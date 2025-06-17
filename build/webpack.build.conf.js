@@ -11,7 +11,7 @@ module.exports = merge(baseWebpackConfig, {
     entry: {
         main: `${PATHS.src}/js/main/main.js`, 
         home: `${PATHS.src}/js/pages/home/home.js`,
-        // admin: `${PATHS.src}/js/pages/admin/admin.js`,
+        admin: `${PATHS.src}/js/pages/admin/admin.js`,
         // home: `${PATHS.src}/js/pages/home/home.js`,
         // logs: `${PATHS.src}/js/pages/logs/logs.js`,
         // applications: `${PATHS.src}/js/pages/applications/applications.js`,
