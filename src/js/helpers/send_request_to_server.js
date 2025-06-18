@@ -11,20 +11,21 @@ export const send_request_to_server = ( params ) => {
 
     let isError = false;
 
-    let { common } = store.getState();
-    let { page, companyAlias } = common;
+    let { common, company } = store.getState();
+    let { currentPage } = common;
+    let { currentCompanyAlias } = company;
 
     let token = '';
     let url = '';
     let headers = {};
 
     let data_complete = { ...data };
-    data_complete.currentPage = page;
-    data_complete.companyAlias = companyAlias;
+    data_complete.currentPage = currentPage;
+    data_complete.companyAlias = currentCompanyAlias;
 
     if( IS_DEVELOPMENT ){
 
-        data_complete.route = route;
+        data_complete.route = `${currentPage}/${route}`;
         url = `${HOST_TO_API_SERVER}/api`;
         headers = {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -33,7 +34,7 @@ export const send_request_to_server = ( params ) => {
         };
 
     }else{
-        url = `${HOST_TO_API_SERVER}/${page}/${route}`;
+        url = `${HOST_TO_API_SERVER}/${currentPage}/${route}`;
 
         if( document.querySelector('meta[name="csrf-token"]') ){
             token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

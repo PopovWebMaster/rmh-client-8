@@ -1,0 +1,35 @@
+.BtnLogout{
+    font-size: 1em;
+    height: 100%;
+    padding: 0 0.6em;
+    background-color: #53688445;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    cursor: pointer;
+
+    span{
+        font-size: 0.8em;
+        color: #032761;
+    }
+
+
+}
+
+.BtnLogout:hover{
+    background-color: #b6b7b9;
+    span{
+        color: #0c0c4f;
+    }
+}
+
+.BtnLogout:active{
+    
+    span{
+        text-decoration: underline;
+        color: #262681;
+    }
+}

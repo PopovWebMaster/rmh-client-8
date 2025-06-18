@@ -1,0 +1,73 @@
+.menuItemLeft{
+    font-size: 1em;
+
+    text-decoration: none;
+    // margin: 0 0.3em;
+    padding: 0 1em;
+    // background-color: #343434;
+    // background-color: #1a87712b;
+    // background-color: #189ab776;
+    height: 100%;
+
+    // background-color: #e9e9e929;
+    background-color: #91b7e945;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    border-right: 1px solid #fffdfd0a;
+
+
+line-height: 2.2em;
+    // border-radius: 0.1em;
+
+    flex-grow: 0;
+
+    span{
+        font-size: 0.7em;
+        font-family: "EuropeExt Normal";
+        color: #beb4b4;
+    }
+
+
+    .TMIL_icon{
+
+    }
+    .TMIL_title{
+        // font-size: 0.9em;
+        // color: #c0c0c0;
+        // font-family:  Courier;
+        // font-family:  Pragmatica;
+        // font-family: a_FuturaRound;
+        // font-family: "Journal Cyrillic";
+
+    }
+}
+
+.menuItemLeft.isActive{
+    // background-color: #1a8772d6;
+    // background-color: #18b781d6;
+    // background-color: #1899b7d6;
+    // background-color: #6c89af45;
+
+
+    // #1899b7d6
+
+    span{
+        color: #6bd2e9f9;
+    }
+
+}
+.menuItemLeft:hover{
+    // background-color: #1a8772;
+    // background-color: #189ab7f9;
+    background-color: #344965ab;
+    span{
+        // color: #fcfcfc;
+        color: #6bd2e9f9;
+    }
+}
+
+

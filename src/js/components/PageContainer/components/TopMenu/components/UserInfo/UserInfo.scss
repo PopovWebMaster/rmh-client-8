@@ -1,0 +1,30 @@
+.userInfo{
+
+    font-size: 1em;
+    height: 100%;
+    padding: 0 0.6em;
+    // background-color: #53688445;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    span{
+        // font-size: 0.7em;
+        color: #ffffff;
+        margin: 0 0.2em;
+    }
+
+    .userInfo_name{
+        font-size: 0.7em;
+        color: #ffffff;
+    }
+
+    .userInfo_status{
+        font-size: 0.6em;
+        color: #9c9c9c;
+    }
+
+
+}

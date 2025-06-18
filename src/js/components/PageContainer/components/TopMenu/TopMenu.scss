@@ -1,0 +1,143 @@
+.topMenu{
+    font-size: 1em;
+    // font-size: 1.3em;
+    height: 2em;
+    background-color: #e9e9e929;
+
+    flex-grow: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+
+    .TM_left{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .TM_home_link{
+            font-size: 0.9em;
+            height: 100%;
+            // height: 100%;
+            padding: 0 0.8em;
+            line-height: 2.2em;
+            background-color: #91b7e945;
+            font-family: "EuropeExt Normal";
+            text-decoration: none;
+
+            color: #beb4b4;
+        }
+        .TM_home_link:hover{
+            background-color: #91b7e96a;
+        }
+        .TM_home_link:active{
+            color: #ffffff;
+        }
+    }
+
+    .TM_right{
+        font-size: 1em;
+        flex-grow: 1;
+        height: 100%;
+        max-width: 100%;
+
+        // padding-right: 1em;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+
+        .TM_btn_login{
+            font-size: 1em;
+            height: 100%;
+            padding: 0 0.6em;
+            // background-color: #53688445;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            cursor: pointer;
+
+            span{
+                font-size: 0.8em;
+                color: #275baf;
+            }
+
+        }
+
+        .TM_btn_login:hover{
+            background-color: #b6b7b9;
+            span{
+                color: #0c0c4f;
+            }
+        }
+
+        .TM_btn_login:active{
+            
+            span{
+                text-decoration: underline;
+                color: #262681;
+            }
+        }
+
+    }
+}
+
+
+@media screen and (min-width: 2400px) and (max-width: 10000px){
+    .topMenu{
+        font-size: 1.2em;
+    }
+    
+}
+
+@media screen and (min-width: 1180px) and (max-width: 2400px){
+    #app{
+
+        font-size: 1.1em;
+    }
+
+}
+
+@media screen and (min-width: 960px) and (max-width: 1180px){
+    #app{
+
+        font-size: 1em;
+    }
+
+}
+
+@media screen and (min-width: 880px) and (max-width: 960px){
+    #app{
+        font-size: 0.9em;
+    }
+
+}
+
+@media screen and (min-width: 740px) and (max-width: 880px){
+    #app{
+        font-size: 0.85em;
+    }
+
+}
+
+@media screen and (min-width: 10px) and (max-width: 740px){
+    #app{
+        font-size: 0.8em;
+    }
+    
+}

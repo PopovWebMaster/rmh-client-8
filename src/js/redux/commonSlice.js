@@ -8,65 +8,75 @@ export const commonSlice = createSlice({
 
     initialState: {
 
-        page: null,
-        companyAlias: null,
-        companyName: null,
-        companyType: null,
-        companyProgramSystem: null,
-        companyList: [],
+        currentPage: null,
+        token: '',
+        // companyAlias: null,
+        // companyName: null,
+        // companyType: null,
+        // companyProgramSystem: null,
+        // companyList: [],
 
 
     },
 
     reducers: {
 
-        setPage: ( state, action ) => {
-            state.page =  action.payload;
+        setCurrentPage: ( state, action ) => {
+            state.currentPage =  action.payload;
         },
 
-        setCompanyAlias: ( state, action ) => {
-            state.companyAlias =  action.payload;
+        setToken: ( state, action ) => {
+            state.token =  action.payload;
         },
 
-        setCompanyName: ( state, action ) => {
-            state.companyName =  action.payload;
-        },
+        
 
-        setCompanyType: ( state, action ) => {
-            state.companyType =  action.payload;
-        },
+        // setCompanyAlias: ( state, action ) => {
+        //     state.companyAlias =  action.payload;
+        // },
 
-        setCompanyProgramSystem: ( state, action ) => {
-            state.companyProgramSystem =  action.payload;
-        },
+        // setCompanyName: ( state, action ) => {
+        //     state.companyName =  action.payload;
+        // },
 
-        setCompanyList: ( state, action ) => {
-            state.companyList =  action.payload;
-        },
+        // setCompanyType: ( state, action ) => {
+        //     state.companyType =  action.payload;
+        // },
+
+        // setCompanyProgramSystem: ( state, action ) => {
+        //     state.companyProgramSystem =  action.payload;
+        // },
+
+        // setCompanyList: ( state, action ) => {
+        //     state.companyList =  action.payload;
+        // },
    
     },
 
 })
 
 export const {  
-    setPage,
-    setCompanyAlias,
-    setCompanyName,
-    setCompanyType,
-    setCompanyProgramSystem,
-    setCompanyList,
+    setCurrentPage,
+    setToken,
+    // setCompanyAlias,
+    // setCompanyName,
+    // setCompanyType,
+    // setCompanyProgramSystem,
+    // setCompanyList,
 
 } = commonSlice.actions;
 
 export const selectorData = ( state ) => {
 
     return {
-        page:                   state.common.page,
-        companyAlias:           state.common.companyAlias,
-        companyName:            state.common.companyName,
-        companyType:            state.common.companyType,
-        companyProgramSystem:   state.common.companyProgramSystem,
-        companyList:            state.common.companyList,
+        currentPage:            state.common.currentPage,
+        token: state.common.token,
+        
+        // companyAlias:           state.common.companyAlias,
+        // companyName:            state.common.companyName,
+        // companyType:            state.common.companyType,
+        // companyProgramSystem:   state.common.companyProgramSystem,
+        // companyList:            state.common.companyList,
 
 
 

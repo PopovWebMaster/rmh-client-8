@@ -6,28 +6,27 @@ import { useDispatch } from 'react-redux';
 
 // import './SetDataFromHtmlMeta.scss';
 
-import { 
-    selectorData as commonSlice,
-    setPage,
-    setCompanyAlias,
-    setCompanyName,
-    setCompanyType,
-    setCompanyProgramSystem,
+import { selectorData as commonSlice, setCurrentPage, setToken } from './../../redux/commonSlice.js';
+import {
+    selectorData as companySlice,
+    setCurrentCompanyAlias,
+    setCurrentCompanyName,
     setCompanyList,
+    setCurrentCompanyType,
+    setCompanyProgramSystem,
+    
 
-} from './../../redux/commonSlice.js';
+} from './../../redux/companySlice.js';
 
 const SetDataFromHtmlMetaComponent = ( props ) => {
 
     let {
         children,
-
-        setPage,
-        setCompanyAlias,
-        setCompanyName,
-        setCompanyType,
-        setCompanyProgramSystem,
-        setCompanyList,
+        setCurrentPage,
+        setCurrentCompanyAlias,
+        setCurrentCompanyName,
+        setCurrentCompanyType,
+        setToken,
 
     } = props;
 
@@ -69,13 +68,21 @@ const SetDataFromHtmlMetaComponent = ( props ) => {
             isError = true;
         };
 
+        if( document.querySelector('meta[name="csrf-token"]') ){
+            token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            setToken( token );
+        };
+
+        
+
         if( isError ){
 
         }else{
-            setPage( page );
-            setCompanyAlias( companyAlias );
-            setCompanyName( companyName );
-            setCompanyType( companyType );
+            setCurrentPage( page );
+
+            setCurrentCompanyAlias( companyAlias );
+            setCurrentCompanyName( companyName );
+            setCurrentCompanyType( companyType );
 
             setIsReady( true );
 
@@ -100,12 +107,17 @@ export function SetDataFromHtmlMeta( props ){
         <SetDataFromHtmlMetaComponent
             { ...props }
             // userInfo = { userInfo }
-            setPage =                   { ( val ) => { dispatch( setPage( val ) ) } }
-            setCompanyAlias =           { ( val ) => { dispatch( setCompanyAlias( val ) ) } }
-            setCompanyName =            { ( val ) => { dispatch( setCompanyName( val ) ) } }
-            setCompanyType =            { ( val ) => { dispatch( setCompanyType( val ) ) } }
-            setCompanyProgramSystem =   { ( val ) => { dispatch( setCompanyProgramSystem( val ) ) } }
-            setCompanyList =            { ( val ) => { dispatch( setCompanyList( val ) ) } }
+            setCurrentPage =          { ( val ) => { dispatch( setCurrentPage( val ) ) } }
+            setCurrentCompanyAlias =  { ( val ) => { dispatch( setCurrentCompanyAlias( val ) ) } }
+            setCurrentCompanyName =   { ( val ) => { dispatch( setCurrentCompanyName( val ) ) } }
+            setCurrentCompanyType =   { ( val ) => { dispatch( setCurrentCompanyType( val ) ) } }
+            setCompanyProgramSystem = { ( val ) => { dispatch( setCompanyProgramSystem( val ) ) } }
+            setCompanyList =          { ( val ) => { dispatch( setCompanyList( val ) ) } }
+            setToken =          { ( val ) => { dispatch( setToken( val ) ) } }
+
+
+            
+
 
 
         />

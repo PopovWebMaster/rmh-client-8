@@ -1,0 +1,58 @@
+.companyMenu{
+    font-size: 1em;
+    padding: 1em;
+    background-color: #fcfcfc21;
+    border-radius: 0.1em;
+    width: 25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .companyMenu_btn{
+        font-size: 0.85em;
+        margin: 0.5em 1em;
+        padding: 0.4em 1em;
+        background-color: #31373f;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        border-radius: 0.1em;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+
+        span{
+            font-size: 0.9em;
+            font-family: "BankGothic RUSS Medium";
+            color: #beb4b4;
+        }
+
+        span.companyMenu_type{
+            font-size: 0.6em;
+            position: absolute;
+            top: -0.7em;
+            right: -1em;
+            background-color: #91b7ba;
+            border: 1px solid #7a999b;
+            color: #31373f;
+            border-radius: 0.1em;
+            padding: .03em .4em;
+
+        }
+    }
+
+    .companyMenu_btn:hover{
+        background-color: #424a54;
+    }
+
+    .companyMenu_btn:active{
+        background-color: #2f353c;
+    }
+
+
+
+
+}
