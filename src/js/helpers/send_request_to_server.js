@@ -73,8 +73,8 @@ export const send_request_to_server = ( params ) => {
         } catch (error) {
             console.error( `Ошибка : ${error}. При попытке вызвать fetch` );
             console.error({
-                _token,
-                href,
+                _token: token,
+                url,
                 data,
             });
             console.log('');

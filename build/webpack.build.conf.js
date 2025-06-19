@@ -13,6 +13,23 @@ module.exports = merge(baseWebpackConfig, {
         home: `${PATHS.src}/js/pages/home/home.js`,
         admin: `${PATHS.src}/js/pages/admin/admin.js`,
         login: `${PATHS.src}/js/pages/login/login.js`, 
+        company: `${PATHS.src}/js/pages/company/company.js`, 
+
+        air_main:           `${PATHS.src}/js/pages/air_main/air_main.js`, 
+        air_schedule:       `${PATHS.src}/js/pages/air_schedule/air_schedule.js`, 
+        air_application:    `${PATHS.src}/js/pages/air_application/air_application.js`, 
+        air_layout:         `${PATHS.src}/js/pages/air_layout/air_layout.js`, 
+        air_play_report:    `${PATHS.src}/js/pages/air_play_report/air_play_report.js`, 
+        air_logs:           `${PATHS.src}/js/pages/air_logs/air_logs.js`, 
+
+
+
+
+
+
+
+
+
         // home: `${PATHS.src}/js/pages/home/home.js`,
         // logs: `${PATHS.src}/js/pages/logs/logs.js`,
         // applications: `${PATHS.src}/js/pages/applications/applications.js`,

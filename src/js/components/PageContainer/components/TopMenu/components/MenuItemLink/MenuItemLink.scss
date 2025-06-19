@@ -1,0 +1,45 @@
+.menuItemLink{
+    font-size: 1em;
+
+    text-decoration: none;
+    padding: 0 1em;
+    height: 100%;
+    background-color: #91b7e945;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    border-right: 1px solid #fffdfd0a;
+    line-height: 2.2em;
+    flex-grow: 0;
+
+    span{
+        font-size: 0.7em;
+        font-family: "EuropeExt Normal";
+        color: #beb4b4;
+    }
+
+
+    .TMIL_icon{
+
+    }
+    .TMIL_title{
+    }
+}
+
+.menuItemLink.isActive{
+    span{
+        color: #6bd2e9f9;
+    }
+
+}
+.menuItemLink:hover{
+    background-color: #344965ab;
+    span{
+        // color: #fcfcfc;
+        color: #6bd2e9f9;
+    }
+}
+
+

@@ -8,7 +8,6 @@ import './CompanyMenu.scss';
 
 import { ROUTE } from './../../../../config/routes.js';
 
-
 const CompanyMenuComponent = ( props ) => {
 
     let {
@@ -16,7 +15,8 @@ const CompanyMenuComponent = ( props ) => {
     } = props;
 
     const click = ( alias ) => {
-        window.location.href = `${HOST_TO_API_SERVER}/${alias}`;
+        // window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY_AIR}/${alias}`;
+        window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${ROUTE.PAGE.AIR_MAIN}/${alias}`;
     };
 
     const create = ( arr ) => {

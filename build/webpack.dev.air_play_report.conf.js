@@ -16,7 +16,7 @@ const devWebpackConfig = merge( baseWebpackConfig, {
 
     entry: {
         main: `${PATHS.src}/js/main/main.js`, 
-        layout: `${PATHS.src}/js/pages/layout/layout.js`, 
+        air_play_report: `${PATHS.src}/js/pages/air_play_report/air_play_report.js`, 
     },
 
 
@@ -45,7 +45,7 @@ const devWebpackConfig = merge( baseWebpackConfig, {
 
 
         new HtmlWebpackPlugin({
-            template: `${PATHS.src}/html/layout.html`,
+            template: `${PATHS.src}/html/air_play_report.html`,
             filename: './index.html', 
         }),
 

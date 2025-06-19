@@ -8,15 +8,24 @@
         "build-prod": "webpack --config ./build/webpack.build_prod.conf.js",
         "admin": "webpack-dev-server --open --config ./build/webpack.dev.admin.conf.js",
         "home": "webpack-dev-server --open --config ./build/webpack.dev.home.conf.js",
-        "logs": "webpack-dev-server --open --config ./build/webpack.dev.logs.conf.js",
-        "applications": "webpack-dev-server --open --config ./build/webpack.dev.applications.conf.js",
+        "company": "webpack-dev-server --open --config ./build/webpack.dev.company.conf.js",
+
+        "air-main": "webpack-dev-server --open --config ./build/webpack.dev.air_main.conf",
+        "air-schedule": "webpack-dev-server --open --config ./build/webpack.dev.air_schedule.conf",
+        "air-application": "webpack-dev-server --open --config ./build/webpack.dev.air_application.conf.js",
+        "air-layout": "webpack-dev-server --open --config ./build/webpack.dev.air_layout.conf.js",
+        "air-play-report": "webpack-dev-server --open --config ./build/webpack.dev.air_play_report.conf.js",
+        "air-logs": "webpack-dev-server --open --config ./build/webpack.dev.air_logs.conf.js",
+        
         "login": "webpack-dev-server --open --config ./build/webpack.dev.login.conf.js",
-        "main": "webpack-dev-server --open --config ./build/webpack.dev.mainPage.conf.js",
-        "schedule": "webpack-dev-server --open --config ./build/webpack.dev.schedule.conf.js",
-        "play-report": "webpack-dev-server --open --config ./build/webpack.dev.playReport.conf.js",
+
+
+
+        
+        
         "access-is-closed": "webpack-dev-server --open --config ./build/webpack.dev.accessIsClosed.conf.js",
-        "page-not-found": "webpack-dev-server --open --config ./build/webpack.dev.pageNotFound.conf.js",
-        "layout": "webpack-dev-server --open --config ./build/webpack.dev.layout.conf.js"
+        "page-not-found": "webpack-dev-server --open --config ./build/webpack.dev.pageNotFound.conf.js"
+        
     },
     "keywords": [],
     "author": "",

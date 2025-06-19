@@ -69,7 +69,7 @@ const SetDataFromHtmlMetaComponent = ( props ) => {
         };
 
         if( document.querySelector('meta[name="csrf-token"]') ){
-            token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             setToken( token );
         };
 
