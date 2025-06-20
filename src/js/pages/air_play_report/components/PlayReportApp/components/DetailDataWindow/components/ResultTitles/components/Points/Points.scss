@@ -1,0 +1,39 @@
+.DDW_ResultPoints{
+    font-size: 1em;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding: 0.4em;
+
+    h2{
+        font-size: 0.7em;
+        color: #575757;
+        margin: 0 0.3em;
+        padding: 0.2em 0;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    span{
+        font-size: 0.7em;
+        color: #575757;
+        margin: 0 0.3em;
+        font-family: 'Courier New', Courier, monospace;
+        padding: 0.2em 0;
+    }
+
+    input{
+        font-size: 0.8em;
+        padding: 0.2em 0.8em;
+        border: 1px solid #34343410;
+        border-radius: 0.1em;
+        outline: none;
+        margin: 0.4em 0.5em;
+        width: 4em;
+    }
+
+
+}

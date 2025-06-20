@@ -1,0 +1,44 @@
+.FTATopHeaderPanel{
+    font-size: 1em;
+    // margin: 0.5em 0;
+    padding: 0 1em;
+    // background-color: #0000003d;
+    // height: 10em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    flex-grow: 0;
+
+    .FTA_download_buttons{
+        font-size: 1em;
+        flex-grow: 0;
+    }
+
+    .FTA_file_dates{
+        font-size: 1em;
+        flex-grow: 0;
+    }
+
+    .FTA_file_durations{
+        font-size: 1em;
+        flex-grow: 0;
+    }
+
+    .FTA_file_others{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+    }
+
+
+}

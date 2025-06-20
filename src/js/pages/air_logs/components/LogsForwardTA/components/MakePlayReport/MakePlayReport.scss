@@ -1,0 +1,93 @@
+.FTA_MakePlayReport{
+    font-size: 1em;
+
+
+    padding: .2em 1.4em;
+    // margin: 0em .8em;
+    // width: 16em;
+    width: 12em;
+
+    background-color: #e1e1e138;
+    cursor: pointer;
+    user-select: none;
+    // height: 1.44em;
+
+    .dateStr{
+        font-size: 1em;
+        // color: #ffffff;
+        
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        .title{
+            font-size: 0.8em;
+            color: #fbfbfb99;
+            font-family: Courier;
+        }
+
+        .serverName{
+            font-size: 0.7em;
+            color: #e4e4e4;
+            padding: 0 0 0 0.6em;
+            font-weight: bold;
+
+        }
+    }
+
+
+
+    .fileDate{
+        font-size: 1em;
+        text-align: center;
+
+        span{
+            font-size: 1em;
+            color: #fbfbfb99;
+            font-family: center;
+            padding: 0 .3em .5em;
+            font-family: Courier;
+            
+           
+
+        
+        }
+        
+    }
+    .make{
+        font-size: 1em;
+        text-align: center;
+        padding: 0.2em 0.6em;
+        font-family: Courier;
+        
+        
+
+        span{
+            font-size: 0.9em;
+            padding: 0.4em 1.5em;
+            color: #fbfbfb;
+            background-color: #ff3b3b;
+            border-radius: 0.1em;
+            // font-weight: bold;
+        }
+    }
+}
+
+.FTA_MakePlayReport:hover{
+    .make{
+        span{
+            background-color: #f00000;
+        }
+    }
+}
+
+.FTA_MakePlayReport:active{
+    .make{
+        span{
+            color: #1945b4;
+        }
+    }
+}

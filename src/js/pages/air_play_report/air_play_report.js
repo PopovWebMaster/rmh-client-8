@@ -10,7 +10,7 @@ import store from './../../redux/store.js';
 
 import './air_play_report.scss';
 
-import { AirPlayReport } from './components/AirPlayReport/AirPlayReport.js';
+import { PlayReportApp } from './components/PlayReportApp/PlayReportApp.js';
 
 console.dir('air_play_report');
 console.log( 'HOST_TO_API_SERVER', HOST_TO_API_SERVER );
@@ -21,7 +21,7 @@ const root = createRoot(container);
 root.render(
     <Provider store={store}>
         <BrowserRouter>
-            <AirPlayReport />
+            <PlayReportApp />
         </BrowserRouter>
     </Provider>
 );

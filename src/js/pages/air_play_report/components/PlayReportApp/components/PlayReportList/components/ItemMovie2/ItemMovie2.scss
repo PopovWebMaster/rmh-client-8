@@ -1,0 +1,87 @@
+.PRL_ItemMovie2{
+    font-size: 1em;
+    margin: 0.3em 0.6em;
+    padding: 0.1em 0.2em;
+    // display: flex;
+    // flex-direction: row;
+    // align-content: flex-start;
+    // align-items: flex-start;
+    
+    background-color: #ffffff85;
+    border-radius: 0.1em 0.1em 0 0;
+
+    .PRL_ItemMovie2_wrap{
+        font-size: 1em;
+        display: flex;
+        flex-direction: row;
+        align-content: flex-start;
+        align-items: flex-start;
+
+        .PRL_Duration_graphics_btn{
+            font-size: 1em;
+            flex-grow: 0;
+            
+            width: 1.4em;
+            height: 1.4em;
+            margin: 0.14em 0 0 0.3em;
+            
+
+            >div{
+                font-size: 1em;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+                background-color: #00000012;
+                border-radius: 0.1em;
+
+                width: 1.4em;
+                height: 1.4em;
+
+                cursor: pointer;
+
+                span{
+                    font-size: 0.6em;
+                    color: #252525;
+                    // background-color: #a48080;
+                }
+
+            }
+
+            >div:hover{
+                background-color: #fbfbfba8;
+                span{
+                    color: #000000;
+                }
+            }
+
+
+        }
+    }
+
+    
+}
+
+.PRL_ItemMovie2.isBacklight{
+    background-color: #2f383a;
+    .PRL_ItemMovie2_date{
+        span{
+            color: #ffffff;
+        }
+    }
+
+    .PRL_ItemMovie2_Time{
+        background-color: #23c8ff;
+
+    }
+
+    .PRL_ItemMovie2_FileData{
+        input{
+            background-color: #5b5a5a;
+            color: #ffffff;
+            font-weight: bold;
+
+        }
+    }
+}

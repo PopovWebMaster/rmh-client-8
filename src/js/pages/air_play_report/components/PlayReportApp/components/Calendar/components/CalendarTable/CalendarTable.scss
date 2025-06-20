@@ -1,0 +1,51 @@
+.PR_Calendar_Table{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    table {
+        border-collapse: separate;
+        border-spacing: 1px 1px;
+        // border: 1px solid #8080801c;
+
+        // th {
+        //     border: 1px solid grey;
+        //  }
+        th{
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+        }
+        th, td {
+            width: 2.5em;
+            height: 2.5em;
+            // border: 1px solid #8080801c;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        tr{
+            font-size: 1em;
+            td{
+                color: #53535385;
+            }
+
+            td.isActive{
+                color: #2a2a2a;
+                font-weight: bold;
+                background-color: #8080801c;
+                cursor: pointer;
+                user-select: none;
+                
+
+            }
+            td.isActive:hover{
+                color: #f2f2f2;
+                background-color: #00000047;
+            }
+        }
+
+    }
+
+}

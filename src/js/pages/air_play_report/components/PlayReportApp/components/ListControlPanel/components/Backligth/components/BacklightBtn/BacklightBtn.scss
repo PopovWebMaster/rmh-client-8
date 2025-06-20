@@ -1,0 +1,35 @@
+.PR_BacklightBtn{
+    font-size: 0.65em;
+    margin: 0.2em 0.3em;
+    flex-grow: 0;
+    padding: 0em 0.2em;
+    cursor: pointer;
+    text-align: center;
+	display: flex;
+	align-items: center;
+    user-select: none;
+
+    span{
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #1c1c1c;
+        background-color: #96dab317;
+        padding: 0.4em 0.8em;
+        border-radius: 0.1em;
+        cursor: pointer;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    }
+
+    span:hover{
+        color: #ffffff;
+        background-color: #96dab3;
+    }
+
+    span.active{
+        background-color: #96dab3;
+        color: #363438;
+    }
+
+
+
+}

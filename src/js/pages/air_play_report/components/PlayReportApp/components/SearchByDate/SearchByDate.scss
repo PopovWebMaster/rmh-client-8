@@ -1,0 +1,25 @@
+.PR_SearchByDate{
+    font-size: 1em;
+
+    padding: 0.3em 0.5em;
+
+    user-select: none;
+    cursor: pointer;
+
+    span{
+        font-size: 1em;
+        line-height: 1em;
+        color: #00000045;
+        // padding: 0 0.2em 0 0.22em;
+    }
+
+
+
+
+}
+.PR_SearchByDate:hover{
+    background-color: #f9f9f9;
+    span{
+        color: #00000087;
+    }
+}

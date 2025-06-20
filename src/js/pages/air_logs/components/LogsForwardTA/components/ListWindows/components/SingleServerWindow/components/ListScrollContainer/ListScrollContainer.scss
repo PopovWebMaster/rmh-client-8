@@ -1,0 +1,51 @@
+.FTA_ListScroll{
+    font-size: 1em;
+    max-width: 100%;
+    flex-grow: 1;
+    padding: 1em 0.5em;
+
+    overflow: auto;
+    
+}
+
+
+.FTA_ListScroll::-webkit-scrollbar {
+    width: 0.7em;
+    // padding-right: 20px;
+}
+    
+.FTA_ListScroll::-webkit-scrollbar-track {
+    background-color: #65656500;
+}
+    
+.FTA_ListScroll::-webkit-scrollbar-thumb {
+    border: 1px solid #6c6c6c32;
+    border-radius: 0.4em;
+    background-color: #6f61575c;
+    -webkit-box-shadow: inset 0 0 0.1em #5b41cf;
+    box-shadow: inset 0 0 0.1em #5b41cf;
+}
+
+
+
+.FTA_ListScroll::-moz-scrollbar {
+    width: 0.7em;
+    // padding-right: 20px;
+}
+    
+.FTA_ListScroll::-moz-scrollbar-track {
+    background-color: #65656500;
+}
+    
+.FTA_ListScroll::-moz-scrollbar-thumb {
+    border: 1px solid #6c6c6c3b;
+    border-radius: 0.4em;
+    background-color: #6f61575c;
+    -moz-box-shadow: inset 0 0 0.1em #5b41cf;
+    box-shadow: inset 0 0 0.1em #5b41cf;
+}
+
+
+.FTA_ListScroll::-moz-scrollbar {
+    width: thin;
+}

@@ -1,0 +1,66 @@
+.SSWHeaderButton{
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin: 0.1em 0;
+    padding: 0.2em;
+    cursor: pointer;
+    user-select: none;
+    background-color: #fff5f51a;
+    border-radius: 0.1em;
+    flex-grow: 0;
+
+    width: fit-content;
+    height: 1.2em;
+    margin: 0 0.5em;
+
+    .SSWHeaderBtn_title{
+        font-size: 0.75em;
+        color: #d9d9d9e9;
+        flex-grow: 1;
+        max-width: 100%;
+        text-align: left;
+        padding: 0 0.6em;
+    }
+
+    .SSWHeaderBtn_serverName{
+        font-size: 0.7em;
+        color: #9d9d9dc9;
+        padding: 0 0.4em 0 0;
+        font-weight: bold;
+    }
+    
+}
+
+.SSWHeaderButton.isActive{
+    background-color: #fffffff7;
+    .SSWHeaderBtn_title{
+        color: #242424d1;
+    }
+    .SSWHeaderBtn_serverName{
+        color: #0daa00;
+    }
+}
+
+.SSWHeaderButton:hover{
+    background-color: #fffffff7;
+    .SSWHeaderBtn_title{
+        color: #242424d1;
+    }
+    .SSWHeaderBtn_serverName{
+        
+        color: #0daa00;
+    }
+}
+
+.SSWHeaderButton.isActive:hover{
+    .SSWHeaderBtn_title{
+        color: #111111d1;
+    }
+    .SSWHeaderBtn_serverName{
+        color: #0d7903;
+    }
+}

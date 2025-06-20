@@ -1,0 +1,33 @@
+.FTA_FileDuration{
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    padding: .22em 1em;
+    margin: .3em 0;
+    width: 11em;
+
+    background-color: #e1e1e138;
+    height: 1.44em;
+
+    // border-radius: 0.1em;
+    
+    .durationStr{
+        font-size: 1.2em;
+        color: #ffffff;
+        font-family: Courier;
+        // width: 9.5em;
+        // font-family: "Roboto Regular";
+        // font-family: "Open Sans";
+    }
+    .serverName{
+        font-size: 0.7em;
+        color: #fbfbfb99;
+        text-align: right;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}

@@ -22,7 +22,8 @@ const MenuItemLinkComponent = ( props ) => {
     
     return (
         <a className = { `${page === currentPage? 'isActive': ''} menuItemLink` }
-            href = { `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${page}/${currentCompanyAlias}` }
+            href = { `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${currentCompanyAlias}/${page}` }
+
         >
             <span className = 'TMIL_icon'></span>
             <span className = 'TMIL_title'>{ title }</span>

@@ -1,0 +1,56 @@
+.PR_SearchPeriod{
+    font-size: 1em;
+
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    // padding: 0.5em 1em;
+
+
+    // width: 33em;
+    // height: 22em;
+    // background-color: rgb(163, 6, 6);
+    // border: 2px solid #93a9a14d;
+    // border-top: 3px solid #93a9a14d;
+    // border-radius: 0 0 0.2em 0.2em;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    >div{
+        font-size: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin: 0 0.3em;
+        padding: 0.3em 0.8em;
+        background-color: #2220201a;
+        border-radius: 1px;
+        cursor: pointer;
+
+        input{
+            font-size: 1em;
+            margin: 0;
+        }
+
+        span{
+            font-size: 0.7em;
+            color: #cecece;
+            margin-left: 0.35em;
+
+        }
+    }
+    >div:hover{
+        background-color: #7d7d7d5e;
+        span{
+            color: #f4f4f4;
+        }
+
+    }
+
+
+}

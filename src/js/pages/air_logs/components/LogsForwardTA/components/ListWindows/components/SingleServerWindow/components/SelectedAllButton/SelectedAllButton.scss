@@ -1,0 +1,19 @@
+.selectedAllButton{
+    .selectedAllButton_chackBox{
+        font-size: 1em;
+        width: 1em;
+        height: 1em;
+        border: 1px solid #868f8363;
+        flex-grow: 0;
+
+        span{
+            font-size: 1.4em;
+            color: #0daa00;
+            text-align: center;
+            line-height: 0.6em;
+            font-weight: bold;
+            padding-left: 0.1em;
+        }
+    }
+    
+}

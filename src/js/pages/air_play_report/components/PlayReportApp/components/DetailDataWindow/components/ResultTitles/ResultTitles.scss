@@ -1,0 +1,33 @@
+.DDW_ResultTitles{
+    font-size: 1em;
+
+    p{
+        font-size: 1em;
+        padding: .3em 1em;
+        background-color: #377873;
+        color: #ffffff;
+        margin: 0.5em;
+        span:first-child{
+            font-size: 0.7em;
+            margin-right: 0.5em;
+        }
+        span{
+            font-size: 0.8em;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        }
+    }
+
+    textarea{
+        font-size: .9em;
+        width: calc(100% - 2.1em);
+
+        min-height: 5em;
+
+        color: #000000;
+        padding: 1em 1em;
+        resize: vertical;
+        white-space: pre-wrap;
+    }
+
+
+}

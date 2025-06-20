@@ -1,0 +1,32 @@
+.PRL_ItemEmpty{
+    font-size: 1em;
+    margin: 0 .6em 0.3em 0.6em;
+    padding: 0.2em 0.2em;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    background-color: #ff8585d0;
+    border-radius: 0.1em 0.1em 0 0;
+
+
+    .PRL_ItemEmpty_title{
+        font-size: 1em;
+        margin: 0 1em;
+        
+
+        span{
+            font-size: 0.8em;
+            color: rgb(127, 38, 38);
+            text-indent: 2em;
+        }
+    }
+    .PRL_ItemEmpty_duration{
+        font-size: 1em;
+        text-align: center;
+
+        span{
+            font-size: 0.7em;
+            color: rgb(106, 37, 37);
+        }
+    }
+}

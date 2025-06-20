@@ -1,0 +1,22 @@
+.PRL_CountElems{
+    position: absolute;
+    top: 0;
+    right: -7.7em;
+    width: fit-content;
+    padding: 0.2em 1em;
+    border-radius: 0.1em;
+    height: 1.2em;
+    background-color: rgb(73, 73, 73);
+    z-index: 999;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    span{
+        font-size: 0.8em;
+        color: #c6c6c6;
+        margin: 0 0.5em;
+    }
+}

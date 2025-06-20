@@ -1,0 +1,116 @@
+.PRL_ItemMovie2_Duration{
+    font-size: 1em;
+    margin: 0  0 0 0.26em;
+    
+    height: 1.7em;
+
+    flex-grow: 1;
+    max-width: 100%;
+
+    cursor: pointer;
+    
+
+    // transition: height 0.2s ease-in;
+
+    overflow: hidden;
+
+    .PRL_Duration_scale{
+        background-color: #ffffff00;
+        font-size: 1em;
+        // height: 1.65em;
+        height: 0.3em;
+
+        border-radius: 0.06em;
+        position: relative;
+
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+
+        .PRL_file_len{
+            font-size: 1em;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            z-index: 200;
+            background-color: #000000b0;
+            border-radius: 0.1em;
+        }
+        .PRL_segment_len{
+            font-size: 1em;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            // left: 0;
+
+            z-index: 300;
+
+            background-color: #00d41f;
+            // border-radius: 0.1em;
+        }
+
+
+
+    }
+
+    .PRL_Duration_data{
+        font-size: 1em;
+        opacity: 0.5;
+        ul{
+            font-size: 1em;
+            list-style-type: none;
+            li{
+                font-size: 0.4em;
+                line-height: 1em;
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+
+                display: flex;
+                justify-content: flex-start;
+                span:first-child{
+                    width: 9em;
+                    font-size: 0.9em;
+                }
+                span:last-child{
+                    // font-weight: bold;
+                    font-size: 1em;
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+}
+
+.PRL_ItemMovie2_Duration.isOpen{
+    height: 4em;
+
+    .PRL_Duration_data{
+        opacity: 1;
+        ul{
+            padding: 0.1em 0;
+            li{
+                font-size: .9em;
+                line-height: 1em;
+                padding: 0.1em 0;
+                
+                
+            }
+        }
+    }
+
+
+
+}

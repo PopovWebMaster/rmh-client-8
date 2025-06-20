@@ -1,0 +1,58 @@
+.PR_DetailDataWindow{
+    font-size: 1em;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2001;
+
+    .DDW_menu{
+        font-size: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        padding: 0.5em;
+
+        span{
+            font-size: 0.8em;
+            padding: 0.2em 1em;
+            color: #767676;
+            border: 1px solid #767676;
+            border-radius: 0.1em;
+            margin: 0.2em 0.4em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span.isActive{
+            background-color: #767676;
+            color: #ffffff;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #PR_DetailDataWindow_curtain{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+
+}

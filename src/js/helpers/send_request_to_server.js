@@ -9,6 +9,17 @@ export const send_request_to_server = ( params ) => {
         errorCallback = () => {},
     } = params;
 
+    /*
+        Внимание!!!
+        
+        Все пост запросы отправляются по принципу HOST/page/route( строка без / )
+
+        "currentPage" и "companyAlias" передаются в объекте data
+
+        ТОЛЬКО ТАК!!!!!!!!!!
+    
+    */
+
     let isError = false;
 
     let { common, company } = store.getState();

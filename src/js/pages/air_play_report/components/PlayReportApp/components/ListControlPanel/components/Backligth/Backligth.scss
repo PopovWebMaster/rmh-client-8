@@ -1,0 +1,22 @@
+.PR_Backligth{
+    font-size: 1em;
+    padding: 0.4em 1em;
+    // margin: 0.5em 0em;
+    background-color: #ccc9c966;
+    border-radius: 0.1em;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    h2{
+        font-size: 1em;
+        padding: 0;
+        color: #ffffff;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    }
+
+}

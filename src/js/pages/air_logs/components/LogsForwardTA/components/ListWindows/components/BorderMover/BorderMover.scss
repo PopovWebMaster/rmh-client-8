@@ -1,0 +1,35 @@
+.FTA_BorderMover{
+    font-size: 1em;
+    height: 100%;
+    // width: 1.6em;
+    // width: 26px;
+
+    // background-color: #ff00004d;
+
+    position: absolute;
+    // top: 0;
+    // left: calc( 50% - 0.8em );
+
+    // cursor: col-resize;
+    cursor: ew-resize;
+
+    z-index: 1000;
+}
+
+.FTA_BorderMover:hover{
+    background-color: #ffffff0d;
+}
+
+
+#curtainCurs{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #831a1a00;
+    z-index: 1000;
+    cursor: ew-resize;
+    
+}

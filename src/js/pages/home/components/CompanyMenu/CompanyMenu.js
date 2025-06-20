@@ -16,7 +16,9 @@ const CompanyMenuComponent = ( props ) => {
 
     const click = ( alias ) => {
         // window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY_AIR}/${alias}`;
-        window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${ROUTE.PAGE.AIR_MAIN}/${alias}`;
+        // window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${ROUTE.PAGE.AIR_MAIN}/${alias}`;
+        window.location.href = `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${alias}/${ROUTE.PAGE.AIR_MAIN}`;
+
     };
 
     const create = ( arr ) => {

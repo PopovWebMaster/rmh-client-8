@@ -1,0 +1,62 @@
+.PR_List_TimeButtons{
+    font-size: 1em;
+    height: 100%;
+    width: fit-content;
+    padding:  0 0 0 0.6em;
+
+
+    ul{
+        font-size: 1em;
+        list-style-type: none;
+
+        li{
+            font-size: 0.9em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.8em;
+                padding: 0.3em 0.3em;
+                // border-radius: 0.2em;
+                // background-color: #80a554;
+                // background-color: #719646;
+                background-color: #7e7e7e;
+                user-select: none;
+                color: #ffffff;
+                width: 3.4em;
+                text-align: center;
+                cursor: pointer;
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+                // font-family: Courier, monospace;
+
+                border-top: 1px solid #55833b;
+                border-left: 1px solid #55833b;
+                border-right: 1px solid #55833b;
+
+
+            }
+
+
+
+            span:hover{
+                // background-color: rgb(22, 125, 8);
+                background-color: #4b5c36;;
+            }
+            span:active{
+                // background-color: rgb(41, 201, 20);
+                background-color: #a2d765;
+            }
+        }
+
+        li:last-child{
+            span{
+                border-bottom: 1px solid #55833b;
+            }
+        }
+
+    }
+
+}

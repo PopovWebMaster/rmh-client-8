@@ -32,7 +32,7 @@ const CompanyPageAppComponent = ( props ) => {
 
                     { currentCompanyAlias? (<>
                         <h1>{ currentCompanyName }<span>({ currentCompanyType })</span></h1>
-                        <a href = { `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${ROUTE.PAGE.AIR_MAIN}/${currentCompanyAlias}` }>
+                        <a href = { `${HOST_TO_API_SERVER}/${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_MAIN}` }>
                             Эфир
                         </a>
                     </>): (

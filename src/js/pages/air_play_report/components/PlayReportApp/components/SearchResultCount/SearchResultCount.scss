@@ -1,0 +1,42 @@
+.PR_SearchResultCount{
+    font-size: 1em;
+
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background-color: #73fef278;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 0.2em 1em;
+
+    z-index: 999;
+
+    
+
+    span.SRL_title{
+        font-size: 0.7em;
+        color: #cecece;
+        margin-right: 1.4em;
+    }
+
+    span.SRL_val{
+        font-size: 0.8em;
+        color: #ffffff;;
+        // margin-left: 0.35em;
+        // font-weight: bold;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        user-select: text;
+
+    }
+
+
+
+
+}
+
+.PR_SearchResultCount:hover{
+    background-color: #2f736d;
+}

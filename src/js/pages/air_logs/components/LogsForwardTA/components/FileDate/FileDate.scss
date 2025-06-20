@@ -1,0 +1,62 @@
+.FTA_FileDate{
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    padding: .22em 1em;
+    margin: .3em .8em;
+    width: 16em;
+
+    background-color: #e1e1e138;
+    height: 1.44em;
+
+    .dateStr{
+        font-size: 1.2em;
+        color: #ffffff;
+        font-family: Courier;
+    }
+
+    .serverName{
+        font-size: 0.7em;
+        color: #fbfbfb99;
+        text-align: right;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+
+    .serverName.errorSignal{
+        font-weight: bold;
+        animation-name: error-signal;
+        animation-duration: 0.7s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+    }
+
+    @keyframes error-signal {
+        from {
+            color: #fbfbfb99;  
+        }
+        25%{
+            color: #f80000;
+        }
+        50%{
+            color:#fbfbfb99;
+        }
+        75%{
+            color: #f80000;
+        }
+        to {
+            color: #fbfbfb99;
+        }
+    }
+
+
+
+}
+
+
+

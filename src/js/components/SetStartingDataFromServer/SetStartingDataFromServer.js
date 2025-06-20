@@ -32,40 +32,40 @@ const SetStartingDataFromServerComponent = ( props ) => {
 
         setSpinnerIsActive( true );
 
-        let route = 'get-starting-data';
+        // let route = 'get-starting-data';
 
-        switch( currentPage ){
-            case ROUTE.PAGE.AIR_MAIN:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
+        // switch( currentPage ){
+        //     case ROUTE.PAGE.AIR_MAIN:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
 
-            case ROUTE.PAGE.AIR_SCHEDULE:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
+        //     case ROUTE.PAGE.AIR_SCHEDULE:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
 
-            case ROUTE.PAGE.AIR_APPLICATION:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
+        //     case ROUTE.PAGE.AIR_APPLICATION:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
 
-            case ROUTE.PAGE.AIR_LAYOUT:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
+        //     case ROUTE.PAGE.AIR_LAYOUT:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
 
-            case ROUTE.PAGE.AIR_PLAY_REPORT:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
+        //     case ROUTE.PAGE.AIR_PLAY_REPORT:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
 
-            case ROUTE.PAGE.AIR_LOGS:
-                route = `get-starting-data/${ currentCompanyAlias }`;
-                break;
-        }
+        //     case ROUTE.PAGE.AIR_LOGS:
+        //         route = `${ currentCompanyAlias }/get-starting-data`;
+        //         break;
+        // }
 
 
         send_request_to_server( {
-            route,
+            route: 'get-starting-data',
             data: {},
             successCallback: ( resp ) => {
-                console.dir( 'resp 1' );
+                console.dir( 'resp' );
                 console.dir( resp );
 
                 set_starting_response_to_store( resp );

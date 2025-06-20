@@ -1,0 +1,122 @@
+.PRL_ItemMovie_Duration{
+    font-size: 1em;
+    // width: 30em;
+    height: 100%;
+
+    background-color: #ffffff;
+    border-radius: 0.1em;
+
+    .PRL_ItemMovie_Duration_indicator{
+        font-size: 1em;
+        width: 100%;
+        height: 0.4em;
+        // background-color: red;
+
+
+        position: relative;
+
+        overflow: hidden;
+
+
+        .PRL_file_len{
+            font-size: 1em;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            z-index: 200;
+            background-color: #000000b0;
+            border-radius: 0.1em;
+        }
+        .PRL_segment_len{
+            font-size: 1em;
+            height: 100%;
+
+            position: absolute;
+            top: 0;
+            // left: 0;
+
+            z-index: 300;
+
+            background-color: #00d41f;
+            // border-radius: 0.1em;
+        }
+
+    }
+
+    .PRL_ItemMovie_Duration_values{
+        font-size: 1em;
+
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        // align-items: center;
+        align-content: flex-start;
+        background-color: #eeeeeedb;
+
+        .PRL_ItemMovie_Duration_item{
+            font-size: 1em;
+            background-color: #ffffff7d;
+            margin: 0.2em;
+            border-radius: 0.1rem;
+
+            width:7em;
+
+            // position: relative;
+
+            h2{
+                font-size: 0.7em;
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+                line-height: 1.4em;
+                color: #2a2a2a;
+                text-align: left;
+                text-indent: 1.4em;
+                font-weight: bold;
+                border-bottom: 1px solid #34343429;
+            }
+        
+            input{
+                font-size: 0.7em;
+                // text-indent: 1em;
+                line-height: 1.1em;
+                color: #2b3024;
+                background-color: #34343400;
+                border: 1px solid #33434400;
+                outline: none;
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+                width: 5em;
+                // width: calc( 100% - 0.5em );
+
+                // font-weight: bold;
+                border-radius: 0.1em;
+                text-align: center;
+                text-indent: 0.4em;
+
+                display: inline-block;
+            }
+
+            .PRL_ItemMovie_Duration_sec{
+                font-size: 0.7em;
+                // position: absolute;
+                // right: 3.5em;
+                // top: 0;
+                color: red;
+            }
+            input:last-child{
+                width: 4em;
+                text-indent: 0;
+                // padding-right: 0.4em;
+                text-align: right;
+            }
+            input:focus{
+                background-color: #ffffff;
+            }
+        }
+    }
+
+
+}

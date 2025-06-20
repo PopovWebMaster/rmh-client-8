@@ -1,0 +1,22 @@
+.PRL_ItemMovie2_date{
+    font-size: 1em;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+    width: 4.4em;
+    height: 1.7em;
+
+    span{
+        font-size: 0.6em;
+        color: #1a1a1a;
+        padding: 0.2em 0.5em;
+
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        
+
+    }
+}

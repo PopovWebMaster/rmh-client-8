@@ -1,0 +1,42 @@
+.PRL_ItemMovie_Time{
+    font-size: 1em;
+    margin: 0 0.3em 0 0;
+
+    height: 100%;
+
+    width: 8em;
+    flex-grow: 0;
+    h2{
+        font-size: 0.7em;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        line-height: 1.4em;
+        color: #2c0094;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    input{
+        font-size: 0.8em;
+        // text-indent: 1em;
+        line-height: 1.6em;
+        color: #ffffff;
+        background-color: #34343400;
+        border: 1px solid #33434400;
+        outline: none;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        width: calc( 100% - 2px );
+        // font-weight: bold;
+        border-radius: 0.1em;
+        text-align: center;
+        background-color: #4c6e24;
+
+    }
+
+    input:focus{
+        background-color: #ffffff;
+        color: #1d1d1d;
+    }
+
+
+
+}

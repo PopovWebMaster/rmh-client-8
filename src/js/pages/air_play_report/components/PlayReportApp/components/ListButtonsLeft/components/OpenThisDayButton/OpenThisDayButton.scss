@@ -1,0 +1,33 @@
+.PRL_OpenThisDayButton{
+    font-size: 1em;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 100%;
+    width: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    >span.PRL_OpenThisDayButton_btn{
+        font-size: 0.8em;
+
+        background-color: #84848400;
+        color: #afafaf;
+        padding: .34em .42em 0.4em 0.42em;
+        border-radius: 0.1em;
+
+        cursor: pointer;
+    }
+
+    >span.PRL_OpenThisDayButton_btn:hover{
+        background-color: #848484;
+        color: #ffffff;
+    }
+    >span.PRL_OpenThisDayButton_btn:active{
+        background-color: #848484;
+        color: #ffc9c9;
+    }
+}

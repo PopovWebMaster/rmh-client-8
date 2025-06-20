@@ -1,0 +1,33 @@
+.PR_BacklightAddBtn{
+    font-size: 0.7em;
+    margin: 0.4em 1em;
+    flex-grow: 0;
+    padding: 0em 0.2em;
+    cursor: pointer;
+
+    text-align: center;
+	display: flex;
+	align-items: center;
+
+    user-select: none;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    span{
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #ddd4d4;
+        background-color: #b6b6b678;
+        padding: 0.4em;
+        border-radius: 0.1em;
+        cursor: pointer;
+    }
+
+    span:hover{
+        color: #e2dcdc;
+        background-color: #b6b6b6;
+    }
+
+}
