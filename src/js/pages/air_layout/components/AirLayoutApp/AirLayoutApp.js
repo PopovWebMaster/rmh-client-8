@@ -1,25 +1,66 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 import './AirLayoutApp.scss';
 
-// import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+
+import { ROUTE } from './../../../../config/routes.js';
 
 import { PageContainer } from './../../../../components/PageContainer/PageContainer.js';
+
+import { AirLayoutMenu } from './../AirLayoutMenu/AirLayoutMenu.js';
+import { LayoutGrid } from './../LayoutGrid/LayoutGrid.js';
+import { LayoutCategory } from './../LayoutCategory/LayoutCategory.js';
+
 
 
 const AirLayoutAppComponent = ( props ) => {
 
     let {
-
+        currentCompanyAlias
     } = props;
+
+    let navigate = useNavigate();
+
+        useEffect( () => {
+        if( currentCompanyAlias !== null ){
+            if( IS_DEVELOPMENT ){
+                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
+
+                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
+
+
+
+            }else{
+                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
+            };
+        };
+
+    }, [ currentCompanyAlias ] );
+
+
+
 
     return (
         <PageContainer className = 'airLayoutApp'>
 
-            AirLayoutApp
+            <AirLayoutMenu />
+
+            <Routes>
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/` } element = { <LayoutGrid /> } />
+
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` }    element = { <div>kei poins</div> } />
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` }        element = { <div>events</div> } />
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` }    element = { <LayoutCategory />} />
+
+            </Routes>
 
         </PageContainer>
     )
@@ -29,12 +70,14 @@ const AirLayoutAppComponent = ( props ) => {
 
 export function AirLayoutApp( props ){
 
-    // const company = useSelector( companySlice );
+    const company = useSelector( companySlice );
     // const dispatch = useDispatch();
 
     return (
         <AirLayoutAppComponent
             { ...props }
+
+            currentCompanyAlias = { company.currentCompanyAlias }
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

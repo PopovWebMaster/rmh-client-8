@@ -1,0 +1,37 @@
+
+.PB_SaveButton{
+    font-size: 1em;
+    opacity: 0.2;
+    font-size: 0.8em;
+    padding: 0.4em 1em;
+    border-radius: 0.1em;
+    background-color: #a3a3a3bd;
+    color: #ffffff;
+
+    cursor: pointer; 
+    user-select: none;
+
+    margin: 0 0 0 0.5em;
+
+    .PB_SaveButton_icon{
+        margin-right: 0.2em;
+        
+    }
+
+}
+
+.PB_SaveButton.isActive{
+    opacity: 1;
+    background-color: #eb7e7e;
+    cursor: pointer; 
+    user-select: none;
+}
+
+.PB_SaveButton.isActive:hover{
+    background-color: #ff0000;
+}
+.PB_SaveButton.isActive:active{
+    span{
+        color: #cbcbcb;
+    }
+}

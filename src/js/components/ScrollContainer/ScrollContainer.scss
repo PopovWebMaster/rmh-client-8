@@ -1,0 +1,46 @@
+.scrollContainer{
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    width: 0.7em;
+}
+    
+.scrollContainer::-webkit-scrollbar-track {
+    background-color: #65656500;
+}
+    
+.scrollContainer::-webkit-scrollbar-thumb {
+    border: 1px solid #6c6c6c32;
+    border-radius: 0.4em;
+    background-color: #6f61575c;
+    -webkit-box-shadow: inset 0 0 0.1em #5b41cf;
+    box-shadow: inset 0 0 0.1em #5b41cf;
+}
+
+
+
+.scrollContainer::-moz-scrollbar {
+    width: 0.7em;
+}
+    
+.scrollContainer::-moz-scrollbar-track {
+    background-color: #65656500;
+}
+    
+.scrollContainer::-moz-scrollbar-thumb {
+    border: 1px solid #6c6c6c3b;
+    border-radius: 0.4em;
+    background-color: #6f61575c;
+    -moz-box-shadow: inset 0 0 0.1em #5b41cf;
+    box-shadow: inset 0 0 0.1em #5b41cf;
+}
+
+
+.scrollContainer::-moz-scrollbar {
+    width: thin;
+}

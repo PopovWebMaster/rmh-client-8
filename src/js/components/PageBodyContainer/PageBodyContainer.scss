@@ -1,0 +1,53 @@
+.pageBodyContainer{
+    font-size: 1em;
+
+    margin: 0.5em;
+    border-radius: 0.1em;
+    background-color: #ffffff57;
+    // min-height: 88vh;
+    // height: 90vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    .PBC_ControlPanel{
+        font-size: 1em;
+        max-width: 100%;
+        min-height: 1.6em;
+        background-color: #ffffff00;
+        flex-grow: 1;
+        padding: 0.5em;
+    
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+
+        // .PBC_ControlPanel_btn_wrap{
+        //     font-size: 1em;
+        //     background-color: red;
+        //     height: 100%;
+        //     flex-grow: 1;
+        //     max-width: 100%;
+
+        // }
+
+    }
+
+    .PBC_scroll_container{
+        font-size: 1em;
+        width: 100%;
+        height: 85vh;
+        flex-grow: 1;
+        // height: calc( 88vh - 3em );
+    }
+
+
+
+}

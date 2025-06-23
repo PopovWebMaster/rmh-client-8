@@ -1,0 +1,117 @@
+.LC_addCategoryComponent{
+    font-size: 1em;
+    padding: 0.5em 1em;
+
+    .LCACC_item{
+        font-size: 1em;
+        padding: .3em 0.4em;
+        margin: .5em 0;
+        // border-bottom: 1px solid #34343424;
+
+        h3{
+            font-size: .8em;
+            padding: 0.2em 0.4em;
+            color: #636363;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+            align-content: stretch;
+
+            span{
+                display: inline-block;
+                width: 8em;
+                text-align: right;
+                padding: 0 0.6em 0 0;
+                flex-grow: 0;
+                line-height: 1.9em;
+            
+            }
+
+            input{
+                flex-grow: 0;
+
+            }
+
+            .allColors{
+                flex-grow: 1;
+                max-width: 100%;
+                margin-left: 0.5em;
+
+            }
+        }
+
+        .LCACC_h3_error{
+            color: #a50000;
+            font-weight: bold;
+        }
+
+        .LCACC_input_text{
+            font-size: 0.75em;
+            padding: 0.2em 1em;
+            line-height: 1.4em;
+            border-radius: 0.1em;
+            border: 1px solid #95636330;
+            outline: none;
+            background-color: #ffffff;
+            width: calc(100% - 2em);
+            color: #575757;
+        }
+
+        .LCACC_input_text_error{
+            background-color: #ffe0e0;
+            color: #ff0000;
+        }
+
+        .LCACC_item_example{
+            font-size: 1em;
+            text-align: center;
+            .LCACC_text_example{
+                font-size: .8em;
+                padding: 0.4em 0.8em;
+                border-radius: 0.1em;
+            }
+        }
+
+
+        .LCACC_create{
+            font-size: 1em;
+            margin: 1em 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            >span{
+                font-size: 0.8em;
+                padding: 0.5em 0.8em;
+                background-color: #8d7c7c;
+                color: #ffffff;
+                border-radius: 0.1em;
+                opacity: 0.1;
+
+                >span{
+                    font-size: 1em;
+                    padding: 0 0.1em;
+                    font-family: Arial, sans-serif;
+                }
+            }
+
+            >span.LCACC_create_isActive{
+                opacity: 1;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            >span.LCACC_create_isActive:hover{
+                background-color: #7e6565;
+            }
+
+            >span.LCACC_create_isActive:active{
+                color: #c7c7c7;
+            }
+        }
+    }
+
+
+}

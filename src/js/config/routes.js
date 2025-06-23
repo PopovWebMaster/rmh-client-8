@@ -39,7 +39,16 @@ export const ROUTE = {
         // APPLICATIONS: 'applications',
     },
 
-    LAYOUT: {
+    LAYOUT: { // не использовать!!!!!
+        KEY_POINTS: 'key-points',
+        DAY_EDITOR: 'day-editor',
+        EVENTS: 'events',
+        BLOCKS: 'blocks',
+        CATEGORIES: 'categories',
+
+    },
+
+    AIR_LAYOUT: {
         KEY_POINTS: 'key-points',
         DAY_EDITOR: 'day-editor',
         EVENTS: 'events',

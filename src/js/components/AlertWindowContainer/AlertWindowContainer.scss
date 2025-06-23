@@ -1,0 +1,242 @@
+$max_blur: 0.4em;
+
+.AlertWindowContainer{
+    font-size: 1em;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+
+    overflow: hidden;
+
+    .AWC_window{
+        font-size: 1em;
+        position: absolute;
+        // height: fit-content;
+        // height: 20vh;
+        // width: 25vw;
+
+        background-color: #ffffff;
+        border: 1px solid #939393;
+        border-radius: 0.1em;
+        
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+
+        .AWC_window_header{
+            font-size: 1em;
+            height: 1.4em;
+            width: 100%;
+            background-color: #ededed;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            .AWC_window_header_title{
+                font-size: 1em;
+                flex-grow: 1;
+                max-width: 100%;
+                height: 100%;
+                h2{
+                    font-size: .7em;
+                    line-height: 2em;
+                    text-indent: 1.6em;
+                    color: #393838;
+                }
+            }
+            .AWC_window_header_close{
+                font-size: 1em;
+                flex-grow: 0;
+                width: 1.4em;
+                height: 100%;
+                padding-top: 0.1em;
+                span{
+                    font-size: 0.9em;
+                    background-color: #dbdbdba1;
+                    padding: 0.2em 0;
+                    border-radius: 0.1em;
+                    color: #837e7e;
+                    cursor: pointer;
+                    user-select: none;
+                }
+                span:hover{
+                    background-color: #bbbbbbf1;
+                    color: #797474;
+                }
+            }
+
+        }
+
+
+        .AWC_window_body_carrentDay{
+            font-size: 1em;
+            background-color: #daefff;
+
+            font-size: 1em;
+            text-align: center;
+
+            padding: 0.5em 0;
+            margin: 0.5em;
+            border-radius: 0.1em;
+
+            span{
+                font-size: 1em;
+                color: #656565;
+                font-family: Open Sans Semibold;
+            }
+        }
+
+        .AWC_window_body{
+            font-size: 1em;
+            // height: calc(100% - 4.7em );
+            width: 100%;
+            overflow: auto;
+
+        }
+
+        .heightShort{
+            height: calc(100% - 4.7em );
+        }
+        
+        .heightFull{
+            height: calc(100% - 1.4em );
+        }
+
+        .AWC_window_body::-webkit-scrollbar {
+            width: 0.5em;
+        }
+            
+        .AWC_window_body::-webkit-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .AWC_window_body::-webkit-scrollbar-thumb {
+            border: 1px solid #ededed;
+            border-radius: 0.1em;
+            background-color: #dddada;
+        }
+        
+        
+        
+        .AWC_window_body::-moz-scrollbar {
+            width: 0.5em;
+        }
+            
+        .AWC_window_body::-moz-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .AWC_window_body::-moz-scrollbar-thumb {
+            border: 1px solid #ededed;
+            border-radius: 0.1em;
+            background-color: #dddada;
+        }
+        
+        
+        .AWC_window_body::-moz-scrollbar {
+            width: thin;
+        }
+
+
+
+
+    }
+
+    .AWC_window.isOpen{
+        opacity: 0;
+        top: 3vh;
+
+        filter: blur($max_blur);
+        animation-delay: 0.1s;
+        animation-duration: 0.2s;
+        animation-name: blurOff;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+
+    }
+
+    .AWC_window.isClose{
+        opacity: 1;
+        filter: blur(0);
+        top: 4vh;
+        animation-delay: 0s;
+        animation-duration: 0.2s;
+        animation-name: blurOn;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+
+    }
+
+    @keyframes blurOn {
+        from {
+            opacity: 1;
+            top: 4vh;
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            filter: blur(0px);
+        }
+        to {
+            -webkit-filter: blur($max_blur);
+            -moz-filter: blur($max_blur);
+            filter: blur($max_blur);
+            opacity: 0;
+            top: 3vh;
+        }
+    }
+    @keyframes blurOff {
+        from {
+            opacity: 0;
+            top: 3vh;
+            -webkit-filter: blur($max_blur);
+            -moz-filter: blur($max_blur);
+            filter: blur($max_blur);
+        }
+        to {
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            filter: blur(0px);
+            opacity: 1;
+            top: 4vh;
+        }
+    }
+}
+
+@keyframes backOff {
+    0%{
+        display: block;
+    }
+    90%{
+        display: block;
+    }
+    100% {
+        display: none;
+    }
+}
+
+
+.AlertWindowContainer.isOpen{
+
+    // top: 25vh;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: #0000003b;
+
+    display: block;
+
+}
+
+
+.AlertWindowContainer.isClose{
+    display: block;
+
+    animation-delay: 0.3s;
+    animation-duration: 0.2s;
+    animation-name: backOff;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
