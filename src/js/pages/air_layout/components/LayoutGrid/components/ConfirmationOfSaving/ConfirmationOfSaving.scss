@@ -1,0 +1,66 @@
+.confirmationOfSaving{
+    font-size: 1em;
+    position: relative;
+    height: 100%;
+
+    .COS_component{
+        font-size: 1em;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        height: 100%;
+
+
+
+        p{
+            font-size: 0.8em;
+            color: #373737;
+            text-align: center;
+            margin: 0.7em 0;
+            // padding: 0.3em 1em;
+            // line-height: 1.4em;
+    
+            span{
+                font-size: 0.9em;
+                padding: 0.4em 1.2em;
+                border-radius: 0.1em;
+                margin: 0 1em;
+                cursor: pointer;
+                user-select: none;
+                width: 5.4em;
+                display: inline-block;
+                padding: 0.2em;
+                line-height: 1.3em;
+            }
+    
+            .COS_yes_btn{
+                background-color: #d75959;
+                color: #ffffff;
+            }
+    
+            .COS_yes_btn:hover{
+                background-color: #e92929;
+            }            
+            .COS_yes_btn:active{
+                color: #555555;
+            }
+    
+            .COS_no_btn{
+                background-color: rgb(29, 153, 35);
+                color: #ffffff;
+            }
+            .COS_no_btn:hover{
+                background-color: rgb(28, 189, 37);
+            }
+            .COS_no_btn:active{
+                color: #a8a8a8;
+            }
+        }
+    }
+
+
+
+}

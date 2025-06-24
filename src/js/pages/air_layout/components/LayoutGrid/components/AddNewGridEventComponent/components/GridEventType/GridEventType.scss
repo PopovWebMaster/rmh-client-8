@@ -1,0 +1,74 @@
+.G_ANG_GridEventType{
+    font-size: 1em;
+    margin: 0.5em 0;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .G_ANG_GridEventType_wrap{
+        font-size: 1em;
+        padding: 0.2em 0.6em;
+
+        cursor: pointer;
+        user-select: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        margin-left: 1em;
+
+        .G_ANG_GridEventType_rect{
+            font-size: 1em;
+            height: 0.9em;
+            width: 0.9em;
+            border: 1px solid #b5b5b55e;
+            border-radius: 0.1em;
+            margin-top: 0.2em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin-right: 0.3em;
+            
+            span{
+                font-size: 0.6em;
+                color: #3eab28;
+                line-height: 1em;
+            }
+        }
+
+        .G_ANG_GridEventType_text{
+            font-size: 1em;
+            // width: 12em;
+
+            span{
+                opacity: 0.4;
+                font-size: 0.7em;
+                color: #5d5d5d;
+            }
+
+            .isSelected{
+                opacity: 1;
+            }
+
+
+        }
+
+
+    }
+
+    .G_ANG_GridEventType_wrap:hover{
+        background-color: #f3f3f38f;
+
+        .G_ANG_GridEventType_text{
+            span{
+                opacity: 1;
+            }
+        }
+    }
+}

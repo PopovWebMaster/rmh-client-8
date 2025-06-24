@@ -1,0 +1,24 @@
+.LE_EventNonesInput{
+    font-size: 1em;
+    margin-right: 1em;
+
+    flex-grow: 1;
+    input{
+        font-size: 0.8em;
+        padding: 0.3em 1em;
+        // width: 20vw;
+        width: calc( 100% - 2em );
+
+        text-align: left;
+        line-height: 1.4em;
+        border: 1px solid #34343400;
+        outline: none;
+        color: #ffffff;
+        background-color: #ffffff17;
+    }
+
+    input:focus{
+        background-color: #ffffffec;
+        color: #4e4e4e;
+    }
+}

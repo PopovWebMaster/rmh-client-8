@@ -18,6 +18,7 @@ import { PageContainer } from './../../../../components/PageContainer/PageContai
 import { AirLayoutMenu } from './../AirLayoutMenu/AirLayoutMenu.js';
 import { LayoutGrid } from './../LayoutGrid/LayoutGrid.js';
 import { LayoutCategory } from './../LayoutCategory/LayoutCategory.js';
+import { LayoutEvents } from './../LayoutEvents/LayoutEvents.js';
 
 
 
@@ -29,17 +30,21 @@ const AirLayoutAppComponent = ( props ) => {
 
     let navigate = useNavigate();
 
-        useEffect( () => {
+    useEffect( () => {
         if( currentCompanyAlias !== null ){
             if( IS_DEVELOPMENT ){
-                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
+                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
 
-                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
+                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
+                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` );
+
 
 
 
             }else{
-                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
+
+                // console.dir(  );
+                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
             };
         };
 
@@ -56,8 +61,8 @@ const AirLayoutAppComponent = ( props ) => {
             <Routes>
                 <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/` } element = { <LayoutGrid /> } />
 
-                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` }    element = { <div>kei poins</div> } />
-                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` }        element = { <div>events</div> } />
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` }    element = { <div></div> } />
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` }        element = { <LayoutEvents /> } />
                 <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` }    element = { <LayoutCategory />} />
 
             </Routes>

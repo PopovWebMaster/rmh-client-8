@@ -1,0 +1,23 @@
+.G_ANG_EventDuration{
+    font-size: 1em;
+    padding: 0.1em 1em;
+    margin: 0.1em 0;
+
+    span{
+        font-size: 0.7em;
+        color: #343434;
+    }
+
+    .name{
+        // font-size: 0.7em;
+        margin-right: 0.4em;
+
+    }
+
+    .value{
+        // font-size: 0.7em;
+        font-weight: bold;
+    }
+
+
+}

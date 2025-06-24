@@ -1,0 +1,44 @@
+.emptyTimeSegment{
+    font-size: 1em;
+    border-radius: 0.1em;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+
+    .ETS_add{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 100%;
+        text-align: right;
+        padding: 0.2em 0 0.2em;;
+        span{
+            font-size: .7em;
+            background-color: #7373732e;
+            text-align: center;
+            color: #fff;
+            padding: .4em .22em .4em .24em;
+            border-radius: 0.1em;
+            line-height: 1.3em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        span:hover{
+            background-color: #afafafb5;
+        }
+        span:active{
+            color: #ffc8c8;
+        }
+    }
+
+    .ETS_remove{
+        font-size: 1em;
+        width: 3em;
+    }
+    
+}

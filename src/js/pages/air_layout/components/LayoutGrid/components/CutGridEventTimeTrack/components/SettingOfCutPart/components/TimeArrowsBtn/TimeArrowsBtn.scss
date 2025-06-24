@@ -1,0 +1,57 @@
+.AOASGE_TimeButtons{
+    font-size: 0.7em;
+    margin: 0.5em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .btn{
+        font-size: 0.9em;
+        padding: 0.4em 1em;
+        border-radius: 0.1em;
+        margin: 0 0.2em;
+
+        background-color: #84a31c;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        cursor: pointer;
+        user-select: none;
+
+        width: 2.6em;
+
+        span{
+
+            color: #ffffff;
+            margin: 0 0.2em;
+
+        }
+        .text{
+            font-size: 0.8em;
+            // margin: 0 0.4em;
+        }
+        .icon{
+            font-size: 0.8em;
+            // padding: 0 0.2em;
+        }
+
+    }
+
+    .marginRight{
+        margin-right: 2em;
+    }
+
+    .btn:hover{
+        background-color: #718c19;
+    }
+    .btn:active{
+        span{
+            color: #ebd2d2;
+        }
+    }
+
+}

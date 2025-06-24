@@ -23,16 +23,16 @@ const SaveCategoryChangesComponent = ( props ) => {
 
     } = props;
 
-    useEffect( () => {
-        return () => {
-            click();
-        }
-    }, [ categoryesIsChanged ] );
 
     const click = () => {
+        
         if( categoryesIsChanged ){
 
             setSpinnerIsActive( true );
+
+            console.dir( 'categoryList' );
+            console.dir( categoryList );
+
 
             send_request_to_server({
                 route: 'save-category-list',

@@ -1,0 +1,43 @@
+.AW_Event_remove{
+    font-size: 1em;
+    p{
+        font-size: 0.8em;
+        color: #373737;
+        text-align: center;
+        margin: 1.2em 0;
+        padding: 0.3em 1em;
+        line-height: 1.4em;
+
+        span{
+            font-size: 0.9em;
+            padding: 0.4em 1.2em;
+            border-radius: 0.1em;
+            margin: 0 1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .AW_Event_remove_btn{
+            background-color: #d75959;
+            color: #ffffff;
+        }
+
+        .AW_Event_remove_btn:hover{
+            background-color: #e92929;
+        }            
+        .AW_Event_remove_btn:active{
+            color: #555555;
+        }
+
+        .AW_Event_no_remove_btn{
+            background-color: rgb(29, 153, 35);
+            color: #ffffff;
+        }
+        .LE_Event_no_remove_btn:hover{
+            background-color: rgb(28, 189, 37);
+        }
+        .AW_Event_no_remove_btn:active{
+            color: #a8a8a8;
+        }
+    }
+}

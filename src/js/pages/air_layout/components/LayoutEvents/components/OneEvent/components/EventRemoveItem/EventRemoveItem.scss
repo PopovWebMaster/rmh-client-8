@@ -1,0 +1,74 @@
+.LE_EventRemoveItem{
+    font-size: 1em;
+    width: 1.4em;
+    height: 1.4em;
+    background-color: #ffffff1a;
+    border-radius: 0.1em;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    margin: 0 0.4em;
+
+    span{
+        font-size: 1em;
+        line-height: 1.4em;
+        color: #817f7f;
+    }
+
+}
+
+.LE_EventRemoveItem:hover{
+    background-color: #ffffff5e;
+    span{
+        color: #616161;
+    }
+}
+.LE_EventRemoveItem:active{
+    span{
+        color: #ee9999;
+    }
+}
+
+.LE_Event_remove{
+    font-size: 1em;
+    p{
+        font-size: 0.8em;
+        color: #373737;
+        text-align: center;
+        margin: 1.2em 0;
+        padding: 0.3em 1em;
+        line-height: 1.4em;
+
+        span{
+            font-size: 0.9em;
+            padding: 0.4em 1.2em;
+            border-radius: 0.1em;
+            margin: 0 1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .LE_Event_remove_btn{
+            background-color: #d75959;
+            color: #ffffff;
+        }
+
+        .LE_Event_remove_btn:hover{
+            background-color: #e92929;
+        }            
+        .LE_Event_remove_btn:active{
+            color: #555555;
+        }
+
+        .LE_Event_no_remove_btn{
+            background-color: rgb(29, 153, 35);
+            color: #ffffff;
+        }
+        .LE_Event_no_remove_btn:hover{
+            background-color: rgb(28, 189, 37);
+        }
+        .LE_Event_no_remove_btn:active{
+            color: #a8a8a8;
+        }
+    }
+}

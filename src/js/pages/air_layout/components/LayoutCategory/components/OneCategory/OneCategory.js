@@ -9,6 +9,7 @@ import { selectorData as layoutSlice, setCategoryesIsChanged, setCategoryList } 
 import { setSpinnerIsActive }                           from './../../../../../../redux/spinnerSlice.js';
 // import { AlertWindowContainer } from './../../../../../AlertWindowContainer/AlertWindowContainer.js';
 import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { AWRemoveConfirmComponent } from './../../../../../../components/AlertWindowContainer/AWRemoveConfirmComponent/AWRemoveConfirmComponent.js';
 
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
@@ -147,25 +148,11 @@ const OneCategoryComponent = ( props ) => {
                 width = '25em'
                 height = '10em'
             >
-                <div className = 'LC_OneCategory_remove'>
-                    <p>Подтвердите удаление категории "{nameValue}"</p>
-                    <p>
-                        <span 
-                            className = 'LC OC_remove_btn'
-                            onClick = { remove_category }
-                        >Удалить</span>
-                        <span 
-                            className = 'LC OC_no_remove_btn'
-                            onClick = { () => { setIsOpen( false ) } }
-                        >Отмена</span>
-
-                    </p>
-                </div>
-
+                <AWRemoveConfirmComponent 
+                    setIsOpen =     { setIsOpen }
+                    removeHandler = { remove_category }
+                />
             </AlertWindowContainer>
-
-
-
 
             <div className = 'LC_OneCategory_wrap'>
                 <input 

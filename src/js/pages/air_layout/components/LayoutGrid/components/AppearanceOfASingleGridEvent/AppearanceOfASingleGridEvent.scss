@@ -1,0 +1,166 @@
+.appearanceOfASingleGridEvent{
+    font-size: 1em;
+    margin: 0.5em;
+    padding: 0.2em 1em;
+
+    background-color: #ededed;
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.2em 0.3em;
+    border-radius: 0.1em;
+
+
+    .AOASGE_wrap{
+        font-size: 1em;
+        padding: 0em .1em;
+        border-radius: 0.1em;
+        max-width: 100%;
+        background-color: #ffffff0f;
+        border-radius: 0.1em;
+        // padding: 0.3em 0.4em;
+        padding: .12em .3em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: center;
+
+
+        .AOASGE_Time{
+            font-size: 1em;
+            flex-grow: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            .AOASGE_Time_time{
+                font-size: 0.7em;
+                color: #343434;
+                background-color: #ffffff;
+                // padding: 0.2em 0.5em;
+                padding: .2em .5em .1em;
+                margin-right: 1.2em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                flex-grow: 0;
+                text-align: center;
+            }
+
+            .isKeyPoint{
+                background-color: #ab3928;
+                color: #fff;
+            }
+            
+            .AOASGE_Time_duration{
+                font-size: 0.7em;
+                color: #343434;
+                background-color: #ffffff;
+                // padding: 0.2em 0.5em;
+                padding: .2em .5em .1em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                text-align: center;
+                flex-grow: 0;
+            }
+        }
+
+        .AOASGE_Body{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            .AOASGE_PrefixItem{
+                font-size: 1em;
+                flex-grow: 0;
+                margin: 0 0.6em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                span{
+                    font-size: 0.6em;
+                    padding: 0.1em 0.2em;
+                    color: #787575;
+                }
+            }
+
+            .AOASGE_EventNameItem{
+                font-size: 0.8em;
+                margin-right: 1em;
+                flex-grow: 0;
+                width: 18em;
+                position: relative;
+                input{
+                    font-size: 0.85em;
+                    padding: 0.4em 1em;
+                    width: calc( 100% - 2em );
+                    text-align: left;
+                    line-height: 1em;
+                    border: 1px solid #34343400;
+                    outline: none;
+                    border-radius: 0.1em;
+                }
+
+                .curPartName{
+                    font-size: 0.8em;
+                    position: absolute;
+                    top: 0;
+                    right: 0.22em;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                    >span{
+                        font-size: 1em;
+                        background-color: #fff;
+                        border-radius: 0.15em;
+                        padding: 0.22em 0.38em 0.22em 0.3em;
+                        .num{
+                            color: #7d7d7d;
+                            font-weight: bold;
+                        }
+                        .icon{
+                            font-size: 0.9em;
+                            color: #c1b4b4;
+                             padding-right: 0.1em;
+                        }
+                    }
+                }
+            }
+
+            .AOASGE_EventNotesItem{
+                font-size: 1em;
+                margin-right: 1em;
+                width: 22em;
+                flex-grow: 1;
+
+                input{
+                    font-size: 0.75em;
+                    padding: 0.35em 1em;
+                    width: 100%;
+                    text-align: left;
+                    line-height: 1em;
+                    border: 1px solid #34343400;
+                    outline: none;
+                    color: #ffffff;
+                    background-color: #c7c7c7;
+                    border-radius: 0.1em;
+                }
+
+                
+            }
+        }
+
+        
+    }
+
+
+}

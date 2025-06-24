@@ -1,0 +1,98 @@
+.CGETT_timeTrack{
+    font-size: 1em;
+    
+
+
+    .CGETT_wrap{
+        font-size: 1em;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding-top: 1.6em;
+
+        // .CGETT_time_space{
+        //     font-size: 1em;
+        //     height: 100%;
+        //     width: 3em;
+        //     text-align: center;
+        //     flex-grow: 0;
+        //     display: flex;
+        //     flex-wrap: nowrap;
+        //     justify-content: center;
+        //     align-items: flex-end;
+        //     align-content: flex-end;
+        //     height: 3.4em;
+        //     padding-bottom: 0.7em;
+
+        //     span{
+        //         font-size: 0.6em;
+        //         padding: 0 0.3em;
+        //     }
+        // }
+
+        .CGETT_track_wrap{
+            font-size: 1em;
+            max-width: 100%;
+            flex-grow: 1;
+            height: 3.4em;
+            position: relative;
+            border-radius: 1px;
+            
+            // .CGETT_track_points{
+            //     font-size: 1em;
+            //     margin: 0;
+            //     height: 2em;
+            //     // background-color: #ac0000;
+            // }
+
+            // .CGETT_track_time{
+            //     font-size: 1em;
+            //     height: 1.4em;
+            //     background-color: #27ac00;
+            //     position: relative;
+            //     border-radius: 1px;
+            //     margin: 0;
+
+            //     .CGETT_cutCursor{
+            //         font-size: 1em;
+            //         position: absolute;
+            //         bottom: 1px;
+            //         left: 50%;
+            //         height: 2.4em;
+            //         width: 2px;
+            //         border-left: 1px solid #b10707;
+            //         user-select: none;
+
+            //         // cursor: none;
+
+            //         span{
+            //             font-size: .6em;
+            //             padding: 0.2em .5em;
+            //             background-color: #f5f5f5;
+            //             color: #db5b5b;
+            //             border-radius: 2px;
+            //             position: absolute;
+            //             top: 0;
+            //             left: 0
+                        
+            //         }
+            //     }
+
+            //     .CGETT_cutCursor:active{
+            //         border-left: 1px solid #b1070710;
+            //         // span{
+            //         //     color: #ff0000;
+            //         // }
+            //     }
+
+            // }
+
+
+
+        }
+
+
+    }
+}

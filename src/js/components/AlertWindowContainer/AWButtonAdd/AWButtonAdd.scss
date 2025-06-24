@@ -1,0 +1,39 @@
+.AWButtonAdd{
+
+    font-size: 1em;
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-top: 2.5em;
+
+    >span{
+        font-size: 0.8em;
+        padding: 0.5em 0.8em;
+        background-color: #8d7c7c;
+        color: #ffffff;
+        border-radius: 0.1em;
+        opacity: 0.1;
+
+        >span{
+            font-size: 1em;
+            padding: 0 0.1em;
+            font-family: Arial, sans-serif;
+        }
+    }
+
+    >span.AWButtonAdd_isActive{
+        opacity: 1;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    >span.AWButtonAdd_isActive:hover{
+        background-color: #7e6565;
+    }
+
+    >span.AWButtonAdd_isActive:active{
+        color: #c7c7c7;
+    }
+}

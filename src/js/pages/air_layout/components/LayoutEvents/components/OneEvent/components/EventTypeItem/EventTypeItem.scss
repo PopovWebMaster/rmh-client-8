@@ -1,0 +1,22 @@
+.LE_OETF_type{
+    font-size: 1em;
+    width: 3.4em;
+    text-align: center;
+    span{
+        font-size: 0.7em;
+        padding: 0.3em 1em;
+        border: 1px solid #00000000;
+        border-radius: 0.1em;
+    }
+
+    .LE_OETF_type_file{
+        background-color: #636bb5;
+        color: #ffffff;
+    }
+
+    .LE_OETF_type_block{
+        background-color: #636bb500;
+        border: 1px solid #636bb5;
+        color: #636bb5;
+    }
+}

@@ -1,0 +1,67 @@
+.cutSegmentButton{
+    font-size: 1em;
+    flex-grow: 0;
+    // width: 3em;
+    height: 100%;
+
+    width: 2em;
+    
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+
+    .CSB_btn{
+        font-size: 0.86em;
+        width: 1.5em;
+        height: 1.4em;
+        background-color: #ffffffbf;
+        border-radius: 0.1em;
+        margin: 0;
+        // cursor: pointer;
+        // user-select: none;
+        // margin: 0 0.4em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        opacity: 0.2;
+
+        span{
+            font-size: 0.85em;
+            color: #817f7f;
+            padding: .4em .22em .4em .24em;
+            
+            line-height: 1.3em;
+        }
+    
+    }
+
+    .isActive{
+        cursor: pointer;
+        user-select: none;
+        opacity: 1;
+    }
+    
+    .CSB_btn.isActive:hover{
+        background-color: #ffffff;
+        span{
+            color: #797979;
+        }
+    }
+    .CSB_btn.isActive:active{
+        span{
+            color: #ee9999;
+        }
+    }
+
+    
+
+
+
+
+}

@@ -2,23 +2,38 @@ $max_blur: 0.4em;
 
 .AlertWindowContainer{
     font-size: 1em;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 1000;
-
     overflow: hidden;
+
+    .AW_item{
+        font-size: 1em;
+        padding: .3em 0.4em;
+        margin: .5em 0;
+
+        h3{
+            font-size: .8em;
+            padding: 0.2em 0.4em;
+            color: #636363;
+
+            span{
+                
+                display: inline-block;
+                width: 8em;
+                text-align: right;
+                padding: 0 0.3em;
+            }
+        }
+    }
+
 
     .AWC_window{
         font-size: 1em;
         position: absolute;
-        // height: fit-content;
-        // height: 20vh;
-        // width: 25vw;
-
         background-color: #ffffff;
         border: 1px solid #939393;
         border-radius: 0.1em;

@@ -1,0 +1,120 @@
+.GDE_OneSector{
+    font-size: 1em;
+
+    background-color: #fafafa29;
+    border-radius: 0.1em;
+
+    margin: 0.3em 0.4em;
+    padding: 0.3em 0.3em;
+
+
+    .GDE_OS_header{
+        font-size: 1em;
+
+        display: flex;
+        justify-content: flex-start;
+        // align-items: center;
+        // align-content: center;
+        background-color: #4dd9ff52;
+        padding: 0.2em 0.4em;
+        height: 1.6em;
+        border-radius: 0.1em;
+
+        .GDE_OS_header_time{
+            font-size: 1em;
+            width: 4em;
+            // text-align: center;
+            flex-grow: 0;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                background-color: #ab3928;
+                color: #ffffff;
+                // border: 1px solid #4fbc0fcc;
+                border-radius: 0.1em;
+                padding: 0.3em 0.6em 0.1em 0.6em;
+            }
+        }
+
+        .GDE_OS_header_time_empty{
+            font-size: 1em;
+            width: 12em;
+            text-align: center;
+            flex-grow: 0;
+            
+            // background-color: #ffffff;
+            // border: 1px solid #343434;
+            border-radius: 0.1em;
+
+            height: 100%;
+
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            span{
+                // font-size: 0.7em;
+
+            }
+
+            .name{
+                font-size: 0.7em;
+                padding: 0em 0.4em;
+                
+                color: #242424;
+                
+            }
+
+            .value{
+                font-size: 0.7em;
+                // background-color: #ffffff;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+                border-radius: 0.1em;
+                padding: 0.2em 0.6em;
+            }
+        }
+
+    }
+
+    .GDE_OS_body{
+        font-size: 1em;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        // align-items: stretch;
+
+        .GDE_OS_body_left{
+            font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            flex-grow: 0;
+
+            .GDE_OS_body_left_timeEnd{
+                font-size: .7em;
+                padding: .2em .8em;
+                color: #1b1a1a;
+                background-color: #bababa;
+                margin: 0.2em 0.5em;
+                border-radius: 0.1em;
+            }
+        }
+
+        .GDE_OS_body_right{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+            // height: 10em;
+        }
+    }
+}

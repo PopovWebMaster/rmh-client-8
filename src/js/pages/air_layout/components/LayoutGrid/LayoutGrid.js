@@ -10,6 +10,9 @@ import './LayoutGrid.scss';
 // import { EventList } from './components/EventList/EventList.js';
 
 import { PageBodyContainer } from './../../../../components/PageBodyContainer/PageBodyContainer.js';
+import { GridDayMenu } from './components/GridDayMenu/GridDayMenu.js';
+import { SaveGridEventsList } from './components/SaveGridEventsList/SaveGridEventsList.js';
+import { GridDayEditor } from './components/GridDayEditor/GridDayEditor.js';
 
 const LayoutGridComponent = ( props ) => {
 
@@ -20,12 +23,11 @@ const LayoutGridComponent = ( props ) => {
         <PageBodyContainer 
             className =             'layoutGrid'
 
-            controlPanelContainer = { <></> }
-            saveButton_clickHandler =   { () => {} }
-            bodyContainer = { <>
-            dds
- 
+            controlPanelContainer = { <>
+                <GridDayMenu />
+                <SaveGridEventsList />
             </> }
+            bodyContainer = { <GridDayEditor /> }
         />
     )
 

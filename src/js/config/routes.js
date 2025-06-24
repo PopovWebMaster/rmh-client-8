@@ -52,7 +52,7 @@ export const ROUTE = {
         KEY_POINTS: 'key-points',
         DAY_EDITOR: 'day-editor',
         EVENTS: 'events',
-        BLOCKS: 'blocks',
+        // BLOCKS: 'blocks',
         CATEGORIES: 'categories',
 
     },

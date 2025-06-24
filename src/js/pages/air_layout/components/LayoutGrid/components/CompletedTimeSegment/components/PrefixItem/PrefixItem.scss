@@ -1,0 +1,15 @@
+.CTS_PrefixItem{
+    font-size: 1em;
+    flex-grow: 0;
+    margin: 0 0.2em;
+
+    input{
+        font-size: 0.6em;
+        padding: 0.1em 0.2em;
+        background-color: #00000000;
+        border: 1px solid #00000000;
+        outline: none;
+        color: #dbd7d7;
+        width: 8em;
+    }
+}

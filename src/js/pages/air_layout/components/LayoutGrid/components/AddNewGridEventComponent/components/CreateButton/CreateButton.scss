@@ -1,0 +1,45 @@
+.G_ANG_CreateButton_wrap{
+
+    font-size:  1em;
+    display: flex;
+    justify-content: center;
+    padding: 1em 0;
+
+
+    .G_ANG_CreateButton{
+        font-size: 0.9em;
+        margin: 1em 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding: 0.45em 0.8em 0.4em 0.8em;
+        background-color: #8d7c7c;
+        border-radius: 0.1em;
+        cursor: pointer;
+        user-select: none;
+
+        span{
+            font-size: 0.8em;
+            color: #ffffff;
+
+        }
+
+        .value{
+            font-family: Arial, sans-serif;
+        }
+
+    }
+
+    .G_ANG_CreateButton:hover{
+        background-color: #7e6565;
+    }
+
+    .G_ANG_CreateButton:active{
+        span{
+            color: #c7c7c7;
+        }
+    }
+
+
+}

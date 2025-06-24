@@ -1,0 +1,40 @@
+.AWEventTypeEventSelect{
+
+    .AW_item_type{
+        font-size: 1em;
+        padding: 0.2em 0;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: .7em;
+            padding: 0.1em 0.8em;
+            border: 1px solid #636bb5;
+            border-radius: 0.1em;
+            color: #636bb5;
+            text-align: center;
+            margin: 0 0.5em;
+            // display: inline-block;
+            width: 6em;
+            font-family: Arial, sans-serif;
+            line-height: 1.5em;
+
+            cursor: pointer;
+            user-select: none;
+        }
+        .noActive:hover{
+            background-color: #636bb5;
+            color: #ffffff;
+        }
+        
+
+        span.isActive{
+            background-color: #636bb5;
+            color: #ffffff;
+        }
+    }
+
+}
