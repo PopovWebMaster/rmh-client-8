@@ -17,6 +17,12 @@ export const layoutSlice = createSlice({
         weekKeyPointList: [
             [], [], [], [], [], [], [] // time,description, ms
         ],
+
+        keyPointsCurrentEventId: null,
+
+
+
+
         pointListIsChanged: false,
         categoryList: [],
         categoryListById: {},
@@ -67,6 +73,15 @@ export const layoutSlice = createSlice({
         setWeekKeyPointList: ( state, action ) => {
             state.weekKeyPointList =  action.payload;
         },
+
+        setKeyPointsCurrentEventId: ( state, action ) => {
+            state.keyPointsCurrentEventId =  action.payload;
+        },
+
+
+        
+
+
 
         setWeekKeyPointListAsChanged: ( state, action ) => {
             state.weekKeyPointList =  action.payload;
@@ -126,7 +141,6 @@ export const layoutSlice = createSlice({
         setGridCurrentDay: ( state, action ) => {
             state.gridCurrentDay =  action.payload;
             state.gridCurrentDayName = WEEK_NAME[ action.payload ];
-
         },
 
         setGridDayEventsIsChanges: ( state, action ) => {
@@ -136,7 +150,9 @@ export const layoutSlice = createSlice({
         setGridDayEventsList: ( state, action ) => {
             state.gridDayEventsList =  action.payload;
             let { gridDayEventsListById } = get_all_list_of_values_grom_grid_events_list( action.payload );
+
             state.gridDayEventsListById = gridDayEventsListById;
+
         },
 
         setGridDayEventsListAsChanged: ( state, action ) => {
@@ -172,6 +188,10 @@ export const layoutSlice = createSlice({
 
 export const {  
     setWeekKeyPointList,
+    setKeyPointsCurrentEventId,
+
+
+    
     setPointListIsChanged,
     setWeekKeyPointListAsChanged,
     setCategoryesIsChanged,
@@ -198,6 +218,17 @@ export const {
 export const selectorData = ( state ) => {
     return {
         weekKeyPointList:   state.layout.weekKeyPointList,
+        keyPointsCurrentEventId:   state.layout.keyPointsCurrentEventId,
+
+
+
+
+
+
+
+
+
+
         pointListIsChanged: state.layout.pointListIsChanged,
 
         categoryList: state.layout.categoryList,

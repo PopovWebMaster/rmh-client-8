@@ -1,0 +1,116 @@
+.LP_Day_point{
+    font-size: 1em;
+    position: absolute;
+    left: 0;
+    top:-10%;
+    width: 100%;
+    height: 1em;
+
+    background-color: #d4dde98a;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    // padding: 0.1em 0;
+
+    .LP_Day_time{
+        font-size: 0.6em;
+        background-color: #005dff0f;
+        padding: 0.1em 0.5em;
+        margin: 0 0.1em 0 .4em;
+        border-radius: 0.1em;
+        line-height: 1em;
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        color: #2c4349;
+        flex-grow: 0;
+    }
+
+    .LP_Day_description{
+        font-size: 0.6em;
+        border: 1px solid #34343400;
+        // outline: none;
+        line-height: 1.3em;
+        // margin-right: 0.2em;
+        padding: 0 0.6em;
+        // color: #595757;
+        // flex-grow: 1;
+        // width: calc( 100% - 8em );
+        width: fit-content;
+        max-width: calc( 100% - 8em );
+
+        // background-color: #2c434900;
+    }
+
+    // .LP_Day_description::placeholder{
+    //     color: rgba(54, 54, 54, 0);
+    // }
+    
+
+
+    // .LP_Day_description:focus{
+    //     background-color: #2c434917;
+    // }
+    // .LP_Day_description:focus::placeholder{
+    //     color: rgb(99, 99, 99);
+    // }
+    
+
+    // .LP_Day_time_remove{
+    //     opacity: 0;
+    //     font-size: 0.8em;
+    //     background-color: #e17d7d;
+    //     color: #ffffff;
+    //     border-radius: 0.1em;
+    //     height: 1em;
+    //     width: 1em;
+    //     line-height: 1em;
+    //     padding: 0.2em;
+    //     text-align: center;
+    //     cursor: pointer;
+    //     user-select: none;
+    //     margin-right: 0.2em;
+
+    //     flex-grow: 0;
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+}
+
+// .LP_Day_point:hover{
+//     background-color: #d4dde98a;
+
+//     .LP_Day_time_remove{
+//         opacity: 1;
+//     }
+
+    
+// }

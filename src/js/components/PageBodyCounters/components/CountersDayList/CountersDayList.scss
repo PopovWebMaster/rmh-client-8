@@ -1,0 +1,60 @@
+.PBC_CountersDayList{
+    font-size: 1em;
+    height: calc( 100% - 3.8em );
+
+    .PBC_one_counter_day{
+        font-size: 1em;
+        margin: 0.3em 0;
+        background-color: #ffffff25;
+        border-radius: 0.1em;
+        padding: 0.1em 0.4em;
+
+        h4{
+            font-size: 1em;
+            padding: 0.1em 0;
+            span{
+                font-size: 0.7em;
+                padding: 0.2em 0.5em;
+                border-radius: 0.1em;
+            }
+        }
+
+        >div{   
+            font-size: 1em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
+            margin: 0 0.1em;
+
+            span{
+                font-size: 0.7em;
+                padding: 0.2em 0.3em;
+                text-align: center;
+                background-color: #f5f4f4;
+                width: 6em;
+                margin: 0 0.2em;
+                border-radius: 0.1em;
+
+            }
+
+            .PBS_time{
+                color: #237f2b;
+                
+            }
+
+            .PBS_procent{
+                color: #2f3ec7;
+            }
+
+            .PBS_duration{
+                color: #343434;
+            }
+            
+
+        }
+
+    }
+
+
+}

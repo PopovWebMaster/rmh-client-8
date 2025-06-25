@@ -1,0 +1,49 @@
+.keyPointsEvents{
+    font-size: 1em;
+    height: 100%;
+    width: 12em;
+    padding: 0 0.5em;
+
+    .keyPointsEvents_title{
+        font-size: .85em;
+        padding: .4em 2em;
+        color: #fff;
+        background-color: #ffffff14;
+    }
+
+    .keyPointsEvents_list{
+        font-size: 1em;
+        height: calc( 100% - 2em );
+
+        .keyPointsEvents_event{
+            font-size: 1em;
+            margin: 0.2em 0;
+            padding: .2em 0.4em;
+            background-color: #ffffff10;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                padding: 0.2em 0.8em;
+                white-space: pre;
+            }
+        }
+
+        .keyPointsEvents_event:hover{
+            background-color: #ffffff23;
+        }
+
+
+
+        .keyPointsEvents_event.isActive{
+            background-color: #ffffff23;
+        }
+    }
+}

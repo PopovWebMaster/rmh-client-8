@@ -19,6 +19,7 @@ import { AirLayoutMenu } from './../AirLayoutMenu/AirLayoutMenu.js';
 import { LayoutGrid } from './../LayoutGrid/LayoutGrid.js';
 import { LayoutCategory } from './../LayoutCategory/LayoutCategory.js';
 import { LayoutEvents } from './../LayoutEvents/LayoutEvents.js';
+import { LayoutKeyPoints } from './../LayoutKeyPoints/LayoutKeyPoints.js';
 
 
 
@@ -37,6 +38,8 @@ const AirLayoutAppComponent = ( props ) => {
 
                 // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
                 // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` );
+                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` );
+
 
 
 
@@ -61,7 +64,7 @@ const AirLayoutAppComponent = ( props ) => {
             <Routes>
                 <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/` } element = { <LayoutGrid /> } />
 
-                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` }    element = { <div></div> } />
+                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` }    element = { <LayoutKeyPoints /> } />
                 <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` }        element = { <LayoutEvents /> } />
                 <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` }    element = { <LayoutCategory />} />
 

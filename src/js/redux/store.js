@@ -8,7 +8,7 @@ import companySlice         from './companySlice.js';
 import logsForwardTASlise   from './logsForwardTASlise.js';
 import playReportSlice      from './playReportSlice.js';
 import layoutSlice          from './layoutSlice.js';
-
+import countersSlise        from './countersSlise.js';
 
 
 
@@ -23,6 +23,7 @@ export default configureStore({
         playReport:     playReportSlice,
         layout:         layoutSlice,
         application:    applicationSlice,
+        counters:       countersSlise,
 
 
 

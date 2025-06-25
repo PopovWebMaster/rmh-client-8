@@ -12,6 +12,7 @@ const PageBodyContainerComponent = ( props ) => {
     let {
         className = '',
         controlPanelContainer,
+        leftContainer = false,
         bodyContainer,
 
     } = props;
@@ -26,13 +27,39 @@ const PageBodyContainerComponent = ( props ) => {
 
             </div>
 
-            <div 
+            <div className = 'PBC_body_container'>
+
+                { leftContainer? (
+
+                    <div className = 'PBC_scroll_container PBC_left'>
+                        <ScrollContainer>
+                            { leftContainer }
+                        </ScrollContainer>
+                    </div>
+                ): '' }
+
+                <div 
+                    className = 'PBC_scroll_container PBC_center'
+                >
+                    <ScrollContainer>
+                        { bodyContainer }
+                    </ScrollContainer>
+                </div>
+
+            </div>
+
+
+            
+
+            {/* <div 
                 className = 'PBC_scroll_container'
             >
                 <ScrollContainer>
                     { bodyContainer }
                 </ScrollContainer>
-            </div>
+            </div> */}
+
+
         </div>
     )
 

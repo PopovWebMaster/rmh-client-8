@@ -17,6 +17,8 @@ import { set_max_height_em_for_empty_time_segment } from './vendors/set_max_heig
 // import { set_max_height_em_for_empty_time_segment } from './../../../../vendors/set_max_height_em_for_empty_time_segment.js';
 import { ListBySectors } from './../ListBySectors/ListBySectors.js';
 
+import { SetCountersDataFromLayout } from './../../../../../../components/PageBodyCounters/SetCountersDataFromLayout.js';
+
 const GridDayEditorComponent = ( props ) => {
 
     let {
@@ -39,7 +41,9 @@ const GridDayEditorComponent = ( props ) => {
         >
             { isReady? (
                 <UpdateOneDayGridList>
-                    <ListBySectors />
+                    <SetCountersDataFromLayout>
+                        <ListBySectors />
+                    </SetCountersDataFromLayout>
                 </UpdateOneDayGridList>
             ): '' }
        </div>

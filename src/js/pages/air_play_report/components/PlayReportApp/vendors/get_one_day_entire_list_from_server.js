@@ -21,7 +21,7 @@ export const get_one_day_entire_list_from_server = ( params ) => {
 
 
     send_request_to_server({
-        route: 'git ',
+        route: 'get-one-day-entire-list',
         data: {
             date_string,
         },

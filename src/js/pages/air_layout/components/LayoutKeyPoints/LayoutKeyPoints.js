@@ -1,49 +1,47 @@
+// LayoutKeyPoints
+
 
 import React from "react";
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
-import './LayoutGrid.scss';
+import './LayoutKeyPoints.scss';
 
 // import { AddEventButton } from './components/AddEventButton/AddEventButton.js';
 // import { SaveEventChangesButton } from './components/SaveEventChangesButton/SaveEventChangesButton.js';
 // import { EventList } from './components/EventList/EventList.js';
 
 import { PageBodyContainer } from './../../../../components/PageBodyContainer/PageBodyContainer.js';
-import { GridDayMenu } from './components/GridDayMenu/GridDayMenu.js';
-import { SaveGridEventsList } from './components/SaveGridEventsList/SaveGridEventsList.js';
-import { GridDayEditor } from './components/GridDayEditor/GridDayEditor.js';
-import { PageBodyCounters } from './../../../../components/PageBodyCounters/PageBodyCounters.js';
+import { KeyPointsEvents } from './component/KeyPointsEvents/KeyPointsEvents.js';
+import { Week } from './component/Week/Week.js';
 
-const LayoutGridComponent = ( props ) => {
+
+const LayoutKeyPointsComponent = ( props ) => {
 
     let {
     } = props;
     
     return (
         <PageBodyContainer 
-            className =             'layoutGrid'
+            className =             'layoutKeyPoints'
 
-            controlPanelContainer = { <>
-                <GridDayMenu />
-                <SaveGridEventsList />
-            </> }
+            controlPanelContainer = { <></> }
 
-            leftContainer =  { <PageBodyCounters /> }
+            leftContainer =  { <KeyPointsEvents /> }
 
-            bodyContainer = { <GridDayEditor /> }
+            bodyContainer = { <Week /> }
         />
     )
 
 };
 
-export function LayoutGrid( props ){
+export function LayoutKeyPoints( props ){
 
     // const company = useSelector( companySlice );
     // const dispatch = useDispatch();
 
     return (
-        <LayoutGridComponent
+        <LayoutKeyPointsComponent
             { ...props }
             // currentCompanyAlias = { company.currentCompanyAlias }
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
