@@ -1,0 +1,31 @@
+.ANAppl_manager_notes{
+    font-size: 1em;
+    margin: 1em 0;
+
+    padding: 0.2em 0.5em;
+    border-radius: 0.1em;
+
+
+    h4{
+        font-size: 0.8em;
+        margin: 0.3em 1em;
+        color: #535252;
+        span{
+            font-size: 0.8em;
+            color: #ff4d4d94;
+        }
+    }
+
+    textarea{
+        font-size: 0.8em;
+        line-height: 1.4em;
+        color: #636363;
+        padding: 0.4em 0.8em;
+        border-radius: 0.1em;
+        border: 1px solid #ebebeb;
+        resize: none;
+        width: calc( 100% - 1em );
+        height: 5em;
+        outline: none;
+    }
+}

@@ -1,0 +1,99 @@
+.AL_FilterList{
+    font-size: 1em;
+    height: 100%;
+
+    // display: flex;
+    // justify-content: center;
+
+    // .AL_FilterList_wrap{
+    //     font-size: 1em;
+    //     max-width: 50em;
+    //     width: 100%;
+    //     padding: 0.8em;
+
+    .AL_FilterList_item_wrap{
+        font-size: 1em;
+        display: flex;
+        justify-content: center;
+        margin: 0.2em 0;
+
+        .AL_FilterList_item{
+            font-size: 1em;
+
+            max-width: 50em;
+            width: 100%;
+
+            padding: 0.2em 0.6em;
+            
+            background-color: #ffffffe6;
+            
+            border: 1px solid #9b9b9b;
+
+            border-radius: 0.1em;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            cursor: pointer;
+            user-select: none;
+            
+            span{
+                // font-size: 0.8em;
+                border-radius: 0.1em;
+                margin-right: 1em;
+                
+            }
+
+            .AL_category{
+                // flex-grow: 0;font-size: 0.8em;
+                font-size: 0.7em;
+                padding: 0.3em 0.8em;
+                
+            }
+
+            .AL_name{
+                // flex-grow: 1;
+                font-size: 0.75em;
+                padding: 0.25em 0.8em;
+                color: #5d5d5d;
+                // min-width: 15em;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+            .AL_num{
+                font-size: 0.75em;
+                padding: 0.25em 0.8em;
+                color: rgb(97, 97, 97);
+                flex-grow: 1;
+                max-width: 20%;
+
+            }
+
+            .AL_release{
+                font-size: 0.6em;
+                padding: 0.25em 0em;
+                color: rgb(97, 97, 97);
+                flex-grow: 0;
+                text-align: left;
+                width: 7em;
+                margin-right: 0em;
+            }
+
+
+        }
+
+        .AL_FilterList_item:hover{
+            background-color: #ffffff;
+            border: 1px solid #34343400;
+        }
+
+    }
+
+       
+
+    // }
+
+    
+}

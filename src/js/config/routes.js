@@ -10,12 +10,15 @@ export const ROUTE = {
     PAGE: {
         HOME: 'home',
         COMPANY: 'company',
+
         AIR_MAIN: 'air-main',
         AIR_SCHEDULE: 'air-schedule',
         AIR_APPLICATION: 'air-application',
         AIR_LAYOUT: 'air-layout',
         AIR_PLAY_REPORT: 'air-play-report',
         AIR_LOGS: 'air-logs',
+
+    
 
 
 

@@ -1,0 +1,18 @@
+.applicationList{
+    font-size: 1em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .AL_filter_wrap{
+        font-size: 1em;
+        flex-grow: 0;
+    }
+
+    .AL_list_wrap{
+        font-size: 1em;
+        flex-grow: 1;
+        overflow: hidden;
+    }
+}

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import './EventRemoveItem.scss';
 
-import { selectorData as layoutSlice, setEventList }    from './../../../../../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice, setEventList, setGridDayEventsList }    from './../../../../../../../../redux/layoutSlice.js';
 import { setSpinnerIsActive }                           from './../../../../../../../../redux/spinnerSlice.js';
 import { AlertWindowContainer }     from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { AWRemoveConfirmComponent } from './../../../../../../../../components/AlertWindowContainer/AWRemoveConfirmComponent/AWRemoveConfirmComponent.js';
@@ -19,6 +19,7 @@ const EventRemoveItemComponent = ( props ) => {
         
         setEventList,
         setSpinnerIsActive,
+        setGridDayEventsList,
 
     } = props;
 
@@ -41,7 +42,12 @@ const EventRemoveItemComponent = ( props ) => {
 
                 if( response.ok ){
                     setSpinnerIsActive( false );
-                    setEventList( response.list );
+                    setEventList( response.eventsList );
+                    setGridDayEventsList( response.gridEventsList );
+
+                    
+
+
                     setIsOpen( false );
                 };
 
@@ -90,6 +96,10 @@ export function EventRemoveItem( props ){
 
             setEventList = { ( val ) => { dispatch( setEventList( val ) ) } }
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
+
+
+            
 
 
         />

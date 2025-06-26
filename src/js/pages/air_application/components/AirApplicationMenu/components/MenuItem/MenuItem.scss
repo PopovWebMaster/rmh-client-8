@@ -1,0 +1,36 @@
+.AM_MenuItem{
+    font-size: 1em;
+    margin: 0.5em 1em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+    padding: 0.4em 1em;
+    background-color: #98989887;
+    margin: 0 0.3em;
+    border-radius: 0.1em;
+
+    span{
+        font-size: 0.8em;
+        color: #ffffff;
+        // margin: 0 0.3em;
+    }
+
+    .title{
+        margin-left: 0.2em;
+        // font-family:  Courier, monospace;
+    }
+
+
+}
+.active{
+    .AM_MenuItem{
+        background-color: #4d7dc1;
+        span{
+            color: #ffffff;
+        }
+    }
+}

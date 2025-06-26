@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -19,15 +19,22 @@ const UpdateOneDayGridListComponent = ( props ) => {
 
     } = props;
 
+    let [ isReady, setIsReady ] = useState( false );
+
     useEffect( () => {
+
         let result = get_grid_one_day_list_by_sector( gridDayEventsList[ gridCurrentDay ] );
         setGridOneDayList( result );
+        setIsReady( true );
+
     }, [
         gridCurrentDay,
         gridDayEventsList
     ] );
 
-    return (<>{ children }</>)
+
+
+    return (<>{ isReady? children: '' }</>)
 
 };
 

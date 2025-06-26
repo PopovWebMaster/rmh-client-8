@@ -1,0 +1,42 @@
+.ANAppl_num{
+    font-size: 1em;
+    margin: 1em 0;
+
+    padding: 0.2em 0.5em;
+    border-radius: 0.1em;
+
+
+    h4{
+        font-size: 0.8em;
+        margin: 0.3em 1em;
+        color: #535252;
+        span{
+            font-size: 0.8em;
+            color: #ff4d4d94;
+        }
+    }
+    input{
+        font-size: 0.8em;
+        line-height: 1.4em;
+        color: #636363;
+        background-color: #ffffff;
+        outline: none;
+        border: 1px solid #e1e1e1;
+        border-radius: 0.1em;
+        padding: 0.2em 1em;
+        width: 7em;
+    }
+    .error{
+        font-size: .75em;
+        color: #9d2c2c;
+        line-height: 1.4em;
+        padding: .5em 1em;
+        text-indent: 1em;
+
+    }
+}
+
+.ANAppl_num.isError{
+    background-color: #ffdede;
+}
+

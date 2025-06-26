@@ -1,0 +1,15 @@
+.applicationsMenu{
+    font-size: 1em;
+    margin: 0.5em 1em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+    a{
+        text-decoration: none;
+    }
+
+}

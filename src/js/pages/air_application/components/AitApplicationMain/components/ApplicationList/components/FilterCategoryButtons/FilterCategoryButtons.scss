@@ -1,0 +1,39 @@
+.AL_FilterCategoryButtons{
+    font-size: 1em;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .AL_btn{
+        font-size: 0.95em;
+        margin: 0.3em 0.5em;
+        padding: 0.3em 1em;
+        border-radius: 0.1em;
+        cursor: pointer;
+        user-select: none;
+        opacity: 0.2;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.8em;
+        }
+        // background-color: red;
+        // color: red;
+    }
+
+    .AL_btn:hover{
+        opacity: 1;
+    }
+
+    .AL_btn.isActive{
+        opacity: 1;
+    }
+
+}
