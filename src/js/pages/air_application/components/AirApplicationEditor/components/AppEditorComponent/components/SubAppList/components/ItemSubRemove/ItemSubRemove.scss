@@ -1,0 +1,125 @@
+.SA_ItemSubRemove{
+    font-size: 1em;
+    height: 100%;
+    // margin-right: 0.2em;
+    padding: 0.45em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+    // border-right: 1px solid #f7feff;
+
+    // width: 4em;
+
+    max-width: 100%;
+    flex-grow: 1;
+
+    .SA_remove_btn{
+        font-size: 0.86em;
+        width: 1.4em;
+        height: 1.4em;
+        background-color: #ffffff1a;
+        border-radius: 0.1em;
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+        // margin: 0 0.4em;
+    
+        span{
+            font-size: 1em;
+            line-height: 1.4em;
+            color: #9f9e9e;
+        }
+    
+    }
+    
+    .SA_remove_btn:hover{
+        // background-color: #ffffff5e;
+        background-color: #e93b3b;
+
+        span{
+            color: #ffffff;
+        }
+    }
+    .SA_remove_btn:active{
+        span{
+            color: #ee9999;
+        }
+    }
+
+
+    // .SA_ItemSubRemove_btn{
+    //     font-size: 0.65em;
+    //     padding: 0.2em 0.8em;
+    //     border-radius: 0.1em;
+    //     background-color: #70b367;
+    //     color: #ffffff;
+
+    //     cursor: pointer;
+    //     user-select: none;
+    //     margin: 0 0.5em 0 0;
+
+    // }
+
+    // .SA_ItemSubRemove_btn:hover{
+    //     background-color: #639584;
+    // }
+
+    // .SA_ItemSubRemove_btn:active{
+    //     color: #f89898;
+    // }
+
+
+    .SA_ItemSubRemove_remove{
+        font-size: 1em;
+        p{
+            font-size: 0.7em;
+            color: #373737;
+            text-align: center;
+            margin: 1.2em 0;
+            padding: 0.3em 1em;
+            line-height: 1.4em;
+    
+            span{
+                font-size: 0.9em;
+                padding: 0.4em 1.2em;
+                border-radius: 0.1em;
+                margin: 0 1em;
+                cursor: pointer;
+                user-select: none;
+            }
+    
+            .SA_ItemSubRemove_remove_btn{
+                background-color: #d75959;
+                color: #ffffff;
+            }
+    
+            .SA_ItemSubRemove_remove_btn:hover{
+                background-color: #e92929;
+            }            
+            .SA_ItemSubRemove_remove_btn:active{
+                color: #555555;
+            }
+    
+            .SA_ItemSubRemove_no_remove_btn{
+                background-color: rgb(29, 153, 35);
+                color: #ffffff;
+            }
+            .SA_ItemSubRemove_no_remove_btn:hover{
+                background-color: rgb(28, 189, 37);
+            }
+            .SA_ItemSubRemove_no_remove_btn:active{
+                color: #a8a8a8;
+            }
+        }
+
+
+    }
+
+}

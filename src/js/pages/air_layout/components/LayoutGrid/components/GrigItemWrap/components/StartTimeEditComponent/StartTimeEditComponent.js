@@ -42,6 +42,13 @@ const StartTimeEditComponentComponent = ( props ) => {
 
         }else{
             setIsReady( false );
+
+            setEventId( null );
+            setDurationTime( 0 );
+            setStartTime( 0 );
+            setTimeSpaceFrom( 0 );
+            setTimeSpaceTo( 0 );
+            setIsReady( false );
         };
 
     }, [ isOpen ] );

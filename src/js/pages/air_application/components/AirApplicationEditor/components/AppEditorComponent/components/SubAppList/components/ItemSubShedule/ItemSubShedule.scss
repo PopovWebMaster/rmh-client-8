@@ -1,0 +1,48 @@
+.SA_ItemSubShedule{
+    font-size: 1em;
+    height: 100%;
+    margin-right: 0.2em;
+    padding: 0.45em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    border-right: 1px solid #f7feff;
+
+    width: 6em;
+
+    .SA_ItemSubShedule_btn{
+        font-size: 0.65em;
+        padding: 0.2em 0.8em;
+        border-radius: 0.1em;
+        background-color: #215fe3;
+        color: #ffffff;
+
+        cursor: pointer;
+        user-select: none;
+        margin: 0 0.5em 0 0;
+
+    }
+
+    .SA_ItemSubShedule_btn:hover{
+        background-color: #00bf7f;
+    }
+
+
+    .SA_ItemSubShedule_count{
+        font-size: .5em;
+        color: #a7a7a7;
+        width: 3em;
+        padding: 0.3em 0;
+        text-align: center;
+    }
+
+
+
+}

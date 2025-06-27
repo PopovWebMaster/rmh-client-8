@@ -43,7 +43,7 @@ const FilterListComponent = ( props ) => {
 
 
     const click = ( id ) => {
-        navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/${id}` );
+        navigate( `/${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/${id}` );
     };
 
     const create = ( arr ) => {

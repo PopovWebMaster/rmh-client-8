@@ -1,0 +1,76 @@
+.AddSubAButton{
+    font-size: 1em;
+
+    width: 13em;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    // background-color: #d3d3d3;
+    // border: 1px solid #c7c7c7;
+    border-radius: 0.1em;
+    
+
+    .AddSubAButton_title{
+        font-size: 1em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding: 0.15em;
+        margin-right: 0.3em;
+
+        .icon{
+            font-size: 0.8em;
+            padding: 0 0.4em;
+            color: #ffffff;
+        }
+
+        .title{
+            font-size: 0.7em;
+            padding: 0.1em .1em 0 0.1em;
+            color: #715f5f;
+        }
+
+    }
+
+    .AddSubAButton_btn{
+
+        font-size: 1em;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: 4em;
+
+        cursor: pointer;
+        user-select: none;
+
+        border: 1px solid #8d7c7c;
+
+        span{
+            font-size: 0.7em;
+            color: #8d7c7c;
+            padding: 0.3em;
+            height: 100%;
+
+        }
+
+    }
+
+    .AddSubAButton_btn:hover{
+        background-color: #8d7c7c;;
+        span{
+            color: #ffffff;
+        }
+    }
+    .AddSubAButton_btn:last-child{
+        margin-left: -1px;
+    }
+
+
+}

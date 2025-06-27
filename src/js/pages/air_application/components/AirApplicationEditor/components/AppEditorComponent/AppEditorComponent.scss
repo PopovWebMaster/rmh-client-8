@@ -1,0 +1,106 @@
+.appEditorComponent{
+    font-size: 1em;
+
+    display: flex;
+    justify-content: center;
+
+    height: calc(100% - 0.5em);;
+
+    .AEC_wrap{
+        font-size: 1em;
+        max-width: 70em;
+        background-color: #f3efef;
+        margin: 0 1em;
+        border-radius: 0.1em;
+        flex-grow: 1;
+
+        .AEC_button_panel{
+            font-size: 1em;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-self: center;
+
+            padding: 0.5em;
+
+            .AEC_left{
+                font-size: 1em;
+                flex-grow: 0;
+
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-self: center;
+            }
+
+            .AEC_right{
+                font-size: 1em;
+                flex-grow: 1;
+                max-width: 100%;
+
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                align-self: center;
+
+
+            }
+        }
+
+        .AEC_orders_wrap{
+            font-size: 1em;
+            height: calc(100% - 12.4em);
+            background-color: #ffffff;
+            margin: 0 0.5em;
+            border: 1px solid #e7e7e7;
+            border-radius: 0.1em;
+            overflow-y: auto;
+        }
+
+
+        .AEC_orders_wrap::-webkit-scrollbar {
+            width: 0.6em;
+        }
+            
+        .AEC_orders_wrap::-webkit-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .AEC_orders_wrap::-webkit-scrollbar-thumb {
+            // border: 1px solid #6c6c6c32;
+            border-radius: 0.1em;
+            background-color: #91857c5c;
+            -webkit-box-shadow: inset 0 0 0.1em #5b41cfc2;
+            box-shadow: inset 0 0 0.1em #5b41cfc2;
+        }
+
+
+
+        .AEC_orders_wrap::-moz-scrollbar {
+            width: 0.7em;
+        }
+            
+        .AEC_orders_wrap::-moz-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .AEC_orders_wrap::-moz-scrollbar-thumb {
+            // border: 1px solid #6c6c6c3b;
+            border-radius: 0.1em;
+            background-color: #6f61575c;
+            -moz-box-shadow: inset 0 0 0.1em #5b41cfc2;
+            box-shadow: inset 0 0 0.1em #5b41cfc2;
+        }
+
+
+        .AEC_orders_wrap::-moz-scrollbar {
+            width: thin;
+        }
+
+
+
+    }
+
+
+    
+}

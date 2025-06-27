@@ -1,0 +1,89 @@
+.SA_ItemSubFiles{
+    font-size: 1em;
+    height: 100%;
+    margin-right: 0.2em;
+    padding: 0.2em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    border-right: 1px solid #f7feff;
+
+    >h3{
+        font-size: .6em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        line-height: 2.2em;
+        // margin-right: 1em;
+
+    }
+
+    .SA_ItemSubFiles_edit{
+        font-size: 0.9em;
+        padding: 1em;
+        margin: 0 .5em;
+
+
+        h3{
+            font-size: .8em;
+            padding: 0.2em 0.4em;
+            color: #636363;
+            margin-right: 1em;
+            // width: 12em;
+
+            span{
+                font-size: 0.8em;
+                color: #ff4d4d94;
+            }
+        }
+
+        input{
+            font-size: .7em;
+            padding: 0.4em 0.4em;
+            width: calc( 100% - 2em );
+            // max-width: 100%;
+            margin: 0 1em 0 0.2em;
+            text-align: left;
+            text-indent: 1em;
+
+            border: 1px solid #7474742e;
+            border-radius: 0.1em;
+            outline: none;
+            // flex-grow: 1;
+
+            color: rgb(54, 54, 54);
+        }
+
+        input[type="text"]::placeholder { 
+            color: #d3d3d3; 
+        }  
+
+        .error{
+            font-size: .75em;
+            color: #9d2c2c;
+            line-height: 1.4em;
+            padding: .5em 1em;
+            text-indent: 1em;
+
+        }
+
+        .SA_ItemSubFiles_edit_version{
+            margin: 1em 0;
+            padding: 0.5em;
+            h4{
+                font-size: .65em;
+                padding: 0.2em 0.4em;
+                color: #476edb;
+                text-indent: 2em;
+            }
+        }
+    }
+
+
+}

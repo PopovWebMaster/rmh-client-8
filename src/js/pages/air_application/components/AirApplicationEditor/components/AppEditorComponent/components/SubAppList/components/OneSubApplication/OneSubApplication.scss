@@ -1,0 +1,18 @@
+.oneSubApplication{
+    font-size: 1em;
+
+    margin: 0.2em 0.5em;
+    min-height: 2em;
+    background-color: #c3e4e745;
+    border-radius: 0.1em;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    
+}
+
+.oneSubApplication:hover{
+    background-color: #c3e4e7b2;
+}

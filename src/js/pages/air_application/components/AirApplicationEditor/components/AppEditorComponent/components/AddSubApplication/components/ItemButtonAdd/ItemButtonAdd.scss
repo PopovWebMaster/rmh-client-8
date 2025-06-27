@@ -1,0 +1,49 @@
+.NS_item_add_num{
+    font-size: 1em;
+
+    padding: 1.5em 0 0 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+    .NS_btn_wrap{
+        font-size: 0.7em;
+        padding: 0.3em 1em;
+        border-radius: 0.1em;
+        border: 1px solid #ffffff00;
+        color: #ffffff;
+        // cursor: pointer; 
+        // user-select: none;
+        margin-right: 1em;
+
+        background-color: #8d7c7c;
+        opacity: 0.2;
+
+        .icon{
+            margin-right: 0.2em;
+        }
+    }
+
+    .isActive{
+        opacity: 1;
+        cursor: pointer; 
+        user-select: none;
+    }
+
+    .NS_btn_wrap.isActive:hover{
+        background-color: #775959;
+        border: 1px solid #ffffff00;
+    }
+
+    .NS_btn_wrap.isActive:active{
+        span{
+            color: #cbcbcb;
+        }
+    }
+
+
+
+
+}

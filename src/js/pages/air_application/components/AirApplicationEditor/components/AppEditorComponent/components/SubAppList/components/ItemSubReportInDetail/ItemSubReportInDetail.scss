@@ -1,0 +1,41 @@
+.SA_ItemSubReportInDetail{
+    font-size: 1em;
+    height: 100%;
+    margin-right: 0.2em;
+    padding: 0.45em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    border-right: 1px solid #f7feff;
+
+    width: 4em;
+    
+
+    .SA_ItemSubReportInDetail_btn{
+        font-size: 0.65em;
+        padding: 0.2em 0.8em;
+        border-radius: 0.1em;
+        background-color: #70b367;
+        color: #ffffff;
+
+        cursor: pointer;
+        user-select: none;
+        margin: 0 0.5em 0 0;
+
+    }
+
+    .SA_ItemSubReportInDetail_btn:hover{
+        background-color: #639584;
+    }
+
+    .SA_ItemSubReportInDetail_btn:active{
+        color: #f89898;
+    }
+}

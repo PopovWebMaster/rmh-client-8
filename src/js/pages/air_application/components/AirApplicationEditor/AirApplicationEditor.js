@@ -6,6 +6,11 @@ import { useSelector } from 'react-redux';
 import './AirApplicationEditor.scss';
 
 // import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+import { PageBodyContainer } from './../../../../components/PageBodyContainer/PageBodyContainer.js';
+import { SaveApplicationChanges } from './components/SaveApplicationChanges/SaveApplicationChanges.js';
+import { SetCurrentApplicationId } from './components/SetCurrentApplicationId/SetCurrentApplicationId.js';
+import { GetCurrentApplicationDataFromServer } from './components/GetCurrentApplicationDataFromServer/GetCurrentApplicationDataFromServer.js';
+import { AppEditorComponent } from './components/AppEditorComponent/AppEditorComponent.js';
 
 const AirApplicationEditorComponent = ( props ) => {
 
@@ -14,7 +19,19 @@ const AirApplicationEditorComponent = ( props ) => {
     } = props;
 
     return (
-        <div>AirApplicationEditor</div>
+        <PageBodyContainer
+            className = 'applicationEditor'
+            controlPanelContainer = {<>
+                <SaveApplicationChanges />
+            </>}
+            bodyContainer = {<>
+                <SetCurrentApplicationId>
+                    <GetCurrentApplicationDataFromServer>
+                        <AppEditorComponent />
+                    </GetCurrentApplicationDataFromServer>
+                </SetCurrentApplicationId>
+            </>}
+        />
     )
 
 };

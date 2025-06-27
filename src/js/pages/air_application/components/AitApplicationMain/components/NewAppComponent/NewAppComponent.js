@@ -10,7 +10,7 @@ import './NewAppComponent.scss';
 import { selectorData as applicationSlice, setApplicationList } from './../../../../../../redux/applicationSlice.js';
 import { setSpinnerIsActive }               from './../../../../../../redux/spinnerSlice.js';
 
-// import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
+import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
 
 import { ItemName } from './components/ItemName/ItemName.js';
 import { ItemNum } from './components/ItemNum/ItemNum.js';
@@ -65,31 +65,30 @@ const NewAppComponentComponent = ( props ) => {
 
     const clickAdd = () => {
         if( isReady ){
-            alert( 'NewAppComponent' );
 
             setSpinnerIsActive( true );
-            // send_request_to_server({
-            //     route: `${currentPage}/add-new-application`,
-            //     data: {
-            //         applicationName: appName,
-            //         applicationNum: appNum,
-            //         applicationCategoryId: categoryId,
-            //         applicationManagerNotes: managerNotes,
+            send_request_to_server({
+                route: `add-new-application`,
+                data: {
+                    applicationName: appName,
+                    applicationNum: appNum,
+                    applicationCategoryId: categoryId,
+                    applicationManagerNotes: managerNotes,
 
-            //     },
+                },
 
-            //     callback: ( response ) => {
-            //         console.dir( 'response' );
-            //         console.dir( response );
+                successCallback: ( response ) => {
+                    console.dir( 'response' );
+                    console.dir( response );
 
-            //         if( response.ok ){
-            //             setSpinnerIsActive( false );
-            //             setApplicationList( response.list );
-            //             setIsOpen( false );
-            //         };
+                    if( response.ok ){
+                        setSpinnerIsActive( false );
+                        setApplicationList( response.list );
+                        setIsOpen( false );
+                    };
 
-            //     },
-            // });
+                },
+            });
         };
     };
 

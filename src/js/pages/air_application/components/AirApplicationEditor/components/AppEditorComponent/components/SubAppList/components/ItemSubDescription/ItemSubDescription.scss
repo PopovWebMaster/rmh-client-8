@@ -1,0 +1,90 @@
+.SA_ItemSubDescription{
+    font-size: 1em;
+    height: 100%;
+    margin-right: 0.2em;
+    padding: 0.2em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    border-right: 1px solid #f7feff;
+
+
+    >h3{
+        font-size: .6em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        line-height: 2.2em;
+        width: 10.2em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .SA_ItemSubDescription_title{
+            font-size: 1em;
+            
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            .icon{
+                padding: 0 .4em;
+                color: #20a13d;
+                width: 1.2em;
+            }
+
+            .SA_ItemSubDescription_yes{
+                padding: 0em 0.4em;
+                color: #329932;
+                font-weight: bold;
+            }
+
+            .SA_ItemSubDescription_no{
+                padding: 0em 0.4em;
+                color: #3a3a3a;
+            }
+        }
+
+
+    }
+
+    .SA_ItemSubDescription_edit{
+        font-size: 0.9em;
+        padding: 1em;
+        margin: 0 .5em;
+
+
+        h3{
+            font-size: .8em;
+            padding: 0.2em 0.4em;
+            color: #636363;
+            margin-right: 1em;
+            
+
+        }
+
+        textarea{
+            font-size: 0.8em;
+            line-height: 1.4em;
+            color: #636363;
+            padding: 0.4em 0.8em;
+            border-radius: 0.1em;
+            border: 1px solid #ebebeb;
+            resize: none;
+            width: calc( 100% - 1em );
+            height: 5em;
+            outline: none;
+        }
+    }
+
+
+}
