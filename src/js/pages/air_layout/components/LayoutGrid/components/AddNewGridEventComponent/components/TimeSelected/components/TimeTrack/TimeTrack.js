@@ -32,6 +32,18 @@ const TimeTrackComponent = ( props ) => {
     let [ sliderWidth, setSliderWidth ] = useState( 0 );
     let [ sliderLeft, setSliderLeft ] = useState( 0 );
     // let [ currentTimeSec, setCurrentTimeSec] = useState( 0 );
+    // console.dir( 'TimeTrack' );
+    // console.dir({
+    //     timeSpaceTo,
+    //     timeSpaceFrom,
+    //     target,
+    //     startTime,
+    //     setTimeTarget,
+    //     duration,
+    //     sliderWidth,
+    //     sliderLeft,
+    //     flag,
+    // });
 
 
     useEffect( () => {
@@ -76,7 +88,6 @@ const TimeTrackComponent = ( props ) => {
 
         if( width_proc <= 1){
             width_proc = 1;
-            // let durNum = intervel * 1 / 100;
             slider_width_proc = intervel * 1/100;
             slider_left_proc = (( scaleTime * 100 )/( intervel + slider_width_proc ));
         };

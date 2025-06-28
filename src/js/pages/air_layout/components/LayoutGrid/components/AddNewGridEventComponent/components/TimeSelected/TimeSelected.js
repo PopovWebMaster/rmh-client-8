@@ -21,7 +21,7 @@ const TimeSelectedComponent = ( props ) => {
         timeTarget,
         setTimeTarget,
         // eventList,
-        eventListById,
+        // eventListById,
         durationTime,
 
     } = props;

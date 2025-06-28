@@ -15,6 +15,7 @@ import { RemoveItem } from './components/RemoveItem/RemoveItem.js';
 import { CutItem } from './components/CutItem/CutItem.js';
 
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
+import { EVENT_TYPE } from './../../../../../../config/layout.js';
 
 const CompletedTimeSegmentComponent = ( props ) => {
 
@@ -37,7 +38,13 @@ const CompletedTimeSegmentComponent = ( props ) => {
     useEffect( () => {
 
         if( firstSegmentId === null ){
-            setDuration( convert_time_str_to_sec( eventListById[ eventId ].durationTime ) );
+            let event = eventListById[ eventId ];
+            if( event.type === EVENT_TYPE.BLOCK ){
+                setDuration( durationTime );
+            }else if( event.type === EVENT_TYPE.FILE ){
+                setDuration( convert_time_str_to_sec( event.durationTime ) );
+            };
+
         }else{
             setDuration( durationTime );
         };

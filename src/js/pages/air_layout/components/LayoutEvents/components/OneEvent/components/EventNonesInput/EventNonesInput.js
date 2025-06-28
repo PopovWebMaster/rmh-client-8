@@ -7,6 +7,8 @@ import './EventNonesInput.scss';
 
 import { selectorData as layoutSlice, setEventListAsChanged } from './../../../../../../../../redux/layoutSlice.js';
 
+import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
 
 const EventNonesInputComponent = ( props ) => {
 
@@ -31,18 +33,26 @@ const EventNonesInputComponent = ( props ) => {
         if( notesValue !== notes ){
             let newArr = [];
 
-            for( let i = 0; i < eventList.length; i++ ){
-                if( eventList[ i ].id === id ){
-                    let item = { ...eventList[ i ] };
-                    item.notes = notesValue;
-                    newArr.push( item );
-                }else{
-                    newArr.push({ ...eventList[ i ] });
-                };
+            // for( let i = 0; i < eventList.length; i++ ){
+            //     if( eventList[ i ].id === id ){
+            //         let item = { ...eventList[ i ] };
+            //         item.notes = notesValue;
+            //         newArr.push( item );
+            //     }else{
+            //         newArr.push({ ...eventList[ i ] });
+            //     };
 
-            };
+            // };
 
-            setEventListAsChanged( newArr );
+            seve_one_event_changes_on_setver({
+                eventId: id,
+                eventData: { 
+                    notes: notesValue,
+                },
+                callback: () => {},
+            });
+
+            // setEventListAsChanged( newArr );
         };
 
        

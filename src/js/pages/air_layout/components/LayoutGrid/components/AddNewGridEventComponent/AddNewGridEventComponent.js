@@ -52,6 +52,11 @@ const AddNewGridEventComponentComponent = ( props ) => {
             setStartTime( timeSpaceFrom );
             setTimeTarget( 'start' );
         }else{
+            setIsAKeyOneEvent( false );
+            setEventId( null );
+            setStartTime( timeSpaceFrom );
+            setTimeTarget( 'start' );
+
 
         };
     }, [ isOpen ]);

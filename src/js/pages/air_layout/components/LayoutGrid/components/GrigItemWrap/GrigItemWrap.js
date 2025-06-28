@@ -21,10 +21,6 @@ const GrigItemWrapComponent = ( props ) => {
         children,
     } = props;
 
-        
-
-
-
     let [ isError, setIsError ] = useState( false );
 
     useEffect( () => {
@@ -32,8 +28,8 @@ const GrigItemWrapComponent = ( props ) => {
             setIsError( false );
         }else{
 
-            console.dir( 'props' );
-    console.dir( props );
+            // console.dir( 'props' );
+            // console.dir( props );
             setIsError( true );
         };
     }, [ durationTime ] );

@@ -10,6 +10,9 @@ import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/events.
 
 import { InputDuration } from './../../../../../../../../components/InputDuration/InputDuration.js';
 
+import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
+
 const EventDurationItemComponent = ( props ) => {
 
     let {
@@ -55,19 +58,28 @@ const EventDurationItemComponent = ( props ) => {
             new_durationTime = `00:00:05`;
         };
 
-        if( new_durationTime !== durationTime ){
-            let newArr = [];
-            for( let i = 0; i < eventList.length; i++ ){
-                if( eventList[ i ].id === id ){
-                    let item = { ...eventList[ i ] };
-                    item.durationTime = new_durationTime;
-                    newArr.push( item );
-                }else{
-                    newArr.push({ ...eventList[ i ] });
-                };
-            };
-            setEventListAsChanged( newArr );
-        };
+        seve_one_event_changes_on_setver({
+            eventId: id,
+            eventData: { 
+                durationTime: new_durationTime,
+                durationSec: duration_sec,
+            },
+            callback: () => {},
+        });
+
+        // if( new_durationTime !== durationTime ){
+        //     let newArr = [];
+        //     for( let i = 0; i < eventList.length; i++ ){
+        //         if( eventList[ i ].id === id ){
+        //             let item = { ...eventList[ i ] };
+        //             item.durationTime = new_durationTime;
+        //             newArr.push( item );
+        //         }else{
+        //             newArr.push({ ...eventList[ i ] });
+        //         };
+        //     };
+        //     setEventListAsChanged( newArr );
+        // };
 
     };
 

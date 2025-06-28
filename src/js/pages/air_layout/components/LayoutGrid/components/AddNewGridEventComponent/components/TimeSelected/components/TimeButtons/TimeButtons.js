@@ -1,11 +1,14 @@
 
-import React from "react";
+import React, { useState } from "react";
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
 import './TimeButtons.scss';
 
 // import { selectorData as layoutSlice }    from './../../../../../../../../../../redux/layoutSlice.js';
+
+import { InputDuration } from './../../../../../../../../../../components/InputDuration/InputDuration.js';
+import { convert_time_str_to_sec } from './../../../../../../../../../../helpers/convert_time_str_to_sec.js';
 
 const TimeButtonsComponent = ( props ) => {
 
@@ -19,10 +22,43 @@ const TimeButtonsComponent = ( props ) => {
 
     } = props;
 
+    let [ SS, setSS ] = useState( '' );
+    let [ MM, setMM ] = useState( '' );
+    let [ HH, setHH ] = useState( '' );
+
+    const enter_input = () => {
+        let hh = '00';
+        let mm = '00';
+        let ss = '00';
+        if( HH !== '' ){
+            hh = HH;
+        };
+        if( MM !== '' ){
+            mm = MM;
+        };
+        if( SS !== '' ){
+            ss = SS;
+        };
+
+        let sec = convert_time_str_to_sec( `${hh}:${mm}:${ss}` );
+        if( sec >= timeSpaceFrom && sec <= timeSpaceTo - duration ){
+            setStartTime( sec );
+        };
+
+        setSS('');
+        setMM('');
+        setHH('');
+
+    }
+
+
     const click_left = ( sec ) => {
         let next_val = startTime - sec;
 
         if( next_val >= timeSpaceFrom ){
+            console.dir( 'next_val' );
+            console.dir( next_val );
+
             setStartTime( next_val );
         };
     };
@@ -85,6 +121,21 @@ const TimeButtonsComponent = ( props ) => {
                 >
                     <span className = 'text'>60s</span>
                     <span className = 'icon icon-right'></span>
+                </div>
+
+                <div className = 'time_input'>
+
+                    <InputDuration 
+                        HH = { HH }
+                        MM = { MM }
+                        SS = { SS }
+                        setHH = { setHH }
+                        setMM = { setMM }
+                        setSS = { setSS }
+
+                        enterHandler = { enter_input }
+                    
+                    />
                 </div>
 
                

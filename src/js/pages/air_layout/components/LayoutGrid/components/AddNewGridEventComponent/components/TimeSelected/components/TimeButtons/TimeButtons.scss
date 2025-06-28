@@ -54,4 +54,18 @@
         }
     }
 
+    .time_input{
+        font-size: 1em;
+
+        flex-grow: 1;
+        max-width: 10em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+
+    }
+
 }

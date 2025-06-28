@@ -41,7 +41,6 @@ const StartTimeEditComponentComponent = ( props ) => {
             updateData();
 
         }else{
-            setIsReady( false );
 
             setEventId( null );
             setDurationTime( 0 );
@@ -56,6 +55,7 @@ const StartTimeEditComponentComponent = ( props ) => {
     const updateData = () => {
 
         setIsReady( false );
+        let flag_no_update = true;
 
         for( let i = 0; i < gridDayEventsList[ gridCurrentDay ].length; i++ ){
             if( gridDayEventsList[ gridCurrentDay ][ i ].id === id ){
@@ -81,9 +81,20 @@ const StartTimeEditComponentComponent = ( props ) => {
                 setTimeSpaceTo( pointTo );
                 setIsReady( true );
 
+                flag_no_update = false;
+
                 break;
 
             };
+        };
+        if( flag_no_update ){
+            console.dir( 'flag_no_update' );
+            setEventId( null );
+            setDurationTime( 0 );
+            setStartTime( 0 );
+            setTimeSpaceFrom( 0 );
+            setTimeSpaceTo( 0 );
+            setIsReady( false );
         };
     }
     const click = () => {

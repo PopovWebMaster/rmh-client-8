@@ -11,6 +11,8 @@ import { AlertWindowContainer } from './../../../../../../../../components/Alert
 
 import { DEFAULT_CATEGORY } from './../../../../../../../../config/layout.js';
 
+import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
 
 const EventCategoryItemComponent = ( props ) => {
 
@@ -41,19 +43,29 @@ const EventCategoryItemComponent = ( props ) => {
 
             let newArr = [];
 
-            for( let i = 0; i < eventList.length; i++ ){
-                if( eventList[ i ].id === id ){
-                    let item = { ...eventList[ i ] };
-                    item.category_id = category_id;
-                    newArr.push( item );
-                }else{
-                    newArr.push({ ...eventList[ i ] });
-                };
+            // for( let i = 0; i < eventList.length; i++ ){
+            //     if( eventList[ i ].id === id ){
+            //         let item = { ...eventList[ i ] };
+            //         item.category_id = category_id;
+            //         newArr.push( item );
+            //     }else{
+            //         newArr.push({ ...eventList[ i ] });
+            //     };
 
-            };
+            // };
 
-            setIsOpen( false );
-            setEventListAsChanged( newArr );
+            seve_one_event_changes_on_setver({
+                eventId: id,
+                eventData: { 
+                    category_id: category_id,
+                },
+                callback: () => {
+                    setIsOpen( false )
+                },
+            });
+
+            // setIsOpen( false );
+            // setEventListAsChanged( newArr );
 
         };
 

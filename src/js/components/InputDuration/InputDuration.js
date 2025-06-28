@@ -8,6 +8,8 @@ import './InputDuration.scss';
 
 import { get_wheel_value } from './vendors/get_wheel_value.js';
 
+let blure_permission = true;
+
 const InputDurationComponent = ( props ) => {
 
     let {
@@ -78,6 +80,7 @@ const InputDurationComponent = ( props ) => {
             };
         }else if( e.which === 13 ){
             enter();
+            blure_permission = false;
             hhRef.current.blur();
         };
     }
@@ -93,6 +96,7 @@ const InputDurationComponent = ( props ) => {
             };
         }else if( e.which === 13 ){
             enter();
+            blure_permission = false;
             mmRef.current.blur();
         };
     }
@@ -108,6 +112,7 @@ const InputDurationComponent = ( props ) => {
             };
         }else if( e.which === 13 ){
             enter();
+            blure_permission = false;
             ssRef.current.blur();
         };
     }
@@ -144,15 +149,20 @@ const InputDurationComponent = ( props ) => {
 
 
     const blur = () => {
-        let timerId = setTimeout( () => {
-            if( mmRef.current === document.activeElement ){
-            }else if( ssRef.current === document.activeElement ){
-            }else if( hhRef.current === document.activeElement ){
-            }else{
-                enter();
-            };
-            clearTimeout( timerId );
-        }, 200 );
+        if( blure_permission ){
+            let timerId = setTimeout( () => {
+                if( mmRef.current === document.activeElement ){
+                }else if( ssRef.current === document.activeElement ){
+                }else if( hhRef.current === document.activeElement ){
+                }else{
+                    enter();
+                };
+                clearTimeout( timerId );
+            }, 200 );
+        };
+
+        blure_permission = true;
+       
 
     };
 

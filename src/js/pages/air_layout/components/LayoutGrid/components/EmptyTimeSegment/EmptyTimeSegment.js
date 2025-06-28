@@ -33,8 +33,16 @@ const EmptyTimeSegmentComponent = ( props ) => {
 
     const clickAdd = () => {
 
+        // if( gridDayEventsIsChanges ){
+        //     setIsConfirm( true );
+        // }else{
+        //     setIsOpen( true );
+        // };
+
         if( gridDayEventsIsChanges ){
-            setIsConfirm( true );
+            save_grid_events_changes_on_server( () => {
+                setIsOpen( true );
+            } );
         }else{
             setIsOpen( true );
         };
