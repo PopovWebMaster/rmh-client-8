@@ -5,12 +5,20 @@ import { useDispatch } from 'react-redux';
 
 import './EventDurationItem.scss';
 
-import { selectorData as layoutSlice, setEventListAsChanged } from './../../../../../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice, setEventListAsChanged, setGridDayEventsList, setGridDayEventsIsChanges } from './../../../../../../../../redux/layoutSlice.js';
+import { setSpinnerIsActive } from './../../../../../../../../redux/spinnerSlice.js';
+
 import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/events.js';
 
 import { InputDuration } from './../../../../../../../../components/InputDuration/InputDuration.js';
 
 import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
+// import { make_start_time_adjustments } from './../../../../../../vendors/make_start_time_adjustments.js';
+import { get_gridDayEventsList_with_new_duration_time } from './vendors/get_gridDayEventsList_with_new_duration_time.js';
+import { save_grid_events_changes_on_server } from './../../../../../LayoutGrid/vendors/save_grid_events_changes_on_server.js';
+
+import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
 
 
 const EventDurationItemComponent = ( props ) => {
@@ -20,7 +28,9 @@ const EventDurationItemComponent = ( props ) => {
         durationTime,
 
         eventList,
-        setEventListAsChanged,
+        setGridDayEventsList,
+        setGridDayEventsIsChanges,
+        setSpinnerIsActive,
 
     } = props;
 
@@ -58,28 +68,48 @@ const EventDurationItemComponent = ( props ) => {
             new_durationTime = `00:00:05`;
         };
 
-        seve_one_event_changes_on_setver({
-            eventId: id,
-            eventData: { 
-                durationTime: new_durationTime,
-                durationSec: duration_sec,
-            },
-            callback: () => {},
-        });
+        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+        if( addReport.isErrors ){
+            let arr = durationTime.split( ':' );
+            setHH( arr[ 0 ] );
+            setMM( arr[ 1 ] );
+            setSS( arr[ 2 ] );
 
-        // if( new_durationTime !== durationTime ){
-        //     let newArr = [];
-        //     for( let i = 0; i < eventList.length; i++ ){
-        //         if( eventList[ i ].id === id ){
-        //             let item = { ...eventList[ i ] };
-        //             item.durationTime = new_durationTime;
-        //             newArr.push( item );
-        //         }else{
-        //             newArr.push({ ...eventList[ i ] });
-        //         };
-        //     };
-        //     setEventListAsChanged( newArr );
-        // };
+            alert( addReport.message );
+
+        }else{
+
+            setSpinnerIsActive( true );
+
+            send_request_to_server({
+                route: `save-grid-event-list`,
+                data: { 
+                    list: addReport.gridDayEventsList,
+                },
+                successCallback: ( response ) => {
+                    console.dir( 'response' );
+                    console.dir( response );
+                    if( response.ok ){
+                        setSpinnerIsActive( false );
+                        setGridDayEventsList( response.list );
+                        setGridDayEventsIsChanges( false );
+
+                        seve_one_event_changes_on_setver({
+                            eventId: id,
+                            eventData: { 
+                                durationTime: new_durationTime,
+                                durationSec: duration_sec,
+                            },
+                            callback: () => {},
+                        });
+                        
+                    };
+    
+                },
+            });
+
+
+        };
 
     };
 
@@ -115,6 +145,15 @@ export function EventDurationItem( props ){
             eventList = { layout.eventList }
 
             setEventListAsChanged = { ( val ) => { dispatch( setEventListAsChanged( val ) ) } }
+            setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
+            setGridDayEventsIsChanges = { ( val ) => { dispatch( setGridDayEventsIsChanges( val ) ) } }
+            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+
+
+            
+
+
+            
 
 
         />
