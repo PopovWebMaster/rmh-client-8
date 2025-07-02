@@ -40,8 +40,11 @@ const OneSectorComponent = ( props ) => {
                     startTime,
                     durationTime,
                     cutPart,
+                    is_premiere,
+
 
                 } = item;
+
 
                 return (
                     <CompletedTimeSegment 
@@ -54,6 +57,7 @@ const OneSectorComponent = ( props ) => {
                         startTime =         { startTime }
                         durationTime =      { durationTime }
                         cutPart =           { cutPart }
+                        is_premiere =       { is_premiere }
 
                     />
                 );

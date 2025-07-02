@@ -25,6 +25,10 @@ export class EventsListClass{
         this.MakeOffsetDown = this.MakeOffsetDown.bind(this);
         this.MakeOffsetUp = this.MakeOffsetUp.bind(this);
         this.GetEventsList = this.GetEventsList.bind(this);
+        this.SetDurationForGridEvent = this.SetDurationForGridEvent.bind(this);
+
+
+        
 
 
         
@@ -75,6 +79,14 @@ export class EventsListClass{
     SetDurationForEvent( eventId, duration ){
         for( let i = 0; i < this.list.length; i++ ){
             if( this.list[ i ].eventId === eventId ){
+                this.list[ i ].durationTime = duration;
+            };
+        };
+    }
+
+    SetDurationForGridEvent( gridEventId, duration ){
+        for( let i = 0; i < this.list.length; i++ ){
+            if( this.list[ i ].id === gridEventId ){
                 this.list[ i ].durationTime = duration;
             };
         };

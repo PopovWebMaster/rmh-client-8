@@ -28,6 +28,8 @@ const CutSegmentButtonComponent = ( props ) => {
     let [ firstSegmentId, setFirstSegmentId ] = useState( null );
     let [ durationTime, setDurationTime ] = useState( 0 );
     let [ startTime, setStartTime ] = useState( 0 );
+    let [ isPremiere, setIsPremiere] = useState( false );
+
 
     useEffect( () => {
         if( gridDayEventsListById[ id ] ){
@@ -36,7 +38,7 @@ const CutSegmentButtonComponent = ( props ) => {
                 durationTime,
                 startTime,
                 eventId,
-
+                is_premiere,
             } = gridDayEventsListById[ id ];
 
             let { type } = eventListById[ eventId ];
@@ -51,6 +53,8 @@ const CutSegmentButtonComponent = ( props ) => {
             setFirstSegmentId( firstSegmentId );
             setDurationTime( durationTime );
             setStartTime( startTime );
+            setIsPremiere( is_premiere );
+
 
 
         }else{
@@ -94,6 +98,7 @@ const CutSegmentButtonComponent = ( props ) => {
                     firstSegmentId =    { firstSegmentId }
                     durationTime =      { durationTime }
                     startTime =         { startTime }
+                    isPremiere =        { isPremiere }
                 />
     
             </AlertWindowContainer>

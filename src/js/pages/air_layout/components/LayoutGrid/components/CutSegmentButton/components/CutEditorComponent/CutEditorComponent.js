@@ -20,6 +20,7 @@ const CutEditorComponentComponent = ( props ) => {
         firstSegmentId,
         durationTime,
         startTime,
+        isPremiere,
 
         gridDayEventsListById,
         gridOneDayList,

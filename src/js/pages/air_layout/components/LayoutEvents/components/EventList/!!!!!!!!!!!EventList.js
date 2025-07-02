@@ -11,9 +11,7 @@ import { OneEvent } from './../OneEvent/OneEvent.js';
 
 import { DEFAULT_CATEGORY } from './../../../../../../config/layout.js';
 
-import { EventsListFilter } from './../EventsListFilter/EventsListFilter.js';
-
-import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
+import { EventsListFilter } from './../'
 
 const EventListComponent = ( props ) => {
 
@@ -21,7 +19,6 @@ const EventListComponent = ( props ) => {
         eventList,
         // eventsIsChanged,
         categoryList,
-        eventsCurrentFilterCategoryId,
 
     } = props;
 
@@ -51,7 +48,7 @@ const EventListComponent = ( props ) => {
 
 
 
-    const create = ( arr, arr_2, current_category_id ) => {
+    const create = ( arr, arr_2 ) => {
 
         let category_obj = get_category_object( arr_2 );
 
@@ -65,21 +62,17 @@ const EventListComponent = ( props ) => {
                 durationTime,
             } = item;
 
-            if( category_id === current_category_id ){
-                return (
-                    <OneEvent 
-                        id =            { id }
-                        name =          { name }
-                        category =      { category_obj[ category_id ]? category_obj[ category_id ]: { ...DEFAULT_CATEGORY } }
-                        notes =         { notes }
-                        type =          { type }
-                        durationTime =  { durationTime }
-                        key =           { index }
-                    />
-                );
-            }else{
-                return '';
-            };
+            return (
+                <OneEvent 
+                    id =            { id }
+                    name =          { name }
+                    category =      { category_obj[ category_id ]? category_obj[ category_id ]: { ...DEFAULT_CATEGORY } }
+                    notes =         { notes }
+                    type =          { type }
+                    durationTime =  { durationTime }
+                    key =           { index }
+                />
+            );
 
         } );
 
@@ -91,20 +84,7 @@ const EventListComponent = ( props ) => {
 
         <div className = 'LC_EventList' >
 
-            <div className = 'LC_filter_wrap'>
-                <EventsListFilter />
-            </div>
-
-            <div className = 'LC_list_wrap'>
-                <ScrollContainer>
-                    { create( eventList, categoryList, eventsCurrentFilterCategoryId ) }
-                </ScrollContainer>
-                
-            </div>
-
-            
-
-            
+            { create( eventList, categoryList ) }
             
         </div>
 
@@ -124,7 +104,6 @@ export function EventList( props ){
             // eventsIsChanged = { layout.eventsIsChanged }
 
             categoryList = { layout.categoryList }
-            eventsCurrentFilterCategoryId = { layout.eventsCurrentFilterCategoryId }
 
 
 

@@ -16,7 +16,7 @@ import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one
 
 // import { make_start_time_adjustments } from './../../../../../../vendors/make_start_time_adjustments.js';
 import { get_gridDayEventsList_with_new_duration_time } from './vendors/get_gridDayEventsList_with_new_duration_time.js';
-import { save_grid_events_changes_on_server } from './../../../../../LayoutGrid/vendors/save_grid_events_changes_on_server.js';
+// import { save_grid_events_changes_on_server } from './../../../../../LayoutGrid/vendors/save_grid_events_changes_on_server.js';
 
 import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
 

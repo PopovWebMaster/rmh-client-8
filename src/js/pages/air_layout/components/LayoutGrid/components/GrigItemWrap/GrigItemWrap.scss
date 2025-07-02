@@ -79,7 +79,7 @@
             flex-grow: 0;
             padding: .2em .8em 0.19em;
             border-radius: 0.1em;
-            margin-left: 5em;
+            // margin-left: 5em;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -89,6 +89,7 @@
             >.text{
                 font-size: 0.7em;
                 color: #575757;
+                margin-left: 4em;
             }
             >.time{
                 font-size: .7em;
@@ -101,17 +102,30 @@
             }
         }
 
+        // .grigItemTimeRemains:hover{
+        //     background-color: #607eb3;
+        //     >.text{
+        //         color: rgb(248, 248, 248);
+        //     }
+
+        //     >.time{
+        //         color: #ffffff;
+        //         border: 1px solid #c1c1c1;
+        //     }
+        // }
+
         .grigItemTimeRemains:hover{
-            background-color: #607eb3;
+            background-color: #ffffff;
             >.text{
-                color: rgb(248, 248, 248);
+                color: #4d4949;
             }
 
             >.time{
-                color: #ffffff;
+                color: #5b3737;
                 border: 1px solid #c1c1c1;
             }
         }
+
 
 
 

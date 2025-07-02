@@ -33,12 +33,15 @@ const SetCountersDataFromLayoutComponent = ( props ) => {
             let { 
                 eventId,
                 durationTime,
+                is_premiere,
             } = list[ i ];
 
             let category = get_category_by_event_id( eventId );
+
             counter_list.push({
                 category,
                 duration: durationTime,
+                is_premiere,
             });
         };
 
@@ -51,9 +54,11 @@ const SetCountersDataFromLayoutComponent = ( props ) => {
 
     const get_category_by_event_id = ( eventId ) => {
         let category = {};
+
         if( eventListById[ eventId ] ){
             
             let category_id = eventListById[ eventId ].category_id;
+
             if( categoryListById[ category_id ] ){
                 category = categoryListById[ category_id ];
             }else{

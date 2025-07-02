@@ -14,11 +14,11 @@ export class SegmentClass{
         this.SetStartTime = this.SetStartTime.bind(this);
         this.GetSegmentData = this.GetSegmentData.bind(this);
         this.SetLimitTimePoint = this.SetLimitTimePoint.bind(this);
-        // this.MakePushItAnalysis = this.MakePushItAnalysis.bind(this);
         this.SetDurationForEvent = this.SetDurationForEvent.bind(this);
+        this.SetDurationForGridEvent = this.SetDurationForGridEvent.bind(this);
 
-        // this.MakeOffset = this.MakeOffset.bind(this);
-        // this.GetOffsetReport = this.GetOffsetReport.bind(this);
+
+
 
 
         
@@ -57,6 +57,13 @@ export class SegmentClass{
     SetDurationForEvent( eventId, duration ){
         this.EventList.MakePushAnalysis( this.startTime, this.limitTimePoint );
         this.EventList.SetDurationForEvent( eventId, duration );
+        this.EventList.MakeOffset( this.startTime, this.limitTimePoint );
+        return this.EventList.GetOffsetReport();
+    }
+
+    SetDurationForGridEvent( gridEventId, duration ){
+        this.EventList.MakePushAnalysis( this.startTime, this.limitTimePoint );
+        this.EventList.SetDurationForGridEvent( gridEventId, duration );
         this.EventList.MakeOffset( this.startTime, this.limitTimePoint );
         return this.EventList.GetOffsetReport();
     }

@@ -15,6 +15,8 @@ export class TimeAdjustmentForDayEventsClass{
 
         this.ResetDurationForEvents = this.ResetDurationForEvents.bind(this);
         this.GetNewEventsList = this.GetNewEventsList.bind(this);
+        this.ResetDurationForGridEvent = this.ResetDurationForGridEvent.bind(this);
+
 
 
         
@@ -71,6 +73,27 @@ export class TimeAdjustmentForDayEventsClass{
 
         return result;
     }
+
+    ResetDurationForGridEvent( gridEventId, duration ){
+
+        let result = {
+            isErrors: false,
+            message: '',
+        };
+
+        for( let i = 0; i < this.segments.length; i++ ){
+            let offsetReport = this.segments[ i ].SetDurationForGridEvent( gridEventId, duration );
+            if( offsetReport.isErrors ){
+                result = offsetReport;
+                break;
+            };
+        };
+
+        return result;
+
+    }
+
+
 
     GetNewEventsList(){
         let result = [];

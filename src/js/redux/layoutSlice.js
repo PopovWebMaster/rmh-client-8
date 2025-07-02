@@ -30,9 +30,15 @@ export const layoutSlice = createSlice({
         allUsedColors: [],
         allUsedNames: [],
         allUsedPrefixes: [],
+
+
         eventList: [],
         eventListById: {},
         eventsIsChanged: false,
+        eventsCurrentFilterCategoryId: null,
+
+
+
 
         gridCurrentDay: 0, // 0 1 2 3 4 5 6
         gridCurrentDayName: WEEK_NAME[ 0 ],
@@ -136,6 +142,13 @@ export const layoutSlice = createSlice({
         },
 
 
+        setEventsCurrentFilterCategoryId: ( state, action ) => {
+            state.eventsCurrentFilterCategoryId =  action.payload;
+        },
+
+
+
+
 
 
         setGridCurrentDay: ( state, action ) => {
@@ -200,6 +213,7 @@ export const {
     setEventsIsChanged,
     setEventList,
     setEventListAsChanged,
+    setEventsCurrentFilterCategoryId,
 
     setGridCurrentDay,
 
@@ -238,6 +252,13 @@ export const selectorData = ( state ) => {
         eventList: state.layout.eventList,
         eventListById: state.layout.eventListById,
         eventsIsChanged: state.layout.eventsIsChanged,
+        eventsCurrentFilterCategoryId: state.layout.eventsCurrentFilterCategoryId,
+
+
+        
+
+
+
         allUsedColors: state.layout.allUsedColors,
         allUsedNames: state.layout.allUsedNames,
         allUsedPrefixes: state.layout.allUsedPrefixes,

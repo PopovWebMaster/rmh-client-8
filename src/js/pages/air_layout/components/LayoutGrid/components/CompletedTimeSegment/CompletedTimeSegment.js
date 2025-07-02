@@ -13,6 +13,7 @@ import { PrefixItem } from './components/PrefixItem/PrefixItem.js';
 import { EventNotesItem } from './components/EventNotesItem/EventNotesItem.js';
 import { RemoveItem } from './components/RemoveItem/RemoveItem.js';
 import { CutItem } from './components/CutItem/CutItem.js';
+import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
 
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
@@ -28,6 +29,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
         startTime,
         durationTime,
         cutPart,
+        is_premiere,
 
         eventListById,
 
@@ -74,15 +76,15 @@ const CompletedTimeSegmentComponent = ( props ) => {
                 />
                 <div className = 'CTS_right_buttons_wrap'>
 
-                    <CutItem 
+                    <PremieraToggle
                         id = { id }
-                        // firstSegmentId = { firstSegmentId }
+                        is_premiere = { is_premiere }
                     />
 
-                    {/* <AddItem 
+                    <CutItem 
                         id = { id }
-                        firstSegmentId = { firstSegmentId }
-                    /> */}
+                    />
+
                     <RemoveItem 
                         id = { id }
                     />

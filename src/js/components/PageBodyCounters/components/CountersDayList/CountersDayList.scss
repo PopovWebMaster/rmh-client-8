@@ -25,17 +25,34 @@
             justify-content: flex-end;
             align-items: center;
             align-content: center;
-            margin: 0 0.1em;
+            margin: 0.05em 0.1em;
 
             span{
-                font-size: 0.7em;
+                font-size: 0.65em;
                 padding: 0.2em 0.3em;
                 text-align: center;
                 background-color: #f5f4f4;
                 width: 6em;
-                margin: 0 0.2em;
+                margin: 0 0.05em;
                 border-radius: 0.1em;
 
+            }
+
+            .PBS_name{
+                >span{
+                    font-size: 0.9em;
+                }
+                
+                .PBS_name_total{
+                    color: #767780;
+                }
+                .PBS_name_premier{
+                    color: #2231b1;
+                    font-weight: bold;
+                }
+                .PBS_name_repeat{
+                    color: #767780;
+                }
             }
 
             .PBS_time{
@@ -49,6 +66,14 @@
 
             .PBS_duration{
                 color: #343434;
+                >span{
+                    margin: 0 0 0 0;
+                    font-size: 0.9em;
+                }
+            }
+
+            .isPremiere{
+                font-weight: bold;
             }
             
 
