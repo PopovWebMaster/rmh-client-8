@@ -12,7 +12,7 @@ import { setSpinnerIsActive }               from './../../../../../../../../redu
 import { selectorData as companySlice }     from './../../../../../../../../redux/companySlice.js';
 
 
-import { UpdateCurrentSubAppData } from './../UpdateCurrentSubAppData/UpdateCurrentSubAppData.js';
+
 
 const SheduleEditorComponentComponent = ( props ) => {
 
@@ -47,12 +47,7 @@ const SheduleEditorComponentComponent = ( props ) => {
     return (
         <div className = 'sheduleEditorComponent'>
 
-            <UpdateCurrentSubAppData>
-SheduleEditorComponent
-
-            </UpdateCurrentSubAppData>
-
-           
+           SheduleEditorComponent
            
 
         </div>

@@ -19,7 +19,9 @@ const ItemMovie2Component = ( props ) => {
         isBacklight
     } = props;
 
-    let { graphics, startTime } = item;
+    // console.dir( item );
+
+    let { graphics, startTime, date } = item;
     let [ graphicsIsOpen, setGraphicsIsOpen ] = useState( false );
 
     useEffect( () => {
@@ -53,6 +55,7 @@ const ItemMovie2Component = ( props ) => {
 
             { graphicsIsOpen? (
                 <Graphics 
+                    date = { date }
                     graphics = { graphics }
                     startTime = { startTime }
                 />

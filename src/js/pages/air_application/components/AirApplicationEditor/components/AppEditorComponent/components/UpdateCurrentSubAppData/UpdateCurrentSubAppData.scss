@@ -1,0 +1,122 @@
+.UCSAD_wait{
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+
+    h1{
+        font-size: 1em;
+        color: #737373;
+        font-family: 'Courier New', Courier, monospace;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        width: 5em;
+
+        span{
+            font-size: 1em;
+            // width: 2em;
+            // background-color: #343444;
+        }
+        .p_0{
+            display: block;
+            // animation: line_0 2s linear infinite;
+            width: 0.1em;
+        }
+        .p_1{
+            // display: none;
+            animation: line_1 3s linear infinite;
+            animation-direction: normal;
+        }
+        .p_2{
+            // display: none;
+            animation: line_2 3s linear infinite;
+            animation-direction: normal;
+        }
+        .p_3{
+            // display: none;
+            animation: line_3 3s linear infinite;
+            animation-direction: normal;
+        }
+
+
+        @keyframes line_0 {
+            0% { 
+                display: block; 
+            }
+            33%{
+                display: none;
+            }
+            66%{
+                display: none;
+            }
+            100% { 
+                display: none;
+            }
+        } 
+
+        @keyframes line_1 {
+            0% { 
+                opacity: 0;
+            }
+            25%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 1;
+            }
+            75%{
+                opacity: 1;
+            }
+            100% { 
+                opacity: 1;
+            }
+        } 
+
+        @keyframes line_2 {
+             0% { 
+                opacity: 0;
+            }
+            25%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 0;
+            }
+            75%{
+                opacity: 1;
+            }
+            100% { 
+                opacity: 1;
+            }
+        } 
+
+        @keyframes line_3 {
+            0% { 
+                opacity: 0;
+            }
+            25%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 0;
+            }
+            75%{
+                opacity: 0;
+            }
+            100% { 
+                opacity: 1;
+            }
+        } 
+
+
+    }
+}

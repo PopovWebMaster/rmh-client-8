@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import './ItemSubShedule.scss';
 
 import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as currentSubApplicationSlise, setCurrentSubAppId } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+
 
 import { AlertWindowContainer } from './../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { SheduleEditorComponent } from './../../../SheduleEditorComponent/SheduleEditorComponent.js';
@@ -16,10 +18,20 @@ const ItemSubSheduleComponent = ( props ) => {
         id,
         application_id,
         release_list,
+        duration_sec,
+        period_from,
+        period_to,
+
+        setCurrentSubAppId,
         
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+
+    const click = () => {
+        setCurrentSubAppId( id );
+        setIsOpen( true )
+    };
 
 
     
@@ -40,7 +52,7 @@ const ItemSubSheduleComponent = ( props ) => {
 
             <span 
                 className = 'SA_ItemSubShedule_btn'
-                onClick = { () => { setIsOpen( true ) } }
+                onClick = { click }
             >Расписание</span>
 
             <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span>
@@ -53,15 +65,21 @@ const ItemSubSheduleComponent = ( props ) => {
 export function ItemSubShedule( props ){
 
     const application = useSelector( applicationSlice );
+    const currentSubApplication = useSelector( currentSubApplicationSlise );
+
+    
     // const navigation = useSelector( navigationSlice );
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <ItemSubSheduleComponent
             { ...props }
             currentSubAppList = { application.currentSubAppList }
 
-            // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
+            currentSubApplication = { currentSubApplication }
+
+
+            setCurrentSubAppId = { ( val ) => { dispatch( setCurrentSubAppId( val ) ) } }
 
 
         />

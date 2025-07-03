@@ -74,6 +74,10 @@ const OneSubApplicationComponent = ( props ) => {
                 id =                { id }
                 application_id =    { application_id }
                 release_list =      { release_list }
+                duration_sec =      { duration_sec }
+                period_from =       { period_from }
+                period_to =         { period_to }
+
             />
 
 

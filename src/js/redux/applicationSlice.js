@@ -28,6 +28,8 @@ export const applicationSlice = createSlice({
         currentSubAppList: [],
 
 
+
+
         // currentAppType: null,
         // currentAppNotes: null,
         // currentAppOrders: [],
@@ -85,6 +87,16 @@ export const applicationSlice = createSlice({
 
 
 
+
+
+
+
+
+
+
+
+
+
         
 
 
@@ -127,6 +139,7 @@ export const selectorData = ( state ) => {
         currentSubAppList:      state.application.currentSubAppList,
 
         currentAppIsChanged:    state.application.currentAppIsChanged,
+
 
 
 
