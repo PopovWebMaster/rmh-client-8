@@ -14,6 +14,8 @@ export const set_category_data = () => {
 
     if( categoryListById[ currentAppCategoryId ] ){
         store.dispatch( setCategoryData( categoryListById[ currentAppCategoryId ] ) );
+    }else{
+        store.dispatch( setCategoryData( DEFAULT_CATEGORY ) );
     };
 
 

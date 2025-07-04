@@ -19,11 +19,24 @@ export const currentSubApplicationSlise = createSlice({
         categoryName: null,
         categoryPrefix: null,
 
+        eventId: null,
 
-        participatingEventsList: [],
+        currentCharType: null,
 
-        eventTypesList: [],
-        currentEventType: null,
+
+        releaseDuration: null,
+        releaseName: null,
+
+        periodFrom: null,
+        periodTo: null,
+
+
+
+
+        // duration_sec,
+        // period_from,
+        // period_to,
+        // name,
 
 
 
@@ -42,9 +55,12 @@ export const currentSubApplicationSlise = createSlice({
             state.categoryName =        null;
             state.categoryPrefix =      null;
 
-            state.participatingEventsList = [];
-            state.eventTypesList = [];
-            state.currentEventType = null;
+            state.eventId =      null;
+            state.currentCharType =      null;
+            state.releaseDuration =      null;
+            state.releaseName =      null;
+
+
 
         },
 
@@ -69,24 +85,38 @@ export const currentSubApplicationSlise = createSlice({
 
         },
 
+        setEventData: ( state, action ) => {
 
+            let { 
+                id,
+            } = action.payload;
+
+            state.eventId = id;
+
+        },
+
+        setCurrentCharType: ( state, action ) => {
+            state.currentCharType =  action.payload;
+        },
+
+
+
+        setReleaseDuration: ( state, action ) => {
+            state.releaseDuration =  action.payload;
+        },
+
+        setReleaseName: ( state, action ) => {
+            state.releaseName =  action.payload;
+        },
         
-        setParticipatingEventsList: ( state, action ) => {
-            state.participatingEventsList =  action.payload;
+        setPeriodFrom: ( state, action ) => {
+            state.periodFrom =  action.payload;
         },
 
-        setEventTypesList: ( state, action ) => {
-            state.eventTypesList =  action.payload;
+        setPeriodTo: ( state, action ) => {
+            state.periodTo =  action.payload;
         },
 
-        setCurrentEventType: ( state, action ) => {
-            state.currentEventType =  action.payload;
-        },
-
-
-
-
-        
 
 
 
@@ -102,6 +132,14 @@ export const {
     setParticipatingEventsList,
     setEventTypesList,
     setCurrentEventType,
+    setEventData,
+    setCurrentCharType,
+
+
+    setReleaseDuration,
+    setReleaseName,
+    setPeriodFrom,
+    setPeriodTo,
 
 
 
@@ -118,10 +156,22 @@ export const selectorData = ( state ) => {
         categoryName:       state.currentSubApplication.categoryName,
         categoryPrefix:     state.currentSubApplication.categoryPrefix,
 
+        eventId:     state.currentSubApplication.eventId,
+        currentCharType:     state.currentSubApplication.currentCharType,
 
-        participatingEventsList:    state.currentSubApplication.participatingEventsList,
-        eventTypesList:             state.currentSubApplication.eventTypesList,
-        currentEventType:           state.currentSubApplication.currentEventType,
+        releaseDuration: state.currentSubApplication.releaseDuration,
+        releaseName: state.currentSubApplication.releaseDuration,
+
+        periodFrom: state.currentSubApplication.periodFrom,
+        periodTo: state.currentSubApplication.periodTo,
+
+
+
+
+
+        // participatingEventsList:    state.currentSubApplication.participatingEventsList,
+        // eventTypesList:             state.currentSubApplication.eventTypesList,
+        // currentEventType:           state.currentSubApplication.currentEventType,
 
 
 

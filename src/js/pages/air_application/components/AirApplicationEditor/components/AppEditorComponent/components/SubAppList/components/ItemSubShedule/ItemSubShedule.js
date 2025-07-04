@@ -6,7 +6,14 @@ import { useDispatch } from 'react-redux';
 import './ItemSubShedule.scss';
 
 import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
-import { selectorData as currentSubApplicationSlise, setCurrentSubAppId } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+import { 
+    selectorData as currentSubApplicationSlise,
+    setCurrentSubAppId,
+    setReleaseDuration,
+    setReleaseName,
+    setPeriodFrom,
+    setPeriodTo,
+} from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
 
 
 import { AlertWindowContainer } from './../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
@@ -21,8 +28,13 @@ const ItemSubSheduleComponent = ( props ) => {
         duration_sec,
         period_from,
         period_to,
+        name,
 
         setCurrentSubAppId,
+        setReleaseDuration,
+        setReleaseName,
+        setPeriodFrom,
+        setPeriodTo,
         
     } = props;
 
@@ -30,6 +42,10 @@ const ItemSubSheduleComponent = ( props ) => {
 
     const click = () => {
         setCurrentSubAppId( id );
+        setReleaseDuration( duration_sec );
+        setReleaseName( name );
+        setPeriodFrom( period_from );
+        setPeriodTo( period_to );
         setIsOpen( true )
     };
 
@@ -80,6 +96,16 @@ export function ItemSubShedule( props ){
 
 
             setCurrentSubAppId = { ( val ) => { dispatch( setCurrentSubAppId( val ) ) } }
+            setReleaseDuration = { ( val ) => { dispatch( setReleaseDuration( val ) ) } }
+            setReleaseName = { ( val ) => { dispatch( setReleaseName( val ) ) } }
+
+            setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
+            setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
+
+
+            
+
+            
 
 
         />

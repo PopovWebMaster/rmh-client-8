@@ -17,6 +17,8 @@ import { ItemNum } from './components/ItemNum/ItemNum.js';
 import { ItemCategory } from './components/ItemCategory/ItemCategory.js';
 import { ItemManagerNotes } from './components/ItemManagerNotes/ItemManagerNotes.js';
 
+import { ItemEvents } from './components/ItemEvents/ItemEvents.js';
+
 import { AlertWindowContainerButtonAdd } from './../../../../../../components/AlertWindowContainerButtonAdd/AlertWindowContainerButtonAdd.js'
 
 
@@ -41,6 +43,10 @@ const NewAppComponentComponent = ( props ) => {
     let [ categoryId,       setCategoryId ] = useState( null );
     let [ managerNotes,     setManagerNotes ] = useState( '' );
 
+    let [ eventId,       setEventId ] = useState( null );
+
+
+
     useEffect( () => {
         if( isOpen ){
             setAppName( '' );
@@ -49,6 +55,7 @@ const NewAppComponentComponent = ( props ) => {
             setAppNumIsError( false );
             setCategoryId( null );
             setManagerNotes( '' );
+            setEventId( null );
         };
 
     }, [ isOpen ]);
@@ -73,6 +80,8 @@ const NewAppComponentComponent = ( props ) => {
                     applicationName: appName,
                     applicationNum: appNum,
                     applicationCategoryId: categoryId,
+                    applicationEventId: eventId,
+
                     applicationManagerNotes: managerNotes,
 
                 },
@@ -114,6 +123,12 @@ const NewAppComponentComponent = ( props ) => {
             <ItemCategory 
                 categoryId =        { categoryId }
                 setCategoryId =     { setCategoryId }
+            />
+
+            <ItemEvents 
+                categoryId =    { categoryId }
+                eventId =       { eventId }
+                setEventId =    { setEventId }
             />
 
             <ItemManagerNotes 

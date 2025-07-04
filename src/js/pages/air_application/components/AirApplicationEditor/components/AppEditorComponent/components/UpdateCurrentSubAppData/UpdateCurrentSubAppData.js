@@ -10,13 +10,11 @@ import './UpdateCurrentSubAppData.scss';
 import { selectorData as applicationSlice } from './../../../../../../../../redux/applicationSlice.js';
 import { selectorData as currentSubApplicationSlise, currentSubAppClearAll } from './../../../../../../../../redux/currentSubApplicationSlise.js';
 
-import { setSpinnerIsActive }               from './../../../../../../../../redux/spinnerSlice.js';
-import { selectorData as companySlice }     from './../../../../../../../../redux/companySlice.js';
-
 
 import { set_category_data } from './vendors/set_category_data.js';
-import { set_participating_events } from './vendors/set_participating_events.js';
-import { set_used_event_types } from './vendors/set_used_event_types.js';
+import { set_event_data } from './vendors/set_event_data.js';
+import { set_current_char_type } from './vendors/set_current_char_type.js';
+// import { create_an_empty_char_list } from './vendors/create_an_empty_char_list.js';
 
 const UpdateCurrentSubAppDataComponent = ( props ) => {
 
@@ -39,10 +37,10 @@ const UpdateCurrentSubAppDataComponent = ( props ) => {
                 здесь порядок вызова функций важен
             */
             set_category_data();
-            set_participating_events();
-            set_used_event_types();
+            set_event_data();
+            set_current_char_type();
 
-
+            setIsReady( true );
 
         };
 

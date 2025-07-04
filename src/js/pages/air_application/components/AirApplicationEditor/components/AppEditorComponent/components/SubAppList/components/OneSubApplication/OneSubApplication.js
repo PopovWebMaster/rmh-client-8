@@ -77,6 +77,7 @@ const OneSubApplicationComponent = ( props ) => {
                 duration_sec =      { duration_sec }
                 period_from =       { period_from }
                 period_to =         { period_to }
+                name = { name }
 
             />
 

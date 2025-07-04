@@ -6,6 +6,7 @@ import {
     setCurrentAppManagerNotes,
     setCurrentSubAppList,
     setCurrentAppIsChanged,
+    setCurrentAppEventId,
 
     setApplicationList,
 
@@ -17,6 +18,7 @@ export const set_application_data_to_store = ( application, applicationList = fa
     let {
         application_id,
         category_id,
+        event_id,
         manager_id,
         name,
         num,
@@ -31,6 +33,7 @@ export const set_application_data_to_store = ( application, applicationList = fa
     store.dispatch( setCurrentAppManagerNotes( manager_notes ) );
     store.dispatch( setCurrentSubAppList( sub_application_list ) );
     store.dispatch( setCurrentAppIsChanged( false ) );
+    store.dispatch( setCurrentAppEventId( event_id ) );
 
     if( applicationList ){
         store.dispatch( setApplicationList( applicationList ) );

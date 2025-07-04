@@ -23,6 +23,8 @@ export const applicationSlice = createSlice({
 
         currentAppName: '',
         currentAppCategoryId: null,
+        currentAppEventId: null,
+
         currentAppNum: null,
         currentAppManagerNotes: '',
         currentSubAppList: [],
@@ -85,6 +87,10 @@ export const applicationSlice = createSlice({
             state.currentAppIsChanged =  action.payload;
         },
 
+        setCurrentAppEventId: ( state, action ) => {
+            state.currentAppEventId =  action.payload;
+        },
+
 
 
 
@@ -115,6 +121,7 @@ export const {
 
     setCurrentAppName,
     setCurrentAppCategoryId,
+    setCurrentAppEventId,
     setCurrentAppNum,
     setCurrentSubAppList,
     setCurrentAppManagerNotes,
@@ -134,6 +141,8 @@ export const selectorData = ( state ) => {
 
         currentAppName:         state.application.currentAppName,
         currentAppCategoryId:   state.application.currentAppCategoryId,
+        currentAppEventId:   state.application.currentAppEventId,
+
         currentAppNum:          state.application.currentAppNum,
         currentAppManagerNotes: state.application.currentAppManagerNotes,
         currentSubAppList:      state.application.currentSubAppList,

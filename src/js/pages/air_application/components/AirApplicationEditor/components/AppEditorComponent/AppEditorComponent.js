@@ -15,6 +15,8 @@ import { AddSubApplication }    from './components/AddSubApplication/AddSubAppli
 import { RemoveApplication }    from './components/RemoveApplication/RemoveApplication.js';
 import { SubAppList }           from './components/SubAppList/SubAppList.js';
 
+import { A_Chart } from './components/A_Chart/A_Chart.js';
+
 const AppEditorComponentComponent = ( props ) => {
 
     let {
@@ -31,6 +33,7 @@ const AppEditorComponentComponent = ( props ) => {
                 <A_Header />
                 <A_Name />
                 <A_CategoryNoEdit />
+                <A_Chart />
                 <A_ManagerNotes />
 
                 <div className = 'AEC_button_panel'>

@@ -13,6 +13,9 @@ import { selectorData as companySlice }     from './../../../../../../../../redu
 
 
 import { UpdateCurrentSubAppData } from './../UpdateCurrentSubAppData/UpdateCurrentSubAppData.js';
+import { CharClass } from './../../../../../../../../classes/CharClass.js';
+
+import { ScrollContainer } from './../../../../../../../..//components/ScrollContainer/ScrollContainer.js'
 
 const SheduleEditorComponentComponent = ( props ) => {
 
@@ -25,18 +28,18 @@ const SheduleEditorComponentComponent = ( props ) => {
 
     } = props;
 
+    let [ Char, setChar ] = useState( null );
+
+    // let Char = new CharClass();
+
+    
     useEffect( () => {
 
         if( isOpen ){
-            console.dir( 'sub_application_id' );
-            console.dir( sub_application_id );
-
-            console.dir( 'application' );
-            console.dir( application );
-
+            setChar( new CharClass() );
 
         }else{
-
+            setChar( null );
         };
 
     }, [ isOpen ] );
@@ -48,12 +51,40 @@ const SheduleEditorComponentComponent = ( props ) => {
         <div className = 'sheduleEditorComponent'>
 
             <UpdateCurrentSubAppData>
-SheduleEditorComponent
+
+                <div className = 'SEC_header'>
+
+                </div>
+
+                <div className = 'SEC_body'>
+
+                    <div className = 'SEC_body_left'>
+
+                        <div className = 'SEC_time_add'>
+
+                        </div>
+
+                        <div className = 'SEC_time_buttons'>
+                            <ScrollContainer>
+                                <div>
+                                   
+                                </div>
+                            </ScrollContainer>
+                        </div>
+                    </div>
+
+                    <div className = 'SEC_body_center'>
+                        <ScrollContainer>
+                            <div className = 'SEC_body_center_wrap'>
+
+                                
+                            </div>
+                        </ScrollContainer>
+                    </div>
+                    
+                </div>
 
             </UpdateCurrentSubAppData>
-
-           
-           
 
         </div>
     )
