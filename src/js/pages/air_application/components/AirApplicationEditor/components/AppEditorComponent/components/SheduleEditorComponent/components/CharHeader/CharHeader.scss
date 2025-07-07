@@ -1,0 +1,55 @@
+.SEC_header{
+    font-size: 1em;
+    height: 5em;
+    width: 100%;
+    background-color: #f7f7f7;
+
+    display: flex;
+    justify-content: flex-start;
+
+    .SEC_header_col{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 100%;
+        height: 100%;
+
+        .SEC_row{
+            font-size: 1em;
+            margin: 0.2em 0.5em;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.6em;
+                padding: 0.2em 0.6em;
+            }
+
+
+            .SEC_row_title{
+                
+                margin: 0 1em;
+                color: #979797;
+            }
+
+            .SEC_row_name{
+                // font-size: 0.6em;
+                margin: 0 1em;
+                // color: rgb(155, 94, 94);
+                font-weight: bold;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 0.1em;
+                border-color: #00000000;
+            }
+
+        }
+
+
+        
+    }
+
+    
+}

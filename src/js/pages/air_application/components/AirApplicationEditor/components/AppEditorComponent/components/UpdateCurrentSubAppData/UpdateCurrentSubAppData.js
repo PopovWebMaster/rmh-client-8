@@ -36,9 +36,9 @@ const UpdateCurrentSubAppDataComponent = ( props ) => {
             /*
                 здесь порядок вызова функций важен
             */
-            set_category_data();
-            set_event_data();
-            set_current_char_type();
+            // set_category_data();
+            // set_event_data();
+            // set_current_char_type();
 
             setIsReady( true );
 

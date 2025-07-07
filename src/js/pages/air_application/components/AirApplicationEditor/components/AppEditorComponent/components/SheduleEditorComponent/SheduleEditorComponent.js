@@ -1,11 +1,11 @@
 
-import React, { useRef, useState, useEffect }   from "react";
+import React, { useRef, useState, useEffect, useMemo }   from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import './SheduleEditorComponent.scss';
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { selectorData as applicationSlice, setApplicationList, setCurrentApplicationId } from './../../../../../../../../redux/applicationSlice.js';
 import { setSpinnerIsActive }               from './../../../../../../../../redux/spinnerSlice.js';
@@ -15,7 +15,13 @@ import { selectorData as companySlice }     from './../../../../../../../../redu
 import { UpdateCurrentSubAppData } from './../UpdateCurrentSubAppData/UpdateCurrentSubAppData.js';
 import { CharClass } from './../../../../../../../../classes/CharClass.js';
 
-import { ScrollContainer } from './../../../../../../../..//components/ScrollContainer/ScrollContainer.js'
+import { ScrollContainer } from './../../../../../../../..//components/ScrollContainer/ScrollContainer.js';
+
+import { CharHeader } from './components/CharHeader/CharHeader.js';
+import { CharTimeColumn } from './components/CharTimeColumn/CharTimeColumn.js';
+import { CharTable } from './components/CharTable/CharTable.js';
+
+
 
 const SheduleEditorComponentComponent = ( props ) => {
 
@@ -29,20 +35,82 @@ const SheduleEditorComponentComponent = ( props ) => {
     } = props;
 
     let [ Char, setChar ] = useState( null );
+    let [ isReady, setIsReady ] = useState( false );
 
-    // let Char = new CharClass();
 
-    
+    let [ timePoints, setTimePoints ] = useState( [] );
+    let [ charType, setCharType ] = useState( null );
+    let [ releareCount, setReleareCount ] = useState( 0 );
+    let [ releareName, setReleareName ] = useState( '' );
+    let [ category, setCategory ] = useState( null );
+    let [ event, setEvent ] = useState( null );
+
+    let [ dayList, setDayList ] = useState( [] );
+
+
+
+
+
+
+
     useEffect( () => {
-
         if( isOpen ){
             setChar( new CharClass() );
-
         }else{
             setChar( null );
         };
-
     }, [ isOpen ] );
+
+    useEffect( () => {
+        if( Char === null ){
+            clearData();
+            setIsReady( false );
+        }else{
+            updateData();
+            setIsReady( true );
+        };
+
+    }, [ Char ] );
+
+    // let Char = useMemo( () => {
+    //     if( isOpen ){
+    //         let Char = new CharClass();
+    //         Char.SetSubApplicationData( sub_application_id );
+    //         return Char;
+    //     }else{
+    //         return null;
+    //     };
+        
+    // }, [ isOpen ] );
+
+    const updateData = () => {
+        setCharType( Char.charType );
+        setReleareCount(100);
+        setReleareName( Char.SubApplication.name );
+        setCategory( Char.Category.GetData() );
+        setEvent( Char.Event.GetData() );
+
+    };
+    const clearData = () => {
+        setCharType( null );
+        setReleareCount( 0 );
+        setReleareName( '' );
+        setCategory( null );
+        setEvent( null );
+    }
+
+    const addTimePoints = ( sec ) => {
+        Char.AddTimePoint( sec );
+        setTimePoints( Char.GetTimePointList() );
+        setDayList( Char.GetDayList() );
+
+        
+    };
+    const clickTimePoint = ( sec ) => {
+        Char.ClickTimePoint( sec );
+    }
+
+
 
 
 
@@ -52,37 +120,41 @@ const SheduleEditorComponentComponent = ( props ) => {
 
             <UpdateCurrentSubAppData>
 
-                <div className = 'SEC_header'>
+                { isReady? (<>
 
-                </div>
+                    <CharHeader 
+                        charType =      { charType }
+                        releareCount =  { releareCount }
+                        releareName =   { releareName }
+                        category =      { category }
+                        event =         { event }
 
-                <div className = 'SEC_body'>
-
-                    <div className = 'SEC_body_left'>
-
-                        <div className = 'SEC_time_add'>
-
-                        </div>
-
-                        <div className = 'SEC_time_buttons'>
-                            <ScrollContainer>
-                                <div>
-                                   
-                                </div>
-                            </ScrollContainer>
-                        </div>
-                    </div>
-
-                    <div className = 'SEC_body_center'>
-                        <ScrollContainer>
-                            <div className = 'SEC_body_center_wrap'>
-
-                                
-                            </div>
-                        </ScrollContainer>
-                    </div>
+                    />
                     
-                </div>
+
+                    <div className = 'SEC_body'>
+                        <div className = 'SEC_body_left'>
+
+                            <CharTimeColumn 
+                                charType =      { charType }
+                                timePoints =    { timePoints }
+                                addTimePoints = { addTimePoints }
+                                clickTimePoint = { clickTimePoint }
+                            />
+
+                        </div>
+
+                        <div className = 'SEC_body_center'>
+
+                            <CharTable 
+                                dayList = { dayList }
+                            />
+
+                        </div>
+                        
+                    </div>
+                
+                </>): '' }
 
             </UpdateCurrentSubAppData>
 

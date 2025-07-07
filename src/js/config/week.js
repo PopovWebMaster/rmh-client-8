@@ -47,3 +47,13 @@ export const WEEK_NAME = [
     'Суббота',
     'Воскресенье',
 ];
+
+export const WEEK_NAME_SHORT = [
+    'Пн',
+    'Вт',
+    'Ср',
+    'Чт',
+    'Пт',
+    'Сб',
+    'Вс',
+];
