@@ -18,7 +18,7 @@ const CharHeaderComponent = ( props ) => {
     let {
         charType,
         releareCount,
-        releareName,
+        releaseName,
         category,
         event, 
 
@@ -67,7 +67,7 @@ const CharHeaderComponent = ( props ) => {
             <div className = 'SEC_header_col'>
                 <h2 className = 'SEC_row'>
                     <span className = 'SEC_row_title'>Выпуск:</span>
-                    <span className = 'SEC_row_name'>{ releareName }</span>
+                    <span className = 'SEC_row_name'>{ releaseName }</span>
                 </h2>
                 <h2 className = 'SEC_row'>
                     <span className = 'SEC_row_title'>График:</span>

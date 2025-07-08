@@ -25,3 +25,4 @@
 // icon-left
 // icon-feather
 // fa-reorder
+// icon-eye-4

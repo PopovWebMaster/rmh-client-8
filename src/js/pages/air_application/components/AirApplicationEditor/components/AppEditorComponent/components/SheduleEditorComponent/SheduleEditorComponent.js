@@ -21,6 +21,7 @@ import { CharHeader } from './components/CharHeader/CharHeader.js';
 import { CharTimeColumn } from './components/CharTimeColumn/CharTimeColumn.js';
 import { CharTable } from './components/CharTable/CharTable.js';
 
+import { EnvironmentShow } from './components/EnvironmentShow/EnvironmentShow.js';
 
 
 const SheduleEditorComponentComponent = ( props ) => {
@@ -42,6 +43,8 @@ const SheduleEditorComponentComponent = ( props ) => {
     let [ charType, setCharType ] = useState( null );
     let [ releareCount, setReleareCount ] = useState( 0 );
     let [ releareName, setReleareName ] = useState( '' );
+    let [ releaseName, setReleaseName ] = useState( '' );
+
     let [ category, setCategory ] = useState( null );
     let [ event, setEvent ] = useState( null );
 
@@ -86,7 +89,7 @@ const SheduleEditorComponentComponent = ( props ) => {
     const updateData = () => {
         setCharType( Char.charType );
         setReleareCount(100);
-        setReleareName( Char.SubApplication.name );
+        setReleaseName( Char.SubApplication.name );
         setCategory( Char.Category.GetData() );
         setEvent( Char.Event.GetData() );
 
@@ -94,7 +97,7 @@ const SheduleEditorComponentComponent = ( props ) => {
     const clearData = () => {
         setCharType( null );
         setReleareCount( 0 );
-        setReleareName( '' );
+        setReleaseName( '' );
         setCategory( null );
         setEvent( null );
     }
@@ -107,7 +110,22 @@ const SheduleEditorComponentComponent = ( props ) => {
         
     };
     const clickTimePoint = ( sec ) => {
-        Char.ClickTimePoint( sec );
+        // Char.ClickTimePoint( sec );
+    }
+
+    const releaseToggle = ( data ) => {
+        Char.ReleaseInDayToggle( data );
+        setDayList( Char.GetDayList() );
+    }
+
+    const dayReleaseToggle = ( YYYY_MM_DD ) => {
+        Char.AllDayReleaseToggle( YYYY_MM_DD );
+        setDayList( Char.GetDayList() );
+    }
+
+    const timePointReleaseToggle = ( sec ) => {
+        Char.TimePointReleaseToggle( sec );
+        setDayList( Char.GetDayList() );
     }
 
 
@@ -118,6 +136,8 @@ const SheduleEditorComponentComponent = ( props ) => {
     return (
         <div className = 'sheduleEditorComponent'>
 
+            <EnvironmentShow />
+
             <UpdateCurrentSubAppData>
 
                 { isReady? (<>
@@ -125,9 +145,10 @@ const SheduleEditorComponentComponent = ( props ) => {
                     <CharHeader 
                         charType =      { charType }
                         releareCount =  { releareCount }
-                        releareName =   { releareName }
+                        releaseName =   { releaseName }
                         category =      { category }
                         event =         { event }
+                        
 
                     />
                     
@@ -139,7 +160,8 @@ const SheduleEditorComponentComponent = ( props ) => {
                                 charType =      { charType }
                                 timePoints =    { timePoints }
                                 addTimePoints = { addTimePoints }
-                                clickTimePoint = { clickTimePoint }
+                                clickTimePoint = { timePointReleaseToggle }
+                                
                             />
 
                         </div>
@@ -147,7 +169,11 @@ const SheduleEditorComponentComponent = ( props ) => {
                         <div className = 'SEC_body_center'>
 
                             <CharTable 
-                                dayList = { dayList }
+                                dayList =   { dayList }
+                                charType =  { charType }
+                                releaseName =   { releaseName }
+                                releaseToggle = { releaseToggle }
+                                dayReleaseToggle = { dayReleaseToggle }
                             />
 
                         </div>

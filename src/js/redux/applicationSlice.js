@@ -30,6 +30,9 @@ export const applicationSlice = createSlice({
         currentSubAppList: [],
 
 
+        envIsOpen: false,
+
+
 
 
         // currentAppType: null,
@@ -92,8 +95,9 @@ export const applicationSlice = createSlice({
         },
 
 
-
-
+        setEnvIsOpen: ( state, action ) => {
+            state.envIsOpen =  action.payload;
+        },
 
 
 
@@ -128,6 +132,8 @@ export const {
     // setCurrentAppOrders,
     setCurrentAppIsChanged,
 
+    setEnvIsOpen,
+
 
 
 } = applicationSlice.actions;
@@ -148,6 +154,9 @@ export const selectorData = ( state ) => {
         currentSubAppList:      state.application.currentSubAppList,
 
         currentAppIsChanged:    state.application.currentAppIsChanged,
+
+
+        envIsOpen:    state.application.envIsOpen,
 
 
 

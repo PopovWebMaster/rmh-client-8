@@ -1,0 +1,152 @@
+.SEC_CharDayTimePoint{
+    font-size: 1em;
+    margin: 0.2em 0.2em;
+    // width: 12em;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    align-content: center;
+    padding: 0.2em 0.3em;
+
+    background-color: #ffffff00;
+    border-radius: 0.1em;
+    border: 1px solid #deeaf47d;
+
+    .SEC_CharDayTimePoint_time{
+        font-size: 1em;
+        // width: 4em;
+        // background-color: #343434;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        margin: 0 0.2em 0 0;
+        flex-grow: 0;
+
+        span{
+            font-size: 0.65em;
+            padding: 0.3em 0.5em 0.1em 0.5em;
+            width: 4em;
+            border-radius: 0.1em;
+
+            background-color: #f0f0f063;
+            color: #5d5d5d;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+        }
+    }
+
+    .SEC_CharDayTimePoint_inp{
+        font-size: 1em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin: 0.1em 0.2em 0 0;
+        flex-grow: 0;
+
+        position: relative;
+
+        input{
+            font-size: 0.6em;
+            color: #343434;
+            font-weight: bold;
+            width: 9em;
+            background-color: #00000000;
+            border: 1px solid #00000000;
+            outline: none;
+        }
+
+
+        .SEC_CharDayTimePoint_inp_curt{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #00000000;
+
+        }
+    }
+
+    .SEC_CharDayTimePoint_block{
+            font-size: 1em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin: 0.25em 0.2em 0 0;
+            flex-grow: 1;
+            max-width: 100%;
+
+        .SEC_CharDayTimePoint_block_title{
+            font-size: 0.55em;
+            color: #817979;
+            margin-right: 0.2em;
+        }
+
+        .SEC_CharDayTimePoint_block_filled{
+            font-size: 0.55em;
+            color: #343434;
+            font-weight: bold;
+        }
+
+        .SEC_CharDayTimePoint_block_slash{
+            font-size: 0.55em;
+            color: #343434;
+            margin: 0 0.1em;
+        }
+
+        .SEC_CharDayTimePoint_block_all{
+            font-size: 0.55em;
+            color: #343434;
+        }
+
+
+    }
+
+    .SEC_CharDayTimePoint_environment{
+        font-size: 1em;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+        padding-top: 0.18em;
+        max-width: 100%;
+        flex-grow: 1;
+
+        span{
+            font-size: 0.7em;
+            padding: 0.1em;
+            color: #b3b3b3;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span:hover{
+            color: #414141;
+        }
+
+        span:active{
+            color: #8d3939;
+        }
+
+    }
+
+}
+
+.SEC_CharDayTimePoint:hover{
+    background-color: #ffffff;
+}
+.filled{
+    background-color: #ffffff;
+}

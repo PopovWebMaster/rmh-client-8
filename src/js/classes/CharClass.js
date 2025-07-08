@@ -26,6 +26,13 @@ export class CharClass {
         this.SetCharType = this.SetCharType.bind(this);
         this.GetDayList = this.GetDayList.bind(this);
 
+        this.ReleaseInDayToggle = this.ReleaseInDayToggle.bind(this);
+        this.AllDayReleaseToggle = this.AllDayReleaseToggle.bind(this);
+        this.TimePointReleaseToggle = this.TimePointReleaseToggle.bind(this);
+
+
+
+
 
 
 
@@ -64,8 +71,9 @@ export class CharClass {
     }
 
     ClickTimePoint( sec ){
-        console.dir( sec );
-        this.Days.GetDayList();
+        // console.dir( sec );
+        // this.Days.GetDayList();
+
 
     }
 
@@ -85,6 +93,22 @@ export class CharClass {
                 };
             };
         };
+    }
+
+    ReleaseInDayToggle( data ){
+        console.dir( data );
+        console.dir( this );
+
+        this.Days.ToggleRelease( data );
+
+    }
+
+    AllDayReleaseToggle( YYYY_MM_DD ){
+        this.Days.AllDayReleaseToggle( YYYY_MM_DD );
+    }
+
+    TimePointReleaseToggle( sec ){
+        this.Days.TimePointReleaseToggle( sec );
     }
 
 

@@ -1,96 +1,101 @@
-// CharTable
-
 
 import React, { useRef, useState, useEffect, useMemo }   from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import './CharTable.scss';
+import './CharDay.scss';
 
 
 import { selectorData as applicationSlice, setApplicationList, setCurrentApplicationId } from './../../../../../../../../../../redux/applicationSlice.js';
 import { setSpinnerIsActive }               from './../../../../../../../../../../redux/spinnerSlice.js';
 import { selectorData as companySlice }     from './../../../../../../../../../../redux/companySlice.js';
 
+import { CharDayHeader } from './components/CharDayHeader/CharDayHeader.js';
 
-import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-import { CharDay } from './../CharDay/CharDay.js';
-
+import { CharDayTimePoint } from './components/CharDayTimePoint/CharDayTimePoint.js';
 
 
-const CharTableComponent = ( props ) => {
+const CharDayComponent = ( props ) => {
 
     let {
-        dayList,
-        charType,
+        YYYY_MM_DD,
+        year,
+        mounth,
+        date,
+        dayNum,
+        dayName,
+        dayNameShort,
+
+        timeToints,
+
         releaseName,
+        charType,
+
         releaseToggle,
         dayReleaseToggle,
 
     } = props;
 
-    console.dir( 'dayList' );
-    console.dir( dayList );
+    const create = ( obj ) => {
 
-    const create = ( arr ) => {
+        let arr = Object.keys( obj );
 
-        let div = arr.map( ( item, index ) => {
-
+        let div = arr.map( ( obj_key, index ) => {
             let {
-                YYYY_MM_DD,
-                year,
-                mounth,
-                date,
-                dayNum,
-                dayName,
-                dayNameShort,
-
-                timeToints,
-            } = item;
+                fill_count,
+                sec,
+                title,
+                time
+            } = obj[ obj_key ];
 
             return (
-                <CharDay
-                    key = { index }
-                    YYYY_MM_DD =    { YYYY_MM_DD }
-                    year =          { year }
-                    mounth =        { mounth }
-                    date =          { date }
-                    dayNum =        { dayNum }
-                    dayName =       { dayName }
-                    dayNameShort =  { dayNameShort }
-                    timeToints =    { timeToints }
+                <CharDayTimePoint
+                    key =           { index }
+                    fill_count =    { fill_count }
+                    sec =           { sec }
+                    title =         { title }
+                    time =          { time }
                     releaseName =   { releaseName }
                     charType =      { charType }
+                    YYYY_MM_DD =    { YYYY_MM_DD }
                     releaseToggle = { releaseToggle }
-                    dayReleaseToggle = { dayReleaseToggle }
                 />
             );
-
-
         } );
 
-        return div;
+        return div
 
-    };
+    }
+
 
 
 
 
     return (
-       <ScrollContainer>
-            <div className = 'SEC_body_center_wrap'>
+        <div className = 'SEC_CharDay'>
 
-                { create( dayList ) }
+            <CharDayHeader 
+                YYYY_MM_DD =    { YYYY_MM_DD }
+                year =          { year }
+                dayNum =        { dayNum }
+                dayName =       { dayName }
+                dayNameShort =  { dayNameShort }
+                date =          { date }
+                mounth =        { mounth }
+                dayReleaseToggle = { dayReleaseToggle }
+            />
 
-                
-            </div>
-        </ScrollContainer>
+            { create( timeToints ) }
+
+            
+
+            
+        </div>
     )
 
 };
 
-export function CharTable( props ){
+export function CharDay( props ){
 
     const application = useSelector( applicationSlice );
     const company = useSelector( companySlice );
@@ -98,7 +103,7 @@ export function CharTable( props ){
     const dispatch = useDispatch();
 
     return (
-        <CharTableComponent
+        <CharDayComponent
             { ...props }
 
             currentApplicationId = { application.currentApplicationId }

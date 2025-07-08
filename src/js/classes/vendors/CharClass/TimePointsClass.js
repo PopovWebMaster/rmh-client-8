@@ -8,6 +8,7 @@ export class TimePointsClass{
     constructor(){
 
         this.list = [];
+        this.list_sec = [];
 
         this.AddPoint = this.AddPoint.bind(this);
         this.GetTimePointList = this.GetTimePointList.bind(this);
@@ -16,8 +17,10 @@ export class TimePointsClass{
     }
 
     AddPoint( time_sec ){
-        this.list.push( new TimePointClass( time_sec ) );
-
+        if( this.list_sec.indexOf( time_sec ) === -1){
+            this.list.push( new TimePointClass( time_sec ) );
+            this.list_sec.push( time_sec );
+        };
     }
 
     GetTimePointList(){
