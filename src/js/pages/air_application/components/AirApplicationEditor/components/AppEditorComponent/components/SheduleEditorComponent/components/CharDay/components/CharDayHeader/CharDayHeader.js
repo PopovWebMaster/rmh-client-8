@@ -11,6 +11,7 @@ import { setSpinnerIsActive }               from './../../../../../../../../../.
 import { selectorData as companySlice }     from './../../../../../../../../../../../../redux/companySlice.js';
 
 import { MOUNTH_NAME } from './../../../../../../../../../../../../config/mounth.js';
+import { convert_sec_to_time } from './../../../../../../../../../../../../helpers/convert_sec_to_time.js';
 
 
 const CharDayHeaderComponent = ( props ) => {
@@ -25,21 +26,11 @@ const CharDayHeaderComponent = ( props ) => {
         mounth,
 
         dayReleaseToggle,
+        pointsLength,
+        releaseLength,
+        dayDuration,
 
     } = props;
-
-    // let { 
-    //     YYYY_MM_DD,
-    //     year,
-    //     mounth,
-    //     date,
-    //     dayNum,
-    //     dayName,
-    //     dayNameShort,
-
-    //     timeToints,
-    //  } = day
-
 
 
 
@@ -52,15 +43,15 @@ const CharDayHeaderComponent = ( props ) => {
 
             <div className = 'SEC_CharDay_release_count'>
                 <span className = 'SEC_CharDay_release_count_title'>Выпуски:</span>
-                <span className = 'SEC_CharDay_release_count_filled'>0</span>
+                <span className = 'SEC_CharDay_release_count_filled'>{ releaseLength }</span>
                 <span className = 'SEC_CharDay_release_count_slash'>/</span>
-                <span className = 'SEC_CharDay_release_count_all'>20</span>
+                <span className = 'SEC_CharDay_release_count_all'>{ pointsLength }</span>
             </div>
 
             <div className = 'SEC_CharDay_release_duration'>
                 <span className = 'SEC_CharDay_release_count_title'>Хрон. общий:</span>
-                <span className = 'SEC_CharDay_release_count_time'>00:00:50</span>
-                <span className = 'SEC_CharDay_release_count_sec'>200</span>
+                <span className = 'SEC_CharDay_release_count_time'>{ convert_sec_to_time( dayDuration ) }</span>
+                <span className = 'SEC_CharDay_release_count_sec'>{ dayDuration }</span>
             </div>
 
             <div className = 'SEC_CharDay_release_all_toggle'>

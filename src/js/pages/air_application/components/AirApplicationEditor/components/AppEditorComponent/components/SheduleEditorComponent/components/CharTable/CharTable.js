@@ -30,8 +30,6 @@ const CharTableComponent = ( props ) => {
 
     } = props;
 
-    console.dir( 'dayList' );
-    console.dir( dayList );
 
     const create = ( arr ) => {
 
@@ -46,7 +44,12 @@ const CharTableComponent = ( props ) => {
                 dayName,
                 dayNameShort,
 
-                timeToints,
+                timePoints,
+
+                pointsLength,
+                releaseLength,
+                dayDuration,
+
             } = item;
 
             return (
@@ -59,11 +62,14 @@ const CharTableComponent = ( props ) => {
                     dayNum =        { dayNum }
                     dayName =       { dayName }
                     dayNameShort =  { dayNameShort }
-                    timeToints =    { timeToints }
+                    timePoints =    { timePoints }
                     releaseName =   { releaseName }
                     charType =      { charType }
                     releaseToggle = { releaseToggle }
                     dayReleaseToggle = { dayReleaseToggle }
+                    pointsLength = { pointsLength }
+                    releaseLength = { releaseLength }
+                    dayDuration =  { dayDuration }
                 />
             );
 

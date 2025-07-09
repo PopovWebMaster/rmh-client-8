@@ -26,13 +26,16 @@ const CharDayComponent = ( props ) => {
         dayName,
         dayNameShort,
 
-        timeToints,
+        timePoints,
 
         releaseName,
         charType,
 
         releaseToggle,
         dayReleaseToggle,
+        pointsLength,
+        releaseLength,
+        dayDuration,
 
     } = props;
 
@@ -83,9 +86,12 @@ const CharDayComponent = ( props ) => {
                 date =          { date }
                 mounth =        { mounth }
                 dayReleaseToggle = { dayReleaseToggle }
+                pointsLength = { pointsLength }
+                releaseLength = { releaseLength }
+                dayDuration = { dayDuration }
             />
 
-            { create( timeToints ) }
+            { create( timePoints ) }
 
             
 

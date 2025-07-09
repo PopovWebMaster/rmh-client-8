@@ -21,20 +21,14 @@ export class CharClass {
         this.charType = CHAR_TYPE.BLIND;
         
         this.AddTimePoint = this.AddTimePoint.bind(this);
-        this.ClickTimePoint = this.ClickTimePoint.bind(this);
         this.GetTimePointList = this.GetTimePointList.bind(this);
         this.SetCharType = this.SetCharType.bind(this);
-        this.GetDayList = this.GetDayList.bind(this);
-
         this.ReleaseInDayToggle = this.ReleaseInDayToggle.bind(this);
         this.AllDayReleaseToggle = this.AllDayReleaseToggle.bind(this);
         this.TimePointReleaseToggle = this.TimePointReleaseToggle.bind(this);
-
-
-
-
-
-
+        this.GetReseaseData = this.GetReseaseData.bind(this);
+        this.AddTimePointsGroupe = this.AddTimePointsGroupe.bind(this);
+        this.FillCharWithReleases = this.FillCharWithReleases.bind(this);
 
 
 
@@ -43,20 +37,19 @@ export class CharClass {
         this.Days.Bind({
             SubApplication: this.SubApplication,
             TimePoints: this.TimePoints,
+            Event: this.Event,
             charType: this.charType,
         });
 
-        this.Days.CreateList();
 
+        this.AddTimePointsGroupe();
+
+        this.FillCharWithReleases();
         
-
-        // this.Days.GetDayList();
-        // this.Days.UpdateDayList();
-
 
         console.dir( this );
 
-
+        
 
     }
 
@@ -65,24 +58,31 @@ export class CharClass {
     AddTimePoint( sec ){
         this.TimePoints.AddPoint( sec );
         this.Days.CreateList();
-
-        console.dir( this );
-
     }
 
-    ClickTimePoint( sec ){
-        // console.dir( sec );
-        // this.Days.GetDayList();
+    AddTimePointsGroupe(){
+
+        if( this.charType === CHAR_TYPE.BLIND ){
+            let arr = this.SubApplication.GetAllTimePointsSecList();
+            for( let i = 0; i < arr.length; i++ ){
+                this.TimePoints.AddPoint( arr[ i ] );
+            };
+            this.Days.CreateList();
+        }else{
+
+            console.dir( this.Days );
 
 
+
+            this.Days.CreateList();
+        }
+
+        
     }
+
 
     GetTimePointList(){
         return this.TimePoints.GetTimePointList();
-    }
-
-    GetDayList(){
-        return this.Days.GetDayList();
     }
 
     SetCharType(){
@@ -96,11 +96,7 @@ export class CharClass {
     }
 
     ReleaseInDayToggle( data ){
-        console.dir( data );
-        console.dir( this );
-
         this.Days.ToggleRelease( data );
-
     }
 
     AllDayReleaseToggle( YYYY_MM_DD ){
@@ -109,6 +105,32 @@ export class CharClass {
 
     TimePointReleaseToggle( sec ){
         this.Days.TimePointReleaseToggle( sec );
+    }
+
+    GetReseaseData(){
+        return {
+            application_id: this.SubApplication.application_id,
+            sub_application_id: this.SubApplication.id,
+            release_list: this.Days.GetReleaseListForServer(),
+        };
+
+    }
+
+    FillCharWithReleases(){ // предназначен вызываться только один раз
+
+        let release_list = this.SubApplication.GetReleaseList();
+        for( let i = 0; i < release_list.length; i++ ){
+            let {
+                date,
+                grid_event_id,
+                time_sec,
+            } = release_list[ i ];
+
+            this.Days.AddFillCount( date, grid_event_id, time_sec );
+
+        };
+
+
     }
 
 

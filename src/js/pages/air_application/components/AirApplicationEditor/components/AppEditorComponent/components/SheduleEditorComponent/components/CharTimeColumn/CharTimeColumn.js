@@ -34,6 +34,7 @@ const CharTimeColumnComponent = ( props ) => {
 
 
     const add_point = () => {
+        
         addTimePoints( convert_time_str_to_sec( `${HH}:${MM}:00` ) );
         setHH( '' );
         setMM( '' );

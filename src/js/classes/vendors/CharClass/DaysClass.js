@@ -15,23 +15,27 @@ export class DaysClass {
 
         this.SubApplication = null;
         this.TimePoints = null;
+        this.Event = null;
         this.charType = null;
         this.WeekPointsTemplate = new WeekPointsTemplateClass();
+        
+        this.allReleaseLength = 0; //  обновляется в GetDayList()
+        this.allReleaseDuration = 0;//  обновляется в GetDayList()
 
 
         this.CreateList = this.CreateList.bind(this);
 
         this.Bind = this.Bind.bind(this);
         this.GetDayList = this.GetDayList.bind(this);
-        this.UpdateDayList = this.UpdateDayList.bind(this);
         this.ToggleRelease = this.ToggleRelease.bind(this);
         this.AllDayReleaseToggle = this.AllDayReleaseToggle.bind(this);
         this.TimePointReleaseToggle = this.TimePointReleaseToggle.bind(this);
 
+        this.GetAllReleaseLength = this.GetAllReleaseLength.bind(this);
+        this.GetAllReleaseDuration = this.GetAllReleaseDuration.bind(this);
+        this.GetReleaseListForServer = this.GetReleaseListForServer.bind(this);
+        this.AddFillCount = this.AddFillCount.bind(this);
 
-
-
-        
 
 
     }
@@ -40,10 +44,14 @@ export class DaysClass {
         let {
             SubApplication,
             TimePoints,
+            Event,
             charType,
         } = data;
+
         this.SubApplication = SubApplication;
         this.TimePoints = TimePoints;
+        this.Event = Event;
+
         this.charType = charType;
     }
 
@@ -51,10 +59,10 @@ export class DaysClass {
 
         this.list = [];
 
-
         this.WeekPointsTemplate.Create({
             charType: this.charType,
             TimePoints: this.TimePoints,
+            Event: this.Event,
         });
 
         let { period_from, period_to } = this.SubApplication;
@@ -63,49 +71,38 @@ export class DaysClass {
         for( let i = 0; i < dayList.length; i++ ){
             let { dayNum, YYYY_MM_DD } = dayList[ i ];
             let Day = new DayClass( { ...dayList[ i ] } );
+
+            Day.Bind( { SubApplication: this.SubApplication } )
             Day.AddTimePoints( this.WeekPointsTemplate.GetPoints( dayNum ) );
-            // this.list.push( Day );
             this.list_as_object[ YYYY_MM_DD ] = Day;
+
+
         };
-
-
-    }
-
-    UpdateDayList(){
-
-
-
-        let { period_from, period_to } = this.SubApplication;
-
-        get_date_list( period_from, period_to );
-
 
 
     }
 
     GetDayList(){
-        // let arr = [];
-        // for( let i = 0; i < this.list.length; i++ ){
-        //     arr.push( this.list[ i ].GetData() );
-        // };
-        // return arr;
-
         let arr = [];
+
+        let allReleaseLength = 0;
+        let allReleaseDuration = 0;
+
+
         for( let YYYY_MM_DD in this.list_as_object ){
-            arr.push( this.list_as_object[ YYYY_MM_DD ].GetData() );
+            let data = this.list_as_object[ YYYY_MM_DD ].GetData();
+            allReleaseLength = allReleaseLength + data.releaseLength;
+            allReleaseDuration = allReleaseDuration + data.dayDuration;
+            arr.push( data );
         };
+
+        this.allReleaseLength = allReleaseLength;
+        this.allReleaseDuration = allReleaseDuration;
 
         return arr;
     }
 
     ToggleRelease( data ){
-        // for( let i = 0; i < this.list.length; i++ ){
-        //     if( this.list[ i ].YYYY_MM_DD === data.YYYY_MM_DD ){
-        //         this.list[ i ].ToggleRelease( data.sec );
-        //         break;
-        //     };
-        // };
-
         this.list_as_object[ data.YYYY_MM_DD ].ToggleRelease( data.sec );
 
     }
@@ -149,4 +146,39 @@ export class DaysClass {
 
 
     }
+
+    GetAllReleaseLength(){
+        return this.allReleaseLength;
+    }
+
+    GetAllReleaseDuration(){
+        return this.allReleaseDuration;
+    }
+
+
+    GetReleaseListForServer(){
+
+        let result = [];
+
+        for( let YYYY_MM_DD in this.list_as_object ){
+            let arr = this.list_as_object[ YYYY_MM_DD ].GetReleaseListForServer();
+            result = [ ...result, ...arr ];
+        };
+
+
+        return result;
+
+    }
+
+    AddFillCount( YYYY_MM_DD, grid_event_id, sec ){
+        if( this.list_as_object[ YYYY_MM_DD ] ){
+            this.list_as_object[ YYYY_MM_DD ].AddFillCount( grid_event_id, sec );
+        };
+        
+
+    }
+
+
+
+
 }

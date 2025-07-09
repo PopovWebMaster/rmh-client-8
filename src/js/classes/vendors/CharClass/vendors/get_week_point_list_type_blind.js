@@ -16,8 +16,8 @@ export const get_week_point_list_type_blind = ( TimePoints ) => {
 
 
 
-    console.dir( 'TimePoints' );
-    console.dir( TimePoints );
+    // console.dir( 'TimePoints' );
+    // console.dir( TimePoints );
 
 
 

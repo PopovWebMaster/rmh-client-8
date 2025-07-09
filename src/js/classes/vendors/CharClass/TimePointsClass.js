@@ -18,7 +18,7 @@ export class TimePointsClass{
 
     AddPoint( time_sec ){
         if( this.list_sec.indexOf( time_sec ) === -1){
-            this.list.push( new TimePointClass( time_sec ) );
+            this.list.push( new TimePointClass({ time_sec: time_sec }) );
             this.list_sec.push( time_sec );
         };
     }

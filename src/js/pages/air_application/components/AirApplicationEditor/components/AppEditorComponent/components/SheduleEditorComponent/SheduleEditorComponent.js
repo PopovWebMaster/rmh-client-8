@@ -23,6 +23,10 @@ import { CharTable } from './components/CharTable/CharTable.js';
 
 import { EnvironmentShow } from './components/EnvironmentShow/EnvironmentShow.js';
 
+import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
+
+import { set_application_data_to_store } from './../../../../vendors/set_application_data_to_store.js';
+
 
 const SheduleEditorComponentComponent = ( props ) => {
 
@@ -33,26 +37,35 @@ const SheduleEditorComponentComponent = ( props ) => {
         application,
         sub_application_id,
 
+
+        setSpinnerIsActive,
+
     } = props;
 
     let [ Char, setChar ] = useState( null );
     let [ isReady, setIsReady ] = useState( false );
+    let [ isChanged, setIsChanged ] = useState( false );
+
 
 
     let [ timePoints, setTimePoints ] = useState( [] );
     let [ charType, setCharType ] = useState( null );
-    let [ releareCount, setReleareCount ] = useState( 0 );
-    let [ releareName, setReleareName ] = useState( '' );
+    let [ releaseCount, setReleaseCount ] = useState( 0 );
     let [ releaseName, setReleaseName ] = useState( '' );
+    let [ releaseDuration, setReleaseDuration ] = useState( 0 );
+    let [ allReleaseDuration, setAllReleaseDuration ] = useState( 0 );
+
+    let [ periodFrom, setPeriodFrom ] = useState( null );
+    let [ periodTo, setPeriodTo ] = useState( null );
+
+
+
+
 
     let [ category, setCategory ] = useState( null );
     let [ event, setEvent ] = useState( null );
 
     let [ dayList, setDayList ] = useState( [] );
-
-
-
-
 
 
 
@@ -75,62 +88,99 @@ const SheduleEditorComponentComponent = ( props ) => {
 
     }, [ Char ] );
 
-    // let Char = useMemo( () => {
-    //     if( isOpen ){
-    //         let Char = new CharClass();
-    //         Char.SetSubApplicationData( sub_application_id );
-    //         return Char;
-    //     }else{
-    //         return null;
-    //     };
-        
-    // }, [ isOpen ] );
-
     const updateData = () => {
         setCharType( Char.charType );
-        setReleareCount(100);
         setReleaseName( Char.SubApplication.name );
+        setReleaseDuration( Char.SubApplication.duration_sec );
         setCategory( Char.Category.GetData() );
         setEvent( Char.Event.GetData() );
+        setDayList( Char.Days.GetDayList() );
+        setReleaseCount( Char.Days.GetAllReleaseLength() );
+        setAllReleaseDuration( Char.Days.GetAllReleaseDuration() );
+        setPeriodFrom( Char.SubApplication.period_from );
+        setPeriodTo( Char.SubApplication.period_to );
+        setTimePoints( Char.GetTimePointList() );
+        setIsChanged( false );
 
     };
     const clearData = () => {
         setCharType( null );
-        setReleareCount( 0 );
+        setReleaseCount( 0 );
         setReleaseName( '' );
+        setReleaseDuration( 0 );
+        setAllReleaseDuration( 0 );
         setCategory( null );
         setEvent( null );
+        setPeriodFrom( null );
+        setPeriodTo( null );
+        setTimePoints( [] );
+        setIsChanged( false );
     }
 
     const addTimePoints = ( sec ) => {
         Char.AddTimePoint( sec );
         setTimePoints( Char.GetTimePointList() );
-        setDayList( Char.GetDayList() );
+        setDayList( Char.Days.GetDayList() );
+        setReleaseCount( Char.Days.GetAllReleaseLength() );
+        setAllReleaseDuration( Char.Days.GetAllReleaseDuration() );
+        setIsChanged( true );
 
-        
     };
-    const clickTimePoint = ( sec ) => {
-        // Char.ClickTimePoint( sec );
-    }
 
     const releaseToggle = ( data ) => {
         Char.ReleaseInDayToggle( data );
-        setDayList( Char.GetDayList() );
+        setDayList( Char.Days.GetDayList() );
+        setReleaseCount( Char.Days.GetAllReleaseLength() );
+        setAllReleaseDuration( Char.Days.GetAllReleaseDuration() );
+        setIsChanged( true );
     }
 
     const dayReleaseToggle = ( YYYY_MM_DD ) => {
         Char.AllDayReleaseToggle( YYYY_MM_DD );
-        setDayList( Char.GetDayList() );
+        setDayList( Char.Days.GetDayList() );
+        setReleaseCount( Char.Days.GetAllReleaseLength() );
+        setAllReleaseDuration( Char.Days.GetAllReleaseDuration() );
+        setIsChanged( true );
     }
 
     const timePointReleaseToggle = ( sec ) => {
         Char.TimePointReleaseToggle( sec );
-        setDayList( Char.GetDayList() );
+        setDayList( Char.Days.GetDayList() );
+        setReleaseCount( Char.Days.GetAllReleaseLength() );
+        setAllReleaseDuration( Char.Days.GetAllReleaseDuration() );
+        setIsChanged( true );
     }
 
 
+    const save_release_list = () => {
 
+        setSpinnerIsActive( true );
 
+        const send = () => {
+            send_request_to_server({
+                route: 'save-sub-application-release',
+                data: Char.GetReseaseData(),
+                successCallback: ( response ) => {
+                    console.dir( 'response' );
+                    console.dir( response );
+                    if( response.ok ){
+                        setSpinnerIsActive( false );
+                        set_application_data_to_store( response.application, response.applicationList );
+
+                        setIsChanged( false );
+
+                        setChar( new CharClass() );
+                    };
+                },
+                errorCallback: () => {
+                    send();
+                }
+            });
+        };
+
+        send();
+
+    }
 
 
     return (
@@ -144,12 +194,25 @@ const SheduleEditorComponentComponent = ( props ) => {
 
                     <CharHeader 
                         charType =      { charType }
-                        releareCount =  { releareCount }
+                        releareCount =  { releaseCount }
                         releaseName =   { releaseName }
+
+
                         category =      { category }
                         event =         { event }
-                        
 
+                        releaseDuration =       { releaseDuration }
+                        allReleaseDuration =    { allReleaseDuration }
+
+                        periodFrom =    { periodFrom }
+                        periodTo =    { periodTo }
+                        save_release_list = { save_release_list }
+                        isChanged = { isChanged }
+                        // setIsChanged = { setIsChanged }
+
+
+
+                    
                     />
                     
 

@@ -29,25 +29,30 @@ const InputDurationComponent = ( props ) => {
     let ssRef = useRef();
 
     const enter = () => {
-        if( HH === '' ){
-            setHH( '00' );
-        }else{
-            setHH( HH.padStart( 2, "0" ) );
-        };
+        if( HH === '' && MM === '' && SS === '' ){
 
-        if( MM === '' ){
-            setMM( '00' );
         }else{
-            setMM( MM.padStart( 2, "0" ) );
-        };
+            if( HH === '' ){
+                setHH( '00' );
+            }else{
+                setHH( HH.padStart( 2, "0" ) );
+            };
 
-        if( SS === '' ){
-            setSS( '00' );
-        }else{
-            setSS( SS.padStart( 2, "0" ) );
-        };
+            if( MM === '' ){
+                setMM( '00' );
+            }else{
+                setMM( MM.padStart( 2, "0" ) );
+            };
 
-        enterHandler();
+            if( SS === '' ){
+                setSS( '00' );
+            }else{
+                setSS( SS.padStart( 2, "0" ) );
+            };
+
+            enterHandler();
+        };
+        
 
     }
 

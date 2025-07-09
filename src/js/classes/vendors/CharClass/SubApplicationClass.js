@@ -59,6 +59,40 @@ export class SubApplicationClass{
 
         };
 
+
+        this.GetAllTimePointsSecList = this.GetAllTimePointsSecList.bind(this);
+        this.GetReleaseList = this.GetReleaseList.bind(this);
+
+
+        
+
+    }
+
+    GetAllTimePointsSecList(){
+
+        let obj = {};
+        let arr = [];
+
+        for( let i = 0; i < this.release_list.length; i++ ){
+            let { time_sec } = this.release_list[ i ];
+            obj[ time_sec ] = true;
+        };
+
+        for( let sec in obj ){
+            arr.push( Number( sec ) );
+        };
+        let result = arr.sort( ( a, b ) => {
+            if( a > b ){ return 1 };
+            if( a < b ){ return -1 };
+            return 0;
+        } );
+
+        return result;
+
+    }
+
+    GetReleaseList(){
+        return [ ...this.release_list ];
     }
 
 
