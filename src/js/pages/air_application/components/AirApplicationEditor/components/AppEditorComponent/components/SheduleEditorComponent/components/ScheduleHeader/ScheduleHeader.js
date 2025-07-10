@@ -1,50 +1,34 @@
-//
+
 import React, { useRef, useState, useEffect, useMemo }   from "react";
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import './CharHeader.scss';
+import './ScheduleHeader.scss';
 
-
-import { selectorData as applicationSlice, setApplicationList, setCurrentApplicationId } from './../../../../../../../../../../redux/applicationSlice.js';
-import { setSpinnerIsActive }               from './../../../../../../../../../../redux/spinnerSlice.js';
-import { selectorData as companySlice }     from './../../../../../../../../../../redux/companySlice.js';
+import { selectorData as scheduleSlise }     from './../../../../../../../../../../redux/scheduleSlise.js';
 
 import { CHAR_TYPE } from './../../../../../../../../../../config/application.js';
 import { EVENT_TYPE } from './../../../../../../../../../../config/layout.js';
 
 import { convert_sec_to_time } from './../../../../../../../../../../helpers/convert_sec_to_time.js';
 
-import { PageBodySaveButton } from './../../../../../../../../../../components/PageBodySaveButton/PageBodySaveButton.js';
 
-// import { send_request_to_server } from './../../../../../../../../../../helpers/send_request_to_server.js';
-
-// import { set_application_data_to_store } from './../../../../../../vendors/set_application_data_to_store.js';
-
-
-
-
-const CharHeaderComponent = ( props ) => {
+const ScheduleHeaderComponent = ( props ) => {
 
     let {
-        charType,
-        
-        releaseName,
-        category,
-        event, 
-        
-        releareCount,
-        releaseDuration,
-        allReleaseDuration,
 
+        charType,
+        releaseName,
+        releaseDuration,
+        allReleaseLength,
+        allReleaseDuration,
+        categoryColorBg,
+        categoryColorText,
+        eventName,
         periodFrom,
         periodTo,
-        save_release_list,
-        isChanged,
-        // setIsChanged,
-
-        setSpinnerIsActive,
-
+        
+        children,
 
     } = props;
 
@@ -60,15 +44,12 @@ const CharHeaderComponent = ( props ) => {
 
     const getCharTitle = ( type  ) => {
         let result = 'Слепой график'
-
         if( type === CHAR_TYPE.BLOCK ){
-            result = `${event.name}`
+            result = `${eventName}`
         }else if( type === CHAR_TYPE.FILE ){
-            result = `${event.name}`
+            result = `${eventName}`
         };
         return result;
-        
-
     }
     const getStyle = ( type ) => {
         let result = {
@@ -76,19 +57,16 @@ const CharHeaderComponent = ( props ) => {
             color: '#e76969',
             borderColor: '#dfdfdf',
         };
-
         if( type === CHAR_TYPE.BLOCK ){
             result.backgroundColor = '#00000000';
-            result.borderColor = category.colorBg;
-            result.color = category.colorBg;
+            result.borderColor = categoryColorBg;
+            result.color = categoryColorBg;
         }else if( type === CHAR_TYPE.FILE ){
-            result.backgroundColor = category.colorBg;
-            result.borderColor = category.colorBg;
-            result.color = category.colorText;
+            result.backgroundColor = categoryColorBg;
+            result.borderColor = categoryColorBg;
+            result.color = categoryColorText;
         };
-
         return result;
-
     }
 
     const getDate = ( str ) => {
@@ -96,7 +74,6 @@ const CharHeaderComponent = ( props ) => {
         if( str !== null ){
             let arr = str.split( '-' );
             result = `${arr[2]}.${arr[1]}.${arr[0]}`
-
         };
         return result;
     }
@@ -143,16 +120,13 @@ const CharHeaderComponent = ( props ) => {
                 </h2>
                 <h2 className = 'SEC_row'>
                     <span className = 'SEC_row_title w11'>Всего выпусков:</span>
-                    <span className = 'SEC_row_filled_count'>{ releareCount }</span>
+                    <span className = 'SEC_row_filled_count'>{ allReleaseLength }</span>
                 </h2>
             </div>
 
             <div className = 'SEC_header_col SEC_header_col_last'>
 
-                <PageBodySaveButton
-                    isChanged = { isChanged }
-                    clickHandler = { save_release_list }
-                />
+               { children }
 
 
             </div>
@@ -168,29 +142,25 @@ const CharHeaderComponent = ( props ) => {
 
 };
 
-export function CharHeader( props ){
+export function ScheduleHeader( props ){
 
-    const application = useSelector( applicationSlice );
-    const company = useSelector( companySlice );
-
-    const dispatch = useDispatch();
+    const schedule = useSelector( scheduleSlise );
+    // const dispatch = useDispatch();
 
     return (
-        <CharHeaderComponent
+        <ScheduleHeaderComponent
             { ...props }
 
-            currentApplicationId = { application.currentApplicationId }
-            application = { application }
-
-            currentCompanyAlias = { company.currentCompanyAlias }
-
-            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
-            setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
-
-
-            setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
-
-            // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
+            charType =              { schedule.charType }
+            releaseName =           { schedule.releaseName }
+            releaseDuration =       { schedule.releaseDuration }
+            allReleaseLength =      { schedule.allReleaseLength }
+            allReleaseDuration =    { schedule.allReleaseDuration }
+            categoryColorBg =       { schedule.categoryColorBg }
+            categoryColorText =     { schedule.categoryColorText }
+            eventName =             { schedule.eventName }
+            periodFrom =            { schedule.periodFrom }
+            periodTo =              { schedule.periodTo }
 
 
         />

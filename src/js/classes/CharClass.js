@@ -70,10 +70,6 @@ export class CharClass {
             this.Days.CreateList();
         }else{
 
-            console.dir( this.Days );
-
-
-
             this.Days.CreateList();
         }
 

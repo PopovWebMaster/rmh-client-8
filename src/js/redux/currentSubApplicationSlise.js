@@ -33,14 +33,6 @@ export const currentSubApplicationSlise = createSlice({
 
 
 
-        // duration_sec,
-        // period_from,
-        // period_to,
-        // name,
-
-
-
-        
 
     },
 

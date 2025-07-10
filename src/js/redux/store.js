@@ -10,6 +10,7 @@ import playReportSlice              from './playReportSlice.js';
 import layoutSlice                  from './layoutSlice.js';
 import countersSlise                from './countersSlise.js';
 import currentSubApplicationSlise   from './currentSubApplicationSlise.js';
+import scheduleSlise                from './scheduleSlise.js';
 
 
 
@@ -26,6 +27,7 @@ export default configureStore({
         application:    applicationSlice,
         counters:       countersSlise,
         currentSubApplication: currentSubApplicationSlise,
+        schedule:       scheduleSlise,
 
 
 

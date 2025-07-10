@@ -1,0 +1,163 @@
+.SEC_CharDayHeader{
+    font-size: 1em;
+    width: 16em;
+    // background-color: #badfa2;
+
+
+    .SEC_CharDay_date{
+        font-size: 1em;
+        background-color: #89ab73;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.75em;
+            padding: 0.3em 0.5em;
+            color: #ffffff;
+            margin: 0 0.6em;
+        }
+
+        .SEC_CharDay_day{
+            font-size: 0.75em;
+            color: #4b4444;
+        }
+    }
+
+    .SEC_CharDay_release_count{
+        font-size: 1em;
+
+        padding: 0.3em 0;
+        border-bottom: 1px solid #dfdfdf;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.65em;
+            margin: 0 0.2em;
+        }
+
+        .SEC_CharDay_release_count_title{
+            // font-size: 1em;
+            color: #797979;
+            
+        }
+
+        .SEC_CharDay_release_count_filled{
+            color: #252323;
+            font-weight: bold;
+
+        }
+
+        .SEC_CharDay_release_count_slash{
+            // font-size: 1em;
+            color: #797979;
+        }
+
+        .SEC_CharDay_release_count_all{
+            // font-size: 1em;
+            color: #797979;
+            padding-right: 0.8em;
+        }
+    }
+
+
+
+    .SEC_CharDay_release_duration{
+        font-size: 1em;
+
+        padding: 0.3em 0;
+        border-bottom: 1px solid #dfdfdf;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.65em;
+            margin: 0 0.2em;
+        }
+
+        .SEC_CharDay_release_count_title{
+            // font-size: 1em;
+            color: #797979;
+            flex-grow: 1;
+            max-width: 100%;
+            text-align: left;
+            padding: 0 0.8em;
+        }
+
+        .SEC_CharDay_release_count_time{
+            color: #252323;
+            font-weight: bold;
+            width: 4em;
+            flex-grow: 0;
+        }
+
+        .SEC_CharDay_release_count_sec{
+            // font-size: 1em;
+            color: #797979;
+            padding-right: 0.3em;
+            width: 4em;
+            flex-grow: 0;
+            text-align: center;
+        }
+    }
+
+    .SEC_CharDay_release_all_toggle{
+
+       font-size: 1em;
+
+        padding: 0.2em 0;
+        // border-bottom: 1px solid #dfdfdf;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .SEC_CharDay_btn{
+            font-size: 1em;
+            margin: 0 1em;
+            padding: 0.16em 0.5em;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+
+            background-color: #699ca3;;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            .SEC_CharDay_btn_all{
+                font-size: 0.6em;
+                margin: 0 .8em 0 0;
+                color: #ffffff;
+            }
+
+            .SEC_CharDay_btn_tog{
+                font-size: 0.5em;
+                color: #676464;
+                padding: .1em .1em .1em;
+            }
+        }
+        .SEC_CharDay_btn:hover{
+            background-color: #73b8c1;
+        }
+
+        .SEC_CharDay_btn:active{
+            .SEC_CharDay_btn_tog{
+                color: #b4acac;
+            }
+        }
+
+
+    }
+}

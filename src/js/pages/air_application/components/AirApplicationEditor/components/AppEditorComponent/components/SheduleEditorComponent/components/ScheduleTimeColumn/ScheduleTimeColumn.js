@@ -3,15 +3,10 @@ import React, { useRef, useState, useEffect, useMemo }   from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import './CharTimeColumn.scss';
+import './ScheduleTimeColumn.scss';
 
 
-import { selectorData as applicationSlice, setApplicationList, setCurrentApplicationId } from './../../../../../../../../../../redux/applicationSlice.js';
-import { setSpinnerIsActive }               from './../../../../../../../../../../redux/spinnerSlice.js';
-import { selectorData as companySlice }     from './../../../../../../../../../../redux/companySlice.js';
 import { selectorData as scheduleSlise }     from './../../../../../../../../../../redux/scheduleSlise.js';
-
-
 
 import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
@@ -20,21 +15,20 @@ import { CHAR_TYPE } from './../../../../../../../../../../config/application.js
 import { InputDuration } from './../../../../../../../../../../components/InputDuration/InputDuration.js';
 import { convert_time_str_to_sec } from './../../../../../../../../../../helpers/convert_time_str_to_sec.js';
 
-const CharTimeColumnComponent = ( props ) => {
+const ScheduleTimeColumnComponent = ( props ) => {
 
     let {
-        charType,
-        timePoints,
-        addTimePoints,
-        clickTimePoint,
+        Schedule,
 
-        schedule,
+        charType,
+        allTimePointsList,
+        // timePoints,
+        // addTimePoints,
+        // clickTimePoint,
+
+        // schedule,
 
     } = props;
-
-    console.dir( 'schedule' );
-    console.dir( schedule );
-
 
     let [ HH, setHH ] = useState( '' );
     let [ MM, setMM ] = useState( '' );
@@ -43,21 +37,34 @@ const CharTimeColumnComponent = ( props ) => {
 
     const add_point = () => {
         
-        addTimePoints( convert_time_str_to_sec( `${HH}:${MM}:00` ) );
+        let hh = '00';
+        let mm = '00';
+        let ss = '00';
+
+        if( HH !== '' ){ hh = HH.padStart( 2, "0" ); };
+        if( MM !== '' ){ mm = MM.padStart( 2, "0" ); };
+        if( SS !== '' ){ ss = SS.padStart( 2, "0" ) };
+
+        Schedule.AddTimePoint( convert_time_str_to_sec( `${hh}:${mm}:00` ) );
+
         setHH( '' );
         setMM( '' );
         setSS( '' );
     }
 
+    const click_time_point = ( sec ) => {
+        Schedule.AllTimePointsToggle( sec );
+    }
+
     const crate = ( list ) => {
 
         let div = list.map( ( item, index ) => {
-            let { time, sec, title } = item;
+            let { sec, title } = item;
             return (
                 <div className = 'SEC_time_list_item' key = { index }>
                     <span 
                         key = { index }
-                        onClick = { () => { clickTimePoint( sec ) } }
+                        onClick = { () => { click_time_point( sec ) } }
                     >{ title }</span>
 
                 </div>
@@ -91,7 +98,7 @@ const CharTimeColumnComponent = ( props ) => {
             <div className = 'SEC_time_buttons'>
                 <ScrollContainer>
                     <div>
-                        { crate( timePoints ) }
+                        { crate( allTimePointsList ) }
                     </div>
                 </ScrollContainer>
             </div>
@@ -100,35 +107,33 @@ const CharTimeColumnComponent = ( props ) => {
 
 };
 
-export function CharTimeColumn( props ){
-
-    const application = useSelector( applicationSlice );
-    const company = useSelector( companySlice );
+export function ScheduleTimeColumn( props ){
 
     const schedule = useSelector( scheduleSlise );
-
-
 
     const dispatch = useDispatch();
 
     return (
-        <CharTimeColumnComponent
+        <ScheduleTimeColumnComponent
             { ...props }
 
-            schedule = { schedule }
+            // schedule = { schedule }
+            charType = { schedule.charType }
+            allTimePointsList = { schedule.allTimePointsList }
 
 
 
-            currentApplicationId = { application.currentApplicationId }
-            application = { application }
 
-            currentCompanyAlias = { company.currentCompanyAlias }
+            // currentApplicationId = { application.currentApplicationId }
+            // application = { application }
 
-            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
-            setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
+            // currentCompanyAlias = { company.currentCompanyAlias }
+
+            // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            // setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
 
 
-            setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
+            // setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
 
             // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
 
