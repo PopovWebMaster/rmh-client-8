@@ -12,6 +12,8 @@ import { selectorData as scheduleSlise } from './../../../../../../../../../../.
 
 import { CHAR_TYPE } from './../../../../../../../../../../../../config/application.js';
 
+import { ItemBlockInfo } from './../ItemBlockInfo/ItemBlockInfo.js';
+
 
 
 const ScheduleDayTimePointComponent = ( props ) => {
@@ -26,6 +28,7 @@ const ScheduleDayTimePointComponent = ( props ) => {
         time,
         releaseName,
         charType,
+        grid_event_id,
 
         setEnvIsOpen,
 
@@ -53,10 +56,17 @@ const ScheduleDayTimePointComponent = ( props ) => {
 
     const click = ( e ) => {
         let className = e.target.classList[ 0 ];
+
+
         if( className === 'environment' ){
             setEnvIsOpen( true );
         }else{
-            releaseToggle( YYYY_MM_DD, sec );
+            if( className === 'SEC_block' ){
+
+            }else{
+                releaseToggle( YYYY_MM_DD, sec );
+            };
+            
         };
         
     };
@@ -81,14 +91,16 @@ const ScheduleDayTimePointComponent = ( props ) => {
             </div>
 
             { charType === CHAR_TYPE.BLOCK? (
-                <div className = 'SEC_CharDayTimePoint_block'>
 
-                    <span className = 'SEC_CharDayTimePoint_block_title'>Блок: </span>
-                    <span className = 'SEC_CharDayTimePoint_block_filled'>200 </span>
-                    <span className = 'SEC_CharDayTimePoint_block_slash'>/</span>
-                    <span className = 'SEC_CharDayTimePoint_block_all'>1200</span>
+                <ItemBlockInfo 
+                    className =     { 'SEC_block' }
+                    Schedule =      { Schedule }
+                    grid_event_id = { grid_event_id }
+                    fill_count =    { fill_count }
+                    YYYY_MM_DD =    { YYYY_MM_DD }
 
-                </div>
+                />
+
 
             ): '' }
 

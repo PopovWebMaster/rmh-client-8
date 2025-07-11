@@ -24,6 +24,7 @@ import {
     setAllReleaseLength,
     setAllReleaseDuration,
     setIsChanged,
+    setGridEventTable,
 
 } from './../../../redux/scheduleSlise.js';
 
@@ -120,6 +121,9 @@ export const set_to_store = ( name, value = null ) => {
             break;
 
 
+        case 'gridEventTable':
+            store.dispatch( setGridEventTable( value ) );
+            break;
 
 
 

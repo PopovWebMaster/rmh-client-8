@@ -39,6 +39,8 @@ export const scheduleSlise = createSlice({
         allReleaseLength: 0,
         allReleaseDuration: 0,
 
+        gridEventTable: {},
+
         isChanged: false,
 
 
@@ -76,8 +78,13 @@ export const scheduleSlise = createSlice({
             state.periodTo = '';
             state.allTimePointsList = [];
             state.dayList = [];
+            state.gridEventTable = {};
+            state.allReleaseLength = 0;
+            state.allReleaseDuration = 0;
+            state.isChanged = false;
 
-            
+
+
 
 
 
@@ -178,6 +185,14 @@ export const scheduleSlise = createSlice({
         },
 
 
+        setGridEventTable: ( state, action ) => {
+            state.gridEventTable =  action.payload;
+        },
+
+
+        
+
+
 
         
     },
@@ -213,6 +228,7 @@ export const {
     setAllReleaseLength,
     setAllReleaseDuration,
     setIsChanged,
+    setGridEventTable,
 
 } = scheduleSlise.actions;
 
@@ -247,6 +263,8 @@ export const selectorData = ( state ) => {
         allReleaseLength:          state.schedule.allReleaseLength,
         allReleaseDuration:          state.schedule.allReleaseDuration,
         isChanged:          state.schedule.isChanged,
+        gridEventTable:          state.schedule.gridEventTable,
+
 
 
 

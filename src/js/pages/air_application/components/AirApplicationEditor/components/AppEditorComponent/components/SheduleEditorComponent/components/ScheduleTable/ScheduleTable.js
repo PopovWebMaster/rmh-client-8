@@ -5,35 +5,17 @@ import { useDispatch } from 'react-redux';
 
 import './ScheduleTable.scss';
 
-
 import { selectorData as scheduleSlise } from './../../../../../../../../../../redux/scheduleSlise.js';
 
 import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-// import { CharDay } from './../CharDay/CharDay.js';
 import { ScheduleDay } from './../ScheduleDay/ScheduleDay.js';
-
-
 
 const ScheduleTableComponent = ( props ) => {
 
     let {
-
         Schedule,
-
-        // charType,
         dayList,
-        // releaseName,
-
-
-        // dayList,
-        // charType,
-        // releaseName,
-        // releaseToggle,
-        // dayReleaseToggle,
-
     } = props;
-
 
     const create = ( arr ) => {
 
@@ -47,9 +29,7 @@ const ScheduleTableComponent = ( props ) => {
                 dayNum,
                 dayName,
                 dayNameShort,
-
                 timePoints,
-
                 pointsLength,
                 releaseLength,
                 dayDuration,
@@ -68,10 +48,6 @@ const ScheduleTableComponent = ( props ) => {
                     dayName =       { dayName }
                     dayNameShort =  { dayNameShort }
                     timePoints =    { timePoints }
-                    // releaseName =   { releaseName }
-                    // charType =      { charType }
-                    // releaseToggle = { releaseToggle }
-                    // dayReleaseToggle = { dayReleaseToggle }
                     pointsLength = { pointsLength }
                     releaseLength = { releaseLength }
                     dayDuration =  { dayDuration }
@@ -85,16 +61,12 @@ const ScheduleTableComponent = ( props ) => {
 
     };
 
-
-
-
     return (
        <ScrollContainer>
             <div className = 'SEC_body_center_wrap'>
 
                 { create( dayList ) }
 
-                
             </div>
         </ScrollContainer>
     )
@@ -113,22 +85,6 @@ export function ScheduleTable( props ){
             charType = { schedule.charType }
             dayList = { schedule.dayList }
             releaseName = { schedule.releaseName }
-
-
-
-            // currentApplicationId = { application.currentApplicationId }
-            // application = { application }
-
-            // currentCompanyAlias = { company.currentCompanyAlias }
-
-            // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
-            // setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
-
-
-            // setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
-
-            // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
-
 
         />
     );

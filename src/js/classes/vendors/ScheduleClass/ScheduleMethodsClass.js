@@ -3,7 +3,8 @@
 import { CHAR_TYPE } from './../../../config/application.js';
 
 import { set_to_store } from './set_to_store.js';
-import { TimePointClass } from './TimePointClass.js';
+// import { TimePointClass } from './TimePointClass.js';
+
 
 export class ScheduleMethodsClass {
     constructor( props ){
@@ -23,7 +24,6 @@ export class ScheduleMethodsClass {
         this.SetAllTimePointsListToStore = this.SetAllTimePointsListToStore.bind(this);
         this.SetDayListToStore = this.SetDayListToStore.bind(this);
         this.AddNewTimePoint = this.AddNewTimePoint.bind(this);
-
 
 
     }
@@ -109,7 +109,12 @@ export class ScheduleMethodsClass {
 
     SetDayListToStore(){
         let dayList = this.Days.GetDayList();
+
         set_to_store( 'dayList', dayList );
+
+        this.GridEventsTable.UpdateTable( dayList );
+
+        this.GridEventsTable.SetTableToStore();
 
         let allReleaseLength = this.Days.GetAllReleaseLength();
         let allReleaseDuration = this.Days.GetAllReleaseDuration();
@@ -118,6 +123,7 @@ export class ScheduleMethodsClass {
         set_to_store( 'allReleaseDuration', allReleaseDuration );
         
     }
+
 
     AddNewTimePoint( sec ){
 
@@ -128,10 +134,6 @@ export class ScheduleMethodsClass {
         set_to_store( 'isChanged', true );
 
     }
-
-
-
-
 
 
 

@@ -7,7 +7,7 @@ import { ApplicationClass } from './vendors/ScheduleClass/ApplicationClass.js';
 import { EventClass } from './vendors/ScheduleClass/EventClass.js';
 import { WeekPointsTemplateClass } from './vendors/ScheduleClass/WeekPointsTemplateClass.js';
 import { DaysClass } from './vendors/ScheduleClass/DaysClass.js';
-// import { AllTimePointsClass } from './vendors/ScheduleClass/AllTimePointsClass.js';
+import { GridEventsTableClass } from './vendors/ScheduleClass/GridEventsTableClass.js';
 
 import { set_to_store } from './vendors/ScheduleClass/set_to_store.js';
 
@@ -25,6 +25,8 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         this.WeekPointsTemplate =   new WeekPointsTemplateClass();
         this.Days =   new DaysClass();
+
+        this.GridEventsTable = new GridEventsTableClass();
 
         this.charType = null;
 
@@ -61,9 +63,18 @@ export class ScheduleClass extends ScheduleMethodsClass {
             charType: this.charType,
             WeekPointsTemplate: this.WeekPointsTemplate,
         });
-
         this.Days.CreateEmptyList();
         this.Days.FillDaysWithReleases();
+
+        this.GridEventsTable.Bind({
+            SubApplication:     this.SubApplication,
+            Event:              this.Event,
+            WeekPointsTemplate: this.WeekPointsTemplate,
+            charType:           this.charType,
+        });
+        this.GridEventsTable.CreateEmptyTable();
+        this.GridEventsTable.FillTableWithReleases();
+
 
         this.SetDayListToStore();
 

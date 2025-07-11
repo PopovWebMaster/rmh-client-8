@@ -1,13 +1,11 @@
 
-import React, { useRef, useState, useEffect, useMemo }   from "react";
+import React from "react";
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
 import './ScheduleDay.scss';
 
-
 // import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
-
 
 import { ScheduleDayHeader } from './components/ScheduleDayHeader/ScheduleDayHeader.js';
 import { ScheduleDayTimePoint } from './components/ScheduleDayTimePoint/ScheduleDayTimePoint.js';
@@ -16,7 +14,6 @@ const ScheduleDayComponent = ( props ) => {
 
     let {
         Schedule,
-
         YYYY_MM_DD,
         year,
         mounth,
@@ -24,14 +21,7 @@ const ScheduleDayComponent = ( props ) => {
         dayNum,
         dayName,
         dayNameShort,
-
         timePoints,
-
-        // releaseName,
-        // charType,
-
-        // releaseToggle,
-        // dayReleaseToggle,
         pointsLength,
         releaseLength,
         dayDuration,
@@ -47,7 +37,9 @@ const ScheduleDayComponent = ( props ) => {
                 fill_count,
                 sec,
                 title,
-                time
+                time,
+                grid_event_id
+
             } = obj[ obj_key ];
 
             return (
@@ -57,11 +49,9 @@ const ScheduleDayComponent = ( props ) => {
                     sec =           { sec }
                     title =         { title }
                     time =          { time }
-                    // releaseName =   { releaseName }
-                    // charType =      { charType }
                     YYYY_MM_DD =    { YYYY_MM_DD }
-                    // releaseToggle = { releaseToggle }
                     Schedule = { Schedule }
+                    grid_event_id = { grid_event_id }
                 />
             );
         } );
@@ -69,10 +59,6 @@ const ScheduleDayComponent = ( props ) => {
         return div
 
     }
-
-
-
-
 
     return (
         <div className = 'SEC_CharDay'>
@@ -86,7 +72,6 @@ const ScheduleDayComponent = ( props ) => {
                 dayNameShort =  { dayNameShort }
                 date =          { date }
                 mounth =        { mounth }
-                // dayReleaseToggle = { dayReleaseToggle }
                 pointsLength = { pointsLength }
                 releaseLength = { releaseLength }
                 dayDuration = { dayDuration }
