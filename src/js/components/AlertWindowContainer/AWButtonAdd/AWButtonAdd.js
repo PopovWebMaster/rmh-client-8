@@ -10,6 +10,7 @@ import './AWButtonAdd.scss';
 const AWButtonAddComponent = ( props ) => {
 
     let {
+        title = 'Добавить',
         isReady,
         clickHandler,
 
@@ -28,7 +29,7 @@ const AWButtonAddComponent = ( props ) => {
                 className = { isReady? 'icon-plus AWButtonAdd_isActive': 'icon-plus ' }
 
                 onClick = { click }
-            ><span>Добавить</span></span>
+            ><span>{ title }</span></span>
         </div>
     )
 

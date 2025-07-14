@@ -37,6 +37,9 @@ export class ScheduleClass extends ScheduleMethodsClass {
         this.AllTimePointsToggle = this.AllTimePointsToggle.bind(this);
         this.ReleaseToggle = this.ReleaseToggle.bind(this);
 
+        this.GetDataForDownloadExcelFormatTable = this.GetDataForDownloadExcelFormatTable.bind(this);
+
+
     }
 
     Create(){
@@ -109,13 +112,33 @@ export class ScheduleClass extends ScheduleMethodsClass {
         set_to_store( 'isChanged', true );
     }
 
-
     GetReseaseData(){
         return {
             application_id:         this.SubApplication.application_id,
             sub_application_id:     this.SubApplication.id,
             release_list:           this.Days.GetReleaseListForServer(),
         };
+    }
+
+    GetDataForDownloadExcelFormatTable(){
+
+        let result = {
+            customer:           this.Application.name,
+            releaseName:        this.SubApplication.name,
+            releaseDuration:    this.SubApplication.duration_sec,
+            releaseDescription: this.SubApplication.description,
+            reseaseData:        this.GetReseaseData(),
+        };
+
+        
+
+
+        console.dir( this );
+        console.dir( 'result' );
+        console.dir( result );
+
+
+
     }
 
 }

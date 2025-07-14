@@ -157,54 +157,57 @@ export class GridEventsTableClass {
     }
 
     UpdateTable( dayList ){
+        if( this.isActive ){
+            let sub_app_id =    this.SubApplication.id;
+            let duration =      this.SubApplication.duration_sec;
+            let name =          this.SubApplication.name;
 
-        let sub_app_id =    this.SubApplication.id;
-        let duration =      this.SubApplication.duration_sec;
-        let name =          this.SubApplication.name;
+            let table = structuredClone( this.table );
 
-        let table = structuredClone( this.table );
+            for( let i = 0; i < dayList.length; i++ ){
+                let { YYYY_MM_DD, timePoints } = dayList[ i ];
 
-        for( let i = 0; i < dayList.length; i++ ){
-            let { YYYY_MM_DD, timePoints } = dayList[ i ];
+                for( let sec in timePoints ){
+                    let { fill_count, grid_event_id } = timePoints[ sec ];
 
-            for( let sec in timePoints ){
-                let { fill_count, grid_event_id } = timePoints[ sec ];
+                    if( table[ YYYY_MM_DD ][ grid_event_id ] ){
 
-                if( table[ YYYY_MM_DD ][ grid_event_id ] ){
+                        let { content } = table[ YYYY_MM_DD ][ grid_event_id ];
 
-                    let { content } = table[ YYYY_MM_DD ][ grid_event_id ];
-
-                    if( fill_count > 0 ){
-                        if( content[ sub_app_id ] ){
-                            table[ YYYY_MM_DD ][ grid_event_id ].content[ sub_app_id ].fill_count = fill_count;
-                        }else{
-                            table[ YYYY_MM_DD ][ grid_event_id ].content[ sub_app_id ] = {
-                                duration,
-                                name,
-                                fill_count,
-                            };
-                        };
-                    }else{
-
-                        let new_content = {};
-                        for( let subAppId in content ){
-                            if( Number( subAppId ) === Number( sub_app_id ) ){
-
+                        if( fill_count > 0 ){
+                            if( content[ sub_app_id ] ){
+                                table[ YYYY_MM_DD ][ grid_event_id ].content[ sub_app_id ].fill_count = fill_count;
                             }else{
-                                new_content[ subAppId ] = { ...content[ subAppId ] }
+                                table[ YYYY_MM_DD ][ grid_event_id ].content[ sub_app_id ] = {
+                                    duration,
+                                    name,
+                                    fill_count,
+                                };
                             };
+                        }else{
+
+                            let new_content = {};
+                            for( let subAppId in content ){
+                                if( Number( subAppId ) === Number( sub_app_id ) ){
+
+                                }else{
+                                    new_content[ subAppId ] = { ...content[ subAppId ] }
+                                };
+                            };
+
+                            table[ YYYY_MM_DD ][ grid_event_id ].content = { ...new_content };
                         };
 
-                        table[ YYYY_MM_DD ][ grid_event_id ].content = { ...new_content };
                     };
 
                 };
 
             };
 
+            this.table = table;
         };
 
-        this.table = table;
+       
 
 
 

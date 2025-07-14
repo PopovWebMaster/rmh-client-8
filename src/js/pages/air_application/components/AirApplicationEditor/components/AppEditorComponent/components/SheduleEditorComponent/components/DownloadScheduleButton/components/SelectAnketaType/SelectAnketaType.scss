@@ -1,0 +1,53 @@
+
+.SEC_SelectAnketaType{
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-bottom: 1px solid #e4e4e4;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .SEC_SelectAnketaType_item{
+        font-size: 1em;
+        margin: 0.3em 1em;
+        padding: 0.2em 0.6em;
+        border: 1px solid #5760d9;
+        border-radius: 0.1em;
+        
+
+        cursor: pointer;
+        user-select: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.7em;
+            color: #5760d9;
+        }
+
+    }
+    .SEC_SelectAnketaType_item:hover{
+        background-color: #5760d96b;
+    }
+
+    .SEC_SelectAnketaType_item.isActive{
+        background-color: #5760d9;
+        span{
+            color: #ffffff;
+        }
+    }
+
+    .SEC_SelectAnketaType_item.isActive:hover{
+        background-color: #5760d9;
+        span{
+            color: #ffffff;
+        }
+    }
+
+}

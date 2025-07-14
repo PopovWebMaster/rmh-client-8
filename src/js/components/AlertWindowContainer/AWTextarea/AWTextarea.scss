@@ -1,0 +1,19 @@
+
+.AWTextarea{
+    .AW_textarea{
+        font-size: 0.75em;
+        padding: 0.2em 1em;
+        line-height: 1.4em;
+        border-radius: 0.1em;
+        border: 1px solid #95636330;
+        outline: none;
+        background-color: #ffffff;
+        width: calc(100% - 2em);
+        color: #575757;
+        min-height: 4em;
+    }
+
+    .AW_textarea::placeholder {
+        color: rgba(0, 0, 0, 0.233);
+    }
+}
