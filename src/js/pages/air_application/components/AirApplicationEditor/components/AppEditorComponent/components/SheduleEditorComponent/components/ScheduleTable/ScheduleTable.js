@@ -33,6 +33,7 @@ const ScheduleTableComponent = ( props ) => {
                 pointsLength,
                 releaseLength,
                 dayDuration,
+                
 
             } = item;
 

@@ -86,7 +86,6 @@ export class GridEventsTableClass {
                 };
             };
 
-            console.dir( this );
 
 
         };
@@ -140,7 +139,6 @@ export class GridEventsTableClass {
             // sub_application_id: 57
             // time_sec: 25019
             // type: "release"
-            console.dir( this );
         };
 
     }

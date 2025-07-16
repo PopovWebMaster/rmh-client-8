@@ -29,6 +29,8 @@ const ScheduleDayTimePointComponent = ( props ) => {
         releaseName,
         charType,
         grid_event_id,
+        is_reserved,
+        reserved_name,
 
         setEnvIsOpen,
 
@@ -37,20 +39,35 @@ const ScheduleDayTimePointComponent = ( props ) => {
 
     let [ value, setValue ] = useState( '' );
     let [ isFilled, setIsFilled ] = useState( false );
+    let [ isReserved, setIsReserved ] = useState( false );
+
 
     useEffect( () => {
-        if( fill_count === 0 ){
+        if( is_reserved ){
             setIsFilled( false );
-            setValue( '' );
+            setIsReserved( true );
+            setValue( reserved_name );
         }else{
-            setValue( releaseName );
-            setIsFilled( true );
+            if( fill_count === 0 ){
+                setIsFilled( false );
+                setValue( '' );
+            }else{
+                setValue( releaseName );
+                setIsFilled( true );
+            };
+            setIsReserved( false );
         };
+        
 
     }, [ fill_count ] );
 
     const releaseToggle = ( YYYY_MM_DD, sec ) => {
-        Schedule.ReleaseToggle( YYYY_MM_DD, sec );
+        if( is_reserved ){
+
+        }else{
+            Schedule.ReleaseToggle( YYYY_MM_DD, sec );
+        }
+        
     };
 
 
@@ -73,7 +90,7 @@ const ScheduleDayTimePointComponent = ( props ) => {
 
     return (
         <div 
-            className = { `SEC_CharDayTimePoint ${ isFilled? 'filled': ''}` }
+            className = { `SEC_CharDayTimePoint ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
             onClick = { click }
         >
 

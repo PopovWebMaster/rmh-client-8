@@ -22,6 +22,7 @@ const ScheduleTimeColumnComponent = ( props ) => {
 
         charType,
         allTimePointsList,
+        allTimePointsGroupeList,
         // timePoints,
         // addTimePoints,
         // clickTimePoint,
@@ -74,6 +75,33 @@ const ScheduleTimeColumnComponent = ( props ) => {
         return div;
     }
 
+    const clickGroupe = ( sec_list ) => { 
+
+        for( let i = 0; i < sec_list.length; i++ ){
+            Schedule.AllTimePointsToggle( sec_list[ i ] );
+        }
+    }
+
+
+
+    const crateGroupe = ( list ) => {
+
+        let div = list.map( ( item, index ) => {
+            let { sec, title, sec_list } = item;
+            return (
+                <div className = 'SEC_time_list_item' key = { index }>
+                    <span 
+                        key = { index }
+                        onClick = { () => { clickGroupe( sec_list ) } }
+                    >{ title }</span>
+
+                </div>
+            );
+        } );
+
+        return div;
+    }
+
 
 
     return (
@@ -98,7 +126,7 @@ const ScheduleTimeColumnComponent = ( props ) => {
             <div className = 'SEC_time_buttons'>
                 <ScrollContainer>
                     <div>
-                        { crate( allTimePointsList ) }
+                        { charType === CHAR_TYPE.BLOCK || charType === CHAR_TYPE.FILE? crateGroupe( allTimePointsGroupeList ): crate( allTimePointsList )  }
                     </div>
                 </ScrollContainer>
             </div>
@@ -120,6 +148,8 @@ export function ScheduleTimeColumn( props ){
             // schedule = { schedule }
             charType = { schedule.charType }
             allTimePointsList = { schedule.allTimePointsList }
+            allTimePointsGroupeList = { schedule.allTimePointsGroupeList }
+
 
 
 

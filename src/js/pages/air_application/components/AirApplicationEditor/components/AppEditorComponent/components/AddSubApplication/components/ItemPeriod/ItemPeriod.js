@@ -23,7 +23,7 @@ const ItemPeriodComponent = ( props ) => {
 
     } = props;
 
-    let [ minDate, setMinDate ] = useState( '' );
+    // let [ minDate, setMinDate ] = useState( '' );
 
 
     useEffect( () => {
@@ -31,7 +31,7 @@ const ItemPeriodComponent = ( props ) => {
 
             let nowDate = get_date_now_value();
 
-            setMinDate( nowDate );
+            // setMinDate( nowDate );
             setDataFrom( nowDate );
             setDataTo( nowDate );
 
@@ -82,7 +82,7 @@ const ItemPeriodComponent = ( props ) => {
             <input 
                 type = 'date'
                 value =     { dataFrom }
-                min =       { minDate }
+                // min =       { minDate }
                 onChange =  { change_date_from }
             />
 

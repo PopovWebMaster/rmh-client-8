@@ -1,10 +1,10 @@
 
 
-export const get_row_6 = ( executor ) => {
+export const get_row_9 = ( period ) => {
     return [
         {},
         {},
-        { v: "Исполнитель:", t: "s", 
+        { v: "период:", t: "s", 
             s: { 
                 font: { 
                     name: "Verdana", 
@@ -17,18 +17,18 @@ export const get_row_6 = ( executor ) => {
                 } 
             } 
         },
-            { v: executor, t: "s", 
+            { v: period, t: "s", 
             s: { 
                 font: { 
                     name: "Arial", 
                     sz: 12,
                     italic: false,
-                    bold: true,
+                    bold: false,
                 },
                 alignment: {
                     horizontal: 'left',
                 } 
             } 
-        },
+            },
     ];
-}
+};

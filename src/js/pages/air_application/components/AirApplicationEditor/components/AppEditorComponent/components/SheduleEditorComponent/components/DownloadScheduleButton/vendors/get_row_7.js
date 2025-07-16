@@ -1,6 +1,6 @@
 
 
-export const get_row_7 = () => {
+export const get_row_7 = ( customer ) => {
     return [
         {},
         {},
@@ -17,7 +17,7 @@ export const get_row_7 = () => {
                 } 
             } 
         },
-            { v: 'ООО" МЕДОЕД"', t: "s", 
+            { v: customer, t: "s", 
             s: { 
                 font: { 
                     name: "Arial", 

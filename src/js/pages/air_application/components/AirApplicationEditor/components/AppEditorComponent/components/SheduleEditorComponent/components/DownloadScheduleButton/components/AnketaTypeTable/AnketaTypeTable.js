@@ -26,6 +26,8 @@ const AnketaTypeTableComponent = ( props ) => {
         setPrice,
         mediaName,
         setMediaName,
+        materialName,
+        setMaterialName,
 
         download_table,
 
@@ -52,6 +54,11 @@ const AnketaTypeTableComponent = ( props ) => {
         if( /^-?\d+$/.test( val ) ){
             setPrice( val )
         };
+    }
+
+    
+    const change_materialName = ( e ) => {
+        setMaterialName( e.target.value )
     }
 
     
@@ -83,6 +90,12 @@ const AnketaTypeTableComponent = ( props ) => {
                 title =     'СМИ'
                 value =     { mediaName }
                 onChange =  { change_mediaName }
+            />
+
+            <AWInputText 
+                title =     'Видеоролик'
+                value =     { materialName }
+                onChange =  { change_materialName }
             />
 
             <AWInputText 

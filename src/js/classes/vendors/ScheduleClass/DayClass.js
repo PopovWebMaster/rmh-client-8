@@ -1,6 +1,8 @@
 
 import { TimePointClass } from './TimePointClass.js';
 
+import { get_day_time_point_object } from './vendors/get_day_time_point_object.js';
+
 export class DayClass {
 
     constructor( props ){
@@ -45,6 +47,8 @@ export class DayClass {
         this.GetReleaseListForServer = this.GetReleaseListForServer.bind(this);
         this.AddFillCount = this.AddFillCount.bind(this);
         this.AddTimePoint = this.AddTimePoint.bind(this);
+        this.AddReservedFillCount = this.AddReservedFillCount.bind(this);
+
 
 
 
@@ -84,6 +88,9 @@ export class DayClass {
     }
 
 
+    
+
+
 
     AddTimePoints( arr ){
 
@@ -97,13 +104,21 @@ export class DayClass {
                 grid_event_id,
             } = arr[ i ];
 
-            obj[ sec ] = {
+            // obj[ sec ] = {
+            //     time,
+            //     sec,
+            //     title,
+            //     fill_count: 0,
+            //     grid_event_id,
+            // };
+
+            obj[ sec ] = get_day_time_point_object( {
                 time,
                 sec,
                 title,
                 fill_count: 0,
                 grid_event_id,
-            };
+            } );
 
         };
 
@@ -135,18 +150,21 @@ export class DayClass {
     ToggleRelease( sec ){
 
         if( this.timePoints[ sec ] ){
-            let { fill_count } = this.timePoints[ sec ];
-            if( fill_count === 0 ){
-                // this.timePoints[ sec ].fill_count = 1;
-                let data = { ...this.timePoints[ sec ] };
-                data.fill_count = 1;
-                this.timePoints[ sec ] = { ...data };
+            let { fill_count, is_reserved } = this.timePoints[ sec ];
+            if( is_reserved ){
+
             }else{
-                let data = { ...this.timePoints[ sec ] };
-                data.fill_count = 0;
-                this.timePoints[ sec ] = { ...data };
-                // this.timePoints[ sec ].fill_count = 0;
+                if( fill_count === 0 ){
+                    let data = { ...this.timePoints[ sec ] };
+                    data.fill_count = 1;
+                    this.timePoints[ sec ] = { ...data };
+                }else{
+                    let data = { ...this.timePoints[ sec ] };
+                    data.fill_count = 0;
+                    this.timePoints[ sec ] = { ...data };
+                };
             };
+
         }else{
             console.dir( 'ошибка' );
             console.dir( {
@@ -167,38 +185,42 @@ export class DayClass {
         let offCount = 0;
 
         for( let sec in this.timePoints ){
-            let { fill_count } = this.timePoints[ sec ];
-            if( fill_count === 0 ){
-                offCount++;
+            let { fill_count, is_reserved } = this.timePoints[ sec ];
+            if( is_reserved ){
+
             }else{
-                onCount++
+                if( fill_count === 0 ){
+                    offCount++;
+                }else{
+                    onCount++
+                };
+            };
+            
+        };
+
+        let new_fill_count = 0;
+        if( onCount === offCount ){
+            new_fill_count = 1
+        }else{
+            if( onCount > offCount ){
+                new_fill_count = 0;
+            }else{
+                new_fill_count = 1;
             };
         };
 
-        if( onCount === offCount ){
-            for( let sec in this.timePoints ){
-                // this.timePoints[ sec ].fill_count = 1;
-                let data = { ...this.timePoints[ sec ] };
-                data.fill_count = 1;
-                this.timePoints[ sec ] = { ...data };
-            };
-        }else{
-            if( onCount > offCount ){
-                for( let sec in this.timePoints ){
-                    // this.timePoints[ sec ].fill_count = 0;
-                    let data = { ...this.timePoints[ sec ] };
-                    data.fill_count = 0;
-                    this.timePoints[ sec ] = { ...data };
-                };  
-            }else{
-                for( let sec in this.timePoints ){
-                    // this.timePoints[ sec ].fill_count = 1;
-                    let data = { ...this.timePoints[ sec ] };
-                    data.fill_count = 1;
-                    this.timePoints[ sec ] = { ...data };
-                };
-            }
+        for( let sec in this.timePoints ){
 
+            let new_timePoints = { ...this.timePoints[ sec ] };
+
+            let { is_reserved } = new_timePoints;
+
+            if( is_reserved ){
+                
+            }else{
+                new_timePoints.fill_count = new_fill_count;
+            };
+            this.timePoints[ sec ] = { ...new_timePoints };
         };
 
         this.UpdateStatystic();
@@ -214,9 +236,13 @@ export class DayClass {
 
     SetFillCountInPoint( sec, fill_count ){
         if( this.timePoints[ sec ] ){
-            let data = { ...this.timePoints[ sec ] };
-            data.fill_count = fill_count;
-            this.timePoints[ sec ] = { ...data };
+            if( this.timePoints[ sec ].is_reserved ){
+
+            }else{
+                let data = { ...this.timePoints[ sec ] };
+                data.fill_count = fill_count;
+                this.timePoints[ sec ] = { ...data };
+            };
         };
         this.UpdateStatystic();
     }
@@ -226,9 +252,13 @@ export class DayClass {
         let pointsLength = 0;
         let releaseLength = 0;
         for( let sec in this.timePoints ){
-            let { fill_count } = this.timePoints[ sec ];
-            pointsLength++;
-            releaseLength = releaseLength + fill_count;
+            let { fill_count, is_reserved } = this.timePoints[ sec ];
+            if( is_reserved ){
+
+            }else{
+                pointsLength++;
+                releaseLength = releaseLength + fill_count;
+            };
         };
         this.pointsLength = pointsLength;
         this.releaseLength = releaseLength;
@@ -239,23 +269,28 @@ export class DayClass {
 
         let result = [];
 
-        let date =                  this.YYYY_MM_DD;
+        let date = this.YYYY_MM_DD;
 
         for( let secName in this.timePoints ){
             let {
                 sec,
                 fill_count,
                 grid_event_id,
+                is_reserved,
             } = this.timePoints[ secName ];
 
-            if( fill_count > 0 ){
-                let time_sec = sec;
-                for( let i = 0; i < fill_count; i++ ){
-                    result.push({
-                        grid_event_id,
-                        date,
-                        time_sec,
-                    });
+            if( is_reserved ){
+
+            }else{
+                if( fill_count > 0 ){
+                    let time_sec = sec;
+                    for( let i = 0; i < fill_count; i++ ){
+                        result.push({
+                            grid_event_id,
+                            date,
+                            time_sec,
+                        });
+                    };
                 };
             };
 
@@ -268,20 +303,59 @@ export class DayClass {
 
         if( grid_event_id === null ){
             for( let secName in this.timePoints ){
-                if( this.timePoints[ secName ].sec === second ){
-                    this.timePoints[ secName ].fill_count = this.timePoints[ secName ].fill_count + 1;
+                if( this.timePoints[ secName ].is_reserved ){
+
+                }else{
+                    if( this.timePoints[ secName ].sec === second ){
+                        this.timePoints[ secName ].fill_count = this.timePoints[ secName ].fill_count + 1;
+                    };
                 };
+                
             };
         }else{
             for( let secName in this.timePoints ){
-                if( this.timePoints[ secName ].grid_event_id === grid_event_id ){
-                    this.timePoints[ secName ].fill_count = this.timePoints[ secName ].fill_count + 1;
+                if( this.timePoints[ secName ].is_reserved ){
+
+                }else{
+                    if( this.timePoints[ secName ].grid_event_id === grid_event_id ){
+                        this.timePoints[ secName ].fill_count = this.timePoints[ secName ].fill_count + 1;
+                    };
                 };
+                
             };
         };
 
         this.UpdateStatystic();
 
+    }
+
+    AddReservedFillCount( grid_event_id, name ){
+
+        for( let secName in this.timePoints ){
+
+            if( this.timePoints[ secName ].grid_event_id === grid_event_id ){
+
+                let {
+                    time,
+                    sec,
+                    title,
+                    fill_count,
+                    grid_event_id,
+                } = this.timePoints[ secName ];
+
+                this.timePoints[ secName ] = get_day_time_point_object({
+                    time,
+                    sec,
+                    title,
+                    fill_count: fill_count + 1,
+                    grid_event_id,
+                    is_reserved: true,
+                    reserved_name: name,
+                });
+
+            };
+
+        };
     }
 
 }

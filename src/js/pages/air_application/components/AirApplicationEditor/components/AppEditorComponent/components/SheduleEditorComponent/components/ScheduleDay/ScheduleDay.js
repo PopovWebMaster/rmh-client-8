@@ -38,7 +38,9 @@ const ScheduleDayComponent = ( props ) => {
                 sec,
                 title,
                 time,
-                grid_event_id
+                grid_event_id,
+                is_reserved = null,
+                reserved_name = null,
 
             } = obj[ obj_key ];
 
@@ -52,6 +54,10 @@ const ScheduleDayComponent = ( props ) => {
                     YYYY_MM_DD =    { YYYY_MM_DD }
                     Schedule = { Schedule }
                     grid_event_id = { grid_event_id }
+                    is_reserved = { is_reserved }
+                    reserved_name = { reserved_name }
+
+
                 />
             );
         } );

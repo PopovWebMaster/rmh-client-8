@@ -1,6 +1,6 @@
 
 
-export const get_row_8 = () => {
+export const get_row_8 = ( medianame ) => {
     return [
         {},
         {},
@@ -17,7 +17,7 @@ export const get_row_8 = () => {
                 } 
             } 
         },
-            { v: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ', t: "s", 
+            { v: medianame, t: "s", 
             s: { 
                 font: { 
                     name: "Arial", 

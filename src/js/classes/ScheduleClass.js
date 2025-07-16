@@ -60,14 +60,17 @@ export class ScheduleClass extends ScheduleMethodsClass {
         this.WeekPointsTemplate.CreateTemplate();
 
         this.SetAllTimePointsListToStore();
-
+        
         this.Days.Bind({
+            Application: this.Application,
             SubApplication: this.SubApplication,
+            Event: this.Event,
             charType: this.charType,
             WeekPointsTemplate: this.WeekPointsTemplate,
         });
         this.Days.CreateEmptyList();
         this.Days.FillDaysWithReleases();
+        this.Days.FillDaysWithReservedReleases();
 
         this.GridEventsTable.Bind({
             SubApplication:     this.SubApplication,
@@ -77,7 +80,6 @@ export class ScheduleClass extends ScheduleMethodsClass {
         });
         this.GridEventsTable.CreateEmptyTable();
         this.GridEventsTable.FillTableWithReleases();
-
 
         this.SetDayListToStore();
 
@@ -123,21 +125,24 @@ export class ScheduleClass extends ScheduleMethodsClass {
     GetDataForDownloadExcelFormatTable(){
 
         let result = {
-            customer:           this.Application.name,
+            
             releaseName:        this.SubApplication.name,
             releaseDuration:    this.SubApplication.duration_sec,
             releaseDescription: this.SubApplication.description,
-            reseaseData:        this.GetReseaseData(),
+            releaseList:        this.Days.GetReleaseListForServer(),
+            colintitul: 'Приложение 1 к Договору №_01-61/02 от 14.01.2025  на оказание услуг (выполнения работ) в сфере телевещания',
+            executor:   'ГУП ДНР  "РМХ"',
+            customer:   this.Application.name,
+            price: 28,
+            mediaName: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ',
+
         };
-
-        
-
 
         console.dir( this );
         console.dir( 'result' );
         console.dir( result );
 
-
+        return result;
 
     }
 

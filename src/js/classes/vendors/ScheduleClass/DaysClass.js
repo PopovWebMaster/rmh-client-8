@@ -4,13 +4,17 @@ import { get_date_list } from './vendors/get_date_list.js';
 
 import { DayClass } from './DayClass.js';
 
+import store from './../../../redux/store.js';
+import { CHAR_TYPE } from './../../../config/application.js';
+
 
 export class DaysClass {
     constructor(){
 
         this.days = {};
-
+        this.Application = null;
         this.SubApplication = null;
+        this.Event = null;
         this.WeekPointsTemplate = null;
         this.charType = null;
         this.allReleaseLength = 0; //  обновляется в GetDayList()
@@ -27,32 +31,8 @@ export class DaysClass {
         this.TimePointReleaseToggle = this.TimePointReleaseToggle.bind(this);
         this.ToggleRelease = this.ToggleRelease.bind(this);
         this.AllDayReleaseToggle = this.AllDayReleaseToggle.bind(this);
-        
+        this.FillDaysWithReservedReleases = this.FillDaysWithReservedReleases.bind(this);
 
-
-        // this.list = []; // не использовать
-        // this.list_as_object = [];
-
-
-        // this.SubApplication = null;
-        // this.TimePoints = null;
-        // this.Event = null;
-        // this.charType = null;
-        // this.WeekPointsTemplate = new WeekPointsTemplateClass();
-        
-        
-
-
-        // 
-
-        // 
-        // 
-
-        // 
-
-        
-        // this.GetReleaseListForServer = this.GetReleaseListForServer.bind(this);
-        // 
 
 
 
@@ -60,14 +40,19 @@ export class DaysClass {
 
     Bind( data ){
         let {
+            Application,
             SubApplication,
             charType,
-            WeekPointsTemplate
+            WeekPointsTemplate,
+            Event,
         } = data;
 
         this.SubApplication = SubApplication;
+        this.Application = Application;
         this.charType = charType;
         this.WeekPointsTemplate = WeekPointsTemplate;
+        this.Event = Event;
+
     }
 
     CreateEmptyList(){
@@ -101,8 +86,68 @@ export class DaysClass {
                 grid_event_id,
                 time_sec,
             } = release_list[ i ];
+            
             this.AddFillCount( date, grid_event_id, time_sec );
         };
+    }
+
+    FillDaysWithReservedReleases(){
+
+
+        if( this.charType === CHAR_TYPE.FILE ){
+            console.dir( this );
+
+            let current_sub_app_id = this.SubApplication.id;
+
+
+            let period_from = this.SubApplication.period_from;
+            let period_to = this.SubApplication.period_to;
+
+
+            let { application } = store.getState();
+            let { applicationList } = application;
+
+            for( let i = 0; i < applicationList.length; i++ ){
+                if( applicationList[ i ].event_id  === this.Event.id ){
+                    let { sub_application_list } = applicationList[ i ];
+
+                    for( let y = 0; y < sub_application_list.length; y++ ){
+                        let { release_list } = sub_application_list[ y ];
+                        for( let index = 0; index < release_list.length; index++ ){
+                            let {
+                                date,
+                                duration_sec,
+                                file_name,
+                                grid_event_id,
+                                name,
+                                sub_application_id,
+                                time_sec,
+                                type,
+                            } = release_list[ index ];
+
+                            if( sub_application_id !== current_sub_app_id ){
+                                if( this.days[ date ] ){
+                                    this.days[ date ].AddReservedFillCount( grid_event_id, name );
+                                    // AddReservedFillCount( grid_event_id, name )
+
+                                };
+                            };
+
+                        };
+                    };
+                };
+            };
+            // date: "2025-07-11"
+            // duration_sec: 35
+            // file_name: ""
+            // grid_event_id: 171
+            // name: "Трусы"
+            // sub_application_id: 57
+            // time_sec: 25019
+            // type: "release"
+        };
+
+
     }
 
     GetDayList(){

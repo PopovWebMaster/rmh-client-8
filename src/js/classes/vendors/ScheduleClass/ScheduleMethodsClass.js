@@ -103,7 +103,15 @@ export class ScheduleMethodsClass {
 
     SetAllTimePointsListToStore(){
         let list = this.WeekPointsTemplate.GetAllTimePointsList();
+
+        let list_groupe = [];
+
+        if( this.charType === CHAR_TYPE.FILE || this.charType === CHAR_TYPE.BLOCK ){
+            list_groupe = this.WeekPointsTemplate.GetAllTimePointsGroupList();
+        };
+
         set_to_store( 'allTimePointsList', list );
+        set_to_store( 'allTimePointsGroupeList', list_groupe );
 
     }
 

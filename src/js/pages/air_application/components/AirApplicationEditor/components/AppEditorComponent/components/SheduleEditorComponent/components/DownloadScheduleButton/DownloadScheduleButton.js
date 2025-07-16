@@ -97,6 +97,7 @@ const DownloadScheduleButtonComponent = ( props ) => {
                 isOpen = { isOpen }
                 setIsOpen = { setIsOpen }
                 Schedule = { Schedule }
+                
             />
         </AlertWindowContainer>
 

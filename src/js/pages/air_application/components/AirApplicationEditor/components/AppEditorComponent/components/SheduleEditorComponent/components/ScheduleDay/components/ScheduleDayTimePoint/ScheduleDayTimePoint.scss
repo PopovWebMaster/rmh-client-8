@@ -54,7 +54,7 @@
         position: relative;
 
         input{
-            font-size: 0.6em;
+            font-size: 0.5em;
             color: #343434;
             font-weight: bold;
             width: 9em;
@@ -74,43 +74,6 @@
 
         }
     }
-
-    // .SEC_CharDayTimePoint_block{
-    //         font-size: 1em;
-
-    //         display: flex;
-    //         justify-content: center;
-    //         align-items: center;
-    //         align-content: center;
-    //         margin: 0.25em 0.2em 0 0;
-    //         flex-grow: 1;
-    //         max-width: 100%;
-
-    //     .SEC_CharDayTimePoint_block_title{
-    //         font-size: 0.55em;
-    //         color: #817979;
-    //         margin-right: 0.2em;
-    //     }
-
-    //     .SEC_CharDayTimePoint_block_filled{
-    //         font-size: 0.55em;
-    //         color: #343434;
-    //         font-weight: bold;
-    //     }
-
-    //     .SEC_CharDayTimePoint_block_slash{
-    //         font-size: 0.55em;
-    //         color: #343434;
-    //         margin: 0 0.1em;
-    //     }
-
-    //     .SEC_CharDayTimePoint_block_all{
-    //         font-size: 0.55em;
-    //         color: #343434;
-    //     }
-
-
-    // }
 
     .SEC_CharDayTimePoint_environment{
         font-size: 1em;
@@ -150,3 +113,21 @@
 .filled{
     background-color: #ffffff;
 }
+
+
+.SEC_CharDayTimePoint.reserved{
+    .SEC_CharDayTimePoint_inp{
+        input{
+            font-size: 0.5em;
+            color: #c34c4cad;
+        }
+    }
+}
+
+.SEC_CharDayTimePoint.reserved:hover{
+    background-color: #ffffff00;
+}
+.SEC_CharDayTimePoint.filled.reserved:hover{
+    background-color: #ffffff00;
+}
+
