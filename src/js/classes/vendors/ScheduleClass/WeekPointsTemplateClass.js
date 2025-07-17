@@ -188,6 +188,7 @@ export class WeekPointsTemplateClass {
             result.push({
                 title,
                 sec_list,
+                interval,
                 grid_event_id_list,
             });
 

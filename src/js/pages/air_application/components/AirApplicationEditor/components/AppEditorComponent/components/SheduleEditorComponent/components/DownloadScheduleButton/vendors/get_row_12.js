@@ -1,13 +1,13 @@
 
 
-export const get_row_9 = ( period ) => {
+export const get_row_12 = ( releaseDuration ) => {
     return [
         {},
         {},
-        { v: "период:", t: "s", 
+        { v: "хронометраж:", t: "s", 
             s: { 
                 font: { 
-                    name: "Verdana", 
+                    name: "Arial", 
                     sz: 12,
                     italic: true,
                     bold: true,
@@ -17,7 +17,8 @@ export const get_row_9 = ( period ) => {
                 } 
             } 
         },
-            { v: period, t: "s", 
+        { 
+            v: releaseDuration, t: "s", 
             s: { 
                 font: { 
                     name: "Arial", 
@@ -29,6 +30,20 @@ export const get_row_9 = ( period ) => {
                     horizontal: 'left',
                 } 
             } 
-            },
+        },
+        { 
+            v: 'сек', t: "s", 
+            s: { 
+                font: { 
+                    name: "Arial", 
+                    sz: 12,
+                    italic: false,
+                    bold: true,
+                },
+                alignment: {
+                    horizontal: 'left',
+                } 
+            } 
+        },
     ];
 };

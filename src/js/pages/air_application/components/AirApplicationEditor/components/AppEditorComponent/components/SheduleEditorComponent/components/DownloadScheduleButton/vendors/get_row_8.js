@@ -23,7 +23,7 @@ export const get_row_8 = ( medianame ) => {
                     name: "Arial", 
                     sz: 12,
                     italic: false,
-                    bold: false,
+                    bold: true,
                 },
                 alignment: {
                     horizontal: 'left',

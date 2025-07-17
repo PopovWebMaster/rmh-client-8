@@ -41,6 +41,6 @@ export const get_array_of_colum_width = () => {
         { width: 4.8 },
         { width: 4.8 },
         { width: 9.3 },
-        { width: 9.6 },
+        { width: 10 },
     ];
 }

@@ -9,7 +9,7 @@ import './AnketaComponent.scss';
 
 import * as XLSX from 'xlsx-js-style';
 
-// import { selectorData as applicationSlice  } from './../../../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as scheduleSlise  } from './../../../../../../../../../../../../redux/scheduleSlise.js';
 
 // import { AlertWindowContainer } from './../../../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
@@ -24,6 +24,16 @@ import { get_row_6 } from './../../vendors/get_row_6.js';
 import { get_row_7 } from './../../vendors/get_row_7.js';
 import { get_row_8 } from './../../vendors/get_row_8.js';
 import { get_row_9 } from './../../vendors/get_row_9.js';
+import { get_row_10 } from './../../vendors/get_row_10.js';
+import { get_row_11 } from './../../vendors/get_row_11.js';
+import { get_row_12 } from './../../vendors/get_row_12.js';
+import { get_row_13 } from './../../vendors/get_row_13.js';
+import { get_row_14 } from './../../vendors/get_row_14.js';
+import { get_row_15 } from './../../vendors/get_row_15.js';
+import { get_table_martix_rows } from './../../vendors/get_table_martix_rows.js';
+
+import { get_full_day_info_from_day_seconds } from './../../../../../../../../../../../../helpers/get_full_day_info_from_day_seconds.js';
+import { MOUNTH_NAME } from './../../../../../../../../../../../../config/mounth.js';
 
 
 const AnketaComponentComponent = ( props ) => {
@@ -32,6 +42,8 @@ const AnketaComponentComponent = ( props ) => {
         isOpen,
         setIsOpen,
         Schedule,
+
+        allTimePointsGroupeList,
 
     } = props;
 
@@ -47,6 +59,8 @@ const AnketaComponentComponent = ( props ) => {
     let [ releaseDuration, setReleaseDuration] = useState( 0 );
     let [ releaseDescription, setReleaseDescription] = useState( '' );
     let [ releaseList, setReleaseList] = useState( [] );
+    let [ martix, setMatrix] = useState( [] );
+
 
     let [ periodFrom, setPeriodFrom] = useState( '' );
     let [ periodTo, setPeriodTo] = useState( '' );
@@ -66,7 +80,12 @@ const AnketaComponentComponent = ( props ) => {
 
             setReleaseDuration( data.releaseDuration );
             setReleaseDescription( data.releaseDescription );
-            setReleaseList( data.releaseList );
+
+            
+
+            // setReleaseList( data.releaseList );
+
+            setMatrix( getReleaseMatrix( data.releaseList, data.releaseDuration ) );
 
             if( data.releaseList[ 0 ] ){
                 setPeriodFrom( data.releaseList[ 0 ].date );
@@ -84,9 +103,67 @@ const AnketaComponentComponent = ( props ) => {
 
             setReleaseDuration( 0 );
             setReleaseDescription( '' );
-            setReleaseList( [] );
+            setMatrix( [] );
+            // setReleaseList( [] );
         };
     }, [ isOpen ] );
+
+
+    const getReleaseMatrix = ( release_list, duration ) => {
+        let result = [];
+
+        for( let i = 0; i < allTimePointsGroupeList.length; i++ ){
+            let { title, interval } = allTimePointsGroupeList[ i ];
+
+            let obj = {
+                title,
+                sec_from: interval.from,
+                sec_to: interval.to,
+                days: {},
+                isFilled: false,
+            };
+
+            for( let y = 0; y < release_list.length; y++ ){
+                // let { date, time_sec } = release_list[ y ];
+                let YYYY_MM_DD = release_list[ y ].date;
+                let time_sec = release_list[ y ].time_sec;
+
+
+                if( obj.days[ YYYY_MM_DD ] ){
+                    // сюда не писать ничего !!!!!!!!!
+                }else{
+
+                    let date_class = new Date( YYYY_MM_DD );
+                    let date_seconds = date_class.getTime() / 1000;
+                    let { 
+                        mounth,
+                        date,
+                        dayNameShort,
+                    } = get_full_day_info_from_day_seconds( date_seconds );
+                    let mounthName = MOUNTH_NAME[ mounth ];
+
+                    obj.days[ YYYY_MM_DD ] = {
+                        title,
+                        duration: 0,
+                        dayName: dayNameShort.toLowerCase(),
+                        dateName: `${ date } ${ mounthName.toLowerCase() }`,
+                    };
+                };
+
+                if( time_sec >= obj.sec_from && time_sec < obj.sec_to ){
+                    obj.days[ YYYY_MM_DD ].duration = obj.days[ YYYY_MM_DD ].duration + duration;
+                    obj.isFilled = true;
+                };
+            };
+
+            if( obj.isFilled ){
+                result.push( { ...obj.days } );
+            };
+        };
+
+        return result;
+
+    }
 
 
 
@@ -111,11 +188,19 @@ const AnketaComponentComponent = ( props ) => {
             get_row_6( executor ),
             get_row_7( customer ),
             get_row_8( mediaName ),
-            get_row_9( getPeriod( periodFrom, periodTo ) )
+            get_row_9( getPeriod( periodFrom, periodTo ) ),
+            get_row_10( materialName ),
+            get_row_11(),
+            get_row_12( releaseDuration ),
+            get_row_13( releaseDuration, mediaName ),
+            get_row_14( martix ),
+            get_row_15( martix ),
+            ...get_table_martix_rows( martix, price, releaseDuration ),
         ]);
 
         ws['!cols'] = get_array_of_colum_width();
-  
+        ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
+
         ws["!merges"] = [
             XLSX.utils.decode_range("A1:AO1"),
             XLSX.utils.decode_range("A2:AO2"),
@@ -125,12 +210,19 @@ const AnketaComponentComponent = ( props ) => {
             XLSX.utils.decode_range("D7:AO7"),
             XLSX.utils.decode_range("D8:AO8"),
             XLSX.utils.decode_range("D9:AO9"),
-        ];
+            XLSX.utils.decode_range("D10:R10"),XLSX.utils.decode_range("S10:AO10"),
+            XLSX.utils.decode_range("F13:AO13"),
+            XLSX.utils.decode_range("A14:A15"),XLSX.utils.decode_range("B14:B15"),XLSX.utils.decode_range("C14:C15"),XLSX.utils.decode_range("D14:D15"),XLSX.utils.decode_range("E14:E15"),
+            XLSX.utils.decode_range("AM14:AM15"),XLSX.utils.decode_range("AN14:AN15"),
 
+
+        ];
 
         XLSX.utils.book_append_sheet(wb, ws, "readme demo");
 
-        XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
+        // XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
+        XLSX.writeFile(wb, `Медиа план ${customer}_${materialName} ${getPeriod( periodFrom, periodTo )}.xlsx`);
+
     }
 
 
@@ -206,7 +298,7 @@ const AnketaComponentComponent = ( props ) => {
 
 export function AnketaComponent( props ){
 
-    // const application = useSelector( applicationSlice );
+    const schedule = useSelector( scheduleSlise );
 
     // const dispatch = useDispatch();
 
@@ -214,7 +306,7 @@ export function AnketaComponent( props ){
         <AnketaComponentComponent
             { ...props }
 
-            // currentApplicationId = { application.currentApplicationId }
+            allTimePointsGroupeList = { schedule.allTimePointsGroupeList }
 
             // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
 

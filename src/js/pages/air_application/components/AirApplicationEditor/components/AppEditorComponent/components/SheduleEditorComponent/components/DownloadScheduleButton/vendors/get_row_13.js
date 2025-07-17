@@ -1,34 +1,40 @@
 
 
-export const get_row_9 = ( period ) => {
+export const get_row_13 = ( releaseDuration, materialName ) => {
     return [
         {},
         {},
-        { v: "период:", t: "s", 
+        {},
+        {},
+        { v: `${releaseDuration} сек`, t: "s", 
             s: { 
                 font: { 
                     name: "Verdana", 
                     sz: 12,
-                    italic: true,
-                    bold: true,
+                    italic: false,
+                    bold: false,
                 },
                 alignment: {
-                    horizontal: 'right',
+                    horizontal: 'center',
+                    vertical: 'bottom',
                 } 
             } 
         },
-            { v: period, t: "s", 
+        { 
+            v: materialName, t: "s", 
             s: { 
                 font: { 
                     name: "Arial", 
                     sz: 12,
                     italic: false,
-                    bold: true,
+                    bold: false,
                 },
                 alignment: {
-                    horizontal: 'left',
+                    horizontal: 'center',
+                    vertical: 'top',
                 } 
             } 
-            },
+        },
+
     ];
 };
