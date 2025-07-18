@@ -20,6 +20,13 @@ const AddAppButtonComponent = ( props ) => {
 
     let [ isOpen, setIsOpen ] = useState( false );
 
+    useEffect( () => {
+        let timerId = setTimeout( () => {
+            setIsOpen( false );
+            clearTimeout( timerId );
+        }, 300 );
+    }, [] );
+
     const click = () => {
         setIsOpen( true );
     }

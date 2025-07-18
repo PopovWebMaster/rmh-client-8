@@ -26,3 +26,5 @@
 // icon-feather
 // fa-reorder
 // icon-eye-4
+
+// 'icon-angle-left': 'icon-angle-right'

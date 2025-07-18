@@ -37,12 +37,12 @@ const AlertWindowContainerComponent = ( props ) => {
     
     return (
         <div 
-            className = { `AlertWindowContainer ${isOpen? 'isOpen': 'isClose'}` }
+            className = { `AlertWindowContainer ${isOpen === true? 'isOpen': 'isClose'}` }
             style = { { opacity } }
         >
 
             <div 
-                className = { `AWC_window ${isOpen? 'isOpen': 'isClose'}` }
+                className = { `AWC_window ${isOpen === true? 'isOpen': 'isClose'}` }
                 style = {{
                     width,
                     height,

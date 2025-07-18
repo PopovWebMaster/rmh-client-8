@@ -168,9 +168,14 @@ const AnketaComponentComponent = ( props ) => {
 
 
     const getPeriod = ( from , to ) => {
+
         let arr_0 = from.split( '-' );
         let arr_1 = to.split( '-' );
-        return `${arr_0[2]}.${arr_0[1]}.${arr_0[0]} - ${arr_1[2]}.${arr_1[1]}.${arr_1[0]}`
+
+        let str_from = arr_0[2]? `${arr_0[2]}.${arr_0[1]}.${arr_0[0]}`: '';
+        let str_t0 = arr_1[2]? `${arr_1[2]}.${arr_1[1]}.${arr_1[0]}`: ''
+        
+        return `${str_from} - ${str_t0}`
 
 
     }

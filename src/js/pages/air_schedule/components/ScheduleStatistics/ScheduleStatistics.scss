@@ -1,0 +1,47 @@
+.scheduleStatistics{
+    font-size: 1em;
+    height: calc( 100vh - 4.6em );
+    // width: 20em;
+    background-color: #40949400;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .SS_body{
+        display: none;
+        font-size: 1em;
+        height: calc( 100vh - 4.6em );
+        width: 18em;
+    }
+
+    .SS_body.open{
+        display: block;
+    }
+
+    .SS_btn{
+        font-size: 1em;
+        height: calc( 100vh - 4.6em );
+        width: 2em;
+        background-color: #ffffff26;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        cursor: pointer;
+        user-select: none;
+
+        span{
+            font-size: 2.4em;
+            color: #9b9b9b;
+        }
+    }
+    .SS_btn:hover{
+        background-color: #ffffff38;
+        span{
+            color: #7e7e7e;
+        }
+    }
+}

@@ -138,9 +138,9 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         };
 
-        console.dir( this );
-        console.dir( 'result' );
-        console.dir( result );
+        // console.dir( this );
+        // console.dir( 'result' );
+        // console.dir( result );
 
         return result;
 

@@ -58,13 +58,6 @@ const SheduleEditorComponentComponent = ( props ) => {
     }, [ Schedule ] );
 
 
-
-
-
-
-
-
-
     return (
         <div className = 'sheduleEditorComponent'>
 

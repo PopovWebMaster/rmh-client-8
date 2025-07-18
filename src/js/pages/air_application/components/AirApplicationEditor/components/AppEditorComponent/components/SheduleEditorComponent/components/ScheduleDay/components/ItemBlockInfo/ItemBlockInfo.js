@@ -29,6 +29,8 @@ const ItemBlockInfoComponent = ( props ) => {
     let [ filedTime, setFiledTime ] = useState( 0 );
     let [ contentList, setContentList ] = useState( [] );
 
+    let [ releaseDuration, setReleaseDuration ] = useState( 0 );
+
     useEffect( () => {
         if( gridEventTable[ YYYY_MM_DD ][ grid_event_id ] ){
             setBlockTime( gridEventTable[ YYYY_MM_DD ][ grid_event_id ].grid_event.duration );
@@ -43,20 +45,18 @@ const ItemBlockInfoComponent = ( props ) => {
                     fill_count,
                     name
                 } = content[ sub_app_id ];
-
                 duration_count = duration_count + ( duration * fill_count );
 
                 arr.push( {
                     name,
                     time: convert_sec_to_time( duration ),
                 } );
-
-                
-
             };
 
             setFiledTime( duration_count );
             setContentList( arr );
+
+            setReleaseDuration( Schedule.SubApplication.duration_sec );
 
         };
 
@@ -86,10 +86,26 @@ const ItemBlockInfoComponent = ( props ) => {
 
     }
 
+    const get_filled_class = ( release_duration, filed_time, block_time  ) => {
+        let result = 'block_few';
+
+        let isOverflowing = filed_time > block_time;
+        if( isOverflowing ){
+                result = 'block_isOverflowing';
+        }else{
+            if( block_time - filed_time < 10 ){
+                result = 'block_middle';
+            };
+        };
+
+        return result;
+
+    }
+
     return (
 
         <div 
-            className = { `${className} SEC_CharDayTimePoint_block ` }
+            className = { `${className} SEC_CharDayTimePoint_block ${ get_filled_class(  releaseDuration, filedTime, blockTime   ) }` }
             onMouseLeave = { leave }
             onClick = { click }
         >

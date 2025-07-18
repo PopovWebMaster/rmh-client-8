@@ -5,7 +5,7 @@ import { BORDER_COLOR_STYLE } from './excel_config.js';
 import { FILL_BG_COLOR } from './excel_config.js';
 
 
-let get_first_cells = ( time, releaseDuration, price ) => {
+let get_first_cells = ( time, releaseDuration, price, rowNum ) => {
     let result = [
         {
             v: time, t: "s", 
@@ -72,7 +72,7 @@ let get_first_cells = ( time, releaseDuration, price ) => {
                     right: { style: BORDER_STYLE, color: BORDER_COLOR_STYLE },
                     bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
                 },
-                numFmt: "0.00%"
+                // numFmt: "0.00%"
             } 
         },
         {
@@ -100,7 +100,12 @@ let get_first_cells = ( time, releaseDuration, price ) => {
         },
 
         {
-            v: `${ releaseDuration * price }`.padStart( 2, "0" ), t: "s", 
+            // v: `${ releaseDuration * price }`.padStart( 2, "0" ), t: "s", 
+            // v: `${ releaseDuration * price } ${rowNum}`.padStart( 2, "0" ), t: "s", 
+            v: '', 
+            t: "s", 
+            f: `=C${rowNum}*D${rowNum}`,
+
             s: { 
                 font: { 
                     name: "Arial", 
@@ -209,7 +214,7 @@ const getCell = ( str ) => {
 }
 
 
-const get_row = ( matrix_row, price, releaseDuration ) => {
+const get_row = ( matrix_row, price, releaseDuration, rowNum ) => {
 
     let result = {
         rows: [],
@@ -243,7 +248,7 @@ const get_row = ( matrix_row, price, releaseDuration ) => {
 
     allPrice = price * allDuration;
 
-    let arr_first_cells = get_first_cells( titleVal, releaseDuration, price );
+    let arr_first_cells = get_first_cells( titleVal, releaseDuration, price, rowNum );
 
     let arr_last_cells = get_last_cells( allDuration, allPrice );
 
@@ -513,7 +518,7 @@ export const get_table_martix_rows = ( martix, price, releaseDuration ) => {
             rows,
             allDuration,
             allPrice,
-         } = get_row( martix[ i ], price, releaseDuration );
+         } = get_row( martix[ i ], price, releaseDuration, 16 + i );
         result.push( rows );
 
         sumDuration = sumDuration + allDuration;

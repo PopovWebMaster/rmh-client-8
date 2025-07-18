@@ -1,0 +1,25 @@
+
+.S_CenterRight{
+    font-size: 1em;
+    width: 5em;
+    height: calc( 100vh - 4.6em );
+    // background-color: #49323298;
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+
+    .S_CenterRightBlackHole{
+        font-size: 1em;
+        width: 100%;
+        height: 100%;
+
+        .S_CenterRightBody{
+            font-size: 1em;
+            width: 10em;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+}
