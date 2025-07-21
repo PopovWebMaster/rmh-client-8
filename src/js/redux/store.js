@@ -11,6 +11,7 @@ import layoutSlice                  from './layoutSlice.js';
 import countersSlise                from './countersSlise.js';
 import currentSubApplicationSlise   from './currentSubApplicationSlise.js';
 import scheduleSlise                from './scheduleSlise.js';
+import scheduleResultSlise          from './scheduleResultSlise.js';
 
 
 
@@ -28,6 +29,8 @@ export default configureStore({
         counters:       countersSlise,
         currentSubApplication: currentSubApplicationSlise,
         schedule:       scheduleSlise,
+        scheduleResult:       scheduleResultSlise,
+
 
 
 

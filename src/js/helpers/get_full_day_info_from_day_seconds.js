@@ -34,6 +34,8 @@ export const get_full_day_info_from_day_seconds = ( seconds ) => {
     result.YYYY_MM_DD = `${YYYY}-${MM}-${DD}`;
     result.year = year;
     result.mounth = mounth;
+    result.month = mounth;
+
     result.date = date;
     result.dayNum = day;
     result.dayName = WEEK_NAME[ day ];

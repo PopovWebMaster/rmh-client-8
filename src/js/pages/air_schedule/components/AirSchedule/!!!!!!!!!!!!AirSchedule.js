@@ -18,8 +18,7 @@ import { S_CenterRight } from './../S_CenterRight/S_CenterRight.js';
 import { ScheduleRight } from './../ScheduleRight/ScheduleRight.js';
 import { ScheduleTopPanel } from './../ScheduleTopPanel/ScheduleTopPanel.js';
 
-import { SetStartingDateNowData } from './../SetStartingDateNowData/SetStartingDateNowData.js';
-import { SetDayDataFromServer } from './../SetDayDataFromServer/SetDayDataFromServer.js';
+import { SetStartingDateNowData } from './../../'
 
 
 const AirScheduleComponent = ( props ) => {
@@ -31,47 +30,36 @@ const AirScheduleComponent = ( props ) => {
     return (
         <PageContainer className = 'airSchedule'>
 
-            <SetStartingDateNowData>
-
-                <ScheduleTopPanel>
-                    <ScheduleCalendar />
-                </ScheduleTopPanel>
-                
-                <ScheduleBody>
-
-                    <SetDayDataFromServer>
-                        <ScheduleStatistics />
-                        <ScheduleCenter>
-                            <S_CenterTopButtons>
-                                <div>btn</div>
-                                <div>btn 2</div>
-                                <div>btn 3</div>
-                            </S_CenterTopButtons>
-
-                            <S_CenterBody>
-                                <div>list</div>
-
-                            </S_CenterBody>
-
-                        </ScheduleCenter>
-
-                        <ScheduleRight>
-                            <div>exp</div>
-                        </ScheduleRight>
-
-                    </SetDayDataFromServer>
-
-                    
-
-                    
-                    
-                </ScheduleBody>
-
-
-
-            </SetStartingDateNowData>
-
+            <ScheduleTopPanel>
+                <ScheduleCalendar />
+            </ScheduleTopPanel>
             
+            <ScheduleBody>
+
+                <ScheduleStatistics />
+
+                <ScheduleCenter>
+                    <S_CenterTopButtons>
+                        <div>btn</div>
+                        <div>btn 2</div>
+                        <div>btn 3</div>
+                    </S_CenterTopButtons>
+
+                    <S_CenterBody>
+                        <div>list</div>
+
+                    </S_CenterBody>
+
+                    
+
+                </ScheduleCenter>
+
+                <ScheduleRight>
+                    <div>exp</div>
+
+                </ScheduleRight>
+                
+            </ScheduleBody>
         </PageContainer>
     )
 

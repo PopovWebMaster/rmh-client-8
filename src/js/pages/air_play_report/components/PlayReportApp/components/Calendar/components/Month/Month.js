@@ -22,17 +22,6 @@ const MonthComponent = ( props ) => {
     } = props;
 
 
-
-    // const click = () => { 
-
-
-    //     let date = new Date( '2025-04-06' );
-    //     // let date = new Date();
-
-    //     console.dir( date.getDay() );
-
-    // }
-
     const click_preview = () => {
 
         let next_month = 0;
