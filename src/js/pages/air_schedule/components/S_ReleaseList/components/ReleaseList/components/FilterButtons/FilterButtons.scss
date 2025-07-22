@@ -1,0 +1,59 @@
+.RL_FilterButtons{
+    font-size: 1em;
+    
+
+    .FB_row{
+        font-size: 1em;
+        padding: 0.1em 0.2em;
+        border-bottom: 1px solid #b1b1b13b;
+        background-color: #ffffff14;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.6em;
+            margin: 0.25em 0.5em;
+            padding: 0.2em 0.5em 0.1em 0.5em;
+            border: 1px solid #ffffff00;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+            
+        }
+
+        span:hover{
+           -webkit-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+            -moz-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+            box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        }
+
+        span:active{
+            -webkit-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+            -moz-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+            box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+        }
+
+        span.isActive{
+            -webkit-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+            -moz-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+            box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        }
+        span.isActive:active{
+             -webkit-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+            -moz-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+            box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
+        }
+
+        .btn_all{
+            color: #ffffff;
+            // background-color: #919191;
+            background-color: #91919100;
+            margin-right: 1em;
+        }
+    }
+
+}

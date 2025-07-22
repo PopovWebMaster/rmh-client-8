@@ -1,0 +1,43 @@
+.topSwitchButtons{
+    font-size: 1em;
+    height: 1.8em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .TSB_btn{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 50%;
+        height: 100%;
+
+        background-color: #10101012;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        cursor: pointer;
+        user-select: none;
+
+        span{
+            font-size: 0.7em;
+            color: #b9b9b9;
+        }
+    }
+    .TSB_btn:hover{
+        span{
+            color: #ffffff;
+        }
+    }
+    .TSB_btn.isActive{
+        background-color: #3f89c55c;
+        span{
+            color: #ffffff;
+        }
+    }
+    
+}
