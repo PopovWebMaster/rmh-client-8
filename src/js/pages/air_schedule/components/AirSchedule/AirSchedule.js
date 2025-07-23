@@ -24,6 +24,8 @@ import { SetDayDataFromServer } from './../SetDayDataFromServer/SetDayDataFromSe
 import { S_EventsList } from './../S_EventsList/S_EventsList.js';
 import { S_ReleaseList } from './../S_ReleaseList/S_ReleaseList.js';
 
+import { CreateScheduleButton } from './../CreateScheduleButton/CreateScheduleButton.js';
+
 
 const AirScheduleComponent = ( props ) => {
 
@@ -37,7 +39,16 @@ const AirScheduleComponent = ( props ) => {
             <SetStartingDateNowData>
 
                 <ScheduleTopPanel>
+
                     <ScheduleCalendar />
+                    
+                    <CreateScheduleButton />
+                    {/* <div className = 'ScheduleTopPanel_right'>
+
+                        <CreateScheduleButton />
+
+                    </div> */}
+
                 </ScheduleTopPanel>
                 
                 <ScheduleBody>
@@ -46,19 +57,12 @@ const AirScheduleComponent = ( props ) => {
                         <ScheduleStatistics />
                         <ScheduleCenter>
 
-                            <S_CenterTopButtons>
-                                
-                            </S_CenterTopButtons>
+                            <S_CenterTopButtons></S_CenterTopButtons>
 
                             <S_CenterBody>
 
                                 <S_EventsList />
-
                                 <S_ReleaseList />
-
-
-
-
 
                             </S_CenterBody>
 

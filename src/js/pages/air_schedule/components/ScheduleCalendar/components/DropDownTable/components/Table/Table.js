@@ -42,11 +42,13 @@ const TableComponent = ( props ) => {
         setCurrentMonth( calendarMonth );
         setCurrentYear( calendarYear );
         setIsOpen( false );
-        if( day === 6 ){
-            setCurrentDayNum( 0 );
-        }else{
+
+
+        // if( day === 7 ){
+        //     setCurrentDayNum( 0 );
+        // }else{
             setCurrentDayNum( day - 1 );
-        };
+        // };
     }
 
 

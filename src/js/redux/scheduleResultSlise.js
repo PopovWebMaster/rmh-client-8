@@ -23,7 +23,11 @@ export const scheduleResultSlise = createSlice({
         monthCalendar: [],
 
         releaseList: [],
+        releaseListById: {},
         releaseListByGridEventId: {},
+
+
+        scheduleEventsList: [],
 
 
 
@@ -77,8 +81,21 @@ export const scheduleResultSlise = createSlice({
             state.releaseList =  action.payload;
         },
 
+
+        setReleaseListById: ( state, action ) => {
+            state.releaseListById =  action.payload;
+        },
+
+
+
+        
+
         setReleaseListByGridEventId: ( state, action ) => {
             state.releaseListByGridEventId =  action.payload;
+        },
+
+        setScheduleEventsList: ( state, action ) => {
+            state.scheduleEventsList =  action.payload;
         },
 
 
@@ -99,7 +116,9 @@ export const {
     setCurrentYear,
     setMonthCalendar,
     setReleaseList,
+    setReleaseListById,
     setReleaseListByGridEventId,
+    setScheduleEventsList,
 
 
 } = scheduleResultSlise.actions;
@@ -118,7 +137,13 @@ export const selectorData = ( state ) => {
         currentYear: state.scheduleResult.currentYear,
         monthCalendar: state.scheduleResult.monthCalendar,
         releaseList: state.scheduleResult.releaseList,
+        releaseListById: state.scheduleResult.releaseListById,
+
+
+        
         releaseListByGridEventId: state.scheduleResult.releaseListByGridEventId,
+        scheduleEventsList: state.scheduleResult.scheduleEventsList,
+
 
 
 

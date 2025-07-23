@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -11,6 +11,7 @@ import { get_filter_data } from './vendors/get_filter_data.js';
 import { get_filtered_list } from './vendors/get_filtered_list.js';
 
 import { FilterButtons } from './components/FilterButtons/FilterButtons.js';
+import { FilterList } from './components/FilterList/FilterList.js';
 
 
 const ReleaseListComponent = ( props ) => {
@@ -19,6 +20,8 @@ const ReleaseListComponent = ( props ) => {
         releaseList,
 
     } = props;
+
+    let listRef = useRef();
 
     let [ activeCategoryId,     setActiveCategoryId ] = useState( null );
     let [ activeEventId,        setActiveEventId ] = useState( null );
@@ -34,10 +37,8 @@ const ReleaseListComponent = ( props ) => {
     let [ subAppList,       setSubAppList ] = useState( [] );
     let [ releaseNamesList, setReleaseNamesList ] = useState( [] );
 
-
-
-
-
+    let [ filterButtonsHeight, setFilterButtonsHeight ] = useState( 0 );
+    let [ filterListHeight, setFilterListHeight ] = useState( 0 );
 
 
     useEffect( () => {
@@ -70,20 +71,6 @@ const ReleaseListComponent = ( props ) => {
 
         setList( filtered_list );
 
-        // let {
-        //     category,
-        //     events,
-        //     subApp,
-        // } = get_filter_data( filtered_list );
-
-        // setEventsList( events );
-
-        console.dir( 'filtered_list' );
-        console.dir( filtered_list );
-
-
-
-
     }, [
         activeCategoryId,
         activeEventId,
@@ -92,34 +79,47 @@ const ReleaseListComponent = ( props ) => {
         releaseList,
     ] );
 
+    useEffect( () => {
+        let listElem = listRef.current;
+        let { height } = window.getComputedStyle( listElem );
+        setFilterListHeight( parseFloat( height ) - filterButtonsHeight );
+
+
+    }, [ filterButtonsHeight ] );
+
 
 
     return (
-       <div className = 'releaseList'>
+       <div 
+            className = 'releaseList'
+            ref = { listRef }
+        >
             <FilterButtons
+                
                 activeCategoryId =      { activeCategoryId }
                 activeEventId =         { activeEventId }
                 activeSubAppId =        { activeSubAppId }
                 activeReleaseName =     { activeReleaseName }
-
 
                 setActiveCategoryId =   { setActiveCategoryId }
                 setActiveEventId =      { setActiveEventId }
                 setActiveSubAppId =     { setActiveSubAppId }
                 setActiveReleaseName =  { setActiveReleaseName }
 
-
                 categoryList =      { categoryList }
                 eventsList =        { eventsList }
                 subAppList =        { subAppList }
                 releaseNamesList =  { releaseNamesList }
 
-                // setCategoryList =   { setCategoryList }
-                // setEventsList =     { setEventsList }
-                // setSubAppList =     { setSubAppList }
+                setFilterButtonsHeight = { setFilterButtonsHeight }
+                length = { list.length }
 
+            />
 
-
+            <FilterList
+                filteredList = { list }
+                height = { filterListHeight }
+            
             />
 
 

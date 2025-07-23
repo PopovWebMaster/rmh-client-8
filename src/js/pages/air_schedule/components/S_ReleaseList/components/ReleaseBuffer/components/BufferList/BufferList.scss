@@ -1,8 +1,8 @@
-.RL_FilterList{
+.RB_BufferList{
     font-size: 1em;
     overflow: hidden;
 
-    .RL_FilterList_item{
+    .RB_BufferList_item{
         font-size: 1em;
         margin: 0.1em 0.5em;
         padding: 0.2em 0.4em;
@@ -12,6 +12,7 @@
         justify-content: flex-start;
         align-items: center;
         align-content: center;
+        cursor: grab;
 
         >.time{
             font-size: 0.6em;
@@ -76,6 +77,17 @@
             background-color: #932213;
             text-align: center;
             border-radius: 0.1em;
+        }
+    }
+
+    .RB_BufferList_item:hover{
+        background-color: #ffffff85;
+    }
+    .RB_BufferList_item:active{
+        background-color: #ffffff85;
+        cursor: grabbing;
+        >.name{
+            color: #b64242;
         }
     }
 }

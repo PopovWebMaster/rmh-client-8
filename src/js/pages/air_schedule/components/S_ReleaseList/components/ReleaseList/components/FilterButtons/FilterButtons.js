@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -8,6 +8,7 @@ import './FilterButtons.scss';
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
+let flag = true; 
 const FilterButtonsComponent = ( props ) => {
 
     let {
@@ -26,23 +27,39 @@ const FilterButtonsComponent = ( props ) => {
         subAppList,
         releaseNamesList,
 
-        // setCategoryList,
-        // setEventsList,
-        // setSubAppList,
+        setFilterButtonsHeight,
+        length,
 
     } = props;
 
-    console.dir({
-        activeCategoryId,
-        activeEventId,
-        activeSubAppId,
-        categoryList,
-        eventsList,
-        subAppList,
-        releaseNamesList,
-        activeReleaseName,
 
-    });
+    /*
+        ВНИМАНИЕ! В коде перепутаны логически sub_application_id и application_id
+        Исправлять было лень, но всё работает.
+    */
+
+    let buttonsRef = useRef();
+
+    const setElemHeight = () => {
+        if( flag ){
+            flag = false;
+            let timerId = setTimeout( () => {
+                let elem = buttonsRef.current;
+                let style = window.getComputedStyle( elem );
+
+                // console.dir( buttonsRef.current );
+                // console.dir( style.height );
+
+                setFilterButtonsHeight( parseFloat( style.height ) );
+
+                flag = true;
+                clearTimeout( timerId );
+
+            }, 300 );
+        };
+
+
+    }
 
     const createCategory = ( arr ) => {
 
@@ -58,10 +75,6 @@ const FilterButtonsComponent = ( props ) => {
                 <span
                     key = { index }
                     className = { `btn_all ${activeCategoryId === id? 'isActive': ''}`}
-                    // style = {{
-                    //     backgroundColor: colorBG,
-                    //     color: colorText,
-                    // }}
                     onClick = { () => { 
                         setActiveCategoryId( id );
                         setActiveEventId( null );
@@ -72,12 +85,14 @@ const FilterButtonsComponent = ( props ) => {
             );
 
         } );
+        setElemHeight();
 
         return span;
 
     };
 
     const createEvents = ( arr ) => {
+        
 
         let filterArr = [];
         if( activeCategoryId === null ){
@@ -111,6 +126,8 @@ const FilterButtonsComponent = ( props ) => {
                 >{ name }</span>
             );
         } );
+
+        setElemHeight();
 
         return span;
 
@@ -175,6 +192,8 @@ const FilterButtonsComponent = ( props ) => {
             );
         } );
 
+        setElemHeight();
+
         return span;
 
     }
@@ -203,7 +222,7 @@ const FilterButtonsComponent = ( props ) => {
             };
             if( event_type === EVENT_TYPE.BLOCK ){
                 style.backgroundColor = '#00000000';
-                style.color = colorBG;
+                style.color = '#ffffff';
             };
 
             return (
@@ -216,13 +235,18 @@ const FilterButtonsComponent = ( props ) => {
             );
         } );
 
+        setElemHeight();
+
         return span;
     }
 
 
 
     return (
-       <div className = 'RL_FilterButtons'>
+       <div 
+            className = 'RL_FilterButtons'
+            ref = { buttonsRef }
+        >
 
             <div className = 'FB_row'>
                 <span 
@@ -267,6 +291,11 @@ const FilterButtonsComponent = ( props ) => {
                 >Все</span> */}
 
                 { createRelease( releaseNamesList ) }
+            </div>
+            <div className = 'FB_row'>
+                <div className = 'FB_row_all'>
+                    <span>Всего: { length }</span>
+                </div>
             </div>
 
 
