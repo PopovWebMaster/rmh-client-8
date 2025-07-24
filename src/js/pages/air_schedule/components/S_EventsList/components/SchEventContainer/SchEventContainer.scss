@@ -1,0 +1,158 @@
+.schEventContainer{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+
+    padding: 0.1em 0em;
+
+    .schEventContainerWrap{
+        font-size: 1em;
+        // margin: 0em 1em;
+        padding: 0em .1em;
+        border-radius: 0.1em;
+        max-width: 90vw;
+        width: 100%;
+
+        background-color: #ffffff14;
+        border-radius: 0.1em;
+        padding: 0.3em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: center;
+
+
+        .schEventItemTime{
+            font-size: 1em;
+            flex-grow: 0;
+            padding: 0.1em 0;
+
+            .SEC_time{
+                font-size: 0.7em;
+                color: #343434;
+                background-color: #ffffff;
+                padding: 0.2em 0.5em 0.1em;
+                margin: .6em 1.2em 0 1em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                flex-grow: 0;
+                text-align: center;
+
+                cursor: pointer;
+            }
+
+            .SEC_time:hover{
+                color: #343434;
+                background-color: #e5e3e3;
+            }
+
+            .SEC_time.isKeyPoint{
+                background-color: #ab3928;
+                color: #ffffff;
+            }
+
+            .SEC_time.isKeyPoint:hover{
+                background-color: #ef6a56;
+                color: #ffffff;
+            }
+
+            
+            .SEC_duration{
+                font-size: 0.7em;
+                color: #343434;
+                background-color: #ffffff;
+                padding: 0.2em 0.5em 0.1em;
+                margin: .6em 1em 0 0em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                text-align: center;
+                flex-grow: 0;
+        
+            }
+        }
+
+        .schEventItemRemains{
+            font-size: 0.9em;
+            flex-grow: 0;
+            padding: .2em .8em 0.19em;
+            border-radius: 0.1em;
+            // margin-left: 5em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            
+            >.text{
+                font-size: 0.7em;
+                color: #575757;
+                margin-left: 4em;
+            }
+            >.time{
+                font-size: .7em;
+                color: #efe6e6c9;
+                border: 1px solid #c1c1c1;
+                border-radius: .1em;
+                padding: .2em .6em 0.1em;
+                margin-left: 0.5em;
+        
+            }
+        }
+
+        // .grigItemTimeRemains:hover{
+        //     background-color: #607eb3;
+        //     >.text{
+        //         color: rgb(248, 248, 248);
+        //     }
+
+        //     >.time{
+        //         color: #ffffff;
+        //         border: 1px solid #c1c1c1;
+        //     }
+        // }
+
+        .schEventItemRemains:hover{
+            background-color: #ffffff;
+            >.text{
+                color: #4d4949;
+            }
+
+            >.time{
+                color: #5b3737;
+                border: 1px solid #c1c1c1;
+            }
+        }
+
+
+
+
+        .schEventItemBody{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+    }
+
+    .schEventContainerWrap.isCompletd{
+        background-color: #f5f5f585;
+    }
+
+    
+
+    .schEventContainerWrap:hover{
+        // background-color: #ffffff30;
+    }
+
+    .errorTime{
+        background-color: #d30000f7;
+        .schEventItemRemains{
+            .text{
+                color: #ffffff;
+            }
+        }
+    }
+}
+

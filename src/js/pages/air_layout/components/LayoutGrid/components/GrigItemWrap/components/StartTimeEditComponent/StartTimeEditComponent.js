@@ -10,107 +10,113 @@ import { selectorData as layoutSlice } from './../../../../../../../../redux/lay
 import { TimeSelected }         from './../../../AddNewGridEventComponent/components/TimeSelected/TimeSelected.js';
 import { AppearanceOfEvent }    from './../../../AddNewGridEventComponent/components/AppearanceOfEvent/AppearanceOfEvent.js';
 
-import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js'
+// import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js'
 
 const StartTimeEditComponentComponent = ( props ) => {
 
     let {
-        isOpen,
-        setIsOpen,
-        id,
+        // isOpen,
+        // setIsOpen,
+        // id,
+        // gridDayEventsList,
+        // gridCurrentDay,
 
-        gridOneDayList,
-        gridDayEventsList,
-        gridCurrentDay,
+        // новое
+        durationTime,
+        startTime,
+        timeSpaceTo,
+        timeSpaceFrom,
+        eventId,
+
+        setStartTime,
+
+        clickSaveHandler,
 
     } = props;
 
-    let [ isReady, setIsReady ] = useState( false );
-    let [ durationTime, setDurationTime ] = useState( 0 );
-    let [ startTime, setStartTime] = useState( 0 );
-    let [ timeSpaceTo, setTimeSpaceTo ] = useState( 0 );
-    let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
-    let [ eventId, setEventId ] = useState( null );
+    // let [ isReady, setIsReady ] = useState( false );
+    // let [ durationTime, setDurationTime ] = useState( 0 );
+    // let [ startTime, setStartTime] = useState( 0 );
+    // let [ timeSpaceTo, setTimeSpaceTo ] = useState( 0 );
+    // let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
+    // let [ eventId, setEventId ] = useState( null );
 
     let [ timeTarget, setTimeTarget ] = useState( 'start' ); // 'finish' 
 
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        if( isOpen ){
-            updateData();
+    //     if( isOpen ){
+    //         // updateData();
 
-        }else{
+    //     }else{
 
-            setEventId( null );
-            setDurationTime( 0 );
-            setStartTime( 0 );
-            setTimeSpaceFrom( 0 );
-            setTimeSpaceTo( 0 );
-            setIsReady( false );
-        };
+    //         // setEventId( null );
+    //         // setDurationTime( 0 );
+    //         // setStartTime( 0 );
+    //         // setTimeSpaceFrom( 0 );
+    //         // setTimeSpaceTo( 0 );
+    //         // setIsReady( false );
+    //     };
 
-    }, [ isOpen ] );
+    // }, [ isOpen ] );
 
-    const updateData = () => {
+    // const updateData = () => {
 
-        setIsReady( false );
-        let flag_no_update = true;
+    //     // setIsReady( false );
+    //     let flag_no_update = true;
 
-        for( let i = 0; i < gridDayEventsList[ gridCurrentDay ].length; i++ ){
-            if( gridDayEventsList[ gridCurrentDay ][ i ].id === id ){
-                let { durationTime, startTime, eventId } = gridDayEventsList[ gridCurrentDay ][ i ];
+    //     for( let i = 0; i < gridDayEventsList[ gridCurrentDay ].length; i++ ){
+    //         if( gridDayEventsList[ gridCurrentDay ][ i ].id === id ){
+    //             let { durationTime, startTime, eventId } = gridDayEventsList[ gridCurrentDay ][ i ];
 
-                let pointFrom = 0;
-                let pointTo = 0;
+    //             let pointFrom = 0;
+    //             let pointTo = 0;
 
-                if( gridDayEventsList[ gridCurrentDay ][ i - 1 ]){
-                    pointFrom = gridDayEventsList[ gridCurrentDay ][ i - 1 ].startTime + gridDayEventsList[ gridCurrentDay ][ i - 1 ].durationTime + 1;
-                };
+    //             if( gridDayEventsList[ gridCurrentDay ][ i - 1 ]){
+    //                 pointFrom = gridDayEventsList[ gridCurrentDay ][ i - 1 ].startTime + gridDayEventsList[ gridCurrentDay ][ i - 1 ].durationTime + 1;
+    //             };
 
-                if( gridDayEventsList[ gridCurrentDay ][ i + 1 ] ){
-                    pointTo = gridDayEventsList[ gridCurrentDay ][ i + 1 ].startTime - 1;
-                }else{
-                    pointTo = 24 * 60 * 60 -1;
-                };
+    //             if( gridDayEventsList[ gridCurrentDay ][ i + 1 ] ){
+    //                 pointTo = gridDayEventsList[ gridCurrentDay ][ i + 1 ].startTime - 1;
+    //             }else{
+    //                 pointTo = 24 * 60 * 60 -1;
+    //             };
 
-                setEventId( eventId );
-                setDurationTime( durationTime );
-                setStartTime( startTime );
-                setTimeSpaceFrom( pointFrom );
-                setTimeSpaceTo( pointTo );
-                setIsReady( true );
+    //             // setEventId( eventId );
+    //             // setDurationTime( durationTime );
+    //             setStartTime( startTime );
+    //             // setTimeSpaceFrom( pointFrom );
+    //             // setTimeSpaceTo( pointTo );
+    //             // setIsReady( true );
 
-                flag_no_update = false;
+    //             flag_no_update = false;
 
-                break;
+    //             break;
 
-            };
-        };
-        if( flag_no_update ){
-            console.dir( 'flag_no_update' );
-            setEventId( null );
-            setDurationTime( 0 );
-            setStartTime( 0 );
-            setTimeSpaceFrom( 0 );
-            setTimeSpaceTo( 0 );
-            setIsReady( false );
-        };
-    }
-    const click = () => {
-        set_grid_event_changes_to_store( id, { startTime } );
-        setIsOpen( false );
-    };
+    //         };
+    //     };
+    //     if( flag_no_update ){
+    //         console.dir( 'flag_no_update' );
+    //         // setEventId( null );
+    //         // setDurationTime( 0 );
+    //         setStartTime( 0 );
+    //         // setTimeSpaceFrom( 0 );
+    //         // setTimeSpaceTo( 0 );
+    //         // setIsReady( false );
+    //     };
+    // }
+    // const click = () => {
+    //     set_grid_event_changes_to_store( id, { startTime } );
+    //     setIsOpen( false );
+    // };
 
 
 
     return (
         <div className = 'startTimeEditComponent'>
 
-            { isReady? (<>
-
-                {/* <DayName /> */}
-
+            {/* { isReady? (<> */}
                 <AppearanceOfEvent 
                     eventId =       { eventId }
                     startTime =     { startTime }
@@ -130,7 +136,7 @@ const StartTimeEditComponentComponent = ( props ) => {
                 <div className = 'STEC_save_changes'>
                     <div 
                         className = 'btn'
-                        onClick = { click }
+                        onClick = { clickSaveHandler }
                     >
                         <span className = 'icon icon-floppy'></span>
                         <span className = 'text'>Сохранить</span>
@@ -138,7 +144,7 @@ const StartTimeEditComponentComponent = ( props ) => {
                     </div>
                 </div>
 
-            </>): '' }
+            {/* </>): '' } */}
 
             
 
@@ -155,7 +161,7 @@ export function StartTimeEditComponent( props ){
     return (
         <StartTimeEditComponentComponent
             { ...props }
-            gridOneDayList = { layout.gridOneDayList }
+            // gridOneDayList = { layout.gridOneDayList }
             gridDayEventsList = { layout.gridDayEventsList }
             gridCurrentDay = { layout.gridCurrentDay }
 

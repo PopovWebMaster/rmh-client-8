@@ -28,6 +28,8 @@ export const scheduleResultSlise = createSlice({
 
 
         scheduleEventsList: [],
+        scheduleEventsListByGridEventId: {},
+
 
 
 
@@ -96,6 +98,11 @@ export const scheduleResultSlise = createSlice({
 
         setScheduleEventsList: ( state, action ) => {
             state.scheduleEventsList =  action.payload;
+            let obj = {};
+            for( let i = 0; i < action.payload.length; i++ ){
+                obj[ action.payload[ i ].gridEventId ] = { ...action.payload[ i ] };
+            };
+            state.scheduleEventsListByGridEventId = obj;
         },
 
 
@@ -143,6 +150,7 @@ export const selectorData = ( state ) => {
         
         releaseListByGridEventId: state.scheduleResult.releaseListByGridEventId,
         scheduleEventsList: state.scheduleResult.scheduleEventsList,
+        scheduleEventsListByGridEventId: state.scheduleResult.scheduleEventsListByGridEventId,
 
 
 

@@ -1,0 +1,25 @@
+.SEC_EventNotesItem{
+    font-size: 0.8em;
+    margin-right: 1em;
+    max-width: 10em;
+    flex-grow: 1;
+
+    input{
+        font-size: 0.85em;
+        padding: 0.3em 0.8em;
+        // width: 20vw;
+        width: calc( 100% - 2em );
+
+        text-align: left;
+        line-height: 1em;
+        border: 1px solid #34343400;
+        outline: none;
+        color: #ffffff;
+        background-color: #ffffff17;
+    }
+
+    input:focus{
+        background-color: #ffffffec;
+        color: #4e4e4e;
+    }
+}

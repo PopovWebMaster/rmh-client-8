@@ -55,6 +55,7 @@ const AirScheduleComponent = ( props ) => {
 
                     <SetDayDataFromServer>
                         <ScheduleStatistics />
+
                         <ScheduleCenter>
 
                             <S_CenterTopButtons></S_CenterTopButtons>

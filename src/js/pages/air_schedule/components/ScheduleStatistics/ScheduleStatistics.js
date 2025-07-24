@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import './ScheduleStatistics.scss';
 
 // import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+// import { PageBodyCounters } from './../../../../components/PageBodyCounters/PageBodyCounters.js';
+import { PageBodyCounters } from './../../../../components/PageBodyCounters/PageBodyCounters.js';
 
 
 const ScheduleStatisticsComponent = ( props ) => {
@@ -23,7 +25,7 @@ const ScheduleStatisticsComponent = ( props ) => {
         <div className = 'scheduleStatistics'>
 
             <div className = { `SS_body ${ isOpen? 'open': '' }` }>
-
+                <PageBodyCounters />
             </div>
 
             <div 

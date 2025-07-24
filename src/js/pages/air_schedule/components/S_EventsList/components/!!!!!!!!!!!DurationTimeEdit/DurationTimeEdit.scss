@@ -1,0 +1,22 @@
+.ETS_duration_block{
+    font-size: 0.7em;
+    color: #343434;
+    background-color: #ffffff;
+    border: 1px solid #1ac59c;
+    padding: 0.2em 0.5em 0.1em;
+    margin: .6em 1em 0 0em;
+    width: 4.6em;
+    border-radius: 0.1em;
+    text-align: center;
+    flex-grow: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ETS_duration_block:hover{
+    color: #22ad8c;
+    background-color: #f3f3f3;
+}
+.ETS_duration_block:active{
+    color: #1f9277;
+}

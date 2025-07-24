@@ -20,7 +20,9 @@ const CreateScheduleButtonComponent = ( props ) => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromGridEvents();
+
         StoreScheduleResultEvents.SetListToStore();
+
 
     };
 

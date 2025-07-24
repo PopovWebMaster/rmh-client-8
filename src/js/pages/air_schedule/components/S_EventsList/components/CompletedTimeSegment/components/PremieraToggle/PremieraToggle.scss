@@ -1,0 +1,40 @@
+.CTS_PremieraToggleItem{
+    
+    font-size: 1em;
+    flex-grow: 1;
+    height: 100%;
+    max-width: 100%;
+    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+    .CTS_PremieraToggleItem_btn{
+        font-size: 0.62em;
+        padding: 0.1em 0.7em 0.35em 0.7em;
+        border: 1px solid #0003f50a;
+        color: #0003ff36;
+        border-radius: 0.1em;
+        font-family: "Open Sans Semibold";
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .CTS_PremieraToggleItem_btn:hover{
+        background-color: #7d7fd9;
+        color: #fcfcfc;
+    }
+
+    .CTS_PremieraToggleItem_btn:active{
+        color: #f08585;
+    }
+
+    .CTS_PremieraToggleItem_btn.isActive{
+        background-color: #7d7fd9;
+        color: #fcfcfc;
+    }
+
+}
