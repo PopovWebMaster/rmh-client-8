@@ -5,61 +5,59 @@ import { useDispatch } from 'react-redux';
 
 import './CutSegmentButton.scss';
 
-import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice, setGridDayEventsList, setGridDayEventsIsChanges } from './../../../../../../redux/layoutSlice.js';
 
-import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import {  setSpinnerIsActive } from './../../../../../../redux/spinnerSlice.js';
 
-import { CutEditorComponent } from './components/CutEditorComponent/CutEditorComponent.js';
+import { selectorData as cutEventEditorSlise, setSutEventData } from './../../../../../../redux/cutEventEditorSlise.js';
 
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
+
+import { CutEventEditor } from './../../../../../../components/CutEventEditor/CutEventEditor.js';
+
+import { get_grid_event_parts_arr } from './components/CutEditorComponent/vendors/get_grid_event_parts_arr.js';
+import { get_max_duration } from './components/CutEditorComponent/vendors/get_max_duration.js';
+import { get_event_style } from './../../../../../../helpers/get_event_style.js';
+import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
+import { add_new_cut_group_into_dayEventsList } from './vendors/add_new_cut_group_into_dayEventsList.js'
+
+import { marge_dayList_and_catList } from './../../../../../../components/CutEventEditor/marge_dayList_and_catList.js';
 
 const CutSegmentButtonComponent = ( props ) => {
 
     let {
         id,
+        gridCurrentDay,
 
         gridDayEventsListById,
+        gridDayEventsList,
         eventListById,
+
+        gridOneDayList,
+        eventsPartsList,
+        setSutEventData,
+        setSpinnerIsActive,
+        setGridDayEventsList,
+        setGridDayEventsIsChanges,
 
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
     let [ showStatus, setShowStatus ] = useState( true );
-    let [ firstSegmentId, setFirstSegmentId ] = useState( null );
-    let [ durationTime, setDurationTime ] = useState( 0 );
-    let [ startTime, setStartTime ] = useState( 0 );
-    let [ isPremiere, setIsPremiere] = useState( false );
-
 
     useEffect( () => {
         if( gridDayEventsListById[ id ] ){
-            let { 
-                firstSegmentId,
-                durationTime,
-                startTime,
-                eventId,
-                is_premiere,
-            } = gridDayEventsListById[ id ];
-
-            let { type } = eventListById[ eventId ];
+            let { firstSegmentId } = gridDayEventsListById[ id ];
+            let event_id = gridDayEventsListById[ id ].eventId;
+            let { type } = eventListById[ event_id ];
             if( type === EVENT_TYPE.FILE ){
-                // setShowStatus( true );
                 setShowStatus( getShowStatus( firstSegmentId ) );
             }else{
                 setShowStatus( false );
             };
 
-            // setShowStatus( getShowStatus( firstSegmentId ) );
-            setFirstSegmentId( firstSegmentId );
-            setDurationTime( durationTime );
-            setStartTime( startTime );
-            setIsPremiere( is_premiere );
-
-
-
         }else{
             setShowStatus( false );
-            // setIsEctive( false );
         };
 
     }, [ gridDayEventsListById ] );
@@ -67,7 +65,20 @@ const CutSegmentButtonComponent = ( props ) => {
 
     const click = ( status ) => {
         if( status ){
-            setIsOpen( true )
+            setIsOpen( true );
+
+            let eventParts = get_grid_event_parts_arr( gridOneDayList, id );
+            let { eventId } = eventParts[ 0 ];
+            let eventStyle = get_event_style( eventId );
+            let eventName = eventListById[ eventId ].name;
+
+            setSutEventData({
+                eventParts,
+                maxDurationTime:    get_max_duration( id ),
+                eventId,
+                eventStyle,
+                eventName,
+            });
         };
     }
 
@@ -81,27 +92,38 @@ const CutSegmentButtonComponent = ( props ) => {
         return result;
     }
 
+    const saveHandler = () => {
+
+        let dayList = marge_dayList_and_catList( gridDayEventsList[ gridCurrentDay ], eventsPartsList );
+
+        setSpinnerIsActive( true );
+        send_request_to_server({
+            route: `set-grid-events-day-list-after-cutting`,
+            data: { 
+                dayNum: gridCurrentDay,
+                dayList,
+            },
+            successCallback: ( response ) => {
+
+                if( response.ok ){
+                    setSpinnerIsActive( false );
+                    setGridDayEventsList( response.list );
+                    setGridDayEventsIsChanges( false );
+                    setIsOpen( false );
+                };
+
+            },
+        });
+    }
+
     return (
         <div className = 'cutSegmentButton'>
 
-            <AlertWindowContainer
-                isOpen = { isOpen }
+            <CutEventEditor
+                isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
-                width = '90vw'
-                height = '90vh'
-                showCurrentDayName = { true }
-            >
-                <CutEditorComponent 
-                    isOpen =            { isOpen }
-                    setIsOpen =         { setIsOpen }
-                    id =                { id }
-                    firstSegmentId =    { firstSegmentId }
-                    durationTime =      { durationTime }
-                    startTime =         { startTime }
-                    isPremiere =        { isPremiere }
-                />
-    
-            </AlertWindowContainer>
+                saveHandler = { saveHandler }
+            />
 
             <div 
                 className = { `CSB_btn ${showStatus? 'isActive': ''}` }
@@ -117,19 +139,35 @@ const CutSegmentButtonComponent = ( props ) => {
 
 export function CutSegmentButton( props ){
 
-        const layout = useSelector( layoutSlice );
-        // const navigation = useSelector( navigationSlice );
-        const dispatch = useDispatch();
-    
+    const layout = useSelector( layoutSlice );
+    const cutEventEditor = useSelector( cutEventEditorSlise );
 
+
+    
+    const dispatch = useDispatch();
+    
     return (
         <CutSegmentButtonComponent
             { ...props }
-            gridDayEventsListById = { layout.gridDayEventsListById }
-            eventListById = { layout.eventListById  }
-            // setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
-            // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
 
+            eventsPartsList = { cutEventEditor.eventsPartsList }
+
+
+            gridDayEventsListById = { layout.gridDayEventsListById }
+            gridDayEventsList = { layout.gridDayEventsList }
+
+            eventListById = { layout.eventListById  }
+            gridOneDayList = { layout.gridOneDayList }
+            gridCurrentDay = { layout.gridCurrentDay }
+
+
+
+            setSutEventData =               { ( obj ) => { dispatch( setSutEventData( obj ) ) } }
+            setSpinnerIsActive =            { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setGridDayEventsList =          { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
+            setGridDayEventsIsChanges =     { ( val ) => { dispatch( setGridDayEventsIsChanges( val ) ) } }
+
+            
         />
     );
 

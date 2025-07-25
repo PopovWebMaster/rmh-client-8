@@ -1,0 +1,23 @@
+.AOASGE_SettingTimeTrack{
+    font-size: 1em;
+
+    .AOASGE_track{
+        font-size: 1em;
+        height: 0.4em;
+        background-color: #bfbfbf;
+        position: relative;
+        margin: 0 3em;
+        border-radius: 0.1em;
+
+        .AOASGE_filled_track{
+            font-size: 1em;
+            height: 100%;
+            width: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #62bb1a;
+        }
+    }
+    
+}

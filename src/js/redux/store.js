@@ -12,6 +12,8 @@ import countersSlise                from './countersSlise.js';
 import currentSubApplicationSlise   from './currentSubApplicationSlise.js';
 import scheduleSlise                from './scheduleSlise.js';
 import scheduleResultSlise          from './scheduleResultSlise.js';
+import cutEventEditorSlise          from './cutEventEditorSlise.js';
+
 
 
 
@@ -30,6 +32,7 @@ export default configureStore({
         currentSubApplication: currentSubApplicationSlise,
         schedule:       scheduleSlise,
         scheduleResult:       scheduleResultSlise,
+        cutEventEditor: cutEventEditorSlise,
 
 
 

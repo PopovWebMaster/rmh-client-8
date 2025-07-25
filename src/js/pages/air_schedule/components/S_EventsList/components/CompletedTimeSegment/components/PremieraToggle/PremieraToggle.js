@@ -8,6 +8,7 @@ import './PremieraToggle.scss';
 // import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 // import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
+import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
 
 
 
@@ -20,8 +21,7 @@ const PremieraToggleComponent = ( props ) => {
     } = props;
 
     const click = () => {
-        // set_grid_event_changes_to_store( id, { is_premiere: !is_premiere } );
-        // set_grid_event_changes_to_store( id, { is_premiere: !is_premiere } );
+        set_schedule_list_changes_to_store( gridEventId, { is_premiere: !is_premiere } )
     }
 
 

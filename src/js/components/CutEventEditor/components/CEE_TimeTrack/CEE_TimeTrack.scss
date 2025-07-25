@@ -1,0 +1,24 @@
+.CGETT_timeTrack{
+    font-size: 1em;
+    
+    .CGETT_wrap{
+        font-size: 1em;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        padding-top: 1.6em;
+
+        .CGETT_track_wrap{
+            font-size: 1em;
+            max-width: 100%;
+            flex-grow: 1;
+            height: 3.4em;
+            position: relative;
+            border-radius: 1px;
+        }
+
+
+    }
+}

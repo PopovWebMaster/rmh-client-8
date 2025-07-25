@@ -43,6 +43,7 @@ const SchOneSectorComponent = ( props ) => {
                     durationTime,
                     cutPart,
                     is_premiere,
+                    finalNotes,
 
 
                 } = item;
@@ -60,6 +61,10 @@ const SchOneSectorComponent = ( props ) => {
                         durationTime =      { durationTime }
                         cutPart =           { cutPart }
                         is_premiere =       { is_premiere }
+                        finalNotes =       { finalNotes }
+
+
+                        
 
                     />
                 );

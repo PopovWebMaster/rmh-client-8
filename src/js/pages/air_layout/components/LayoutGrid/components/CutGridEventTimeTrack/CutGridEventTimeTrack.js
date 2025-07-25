@@ -31,16 +31,6 @@ const CutGridEventTimeTrackComponent = ( props ) => {
         setPointList( get_cut_point_list( gridEventsParts ) );
     }, [ gridEventsParts ] );
 
-//             cutPart: null,
-//             dayNum: 0,
-//             durationTime: 180,
-//             eventId: 1,
-//             firstSegmentId: null,
-//             id: 2,
-//             isKeyPoint: true,
-//             notes: null,
-//             pushIt: null,
-//             startTime: 0,
 
     return (
         <div className = 'cutGridEventTimeTrack'>

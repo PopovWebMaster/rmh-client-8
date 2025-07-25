@@ -1,0 +1,40 @@
+.CGETT_cut_time_track{
+    font-size: 1em;
+    height: 1.4em;
+    background-color: #27ac00;
+    position: relative;
+    border-radius: 1px;
+    margin: 0;
+    z-index: 100;
+
+    .CGETT_cutTimeCursor{
+        font-size: 1em;
+        position: absolute;
+        bottom: 1px;
+        left: 50%;
+        height: 2.4em;
+        width: 2px;
+        border-left: 1px solid #b10707;
+        user-select: none;
+
+        span{
+            font-size: .6em;
+            padding: 0.2em .5em;
+            background-color: #f5f5f5;
+            color: #db5b5b;
+            border-radius: 2px;
+            position: absolute;
+            top: 0;
+            left: 0
+            
+        }
+    }
+
+    .CGETT_cutTimeCursor:active{
+        border-left: 1px solid #b1070710;
+        // span{
+        //     color: #ff0000;
+        // }
+    }
+
+}

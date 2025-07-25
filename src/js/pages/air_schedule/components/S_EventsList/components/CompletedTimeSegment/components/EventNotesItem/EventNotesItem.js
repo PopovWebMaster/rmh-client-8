@@ -5,91 +5,88 @@ import { useSelector } from 'react-redux';
 
 import './EventNotesItem.scss';
 
-import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
+import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 
 // import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
+import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { AWTextarea } from './../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
+import { AWButtonAdd } from './../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
+
+import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js'
+
+
 
 
 const EventNotesItemComponent = ( props ) => {
 
     let {
-        eventId,
         gridEventId,
-        notes,
+        finalNotes,
 
-        eventListById,
+        // scheduleEventsList,
     } = props;
 
-    let inputRef = useRef();
+    let [ isOpen, setIsOpen ] = useState( false );
 
-    let [ eventNotes, setEventNotes ] = useState('');
-    let [ notesValue, setNotesValue ] = useState( notes );
-    let [ inputValue, setInputValue ] = useState( '' );
+    let [ inputValue, setInputValue ] = useState( finalNotes );
 
 
     useEffect( () => {
-        setNotesValue( notes );
-    }, [ notes ] )
+        setInputValue( finalNotes );
+    }, [ finalNotes ] )
 
-    useEffect( () => {
-        if( eventListById[ eventId ] ){
-            setEventNotes( eventListById[ eventId ].notes );
-        };
-    }, [ eventId, eventListById ]);
 
-    useEffect(() => {
-        if( eventNotes.trim() === '' ){
-            setInputValue( notesValue );
-        }else{
-            setInputValue( `${eventNotes} ${notesValue}` );
-        };
-        
-    }, [ eventNotes, notesValue ]);
 
-    const set_changes_to_store = () => {
-        if( notesValue !== notes ){
-            // set_grid_event_changes_to_store( id, { notes: notesValue } );
-        };
-    };
-
+    const clickOpen = () => {
+        setIsOpen( true );
+    }
     const change = ( e ) => {
         let val = e.target.value;
-        if( eventNotes === '' ){
-            setNotesValue( val );
-        }else{
-            if( val.indexOf( `${eventNotes} ` ) !== -1 ){
-                let val_2 = val.replace( `${eventNotes} `, '' );
-                setNotesValue( val_2 );
-            };
-        };
+        setInputValue( val );
     };
 
-    const enter = ( e ) => {
-        if( e.which === 13 ){
-            set_changes_to_store();
-            inputRef.current.blur();
-        };
-    };
-
-    const blur = ( e ) => {
-        set_changes_to_store();
-    };
-    
+    const save = () => {
+        set_schedule_list_changes_to_store( gridEventId, { finalNotes } );
+        setIsOpen( false );
+    }
 
 
     return (
         <div className = 'SEC_EventNotesItem'>
-            <input 
-                type =      'text'
-                // value =     { `${eventNotes} ${notesValue}` }
-                value =     { inputValue }
 
-                maxLength = { 255 }
-                onChange =  { change }
-                onKeyDown = { enter }
-                onBlur =    { blur }
-                ref =       { inputRef }
-            />
+            <AlertWindowContainer
+                isOpen =        { isOpen }
+                setIsOpen =     { setIsOpen }
+                title =         'Заметка для эфирщика'
+                width =         { '30em' }
+                height =        { '20em' }
+
+            >
+
+                <AWTextarea 
+                    title = { 'Notes' }
+                    value = { inputValue }
+                    onChange = { change }
+
+                    placeholder = 'Это прочтёт эфирщик'
+                />
+
+                <AWButtonAdd 
+                    isReady = { true }
+                    clickHandler = { save }
+                />
+
+            </AlertWindowContainer>
+
+            <div
+                className = 'SEC_EventNotesItem_btn'
+                onClick = { clickOpen }
+            >
+                <span className = 'SEC_EventNotesItem_icon icon-edit'></span>
+            </div>
+
+            <span className = 'SEC_EventNotesItem_text'>{ inputValue }</span>
+
         </div>
     )
 
@@ -97,15 +94,13 @@ const EventNotesItemComponent = ( props ) => {
 
 export function EventNotesItem( props ){
 
-    const layout = useSelector( layoutSlice );
+    const scheduleResult = useSelector( scheduleResultSlise );
     // const dispatch = useDispatch();
 
     return (
         <EventNotesItemComponent
             { ...props }
-            layout = { layout }
-            eventListById = { layout.eventListById }
-            categoryListById = { layout.categoryListById }
+            scheduleEventsList = { scheduleResult.scheduleEventsList }
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />

@@ -7,10 +7,8 @@ import './CompletedTimeSegment.scss';
 
 import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 import { SchEventContainer } from './../SchEventContainer/SchEventContainer.js';
-// import { GrigItemWrap } from './../GrigItemWrap/GrigItemWrap.js';
 
 import { EventNameItem } from './components/EventNameItem/EventNameItem.js';
-import { PrefixItem } from './components/PrefixItem/PrefixItem.js';
 import { EventNotesItem } from './components/EventNotesItem/EventNotesItem.js';
 import { RemoveItem } from './components/RemoveItem/RemoveItem.js';
 import { CutItem } from './components/CutItem/CutItem.js';
@@ -31,6 +29,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
         durationTime,
         cutPart,
         is_premiere,
+        finalNotes,
 
         eventListById,
 
@@ -66,22 +65,19 @@ const CompletedTimeSegmentComponent = ( props ) => {
         >
             <div className = 'completedTimeSegment'>
 
-                <PrefixItem eventId = { eventId }/>
+                <PremieraToggle
+                    gridEventId = { gridEventId }
+                    is_premiere = { is_premiere }
+                />
                 <EventNameItem 
                     eventId = { eventId }
                     cutPart = { cutPart }
                 />
                 <EventNotesItem 
-                    eventId =   { eventId }
-                    gridEventId =        { gridEventId }
-                    notes =     { notes }
+                    gridEventId =   { gridEventId }
+                    finalNotes =    { finalNotes }
                 />
                 <div className = 'SEC_right_buttons_wrap'>
-
-                    <PremieraToggle
-                        gridEventId = { gridEventId }
-                        is_premiere = { is_premiere }
-                    />
 
                     <CutItem 
                         gridEventId = { gridEventId }

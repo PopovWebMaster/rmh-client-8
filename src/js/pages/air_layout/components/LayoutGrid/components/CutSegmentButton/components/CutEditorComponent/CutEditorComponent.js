@@ -16,6 +16,13 @@ const CutEditorComponentComponent = ( props ) => {
     let {
         isOpen,
         setIsOpen,
+        maxDurationTime,
+        eventParts,
+        setEventsParts,
+
+
+
+        
         id,
         firstSegmentId,
         durationTime,
@@ -27,15 +34,15 @@ const CutEditorComponentComponent = ( props ) => {
 
     } = props;
 
-    let [ gridEventsParts, setGridEventsParts ] = useState([]);
+    // let [ gridEventsParts, setGridEventsParts ] = useState([]);
 
-    let [ maxDurationTime, setMaxDurationTime ] = useState( 0 );
+    // let [ maxDurationTime, setMaxDurationTime ] = useState( 0 );
 
     useEffect( () => {
 
         if( isOpen ){
-            setGridEventsParts( get_grid_event_parts_arr( gridOneDayList, id ) );
-            setMaxDurationTime( get_max_duration( id ) );
+            // setGridEventsParts( get_grid_event_parts_arr( gridOneDayList, id ) );
+            // setMaxDurationTime( get_max_duration( id ) );
 
         };
 
@@ -50,10 +57,10 @@ const CutEditorComponentComponent = ( props ) => {
         <div className = 'cutEditorComponent'>
 
             <CutGridEventTimeTrack 
-                gridEventsParts =   { gridEventsParts }
+                gridEventsParts =   { eventParts }
                 maxDurationTime =   { maxDurationTime }
                 startTime =         { startTime }
-                setGridEventsParts = { setGridEventsParts }
+                setGridEventsParts = { setEventsParts }
                 setIsOpen = { setIsOpen }
             />
             

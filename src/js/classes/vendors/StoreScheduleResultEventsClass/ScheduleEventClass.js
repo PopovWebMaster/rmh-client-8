@@ -13,7 +13,8 @@ export class ScheduleEventClass{
         this.durationTime =     null;
         this.eventId =          null;
         this.firstSegmentId =   null;
-        this.gridEventId =      null;
+        this.id =               null;
+        this.gridEventId =      null;  // this.gridEventId и this.id - это одно и тоже, так надо.
         this.isKeyPoint =       null;
         this.is_premiere =      null;
         this.notes =            null;
@@ -22,6 +23,7 @@ export class ScheduleEventClass{
         this.releases =         null;
 
         this.releaseList = []; // при выводе данных не использовать !!!!!!!
+        this.finalNotes = '';
 
         this.GetData = this.GetData.bind(this);
         this.SetDataFromGridEvent = this.SetDataFromGridEvent.bind(this);
@@ -54,6 +56,7 @@ export class ScheduleEventClass{
         this.durationTime =         durationTime;
         this.eventId =              eventId;
         this.firstSegmentId =       firstSegmentId;
+        this.id =                   id;
         this.gridEventId =          id;
         this.isKeyPoint =           isKeyPoint;
         this.is_premiere =          is_premiere;
@@ -62,6 +65,8 @@ export class ScheduleEventClass{
         this.startTime =            startTime;
         this.releases =             [];
         this.releaseList = [];
+
+        this.finalNotes = this.notes;
 
 
         // this.SetListToStore();
@@ -83,6 +88,7 @@ export class ScheduleEventClass{
             durationTime,
             eventId,
             firstSegmentId,
+            id,
             gridEventId,
             isKeyPoint,
             is_premiere,
@@ -90,6 +96,7 @@ export class ScheduleEventClass{
             pushIt,
             startTime,
             releases,
+            finalNotes,
         } = data;
 
         this.cutPart =              cutPart;
@@ -97,6 +104,7 @@ export class ScheduleEventClass{
         this.durationTime =         durationTime;
         this.eventId =              eventId;
         this.firstSegmentId =       firstSegmentId;
+        this.id =                   id;
         this.gridEventId =          gridEventId;
         this.isKeyPoint =           isKeyPoint;
         this.is_premiere =          is_premiere;
@@ -104,6 +112,8 @@ export class ScheduleEventClass{
         this.pushIt =               pushIt;
         this.startTime =            startTime;
         this.releases =             [ ...releases ];
+        this.finalNotes =           finalNotes;
+
 
         for( let i = 0; i < releases.length; i++ ){
             this.AddRelease( releases[ i ] );
@@ -120,6 +130,7 @@ export class ScheduleEventClass{
             durationTime:       this.durationTime,
             eventId:            this.eventId,
             firstSegmentId:     this.firstSegmentId,
+            id:                 this.id,
             gridEventId:        this.gridEventId,
             isKeyPoint:         this.isKeyPoint,
             is_premiere:        this.is_premiere,
@@ -127,6 +138,7 @@ export class ScheduleEventClass{
             pushIt:             this.pushIt,
             startTime:          this.startTime,
             releases:           this.releases,
+            finalNotes:         this.finalNotes,
         };
     }
     AddRelease( release_id ){

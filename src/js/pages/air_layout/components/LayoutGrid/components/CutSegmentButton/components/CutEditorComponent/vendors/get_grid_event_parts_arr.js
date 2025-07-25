@@ -13,7 +13,6 @@ export const get_grid_event_parts_arr = ( gridOneDayList, gridEventId ) => {
             if( id === gridEventId ){
                 parts.push( { ...sector_list[ i ] } );
             }else if( firstSegmentId !== null && firstSegmentId === gridEventId ){
-                console.dir( sector_list[ i ] );
                 parts.push( { ...sector_list[ i ] } );
             };
         };

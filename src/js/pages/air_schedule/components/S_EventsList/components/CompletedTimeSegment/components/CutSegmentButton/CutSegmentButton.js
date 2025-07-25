@@ -6,103 +6,152 @@ import { useDispatch } from 'react-redux';
 import './CutSegmentButton.scss';
 
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
+import { selectorData as scheduleResultSlise, setScheduleEventsList } from './../../../../../../../../redux/scheduleResultSlise.js';
+import { selectorData as cutEventEditorSlise, setSutEventData } from './../../../../../../../../redux/cutEventEditorSlise.js';
 
-import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { CutEventEditor } from './../../../../../../../../components/CutEventEditor/CutEventEditor.js';
+import { marge_dayList_and_catList } from './../../../../../../../../components/CutEventEditor/marge_dayList_and_catList.js';
 
-
-// import { CutEditorComponent } from './components/CutEditorComponent/CutEditorComponent.js';
-
-// import { EVENT_TYPE } from './../../../../../../config/layout.js';
+import { EVENT_TYPE }       from './../../../../../../../../config/layout.js';
+import { get_event_style }  from './../../../../../../../../helpers/get_event_style.js';
 
 const CutSegmentButtonComponent = ( props ) => {
 
     let {
+        
         gridEventId,
 
         gridDayEventsListById,
+        eventsPartsList,
         eventListById,
+
+        scheduleEventsList,
+        scheduleEventsListByGridEventId,
+        setSutEventData,
+        setScheduleEventsList,
 
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
     let [ showStatus, setShowStatus ] = useState( true );
-    let [ firstSegmentId, setFirstSegmentId ] = useState( null );
-    let [ durationTime, setDurationTime ] = useState( 0 );
-    let [ startTime, setStartTime ] = useState( 0 );
-    let [ isPremiere, setIsPremiere] = useState( false );
 
 
-    // useEffect( () => {
-    //     // if( gridDayEventsListById[ id ] ){
-    //     //     let { 
-    //     //         firstSegmentId,
-    //     //         durationTime,
-    //     //         startTime,
-    //     //         eventId,
-    //     //         is_premiere,
-    //     //     } = gridDayEventsListById[ id ];
+    useEffect( () => {
 
-    //     //     let { type } = eventListById[ eventId ];
-    //     //     if( type === EVENT_TYPE.FILE ){
-    //     //         // setShowStatus( true );
-    //     //         setShowStatus( getShowStatus( firstSegmentId ) );
-    //     //     }else{
-    //     //         setShowStatus( false );
-    //     //     };
+        // console.dir(  'scheduleEventsListByGridEventId[ gridEventId ]' );
+        // console.dir(  scheduleEventsListByGridEventId[ gridEventId ] );
+        // console.dir(  'scheduleEventsListByGridEventId' );
+        // console.dir(  scheduleEventsListByGridEventId );
 
-    //     //     // setShowStatus( getShowStatus( firstSegmentId ) );
-    //     //     setFirstSegmentId( firstSegmentId );
-    //     //     setDurationTime( durationTime );
-    //     //     setStartTime( startTime );
-    //     //     setIsPremiere( is_premiere );
+        if( scheduleEventsListByGridEventId[ gridEventId ] ){
+
+            let { firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
+
+            let event_id = scheduleEventsListByGridEventId[ gridEventId ].eventId;
+            let { type } = eventListById[ event_id ];
+            if( type === EVENT_TYPE.FILE ){
+                setShowStatus( getShowStatus( firstSegmentId ) );
+            }else{
+                setShowStatus( false );
+            };
+
+        }else{
+            setShowStatus( false );
+        };
+
+    }, [ scheduleEventsListByGridEventId ] );
+ 
+    const getShowStatus = ( first_segment_id ) => {
+        let result = false;
+        if( first_segment_id === null ){
+            result = true;
+        }else if( first_segment_id === gridEventId ){
+            result = true;
+        };
+        return result;
+    }
 
 
+    const get_event_parts = () => {
 
-    //     // }else{
-    //     //     setShowStatus( false );
-    //     //     // setIsEctive( false );
-    //     // };
+        let result = [];
 
-    // }, [ gridDayEventsListById ] );
+        for( let i = 0; i < scheduleEventsList.length; i++ ){
+            let { id, firstSegmentId } = scheduleEventsList[ i ];
+            if( id === gridEventId ){
+                result.push( { ...scheduleEventsList[ i ] } );
+            }else if( firstSegmentId !== null && firstSegmentId === gridEventId ){
+                result.push( { ...scheduleEventsList[ i ] } );
+            };
+        };
 
+        return result;
+
+    };
+
+    const getMaxDuration = ( arr ) => {
+        let result = 0;
+        for( let i = 0; i < arr.length; i++ ){
+            let { durationTime } = arr[ i ];
+            result = result + durationTime;
+        };
+        return result;
+
+    }
 
     const click = ( status ) => {
         if( status ){
-            setIsOpen( true )
+            setIsOpen( true );
+
+            let eventParts = get_event_parts();
+
+
+            let { eventId } = eventParts[ 0 ];
+            let eventStyle = get_event_style( eventId );
+
+            if( eventStyle.event_is_not_found ){
+                alert( 'В расисании есть удалённые события, пожалуйста, пересоздайте лист заново' );
+            }else{
+                let eventName = eventListById[ eventId ].name;
+
+                setSutEventData({
+                    eventParts,
+                    maxDurationTime: getMaxDuration( eventParts ),
+                    eventId,
+                    eventStyle,
+                    eventName,
+                });
+
+            };
+
+
+
         };
     }
 
-    // const getShowStatus = ( first_segment_id ) => {
-    //     let result = false;
-    //     if( first_segment_id === null ){
-    //         result = true;
-    //     }else if( first_segment_id === gridEventId ){
-    //         result = true;
-    //     };
-    //     return result;
-    // }
+
+
+    const saveHandler = () => {
+
+        let dayList = marge_dayList_and_catList( scheduleEventsList, eventsPartsList );
+
+        setScheduleEventsList( dayList );
+        setIsOpen( false );
+
+
+    }
+
+
 
     return (
         <div className = 'cutSegmentButton'>
 
-            <AlertWindowContainer
-                isOpen = { isOpen }
+
+            <CutEventEditor
+                isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
-                width = '90vw'
-                height = '90vh'
-                showCurrentDayName = { true }
-            >
-                {/* <CutEditorComponent 
-                    isOpen =            { isOpen }
-                    setIsOpen =         { setIsOpen }
-                    id =                { id }
-                    firstSegmentId =    { firstSegmentId }
-                    durationTime =      { durationTime }
-                    startTime =         { startTime }
-                    isPremiere =        { isPremiere }
-                /> */}
-    
-            </AlertWindowContainer>
+                saveHandler = { saveHandler }
+            />
 
             <div 
                 className = { `CSB_btn ${showStatus? 'isActive': ''}` }
@@ -119,6 +168,12 @@ const CutSegmentButtonComponent = ( props ) => {
 export function CutSegmentButton( props ){
 
         const layout = useSelector( layoutSlice );
+        const scheduleResult = useSelector( scheduleResultSlise );
+        const cutEventEditor = useSelector( cutEventEditorSlise );
+
+
+        
+
         // const navigation = useSelector( navigationSlice );
         const dispatch = useDispatch();
     
@@ -128,8 +183,19 @@ export function CutSegmentButton( props ){
             { ...props }
             gridDayEventsListById = { layout.gridDayEventsListById }
             eventListById = { layout.eventListById  }
+
+            eventsPartsList = { cutEventEditor.eventsPartsList }
+
+
+            scheduleEventsList = { scheduleResult.scheduleEventsList }
+            scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
+
+
+            // aaa = { cutEventEditor.e }
             // setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
-            // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setSutEventData = { ( obj ) => { dispatch( setSutEventData( obj ) ) } }
+            setScheduleEventsList = { ( arr ) => { dispatch( setScheduleEventsList( arr ) ) } }
+
 
         />
     );
