@@ -8,16 +8,29 @@ import './AddAllBtn.scss';
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { BuffferButtonContainer } from './../BuffferButtonContainer/BuffferButtonContainer.js';
 
+import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+
 const AddAllBtnComponent = ( props ) => {
 
     let {
-
+        scheduleEventsList,
+        releaseList,
     } = props;
 
     let [ isActive, setIsActive ] = useState( true );
 
     const click = () => {
-        console.dir( 'Расставить все' );
+
+        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList, false );
+        StoreScheduleResultEvents.AddAllReleases( releaseList );
+        StoreScheduleResultEvents.SetListToStore();
+
+
+
+
+
+
     }
 
 
@@ -42,6 +55,9 @@ export function AddAllBtn( props ){
     return (
         <AddAllBtnComponent
             { ...props }
+
+            scheduleEventsList = { scheduleResult.scheduleEventsList }
+            releaseList = { scheduleResult.releaseList }
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

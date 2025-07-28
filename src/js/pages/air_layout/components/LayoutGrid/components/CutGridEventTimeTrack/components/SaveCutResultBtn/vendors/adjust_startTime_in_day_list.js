@@ -91,7 +91,12 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
 
         };
 
-        result = arr_1;
+        let sortArr = arr_1.sort(  ( a, b ) => { 
+            if( a.startTime > b.startTime ){ return 1 }else{ return -1 ;}
+            
+        } );
+
+        result = sortArr;
 
 
     };

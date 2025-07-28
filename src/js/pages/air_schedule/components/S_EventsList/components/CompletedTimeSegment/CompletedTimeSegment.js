@@ -14,6 +14,8 @@ import { RemoveItem } from './components/RemoveItem/RemoveItem.js';
 import { CutItem } from './components/CutItem/CutItem.js';
 import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
 
+import { ReleasesItem } from './components/ReleasesItem/ReleasesItem.js';
+
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
 
@@ -30,14 +32,18 @@ const CompletedTimeSegmentComponent = ( props ) => {
         cutPart,
         is_premiere,
         finalNotes,
+        releases,
 
         eventListById,
 
     } = props;
 
+
     let [ duration, setDuration ] = useState( 0 );
 
     useEffect( () => {
+
+
 
         if( firstSegmentId === null ){
             let event = eventListById[ eventId ];
@@ -51,13 +57,14 @@ const CompletedTimeSegmentComponent = ( props ) => {
             setDuration( durationTime );
         };
 
+
     }, [ eventListById, durationTime ]);
 
 
     return (
         <SchEventContainer
             startTime =     { startTime }
-            eventId = { eventId }
+            eventId =       { eventId }
             durationTime =  { duration }
             isCompletd =    { true }
             isKeyPoint =    { isKeyPoint }
@@ -77,6 +84,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
                     gridEventId =   { gridEventId }
                     finalNotes =    { finalNotes }
                 />
+
                 <div className = 'SEC_right_buttons_wrap'>
 
                     <CutItem 
@@ -89,6 +97,11 @@ const CompletedTimeSegmentComponent = ( props ) => {
                 </div> 
 
             </div>
+
+            <ReleasesItem
+                releases = { releases }
+                gridEventId = { gridEventId }
+            />
         </SchEventContainer>
 
     )

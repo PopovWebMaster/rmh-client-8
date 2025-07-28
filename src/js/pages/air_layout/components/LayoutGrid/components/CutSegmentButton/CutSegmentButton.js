@@ -60,7 +60,7 @@ const CutSegmentButtonComponent = ( props ) => {
             setShowStatus( false );
         };
 
-    }, [ gridDayEventsListById ] );
+    }, [ gridDayEventsListById, id ] );
 
 
     const click = ( status ) => {

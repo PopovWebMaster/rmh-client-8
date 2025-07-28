@@ -1,0 +1,51 @@
+.CTS_ReleasesItemItem{
+    font-size: 1em;
+
+    .CTS_RI_Item{
+        font-size: 1em;
+        padding: 0.1em 0.2em 0.1em 5em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        >span.name{
+            font-size: 0.55em;
+            color: #343434;
+            font-weight: bold;
+            margin: 0.1em 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+        >span.duration{
+            font-size: 0.55em;
+            color: #343434;
+            font-weight: bold;
+            margin: 0.1em 0.3em;
+            flex-grow: 0;
+            // max-width: 100%;
+        }
+
+        >span.remove{
+            font-size: 0.55em;
+            flex-grow: 0;
+            padding: 0.1em 0.3em;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+            // background-color: red;
+            color: #df7070;
+        }
+        >span.remove:hover{
+            color: #eb4848;
+        }
+        >span.remove:active{
+            color: #ad3131;
+        }
+    }
+
+    .CTS_RI_Item:hover{
+        background-color: #ffffff;
+    }
+}

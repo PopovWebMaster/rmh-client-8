@@ -29,29 +29,14 @@ const TimeTrackComponent = ( props ) => {
 
     } = props;
 
-
     let [ sliderWidth, setSliderWidth ] = useState( 0 );
     let [ sliderLeft, setSliderLeft ] = useState( 0 );
-    // let [ currentTimeSec, setCurrentTimeSec] = useState( 0 );
-    // console.dir( 'TimeTrack' );
-    // console.dir({
-    //     timeSpaceTo,
-    //     timeSpaceFrom,
-    //     target,
-    //     startTime,
-    //     setTimeTarget,
-    //     duration,
-    //     sliderWidth,
-    //     sliderLeft,
-    //     flag,
-    // });
 
 
     useEffect( () => {
         if( duration === null ){
             setSliderWidth( 0 );
             setSliderLeft( 0 );
-            // flag = true;
         }else{
             let slider_width_proc = round_to_number( ( duration * 100 )/(timeSpaceTo - timeSpaceFrom ), 5 )  ;
             if( slider_width_proc <= 1){
@@ -65,7 +50,12 @@ const TimeTrackComponent = ( props ) => {
 
         flag = true;
 
-    }, [ duration ] );
+    }, [ 
+        duration,
+        timeSpaceTo,
+        timeSpaceFrom,
+        startTime,
+ ] );
 
     useEffect( () => {
 

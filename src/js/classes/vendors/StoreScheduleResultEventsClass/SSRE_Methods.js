@@ -32,10 +32,24 @@ export class SSRE_Methods{
     }
 
     SetLastGridEventId( ScheduleEvent ){
-        let id = ScheduleEvent.gridEventId;
-        if( this.lastGridEventId < id ){
-            this.lastGridEventId = id;
+        let id =            ScheduleEvent.id;
+        let gridEventId =   ScheduleEvent.gridEventId;
+
+        if( id !== null ){
+            if( this.lastGridEventId < id ){
+                this.lastGridEventId = id;
+            };
+        }else{
+            if( gridEventId !== null ){
+                if( this.lastGridEventId < gridEventId ){
+                    this.lastGridEventId = gridEventId;
+                };
+            };
         };
+
+        // if( this.lastGridEventId < id ){
+        //     this.lastGridEventId = id;
+        // };
     }
 
 

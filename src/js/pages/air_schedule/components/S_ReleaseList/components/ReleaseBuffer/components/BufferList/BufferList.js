@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './BufferList.scss';
 
-import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultSlise, setDragebleReleaseId,
+    setDragebleReleaseEventId, } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 
@@ -21,6 +22,11 @@ const BufferListComponent = ( props ) => {
         height,
         releaseList,
         eventListById,
+        gridDayEventsListById,
+        usedReleasesById,
+
+        setDragebleReleaseId,
+    setDragebleReleaseEventId,
 
     } = props;
 
@@ -34,9 +40,18 @@ const BufferListComponent = ( props ) => {
 
     }, [ releaseList ] );
 
-    const drag_start = ( e ) => {
-        console.dir( e );
+    const drag_start = ( e, item ) => {
+        let {
+            event_id, id
+        } = item;
+        setDragebleReleaseId( id )
+        setDragebleReleaseEventId( event_id )
+        
+    }
 
+    const drag_end = () => {
+        setDragebleReleaseId( null )
+        setDragebleReleaseEventId( null )
     }
 
 
@@ -49,30 +64,37 @@ const BufferListComponent = ( props ) => {
                 releaseDuration,
                 event_id,
                 category_id,
+                grid_event_id,
+                id,
+
             } = item;
 
-            let charYes = eventListById[ event_id ]? true: false;
+            let eventName = eventListById[ event_id ]? eventListById[ event_id ].name: '';
+
+            if( usedReleasesById[ id ] ){
+                return '';
+            }else{
+                return (
+                    <div
+                        key = { index }
+                        className = 'RB_BufferList_item'
+                        draggable = { true }
+                        onDragStart = { ( e ) => { drag_start( e, item ) } }
+                        onDragEnd = { drag_end }
+                        
+                    >
+                        <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
+                        <span className = 'name'>{ releaseName }</span>
+                        <span className = 'eventName'>{ eventName }</span>
+                        <span className = 'duration_name'>Хрон.</span>
+                        <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
+
+                    </div>
+                )
+            };
 
 
-            return (
-                <div
-                    key = { index }
-                    className = 'RB_BufferList_item'
-                    draggable = { true }
-                    onDragStart = { drag_start }
-                    
-                >
-                    <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
-                    <span className = 'name'>{ releaseName }</span>
-                    <span className = 'duration_name'>Хрон.</span>
-                    <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
-                    {/* <span className = 'char_name'>График</span>
-                    <span className = { charYes? 'char_yes': 'char_not' }>{ charYes? 'Да': 'Нет' }</span> */}
-
-
-
-                </div>
-            )
+            
         });
 
         return div;
@@ -119,16 +141,22 @@ export function BufferList( props ){
     
 
     
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <BufferListComponent
             { ...props }
 
             releaseList = { scheduleResult.releaseList }
-            eventListById = { layout.eventListById }
+            usedReleasesById = { scheduleResult.usedReleasesById }
 
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            eventListById = { layout.eventListById }
+            gridDayEventsListById = { layout.gridDayEventsListById }
+
+            setDragebleReleaseId = { ( val ) => { dispatch( setDragebleReleaseId( val ) ) } }
+            setDragebleReleaseEventId = { ( val ) => { dispatch( setDragebleReleaseEventId( val ) ) } }
+
+
 
         />
     );

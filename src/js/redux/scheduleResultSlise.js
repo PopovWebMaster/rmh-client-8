@@ -31,6 +31,15 @@ export const scheduleResultSlise = createSlice({
         scheduleEventsListByGridEventId: {},
 
 
+        dragebleReleaseId: null,
+        dragebleReleaseEventId: null,
+
+        usedReleasesById: {
+
+        },
+
+
+
 
 
 
@@ -99,12 +108,38 @@ export const scheduleResultSlise = createSlice({
         setScheduleEventsList: ( state, action ) => {
             state.scheduleEventsList =  action.payload;
             let obj = {};
+            let usedReleses = {};
             for( let i = 0; i < action.payload.length; i++ ){
-                obj[ action.payload[ i ].gridEventId ] = { ...action.payload[ i ] };
+                if( action.payload[ i ].gridEventId !== null ){
+                    obj[ action.payload[ i ].gridEventId ] = { ...action.payload[ i ] };
+                    let { releases } = action.payload[ i ];
+                    for( let y = 0; y < releases.length; y++ ){
+                        let { id } = releases[ y ];
+                        usedReleses[ id ] = true;
+                    };
+                };
             };
             state.scheduleEventsListByGridEventId = obj;
+            state.usedReleasesById = usedReleses;
+
         },
 
+
+        setDragebleReleaseId: ( state, action ) => {
+            state.dragebleReleaseId =  action.payload;
+        },
+
+
+        setDragebleReleaseEventId: ( state, action ) => {
+            state.dragebleReleaseEventId =  action.payload;
+        },
+
+        setUsedReleasesById: ( state, action ) => {
+            state.usedReleasesById =  action.payload;
+        },
+
+
+        
 
 
         
@@ -126,6 +161,10 @@ export const {
     setReleaseListById,
     setReleaseListByGridEventId,
     setScheduleEventsList,
+
+    setDragebleReleaseId,
+    setDragebleReleaseEventId,
+    setUsedReleasesById,
 
 
 } = scheduleResultSlise.actions;
@@ -151,6 +190,13 @@ export const selectorData = ( state ) => {
         releaseListByGridEventId: state.scheduleResult.releaseListByGridEventId,
         scheduleEventsList: state.scheduleResult.scheduleEventsList,
         scheduleEventsListByGridEventId: state.scheduleResult.scheduleEventsListByGridEventId,
+
+        dragebleReleaseId: state.scheduleResult.dragebleReleaseId,
+        dragebleReleaseEventId: state.scheduleResult.dragebleReleaseEventId,
+        usedReleasesById: state.scheduleResult.usedReleasesById,
+
+
+
 
 
 

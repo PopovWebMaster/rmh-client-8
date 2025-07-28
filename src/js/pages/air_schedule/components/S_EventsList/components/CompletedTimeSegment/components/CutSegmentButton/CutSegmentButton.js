@@ -15,6 +15,10 @@ import { marge_dayList_and_catList } from './../../../../../../../../components/
 import { EVENT_TYPE }       from './../../../../../../../../config/layout.js';
 import { get_event_style }  from './../../../../../../../../helpers/get_event_style.js';
 
+import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+
+
+
 const CutSegmentButtonComponent = ( props ) => {
 
     let {
@@ -38,11 +42,6 @@ const CutSegmentButtonComponent = ( props ) => {
 
     useEffect( () => {
 
-        // console.dir(  'scheduleEventsListByGridEventId[ gridEventId ]' );
-        // console.dir(  scheduleEventsListByGridEventId[ gridEventId ] );
-        // console.dir(  'scheduleEventsListByGridEventId' );
-        // console.dir(  scheduleEventsListByGridEventId );
-
         if( scheduleEventsListByGridEventId[ gridEventId ] ){
 
             let { firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
@@ -59,7 +58,7 @@ const CutSegmentButtonComponent = ( props ) => {
             setShowStatus( false );
         };
 
-    }, [ scheduleEventsListByGridEventId ] );
+    }, [ scheduleEventsListByGridEventId, gridEventId ] );
  
     const getShowStatus = ( first_segment_id ) => {
         let result = false;
@@ -105,7 +104,6 @@ const CutSegmentButtonComponent = ( props ) => {
 
             let eventParts = get_event_parts();
 
-
             let { eventId } = eventParts[ 0 ];
             let eventStyle = get_event_style( eventId );
 
@@ -135,9 +133,12 @@ const CutSegmentButtonComponent = ( props ) => {
 
         let dayList = marge_dayList_and_catList( scheduleEventsList, eventsPartsList );
 
-        setScheduleEventsList( dayList );
-        setIsOpen( false );
+        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateFromScheduleEventsList( dayList );
+        StoreScheduleResultEvents.SetListToStore();
 
+        // setScheduleEventsList( dayList );
+        setIsOpen( false );
 
     }
 

@@ -90,8 +90,12 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
 
 
         };
+        let sortArr = arr_1.sort(  ( a, b ) => { 
+            if( a.startTime > b.startTime ){ return 1 }else{ return -1 ;}
+            
+        } );
 
-        result = arr_1;
+        result = sortArr;
 
 
     };

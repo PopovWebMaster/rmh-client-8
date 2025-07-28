@@ -44,6 +44,8 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
     let result = [];
     let arr_0 = [];
 
+    
+
     let next_startTime = arr[ 0 ].startTime;
 
     for( let i = 0; i < arr.length; i++ ){
@@ -58,6 +60,7 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
             arr_0.push( { ...item } );
         };
         next_startTime = startTime + durationTime + 1;
+
     };
 
     let last_duration = arr_0[ arr_0.length - 1 ].durationTime;
@@ -69,7 +72,6 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
 
         let arr_1 = [];
 
-        // let correct_startTime = timeSpaceTo - arr_0[ arr_0.length - 1 ].durationTime - 1;
         let correct_startTime = timeSpaceTo;
 
         for( let i = arr_0.length - 1; i >= 0; i-- ){
@@ -81,8 +83,14 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
             if( startTime > correct_startTime ){
                 let item = { ...arr_0[ i ] };
                 item.startTime = correct_startTime;
-                // correct_startTime = correct_startTime;
                 arr_1.push( { ...item } );
+
+
+                // console.dir( 'arr_0[ i ]' );
+                // console.dir( arr_0[ i ] );
+                // console.dir( 'arr_1' );
+                // console.dir( arr_1 );
+
             }else{
                 arr_1.push( { ...arr_0[ i ] } );
                 correct_startTime = startTime;
@@ -96,13 +104,11 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
             
         } );
 
+
         result = sortArr;
 
 
     };
-
-    
-
 
 
 

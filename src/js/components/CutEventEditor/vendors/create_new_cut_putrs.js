@@ -40,6 +40,8 @@ export const create_new_cut_putrs = ( cut_point ) => {
             let new_item = { ...eventsPartsList[ i ] };
             next_cut_part = next_cut_part + 1;
             new_item.id = null;
+            new_item.gridEventId = null;
+
             new_item.startTime = startTime_1;
             new_item.durationTime = dutationTime_1;
             new_item.cutPart = next_cut_part;

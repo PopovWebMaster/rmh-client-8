@@ -14,6 +14,8 @@ import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
 import { StartTimeEditButton } from './../StartTimeEditButton/StartTimeEditButton.js';
 
+import { StoreScheduleResultEventsClass } from './../../../../../../classes/StoreScheduleResultEventsClass.js';
+
 const SchEventContainerComponent = ( props ) => {
 
     let {
@@ -29,11 +31,16 @@ const SchEventContainerComponent = ( props ) => {
         // gridDayEventsListById,
         eventListById,
 
+        dragebleReleaseId,
+        dragebleReleaseEventId,
+        scheduleEventsList,
+
         children,
     } = props;
 
     let [ isError, setIsError ] = useState( false );
     let [ eventType, setEventType ] = useState( '' );
+    let [ isLighter, setIsLighter ] = useState( false );
 
     useEffect( () => {
         if( eventListById[ eventId ] ){
@@ -48,6 +55,7 @@ const SchEventContainerComponent = ( props ) => {
         };
 
     }, [ gridEventId ] );
+
 
     useEffect( () => {
         if( durationTime >= 0 ){
@@ -68,18 +76,56 @@ const SchEventContainerComponent = ( props ) => {
 
     };
 
-   
+   const drag_over = ( e ) => {
+        e.preventDefault()
+        if( dragebleReleaseEventId !== null ){
+            if( dragebleReleaseEventId === eventId ){
+                setIsLighter( true );
+            }
+
+        }else{
+            setIsLighter( false );
+        }
+   }
+
+   const drag_leave = ( e ) => {
+        setIsLighter( false );
+   }
+
+   const drop = () => {
+        // console.dir({
+        //     dragebleReleaseId,
+        //     dragebleReleaseEventId,
+        // });
+
+        setIsLighter( false );
+
+        if( dragebleReleaseEventId === eventId && dragebleReleaseEventId !== null ){ 
+            let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+            StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+            StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
+            StoreScheduleResultEvents.SetListToStore();
+
+        };
+
+        
+
+   }
 
     return (
 
-       <div className = 'schEventContainer'>
+       <div 
+            className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }
+            onDragOver =    { drag_over }
+            onDragLeave =   { drag_leave }
+            onDrop =        { drop }
+        >
             <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
                 { isCompletd? (
                     <div className = 'schEventItemTime'>
-                        {/* <span 
-                            className = { `SEC_time ${isKeyPoint? 'isKeyPoint': ''}` }
-                        >{ convert_sec_to_time( startTime ) }</span> */}
+                        
                         <StartTimeEditButton
+                            startTime = { startTime }
                             isKeyPoint = { isKeyPoint }
                             gridEventId = { gridEventId }
                         />
@@ -120,6 +166,12 @@ export function SchEventContainer( props ){
             { ...props }
 
             scheduleEventsList = { scheduleResult.scheduleEventsList }
+
+
+            dragebleReleaseId = { scheduleResult.dragebleReleaseId }
+            dragebleReleaseEventId = { scheduleResult.dragebleReleaseEventId }
+
+
             eventListById = { layout.eventListById }
 
 

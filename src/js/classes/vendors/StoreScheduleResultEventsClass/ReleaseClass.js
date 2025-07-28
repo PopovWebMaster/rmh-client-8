@@ -62,7 +62,29 @@ export class ReleaseClass {
 
 
         this.GetDurationTime = this.GetDurationTime.bind(this);
+        this.GetData = this.GetData.bind(this);
 
+
+
+    }
+
+    GetData(){
+        return {
+            YYYY_MM_DD:         this.YYYY_MM_DD,
+            air_notes:          this.air_notes,
+            applicationName:    this.applicationName,
+            application_id:     this.application_id,
+            category_id:        this.category_id,
+            event_id:           this.event_id,
+            file_list:          this.file_list,
+            grid_event_id:      this.grid_event_id,
+            id:                 this.id,
+            manager_id:         this.manager_id,
+            releaseDuration:    this.releaseDuration,
+            releaseName:        this.releaseName,
+            startTime:          this.startTime,
+            sub_application_id: this.sub_application_id,
+        }
 
     }
 

@@ -29,8 +29,18 @@
             padding: 0.1em 0.3em;
             color: #343434;
             flex-grow: 1;
+            max-width: calc( 100% - 20em );
+            overflow: hidden;
+            white-space: preserve nowrap;
+        }
+        >.eventName{
+            font-size: 0.6em;
+            padding: 0.1em 0.3em;
+            color: #ffffff;
+            flex-grow: 1;
             max-width: calc( 100% - 19em );
             overflow: hidden;
+            text-align: right;
             white-space: preserve nowrap;
         }
         >.duration_name{

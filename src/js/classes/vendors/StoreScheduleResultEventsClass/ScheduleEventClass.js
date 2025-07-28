@@ -4,6 +4,7 @@ import { get_grid_event_by_id } from './get_grid_event_by_id.js';
 import { get_event_by_id } from './../StoreScheduleResultEventsClass/get_event_by_id.js';
 import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../../../config/layout.js';
 
+
 export class ScheduleEventClass{
     constructor(){
 
@@ -30,6 +31,12 @@ export class ScheduleEventClass{
         this.SetDataFromScheduleEvent = this.SetDataFromScheduleEvent.bind(this);
         this.AddRelease = this.AddRelease.bind(this);
         this.UpdateDurationTime = this.UpdateDurationTime.bind(this);
+        this.SetIdIfNull = this.SetIdIfNull.bind(this);
+        this.RemoveRelease = this.RemoveRelease.bind(this);
+
+
+
+        
 
 
     }
@@ -81,7 +88,7 @@ export class ScheduleEventClass{
        
     }
 
-    SetDataFromScheduleEvent( data ){
+    SetDataFromScheduleEvent( data, withReleses = true ){
         let {
             cutPart,
             dayNum,
@@ -99,6 +106,15 @@ export class ScheduleEventClass{
             finalNotes,
         } = data;
 
+        if( withReleses ){
+            for( let i = 0; i < releases.length; i++ ){
+                let releases_id = releases[ i ].id;
+                this.AddRelease( releases_id );
+            };
+        }else{
+
+        };
+
         this.cutPart =              cutPart;
         this.dayNum =               dayNum;
         this.durationTime =         durationTime;
@@ -111,19 +127,20 @@ export class ScheduleEventClass{
         this.notes =                notes;
         this.pushIt =               pushIt;
         this.startTime =            startTime;
-        this.releases =             [ ...releases ];
+        this.releases =             [];
         this.finalNotes =           finalNotes;
 
-
-        for( let i = 0; i < releases.length; i++ ){
-            this.AddRelease( releases[ i ] );
-        };
-
-        this.UpdateDurationTime();
 
     }
 
     GetData(){
+
+        let releases = [];
+
+        for( let i = 0; i < this.releaseList.length; i++ ){
+            releases.push( this.releaseList[ i ].GetData() );
+        };
+
         return {
             cutPart:            this.cutPart,
             dayNum:             this.dayNum,
@@ -137,32 +154,78 @@ export class ScheduleEventClass{
             notes:              this.notes,
             pushIt:             this.pushIt,
             startTime:          this.startTime,
-            releases:           this.releases,
+            releases:           releases,
             finalNotes:         this.finalNotes,
         };
     }
     AddRelease( release_id ){
         let Release = new ReleaseClass( release_id );
         this.releaseList.push( Release );
+
+        // console.dir( this );
+    }
+
+    RemoveRelease( release_id ){
+        // let Release = new ReleaseClass( release_id );
+        // this.releaseList.push( Release );
+        let arr = [];
+
+        for( let i = 0; i < this.releaseList.length; i++ ){
+            if( this.releaseList[ i ].id === release_id ){
+
+            }else{
+                arr.push( this.releaseList[ i ] );
+            };
+
+        };
+
+        this.releaseList = arr;
+
+        // console.dir( this );
     }
 
     UpdateDurationTime(){
         let { type } = get_event_by_id( this.eventId );
         if( type ){
-            let { durationTime } = get_grid_event_by_id( this.gridEventId );
+
+            let durationTime = 0;
+
             if( this.releaseList.length > 0 ){
-                durationTime = 0;
+
                 for( let i = 0; i < this.releaseList.length; i++ ){
                     durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
+
                 };
+                
+
             }else{
                 if( type === EVENT_TYPE.BLOCK ){
                     durationTime = MIN_EVENT_DURATION_SEC
+                }else{
+                    if( this.gridEventId !== null ){
+                        let event = get_grid_event_by_id( this.gridEventId );
+                        durationTime = event.durationTime;
+                    }else{
+                        durationTime = this.durationTime;
+                    }
                 };
             };
             this.durationTime = durationTime;
+
+            
         }
     }
+
+    SetIdIfNull( newId ){
+
+        if( this.gridEventId === null || this.id === null ){
+            this.gridEventId =      newId;
+            this.id =               newId;
+        };
+
+    }
+
+
 }
 
 

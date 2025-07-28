@@ -17,6 +17,7 @@ import { set_schedule_list_changes_to_store } from './../../../../vendors/set_sc
 const StartTimeEditButtonComponent = ( props ) => {
 
     let {
+        startTime,
         isKeyPoint,
         gridEventId,
 
@@ -28,7 +29,9 @@ const StartTimeEditButtonComponent = ( props ) => {
     let [ isOpen, setIsOpen ] = useState( false );
 
     let [ durationTime, setDurationTime ] = useState( 0 );
-    let [ startTime, setStartTime] = useState( 0 );
+    // let [ startTime, setStartTime] = useState( 0 );
+    let [ startTimeNext, setStartTimeNext ] = useState( 0 );
+
     let [ timeSpaceTo, setTimeSpaceTo ] = useState( 0 );
     let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
     let [ eventId, setEventId ] = useState( null );
@@ -36,7 +39,13 @@ const StartTimeEditButtonComponent = ( props ) => {
     useEffect( () => {
         get_day_event_data();
 
-    }, [ gridEventId, isOpen ] )
+    }, [ 
+        gridEventId, 
+        isOpen, 
+        scheduleEventsList,
+    ] )
+
+    useEffect( () => { setStartTimeNext( startTime ) }, [startTime] );
 
     const clickAdd = () => {
         
@@ -47,7 +56,12 @@ const StartTimeEditButtonComponent = ( props ) => {
 
         for( let i = 0; i < scheduleEventsList.length; i++ ){
             if( scheduleEventsList[ i ].gridEventId === gridEventId ){
-                let { durationTime, startTime, eventId } = scheduleEventsList[ i ];
+                let { 
+                    durationTime, 
+                    // startTime, 
+                    eventId 
+                } = scheduleEventsList[ i ];
+
                 let pointFrom = 0;
                 let pointTo = 0;
                 if( scheduleEventsList[ i - 1 ]){
@@ -62,7 +76,9 @@ const StartTimeEditButtonComponent = ( props ) => {
 
                 setEventId( eventId );
                 setDurationTime( durationTime );
-                setStartTime( startTime );
+                // setStartTime( startTime );
+                setStartTimeNext( scheduleEventsList[ i ].startTime );
+
                 setTimeSpaceFrom( pointFrom );
                 setTimeSpaceTo( pointTo );
                 break;
@@ -71,7 +87,7 @@ const StartTimeEditButtonComponent = ( props ) => {
     }
 
     const clickSaveHandler = () => {
-        set_schedule_list_changes_to_store( gridEventId, { startTime } );
+        set_schedule_list_changes_to_store( gridEventId, { startTime: startTimeNext } );
         setIsOpen( false );
     };
     
@@ -82,18 +98,22 @@ const StartTimeEditButtonComponent = ( props ) => {
             isOpen =            { isOpen }
             setIsOpen =         { setIsOpen }
             durationTime =      { durationTime }
-            startTime =         { startTime }
+            // startTime =         { startTime }
+            startTime =         { startTimeNext }
+
             timeSpaceTo =       { timeSpaceTo }
             timeSpaceFrom =     { timeSpaceFrom }
             eventId =           { eventId }
-            setStartTime =      { setStartTime }
+            // setStartTime =      { setStartTime }
+            setStartTime =      { setStartTimeNext }
+
             clickSaveHandler =  { clickSaveHandler }
         />
     
         <span 
             className = { `SEC_time ${isKeyPoint? 'isKeyPoint': ''}` }
             onClick = { clickAdd }
-        >{ convert_sec_to_time( startTime ) }</span>
+        >{ convert_sec_to_time( startTimeNext ) }</span>
     </>)
 
 };
