@@ -30,6 +30,10 @@ const ReleasesItemComponent = ( props ) => {
     }
 
     const create = ( arr ) => {
+
+        // console.dir( 'releases' );
+        // console.dir( arr );
+
         let div = arr.map( ( item, index ) => {
             let {
                 applicationName,

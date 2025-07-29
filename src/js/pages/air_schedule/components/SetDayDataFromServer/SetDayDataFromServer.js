@@ -5,7 +5,10 @@ import { useDispatch } from 'react-redux';
 
 import './SetDayDataFromServer.scss';
 
-import { selectorData as scheduleResultSlise } from './../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultSlise, setScheduleEventsList } from './../../../../redux/scheduleResultSlise.js';
+import { setGridCurrentDay } from './../../../../redux/layoutSlice.js';
+
+
 import { selectorData as spinnerSlice, setSpinnerIsActive } from './../../../../redux/spinnerSlice.js';
 
 
@@ -25,7 +28,10 @@ const SetDayDataFromServerComponent = ( props ) => {
         currentDate,
         currentMonth,
         currentYear,
+        currentDayNum,
         setSpinnerIsActive,
+        setGridCurrentDay,
+        setScheduleEventsList,
 
 
     } = props;
@@ -51,6 +57,8 @@ const SetDayDataFromServerComponent = ( props ) => {
                         setSpinnerIsActive( false );
                         let { release_list } = response;
                         set_release_list_to_store( release_list );
+                        setGridCurrentDay( currentDayNum );
+                        setScheduleEventsList( [] );
 
                     }else{
                         if( IS_DEVELOPMENT ){
@@ -107,9 +115,15 @@ export function SetDayDataFromServer( props ){
             currentDate =   { scheduleResult.currentDate }
             currentMonth =  { scheduleResult.currentMonth }
             currentYear =   { scheduleResult.currentYear }
+            currentDayNum =   { scheduleResult.currentDayNum }
+
 
 
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setGridCurrentDay = { ( val ) => { dispatch( setGridCurrentDay( val ) ) } }
+            setScheduleEventsList = { ( val ) => { dispatch( setScheduleEventsList( val ) ) } }
+
+
             
 
             

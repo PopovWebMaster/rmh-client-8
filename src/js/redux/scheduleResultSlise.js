@@ -34,9 +34,7 @@ export const scheduleResultSlise = createSlice({
         dragebleReleaseId: null,
         dragebleReleaseEventId: null,
 
-        usedReleasesById: {
-
-        },
+        usedReleasesById: {},
 
 
 

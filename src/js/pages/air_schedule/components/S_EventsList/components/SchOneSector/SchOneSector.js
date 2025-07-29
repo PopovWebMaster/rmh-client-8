@@ -27,7 +27,6 @@ const SchOneSectorComponent = ( props ) => {
 
     } = props;
 
-
     const create = ( arr ) => {
 
         let div = arr.map( ( item, index ) => {

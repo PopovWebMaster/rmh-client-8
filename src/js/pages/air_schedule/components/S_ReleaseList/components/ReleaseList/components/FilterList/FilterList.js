@@ -24,8 +24,8 @@ const FilterListComponent = ( props ) => {
 
     } = props;
 
-    console.dir( 'filteredList' );
-    console.dir( filteredList );
+    // console.dir( 'filteredList' );
+    // console.dir( filteredList );
 
     const create = ( arr ) => {
 

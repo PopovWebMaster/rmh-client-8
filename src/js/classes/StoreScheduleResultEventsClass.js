@@ -11,7 +11,7 @@ import { get_category_by_event_id } from './vendors/StoreScheduleResultEventsCla
 
 import { adjust_startTime_in_day_list } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_day_list.js';
 
-
+import { EVENT_TYPE } from './../config/layout.js';
 
 export class StoreScheduleResultEventsClass extends SSRE_Methods{
     constructor( props ){
@@ -31,6 +31,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddRelease = this.AddRelease.bind(this);
         this.RemoveRelease = this.RemoveRelease.bind(this);
         this.AddAllReleases = this.AddAllReleases.bind(this);
+        this.RemoveEvent = this.RemoveEvent.bind(this);
+        this.AddEvent = this.AddEvent.bind(this);
+
+        
 
 
         
@@ -53,6 +57,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     CreateFromScheduleEventsList( arr, withReleses = true ){
 
+
+
         for( let i = 0; i < arr.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromScheduleEvent( arr[ i ], withReleses );
@@ -64,7 +70,34 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             this.list[ i ].SetIdIfNull( this.lastGridEventId + 1 );
             this.SetLastGridEventId( this.list[ i ] );
         }
+    }
 
+    AddEvent( params ){
+        let {
+            gridCurrentDay,
+            isAKeyPoint,
+            startTime,
+            eventId,
+            durationTime,
+        } = params;
+        let newId = this.lastGridEventId + 1;
+        let ScheduleEvent = new ScheduleEventClass();
+        ScheduleEvent.SetDataFromGridEvent( {
+            cutPart: null,
+            dayNum: gridCurrentDay,
+            durationTime,
+            eventId,
+            firstSegmentId: null,
+            id: newId,
+            isKeyPoint: isAKeyPoint,
+            is_premiere: false,
+            notes: '',
+            pushIt: null,
+            startTime,
+        } );
+        this.list.push( ScheduleEvent );
+        this.SetLastGridEventId( ScheduleEvent );
+        this.SortList();
 
     }
 
@@ -104,12 +137,67 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     AddRelease( gridEventId, releaseId ){
 
-        for( let i = 0; i < this.list.length; i++ ){
-            if( this.list[ i ].gridEventId === gridEventId ){
-                this.list[ i ].AddRelease( releaseId );
-                this.list[ i ].UpdateDurationTime();
-                break;
+        let Event = this.GetEventData( gridEventId );
+        
+        if( Event ){
+            if( Event.firstSegmentId === null ){
+                let type = this.GetEventType( Event.eventId );
+                if( type === EVENT_TYPE.BLOCK ){
+                    Event.AddRelease( releaseId );
+                    Event.UpdateDurationTime();
+                }else{
+                    if( Event.releases.length === 0 ){
+                        Event.AddRelease( releaseId );
+                        Event.UpdateDurationTime();
+                    };
+                };
+            }else if( Event.gridEventId === gridEventId ){
+
+                let EventParts = this.GetEventParts( gridEventId );
+
+                let releaseData = this.GetReleaseData( releaseId );
+                let { releaseDuration, applicationName, releaseName } = releaseData;
+                let rest_duration = releaseDuration;
+
+                let removeEventList = [];
+
+                for( let i = 0; i < EventParts.length; i++ ){
+                    let { durationTime, releases } = EventParts[ i ];
+                    if( releases.length === 0 ){
+                        let duration = 0;
+
+                        if( rest_duration >= durationTime ){
+                            if( EventParts[ i + 1 ] ){
+                                duration = durationTime;
+                                rest_duration = rest_duration - durationTime;
+                            }else{
+                                duration = rest_duration;
+                                rest_duration = 0;
+                            };
+                        }else{
+                            duration = rest_duration;
+                            rest_duration = 0
+                        };
+
+                        if( duration > 0 ){
+                            let data = { ...releaseData };
+                            data.releaseDuration = duration;
+                            data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                            EventParts[ i ].AddReleaseByData( data );
+                            EventParts[ i ].UpdateDurationTime();
+                        }else{
+                            let { gridEventId } = EventParts[ i ];
+                            removeEventList.push( gridEventId );
+                        };
+                    };
+                };
+
+                for( let i = 0; i < removeEventList.length; i++ ){
+                    this.RemoveEvent( removeEventList[ i ] )
+                };
+
             };
+
         };
 
     }
@@ -127,10 +215,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     AddAllReleases( allReleases ){
 
-        console.dir( 'allReleases' );
-        console.dir( allReleases );
-        console.dir( this );
-
         let allByGEId = {};
         for( let i = 0; i < allReleases.length; i++ ){
             let { grid_event_id, id } = allReleases[ i ];
@@ -147,8 +231,9 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             let gridEventId = this.list[ i ].gridEventId;
             if( gridEventId !== null ){
                 if( allByGEId[ gridEventId ] ){
-                    for(let y = 0; y < allByGEId[ gridEventId ].length; y++ ){
-                        this.list[ i ].AddRelease( allByGEId[ gridEventId ][ y ] );
+                    for( let y = 0; y < allByGEId[ gridEventId ].length; y++ ){
+                        let releaseId = allByGEId[ gridEventId ][ y ];
+                        this.AddRelease( gridEventId, releaseId );
                         this.list[ i ].UpdateDurationTime();
                     };
                 };
@@ -157,6 +242,19 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
 
+    }
+
+    RemoveEvent( gridEventId ){
+        let newList = [];
+        for( let i = 0; i < this.list.length; i++ ){
+
+            if( this.list[ i ].gridEventId === gridEventId ){
+
+            }else{
+                newList.push( this.list[ i ] );
+            };
+        };
+        this.list = newList;
     }
     
 }

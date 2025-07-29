@@ -12,7 +12,7 @@ import { SchEventContainer } from './../SchEventContainer/SchEventContainer.js';
 
 import { get_height_em } from './vendors/get_height_em.js';
 import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
-import { AddNewEventComponent } from './components/AddNewEventComponent/AddNewEventComponent.js';
+import { AddNewEventComponent } from './../../'
 // import { AddNewGridEventComponent } from './../AddNewGridEventComponent/AddNewGridEventComponent.js';
 // import { ConfirmationOfSaving } from './../ConfirmationOfSaving/ConfirmationOfSaving.js';
 // import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js';
@@ -29,10 +29,15 @@ const EmptyTimeSegmentComponent = ( props ) => {
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+    let [ isConfirm, setIsConfirm ] = useState( false );
 
     const clickAdd = () => {
-        setIsOpen( true );
+
     };
+
+    const saveFirst = () => {
+
+    }
 
     return (
         <SchEventContainer
@@ -45,19 +50,27 @@ const EmptyTimeSegmentComponent = ( props ) => {
                 setIsOpen = { setIsOpen }
                 width =     '90vw'
                 height =    '80vh'
-                title = 'Новое событие'
+                title = 'Новое событие сетки'
                 showCurrentDayName = { true }
             >
-
-                <AddNewEventComponent
+                {/* <AddNewGridEventComponent 
                     isOpen =    { isOpen }
                     setIsOpen = { setIsOpen }
 
                     timeSpaceFrom = { startTime }
                     timeSpaceTo =   { startTime + durationTime }
-                />
+
+                /> */}
 
             </AlertWindowContainer>
+
+            {/* <ConfirmationOfSaving 
+                isOpen = { isConfirm }
+                setIsOpen = { setIsConfirm }
+                comfirmHandler = { saveFirst }
+            /> */}
+
+
 
             <div 
                 className = 'emptyTimeSegment'

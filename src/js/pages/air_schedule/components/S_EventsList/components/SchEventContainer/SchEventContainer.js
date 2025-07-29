@@ -34,6 +34,7 @@ const SchEventContainerComponent = ( props ) => {
         dragebleReleaseId,
         dragebleReleaseEventId,
         scheduleEventsList,
+        scheduleEventsListByGridEventId,
 
         children,
     } = props;
@@ -67,6 +68,27 @@ const SchEventContainerComponent = ( props ) => {
 
     let text_seccess = 'Свободно:';
     let text_error = 'Ошибка, нарушение хронометража! Превышен на ';
+
+    const getTargetState = () => {
+        let result = false;
+        if( dragebleReleaseEventId !== null ){
+            if( dragebleReleaseEventId === eventId ){
+                if( eventType === EVENT_TYPE.BLOCK ){
+                    result = true;
+                }else{
+                    let { releases, firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
+                    if( firstSegmentId === null || firstSegmentId === gridEventId ){
+                        if( releases.length === 0 ){
+                            result = true;
+                        };
+                    };
+                };
+            };
+        };
+        return result;
+
+    }
+
     const getDuration = ( val ) => {
         if( val >= 0 ){
             return convert_sec_to_time( durationTime )
@@ -76,16 +98,14 @@ const SchEventContainerComponent = ( props ) => {
 
     };
 
-   const drag_over = ( e ) => {
-        e.preventDefault()
-        if( dragebleReleaseEventId !== null ){
-            if( dragebleReleaseEventId === eventId ){
-                setIsLighter( true );
-            }
-
+    const drag_over = ( e ) => {
+        e.preventDefault();
+        let isTargetEvent = getTargetState();
+        if( isTargetEvent ){
+            setIsLighter( true );
         }else{
             setIsLighter( false );
-        }
+        };
    }
 
    const drag_leave = ( e ) => {
@@ -93,22 +113,17 @@ const SchEventContainerComponent = ( props ) => {
    }
 
    const drop = () => {
-        // console.dir({
-        //     dragebleReleaseId,
-        //     dragebleReleaseEventId,
-        // });
 
         setIsLighter( false );
 
-        if( dragebleReleaseEventId === eventId && dragebleReleaseEventId !== null ){ 
+        let isTargetEvent = getTargetState();
+        if( isTargetEvent ){ 
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
             StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
             StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
             StoreScheduleResultEvents.SetListToStore();
 
         };
-
-        
 
    }
 
@@ -166,6 +181,8 @@ export function SchEventContainer( props ){
             { ...props }
 
             scheduleEventsList = { scheduleResult.scheduleEventsList }
+
+            scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
 
 
             dragebleReleaseId = { scheduleResult.dragebleReleaseId }

@@ -33,6 +33,8 @@ export class ScheduleEventClass{
         this.UpdateDurationTime = this.UpdateDurationTime.bind(this);
         this.SetIdIfNull = this.SetIdIfNull.bind(this);
         this.RemoveRelease = this.RemoveRelease.bind(this);
+        this.AddReleaseByData = this.AddReleaseByData.bind(this);
+
 
 
 
@@ -88,6 +90,7 @@ export class ScheduleEventClass{
        
     }
 
+
     SetDataFromScheduleEvent( data, withReleses = true ){
         let {
             cutPart,
@@ -109,7 +112,13 @@ export class ScheduleEventClass{
         if( withReleses ){
             for( let i = 0; i < releases.length; i++ ){
                 let releases_id = releases[ i ].id;
-                this.AddRelease( releases_id );
+                let data = { ...releases[ i ] };
+                this.AddReleaseByData( data );
+
+
+
+
+                // this.AddRelease( releases_id );
             };
         }else{
 
@@ -159,10 +168,17 @@ export class ScheduleEventClass{
         };
     }
     AddRelease( release_id ){
-        let Release = new ReleaseClass( release_id );
+        let Release = new ReleaseClass();
+        Release.AddRelease( release_id );
         this.releaseList.push( Release );
+    }
+    AddReleaseByData( data ){
+        // console.dir( 'data' );
+        // console.dir( data );
 
-        // console.dir( this );
+        let Release = new ReleaseClass();
+        Release.AddReleaseByData( data );
+        this.releaseList.push( Release );
     }
 
     RemoveRelease( release_id ){
