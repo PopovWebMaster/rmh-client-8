@@ -1,7 +1,7 @@
 
 
 
-export const convert_sec_to_time = ( all_seconds ) => {
+export const convert_sec_to_time = ( all_seconds, isShort = false ) => {
 
     let hours = 0;
 
@@ -13,11 +13,21 @@ export const convert_sec_to_time = ( all_seconds ) => {
 
     let seconds = Math.round( rest_from_hours_sec - ( minutes * 60 )) ;
 
-    let formattedTime = [
-        hours.toString().padStart(2, "0"),
-        minutes.toString().padStart(2, "0"),
-        seconds.toString().padStart(2, "0")
-    ].join(":");
+    let formattedTime = '';
+    if( isShort ){
+        formattedTime = [
+            hours.toString().padStart(2, "0"),
+            minutes.toString().padStart(2, "0")
+            // seconds.toString().padStart(2, "0")
+        ].join(":");
+    }else{
+        formattedTime = [
+            hours.toString().padStart(2, "0"),
+            minutes.toString().padStart(2, "0"),
+            seconds.toString().padStart(2, "0")
+        ].join(":");
+    };
+
 
     return formattedTime;
 };

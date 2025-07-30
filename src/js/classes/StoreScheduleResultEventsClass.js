@@ -33,14 +33,11 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddAllReleases = this.AddAllReleases.bind(this);
         this.RemoveEvent = this.RemoveEvent.bind(this);
         this.AddEvent = this.AddEvent.bind(this);
+        this.GetAllUsedEvents = this.GetAllUsedEvents.bind(this);
+
 
         
-
-
         
-
-        
-
 
 
     }
@@ -56,9 +53,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     }
 
     CreateFromScheduleEventsList( arr, withReleses = true ){
-
-
-
         for( let i = 0; i < arr.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromScheduleEvent( arr[ i ], withReleses );
@@ -239,9 +233,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                 };
             };
         };
-
-
-
     }
 
     RemoveEvent( gridEventId ){
@@ -255,6 +246,23 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             };
         };
         this.list = newList;
+    }
+
+    GetAllUsedEvents(){
+
+        let obj = {};
+
+        for( let i = 0; i < this.list.length; i++ ){
+            let { eventId } = this.list[ i ];
+            obj[ eventId ] = true;
+        };
+
+        let result = [];
+        for( let key in obj ){
+            result.push( key );
+        };
+        return result;
+
     }
     
 }

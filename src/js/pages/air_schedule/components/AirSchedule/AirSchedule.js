@@ -25,6 +25,7 @@ import { S_EventsList } from './../S_EventsList/S_EventsList.js';
 import { S_ReleaseList } from './../S_ReleaseList/S_ReleaseList.js';
 
 import { CreateScheduleButton } from './../CreateScheduleButton/CreateScheduleButton.js';
+import { DownloadExcelButton } from './../DownloadExcelButton/DownloadExcelButton.js';
 
 
 const AirScheduleComponent = ( props ) => {
@@ -43,11 +44,13 @@ const AirScheduleComponent = ( props ) => {
                     <ScheduleCalendar />
                     
                     <CreateScheduleButton />
-                    {/* <div className = 'ScheduleTopPanel_right'>
 
-                        <CreateScheduleButton />
+                    
+                    <div className = 'ScheduleTopPanel_right'>
 
-                    </div> */}
+                        <DownloadExcelButton />
+
+                    </div>
 
                 </ScheduleTopPanel>
                 
