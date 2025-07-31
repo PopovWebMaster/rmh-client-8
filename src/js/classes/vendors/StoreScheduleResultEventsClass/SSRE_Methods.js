@@ -18,12 +18,6 @@ export class SSRE_Methods{
 
 
 
-
-
-
-        
-
-
     }
 
     GetGridEventsList(){

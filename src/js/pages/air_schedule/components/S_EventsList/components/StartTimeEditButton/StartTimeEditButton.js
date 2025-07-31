@@ -76,7 +76,6 @@ const StartTimeEditButtonComponent = ( props ) => {
 
                 setEventId( eventId );
                 setDurationTime( durationTime );
-                // setStartTime( startTime );
                 setStartTimeNext( scheduleEventsList[ i ].startTime );
 
                 setTimeSpaceFrom( pointFrom );

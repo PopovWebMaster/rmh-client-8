@@ -70,6 +70,7 @@ const BufferListComponent = ( props ) => {
             } = item;
 
             let eventName = eventListById[ event_id ]? eventListById[ event_id ].name: '';
+            let charYes = gridDayEventsListById[ grid_event_id ]? true: false;
 
             if( usedReleasesById[ id ] ){
                 return '';
@@ -85,7 +86,14 @@ const BufferListComponent = ( props ) => {
                     >
                         <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
                         <span className = 'name'>{ releaseName }</span>
-                        <span className = 'eventName'>{ eventName }</span>
+                        {
+                            eventName === ''? <>
+                                <span className = 'char_name'>График</span>
+                                <span className = { charYes? 'char_yes': 'char_not' }>{ charYes? 'Да': 'Нет' }</span>
+                            </>: <span className = 'eventName'>{ eventName }</span>
+                        }
+                        
+                        
                         <span className = 'duration_name'>Хрон.</span>
                         <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
 

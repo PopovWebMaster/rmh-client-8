@@ -27,6 +27,7 @@ const SchEventContainerComponent = ( props ) => {
         isCompletd = false,
         isKeyPoint = false,
         gridEventId = null,
+        isEmpty = false,
 
         // gridDayEventsListById,
         eventListById,
@@ -71,8 +72,24 @@ const SchEventContainerComponent = ( props ) => {
 
     const getTargetState = () => {
         let result = false;
-        if( dragebleReleaseEventId !== null ){
-            if( dragebleReleaseEventId === eventId ){
+
+        if( isEmpty ){
+
+        }else{
+            if( dragebleReleaseEventId !== null ){
+                if( dragebleReleaseEventId === eventId ){
+                    if( eventType === EVENT_TYPE.BLOCK ){
+                        result = true;
+                    }else{
+                        let { releases, firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
+                        if( firstSegmentId === null || firstSegmentId === gridEventId ){
+                            if( releases.length === 0 ){
+                                result = true;
+                            };
+                        };
+                    };
+                }else{};
+            }else{
                 if( eventType === EVENT_TYPE.BLOCK ){
                     result = true;
                 }else{
@@ -84,7 +101,9 @@ const SchEventContainerComponent = ( props ) => {
                     };
                 };
             };
-        };
+        }
+
+        
         return result;
 
     }
@@ -192,7 +211,7 @@ export function SchEventContainer( props ){
             eventListById = { layout.eventListById }
 
 
-            setCounterList = { ( obj ) => { dispatch( setCounterList( obj ) ) } }
+            // setCounterList = { ( obj ) => { dispatch( setCounterList( obj ) ) } }
 
         />
     );

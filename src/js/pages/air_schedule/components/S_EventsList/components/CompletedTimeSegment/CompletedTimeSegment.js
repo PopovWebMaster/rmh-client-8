@@ -43,8 +43,6 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
     useEffect( () => {
 
-
-
         if( firstSegmentId === null ){
             let event = eventListById[ eventId ];
             if( event.type === EVENT_TYPE.BLOCK ){
@@ -65,7 +63,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
         <SchEventContainer
             startTime =     { startTime }
             eventId =       { eventId }
-            durationTime =  { duration }
+            durationTime =  { durationTime }
             isCompletd =    { true }
             isKeyPoint =    { isKeyPoint }
             gridEventId =   { gridEventId }

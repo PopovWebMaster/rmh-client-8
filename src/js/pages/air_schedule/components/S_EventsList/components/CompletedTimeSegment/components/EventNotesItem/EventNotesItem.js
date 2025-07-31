@@ -46,7 +46,7 @@ const EventNotesItemComponent = ( props ) => {
     };
 
     const save = () => {
-        set_schedule_list_changes_to_store( gridEventId, { finalNotes } );
+        set_schedule_list_changes_to_store( gridEventId, { finalNotes: inputValue } );
         setIsOpen( false );
     }
 

@@ -34,6 +34,12 @@ export class ScheduleEventClass{
         this.SetIdIfNull = this.SetIdIfNull.bind(this);
         this.RemoveRelease = this.RemoveRelease.bind(this);
         this.AddReleaseByData = this.AddReleaseByData.bind(this);
+        this.UpdateEventData = this.UpdateEventData.bind(this);
+        this.UpdateFinalNotes = this.UpdateFinalNotes.bind(this);
+
+
+        
+
 
 
 
@@ -75,11 +81,8 @@ export class ScheduleEventClass{
         this.releases =             [];
         this.releaseList = [];
 
-        this.finalNotes = this.notes;
+        // this.finalNotes = this.notes;
 
-
-        // this.SetListToStore();
-        // this.UpdateDurationTime()
 
         let { type } = get_event_by_id( this.eventId );
         if( type ){
@@ -173,31 +176,21 @@ export class ScheduleEventClass{
         this.releaseList.push( Release );
     }
     AddReleaseByData( data ){
-        // console.dir( 'data' );
-        // console.dir( data );
-
         let Release = new ReleaseClass();
         Release.AddReleaseByData( data );
         this.releaseList.push( Release );
     }
 
     RemoveRelease( release_id ){
-        // let Release = new ReleaseClass( release_id );
-        // this.releaseList.push( Release );
         let arr = [];
 
         for( let i = 0; i < this.releaseList.length; i++ ){
             if( this.releaseList[ i ].id === release_id ){
-
             }else{
                 arr.push( this.releaseList[ i ] );
             };
-
         };
-
         this.releaseList = arr;
-
-        // console.dir( this );
     }
 
     UpdateDurationTime(){
@@ -205,15 +198,10 @@ export class ScheduleEventClass{
         if( type ){
 
             let durationTime = 0;
-
             if( this.releaseList.length > 0 ){
-
                 for( let i = 0; i < this.releaseList.length; i++ ){
                     durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
-
                 };
-                
-
             }else{
                 if( type === EVENT_TYPE.BLOCK ){
                     durationTime = MIN_EVENT_DURATION_SEC
@@ -227,18 +215,35 @@ export class ScheduleEventClass{
                 };
             };
             this.durationTime = durationTime;
-
-            
         }
     }
 
-    SetIdIfNull( newId ){
+    UpdateEventData(){
+        this.UpdateDurationTime();
+        this.UpdateFinalNotes();
+    }
 
+    UpdateFinalNotes(){
+        let { type } = get_event_by_id( this.eventId );
+        if( type ){
+            if( type === EVENT_TYPE.BLOCK ){
+                this.finalNotes = this.notes;
+            }else{
+                let releaseNotes = '';
+                for( let i = 0; i < this.releaseList.length; i++ ){
+                    releaseNotes = `${releaseNotes} ${this.releaseList[ i ].air_notes}`;
+                };
+                this.finalNotes = `${this.notes} ${ releaseNotes }`;
+            };
+        }
+
+    }
+
+    SetIdIfNull( newId ){
         if( this.gridEventId === null || this.id === null ){
             this.gridEventId =      newId;
             this.id =               newId;
         };
-
     }
 
 

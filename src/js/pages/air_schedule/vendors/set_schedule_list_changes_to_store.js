@@ -15,6 +15,7 @@ export const set_schedule_list_changes_to_store = ( gridEventId, objWithChanges,
 
         for( let i = 0; i <scheduleEventsList.length; i++ ){
             if( scheduleEventsList[ i ].gridEventId === gridEventId ){
+
                 newArr.push( { ...scheduleEventsList[ i ], ...objWithChanges } );
             }else{
                 newArr.push( { ...scheduleEventsList[ i ] } );

@@ -104,12 +104,15 @@ const DExcelComponentComponent = ( props ) => {
     const click = () => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        console.dir( 'scheduleEventsList' );
+        console.dir( scheduleEventsList );
+
         let scheduleEventsLlist = StoreScheduleResultEvents.GetScheduleEventsList();
     
         let used_events = get_used_events( scheduleEventsLlist, filterList );
         let rows = get_rows_from_events( used_events );
-        console.dir( 'rows' );
-        console.dir( rows );
+        // console.dir( 'rows' );
+        // console.dir( rows );
 
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.aoa_to_sheet([

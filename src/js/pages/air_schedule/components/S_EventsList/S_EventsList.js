@@ -20,7 +20,7 @@ const S_EventsListComponent = ( props ) => {
 
     let {
         scheduleEventsList,
-        setCounterList,
+        // setCounterList,
     } = props;
 
     let refEd = useRef();
@@ -36,17 +36,21 @@ const S_EventsListComponent = ( props ) => {
     useEffect( () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-        setListBySectors( StoreScheduleResultEvents.GetListBySectors() );
+        let list = StoreScheduleResultEvents.GetScheduleEventsList();
+        StoreScheduleResultEvents.SetCounterDataToStore( list );
 
-        let counter_list = StoreScheduleResultEvents.GetCounterList();
-        setCounterList( counter_list );
+        let list_by_sectirs = StoreScheduleResultEvents.GetListBySectors();
+        setListBySectors( list_by_sectirs );
+
+        // let counter_list = StoreScheduleResultEvents.GetCounterList();
+        // setCounterList( counter_list );
 
     }, [ scheduleEventsList ] );
 
 
     const create = ( arr ) => {
-
         if( arr.length > 0 ){
             let sectors = arr.map( ( item, index ) => {
                 return (

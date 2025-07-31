@@ -11,6 +11,8 @@ export const countersSlise = createSlice({
         currentCounterType: 'day', //  day hour
         currentCounterCategoryId: null,
         counterList: [],
+        counterListHours: [],
+
        
 
 
@@ -30,9 +32,11 @@ export const countersSlise = createSlice({
         },
         setCounterList: ( state, action ) => {
             state.counterList =  action.payload;
-        },
+        },  
 
-        
+        setCounterListHours: ( state, action ) => {
+            state.counterListHours =  action.payload;
+        }, 
         
     },
 
@@ -42,6 +46,7 @@ export const {
     setCurrentCounterType,
     setCurrentCounterCategoryId,
     setCounterList,
+    setCounterListHours,
    
    
 
@@ -52,6 +57,8 @@ export const selectorData = ( state ) => {
         currentCounterType:         state.counters.currentCounterType,
         currentCounterCategoryId:   state.counters.currentCounterCategoryId,
         counterList:                state.counters.counterList,
+        counterListHours:           state.counters.counterListHours,
+
 
 
 

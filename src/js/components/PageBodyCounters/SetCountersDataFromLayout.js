@@ -6,7 +6,10 @@ import { useDispatch } from 'react-redux';
 import { selectorData as layoutSlice } from './../../redux/layoutSlice.js';
 import { selectorData as countersSlise, setCounterList } from './../../redux/countersSlise.js';
 
-import { DEFAULT_CATEGORY } from './../../config/layout.js'
+import { DEFAULT_CATEGORY } from './../../config/layout.js';
+
+
+import { EventsDayCountersClass } from './../../classes/EventsDayCountersClass.js';
 
 const SetCountersDataFromLayoutComponent = ( props ) => {
 
@@ -27,46 +30,53 @@ const SetCountersDataFromLayoutComponent = ( props ) => {
 
         let list = gridDayEventsList[ gridCurrentDay ];
 
-        let counter_list = [];
+        let EventsDayCounters = new EventsDayCountersClass();
+        EventsDayCounters.CreateTypeDay( list );
+        EventsDayCounters.CreateTypeHour( list );
+        EventsDayCounters.SetToStore();
 
-        for( let i = 0; i < list.length; i++ ){
-            let { 
-                eventId,
-                durationTime,
-                is_premiere,
-            } = list[ i ];
+        // let list = gridDayEventsList[ gridCurrentDay ];
 
-            let category = get_category_by_event_id( eventId );
+        // let counter_list = [];
 
-            counter_list.push({
-                category,
-                duration: durationTime,
-                is_premiere,
-            });
-        };
+        // for( let i = 0; i < list.length; i++ ){
+        //     let { 
+        //         eventId,
+        //         durationTime,
+        //         is_premiere,
+        //     } = list[ i ];
 
-        setCounterList( counter_list );
+        //     let category = get_category_by_event_id( eventId );
+
+        //     counter_list.push({
+        //         category,
+        //         duration: durationTime,
+        //         is_premiere,
+        //     });
+        // };
+
+        // setCounterList( counter_list );
 
     }, [
         gridCurrentDay,
         gridDayEventsList,
     ] );
 
-    const get_category_by_event_id = ( eventId ) => {
-        let category = {};
+    // const get_category_by_event_id = ( eventId ) => {
+    //     let category = {};
 
-        if( eventListById[ eventId ] ){
+    //     if( eventListById[ eventId ] ){
             
-            let category_id = eventListById[ eventId ].category_id;
+    //         let category_id = eventListById[ eventId ].category_id;
 
-            if( categoryListById[ category_id ] ){
-                category = categoryListById[ category_id ];
-            }else{
-                category = DEFAULT_CATEGORY
-            };
-        };
-        return category;
-    }
+    //         if( categoryListById[ category_id ] ){
+    //             category = categoryListById[ category_id ];
+    //         }else{
+    //             category = DEFAULT_CATEGORY
+    //         };
+    //     };
+    //     return category;
+    // }
 
 
     

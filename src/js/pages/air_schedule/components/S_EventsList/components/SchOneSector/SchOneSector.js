@@ -48,10 +48,6 @@ const SchOneSectorComponent = ( props ) => {
 
                 } = item;
 
-
-                
-
-
                 return (
                     <CompletedTimeSegment 
                         key =               { index }

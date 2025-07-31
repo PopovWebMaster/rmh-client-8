@@ -21,7 +21,6 @@ const CountersDayListComponent = ( props ) => {
     } = props;
 
     const create = ( arr ) => {
-
         let obj_filter = {};
 
         for( let i = 0; i < arr.length; i++ ){

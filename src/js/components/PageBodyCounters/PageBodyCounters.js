@@ -9,6 +9,7 @@ import { selectorData as countersSlise } from './../../redux/countersSlise.js';
 
 import { CounterTypeSelect } from './components/CounterTypeSelect/CounterTypeSelect.js';
 import { CountersDayList } from './components/CountersDayList/CountersDayList.js';
+import { CountersHoursList } from './components/CountersHoursList/CountersHoursList.js'
 
 const PageBodyCountersComponent = ( props ) => {
 
@@ -25,7 +26,7 @@ const PageBodyCountersComponent = ( props ) => {
 
             { currentCounterType === 'day'? (
                 <CountersDayList />
-            ): '' }
+            ): <CountersHoursList /> }
 
             
 

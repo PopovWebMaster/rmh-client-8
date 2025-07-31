@@ -38,6 +38,7 @@ const EmptyTimeSegmentComponent = ( props ) => {
         <SchEventContainer
             startTime =     { startTime }
             durationTime =  { durationTime }
+            isEmpty = { true }
         >
 
             <AlertWindowContainer

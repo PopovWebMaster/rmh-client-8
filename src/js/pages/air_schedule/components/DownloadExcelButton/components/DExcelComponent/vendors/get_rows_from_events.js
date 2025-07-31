@@ -19,24 +19,24 @@ export const get_rows_from_events = ( used_events ) => {
             notes,
             startTime,
             withOnlyApplications,
-            releases
+            releases,
+            finalNotes,
+
         } = used_events[ i ];
 
         let startTimeStr = convert_sec_to_time( startTime, true );
         let releaseName = '';
         
         let releaseDurationStr = durationTime;
-        let allNotes = notes;
+        let allNotes = finalNotes;
 
         let eventName = '';
         if( eventListById[ eventId ] ){
             eventName = eventListById[ eventId ].name;
         };
-        
-
 
         if( releases[ 0 ] ){
-            let reseaseData = getReleaseData( releases[ 0 ], cutPart, notes );
+            let reseaseData = getReleaseData( releases[ 0 ], cutPart, finalNotes );
             releaseName =           reseaseData.releaseName;
             releaseDurationStr =    reseaseData.releaseDurationStr;
             allNotes =              reseaseData.allNotes;
@@ -53,7 +53,7 @@ export const get_rows_from_events = ( used_events ) => {
                 pushItem( startTimeStr, eventName, releaseName, convert_sec_to_time( releaseDurationStr ), allNotes, );
 
                 for( let i = 1; i < releases.length; i++ ){
-                    let reseaseData = getReleaseData( releases[ i ], cutPart, notes );
+                    let reseaseData = getReleaseData( releases[ i ], cutPart, finalNotes );
                     let relName =       reseaseData.releaseName;
                     let relDuretion =   reseaseData.releaseDurationStr;
                     let relAllNotes =   reseaseData.allNotes;
@@ -61,10 +61,14 @@ export const get_rows_from_events = ( used_events ) => {
                 };
 
                 // pushItem( '', '', '', 'formula', '', );
+                pushItem( '', '', '', '', '', );
+
             };
         }else{
             pushItem( startTimeStr, eventName, releaseName, convert_sec_to_time( releaseDurationStr ), allNotes, );
             // pushItem( '', '', '', 'formula', '', );
+            pushItem( '', '', '', '', '', );
+
         };
 
     }
