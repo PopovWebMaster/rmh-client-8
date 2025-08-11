@@ -14,7 +14,7 @@ import { ScheduleStatistics } from './../ScheduleStatistics/ScheduleStatistics.j
 import { ScheduleCenter } from './../ScheduleCenter/ScheduleCenter.js';
 import { S_CenterTopButtons } from './../S_CenterTopButtons/S_CenterTopButtons.js';
 import { S_CenterBody } from './../S_CenterBody/S_CenterBody.js';
-import { S_CenterRight } from './../S_CenterRight/S_CenterRight.js';
+// import { S_CenterRight } from './../S_CenterRight/S_CenterRight.js';
 import { ScheduleRight } from './../ScheduleRight/ScheduleRight.js';
 import { ScheduleTopPanel } from './../ScheduleTopPanel/ScheduleTopPanel.js';
 
@@ -42,14 +42,10 @@ const AirScheduleComponent = ( props ) => {
                 <ScheduleTopPanel>
 
                     <ScheduleCalendar />
-                    
                     <CreateScheduleButton />
 
-                    
                     <div className = 'ScheduleTopPanel_right'>
-
                         <DownloadExcelButton />
-
                     </div>
 
                 </ScheduleTopPanel>
@@ -78,17 +74,9 @@ const AirScheduleComponent = ( props ) => {
 
                     </SetDayDataFromServer>
 
-                    
-
-                    
-                    
                 </ScheduleBody>
-
-
-
             </SetStartingDateNowData>
 
-            
         </PageContainer>
     )
 

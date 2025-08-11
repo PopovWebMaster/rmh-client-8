@@ -14,6 +14,7 @@ import { ItemEditComponent } from './../ItemEditComponent/ItemEditComponent.js';
 import { AlertWindowContainerSaveAdd } from './../../../../../../../../../../components/AlertWindowContainerSaveAdd/AlertWindowContainerSaveAdd.js';
 
 import { save_sub_app_changes_on_server } from './../../../../../../vendors/save_sub_app_changes_on_server.js';
+import { MAX_CHAR_DAY_LENGTH } from './../../../../../../../../../../config/application.js';
 
 const ItemSubPeriodComponent = ( props ) => {
 
@@ -24,6 +25,7 @@ const ItemSubPeriodComponent = ( props ) => {
         period_to,
         
     } = props;
+    let max_ms_diference = MAX_CHAR_DAY_LENGTH * 24 * 60 * 60 * 1000;
 
     let [ isReady, setIsReady ] = useState( false );
 
@@ -62,13 +64,56 @@ const ItemSubPeriodComponent = ( props ) => {
     }
 
     const change_date_from = ( e ) => {
+        // let val = e.target.value;
+        // console.dir({
+        //     dataFromValue,
+        //     dataToValue,
+        // });
+        // setDataFromValue( val );
+
+
         let val = e.target.value;
-        setDataFromValue( val );
+        let date = new Date( val );
+        let from_ms = date.getTime();
+
+        let date_2 = new Date( dataToValue );
+        let to_ms = date_2.getTime();
+        if( from_ms <= to_ms ){
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataFromValue( val );
+            };
+        }else{
+            
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataFromValue( val );
+                setDataToValue( val );
+            };
+        };
+
+        
     };
 
     const change_date_to = ( e ) => {
+        // let val = e.target.value;
+        // console.dir({
+        //     dataFromValue,
+        //     dataToValue,
+        // });
+        // setDataToValue( val );
+        // setDataFromValue( period_from );
+        // setDataToValue( period_to );
+
         let val = e.target.value;
-        setDataToValue( val );
+        let date = new Date( val );
+        let to_ms = date.getTime();
+
+        let date_2 = new Date( dataFromValue );
+        let from_ms = date_2.getTime();
+        if( to_ms >= from_ms ){
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataToValue( val );
+            }
+        };
     };
     
     

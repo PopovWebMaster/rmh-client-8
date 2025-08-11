@@ -8,6 +8,7 @@ import './ItemPeriod.scss';
 // import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
 
 import { get_date_now_value } from './vendors/get_date_now_value.js';
+import { MAX_CHAR_DAY_LENGTH } from './../../../../../../../../../../config/application.js';
 
 
 
@@ -24,6 +25,7 @@ const ItemPeriodComponent = ( props ) => {
     } = props;
 
     // let [ minDate, setMinDate ] = useState( '' );
+    let max_ms_diference = MAX_CHAR_DAY_LENGTH * 24 * 60 * 60 * 1000;
 
 
     useEffect( () => {
@@ -49,10 +51,15 @@ const ItemPeriodComponent = ( props ) => {
         let date_2 = new Date( dataTo );
         let to_ms = date_2.getTime();
         if( from_ms <= to_ms ){
-            setDataFrom( val );
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataFrom( val );
+            };
         }else{
-            setDataFrom( val );
-            setDataTo( val );
+            
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataFrom( val );
+                setDataTo( val );
+            };
         };
     };
 
@@ -64,7 +71,9 @@ const ItemPeriodComponent = ( props ) => {
         let date_2 = new Date( dataFrom );
         let from_ms = date_2.getTime();
         if( to_ms >= from_ms ){
-            setDataTo( val );
+            if( to_ms - from_ms < max_ms_diference ){
+                setDataTo( val );
+            }
         };
 
     };

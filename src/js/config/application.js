@@ -13,6 +13,7 @@ export const CHAR_TYPE = {
     BLOCK: EVENT_TYPE.BLOCK,
     BLIND: 'blind',
 };
+export const MAX_CHAR_DAY_LENGTH = 32;
 
 
 // export const ANKETA_TYPE_TABLE_ROWS = {

@@ -30,6 +30,8 @@ export const currentSubApplicationSlise = createSlice({
         periodFrom: null,
         periodTo: null,
 
+        modeMix: false,
+
 
 
 
@@ -109,6 +111,9 @@ export const currentSubApplicationSlise = createSlice({
             state.periodTo =  action.payload;
         },
 
+        setModeMix: ( state, action ) => {
+            state.modeMix =  action.payload;
+        },
 
 
 
@@ -132,7 +137,7 @@ export const {
     setReleaseName,
     setPeriodFrom,
     setPeriodTo,
-
+    setModeMix,
 
 
 
@@ -156,6 +161,7 @@ export const selectorData = ( state ) => {
 
         periodFrom: state.currentSubApplication.periodFrom,
         periodTo: state.currentSubApplication.periodTo,
+        modeMix: state.currentSubApplication.modeMix,
 
 
 

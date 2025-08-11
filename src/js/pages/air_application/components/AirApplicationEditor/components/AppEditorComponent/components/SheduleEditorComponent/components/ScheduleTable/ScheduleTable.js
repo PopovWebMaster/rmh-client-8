@@ -37,6 +37,9 @@ const ScheduleTableComponent = ( props ) => {
 
             } = item;
 
+           
+
+
             return (
                 <ScheduleDay
                     key = { index }
@@ -83,9 +86,9 @@ export function ScheduleTable( props ){
     return (
         <ScheduleTableComponent
             { ...props }
-            charType = { schedule.charType }
-            dayList = { schedule.dayList }
-            releaseName = { schedule.releaseName }
+            charType =      { schedule.charType }
+            dayList =       { schedule.dayList }
+            releaseName =   { schedule.releaseName }
 
         />
     );

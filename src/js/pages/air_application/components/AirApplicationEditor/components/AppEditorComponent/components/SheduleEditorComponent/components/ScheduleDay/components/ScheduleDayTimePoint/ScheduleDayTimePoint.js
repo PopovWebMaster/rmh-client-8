@@ -13,6 +13,7 @@ import { selectorData as scheduleSlise } from './../../../../../../../../../../.
 import { CHAR_TYPE } from './../../../../../../../../../../../../config/application.js';
 
 import { ItemBlockInfo } from './../ItemBlockInfo/ItemBlockInfo.js';
+import { MixContent } from './../MixContent/MixContent.js';
 
 
 
@@ -99,11 +100,22 @@ const ScheduleDayTimePointComponent = ( props ) => {
             </div>
 
             <div className = 'SEC_CharDayTimePoint_inp'>
-                <input 
-                    type = 'text'
-                    value = { value }
-                    onChange = { () => {} }
-                />
+
+                <div className = 'SEC_CharDayTimePoint_inp_wrap'>
+                    <input 
+                        type = 'text'
+                        value = { value }
+                        onChange = { () => {} }
+                    />
+                </div>
+
+                { charType === CHAR_TYPE.BLOCK? (
+                    <MixContent 
+                        grid_event_id = { grid_event_id }
+                        YYYY_MM_DD =    { YYYY_MM_DD }
+                    />
+                ): '' }
+
                 <div className = 'SEC_CharDayTimePoint_inp_curt'></div>
             </div>
 

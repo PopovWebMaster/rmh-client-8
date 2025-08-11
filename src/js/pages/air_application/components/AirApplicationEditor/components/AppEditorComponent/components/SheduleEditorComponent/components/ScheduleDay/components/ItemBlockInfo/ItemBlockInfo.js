@@ -35,7 +35,6 @@ const ItemBlockInfoComponent = ( props ) => {
         if( gridEventTable[ YYYY_MM_DD ][ grid_event_id ] ){
             setBlockTime( gridEventTable[ YYYY_MM_DD ][ grid_event_id ].grid_event.duration );
             let { content } = gridEventTable[ YYYY_MM_DD ][ grid_event_id ];
-
             let duration_count = 0;
             let arr = [];
 

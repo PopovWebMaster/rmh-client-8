@@ -84,18 +84,10 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
                 let item = { ...arr_0[ i ] };
                 item.startTime = correct_startTime;
                 arr_1.push( { ...item } );
-
-
-                // console.dir( 'arr_0[ i ]' );
-                // console.dir( arr_0[ i ] );
-                // console.dir( 'arr_1' );
-                // console.dir( arr_1 );
-
             }else{
                 arr_1.push( { ...arr_0[ i ] } );
                 correct_startTime = startTime;
             };
-
 
         };
 
@@ -104,13 +96,9 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
             
         } );
 
-
         result = sortArr;
 
-
     };
-
-
 
     return result;
 

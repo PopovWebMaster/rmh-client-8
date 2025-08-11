@@ -12,6 +12,8 @@ import { AWTextarea } from './../../../../../../../../../../../../components/Ale
 import { AWInputText } from './../../../../../../../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
 import { AWButtonAdd } from './../../../../../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
+import { downloadExcel } from './vendors/downloadExcel.js';
+
 
 const AnketaTypeTableComponent = ( props ) => {
 
@@ -28,8 +30,9 @@ const AnketaTypeTableComponent = ( props ) => {
         setMediaName,
         materialName,
         setMaterialName,
+        Schedule,
 
-        download_table,
+        // download_table,
 
     } = props;
 
@@ -60,6 +63,19 @@ const AnketaTypeTableComponent = ( props ) => {
     const change_materialName = ( e ) => {
         setMaterialName( e.target.value )
     }
+
+
+    const download_table = () => {
+        downloadExcel({
+            tableHeader,
+            executor,
+            customer,
+            price,
+            mediaName,
+            materialName,
+            Schedule,
+        });
+    };
 
     
 

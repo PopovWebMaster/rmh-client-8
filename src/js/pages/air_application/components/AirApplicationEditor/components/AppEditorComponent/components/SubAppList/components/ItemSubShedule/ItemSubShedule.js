@@ -13,6 +13,7 @@ import {
     setReleaseName,
     setPeriodFrom,
     setPeriodTo,
+    setModeMix,
 } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
 
 
@@ -35,6 +36,7 @@ const ItemSubSheduleComponent = ( props ) => {
         setReleaseName,
         setPeriodFrom,
         setPeriodTo,
+        setModeMix,
         
     } = props;
 
@@ -46,7 +48,8 @@ const ItemSubSheduleComponent = ( props ) => {
         setReleaseName( name );
         setPeriodFrom( period_from );
         setPeriodTo( period_to );
-        setIsOpen( true )
+        setIsOpen( true );
+        setModeMix( false );
     };
 
 
@@ -101,6 +104,8 @@ export function ItemSubShedule( props ){
 
             setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
             setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
+            setModeMix = { ( val ) => { dispatch( setModeMix( val ) ) } }
+
 
 
             

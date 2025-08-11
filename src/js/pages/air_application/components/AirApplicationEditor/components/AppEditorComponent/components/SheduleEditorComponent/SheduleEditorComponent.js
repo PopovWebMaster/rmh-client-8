@@ -17,6 +17,7 @@ import { ScheduleSaveButton }   from './components/ScheduleSaveButton/ScheduleSa
 import { ScheduleTimeColumn }   from './components/ScheduleTimeColumn/ScheduleTimeColumn.js';
 import { ScheduleTable }        from './components/ScheduleTable/ScheduleTable.js';
 import { DownloadScheduleButton } from './components/DownloadScheduleButton/DownloadScheduleButton.js';
+import { MixModeButton } from './components/MixModeButton/MixModeButton.js';
 
 
 const SheduleEditorComponentComponent = ( props ) => {
@@ -68,6 +69,8 @@ const SheduleEditorComponentComponent = ( props ) => {
                 { isReady? (<>
 
                     <ScheduleHeader>
+
+                        <MixModeButton />
 
                         <DownloadScheduleButton 
                             Schedule =      { Schedule }

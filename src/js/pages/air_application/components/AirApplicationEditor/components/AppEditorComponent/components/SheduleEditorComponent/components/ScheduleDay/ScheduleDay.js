@@ -28,6 +28,8 @@ const ScheduleDayComponent = ( props ) => {
 
     } = props;
 
+
+
     const create = ( obj ) => {
 
         let arr = Object.keys( obj );
@@ -52,9 +54,9 @@ const ScheduleDayComponent = ( props ) => {
                     title =         { title }
                     time =          { time }
                     YYYY_MM_DD =    { YYYY_MM_DD }
-                    Schedule = { Schedule }
+                    Schedule =      { Schedule }
                     grid_event_id = { grid_event_id }
-                    is_reserved = { is_reserved }
+                    is_reserved =   { is_reserved }
                     reserved_name = { reserved_name }
 
 

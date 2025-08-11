@@ -179,7 +179,7 @@ const AnketaComponentComponent = ( props ) => {
 
 
     }
-
+/*
     const download_table = () => {
 
         const wb = XLSX.utils.book_new();
@@ -229,6 +229,11 @@ const AnketaComponentComponent = ( props ) => {
         XLSX.writeFile(wb, `Медиа план ${customer}_${materialName} ${getPeriod( periodFrom, periodTo )}.xlsx`);
 
     }
+*/
+
+    const download_table = () => {
+
+    }
 
 
 
@@ -251,7 +256,8 @@ const AnketaComponentComponent = ( props ) => {
                         setMediaName =      { setMediaName }
                         materialName =      { materialName }
                         setMaterialName =   { setMaterialName }
-                        download_table =    { download_table }
+                        Schedule = { Schedule }
+                        // download_table =    { download_table }
                     />
                 );
                 break;
@@ -276,7 +282,7 @@ const AnketaComponentComponent = ( props ) => {
 
     return (
         <div  className = 'SEC_AnketaComponent'>
-            <SelectAnketaType 
+            {/* <SelectAnketaType 
                 anketaType =    { anketaType }
                 setAnketaType = { setAnketaType }
                 itemList = { [
@@ -293,7 +299,7 @@ const AnketaComponentComponent = ( props ) => {
                         name: 'Список',
                     },
                 ] }
-            />
+            /> */}
 
             { create( anketaType ) }
         </div>

@@ -28,6 +28,8 @@ export const applicationSlice = createSlice({
         currentAppNum: null,
         currentAppManagerNotes: '',
         currentSubAppList: [],
+        currentSubAppListById: {},
+
 
 
         envIsOpen: false,
@@ -76,6 +78,15 @@ export const applicationSlice = createSlice({
 
         setCurrentSubAppList: ( state, action ) => {
             state.currentSubAppList =  action.payload;
+
+            let obj = {};
+            for( let i = 0; i < action.payload.length; i++ ){
+                let { id } = action.payload[ i ];
+                obj[ id ] = { ...action.payload[ i ] }
+
+            };
+
+            state.currentSubAppListById =  obj;
         },
 
         setCurrentAppManagerNotes: ( state, action ) => {
@@ -152,6 +163,10 @@ export const selectorData = ( state ) => {
         currentAppNum:          state.application.currentAppNum,
         currentAppManagerNotes: state.application.currentAppManagerNotes,
         currentSubAppList:      state.application.currentSubAppList,
+        currentSubAppListById:      state.application.currentSubAppListById,
+
+
+        
 
         currentAppIsChanged:    state.application.currentAppIsChanged,
 

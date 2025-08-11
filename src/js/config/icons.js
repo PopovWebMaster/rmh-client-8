@@ -28,3 +28,4 @@
 // icon-eye-4
 
 // 'icon-angle-left': 'icon-angle-right'
+// icon-flow-tree
