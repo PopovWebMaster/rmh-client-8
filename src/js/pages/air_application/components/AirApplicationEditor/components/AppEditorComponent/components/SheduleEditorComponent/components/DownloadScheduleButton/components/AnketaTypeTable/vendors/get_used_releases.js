@@ -3,7 +3,10 @@ import store from './../../../../../../../../../../../../../redux/store.js';
 
 export const get_used_releases = () => {
 
-    let result  = {};
+    let releases  = {};
+    let used_sab_app_id = [];
+    let used_sab_app_id_obj = {};
+
     let { schedule, application, currentSubApplication } = store.getState();
     let { gridEventTable } = schedule;
     let { currentSubAppListById } = application;
@@ -27,6 +30,8 @@ export const get_used_releases = () => {
                                 sub_app_id: Number( sub_app_id ),
                             });
                         };
+
+                        used_sab_app_id_obj[ sub_app_id ] = true;
                     };
                 };
 
@@ -40,6 +45,8 @@ export const get_used_releases = () => {
                             sub_app_id: Number( currentSubAppId ),
                         });
                     };
+
+                    used_sab_app_id_obj[ currentSubAppId ] = true;
                 };
             };
 
@@ -53,11 +60,18 @@ export const get_used_releases = () => {
                     return -1
                 };
             } );
-            result[ YYYY_MM_DD ] = sort_arr;
+            releases[ YYYY_MM_DD ] = sort_arr;
         }else{
-            result[ YYYY_MM_DD ] = [];
+            releases[ YYYY_MM_DD ] = [];
         };
     };
 
-    return result;
+    for( let sub_app_id in used_sab_app_id_obj ){
+        used_sab_app_id.push( Number( sub_app_id ) );
+    };
+
+    return {
+        releases,
+        used_sab_app_id,
+    };
 };

@@ -42,7 +42,7 @@ const DownloadScheduleButtonComponent = ( props ) => {
 
     const click = () => {
 
-        console.dir( Schedule.GetDataForDownloadExcelFormatTable() );
+        // console.dir( Schedule.GetDataForDownloadExcelFormatTable() );
 
 
 /*
