@@ -13,6 +13,10 @@ import { RowMediaNameAsHeaderClass } from './vendors/ExcelMediaPlanMixClass/RowM
 import { RowMartixHeaderDayNamesClass } from './vendors/ExcelMediaPlanMixClass/RowMartixHeaderDayNamesClass.js';
 import { RowMartixHeaderDatesClass } from './vendors/ExcelMediaPlanMixClass/RowMartixHeaderDatesClass.js';
 
+import { RowMartixClass } from './vendors/ExcelMediaPlanMixClass/RowMartixClass.js';
+import { RowMatrixFooterClass } from './vendors/ExcelMediaPlanMixClass/RowMatrixFooterClass.js';
+import { TableFooterClass } from './vendors/ExcelMediaPlanMixClass/TableFooterClass.js';
+
 
 
 
@@ -29,6 +33,7 @@ import { get_array_of_colum_width } from './vendors/ExcelMediaPlanMixClass/get_a
 
 export class ExcelMediaPlanMixClass {
     constructor(){
+        this.modeMixStatus = false;
         this.tableHeader = '';
         this.executor = '';
         this.customer = '';
@@ -45,7 +50,12 @@ export class ExcelMediaPlanMixClass {
         this.Matrix = new MatrixClass();
         this.Period = new PeriodClass();
 
+        this.SetModeMixStatus =   this.SetModeMixStatus.bind(this);
         this.SetTableHeader =   this.SetTableHeader.bind(this);
+
+
+        
+
         this.SetExecutor =      this.SetExecutor.bind(this);
         this.SetCustomer =      this.SetCustomer.bind(this);
         this.SetPrice =         this.SetPrice.bind(this);
@@ -66,6 +76,9 @@ export class ExcelMediaPlanMixClass {
 
 
     }
+    SetModeMixStatus( value ){
+        this.modeMixStatus = value;
+    }
 
     SetTableHeader( value ){
         this.tableHeader = value;
@@ -81,7 +94,7 @@ export class ExcelMediaPlanMixClass {
     }
 
     SetPrice( value ){
-        this.price = value;
+        this.price = Number( value );
     }
 
     SetMediaName( value ){
@@ -128,14 +141,47 @@ export class ExcelMediaPlanMixClass {
         let datesList = this.Matrix.GetDatesList();
         this.AddRow( new RowMartixHeaderDatesClass( this.nextRowNumber, datesList ) );
 
+        let rows = this.Matrix.GetRowsList();
+
+        for( let i = 0; i < rows.length; i++ ){
+            let {
+                title,
+                values,
+                index,
+                name,
+                duration,
+            } = rows[ i ];
+
+            let data = {
+                title,
+                values,
+                index,
+                name,
+                duration,
+                withName: this.modeMixStatus,
+                price: this.price,
+            };
+
+            this.AddRow( new RowMartixClass( this.nextRowNumber, data ) );
+        };
+
+        this.AddRow( new RowMatrixFooterClass( this.nextRowNumber, rows ) );
+
+        this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+        this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+        this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+
+        let text = '* ГУП ДНР "РМХ" оставляет за собой право, в случае невозможности размещения рекламной продукции заказчика в указаннное время (форс-мажорные обстоятельства), предоставить клиенту эквивалентные по обьему и срокам позиции.'
+        this.AddRow( new TableFooterClass( this.nextRowNumber, text ) );
 
 
 
 
 
+        
 
 
-
+        
 
 
     }
@@ -159,15 +205,6 @@ export class ExcelMediaPlanMixClass {
 
 
 
-
-
-
-
-
-
-
-
-
     Download(){
 
         this.CreateExcelRows();
@@ -182,7 +219,7 @@ export class ExcelMediaPlanMixClass {
         ]);
     */
 
-        ws['!cols'] = get_array_of_colum_width();
+        ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
         ws['!rows'] = this.excelRowHeights;
         /*
         ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
@@ -206,7 +243,7 @@ export class ExcelMediaPlanMixClass {
 */
         XLSX.utils.book_append_sheet(wb, ws, "111");
 
-        XLSX.writeFile(wb, `Медиа план customer_materialName periodFrom periodTo.xlsx`);
+        XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
     }
 
 }

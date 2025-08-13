@@ -11,7 +11,7 @@ export const get_matrix_array = () => {
     let rows = get_matrix_rows( releases );
 
     let empty_matrix = get_empty_matrix( releases, rows );
-    let matrix = get_filled_matrix( empty_matrix, releases );
+    let matrix = get_filled_matrix( empty_matrix, releases, used_sab_app_id );
 
     return { 
         matrix,

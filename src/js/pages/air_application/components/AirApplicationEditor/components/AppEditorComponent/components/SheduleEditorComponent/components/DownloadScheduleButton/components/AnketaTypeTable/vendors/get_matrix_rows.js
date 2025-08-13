@@ -59,7 +59,6 @@ export const get_matrix_rows = ( used_releases ) => {
             });
         };
     };
-
     return result;
 
 

@@ -8,6 +8,8 @@ export class SubAppListClass {
 
         this.CreateList = this.CreateList.bind(this);
         this.GetListArray = this.GetListArray.bind(this);
+        this.GetItemById = this.GetItemById.bind(this);
+
 
 
     }
@@ -28,6 +30,10 @@ export class SubAppListClass {
             arr.push( this.listById[ key ] );
         };
         return arr;
+    }
+
+    GetItemById( id ){
+        return { ...this.listById[ id ] };
 
     }
 }

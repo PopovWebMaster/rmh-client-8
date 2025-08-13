@@ -1,9 +1,10 @@
 
 
-export const get_array_of_colum_width = () => {
+
+export const get_array_of_colum_width = ( isMix = false ) => {
     return [
         { width: 14.43 }, 
-        { width: 17 }, 
+        { width: isMix? 30: 17 }, 
         { width: 15.43 },
         { width: 8.29 },
         { width: 14.86 },

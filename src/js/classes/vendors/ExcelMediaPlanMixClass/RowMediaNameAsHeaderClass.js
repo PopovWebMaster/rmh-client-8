@@ -3,7 +3,7 @@ import { RowClass } from './RowClass.js';
 
 export class RowMediaNameAsHeaderClass extends RowClass {
 
- constructor( rowNumber, mediaName ){
+    constructor( rowNumber, mediaName ){
         super( rowNumber );
 
         this.mediaName = mediaName;

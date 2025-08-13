@@ -3,6 +3,8 @@ import { get_matrix_array } from './get_matrix_array.js';
 
 import { ExcelMediaPlanMixClass } from './../../../../../../../../../../../../../classes/ExcelMediaPlanMixClass.js';
 
+import store from './../../../../../../../../../../../../../redux/store.js';
+
 export const downloadExcel = ( params ) => {
     let {
         tableHeader,
@@ -13,6 +15,11 @@ export const downloadExcel = ( params ) => {
         materialName,
         Schedule,
     } = params;
+
+    let { currentSubApplication } = store.getState();
+    let { modeMix } = currentSubApplication;
+
+
 
     console.dir({
         tableHeader,
@@ -30,7 +37,9 @@ export const downloadExcel = ( params ) => {
 
     let ExcelMediaPlanMix = new ExcelMediaPlanMixClass();
 
+    ExcelMediaPlanMix.SetModeMixStatus( modeMix );
     ExcelMediaPlanMix.SetTableHeader( tableHeader );
+
     ExcelMediaPlanMix.SetExecutor( executor );
     ExcelMediaPlanMix.SetCustomer( customer );
     ExcelMediaPlanMix.SetPrice( price );
@@ -39,11 +48,6 @@ export const downloadExcel = ( params ) => {
     ExcelMediaPlanMix.SetMatrix( matrix );
 
     ExcelMediaPlanMix.Download();
-
-    // console.dir( 'matrix' );
-    // console.dir( matrix );
-    // console.dir( 'used_sub_app_id' );
-    // console.dir( used_sub_app_id );
 
     console.dir( ExcelMediaPlanMix );
 

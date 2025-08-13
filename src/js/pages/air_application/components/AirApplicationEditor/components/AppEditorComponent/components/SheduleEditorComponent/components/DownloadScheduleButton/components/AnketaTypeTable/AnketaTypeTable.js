@@ -108,11 +108,11 @@ const AnketaTypeTableComponent = ( props ) => {
                 onChange =  { change_mediaName }
             />
 
-            <AWInputText 
+            {/* <AWInputText 
                 title =     'Видеоролик'
                 value =     { materialName }
                 onChange =  { change_materialName }
-            />
+            /> */}
 
             <AWInputText 
                 title =     'Прайсовая стоимость 1 рос. руб.'
