@@ -10,6 +10,7 @@ export const ROUTE = {
     PAGE: {
         HOME: 'home',
         COMPANY: 'company',
+        ADMIN: 'admin',
 
         AIR_MAIN: 'air-main',
         AIR_SCHEDULE: 'air-schedule',

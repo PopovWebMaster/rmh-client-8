@@ -1,0 +1,160 @@
+.A_companyList{
+    font-size: 1em;
+    // height: 100%;
+    // overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+align-items: center;
+    // align-content: center;
+
+    .A_companyList_item{
+        font-size: 1em;
+        margin: 0.5em 0.6em;
+        padding: 0.3em 0.5em;
+        background-color: #ffffff42;
+        border-radius: 0.1em;
+        max-width: 57em;
+        width: 100%;
+        flex-grow: 1;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        cursor: pointer;
+        user-select: none;
+
+        .A_CL_I_name{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+
+            margin: 0 0.5em;
+
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                color: #ffffff;
+
+            }
+
+        }
+
+        .A_CL_I_type{
+            font-size: 1em;
+            flex-grow: 0;
+            width: 3em;
+
+            margin: 0 0.5em;
+
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                color: #ffffff;
+
+            }
+
+        }
+
+        
+        .A_CL_I_city{
+            font-size: 1em;
+            flex-grow: 0;
+            width: 7em;
+
+            margin: 0 0.5em;
+
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                color: #ffffff;
+
+            }
+
+        }
+
+        .A_CL_I_alias{
+            font-size: 1em;
+            flex-grow: 0;
+            width: 8em;
+
+            margin: 0 0.5em;
+
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                color: #ffffff;
+
+            }
+
+        }
+        .A_CL_I_program{
+            font-size: 1em;
+            flex-grow: 0;
+            width: 10em;
+
+            margin: 0 0.5em;
+
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            span{
+                font-size: 0.7em;
+                color: #ffffff;
+
+            }
+
+        }
+
+
+    }
+
+    .A_companyList_item:hover{
+        background-color: #a3a3a3e3;
+    }
+
+    .A_companyList_item:active{
+        background-color: #ffffff24;
+        .A_CL_I_name{
+            span{
+                color: #b7b7b7;
+
+            }
+
+        }
+    }
+
+
+}

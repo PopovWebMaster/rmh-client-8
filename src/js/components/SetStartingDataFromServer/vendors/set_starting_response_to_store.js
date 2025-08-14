@@ -7,6 +7,11 @@ import { set_category_list } from './set_category_list.js';
 import { set_events_list } from './set_events_list.js';
 import { set_grid_events_list } from './set_grid_events_list.js';
 import { set_application_list } from './set_application_list.js';
+import { set_companies } from './set_companies.js';
+import { set_default_program_system } from './set_default_program_system.js';
+import { set_default_company_type } from './set_default_company_type.js';
+
+
 
 export const set_starting_response_to_store = ( response ) => {
 
@@ -19,6 +24,9 @@ export const set_starting_response_to_store = ( response ) => {
         set_events_list( response );
         set_grid_events_list( response );
         set_application_list( response );
+        set_companies( response );
+        set_default_program_system( response );
+        set_default_company_type( response );
 
     }else{
 

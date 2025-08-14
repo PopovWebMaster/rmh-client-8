@@ -13,6 +13,7 @@ import { BtnAuth }              from './components/BtnAuth/BtnAuth.js';
 import { UserInfo }             from './components/UserInfo/UserInfo.js';
 import { MenuForAirPage }       from './components/MenuForAirPage/MenuForAirPage.js';
 import { MenuForCompanyPage }   from './components/MenuForCompanyPage/MenuForCompanyPage.js';
+import { MenuForAdmin }         from './components/MenuForAdmin/MenuForAdmin.js';
 
 const TopMenuComponent = ( props ) => {
 
@@ -40,6 +41,11 @@ const TopMenuComponent = ( props ) => {
             case ROUTE.PAGE.ACCESS_IS_CLOSED:
                 result = false;
                 break;
+
+
+                
+
+                // admin
 
         };
 
@@ -81,6 +87,11 @@ const TopMenuComponent = ( props ) => {
             case ROUTE.PAGE.AIR_LOGS:
                 result = <MenuForAirPage />
                 break;
+
+            case ROUTE.PAGE.ADMIN:
+                result = <MenuForAdmin />
+                break;
+            
 
         };
 

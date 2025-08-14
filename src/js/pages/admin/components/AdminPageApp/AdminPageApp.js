@@ -5,8 +5,17 @@ import { useDispatch } from 'react-redux';
 
 import './AdminPageApp.scss';
 
-import { SetDataFromHtmlMeta } from './../../../../components/SetDataFromHtmlMeta/SetDataFromHtmlMeta.js';
-import { SetStartingDataFromServer } from './../../../../components/SetStartingDataFromServer/SetStartingDataFromServer.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+// import { SetDataFromHtmlMeta } from './../../../../components/SetDataFromHtmlMeta/SetDataFromHtmlMeta.js';
+// import { SetStartingDataFromServer } from './../../../../components/SetStartingDataFromServer/SetStartingDataFromServer.js';
+
+import { PageContainer } from './../../../../components/PageContainer/PageContainer.js';
+
+import { ROUTE } from './../../../../config/routes.js';
+
+import { AdminCompanies } from './../AdminCompanies/AdminCompanies.js';
 
 
 const AdminPageAppComponent = ( props ) => {
@@ -15,9 +24,17 @@ const AdminPageAppComponent = ( props ) => {
 
     } = props;
 
+    let navigate = useNavigate();
+
     useEffect(() => {
 
+        if( IS_DEVELOPMENT ){
+            // navigate( `/admin` );
+            navigate( `/admin/company` );
 
+
+        }else{
+        };
 
     }, [])
 
@@ -25,15 +42,16 @@ const AdminPageAppComponent = ( props ) => {
 
     return (
 
-        <SetDataFromHtmlMeta>
-            <SetStartingDataFromServer >
-                
-                <div>
-                    AdminPageApp
-                </div>
+        <PageContainer className = 'adminApp'>
 
-            </SetStartingDataFromServer>
-        </SetDataFromHtmlMeta>
+            <Routes>
+                <Route path = { `/admin` }      element = { <div></div> } />
+                <Route path = { `/admin/company` }   element = { <AdminCompanies /> } />
+
+            </Routes>
+
+        </PageContainer>
+
 
 
     )
