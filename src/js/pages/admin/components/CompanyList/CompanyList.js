@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import { selectorData as adminSlice } from './../../../../redux/adminSlice.js';
+import { selectorData as adminSlice, setCurrentCompanyId } from './../../../../redux/adminSlice.js';
+import { useNavigate } from "react-router-dom";
 
 import './CompanyList.scss';
 
@@ -13,13 +14,18 @@ import { ScrollContainer } from './../../../../components/ScrollContainer/Scroll
 const CompanyListComponent = ( props ) => {
 
     let {
-        companies
+        companies,
+        setCurrentCompanyId,
 
     } = props;
 
+    let navigate = useNavigate();
+
     const click = ( company_id ) => {
-        console.dir( 'company_id' );
-        console.dir( company_id );
+        
+        setCurrentCompanyId( company_id );
+        navigate( `/admin/company/${company_id}` );
+
 
     };
 
@@ -45,21 +51,24 @@ const CompanyListComponent = ( props ) => {
                     key = { index }
                     onClick = { () => { click( company_id ) } }
                 >
-                    <div className = 'A_CL_I_name'>
-                        <span>{ company_name }</span>
-                    </div>
-                    <div className = 'A_CL_I_city'>
-                        <span>{ company_city }</span>
-                    </div>
-
                     <div className = 'A_CL_I_type'>
                         <span>{ company_type }</span>
+
+                    </div>
+
+                    <div className = 'A_CL_I_name'>
+                        <span>{ company_name }</span>
                     </div>
 
                     <div className = 'A_CL_I_alias'>
                         <span>{ company_alias }</span>
                     </div>
 
+                    <div className = 'A_CL_I_city'>
+                        <span>{ company_city === ''? '': `г. ${company_city}` }</span>
+                    </div>
+
+                    
                     <div className = 'A_CL_I_program'>
                         <span>{ company_program_system }</span>
                     </div>
@@ -95,14 +104,14 @@ const CompanyListComponent = ( props ) => {
 export function CompanyList( props ){
 
     const admin = useSelector( adminSlice );
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <CompanyListComponent
             { ...props }
 
             companies = { admin.companies }
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            setCurrentCompanyId = { ( val ) => { dispatch( setCurrentCompanyId( val ) ) } }
 
         />
     );

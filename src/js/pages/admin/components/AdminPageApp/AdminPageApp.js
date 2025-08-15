@@ -16,6 +16,7 @@ import { PageContainer } from './../../../../components/PageContainer/PageContai
 import { ROUTE } from './../../../../config/routes.js';
 
 import { AdminCompanies } from './../AdminCompanies/AdminCompanies.js';
+import { AdminCompanyEditor } from './../AdminCompanyEditor/AdminCompanyEditor.js';
 
 
 const AdminPageAppComponent = ( props ) => {
@@ -47,6 +48,8 @@ const AdminPageAppComponent = ( props ) => {
             <Routes>
                 <Route path = { `/admin` }      element = { <div></div> } />
                 <Route path = { `/admin/company` }   element = { <AdminCompanies /> } />
+                <Route path = { `/admin/company/:id` }   element = { <AdminCompanyEditor /> } />
+
 
             </Routes>
 

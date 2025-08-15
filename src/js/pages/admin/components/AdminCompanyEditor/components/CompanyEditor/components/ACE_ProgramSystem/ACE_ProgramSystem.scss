@@ -1,0 +1,56 @@
+.ACE_ProgramSystem{
+    font-size: 0.8em;
+    margin: 0 0.5em;
+    padding: 0.4em 1em;
+    border-radius: 0.1em;
+    // background-color: #f3efef;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    border-bottom: 1px solid #d8d4d466;
+
+    h4{
+        font-size: 0.8em;
+        padding: 0 0.5em;
+        color: #454545;
+        width: 12em;
+    }
+
+
+    .ACE_ProgramSystem_input{
+        font-size: 0.85em;
+        line-height: 1.4em;
+        padding: 0.4em 1em;
+        border: 1px solid #c9c9c966;
+        border-radius: 0.1em;
+        width: 40%;
+        outline: none;
+        background-color: #ffffff;
+        color: #485377;
+
+    }
+    .ACE_ProgramSystem_input:focus{
+        // background-color: red;
+        border: 1px solid #a8a8a8;
+        background-color: #ffffff;
+    }
+
+    .ACE_ProgramSystem_set_def{
+        font-size: 0.8em;
+        color: #334a93;
+        cursor: pointer;
+        user-select: none;
+        margin: 0 1em;
+
+    }
+    .ACE_ProgramSystem_set_def:hover{
+        text-decoration: underline;
+    }
+    .ACE_ProgramSystem_set_def:active{
+        color: #223570;
+        text-decoration: none;
+    }
+}
