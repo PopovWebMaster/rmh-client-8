@@ -14,6 +14,8 @@ export const companySlice = createSlice({
         currentCompanyName: null,
         currentCompanyType: null,
         companyProgramSystem: null,
+        companyLegalName: '',
+
 
 
         companyList: [],
@@ -42,6 +44,12 @@ export const companySlice = createSlice({
         setCompanyProgramSystem: ( state, action ) => {
             state.companyProgramSystem =  action.payload;
         },
+
+        
+        setCompanyLegalName: ( state, action ) => {
+            state.companyLegalName =  action.payload;
+        },
+        
         
         
         
@@ -56,6 +64,7 @@ export const {
     setCompanyList,
     setCurrentCompanyType,
     setCompanyProgramSystem,
+    setCompanyLegalName,
    
 
 } = companySlice.actions;
@@ -68,6 +77,8 @@ export const selectorData = ( state ) => {
 
         currentCompanyType:         state.company.currentCompanyType,
         companyProgramSystem:       state.company.companyProgramSystem,
+        companyLegalName:       state.company.companyLegalName,
+
 
 
         

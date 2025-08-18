@@ -10,6 +10,7 @@ import { set_application_list } from './set_application_list.js';
 import { set_companies } from './set_companies.js';
 import { set_default_program_system } from './set_default_program_system.js';
 import { set_default_company_type } from './set_default_company_type.js';
+import { set_company_legal_name } from './set_company_legal_name.js';
 
 
 
@@ -27,6 +28,7 @@ export const set_starting_response_to_store = ( response ) => {
         set_companies( response );
         set_default_program_system( response );
         set_default_company_type( response );
+        set_company_legal_name( response );
 
     }else{
 

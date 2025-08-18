@@ -23,6 +23,8 @@ import { ACE_Type } from './components/ACE_Type/ACE_Type.js';
 import { ACE_BackCross } from './components/ACE_BackCross/ACE_BackCross.js';
 
 import { AddUserButton } from './components/AddUserButton/AddUserButton.js';
+import { UserList } from './components/UserList/UserList.js';
+import { RemoveCompany } from './components/RemoveCompany/RemoveCompany.js';
 
 const CompanyEditorComponent = ( props ) => {
 
@@ -31,8 +33,6 @@ const CompanyEditorComponent = ( props ) => {
         setCurrentCompanyId,
 
     } = props;
-
-
 
 
 
@@ -58,13 +58,14 @@ const CompanyEditorComponent = ( props ) => {
                             </div>
         
                             <div className = 'A_right'>
-                                
+                                <RemoveCompany />
                             </div>
                         </div>
 
                         <div className = 'A_CompanyEditor_personal_wrap'>
-                                            
-                            
+
+                            <UserList />
+                                           
         
                         </div>
 

@@ -11,6 +11,8 @@ import { GridEventsTableClass } from './vendors/ScheduleClass/GridEventsTableCla
 
 import { set_to_store } from './vendors/ScheduleClass/set_to_store.js';
 
+import store from './../redux/store.js';
+
 
 
 export class ScheduleClass extends ScheduleMethodsClass {
@@ -124,6 +126,9 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
     GetDataForDownloadExcelFormatTable(){
 
+        let { company } = store.getState();
+        let { companyLegalName } = company;
+
         let result = {
             
             releaseName:        this.SubApplication.name,
@@ -134,7 +139,11 @@ export class ScheduleClass extends ScheduleMethodsClass {
             executor:   'ГУП ДНР  "РМХ"',
             customer:   this.Application.name,
             price: 28,
-            mediaName: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ',
+            // mediaName: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ',
+            mediaName: companyLegalName,
+            
+
+            
 
         };
 

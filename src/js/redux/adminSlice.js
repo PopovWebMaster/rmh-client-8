@@ -24,6 +24,8 @@ export const adminSlice = createSlice({
         currentCompanyPersonal: [],
         currentCompanyType: '',
 
+        userDataById: {}
+
 
 
 
@@ -51,6 +53,19 @@ export const adminSlice = createSlice({
 
         setCurrentCompanyId: ( state, action ) => {
             state.currentCompanyId =  action.payload;
+            if( action.payload === null ){
+                state.userDataById = {};
+            }else{
+                let { company_personal } = state.companiesById[ action.payload ];
+                let obj = {};
+                for( let i = 0; i < company_personal.length; i++ ){
+                    let { id } = company_personal[ i ];
+                    obj[ id ] = company_personal[ i ];
+                };
+                state.userDataById = obj;
+            };
+
+
         },
 
         setCurrentCompanyIsChanged: ( state, action ) => {
@@ -133,6 +148,8 @@ export const selectorData = ( state ) => {
         currentCompanyCity:             state.admin.currentCompanyCity,
         currentCompanyPersonal:         state.admin.currentCompanyPersonal,
         currentCompanyType:             state.admin.currentCompanyType,
+        userDataById:                   state.admin.userDataById,
+
 
 
         
