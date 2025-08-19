@@ -117,7 +117,6 @@ export class ScheduleMethodsClass {
 
     SetDayListToStore(){
         let dayList = this.Days.GetDayList();
-
         set_to_store( 'dayList', dayList );
 
         this.GridEventsTable.UpdateTable( dayList );

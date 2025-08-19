@@ -10,6 +10,8 @@ import { add_empty_segments_and_types } from './vendors/StoreScheduleResultEvent
 import { get_category_by_event_id } from './vendors/StoreScheduleResultEventsClass/get_category_by_event_id.js';
 
 import { adjust_startTime_in_day_list } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_day_list.js';
+import { get_remaining_place_for_key_block } from './vendors/StoreScheduleResultEventsClass/get_remaining_place_for_key_block.js';
+
 
 // import { setCounterList } from './../redux/countersSlise.js';
 
@@ -126,67 +128,80 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     AddRelease( gridEventId, releaseId ){
 
         let Event = this.GetEventData( gridEventId );
-        
-        if( Event ){
-            if( Event.firstSegmentId === null ){
-                let type = this.GetEventType( Event.eventId );
-                if( type === EVENT_TYPE.BLOCK ){
-                    Event.AddRelease( releaseId );
-                    Event.UpdateEventData();
-                }else{
-                    if( Event.releases.length === 0 ){
+
+        let releaseData = this.GetReleaseData( releaseId );
+
+        let rest_sec = get_remaining_place_for_key_block({
+            Event,
+            releaseData,
+            list: this.list
+        });
+
+        if( rest_sec >= 0 ){
+            if( Event ){
+                if( Event.firstSegmentId === null ){
+                    let type = this.GetEventType( Event.eventId );
+                    if( type === EVENT_TYPE.BLOCK ){
                         Event.AddRelease( releaseId );
                         Event.UpdateEventData();
+                    }else{
+                        if( Event.releases.length === 0 ){
+                            Event.AddRelease( releaseId );
+                            Event.UpdateEventData();
+                        };
                     };
-                };
-            }else if( Event.gridEventId === gridEventId ){
+                }else if( Event.gridEventId === gridEventId ){
 
-                let EventParts = this.GetEventParts( gridEventId );
+                    let EventParts = this.GetEventParts( gridEventId );
 
-                let releaseData = this.GetReleaseData( releaseId );
-                let { releaseDuration, applicationName, releaseName } = releaseData;
-                let rest_duration = releaseDuration;
+                    // let releaseData = this.GetReleaseData( releaseId );
+                    let { releaseDuration, applicationName, releaseName } = releaseData;
+                    let rest_duration = releaseDuration;
 
-                let removeEventList = [];
+                    let removeEventList = [];
 
-                for( let i = 0; i < EventParts.length; i++ ){
-                    let { durationTime, releases } = EventParts[ i ];
-                    if( releases.length === 0 ){
-                        let duration = 0;
+                    for( let i = 0; i < EventParts.length; i++ ){
+                        let { durationTime, releases } = EventParts[ i ];
+                        if( releases.length === 0 ){
+                            let duration = 0;
 
-                        if( rest_duration >= durationTime ){
-                            if( EventParts[ i + 1 ] ){
-                                duration = durationTime;
-                                rest_duration = rest_duration - durationTime;
+                            if( rest_duration >= durationTime ){
+                                if( EventParts[ i + 1 ] ){
+                                    duration = durationTime;
+                                    rest_duration = rest_duration - durationTime;
+                                }else{
+                                    duration = rest_duration;
+                                    rest_duration = 0;
+                                };
                             }else{
                                 duration = rest_duration;
-                                rest_duration = 0;
+                                rest_duration = 0
                             };
-                        }else{
-                            duration = rest_duration;
-                            rest_duration = 0
-                        };
 
-                        if( duration > 0 ){
-                            let data = { ...releaseData };
-                            data.releaseDuration = duration;
-                            data.releaseName = `${releaseName} (Порезка ${i+1})`;
-                            EventParts[ i ].AddReleaseByData( data );
-                            EventParts[ i ].UpdateEventData();
-                        }else{
-                            let { gridEventId } = EventParts[ i ];
-                            removeEventList.push( gridEventId );
+                            if( duration > 0 ){
+                                let data = { ...releaseData };
+                                data.releaseDuration = duration;
+                                data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                                EventParts[ i ].AddReleaseByData( data );
+                                EventParts[ i ].UpdateEventData();
+                            }else{
+                                let { gridEventId } = EventParts[ i ];
+                                removeEventList.push( gridEventId );
+                            };
                         };
                     };
-                };
 
-                for( let i = 0; i < removeEventList.length; i++ ){
-                    this.RemoveEvent( removeEventList[ i ] )
+                    for( let i = 0; i < removeEventList.length; i++ ){
+                        this.RemoveEvent( removeEventList[ i ] )
+                    };
+
                 };
 
             };
 
         };
+
+        
 
     }
 
@@ -213,7 +228,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                 };
             };
         };
-
         for( let i = 0; i < this.list.length; i++ ){
             let gridEventId = this.list[ i ].gridEventId;
             if( gridEventId !== null ){

@@ -16,6 +16,7 @@ import {
 import './DownloadButton.scss';
 
 import { read_log_file } from './vendors/read_log_file.js';
+import { read_log_as_sll_text_file } from './vendors/read_log_as_sll_text_file.js';
 import { LogListClass } from './classes/LogListClass.js';
 
 const DownloadButtonComponent = ( props ) => {
@@ -34,10 +35,11 @@ const DownloadButtonComponent = ( props ) => {
 
     const click = () => {
 
-        let accept = [ '.PlayReport' ];
+        let accept = [ '.PlayReport', '.txt' ];
         let input = inputRef.current;
         input.setAttribute('accept', accept.join(',') );
         input.click();
+
     };
 
 
@@ -50,6 +52,56 @@ const DownloadButtonComponent = ( props ) => {
         let files = e.target.files;
         let file = files[0];
 
+        // console.dir( 'file' );
+        // console.dir( file );
+
+        let { type } = file;
+
+        const addData = ( list_ ) => {
+            let LogList = new LogListClass( list_ );
+
+            if( serverName === 'main' ){
+                setProcessedListOfLogsMain( LogList.GetResult() );
+                setLogFileDateMain( LogList.GetFileDate() );
+                setLogFileDurationMain( LogList.GetFileDurationTime() );
+
+            }else if( serverName === 'backup' ){
+                setProcessedListOfLogsBackup( LogList.GetResult() );
+                setLogFileDateBackup( LogList.GetFileDate() );
+                setLogFileDurationBackup( LogList.GetFileDurationTime() );
+            };
+        };
+
+        if( type === 'text/plain' ){
+            // read_log_as_sll_text_file( file, ( list ) => {} );
+            read_log_as_sll_text_file( file, addData );
+            inputRef.current.value = "";
+
+        }else{
+            read_log_file( file, addData );
+            // read_log_file( file, ( list ) => {
+
+            // // let LogList = new LogListClass( list );
+
+            // // if( serverName === 'main' ){
+            // //     setProcessedListOfLogsMain( LogList.GetResult() );
+            // //     setLogFileDateMain( LogList.GetFileDate() );
+            // //     setLogFileDurationMain( LogList.GetFileDurationTime() );
+
+            // // }else if( serverName === 'backup' ){
+            // //     setProcessedListOfLogsBackup( LogList.GetResult() );
+            // //     setLogFileDateBackup( LogList.GetFileDate() );
+            // //     setLogFileDurationBackup( LogList.GetFileDurationTime() );
+            // // };
+
+            // } );
+
+            inputRef.current.value = "";
+        };
+
+
+
+        /*
         read_log_file( file, ( list ) => {
 
             let LogList = new LogListClass( list );
@@ -68,6 +120,7 @@ const DownloadButtonComponent = ( props ) => {
         } );
 
         inputRef.current.value = "";
+        */
 
     }
 
@@ -88,7 +141,7 @@ const DownloadButtonComponent = ( props ) => {
 
             <span className = 'icon fpd-icon-file-upload'></span>
             <span className = 'title'>Загрузить</span>
-            <span className = 'extension'>.PlayReport</span>
+            <span className = 'extension'>.PlayReport, .txt</span>
             { serverName === 'main'? 
                 <span className = 'title_second'>Основной</span>: 
                 <span className = 'title_second'>Резервный</span> 

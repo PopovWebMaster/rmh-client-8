@@ -81,13 +81,17 @@ export const get_rows_from_events = ( used_events ) => {
 function getReleaseData( release, cutPart, notes ){
     let cutName = '';
     if( cutPart !== null ){
-        cutName = `(порезка ${cutPart})`;
+        // cutName = `(порезка ${cutPart})`;
+        cutName = ``;
+
     };
     let fileName = '';
     if( release.file_list.length > 0 ){
         fileName = release.file_list[ release.file_list.length - 1 ];
     };
-    let releaseName = `${ release.applicationName } / ${release.releaseName} / ${fileName} ${cutName}`;
+    // let releaseName = `${ release.applicationName } / ${release.releaseName} / ${fileName} ${cutName}`;
+    let releaseName = `${release.releaseName} / ${fileName} ${cutName}`;
+
 
     // let releaseDurationStr = convert_sec_to_time( release.releaseDuration );
     let releaseDurationStr = release.releaseDuration;

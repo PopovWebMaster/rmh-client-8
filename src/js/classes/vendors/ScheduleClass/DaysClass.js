@@ -95,7 +95,6 @@ export class DaysClass {
 
 
         if( this.charType === CHAR_TYPE.FILE ){
-            console.dir( this );
 
             let current_sub_app_id = this.SubApplication.id;
 

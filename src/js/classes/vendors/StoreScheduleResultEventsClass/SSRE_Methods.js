@@ -66,6 +66,7 @@ export class SSRE_Methods{
     GetEventData( gridEventId ){
         let result = null;
         for( let i = 0; i < this.list.length; i++ ){
+            
             if( this.list[ i ].gridEventId === gridEventId ){
                 result = this.list[ i ];
                 break;

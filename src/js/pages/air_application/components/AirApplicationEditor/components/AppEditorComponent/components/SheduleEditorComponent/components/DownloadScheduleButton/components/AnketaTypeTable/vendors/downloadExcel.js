@@ -21,19 +21,19 @@ export const downloadExcel = ( params ) => {
 
 
 
-    console.dir({
-        tableHeader,
-        executor,
-        customer,
-        price,
-        mediaName,
-        materialName,
-    });
 
     let {
         matrix,
         used_sub_app_id
     } = get_matrix_array();
+
+    // console.dir( 'matrix' );
+    // console.dir( matrix );
+
+    // console.dir( 'used_sub_app_id' );
+    // console.dir( used_sub_app_id );
+
+
 
     let ExcelMediaPlanMix = new ExcelMediaPlanMixClass();
 
@@ -49,7 +49,7 @@ export const downloadExcel = ( params ) => {
 
     ExcelMediaPlanMix.Download();
 
-    console.dir( ExcelMediaPlanMix );
+    // console.dir( ExcelMediaPlanMix );
 
 
 

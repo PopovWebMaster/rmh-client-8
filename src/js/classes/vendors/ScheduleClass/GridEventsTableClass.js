@@ -42,7 +42,7 @@ export class GridEventsTableClass {
 
         } = params;
 
-        if( charType === CHAR_TYPE.BLOCK ){
+        // if( charType === CHAR_TYPE.BLOCK ){
             this.charType =             charType;
             this.SubApplication =       SubApplication;
             this.Event =                Event;
@@ -50,7 +50,7 @@ export class GridEventsTableClass {
             this.WeekPointsTemplate =   WeekPointsTemplate;
 
             this.isActive = true;
-        };
+        // };
 
         
     }

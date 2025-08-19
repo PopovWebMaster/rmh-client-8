@@ -42,14 +42,56 @@
         }
     }
 
-    // .A_Header_name{
-    //     font-size: .85em;
-    //     color: #485377;
-    //     background-color: #ffffff;
-    //     padding: 0.35em 1em;
-    //     border-radius: 0.1em;
-    //     margin: 0 1em;
-    // }
+    .A_Header_last{
+        font-size: 1em;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+        flex-grow: 1;
+        max-width: 100%;
+        
+
+
+
+
+        .A_BackCross{
+            font-size: 0.8em;
+            margin: 0 -1.1em 0 0;
+            // padding: 0.8em 0.2em 0.4em 0.2em;
+            border-radius: 0.1em;
+            // background-color: #f3efef;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
+
+            // border-bottom: 1px solid #d8d4d466;
+
+            .A_BackCross_icon{
+                font-size: 1em;
+                padding: 0.32em 0.12em 0.2em 0.12em;
+                border-radius: 0.1em;
+                background-color: #af7373;
+                color: #ffffff;
+                cursor: pointer;
+                user-select: none;
+                
+
+            }
+            .A_BackCross_icon:hover{
+                background-color: #b44343;
+            }
+            .A_BackCross_icon:active{
+                // background-color: #b44343;
+                color: #dbdbdb;
+            }
+
+
+        }
+    }
 
 
 }

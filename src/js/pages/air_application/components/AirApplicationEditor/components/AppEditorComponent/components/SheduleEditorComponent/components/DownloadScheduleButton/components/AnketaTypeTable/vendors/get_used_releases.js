@@ -8,6 +8,8 @@ export const get_used_releases = () => {
     let used_sab_app_id_obj = {};
 
     let { schedule, application, currentSubApplication } = store.getState();
+
+
     let { gridEventTable } = schedule;
     let { currentSubAppListById } = application;
     let { currentSubAppId, modeMix } = currentSubApplication;

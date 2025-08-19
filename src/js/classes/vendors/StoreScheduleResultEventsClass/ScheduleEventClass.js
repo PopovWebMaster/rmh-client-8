@@ -4,7 +4,6 @@ import { get_grid_event_by_id } from './get_grid_event_by_id.js';
 import { get_event_by_id } from './../StoreScheduleResultEventsClass/get_event_by_id.js';
 import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../../../config/layout.js';
 
-
 export class ScheduleEventClass{
     constructor(){
 
@@ -172,6 +171,7 @@ export class ScheduleEventClass{
     }
     AddRelease( release_id ){
         let Release = new ReleaseClass();
+
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
     }

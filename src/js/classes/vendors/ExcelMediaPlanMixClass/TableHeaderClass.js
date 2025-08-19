@@ -29,7 +29,7 @@ export class TableHeaderClass extends RowClass {
                         bold: false,
                     },
                     alignment: {
-                        horizontal: 'right',
+                        horizontal: 'center',
                     } 
                 } 
             },
