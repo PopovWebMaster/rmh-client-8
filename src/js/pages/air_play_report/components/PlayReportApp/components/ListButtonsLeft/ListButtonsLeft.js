@@ -11,6 +11,8 @@ import { DateListSelect } from './components/DateListSelect/DateListSelect.js';
 import { DownloadAsText } from './components/DownloadAsText/DownloadAsText.js';
 import { DownloadAsExel } from './components/DownloadAsExel/DownloadAsExel.js';
 import { DetailDataWindowButton } from './components/DetailDataWindowButton/DetailDataWindowButton.js';
+
+import { ButtonShowAllAsTextForExcel } from './components/ButtonShowAllAsTextForExcel/ButtonShowAllAsTextForExcel.js';
  
  
 const ListButtonsLeftComponent = ( props ) => {
@@ -25,8 +27,11 @@ const ListButtonsLeftComponent = ( props ) => {
             <div className = 'PRL_ListButtonsLeft_wrap'>
 
                 <div className = 'PRL_ListButtonsLeft_wrap_row'>
-                    <DownloadAsText />
-                    <DownloadAsExel />
+                    
+                    <ButtonShowAllAsTextForExcel />
+
+                    {/* <DownloadAsText />
+                    <DownloadAsExel /> */}
                 </div>
 
                 <div className = 'PRL_ListButtonsLeft_wrap_row'>

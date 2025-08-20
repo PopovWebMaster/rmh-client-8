@@ -1,8 +1,10 @@
 .PRL_ButtonLeft{
-    font-size: 1em;
+    font-size: 0.9em;
+    // width: fit-content;
     width: fit-content;
+
     
-    padding: 0.4em 0.8em;
+    padding: 0.32em 0.6em;
     border-radius: 0.1em;
     // margin: 0.5em;
 
@@ -12,7 +14,7 @@
     align-items: center;
     align-content: center;
 
-    background-color: #47be23;
+    background-color: #3bcc10b5;
 
     cursor: pointer;
     user-select: none;
@@ -32,10 +34,10 @@
 
     span.PRL_ButtonLeft_text{
         font-size: 0.75em;
-        color: #ffecec;
+        color: #ffffff;
         flex-grow: 1;
         max-width: 100%;
-        margin: 0 0.2em;
+        margin: 0 0 0 0.3em;
 
         font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
         // font-family: Courier, monospace;
@@ -53,24 +55,31 @@
 }
 
 .PRL_ButtonLeft:hover{
-    margin-top: -1px;
-    margin-bottom: 1px;
+    // margin-top: -1px;
+    // margin-bottom: 1px;
 
-    background-color: #4fc52c;
-    -webkit-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
-    -moz-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
-    box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
+    background-color: #47be23;
+
+    span.PRL_ButtonLeft_text{
+        color: #ffffff;
+    }
+    
+    // -webkit-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
+    // -moz-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
+    // box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
 
     span.PRL_ButtonLeft_icon{
         // color: #000000ea;
     }
 }
 .PRL_ButtonLeft:active{
-    margin-top: 0;
-    margin-bottom: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow:  none;
-    box-shadow:  none;
-    color: #ec5c5c;
+    // margin-top: 0;
+    // margin-bottom: 0;
+    // -webkit-box-shadow: none;
+    // -moz-box-shadow:  none;
+    // box-shadow:  none;
+    span.PRL_ButtonLeft_text{
+        color: #dddddd;
+    }
 }
 

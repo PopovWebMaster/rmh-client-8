@@ -1,0 +1,19 @@
+.PRL_ShowAsTextComponent{
+    font-size: 1em;
+    padding: 0.5em;
+
+
+    .PRL_ShowAsTextComponent_text{
+        font-size: 1em;
+
+        height: 88vh;
+        width: calc( 100% - 1em );
+        background-color: #ffffff;
+        border: 1px solid #ddd8d8;
+        border-radius: 0.1em;
+        outline: none;
+        color: #343434;
+        line-height: 1.2em;
+        padding: 0.3em;
+    }
+}
