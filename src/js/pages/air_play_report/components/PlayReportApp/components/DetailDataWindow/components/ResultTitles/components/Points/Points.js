@@ -41,6 +41,7 @@ const PointsComponent = ( props ) => {
 
     const enter = ( e ) => {
         if( e.which === 13 ){
+
             let arr = [ ...resultPointsSec, Number( e.target.value ) ];
             let arr_2 = arr.sort( ( a, b ) => {
                 if(a < b ){
@@ -57,19 +58,28 @@ const PointsComponent = ( props ) => {
 
     };
 
+    const clear_click = () => {
+        setResultPointsSec( [] );
+    }
+
     return (
 
         <div className = 'DDW_ResultPoints'>
 
             <h2>Точки (sec):</h2>
             { create( resultPointsSec ) }
+
+            
             <input 
                 type = 'number'
                 value = { valueSec }
                 onChange = { change }
                 onKeyDown = { enter }
             />
-
+            <span
+                className = 'DDW_ResultPoints_clear'
+                onClick = { clear_click }
+            >clear</span>
         </div>
         
     )

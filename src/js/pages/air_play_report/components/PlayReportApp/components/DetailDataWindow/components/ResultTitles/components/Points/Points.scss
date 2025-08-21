@@ -25,6 +25,23 @@
         padding: 0.2em 0;
     }
 
+    span.DDW_ResultPoints_clear{
+        font-size: 0.65em;
+        color: #1e4ed1;
+        margin: 0 0.4em;
+        font-family: 'Courier New', Courier, monospace;
+        padding: 0.2em 0;
+        cursor: pointer;
+        user-select: none;
+    }
+    span.DDW_ResultPoints_clear:hover{
+        text-decoration: underline;
+    }
+    span.DDW_ResultPoints_clear:active{
+        text-decoration: none;
+        color: #4b74e4;
+    }
+
     input{
         font-size: 0.8em;
         padding: 0.2em 0.8em;

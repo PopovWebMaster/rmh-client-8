@@ -32,8 +32,6 @@ const DetailDataWindowComponent = ( props ) => {
             case 'points':
                 return <ResultTitles />
 
-                
-
             default:
                 return '';
         }

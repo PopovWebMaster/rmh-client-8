@@ -8,12 +8,14 @@ import './ListButtonsLeft.scss';
 import { TimeScrollButtons } from './components/TimeScrollButtons/TimeScrollButtons.js';
 import { DateListSelect } from './components/DateListSelect/DateListSelect.js';
 
-import { DownloadAsText } from './components/DownloadAsText/DownloadAsText.js';
-import { DownloadAsExel } from './components/DownloadAsExel/DownloadAsExel.js';
+// import { DownloadAsText } from './components/DownloadAsText/DownloadAsText.js';
+// import { DownloadAsExel } from './components/DownloadAsExel/DownloadAsExel.js';
 import { DetailDataWindowButton } from './components/DetailDataWindowButton/DetailDataWindowButton.js';
 
-import { ButtonShowAllAsTextForExcel } from './components/ButtonShowAllAsTextForExcel/ButtonShowAllAsTextForExcel.js';
- 
+import { ButtonShowDayAsTextForExcel } from './components/ButtonShowDayAsTextForExcel/ButtonShowDayAsTextForExcel.js';
+import { ButtonShowAllDaysAsTextForExcel } from './components/ButtonShowAllDaysAsTextForExcel/ButtonShowAllDaysAsTextForExcel.js';
+import { ButtonDownloadDayAsExcel } from './components/ButtonDownloadDayAsExcel/ButtonDownloadDayAsExcel.js';
+import { ButtonDownloadAllDaysAsExcel } from './components/ButtonDownloadAllDaysAsExcel/ButtonDownloadAllDaysAsExcel.js';
  
 const ListButtonsLeftComponent = ( props ) => {
 
@@ -28,7 +30,10 @@ const ListButtonsLeftComponent = ( props ) => {
 
                 <div className = 'PRL_ListButtonsLeft_wrap_row'>
                     
-                    <ButtonShowAllAsTextForExcel />
+                    <ButtonShowDayAsTextForExcel />
+                    <ButtonShowAllDaysAsTextForExcel />
+                    <ButtonDownloadDayAsExcel />
+                    <ButtonDownloadAllDaysAsExcel />
 
                     {/* <DownloadAsText />
                     <DownloadAsExel /> */}
@@ -37,8 +42,6 @@ const ListButtonsLeftComponent = ( props ) => {
                 <div className = 'PRL_ListButtonsLeft_wrap_row'>
                     <DetailDataWindowButton />
                 </div>
-
-                
 
             </div>
 

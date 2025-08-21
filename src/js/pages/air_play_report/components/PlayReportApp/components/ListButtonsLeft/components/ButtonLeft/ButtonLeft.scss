@@ -32,25 +32,27 @@
     }
 
 
-    span.PRL_ButtonLeft_text{
+    >span.PRL_ButtonLeft_text{
         font-size: 0.75em;
-        color: #ffffff;
+        color: #d9d8d8;
         flex-grow: 1;
         max-width: 100%;
         margin: 0 0 0 0.3em;
 
         font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-        // font-family: Courier, monospace;
+
+        >span.PRL_ButtonLeft_textSecond{
+            // font-size: 0.7em;
+            color: #ffffff;
+
+            // flex-grow: 0;
+            // max-width: 100%;
+
+        }
 
 
     }
-    span.PRL_ButtonLeft_textSecond{
-        font-size: 0.7em;
-        color: #dbdbdb;
-        flex-grow: 0;
-        max-width: 100%;
 
-    }
 
 }
 
@@ -60,15 +62,24 @@
 
     background-color: #47be23;
 
-    span.PRL_ButtonLeft_text{
+    >span.PRL_ButtonLeft_text{
         color: #ffffff;
+
+        // span{
+        //     >span.PRL_ButtonLeft_textSecond{
+        //         // font-size: 0.7em;
+        //         color: #525252;
+
+
+        //     }
+        // }
     }
     
     // -webkit-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
     // -moz-box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
     // box-shadow: 2px 3px 5px 2px rgba(34, 60, 80, 0.4);
 
-    span.PRL_ButtonLeft_icon{
+    >span.PRL_ButtonLeft_icon{
         // color: #000000ea;
     }
 }
@@ -78,7 +89,7 @@
     // -webkit-box-shadow: none;
     // -moz-box-shadow:  none;
     // box-shadow:  none;
-    span.PRL_ButtonLeft_text{
+    >span.PRL_ButtonLeft_text{
         color: #dddddd;
     }
 }
