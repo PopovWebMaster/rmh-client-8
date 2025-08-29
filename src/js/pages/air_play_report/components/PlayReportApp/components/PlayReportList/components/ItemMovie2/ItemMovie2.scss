@@ -9,6 +9,7 @@
     
     background-color: #ffffff85;
     border-radius: 0.1em 0.1em 0 0;
+    border: 1px solid #ffffff00;
 
     .PRL_ItemMovie2_wrap{
         font-size: 1em;
@@ -63,6 +64,37 @@
     
 }
 
+.PRL_ItemMovie2:hover{
+    // background-color: #ffffffa8;
+    border: 1px solid #4b9cc9;
+
+    .PRL_ItemMovie2_Duration_v2{
+        .PRL_Duration_data{
+            ul{
+                li{
+                    span{
+                        // color: #fffefe;
+                        color: #000000;
+
+                    }
+                    input{
+                        background-color: #ffffff;
+                    }
+                    .PRL_Duration_data_segment{
+                        background-color: #535353;
+                        // color: #79ff8c;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+.PRL_ItemMovie2.isBacklight:hover{
+    background-color: #434f52;
+}
+
 .PRL_ItemMovie2.isBacklight{
     background-color: #2f383a;
     .PRL_ItemMovie2_date{
@@ -82,6 +114,54 @@
             color: #ffffff;
             font-weight: bold;
 
+        }
+    }
+
+    .PRL_ItemMovie2_Duration_v2{
+        .PRL_Duration_data{
+            ul{
+                li{
+                    span{
+                        color: #d7d7d7;
+                    }
+                }
+            }
+        }
+    }
+    
+    .PRL_ItemMovie2_Graphics{
+        ul{
+            li{
+                .PRL_ItemGraphics_item_file{
+                    color: #d7d7d7;
+                }
+
+                .PRL_ItemGraphics_item_markIn{
+                     color: #d7d7d7;
+                    .PRL_ItemGraphics_item_markInsec{
+                        color: #d7d7d7;
+                    }
+                }
+            }
+        }
+    }
+
+    .PRL_Duration_graphics_btn{
+        >div{
+
+            background-color: #afafafcc;
+
+            span{
+                color: #252525;
+            }
+
+        }
+
+        >div:hover{
+            background-color: #fbfbfba8;
+            span{
+                color: #000000;
+            }
         }
     }
 }

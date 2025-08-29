@@ -14,6 +14,7 @@ const AWCategorySelectComponent = ( props ) => {
     let {
         value,
         changeHandler,
+        setCategoryErrors,
 
         categoryList,
         categoryListById,
@@ -43,6 +44,7 @@ const AWCategorySelectComponent = ( props ) => {
         setCategoryIsOpen( false );
 
         changeHandler( id );
+        setCategoryErrors( [] );
 
     }
 

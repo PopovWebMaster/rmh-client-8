@@ -16,6 +16,9 @@ const ItemEditContainerComponent = ( props ) => {
         children,
 
         closeHandler = () => {},
+
+        openHandler = () => {},
+        // closeHandler = () => {},
         
     } = props;
 
@@ -24,6 +27,8 @@ const ItemEditContainerComponent = ( props ) => {
     useEffect( () => {
         if( isOpen === false ){
             closeHandler();
+        }else{
+            openHandler();
         };
 
     }, [ isOpen ] );
@@ -41,7 +46,7 @@ const ItemEditContainerComponent = ( props ) => {
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
                 width =     { '40em' }
-                height =    { '20em' }
+                height =    { '40em' }
             >
                 <>{ children }</>
             </AlertWindowContainer>

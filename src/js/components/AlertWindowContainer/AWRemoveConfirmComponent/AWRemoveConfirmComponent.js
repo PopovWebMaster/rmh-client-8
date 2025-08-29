@@ -22,7 +22,9 @@ const AWRemoveConfirmComponentComponent = ( props ) => {
             <p>
                 <span 
                     className = 'AW_Event_remove_btn'
-                    onClick = { removeHandler}
+                    // onClick = { removeHandler }
+                    onClick = { () => { alert( 'Функция удаления категорий и событий временно находится на ремонте. Это не надолго.' ) } }
+
                 >Удалить</span>
                 <span 
                     className = 'AW_Event_no_remove_btn'

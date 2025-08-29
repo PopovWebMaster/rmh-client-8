@@ -19,11 +19,15 @@ import { AWButtonAdd }              from './../../../../../../components/AlertWi
 import { AWEventTypeEventSelect }   from './../../../../../../components/AlertWindowContainer/AWEventTypeEventSelect/AWEventTypeEventSelect.js';
 import { AWCategorySelect }         from './../../../../../../components/AlertWindowContainer/AWCategorySelect/AWCategorySelect.js';
 
+import { AWShowErrors } from './../../../../../../components/AlertWindowContainer/AWShowErrors/AWShowErrors.js';
+
 const AddEventComponentComponent = ( props ) => {
 
     let {
         isOpen,
         setIsOpen,
+
+        eventList,
 
         setSpinnerIsActive,
         setEventList,
@@ -36,6 +40,10 @@ const AddEventComponentComponent = ( props ) => {
     let [ notes, setNotes ] = useState( '' );
 
     let [ categoryIdValue, setCategoryIdValue ] = useState( null );
+
+    let [ categoryErrors, setCategoryErrors ] = useState( [] );
+    let [ nameErrors, setNameErrors ] = useState( [] );
+
 
     useEffect( () => {
         if( isOpen === false ){
@@ -50,6 +58,7 @@ const AddEventComponentComponent = ( props ) => {
     const changeName = ( e ) => {
         let val = e.target.value;
         setName( val );
+        setNameErrors([]);
     }
 
     const chengeDuration = ( sec, time ) => {
@@ -64,6 +73,85 @@ const AddEventComponentComponent = ( props ) => {
     }
 
     const create = () => {
+
+        let trimName = name.trim();
+
+        if( trimName === '' ){
+            setNameErrors( [ 'Поле с названием должно быть заполнено!' ] );
+        }else{
+            let isUniq = true;
+            for( let i = 0; i < eventList.length; i++ ){
+                if( eventList[ i ].name === trimName ){
+                    isUniq = false;
+                    break;
+                };
+            };
+            if( isUniq === false ){
+                setNameErrors( [ `Уже существует событие с таким именем "${trimName}"` ] );
+            }else{
+                if( categoryIdValue === null ){
+                    setCategoryErrors( [ 'Пожалуйста, выбирите категорию.' ] );
+                }else{
+                    setSpinnerIsActive( true );
+
+                    send_request_to_server({
+                        route: `add-new-event`,
+                        data: { 
+                            eventName:  trimName,
+                            eventNotes: notes,
+                            eventType:  eventType, // file block
+                            categoryId: categoryIdValue,
+                            eventDurationTime: duration,
+                        },
+
+                        successCallback: ( response ) => {
+                            console.dir( 'response' );
+                            console.dir( response );
+                            if( response.ok ){
+                                setSpinnerIsActive( false );
+                                setEventList( response.list );
+                                setIsOpen( false );
+                            };
+                        },
+                    });
+
+
+
+                };
+
+            };
+
+            
+        //     console.dir(  'eventList' );
+        //     console.dir(  eventList );
+
+        // console.dir({
+        //     eventName:  name,
+        //     eventNotes: notes,
+        //     eventType:  eventType, 
+        //     categoryId: categoryIdValue,
+        //     eventDurationTime: duration,
+        // });
+
+        };
+
+
+
+        // console.dir({
+        //     eventName:  name,
+        //     eventNotes: notes,
+        //     eventType:  eventType, 
+        //     categoryId: categoryIdValue,
+        //     eventDurationTime: duration,
+        // });
+
+        // setNameErrors( [ 'Пожалуйста, выбирите категорию' ] );
+        // setNameErrors( [ 'Поле с названием должно быть заполнено!' ] );
+
+
+
+        
+        /*
 
         setSpinnerIsActive( true );
 
@@ -87,6 +175,8 @@ const AddEventComponentComponent = ( props ) => {
                 };
             },
         });
+
+        */
     }
 
     const eventIsReady = ( name ) => {
@@ -100,6 +190,13 @@ const AddEventComponentComponent = ( props ) => {
     return (
 
         <div className = 'LE_AddEventComponent' >
+
+            
+
+            <AWShowErrors
+                errors = { nameErrors }
+                onlyErrorInfo = { true }
+            />
 
             <AWInputText 
                 title = { 'Название:' }
@@ -125,13 +222,23 @@ const AddEventComponentComponent = ( props ) => {
             
             />
 
+            <AWShowErrors
+                errors = { categoryErrors }
+                onlyErrorInfo = { true }
+            />
+
             <AWCategorySelect 
                 value = { categoryIdValue }
                 changeHandler = { setCategoryIdValue }
+                setCategoryErrors = { setCategoryErrors }
             />
 
+           
+
             <AWButtonAdd 
-                isReady = { eventIsReady( name ) }
+                // isReady = { eventIsReady( name ) }
+                isReady = { true }
+
                 clickHandler = { create }
             />
 
@@ -150,6 +257,8 @@ export function AddEventComponent( props ){
         <AddEventComponentComponent
             { ...props }
             categoryList = { layout.categoryList }
+            eventList = { layout.eventList }
+
 
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
             setEventList = { ( val ) => { dispatch( setEventList( val ) ) } }

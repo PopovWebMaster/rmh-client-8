@@ -1,9 +1,10 @@
 .PRL_ItemMovie2_FileData{
     font-size: 1em;
 
-    width: 36vw;
-    // background-color: rgb(255, 255, 255);
-    // border-radius: 0.1em;
+    
+    flex-grow: 1;
+    max-width: 100%;
+    // width: 36vw;
 
     display: flex;
     justify-content: flex-start;

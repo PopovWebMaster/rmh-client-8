@@ -13,6 +13,7 @@ import { ItemUserId } from './../ItemUserId/ItemUserId.js';
 import { ItemUserEmail } from './../ItemUserEmail/ItemUserEmail.js';
 import { ItemUserPassword } from './../ItemUserPassword/ItemUserPassword.js';
 import { ItemUserRemove } from './../ItemUserRemove/ItemUserRemove.js';
+import { ItemAccessRights } from './../ItemAccessRights/ItemAccessRights.js';
 
 
 const OneUserItemComponent = ( props ) => {
@@ -49,6 +50,12 @@ const OneUserItemComponent = ( props ) => {
 
             <ItemUserPassword
                 userId =    { id }
+            />
+
+            <ItemAccessRights
+                userId =    { id }
+                name =      { name }
+                email =     { email }
             />
 
             <ItemUserRemove

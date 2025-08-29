@@ -1,0 +1,29 @@
+.LC_OneCategory_canel{
+    font-size: 1em;
+    width: 1.4em;
+    height: 1.4em;
+    background-color: #ffffff1a;
+    border-radius: 0.1em;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+
+    span{
+        font-size: 1em;
+        line-height: 1.4em;
+        color: #817f7f;
+    }
+}
+
+.LC_OneCategory_canel:hover{
+    background-color: #ffffff5e;
+    span{
+        color: #616161;
+    }
+}
+.LC_OneCategory_canel:active{
+    // background-color: #ffffff5e;
+    span{
+        color: #ee9999;
+    }
+}

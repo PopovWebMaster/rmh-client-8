@@ -18,6 +18,7 @@
         "login": "webpack-dev-server --open --config ./build/webpack.dev.login.conf.js",
         "access-is-closed": "webpack-dev-server --open --config ./build/webpack.dev.accessIsClosed.conf.js",
         "page-not-found": "webpack-dev-server --open --config ./build/webpack.dev.pageNotFound.conf.js"
+
     },
     "keywords": [],
     "author": "",

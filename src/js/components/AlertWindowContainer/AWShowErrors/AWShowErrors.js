@@ -12,15 +12,24 @@ import './AWShowErrors.scss';
 const AWShowErrorsComponent = ( props ) => {
 
     let {
-        errors = []
+        errors = [], // array or string
+        onlyErrorInfo = false,
         
 
     } = props;
 
     const create = ( arr ) => {
-        let p = arr.map( ( text, index ) => {
-            return <p key = { index }>{ text }</p>
-        } );
+        let p = '';
+        if( typeof arr === "string" ){
+            /*
+                Моя частая ошибка воткнуть строку вместо массива...
+            */
+            p  = <p>{ arr }</p>;
+        }else{
+            p = arr.map( ( text, index ) => {
+                return <p key = { index }>{ text }</p>
+            } );
+        };
         return p;
 
 
@@ -30,7 +39,8 @@ const AWShowErrorsComponent = ( props ) => {
     return (<>
         { errors.length === 0? '': (
             <div className = 'AW_item AWShowErrors'>
-                <h3 className = 'error_h3'>Ошибка!</h3>
+                { onlyErrorInfo? '': <h3 className = 'error_h3'>Ошибка!</h3> }
+                
                 { create( errors ) }
             </div>
         ) }

@@ -10,6 +10,7 @@ import { DateItem } from './components/DateItem/DateItem.js';
 import { Time } from './components/Time/Time.js';
 import { FileData } from './components/FileData/FileData.js';
 import { Duration } from './components/Duration/Duration.js';
+import { Duration_v2 } from './components/Duration_v2/Duration_v2.js';
 import { Graphics } from './components/Graphics/Graphics.js';
 
 const ItemMovie2Component = ( props ) => {
@@ -35,7 +36,13 @@ const ItemMovie2Component = ( props ) => {
                 <DateItem date = { item.date }/>
                 <Time startTime = { item.startTime }/>
                 <FileData file = { item.file }/>
-                <Duration 
+                {/* <Duration 
+                    fileDuration =          { item.fileDuration }
+                    segmentRealDuration =   { item.segmentRealDuration }
+                    markIn =                { item.markIn }
+                /> */}
+
+                <Duration_v2
                     fileDuration =          { item.fileDuration }
                     segmentRealDuration =   { item.segmentRealDuration }
                     markIn =                { item.markIn }

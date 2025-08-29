@@ -27,5 +27,7 @@
 // fa-reorder
 // icon-eye-4
 
+// animate-spin icon-spin5
+
 // 'icon-angle-left': 'icon-angle-right'
 // icon-flow-tree

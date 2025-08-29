@@ -14,6 +14,8 @@ import { AWRemoveConfirmComponent } from './../../../../../../components/AlertWi
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
 
+import { RemoveCategoryButton } from './components/RemoveCategoryButton/RemoveCategoryButton.js';
+
 const OneCategoryComponent = ( props ) => {
 
     let {
@@ -202,12 +204,16 @@ const OneCategoryComponent = ( props ) => {
 
                 <div className = 'LC_OneCategory_control'>
 
-                    <div 
+                    <RemoveCategoryButton
+                        categoryId = { id }
+                    />
+
+                    {/* <div 
                         className = 'LC_OneCategory_canel'
                         onClick = { () => { setIsOpen( true ) } }
                     >
                         <span className = 'icon-cancel-2'></span>
-                    </div>
+                    </div> */}
 
                 </div>
 

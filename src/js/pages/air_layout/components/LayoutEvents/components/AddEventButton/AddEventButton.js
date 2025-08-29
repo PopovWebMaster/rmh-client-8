@@ -33,8 +33,8 @@ const AddEventButtonComponent = ( props ) => {
         <AlertWindowContainer
             isOpen =    { isOpen }
             setIsOpen = { setIsOpen }
-            width =     '27em'
-            height =    '34em'
+            width =     '28em'
+            height =    '40em'
             title = 'Новое событие'
         >
             <AddEventComponent 

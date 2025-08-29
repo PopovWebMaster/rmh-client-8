@@ -22,7 +22,7 @@ const AdminCompanyEditorComponent = ( props ) => {
 
         <AdminPageContainer
             className =             'adminCompanyEditor'
-            topPanelComponents =    { <SaveChangesButton />}
+            topPanelComponents =    { <SaveChangesButton /> }
             bodyComponent =         { <CompanyEditor /> }
         />
 

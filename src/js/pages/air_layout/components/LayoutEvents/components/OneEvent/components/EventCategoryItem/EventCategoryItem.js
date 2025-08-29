@@ -72,40 +72,20 @@ const EventCategoryItemComponent = ( props ) => {
     }
 
     const createCategoryList = ( arr ) => {
+
         let li = arr.map( ( item, index ) => {
 
-            let isActive = item.id === category.id? true: false;
+        let isActive = item.id === category.id? true: false;
 
-            if( index === 0 ){
-                return (<React.Fragment
-                    key = { index }
-                >
-                    <li
-                        className = { category.id === null? 'active': '' }
-                        onClick = { () => {
-                            categoryClick( DEFAULT_CATEGORY.id );
-                        } }
-                    >{ DEFAULT_CATEGORY.name }</li>
-                    
-                    <li
-                        className = { isActive? 'active': '' }
-                        onClick = { () => {
-                            categoryClick( item.id );
-                        } }
-                    >{ item.name }</li>
-                </React.Fragment>);
-            }else{
-                return (
-                    <li
-                        className = { isActive? 'active': '' }
-                        key = { index }
-                        onClick = { () => {
-                            categoryClick( item.id );
-                        } }
-                    >{ item.name }</li>
-                );
-            };
-
+        return (
+            <li
+                className = { isActive? 'active': '' }
+                key = { index }
+                onClick = { () => {
+                    categoryClick( item.id );
+                } }
+            >{ item.name }</li>
+        );
 
         } );
 

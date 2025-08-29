@@ -7,7 +7,8 @@
     align-items: center;
     align-content: center;
     
-    width: 4.4em;
+    // width: 4.4em;
+    width: fit-content;
     height: 1.7em;
 
     span{
@@ -16,6 +17,8 @@
         padding: 0.2em 0.5em;
 
         font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+        white-space: preserve nowrap;
         
 
     }
