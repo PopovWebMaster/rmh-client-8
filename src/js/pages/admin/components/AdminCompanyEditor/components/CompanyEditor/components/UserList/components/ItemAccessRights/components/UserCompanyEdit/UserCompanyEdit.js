@@ -12,16 +12,11 @@ import { ScrollContainer } from './../../../../../../../../../../../../component
 const UserCompanyEditComponent = ( props ) => {
 
     let {
-        userId,
         userCompanyList,
         setUserCompanyList,
-        admin,
         companies,
         currentCompanyAlias,
     } = props;
-
-    console.dir( 'admin' );
-    console.dir( admin );
 
     const click = ( alias ) => {
         if( alias === currentCompanyAlias ){
@@ -38,12 +33,10 @@ const UserCompanyEditComponent = ( props ) => {
                     }else{
                         arr.push( userCompanyList[ i ] );
                     };
-
                 };
                 setUserCompanyList( arr );
             }
         };
-
 
     };
 
@@ -69,7 +62,7 @@ const UserCompanyEditComponent = ( props ) => {
                     </div>
 
                     <div className = 'compamy_item_isNative'>
-                        { isNative? <span>родная</span>: '' }
+                        { isNative? <span>native</span>: '' }
                     </div>
 
                     <div className = 'compamy_item_name'>
@@ -91,8 +84,6 @@ const UserCompanyEditComponent = ( props ) => {
 
     }
 
-
-
     return (
         <div className = 'ACE_UserCompanyEdit'>
 
@@ -100,12 +91,7 @@ const UserCompanyEditComponent = ( props ) => {
 
                 { create( companies, userCompanyList ) }
 
-                
-
-
             </ScrollContainer>
-
-          
 
         </div>
     )
@@ -115,13 +101,11 @@ const UserCompanyEditComponent = ( props ) => {
 export function UserCompanyEdit( props ){
 
     const admin = useSelector( adminSlice );
-    
     // const dispatch = useDispatch();
 
     return (
         <UserCompanyEditComponent
             { ...props }
-            admin = { admin }
             companies = { admin.companies }
             currentCompanyAlias = { admin.currentCompanyAlias }
 

@@ -26,11 +26,7 @@ const OneUserItemComponent = ( props ) => {
         // isAuth,
         name,
         position,
-    } = props;
-
-
-
-
+    } = props
 
 
     return (

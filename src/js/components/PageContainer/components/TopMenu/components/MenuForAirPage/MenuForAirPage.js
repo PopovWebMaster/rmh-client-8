@@ -21,6 +21,7 @@ const MenuForAirPageComponent = ( props ) => {
 
     return (<>
         <HomeLink />
+        
         <SiteLogo />
 
         <MenuItemLink 

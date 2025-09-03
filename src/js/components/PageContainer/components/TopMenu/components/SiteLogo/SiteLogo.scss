@@ -40,4 +40,72 @@
 
     }
 
+    .logoCompanyArrow{
+        font-size: 1em;
+        color: #8d8787;
+        width: 1.2em;
+        margin-right: 0.2em;
+        // height: calc( 100% - 1em );
+    }
+
+    .siteLogo_DDList{
+        font-size: 1em;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: fit-content;
+        min-width: 100%;
+
+        background-color: #263445;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: center;
+
+        z-index: 2000;
+        border: 1px solid #33434300;
+
+        a{
+            font-size: 0.8em;
+            font-family: "EuropeExt Normal";
+            text-decoration: none;
+            border: 1px solid #fffdfd00;
+            padding: 0.5em 1em 0.5em 2em;
+            color: #beb4b4;
+            flex-grow: 1;
+            min-width: calc( 100% - 3.05em );
+            border-bottom: 1px solid #f7f4f41c;
+            white-space: preserve nowrap;
+        }
+        a:last-child{
+            border-bottom: 1px solid #ffffff00;
+        }
+
+        a:hover{
+            background-color: #5e7da745;
+        }
+
+        a:active{
+            color: #ffffff;
+        }
+
+
+    }
+
+}
+
+.siteLogo.isMulti{
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.siteLogo.isMulti:hover{
+    background-color: #4d535b;
+
+    .logoCompanyArrow{
+        color: #ffffff;
+    }
 }

@@ -32,8 +32,6 @@ const AdminPageAppComponent = ( props ) => {
         if( IS_DEVELOPMENT ){
             // navigate( `/admin` );
             navigate( `/admin/company` );
-
-
         }else{
         };
 

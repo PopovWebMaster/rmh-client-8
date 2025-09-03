@@ -21,13 +21,13 @@ const AccessRightEditComponent = ( props ) => {
         userId,
         userCompanyList,
         setUserCompanyList,
-        admin,
+        // admin,
         companies,
         currentCompanyAlias,
     } = props;
 
-    console.dir( 'admin' );
-    console.dir( admin );
+    // console.dir( 'admin' );
+    // console.dir( admin );
 
     // const click = ( alias ) => {
     //     if( alias === currentCompanyAlias ){

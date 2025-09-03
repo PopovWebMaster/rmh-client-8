@@ -29,5 +29,5 @@
 
 // animate-spin icon-spin5
 
-// 'icon-angle-left': 'icon-angle-right'
+// 'icon-angle-left': 'icon-angle-right' icon-angle-down icon-angle-up
 // icon-flow-tree
