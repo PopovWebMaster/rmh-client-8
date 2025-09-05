@@ -14,6 +14,7 @@ import { get_filter_list_from_events_list } from './../../vendors/get_filter_lis
 import { get_changet_filter_list } from './../../vendors/get_changet_filter_list.js';
 
 import { FilterItem } from './../FilterItem/FilterItem.js';
+import { FilterControlPanel } from './../FilterControlPanel/FilterControlPanel.js';
  
 import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
 
@@ -26,6 +27,10 @@ import { get_excel_rows } from './vendors/get_excel_rows.js';
 import { get_file_name } from './vendors/get_file_name.js'
 
 import { MOUNTH_NAME } from './../.././../../../../config/mounth.js';
+
+
+
+import { ResultScheduleClass } from './vendors/ResultScheduleClass.js';
 
 
 const DExcelComponentComponent = ( props ) => {
@@ -108,11 +113,25 @@ const DExcelComponentComponent = ( props ) => {
         console.dir( scheduleEventsList );
 
         let scheduleEventsLlist = StoreScheduleResultEvents.GetScheduleEventsList();
-    
+
         let used_events = get_used_events( scheduleEventsLlist, filterList );
+
+        console.dir( 'used_events' );
+        console.dir( used_events );
+
+        let ResultSchedule = new ResultScheduleClass();
+
+        ResultSchedule.AddUsedEvents( used_events );
+
+        ResultSchedule.SetCurrentDate( currentDate );
+        ResultSchedule.SetCurrentDayNum( currentDayNum );
+        ResultSchedule.SetCurrentMonth( currentMonth );
+        ResultSchedule.SetCurrentYear( currentYear );
+
+        ResultSchedule.Download();
+        /*
         let rows = get_rows_from_events( used_events );
-        // console.dir( 'rows' );
-        // console.dir( rows );
+
 
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.aoa_to_sheet([
@@ -143,7 +162,7 @@ const DExcelComponentComponent = ( props ) => {
             currentYear,
         });
         XLSX.writeFile(wb, fileName);
-
+*/
         
 
     }
@@ -154,6 +173,13 @@ const DExcelComponentComponent = ( props ) => {
     return (
         <div className = 'S_DExcelComponent'>
             <h4 className = 'S_DExcelComponent_header'>Что включить в экспорт?</h4>
+
+            <FilterControlPanel
+                filterList = { filterList }
+                setFilterList = { setFilterList }
+                isOpen = { isOpen }
+            />
+
             <div className = 'S_DExcelComponent_listWrap'>
                 <ScrollContainer>
                     { createList( filterList ) }

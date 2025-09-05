@@ -66,19 +66,22 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
                 <PrefixItem eventId = { eventId }/>
                 <EventNameItem 
+                    firstSegmentId =        { firstSegmentId }
                     eventId = { eventId }
                     cutPart = { cutPart }
                 />
                 <EventNotesItem 
                     eventId =   { eventId }
-                    id =        { id }
-                    notes =     { notes }
+                    id =   { id }
+                    notes =   { notes }
                 />
+
                 <div className = 'CTS_right_buttons_wrap'>
 
                     <PremieraToggle
                         id = { id }
                         is_premiere = { is_premiere }
+                        firstSegmentId = { firstSegmentId }
                     />
 
                     <CutItem 

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -15,10 +15,19 @@ import { SaveGridEventsList } from './components/SaveGridEventsList/SaveGridEven
 import { GridDayEditor } from './components/GridDayEditor/GridDayEditor.js';
 import { PageBodyCounters } from './../../../../components/PageBodyCounters/PageBodyCounters.js';
 
+import { save_grid_events_changes_on_server } from './vendors/save_grid_events_changes_on_server.js';
+
 const LayoutGridComponent = ( props ) => {
 
     let {
+
     } = props;
+
+    useEffect( () => {
+        return () => {
+            save_grid_events_changes_on_server( () => {} );
+        }
+    }, [] );
     
     return (
         <PageBodyContainer 

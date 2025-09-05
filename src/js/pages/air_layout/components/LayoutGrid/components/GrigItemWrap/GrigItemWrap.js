@@ -30,6 +30,7 @@ const GrigItemWrapComponent = ( props ) => {
 
     let [ gridEventType, setGridEventType ] = useState( '' );
 
+
     useEffect( () => {
         if( gridDayEventsListById[ id ] ){
 
@@ -78,9 +79,9 @@ const GrigItemWrapComponent = ( props ) => {
                 { isCompletd? (
                     <div className = 'grigItemTime'>
                         <StartTimeWithEdit 
-                            startTime =     { startTime }
-                            isKeyPoint =    { isKeyPoint }
-                            id =            { id }
+                            startTimeValue =    { startTime }
+                            isKeyPoint =        { isKeyPoint }
+                            id =                { id }
                         />
 
                         { gridEventType === EVENT_TYPE.BLOCK? ( <DurationTimeEdit

@@ -16,7 +16,7 @@ import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_
 const StartTimeWithEditComponent = ( props ) => {
 
     let {
-        // startTime,
+        startTimeValue, // Нужна здесь только для того чтоб отслеживать его изменения и вовремя перерисовывать в DOM
         isKeyPoint = false,
         id = null,
 
@@ -38,7 +38,7 @@ const StartTimeWithEditComponent = ( props ) => {
 
         get_day_event_data();
 
-    }, [ id, isOpen ] )
+    }, [ id, isOpen, startTimeValue ] )
 
     const clickAdd = () => {
         setIsOpen( true );

@@ -13,6 +13,7 @@ import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 const EventNameItemComponent = ( props ) => {
 
     let {
+        firstSegmentId,
         eventId,
         cutPart,
 
@@ -75,6 +76,15 @@ const EventNameItemComponent = ( props ) => {
         return result;
 
     }
+
+    const clickCut = () => {
+        
+
+        console.dir( `cut_button_${firstSegmentId}` );
+
+        let elem = document.getElementById( `cut_button_${firstSegmentId}` );
+        elem.click();
+    }
     
 
 
@@ -88,7 +98,10 @@ const EventNameItemComponent = ( props ) => {
                 style =     { get_style( eventType ) }
             />
             { cutPart !== null? (
-                <div className = 'curPartName'>
+                <div
+                    className = 'curPartName'
+                    onClick = { clickCut }
+                >
                     <span>
                         <span className = 'icon icon-scissors'></span>
                         <span className = 'num'>{ cutPart }</span>

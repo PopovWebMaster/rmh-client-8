@@ -4,6 +4,7 @@
     flex-grow: 1;
     height: 100%;
     max-width: 100%;
+
     
     display: flex;
     justify-content: flex-start;
@@ -26,6 +27,11 @@
     .CTS_PremieraToggleItem_btn:hover{
         background-color: #7d7fd9;
         color: #fcfcfc;
+
+        border: 1px solid #0003f540;
+
+
+
     }
 
     .CTS_PremieraToggleItem_btn:active{

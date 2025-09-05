@@ -42,6 +42,7 @@ const EventNotesItemComponent = ( props ) => {
             setInputValue( notesValue );
         }else{
             setInputValue( `${eventNotes} ${notesValue}` );
+            
         };
         
     }, [ eventNotes, notesValue ]);

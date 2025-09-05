@@ -16,6 +16,8 @@ import { send_request_to_server } from './../../../../../../../../helpers/send_r
 
 import { RemoveSegmentButton } from './../../../RemoveSegmentButton/RemoveSegmentButton.js';
 
+import { remove_grid_event_from_curren_day_in_store } from './../../../../vendors/remove_grid_event_from_curren_day_in_store.js';
+
 const RemoveItemComponent = ( props ) => {
 
     let {
@@ -31,10 +33,12 @@ const RemoveItemComponent = ( props ) => {
         setIsOpen( false );
         setSpinnerIsActive( true );
 
+        let gridEventId = id;
+
         send_request_to_server({
             route: `remove-grid-event`,
             data: { 
-                gridEventId: id,
+                gridEventId: gridEventId,
             },
 
             successCallback: ( response ) => {
@@ -43,7 +47,12 @@ const RemoveItemComponent = ( props ) => {
 
                 if( response.ok ){
                     setSpinnerIsActive( false );
-                    setGridDayEventsList( response.list );
+
+                    remove_grid_event_from_curren_day_in_store( gridEventId );
+
+
+
+                    // setGridDayEventsList( response.list );
                 };
 
             },

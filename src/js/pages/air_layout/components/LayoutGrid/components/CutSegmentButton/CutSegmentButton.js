@@ -126,6 +126,7 @@ const CutSegmentButtonComponent = ( props ) => {
             />
 
             <div 
+                id = { `cut_button_${id}` } // этот id нужен только для того, чтоб искать его из EventNameItem
                 className = { `CSB_btn ${showStatus? 'isActive': ''}` }
                 onClick = { () => { click( showStatus ) } }
             >

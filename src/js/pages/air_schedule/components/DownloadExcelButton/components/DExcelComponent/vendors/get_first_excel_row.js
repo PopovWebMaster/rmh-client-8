@@ -11,7 +11,7 @@ export const get_first_excel_row = ( params ) => {
         currentYear,
     } = params;
 
-    let value = `${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}`
+    let value = `Расписание ${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}`
 
 
 

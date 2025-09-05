@@ -9,6 +9,8 @@ import { selectorData as layoutSlice, setGridCurrentDay } from './../../../../..
 
 // import { WEEK } from './../../../../../../config/week.js';
 
+import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js';
+
 const GridDayMenuComponent = ( props ) => {
 
     let {
@@ -23,7 +25,13 @@ const GridDayMenuComponent = ( props ) => {
 
     const click = ( val ) => { 
         if( val !== gridCurrentDay ){
-            setGridCurrentDay( val );
+
+            save_grid_events_changes_on_server( () => {
+                setGridCurrentDay( val );
+            } );
+            
+
+            // console.dir( 'здесь тоже сохраняемся' );
         };
     }
 

@@ -17,6 +17,8 @@ import { TimeSelected } from './components/TimeSelected/TimeSelected.js';
 import { AppearanceOfEvent } from './components/AppearanceOfEvent/AppearanceOfEvent.js';
 import { CreateButton } from './components/CreateButton/CreateButton.js';
 
+import { add_new_grid_event_to_current_day_to_store } from './../../vendors/add_new_grid_event_to_current_day_to_store.js';
+
 const AddNewGridEventComponentComponent = ( props ) => {
 
     let {
@@ -31,8 +33,10 @@ const AddNewGridEventComponentComponent = ( props ) => {
         gridCurrentDay,
         setSpinnerIsActive,
 
-        setGridDayEventsList,
+        // setGridDayEventsList,
         setGridDayEventsIsChanges,
+
+        layout
         
 
     } = props;
@@ -95,9 +99,14 @@ const AddNewGridEventComponentComponent = ( props ) => {
                     console.dir( 'response' );
                     console.dir( response );
 
+                    // newGridEvent
+
                     if( response.ok ){
                         setSpinnerIsActive( false );
-                        setGridDayEventsList( response.list );
+                        // setGridDayEventsList( response.list );
+
+                        add_new_grid_event_to_current_day_to_store( response.newGridEvent );
+
                         setGridDayEventsIsChanges( false );
                         setIsOpen( false );
                     };
@@ -105,6 +114,7 @@ const AddNewGridEventComponentComponent = ( props ) => {
                 },
             });
         };
+
     };
 
 
@@ -168,6 +178,8 @@ export function AddNewGridEventComponent( props ){
             { ...props }
             gridCurrentDay = { layout.gridCurrentDay }
             eventListById = { layout.eventListById }
+            layout = { layout }
+
 
             // // categoryList = { layout.categoryList }
 
