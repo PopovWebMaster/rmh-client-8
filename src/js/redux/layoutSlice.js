@@ -70,6 +70,10 @@ export const layoutSlice = createSlice({
 
 
 
+        dragebleGridEventId: null,
+
+
+
     },
 
     reducers: {
@@ -190,6 +194,17 @@ export const layoutSlice = createSlice({
             state.gridOneDayList =  action.payload;
         },
 
+
+
+
+
+        setDragebleGridEventId: ( state, action ) => {
+            state.dragebleGridEventId =  action.payload;
+        },
+
+
+        
+
         
 
 
@@ -225,6 +240,8 @@ export const {
 
     setGridEmptySegmentMaxHeightEm,
     setGridEmptySegmentMinHeightEm,
+
+    setDragebleGridEventId,
    
 
 } = layoutSlice.actions;
@@ -273,6 +290,9 @@ export const selectorData = ( state ) => {
 
         gridEmptySegmentMaxHeightEm: state.layout.gridEmptySegmentMaxHeightEm,
         gridEmptySegmentMinHeightEm: state.layout.gridEmptySegmentMinHeightEm,
+
+
+        dragebleGridEventId: state.layout.dragebleGridEventId,
 
 
         

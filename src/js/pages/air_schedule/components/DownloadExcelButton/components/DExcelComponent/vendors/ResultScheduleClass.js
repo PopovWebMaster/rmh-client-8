@@ -30,8 +30,7 @@ export class ResultScheduleClass {
         this.currentMonth = '';
         this.currentYear = '';
 
-        // this.collsWidthList =   [ { width: 7.45 }, { width: 20 }, { width: 53 }, { width: 9.8 }, { width: 35 }, ];
-        this.collsWidthList =   [ { width: 9.45 }, { width: 9.45 }, { width: 9.8 }, { width: 53 }, ];
+        this.collsWidthList =   [ { width: 5 }, { width: 7.4 }, { width: 18 }, { width: 64 }, ];
 
         this.rowsHeightList =   [ { hpx: 30 }, ];
         this.mergesList =       [ 'A1:E1', ];
@@ -129,7 +128,7 @@ export class ResultScheduleClass {
             let cell_A = get_cell_A( startTime, isKeyPoint, isLastBlockRow );
             let cell_B = get_cell_B( durationTime, isLastBlockRow );
             let cell_C = get_cell_C( eventId, isLastBlockRow );
-            let cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, notes, releases[ 1 ]? false: true );
+            let cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true );
 
             this.rows.push( [ cell_A, cell_B, cell_C, cell_D ] );
 
@@ -142,12 +141,12 @@ export class ResultScheduleClass {
                     cell_A_ = get_cell_A( false, false, false );
                     cell_B_ = get_cell_B( null, false );
                     cell_C_ = get_cell_C( null, false );
-                    cell_D_ = get_cell_D( releases[ rel_index ], notes, false );
+                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes, false );
                 }else{
                     cell_A_ = get_cell_A( false, false, true );
                     cell_B_ = get_cell_B( null, true );
                     cell_C_ = get_cell_C( null, true );
-                    cell_D_ = get_cell_D( releases[ rel_index ], notes, true );
+                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes, true );
                 };
                 this.rows.push( [ cell_A_, cell_B_, cell_C_, cell_D_ ] );
             };

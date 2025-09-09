@@ -4,6 +4,8 @@ import { BORDER_COLOR_STYLE, FONT_SIZE } from './excel_config.js';
 
 export const get_cell_A = ( startTime = false, isKeyPoint = false, isLastBlockRow = false ) => {
 
+    let value = '';
+
     let border = {
         left: { style: 'thin', color: BORDER_COLOR_STYLE },
     };
@@ -11,6 +13,11 @@ export const get_cell_A = ( startTime = false, isKeyPoint = false, isLastBlockRo
     if( startTime !== false ){
         
         border.top = { style: 'thin', color: BORDER_COLOR_STYLE };
+
+        let time = convert_sec_to_time( startTime );
+
+        let arr = time.split(':');
+        value = `${arr[0]}:${arr[1]}`;
     };
 
     if( isLastBlockRow ){
@@ -18,7 +25,9 @@ export const get_cell_A = ( startTime = false, isKeyPoint = false, isLastBlockRo
     };
 
     return { 
-        v: startTime === false? '': convert_sec_to_time( startTime ), 
+        // v: startTime === false? '': convert_sec_to_time( startTime ), 
+        v: value, 
+
         t: "s", 
         s: { 
             font: { 

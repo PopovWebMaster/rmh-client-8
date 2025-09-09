@@ -9,6 +9,12 @@ export const DEFAULT_CATEGORY = {
 
 };
 
+export const BLIND_STYLE = {
+    backgroundColor: '#fff2e4',
+    color: '#e76969',
+    borderColor: '#dfdfdf',
+};
+
 export const EVENT_TYPE = {
     BLOCK: 'block',
     FILE: 'file',

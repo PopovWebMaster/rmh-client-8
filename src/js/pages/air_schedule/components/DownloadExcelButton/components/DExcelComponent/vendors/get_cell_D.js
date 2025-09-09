@@ -44,11 +44,9 @@ export const get_cell_D = ( release, notes, isLastBlockRow ) => {
             value = `${ file_list[ file_list.length - 1 ] }`
         };
 
-        value = `${ value }  (${notes} ${air_notes})`;
+        let comment = `${notes} ${air_notes}`.trim();
 
-        if( value === '()' ){
-            value = '';
-        };
+        value = `${ value } ${comment === ''? '': '   // ' + comment}`;
 
         return { 
             v: value, 
@@ -56,7 +54,7 @@ export const get_cell_D = ( release, notes, isLastBlockRow ) => {
             s: { 
                 font: { 
                     name: "Arial", 
-                    sz: FONT_SIZE,
+                    sz: FONT_SIZE-1,
                     italic: false,
                     bold: false,
                 },

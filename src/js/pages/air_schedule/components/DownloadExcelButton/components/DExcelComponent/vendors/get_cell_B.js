@@ -22,7 +22,9 @@ export const get_cell_B = ( durationTime = null, isLastBlockRow = false  ) => {
             s: { 
                 font: { 
                     name: "Arial", 
-                    sz: FONT_SIZE,
+                    sz: FONT_SIZE - 1,
+                    // sz: 8,
+
                     italic: false,
                     bold: false,
                 },
@@ -44,7 +46,7 @@ export const get_cell_B = ( durationTime = null, isLastBlockRow = false  ) => {
             s: { 
                 font: { 
                     name: "Arial", 
-                    sz: FONT_SIZE,
+                    sz: FONT_SIZE - 1,
                     italic: false,
                     bold: false,
                 },

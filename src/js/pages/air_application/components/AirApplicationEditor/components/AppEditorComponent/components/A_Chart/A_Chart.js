@@ -8,7 +8,7 @@ import './A_Chart.scss';
 import { selectorData as applicationSlice } from './../../../../../../../../redux/applicationSlice.js';
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
-import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../../../config/layout.js';
+import { DEFAULT_CATEGORY, EVENT_TYPE, BLIND_STYLE } from './../../../../../../../../config/layout.js';
 
 const A_ChartComponent = ( props ) => {
 
@@ -87,9 +87,11 @@ const A_ChartComponent = ( props ) => {
         };
         
         if( eventId === null ){
-            result.backgroundColor = '#fff2e4';
-            result.color = '#e76969';
-            result.borderColor = '#dfdfdf';
+            // result.backgroundColor = '#fff2e4';
+            // result.color = '#e76969';
+            // result.borderColor = '#dfdfdf';
+
+            result = BLIND_STYLE;
         }else{
             if( type === EVENT_TYPE.FILE ){
                 result.backgroundColor = colorBG;

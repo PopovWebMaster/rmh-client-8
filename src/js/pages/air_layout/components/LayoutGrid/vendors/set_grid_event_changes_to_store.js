@@ -28,9 +28,31 @@ export const set_grid_event_changes_to_store = ( gridEventId, objWithChanges, ch
                         dayArr.push( { ...gridDayEventsList[ day ][ i ] } );
                     };
                 };
-                newArr.push( dayArr );
+
+                function sortArr( a, b ){
+                    if( a.startTime > b.startTime){
+                        return 1;
+                    }else{
+                        return -1;
+                    };
+
+                }
+                let sortedArr = dayArr.sort( sortArr );
+                newArr.push( sortedArr );
             };
         };
+
+
+
+        
+
+        // console.dir( 'sortedArr' );
+        // console.dir( sortedArr );
+
+
+
+
+
 
         store.dispatch( setGridDayEventsListAsChanged( newArr ) );
     };

@@ -17,7 +17,7 @@ import { ScrollContainer } from './../../../../../../../../components/ScrollCont
 
 import { get_filtred_app_list } from './vendors/get_filtred_app_list.js';
 
-import { DEFAULT_CATEGORY  } from './../../../../../../../../config/layout.js';
+import { DEFAULT_CATEGORY, EVENT_TYPE, BLIND_STYLE  } from './../../../../../../../../config/layout.js';
 import { ROUTE } from './../../../../../../../../config/routes.js';
 
 
@@ -29,6 +29,8 @@ const FilterListComponent = ( props ) => {
         currentCompanyAlias,
     
         currentCategoryIdOfListFilter,
+
+        eventListById,
 
     } = props;
 
@@ -53,15 +55,49 @@ const FilterListComponent = ( props ) => {
                 name,
                 num,
                 category_id,
+                event_id,
                 sub_application_list
 
             } = item;
+
+            
+
+            console.dir( 'item' );
+            console.dir( item );
+
 
             let category = DEFAULT_CATEGORY;
 
             if( categoryListById[ category_id ] ){
                 category = categoryListById[ category_id ];
             };
+
+            let style = {
+                backgroundColor: category.colorBG,
+                color: category.colorBGcolorText,
+            };
+
+            let event = null;
+            let eventName = 'Слепой график';
+
+            if( eventListById[ event_id ] ){
+                event = eventListById[ event_id ];
+                eventName = event.name;
+            }else{
+                style = BLIND_STYLE;
+            };
+
+
+            if( event !==null ){
+                if( event.type === EVENT_TYPE.BLOCK ){
+                    style = {
+                        // backgroundColor: category.colorBG,
+                        color: category.colorBG,
+                        border: `1px solid ${category.colorBG}`
+                    };
+                }
+            };
+
 
 
             return (
@@ -73,13 +109,20 @@ const FilterListComponent = ( props ) => {
                         className = 'AL_FilterList_item'
                         onClick = { () => { click( id ) } }
                     >
-                        <span 
+                        {/* <span 
                             className = 'AL_category'
                             style = {{
                                 backgroundColor: category.colorBG,
                                 color: category.colorBGcolorText,
                             }}
-                        >{ category.name }</span>
+                        >{ category.name }</span> */}
+
+                        <span 
+                            className = 'AL_event'
+                            style = { style }
+                        >{ eventName }</span>
+
+
                         <span className = 'AL_name'>{ name }</span>
                         <span className = 'AL_num'>№ { num }</span>
                         <span className = 'AL_release'>выпуски: { sub_application_list.length }</span>
@@ -131,6 +174,9 @@ export function FilterList( props ){
             currentCompanyAlias = { company.currentCompanyAlias }
 
             categoryListById = { layout.categoryListById }
+
+            eventListById = { layout.eventListById }
+
 
             // currentCompanyAlias = { company.currentCompanyAlias }
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }

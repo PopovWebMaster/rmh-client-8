@@ -53,6 +53,8 @@ export class WeekPointsTemplateClass {
 
     CreateTemplate(){
 
+        console.dir( this.charType );
+
         switch( this.charType ){
             case CHAR_TYPE.BLIND:
                 this.CreateTemplateBlind();
@@ -86,7 +88,7 @@ export class WeekPointsTemplateClass {
     }
 
     CreateTemplateBlock(){
-        let { all_time_points, week_point_list } = get_week_point_list( this.Event.id );
+        let { all_time_points, week_point_list } = get_week_point_list( this.Event.id, this.SubApplication.GetReleaseList() );
 
         for( let i = 0; i < all_time_points.length; i++ ){
             this.AllTimePoints.AddPoint( all_time_points[ i ] );
@@ -98,7 +100,13 @@ export class WeekPointsTemplateClass {
     }
 
     CreateTemplateFile(){
-        let { all_time_points, week_point_list } = get_week_point_list( this.Event.id );
+        let { all_time_points, week_point_list } = get_week_point_list( this.Event.id, this.SubApplication.GetReleaseList() );
+
+        console.dir( 'all_time_points' );
+        console.dir( all_time_points );
+
+        console.dir( 'week_point_list' );
+        console.dir( week_point_list );
 
         for( let i = 0; i < all_time_points.length; i++ ){
             this.AllTimePoints.AddPoint( all_time_points[ i ] );

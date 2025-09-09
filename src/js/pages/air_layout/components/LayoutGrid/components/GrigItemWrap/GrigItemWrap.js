@@ -1,15 +1,18 @@
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './GrigItemWrap.scss';
 
-import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice, setDragebleGridEventId } from './../../../../../../redux/layoutSlice.js';
 import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_time.js';
 import { StartTimeWithEdit } from './components/StartTimeWithEdit/StartTimeWithEdit.js';
 import { DurationTimeEdit } from './components/DurationTimeEdit/DurationTimeEdit.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
+
+// import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
+import { set_grid_event_changes_to_store } from './../../vendors/set_grid_event_changes_to_store.js';
 
 const GrigItemWrapComponent = ( props ) => {
 
@@ -24,9 +27,15 @@ const GrigItemWrapComponent = ( props ) => {
         eventListById,
 
         children,
+
+        dragebleGridEventId,
+
+        setDragebleGridEventId,
     } = props;
 
     let [ isError, setIsError ] = useState( false );
+
+    let [ isLighter, setIsLighter ] = useState( false );
 
     let [ gridEventType, setGridEventType ] = useState( '' );
 
@@ -72,9 +81,103 @@ const GrigItemWrapComponent = ( props ) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const getTargetState = () => {
+        let result = false;
+        if( isCompletd ){
+        }else{
+            let dragebleGE = gridDayEventsListById[ dragebleGridEventId ];
+
+            if( dragebleGE.startTime > startTime ){ // верхний
+                if( startTime + durationTime !== dragebleGE.startTime ){
+                    if( durationTime >= dragebleGE.durationTime ){
+                        result = true;
+                    };
+                };
+            }else{ // нижний
+                if( dragebleGE.startTime + dragebleGE.durationTime + 1 !== startTime ){
+                    if( durationTime >= dragebleGE.durationTime ){
+                        result = true;
+                    };
+                };
+            };
+        };
+        return result;
+
+    }
+
+
+    const drag_start = ( e, gridEventId ) => {
+        if( isCompletd ){
+            setDragebleGridEventId( gridEventId );
+        };  
+    }
+
+    const drag_end = () => {
+        setDragebleGridEventId( null );
+    }
+
+    const drag_over = ( e ) => {
+        e.preventDefault();
+        let isTargetEvent = getTargetState();
+        if( isTargetEvent ){
+            setIsLighter( true );
+        }else{
+            setIsLighter( false );
+        };
+    }
+    
+    const drag_leave = ( e ) => {
+        setIsLighter( false );
+    }
+    
+    const drop = () => {
+
+        setIsLighter( false );
+
+        let isTargetEvent = getTargetState();
+        if( isTargetEvent ){ 
+
+            set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
+
+
+            // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+            // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+            // StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
+            // StoreScheduleResultEvents.SetListToStore();
+
+        };
+
+    }
+
+
+
     
     return (
-        <div className = 'grigItem'>
+        <div
+            className = { `grigItem ${ isLighter? 'isLighter': '' } ${isCompletd? 'isCompletd_': ''}` }
+            draggable = { true }
+            onDragStart = { ( e ) => { drag_start( e, id ) } }
+            onDragEnd =     { drag_end }
+
+            onDragOver =    { drag_over }
+            onDragLeave =   { drag_leave }
+            onDrop =        { drop }
+        >
             <div className = { `grigItemWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
                 { isCompletd? (
                     <div className = 'grigItemTime'>
@@ -117,15 +220,18 @@ const GrigItemWrapComponent = ( props ) => {
 export function GrigItemWrap( props ){
 
     const layout = useSelector( layoutSlice );
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <GrigItemWrapComponent
             { ...props }
             gridDayEventsListById = { layout.gridDayEventsListById }
             eventListById = { layout.eventListById }
-            // gridCurrentDay = { layout.gridCurrentDay }
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+
+
+            dragebleGridEventId = { layout.dragebleGridEventId }
+
+            setDragebleGridEventId = { ( callback ) => { dispatch( setDragebleGridEventId( callback ) ) } }
 
         />
     );

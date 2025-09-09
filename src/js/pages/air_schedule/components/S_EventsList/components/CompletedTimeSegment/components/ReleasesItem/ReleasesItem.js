@@ -24,8 +24,26 @@ const ReleasesItemComponent = ( props ) => {
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         StoreScheduleResultEvents.RemoveRelease( gridEventId, release_id  );
         StoreScheduleResultEvents.SetListToStore();
+    }
 
 
+    const releaseMoveUp = ( id ) => {
+
+        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.ReleaseMoveUp( gridEventId, id  );
+        StoreScheduleResultEvents.SetListToStore();
+
+        // ReleaseMoveUp
+
+    }
+
+    const releaseMoveDown = ( id ) => {
+
+        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.ReleaseMoveDown( gridEventId, id  );
+        StoreScheduleResultEvents.SetListToStore();
 
     }
 
@@ -44,15 +62,25 @@ const ReleasesItemComponent = ( props ) => {
             } = item;
             let file = '';
             if( file_list.length > 0 ){
-                file = ` / ${file_list[ file_list.length - 1 ]}`;
+                file = `${file_list[ file_list.length - 1 ]}`;
             };
 
+            let name = file === ''? `${releaseName}/`: file;
             return (
                 <div
                     className = 'CTS_RI_Item'
                     key = { index }
                 >
-                    <span className = 'name'>{ `${applicationName} / ${releaseName}${file}` }</span>
+                    <span
+                        className = 'icon-angle-up arrow'
+                        onClick = { () => { releaseMoveUp( id ) } }
+                    ></span>
+                    <span
+                        className = 'icon-angle-down arrow'
+                        onClick = { () => { releaseMoveDown( id ) } }
+                    ></span>
+
+                    <span className = 'name'>{ name }</span>
                     <span className = 'duration'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span
                         onClick = { () => { remove( id ) } }

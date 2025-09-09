@@ -37,6 +37,13 @@ export class ScheduleEventClass{
         this.UpdateFinalNotes = this.UpdateFinalNotes.bind(this);
 
 
+
+        this.MoveUp = this.MoveUp.bind(this);
+        this.MoveDown = this.MoveDown.bind(this);
+
+
+
+
         
 
 
@@ -189,6 +196,53 @@ export class ScheduleEventClass{
             }else{
                 arr.push( this.releaseList[ i ] );
             };
+        };
+        this.releaseList = arr;
+    }
+
+    MoveUp( release_id ){
+        let arr = [];
+
+        for( let i = 0; i < this.releaseList.length; i++ ){
+            if( this.releaseList[ i ].id === release_id ){
+
+                if( i > 0 ){
+                    let prevewItem = { ...arr[ i - 1 ] };
+                    arr.pop();
+                    arr.push( this.releaseList[ i ] );
+                    arr.push( prevewItem );
+
+                }else{
+                    arr.push( this.releaseList[ i ] );
+                };
+
+            }else{
+                arr.push( this.releaseList[ i ] );
+            };
+        };
+        this.releaseList = arr;
+    }
+
+    MoveDown( release_id ){
+        let arr = [];
+
+        let pushed_I = null;
+
+        for( let i = 0; i < this.releaseList.length; i++ ){
+            if( pushed_I !== i ){
+                if( this.releaseList[ i ].id === release_id ){
+                    if( this.releaseList[ i + 1 ] ){
+                        pushed_I = i + 1;
+                        arr.push( this.releaseList[ i + 1 ] );
+                        arr.push( this.releaseList[ i ] );
+                    }else{
+                        arr.push( this.releaseList[ i ] );
+                    };
+                }else{
+                    arr.push( this.releaseList[ i ] );
+                };
+            }
+            
         };
         this.releaseList = arr;
     }

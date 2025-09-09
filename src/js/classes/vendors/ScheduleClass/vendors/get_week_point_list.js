@@ -2,15 +2,16 @@
 import store from './../../../../redux/store.js';
 
 import { TimePointClass } from './../TimePointClass.js';
+import { get_full_day_info_from_day_seconds } from './../../../../helpers/get_full_day_info_from_day_seconds.js';
 
-export const get_week_point_list = ( /*TimePoints,*/ event_id ) => {
+
+export const get_week_point_list = ( /*TimePoints,*/ event_id, releaseList ) => {
 
     let result =  [ [], [], [], [], [], [], [], ];
     let week_point_list =  [ [], [], [], [], [], [], [], ];
 
-
     let { layout } = store.getState();
-    let { gridDayEventsList } = layout;
+    let { gridDayEventsList, gridDayEventsListById } = layout;
 
     let obj = {};
     let all_time_points = [];
@@ -44,6 +45,37 @@ export const get_week_point_list = ( /*TimePoints,*/ event_id ) => {
             };
         };
     };
+
+
+    for( let i = 0; i < releaseList.length; i++ ){
+        let { grid_event_id, time_sec, duration_sec, date } = releaseList[ i ];
+        if( gridDayEventsListById[ grid_event_id ] ){
+
+        }else{
+            // console.dir( 'нашёл' );
+            // console.dir( releaseList[ i ] );
+
+            let date_to = new Date( date );
+            let seconds_to = date_to.getTime()/1000;
+
+            let dateInfo = get_full_day_info_from_day_seconds( seconds_to );
+            // dayNum
+
+            let TimePoint = new TimePointClass({ 
+                time_sec:       time_sec,
+                grid_event_id:  grid_event_id,
+                duration:       duration_sec,
+            });
+
+            week_point_list[ dateInfo.dayNum ].push( TimePoint.GetData() );
+
+            // console.dir( dateInfo );
+
+        };
+
+    }
+
+
 
 
 

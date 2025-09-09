@@ -85,7 +85,7 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         this.SetDayListToStore();
 
-        // console.dir( this );
+        console.dir( this );
         
 
     }

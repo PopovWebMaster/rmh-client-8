@@ -65,6 +65,10 @@ export class GridEventsTableClass {
 
                 let points = this.WeekPointsTemplate.GetPoints( dayNum );
 
+                
+                            // console.dir( 'points' );
+                            // console.dir( points );
+
                 for( let point_i = 0; point_i < points.length; point_i++ ){
                     let {
                         time,
@@ -115,17 +119,30 @@ export class GridEventsTableClass {
                                 type,
                             } = release_list[ index ];
 
+                            // console.dir( 'this.table' );
+                            // console.dir( this.table );
+
+                            // console.dir( 'grid_event_id' );
+                            // console.dir( grid_event_id );
+
+
                             if( this.table[ date ] ){
-                                if( this.table[ date ][ grid_event_id ].content[ sub_application_id ] ){
-                                    let { fill_count } = this.table[ date ][ grid_event_id ].content[ sub_application_id ];
-                                    this.table[ date ][ grid_event_id ].content[ sub_application_id ].fill_count = fill_count + 1;
-                                }else{
-                                    this.table[ date ][ grid_event_id ].content[ sub_application_id ] = {
-                                        duration: duration_sec,
-                                        name,
-                                        fill_count: 1,
+
+                                if( this.table[ date ][ grid_event_id ] ){
+                                    if( this.table[ date ][ grid_event_id ].content[ sub_application_id ] ){
+                                        let { fill_count } = this.table[ date ][ grid_event_id ].content[ sub_application_id ];
+                                        this.table[ date ][ grid_event_id ].content[ sub_application_id ].fill_count = fill_count + 1;
+                                    }else{
+                                        this.table[ date ][ grid_event_id ].content[ sub_application_id ] = {
+                                            duration: duration_sec,
+                                            name,
+                                            fill_count: 1,
+                                        };
                                     };
                                 };
+
+
+                                
                             };
                         };
                     };
