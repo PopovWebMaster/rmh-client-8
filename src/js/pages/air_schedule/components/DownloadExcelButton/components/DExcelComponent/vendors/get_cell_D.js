@@ -1,7 +1,7 @@
 
 import store from './../../../../../../../redux/store.js';
 
-import { FONT_SIZE, BORDER_COLOR_STYLE } from './excel_config.js';
+import { FONT_SIZE, BORDER_COLOR_STYLE, FILL_BG_COLOR_GRAY } from './excel_config.js';
 
 export const get_cell_D = ( release, notes, isLastBlockRow ) => {
 
@@ -31,6 +31,9 @@ export const get_cell_D = ( release, notes, isLastBlockRow ) => {
                     vertical: 'center',
                 },
                 border,
+                fill: {
+                    fgColor: { rgb: FILL_BG_COLOR_GRAY }
+                },
                 // numFmt: 'hh:mm:ss'
             } 
         };
@@ -63,6 +66,9 @@ export const get_cell_D = ( release, notes, isLastBlockRow ) => {
                     vertical: 'center',
                 },
                 border,
+                fill: {
+                    fgColor: { rgb: FILL_BG_COLOR_GRAY }
+                },
             } 
         };
 

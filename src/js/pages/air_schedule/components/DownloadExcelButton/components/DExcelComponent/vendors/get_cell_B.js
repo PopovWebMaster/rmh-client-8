@@ -1,7 +1,7 @@
 
 import { convert_sec_to_time } from './../../../../../../../helpers/convert_sec_to_time.js';
 
-import { BORDER_COLOR_STYLE, FONT_SIZE } from './excel_config.js';
+import { BORDER_COLOR_STYLE, FONT_SIZE, FILL_BG_COLOR_GRAY } from './excel_config.js';
 
 export const get_cell_B = ( durationTime = null, isLastBlockRow = false  ) => {
 
@@ -33,6 +33,9 @@ export const get_cell_B = ( durationTime = null, isLastBlockRow = false  ) => {
                     vertical: 'center',
                 },
                 border,
+                fill: {
+                    fgColor: { rgb: FILL_BG_COLOR_GRAY }
+                },
                 // numFmt: 'hh:mm:ss'
             } 
         };
@@ -55,6 +58,9 @@ export const get_cell_B = ( durationTime = null, isLastBlockRow = false  ) => {
                     vertical: 'center',
                 },
                 border,
+                fill: {
+                    fgColor: { rgb: FILL_BG_COLOR_GRAY }
+                },
             } 
         }; 
     };

@@ -104,6 +104,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.SetLastGridEventId( ScheduleEvent );
         this.SortList();
 
+        return ScheduleEvent;
+
     }
 
     GetListBySectors(){

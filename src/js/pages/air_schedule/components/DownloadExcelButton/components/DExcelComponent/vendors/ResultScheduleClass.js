@@ -162,10 +162,6 @@ export class ResultScheduleClass {
 
             };
             
-
-
-            
-
 // cutPart: null
 // dayNum: 4
 // durationTime: 180

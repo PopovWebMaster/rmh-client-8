@@ -16,6 +16,8 @@ import { StartTimeEditButton } from './../StartTimeEditButton/StartTimeEditButto
 
 import { StoreScheduleResultEventsClass } from './../../../../../../classes/StoreScheduleResultEventsClass.js';
 
+import { create_new_grid_event } from './vendors/create_new_grid_event.js'
+
 const SchEventContainerComponent = ( props ) => {
 
     let {
@@ -31,6 +33,10 @@ const SchEventContainerComponent = ( props ) => {
 
         // gridDayEventsListById,
         eventListById,
+        gridCurrentDay,
+
+
+        releaseListById,
 
         dragebleReleaseId,
         dragebleReleaseEventId,
@@ -74,7 +80,9 @@ const SchEventContainerComponent = ( props ) => {
         let result = false;
 
         if( isEmpty ){
-
+            if( durationTime => releaseListById[ dragebleReleaseId ].releaseDuration ){
+                result = true;
+            };
         }else{
             if( dragebleReleaseEventId !== null ){
                 if( dragebleReleaseEventId === eventId ){
@@ -90,6 +98,10 @@ const SchEventContainerComponent = ( props ) => {
                     };
                 }else{};
             }else{
+
+                /*
+                    
+                */
                 if( eventType === EVENT_TYPE.BLOCK ){
                     result = true;
                 }else{
@@ -137,11 +149,47 @@ const SchEventContainerComponent = ( props ) => {
 
         let isTargetEvent = getTargetState();
         if( isTargetEvent ){ 
-            let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-            StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-            StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
-            StoreScheduleResultEvents.SetListToStore();
 
+            if( isEmpty ){
+
+        //         startTime,
+        // durationTime,
+
+let release = releaseListById[ dragebleReleaseId ];
+
+console.dir( 'release' );
+console.dir( release );
+
+
+                if( dragebleReleaseEventId === null ){
+
+                }else{
+
+                    let event = eventListById[ dragebleReleaseEventId ];
+                    
+                    let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+                    StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+                    let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
+                        gridCurrentDay,
+                        isAKeyPoint: false,
+                        startTime,
+                        eventId: dragebleReleaseEventId,
+                        durationTime: event.durationTime,
+                    });
+                    StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
+
+                    console.dir( ScheduleEvent );
+                    StoreScheduleResultEvents.SetListToStore();
+                };
+
+                
+
+            }else{
+                let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+                StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+                StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
+                StoreScheduleResultEvents.SetListToStore();
+            };
         };
 
    }
@@ -207,8 +255,11 @@ export function SchEventContainer( props ){
             dragebleReleaseId = { scheduleResult.dragebleReleaseId }
             dragebleReleaseEventId = { scheduleResult.dragebleReleaseEventId }
 
+            releaseListById = { scheduleResult.releaseListById }
+
 
             eventListById = { layout.eventListById }
+            gridCurrentDay = { layout.gridCurrentDay }
 
 
             // setCounterList = { ( obj ) => { dispatch( setCounterList( obj ) ) } }

@@ -28,8 +28,6 @@ import { get_file_name } from './vendors/get_file_name.js'
 
 import { MOUNTH_NAME } from './../.././../../../../config/mounth.js';
 
-
-
 import { ResultScheduleClass } from './vendors/ResultScheduleClass.js';
 
 
@@ -109,15 +107,15 @@ const DExcelComponentComponent = ( props ) => {
     const click = () => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-        console.dir( 'scheduleEventsList' );
-        console.dir( scheduleEventsList );
+        // console.dir( 'scheduleEventsList' );
+        // console.dir( scheduleEventsList );
 
         let scheduleEventsLlist = StoreScheduleResultEvents.GetScheduleEventsList();
 
         let used_events = get_used_events( scheduleEventsLlist, filterList );
 
-        console.dir( 'used_events' );
-        console.dir( used_events );
+        // console.dir( 'used_events' );
+        // console.dir( used_events );
 
         let ResultSchedule = new ResultScheduleClass();
 
