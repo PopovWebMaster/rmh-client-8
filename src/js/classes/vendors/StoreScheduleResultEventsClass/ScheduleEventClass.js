@@ -10,7 +10,7 @@ export class ScheduleEventClass{
         this.cutPart =          null;
         this.dayNum =           null;
         this.durationTime =     null;
-        this.durationTime =     null;
+        // this.durationTime =     null;
         this.eventId =          null;
         this.firstSegmentId =   null;
         this.id =               null;
@@ -71,6 +71,7 @@ export class ScheduleEventClass{
             startTime,
 
         } = data;
+  
 
         this.cutPart =              cutPart;
         this.dayNum =               dayNum;
@@ -248,7 +249,7 @@ export class ScheduleEventClass{
     }
 
     UpdateDurationTime(){
-        let { type } = get_event_by_id( this.eventId );
+        let { type } = get_event_by_id( this.eventId );  
         if( type ){
 
             let durationTime = 0;
@@ -260,16 +261,28 @@ export class ScheduleEventClass{
                 if( type === EVENT_TYPE.BLOCK ){
                     durationTime = MIN_EVENT_DURATION_SEC
                 }else{
+
                     if( this.gridEventId !== null ){
                         let event = get_grid_event_by_id( this.gridEventId );
-                        durationTime = event.durationTime;
+
+                        if( event === null ){
+                            durationTime = this.durationTime;
+                        }else{
+                            durationTime = event.durationTime;
+                        };
+
                     }else{
+
+
+
+
                         durationTime = this.durationTime;
                     }
                 };
             };
             this.durationTime = durationTime;
         }
+
     }
 
     UpdateEventData(){

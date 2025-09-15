@@ -7,6 +7,7 @@ import './BufferButtons.scss';
 
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { AddAllBtn } from './../AddAllBtn/AddAllBtn.js';
+import { DownloadRemainderBtn } from './../DownloadRemainderBtn/DownloadRemainderBtn.js';
 
 let flag = true; 
 const BufferButtonsComponent = ( props ) => {
@@ -44,6 +45,8 @@ const BufferButtonsComponent = ( props ) => {
             ref = { buttonsRef }
         >
             <AddAllBtn />
+
+            <DownloadRemainderBtn />
 
 
         

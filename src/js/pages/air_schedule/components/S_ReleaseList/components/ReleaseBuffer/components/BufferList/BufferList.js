@@ -36,8 +36,6 @@ const BufferListComponent = ( props ) => {
 
         serFreeList( get_free_list() );
 
-        
-
     }, [ releaseList ] );
 
     const drag_start = ( e, item ) => {
@@ -84,6 +82,7 @@ const BufferListComponent = ( props ) => {
                         onDragEnd = { drag_end }
                         
                     >
+                        <span className = 'GE_id'>{ charYes? grid_event_id: '' }</span>
                         <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
                         <span className = 'name'>{ releaseName }</span>
                         {

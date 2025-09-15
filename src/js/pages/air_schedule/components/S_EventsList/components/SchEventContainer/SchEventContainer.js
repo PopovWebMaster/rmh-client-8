@@ -7,16 +7,18 @@ import './SchEventContainer.scss';
 
 import { selectorData as scheduleResultSlise } from './../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
-// import { StartTimeWithEdit } from './components/StartTimeWithEdit/StartTimeWithEdit.js';
-
-import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_time.js';
 
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
-import { StartTimeEditButton } from './../StartTimeEditButton/StartTimeEditButton.js';
 
 import { StoreScheduleResultEventsClass } from './../../../../../../classes/StoreScheduleResultEventsClass.js';
 
-import { create_new_grid_event } from './vendors/create_new_grid_event.js'
+import { get_target_state_for_element } from './vendors/get_target_state_for_element.js';
+
+import { CompletedTimeSector } from './components/CompletedTimeSector/CompletedTimeSector.js';
+import { EmptyTimeSector } from './components/EmptyTimeSector/EmptyTimeSector.js';
+import { SelectedEventWindow } from './components/SelectedEventWindow/SelectedEventWindow.js';
+
+
 
 const SchEventContainerComponent = ( props ) => {
 
@@ -25,13 +27,11 @@ const SchEventContainerComponent = ( props ) => {
         durationTime,
         eventId = null,
 
-
         isCompletd = false,
         isKeyPoint = false,
         gridEventId = null,
         isEmpty = false,
 
-        // gridDayEventsListById,
         eventListById,
         gridCurrentDay,
 
@@ -50,6 +50,25 @@ const SchEventContainerComponent = ( props ) => {
     let [ eventType, setEventType ] = useState( '' );
     let [ isLighter, setIsLighter ] = useState( false );
 
+
+    let [ selectedEventId, setSelectedEventId ] = useState( null );
+    /*
+        selectedEventId 
+        Здесь null - это отслеживаемое состояние. Если не null значит компонент создаст новое событие в сетке
+        по этому нужно обязателдьно после создания события записывать в setSelectedEventId null
+    */
+    let [ durationLimit, setDurationLimit ] = useState( 0 );
+
+    let [ selectedEventWindow_isOpen, setSelectedEventWindow_isOpen ] = useState( 0 );
+
+    let [ releaseIdInWork, setReleaseIdInWork ] = useState( null );
+
+
+
+
+    
+
+
     useEffect( () => {
         if( eventListById[ eventId ] ){
             let { type } = eventListById[ eventId ];
@@ -59,7 +78,6 @@ const SchEventContainerComponent = ( props ) => {
                 alert( 'Нужно пересоздать расписание, какое-то из событий было удалено' );
                 setEventType( EVENT_TYPE.FILE );
             };
-
         };
 
     }, [ gridEventId ] );
@@ -68,66 +86,49 @@ const SchEventContainerComponent = ( props ) => {
     useEffect( () => {
         if( durationTime >= 0 ){
             setIsError( false );
+            setDurationLimit( durationTime );
         }else{
             setIsError( true );
+            setDurationLimit( 0 );
         };
     }, [ durationTime ] );
 
-    let text_seccess = 'Свободно:';
-    let text_error = 'Ошибка, нарушение хронометража! Превышен на ';
+    useEffect( () => {
+        if( selectedEventId !== null ){
+            if( eventListById[ selectedEventId ] ){
+                let event = eventListById[ selectedEventId ];
+                    
+                let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+                StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+                let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
+                    gridCurrentDay,
+                    isAKeyPoint: false,
+                    startTime,
+                    eventId: selectedEventId,
+                    durationTime: event.durationTime,
+                });
+                StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, releaseIdInWork );
+                StoreScheduleResultEvents.SetListToStore();
+                setDurationLimit( null );
+            };
+
+        };
+
+    }, [ selectedEventId ] );
 
     const getTargetState = () => {
-        let result = false;
 
-        if( isEmpty ){
-            if( durationTime => releaseListById[ dragebleReleaseId ].releaseDuration ){
-                result = true;
-            };
-        }else{
-            if( dragebleReleaseEventId !== null ){
-                if( dragebleReleaseEventId === eventId ){
-                    if( eventType === EVENT_TYPE.BLOCK ){
-                        result = true;
-                    }else{
-                        let { releases, firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
-                        if( firstSegmentId === null || firstSegmentId === gridEventId ){
-                            if( releases.length === 0 ){
-                                result = true;
-                            };
-                        };
-                    };
-                }else{};
-            }else{
-
-                /*
-                    
-                */
-                if( eventType === EVENT_TYPE.BLOCK ){
-                    result = true;
-                }else{
-                    let { releases, firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
-                    if( firstSegmentId === null || firstSegmentId === gridEventId ){
-                        if( releases.length === 0 ){
-                            result = true;
-                        };
-                    };
-                };
-            };
-        }
-
-        
+        let result = get_target_state_for_element({
+            durationTime,
+            eventId,
+            eventType,
+            gridEventId,
+            isEmpty,
+            isCompletd,
+        });
         return result;
 
     }
-
-    const getDuration = ( val ) => {
-        if( val >= 0 ){
-            return convert_sec_to_time( durationTime )
-        }else{
-            return convert_sec_to_time( durationTime * -1 );
-        };
-
-    };
 
     const drag_over = ( e ) => {
         e.preventDefault();
@@ -151,22 +152,16 @@ const SchEventContainerComponent = ( props ) => {
         if( isTargetEvent ){ 
 
             if( isEmpty ){
-
-        //         startTime,
-        // durationTime,
-
-let release = releaseListById[ dragebleReleaseId ];
-
-console.dir( 'release' );
-console.dir( release );
-
+                setReleaseIdInWork( dragebleReleaseId );
 
                 if( dragebleReleaseEventId === null ){
-
+                    setSelectedEventWindow_isOpen( true );
+                    /*
+                        Новое событие в сетке создается из useEffect
+                    */
                 }else{
-
                     let event = eventListById[ dragebleReleaseEventId ];
-                    
+
                     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
                     StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
                     let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
@@ -177,8 +172,6 @@ console.dir( release );
                         durationTime: event.durationTime,
                     });
                     StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
-
-                    console.dir( ScheduleEvent );
                     StoreScheduleResultEvents.SetListToStore();
                 };
 
@@ -202,27 +195,35 @@ console.dir( release );
             onDragLeave =   { drag_leave }
             onDrop =        { drop }
         >
-            <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
-                { isCompletd? (
-                    <div className = 'schEventItemTime'>
-                        
-                        <StartTimeEditButton
-                            startTime = { startTime }
-                            isKeyPoint = { isKeyPoint }
-                            gridEventId = { gridEventId }
-                        />
 
-                        <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span>
-   
-                    </div>
+            
+
+            <SelectedEventWindow
+                selectedEventWindow_isOpen = { selectedEventWindow_isOpen }
+                setSelectedEventWindow_isOpen = { setSelectedEventWindow_isOpen }
+                selectedEventId = { selectedEventId }
+                setSelectedEventId = { setSelectedEventId }
+                durationLimit = { durationLimit }
+            />
+            <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
+
+                <div className = 'schId'>
+                    <span>{ gridEventId }</span>
+                </div>
+                { isCompletd? (
+                    <CompletedTimeSector
+                        startTime =     { startTime }
+                        isKeyPoint =    { isKeyPoint }
+                        gridEventId =   { gridEventId }
+                        durationTime =  { durationTime }
+                    />
                 ): (
-                    <div className = 'schEventItemRemains'>
-                        <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
-                        
-                        <span className = 'text'>{ isError? text_error: text_seccess }</span>
-                        
-                        <span className = 'time'>{ getDuration( durationTime ) }</span>
-                    </div>
+
+                    <EmptyTimeSector
+                        startTime =     { startTime }
+                        isError =       { isError }
+                        durationTime =  { durationTime }
+                    />
                 ) }
                 
                 <div className = 'schEventItemBody'>

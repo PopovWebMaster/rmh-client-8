@@ -12,6 +12,8 @@ import { get_category_by_event_id } from './vendors/StoreScheduleResultEventsCla
 import { adjust_startTime_in_day_list } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_day_list.js';
 import { get_remaining_place_for_key_block } from './vendors/StoreScheduleResultEventsClass/get_remaining_place_for_key_block.js';
 
+import { get_last_grid_event_id_from_store } from './vendors/StoreScheduleResultEventsClass/get_last_grid_event_id_from_store.js';
+
 
 // import { setCounterList } from './../redux/countersSlise.js';
 
@@ -25,9 +27,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         this.list = [];
 
-        this.lastGridEventId = 0;
 
-
+        this.lastGridEventId = get_last_grid_event_id_from_store();
 
         this.CreateFromGridEvents = this.CreateFromGridEvents.bind(this);
         this.SetListToStore = this.SetListToStore.bind(this);
@@ -46,11 +47,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
 
-
-        
-        
-
-
     }
 
     CreateFromGridEvents(){
@@ -58,6 +54,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         for( let i = 0; i < gridEventsList.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromGridEvent( gridEventsList[ i ] );
+
             this.list.push( ScheduleEvent );
             this.SetLastGridEventId( ScheduleEvent );
         };
@@ -67,6 +64,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         for( let i = 0; i < arr.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromScheduleEvent( arr[ i ], withReleses );
+
             this.list.push( ScheduleEvent );
             this.SetLastGridEventId( ScheduleEvent );
         };
@@ -85,6 +83,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             eventId,
             durationTime,
         } = params;
+
         let newId = this.lastGridEventId + 1;
         let ScheduleEvent = new ScheduleEventClass();
         ScheduleEvent.SetDataFromGridEvent( {
@@ -100,6 +99,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             pushIt: null,
             startTime,
         } );
+
         this.list.push( ScheduleEvent );
         this.SetLastGridEventId( ScheduleEvent );
         this.SortList();
@@ -128,6 +128,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     SetListToStore(){
         let scheduleEventsList = this.GetScheduleEventsList();
         let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
+
         store.dispatch( setScheduleEventsList( arr_2 ) );
         this.SetCounterDataToStore( arr_2 );
     }

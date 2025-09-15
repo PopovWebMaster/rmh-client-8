@@ -1,0 +1,39 @@
+.schEventItemRemains{
+    font-size: 0.9em;
+    flex-grow: 0;
+    padding: .2em .8em 0.19em;
+    border-radius: 0.1em;
+    // margin-left: 5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+    >.text{
+        font-size: 0.7em;
+        color: #575757;
+        margin-left: 4em;
+    }
+    >.time{
+        font-size: .7em;
+        color: #efe6e6c9;
+        border: 1px solid #c1c1c1;
+        border-radius: .1em;
+        padding: .2em .6em 0.1em;
+        margin-left: 0.5em;
+
+    }
+}
+
+.schEventItemRemains:hover{
+    background-color: #ffffff;
+    >.text{
+        color: #4d4949;
+    }
+
+    >.time{
+        color: #5b3737;
+        border: 1px solid #c1c1c1;
+    }
+}

@@ -72,7 +72,7 @@ const SelectedEventComponent = ( props ) => {
     return (
 
         <div className = 'G_ANG_SelectedEvent'>
-            <h3>Категория:</h3>
+            <h3>Событие:</h3>
             <div 
                 className = 'G_ANG_eventList_body'
                 // onMouseLeave = { () => { setListIsOpen( false ) } }

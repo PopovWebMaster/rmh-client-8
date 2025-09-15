@@ -1,0 +1,48 @@
+.schEventItemTime{
+    font-size: 1em;
+    flex-grow: 0;
+    padding: 0.1em 0;
+
+    .SEC_time{
+        font-size: 0.7em;
+        color: #343434;
+        background-color: #ffffff;
+        padding: 0.2em 0.5em 0.1em;
+        margin: .6em 1.2em 0 1em;
+        width: 4.6em;
+        border-radius: 0.1em;
+        flex-grow: 0;
+        text-align: center;
+
+        cursor: pointer;
+    }
+
+    .SEC_time:hover{
+        color: #343434;
+        background-color: #e5e3e3;
+    }
+
+    .SEC_time.isKeyPoint{
+        background-color: #ab3928;
+        color: #ffffff;
+    }
+
+    .SEC_time.isKeyPoint:hover{
+        background-color: #ef6a56;
+        color: #ffffff;
+    }
+
+    
+    .SEC_duration{
+        font-size: 0.7em;
+        color: #343434;
+        background-color: #ffffff;
+        padding: 0.2em 0.5em 0.1em;
+        margin: .6em 1em 0 0em;
+        width: 4.6em;
+        border-radius: 0.1em;
+        text-align: center;
+        flex-grow: 0;
+
+    }
+}

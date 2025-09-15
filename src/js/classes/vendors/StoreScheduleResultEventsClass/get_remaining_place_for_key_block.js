@@ -10,8 +10,8 @@ export const get_remaining_place_for_key_block = ( params ) => {
     let { releaseDuration } = releaseData;
 
     let startTime_from = 0;
-    let startTime_to = 0;
-
+    // let startTime_to = 0;
+    let startTime_to = 24 * 60 * 60;
 
     let startIndex = 0;
     let finishIndex = 0;
