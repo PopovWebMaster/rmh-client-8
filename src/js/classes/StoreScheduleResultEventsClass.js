@@ -3,7 +3,7 @@ import { SSRE_Methods } from './vendors/StoreScheduleResultEventsClass/SSRE_Meth
 import { ScheduleEventClass } from './vendors/StoreScheduleResultEventsClass/ScheduleEventClass.js';
 
 import store from './../redux/store.js';
-import { setScheduleEventsList } from './../redux/scheduleResultSlise.js';
+import { setScheduleEventsList, setScheduleEventsListIsChanged } from './../redux/scheduleResultSlise.js';
 
 import { divide_day_into_sectors } from './vendors/StoreScheduleResultEventsClass/divide_day_into_sectors.js';
 import { add_empty_segments_and_types } from './vendors/StoreScheduleResultEventsClass/add_empty_segments_and_types.js';
@@ -125,11 +125,16 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     }
 
-    SetListToStore(){
+    SetListToStore( isChanged = null ){
         let scheduleEventsList = this.GetScheduleEventsList();
         let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
 
         store.dispatch( setScheduleEventsList( arr_2 ) );
+        if( isChanged !== null ){
+            store.dispatch( setScheduleEventsListIsChanged( isChanged ) );
+        };
+        
+
         this.SetCounterDataToStore( arr_2 );
     }
 

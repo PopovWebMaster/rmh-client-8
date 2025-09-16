@@ -87,7 +87,7 @@ const AddNewEventComponentComponent = ( props ) => {
                 eventId,
                 durationTime,
             });
-            StoreScheduleResultEvents.SetListToStore();
+            StoreScheduleResultEvents.SetListToStore( true );
             setIsOpen( false );
 
         };

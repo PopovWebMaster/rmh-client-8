@@ -29,6 +29,8 @@ export const scheduleResultSlise = createSlice({
 
         scheduleEventsList: [],
         scheduleEventsListByGridEventId: {},
+        scheduleEventsListIsChanged: false,
+
 
 
         dragebleReleaseId: null,
@@ -122,6 +124,12 @@ export const scheduleResultSlise = createSlice({
 
         },
 
+        setScheduleEventsListIsChanged: ( state, action ) => {
+            state.scheduleEventsListIsChanged =  action.payload;
+        },
+
+        
+
 
         setDragebleReleaseId: ( state, action ) => {
             state.dragebleReleaseId =  action.payload;
@@ -159,6 +167,7 @@ export const {
     setReleaseListById,
     setReleaseListByGridEventId,
     setScheduleEventsList,
+    setScheduleEventsListIsChanged,
 
     setDragebleReleaseId,
     setDragebleReleaseEventId,
@@ -188,6 +197,7 @@ export const selectorData = ( state ) => {
         releaseListByGridEventId: state.scheduleResult.releaseListByGridEventId,
         scheduleEventsList: state.scheduleResult.scheduleEventsList,
         scheduleEventsListByGridEventId: state.scheduleResult.scheduleEventsListByGridEventId,
+        scheduleEventsListIsChanged: state.scheduleResult.scheduleEventsListIsChanged,
 
         dragebleReleaseId: state.scheduleResult.dragebleReleaseId,
         dragebleReleaseEventId: state.scheduleResult.dragebleReleaseEventId,

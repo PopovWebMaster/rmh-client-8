@@ -108,7 +108,7 @@ const SchEventContainerComponent = ( props ) => {
                     durationTime: event.durationTime,
                 });
                 StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, releaseIdInWork );
-                StoreScheduleResultEvents.SetListToStore();
+                StoreScheduleResultEvents.SetListToStore( true);
                 setDurationLimit( null );
             };
 
@@ -172,7 +172,7 @@ const SchEventContainerComponent = ( props ) => {
                         durationTime: event.durationTime,
                     });
                     StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
-                    StoreScheduleResultEvents.SetListToStore();
+                    StoreScheduleResultEvents.SetListToStore( true );
                 };
 
                 
@@ -181,7 +181,7 @@ const SchEventContainerComponent = ( props ) => {
                 let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
                 StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
-                StoreScheduleResultEvents.SetListToStore();
+                StoreScheduleResultEvents.SetListToStore( true );
             };
         };
 

@@ -11,6 +11,7 @@ import { set_companies } from './set_companies.js';
 import { set_default_program_system } from './set_default_program_system.js';
 import { set_default_company_type } from './set_default_company_type.js';
 import { set_company_legal_name } from './set_company_legal_name.js';
+// import { set_current_day_shadule_list } from './set_current_day_shadule_list.js'
 
 
 
@@ -29,6 +30,12 @@ export const set_starting_response_to_store = ( response ) => {
         set_default_program_system( response );
         set_default_company_type( response );
         set_company_legal_name( response );
+        // set_current_day_shadule_list( response );
+
+
+
+        // currentDaySchaduleList
+
 
     }else{
 

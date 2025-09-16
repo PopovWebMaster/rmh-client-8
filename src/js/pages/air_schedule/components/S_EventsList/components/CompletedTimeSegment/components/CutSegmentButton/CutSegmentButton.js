@@ -135,7 +135,7 @@ const CutSegmentButtonComponent = ( props ) => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( dayList );
-        StoreScheduleResultEvents.SetListToStore();
+        StoreScheduleResultEvents.SetListToStore( true );
 
         // setScheduleEventsList( dayList );
         setIsOpen( false );
