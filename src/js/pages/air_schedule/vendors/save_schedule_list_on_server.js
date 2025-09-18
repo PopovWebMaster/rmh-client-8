@@ -1,6 +1,8 @@
 
 import store from './../../../redux/store.js';
 import { setScheduleEventsListIsChanged } from './../../../redux/scheduleResultSlise.js';
+import { setSpinnerIsActive } from './../../../redux/spinnerSlice.js';
+
 
 
 import { get_YYYY_MM_DD } from './../../../helpers/get_YYYY_MM_DD.js';
@@ -28,11 +30,7 @@ export const save_schedule_list_on_server = ( callback ) => {
         list.push( item );
     };
 
-    // console.dir( 'YYYY_MM_DD' );
-    // console.dir( YYYY_MM_DD );
-
-    // console.dir( 'list' );
-    // console.dir( list );
+    store.dispatch( setSpinnerIsActive( true ) );
 
     send_request_to_server({
         route: 'save-schedule-list',
@@ -46,9 +44,7 @@ export const save_schedule_list_on_server = ( callback ) => {
             // console.dir( response );
 
             store.dispatch( setScheduleEventsListIsChanged( false ) );
-
-            
-
+            store.dispatch( setSpinnerIsActive( false ) );
 
         }
     });

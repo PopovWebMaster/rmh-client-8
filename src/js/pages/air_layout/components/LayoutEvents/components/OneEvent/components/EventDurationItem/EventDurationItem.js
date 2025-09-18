@@ -14,11 +14,12 @@ import { InputDuration } from './../../../../../../../../components/InputDuratio
 
 import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
 
-// import { make_start_time_adjustments } from './../../../../../../vendors/make_start_time_adjustments.js';
 import { get_gridDayEventsList_with_new_duration_time } from './vendors/get_gridDayEventsList_with_new_duration_time.js';
-// import { save_grid_events_changes_on_server } from './../../../../../LayoutGrid/vendors/save_grid_events_changes_on_server.js';
-
 import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
+
+import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { AWConfirm } from './../../../../../../../../components/AlertWindowContainer/AWConfirm/AWConfirm.js';
+
 
 
 const EventDurationItemComponent = ( props ) => {
@@ -38,11 +39,17 @@ const EventDurationItemComponent = ( props ) => {
     let [ MM, setMM ] = useState( '' );
     let [ SS, setSS ] = useState( '' );
 
-    useEffect( () => {
+    let [ isOpen, setIsOpen ] = useState( false );
+
+    const splitTimeAndSetToState = () => {
         let arr = durationTime.split( ':' );
         setHH( arr[ 0 ] );
         setMM( arr[ 1 ] );
         setSS( arr[ 2 ] );
+    };
+
+    useEffect( () => {
+        splitTimeAndSetToState();
 
     }, [ durationTime ] );
 
@@ -79,43 +86,90 @@ const EventDurationItemComponent = ( props ) => {
 
         }else{
 
-            setSpinnerIsActive( true );
-
-            send_request_to_server({
-                route: `save-grid-event-list`,
-                data: { 
-                    list: addReport.gridDayEventsList,
-                },
-                successCallback: ( response ) => {
-                    console.dir( 'response' );
-                    console.dir( response );
-                    if( response.ok ){
-                        setSpinnerIsActive( false );
-                        setGridDayEventsList( response.list );
-                        setGridDayEventsIsChanges( false );
-
-                        seve_one_event_changes_on_setver({
-                            eventId: id,
-                            eventData: { 
-                                durationTime: new_durationTime,
-                                durationSec: duration_sec,
-                            },
-                            callback: () => {},
-                        });
-                        
-                    };
-    
-                },
-            });
-
+            if( new_durationTime !== durationTime ){
+                setIsOpen( true );
+            };
 
         };
 
     };
 
+    const setNewDuration = () => {
+        setIsOpen( false );
+
+        let duration_sec = getTimeInSeconds( HH, MM, SS );
+        let new_durationTime = `${HH}:${MM}:${SS}`;
+
+        if( duration_sec >= MIN_EVENT_DURATION_SEC ){
+
+        }else{
+            setHH( '00' );
+            setMM( '00' );
+            setSS( '05' );
+            new_durationTime = `00:00:05`;
+        };
+
+        setSpinnerIsActive( true );
+
+        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+
+        send_request_to_server({
+            route: `save-grid-event-list`,
+            data: { 
+                list: addReport.gridDayEventsList,
+            },
+            successCallback: ( response ) => {
+                console.dir( 'response' );
+                console.dir( response );
+                if( response.ok ){
+                    setSpinnerIsActive( false );
+                    setGridDayEventsList( response.list );
+                    setGridDayEventsIsChanges( false );
+
+                    
+
+                    seve_one_event_changes_on_setver({
+                        eventId: id,
+                        eventData: { 
+                            durationTime: new_durationTime,
+                            durationSec: duration_sec,
+                        },
+                        callback: () => {},
+                    });
+                    
+                };
+
+            },
+        });
+
+    }
+
+    const cancelChangesDuration = () => {
+        setIsOpen( false );
+        splitTimeAndSetToState();
+    }
+
     return (
 
         <div className = 'LE_EventDurationItem'>
+
+            <AlertWindowContainer
+                isOpen =        { isOpen }
+                setIsOpen =     { setIsOpen }
+                title =     'Подтверждение нового хронометража'
+                width =     '30em'
+                height =    '13em'
+            >
+                <AWConfirm
+                    text =              { `Новый хронометраж ${HH}:${MM}:${SS} будет присвоен всем событиям в эфирной сетке` }
+                    type =              'confirm'
+                    continueHandler =   { setNewDuration }
+                    cancelHandler =     { cancelChangesDuration }
+                    titleContinue =     'Продолжить'
+                    titlecancel =       'Отмена'
+                />
+            </AlertWindowContainer>
+
             <InputDuration 
                 HH = { HH }
                 MM = { MM }

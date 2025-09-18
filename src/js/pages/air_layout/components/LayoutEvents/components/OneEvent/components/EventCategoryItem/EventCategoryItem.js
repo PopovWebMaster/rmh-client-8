@@ -9,9 +9,10 @@ import { selectorData as layoutSlice, setEventListAsChanged } from './../../../.
 
 import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
-import { DEFAULT_CATEGORY } from './../../../../../../../../config/layout.js';
 
-import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+// import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
+import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
 
 
 const EventCategoryItemComponent = ( props ) => {
@@ -41,31 +42,17 @@ const EventCategoryItemComponent = ( props ) => {
 
         if( category_id !== category.id ){
 
-            let newArr = [];
+            set_event_changes_to_store( id, { category_id } );
 
-            // for( let i = 0; i < eventList.length; i++ ){
-            //     if( eventList[ i ].id === id ){
-            //         let item = { ...eventList[ i ] };
-            //         item.category_id = category_id;
-            //         newArr.push( item );
-            //     }else{
-            //         newArr.push({ ...eventList[ i ] });
-            //     };
-
-            // };
-
-            seve_one_event_changes_on_setver({
-                eventId: id,
-                eventData: { 
-                    category_id: category_id,
-                },
-                callback: () => {
-                    setIsOpen( false )
-                },
-            });
-
-            // setIsOpen( false );
-            // setEventListAsChanged( newArr );
+            // seve_one_event_changes_on_setver({
+            //     eventId: id,
+            //     eventData: { 
+            //         category_id: category_id,
+            //     },
+            //     callback: () => {
+            //         setIsOpen( false )
+            //     },
+            // });
 
         };
 
@@ -96,7 +83,10 @@ const EventCategoryItemComponent = ( props ) => {
 
     return (
 
-        <div className = 'LE_EventCategoryItem'>
+        <div
+            className = 'LE_EventCategoryItem'
+            onClick = { () => { setIsOpen( !isOpen ) } }
+        >
 
             <AlertWindowContainer
                 isOpen =    { isOpen }
@@ -118,7 +108,7 @@ const EventCategoryItemComponent = ( props ) => {
             
             <span 
                 className = 'icon icon-down-open-1'
-                onClick = { () => { setIsOpen( true ) } }
+                // onClick = { () => { setIsOpen( true ) } }
             ></span>
             <span className = 'name'>{ categoryName }</span>
 

@@ -39,7 +39,6 @@ const SetDayDataFromServerComponent = ( props ) => {
     useEffect( () => {
 
         let YYYY_MM_DD = get_YYYY_MM_DD( currentYear, currentMonth, currentDate );
-        console.log( 'YYYY_MM_DD', YYYY_MM_DD );
 
         setSpinnerIsActive( true );
 
@@ -58,6 +57,7 @@ const SetDayDataFromServerComponent = ( props ) => {
                         let { release_list, scheduleEventsList } = response;
                         set_release_list_to_store( release_list );
                         setGridCurrentDay( currentDayNum );
+
                         setScheduleEventsList( scheduleEventsList );
 
                     }else{
@@ -68,9 +68,8 @@ const SetDayDataFromServerComponent = ( props ) => {
                         };
                     };
 
-                    
-
                 },
+
                 errorCallback: () => {
                     if( IS_DEVELOPMENT ){
 

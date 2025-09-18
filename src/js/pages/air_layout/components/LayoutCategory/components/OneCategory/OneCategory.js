@@ -7,12 +7,6 @@ import './OneCategory.scss';
 
 import { selectorData as layoutSlice, setCategoryesIsChanged, setCategoryList } from './../../../../../../redux/layoutSlice.js';
 import { setSpinnerIsActive }                           from './../../../../../../redux/spinnerSlice.js';
-// import { AlertWindowContainer } from './../../../../../AlertWindowContainer/AlertWindowContainer.js';
-import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
-import { AWRemoveConfirmComponent } from './../../../../../../components/AlertWindowContainer/AWRemoveConfirmComponent/AWRemoveConfirmComponent.js';
-
-
-import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
 
 import { RemoveCategoryButton } from './components/RemoveCategoryButton/RemoveCategoryButton.js';
 
@@ -29,7 +23,6 @@ const OneCategoryComponent = ( props ) => {
 
         setCategoryesIsChanged,
         setCategoryList,
-        setSpinnerIsActive,
 
     } = props;
 
@@ -37,10 +30,6 @@ const OneCategoryComponent = ( props ) => {
     let [ prefixValue, setPrefixValue ] = useState( prefix );
     let [ colorTextValue, setColorTextValue ] = useState( colorText );
     let [ colorBGValue, setColorBGValue] = useState( colorBG );
-
-    let [ isOpen, setIsOpen] = useState( false );
-
-
 
     useEffect( () => {
         setNameValue( name );
@@ -101,8 +90,6 @@ const OneCategoryComponent = ( props ) => {
         setCategoryesIsChanged( true );
     }
 
-
-
     const enter = ( e ) => {
         if( e.which === 13 ){
             set_changes_to_store();
@@ -113,48 +100,9 @@ const OneCategoryComponent = ( props ) => {
         set_changes_to_store();
     }
 
-    const remove_category = () => {
-        setIsOpen( false );
-
-        setSpinnerIsActive( true );
-
-        send_request_to_server({
-            route: 'remove-category',
-            data: {
-                categoryId: id,
-            },
-            successCallback: ( response ) => {
-                console.dir( 'response' );
-                console.dir( response );
-
-                if( response.ok ){
-                    setSpinnerIsActive( false );
-                    setCategoryList( response.list );
-                    setCategoryesIsChanged( false );
-                    setIsOpen( false );
-                };
-            }
-        });
-
-    }
-
-
     return (
 
         <div className = 'LC_OneCategory' >
-
-
-            <AlertWindowContainer
-                isOpen = { isOpen }
-                setIsOpen = { setIsOpen }
-                width = '25em'
-                height = '10em'
-            >
-                <AWRemoveConfirmComponent 
-                    setIsOpen =     { setIsOpen }
-                    removeHandler = { remove_category }
-                />
-            </AlertWindowContainer>
 
             <div className = 'LC_OneCategory_wrap'>
                 <input 
@@ -208,20 +156,10 @@ const OneCategoryComponent = ( props ) => {
                         categoryId = { id }
                     />
 
-                    {/* <div 
-                        className = 'LC_OneCategory_canel'
-                        onClick = { () => { setIsOpen( true ) } }
-                    >
-                        <span className = 'icon-cancel-2'></span>
-                    </div> */}
-
                 </div>
 
             </div>
 
-            
-
-            
         </div>
 
     )

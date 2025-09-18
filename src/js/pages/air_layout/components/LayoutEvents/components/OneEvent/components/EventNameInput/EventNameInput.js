@@ -8,7 +8,10 @@ import './EventNameInput.scss';
 import { selectorData as layoutSlice, setEventListAsChanged } from './../../../../../../../../redux/layoutSlice.js';
 import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
-import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+// import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
+import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
+
 
 const EventNameInputComponent = ( props ) => {
 
@@ -33,28 +36,18 @@ const EventNameInputComponent = ( props ) => {
 
     const set_changes_to_store = () => {
 
-        if( nameValue !== name ){
-            let newArr = [];
+        if( nameValue.trim() !== name ){
 
-            // for( let i = 0; i < eventList.length; i++ ){
-            //     if( eventList[ i ].id === id ){
-            //         let item = { ...eventList[ i ] };
-            //         item.name = nameValue;
-            //         newArr.push( item );
-            //     }else{
-            //         newArr.push({ ...eventList[ i ] });
-            //     };
-            // };
+            set_event_changes_to_store( id, { name: nameValue.trim() } );
 
-            // setEventListAsChanged( newArr );
 
-            seve_one_event_changes_on_setver({
-                 eventId: id,
-                eventData: { 
-                    name: nameValue,
-                },
-                callback: () => {},
-            });
+            // seve_one_event_changes_on_setver({
+            //     eventId: id,
+            //     eventData: { 
+            //         name: nameValue,
+            //     },
+            //     callback: () => {},
+            // });
         };
 
     };

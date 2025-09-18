@@ -16,9 +16,9 @@ const AWConfirmComponent = ( props ) => {
 
         continueHandler = () => {},
         cancelHandler = () => {},
-
-        titleContinue = 'Продолжить',
-        titlecancel = 'Отмена',
+ 
+        titleContinue = 'Продолжить', // 'string' || null 
+        titlecancel = 'Отмена', // 'string' || null 
 
 
 
@@ -51,19 +51,27 @@ const AWConfirmComponent = ( props ) => {
 
             <div className = 'AWConfirm_buttons'>
 
-                <div
-                    className = { `btn ${ type === 'confirm'? 'confirm': 'warning'}` }
-                    onClick = { continueHandler }
-                >
-                    <span>{ titleContinue }</span>
-                </div>
+                { titleContinue === null? '': (
+                    <div
+                        className = { `btn ${ type === 'confirm'? 'confirm': 'warning'}` }
+                        onClick = { continueHandler }
+                    >
+                        <span>{ titleContinue }</span>
+                    </div>
+                ) }
 
-                <div 
-                    className = 'btn cancel'
-                    onClick = { cancelHandler }
-                >
-                    <span>{ titlecancel }</span>
-                </div>
+                { titlecancel === null? '': (
+                    <div 
+                        className = 'btn cancel'
+                        onClick = { cancelHandler }
+                    >
+                        <span>{ titlecancel }</span>
+                    </div>
+                ) }
+
+                
+
+
 
             </div>
 

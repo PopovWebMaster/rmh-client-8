@@ -5,12 +5,6 @@ import React from "react";
 
 import './OneEvent.scss';
 
-// import { EventNonesInput } from './../EventNonesInput/EventNonesInput.js';
-// import { EventCategoryItem } from './../EventCategoryItem/EventCategoryItem.js';
-// import { EventRemoveItem } from './../EventRemoveItem/EventRemoveItem.js';
-// import { EventNameInput } from './../EventNameInput/EventNameInput.js';
-// import { EventDurationItem } from './../EventDurationItem/EventDurationItem.js';
-
 import { EventTypeItem } from './components/EventTypeItem/EventTypeItem.js';
 import { EventPrefixItem } from './components/EventPrefixItem/EventPrefixItem.js';
 import { EventDurationItem } from './components/EventDurationItem/EventDurationItem.js';
@@ -19,7 +13,6 @@ import { EventNonesInput } from './components/EventNonesInput/EventNonesInput.js
 import { EventCategoryItem } from './components/EventCategoryItem/EventCategoryItem.js';
 import { EventRemoveItem } from './components/EventRemoveItem/EventRemoveItem.js';
 
-import { EVENT_TYPE } from './../../../../../../config/layout.js';
 
 const OneEventComponent = ( props ) => {
 
@@ -43,7 +36,7 @@ const OneEventComponent = ( props ) => {
                 />
 
                 <EventPrefixItem 
-                    category = { category }
+                    category =  { category }
                 />
 
                 <EventDurationItem 
@@ -70,7 +63,9 @@ const OneEventComponent = ( props ) => {
 
                 <EventRemoveItem 
                     id = { id }
+                    name =      { name }
                 />
+                
             </div>
         </div>
 

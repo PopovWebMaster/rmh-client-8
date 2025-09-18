@@ -108,6 +108,7 @@ const CutSegmentButtonComponent = ( props ) => {
             let eventStyle = get_event_style( eventId );
 
             if( eventStyle.event_is_not_found ){
+
                 alert( 'В расисании есть удалённые события, пожалуйста, пересоздайте лист заново' );
             }else{
                 let eventName = eventListById[ eventId ].name;

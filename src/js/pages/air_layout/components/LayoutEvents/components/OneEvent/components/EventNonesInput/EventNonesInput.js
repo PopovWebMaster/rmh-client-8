@@ -7,7 +7,9 @@ import './EventNonesInput.scss';
 
 import { selectorData as layoutSlice, setEventListAsChanged } from './../../../../../../../../redux/layoutSlice.js';
 
-import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+// import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
+
+import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
 
 
 const EventNonesInputComponent = ( props ) => {
@@ -30,29 +32,18 @@ const EventNonesInputComponent = ( props ) => {
 
     const set_changes_to_store = () => {
 
-        if( notesValue !== notes ){
-            let newArr = [];
+        if( notesValue.trim() !== notes ){
 
-            // for( let i = 0; i < eventList.length; i++ ){
-            //     if( eventList[ i ].id === id ){
-            //         let item = { ...eventList[ i ] };
-            //         item.notes = notesValue;
-            //         newArr.push( item );
-            //     }else{
-            //         newArr.push({ ...eventList[ i ] });
-            //     };
+            set_event_changes_to_store( id, { notes: notesValue.trim() } );
 
-            // };
+            // seve_one_event_changes_on_setver({
+            //     eventId: id,
+            //     eventData: { 
+            //         notes: notesValue,
+            //     },
+            //     callback: () => {},
+            // });
 
-            seve_one_event_changes_on_setver({
-                eventId: id,
-                eventData: { 
-                    notes: notesValue,
-                },
-                callback: () => {},
-            });
-
-            // setEventListAsChanged( newArr );
         };
 
        

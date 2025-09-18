@@ -29,7 +29,7 @@ const LayoutEventsComponent = ( props ) => {
             className = 'layoutEvents'
             controlPanelContainer = { <>
                 <AddEventButton />
-                {/* <SaveEventsChanges /> */}
+                <SaveEventsChanges />
             </> }
             bodyContainer = { <EventList /> }
         />

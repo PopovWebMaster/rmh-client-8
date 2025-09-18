@@ -107,6 +107,7 @@ export const scheduleResultSlise = createSlice({
 
         setScheduleEventsList: ( state, action ) => {
             state.scheduleEventsList =  action.payload;
+
             let obj = {};
             let usedReleses = {};
             for( let i = 0; i < action.payload.length; i++ ){
