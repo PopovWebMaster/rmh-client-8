@@ -23,7 +23,7 @@ const ReleasesItemComponent = ( props ) => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         StoreScheduleResultEvents.RemoveRelease( gridEventId, release_id  );
-        StoreScheduleResultEvents.SetListToStore();
+        StoreScheduleResultEvents.SetListToStore( true );
     }
 
 
@@ -32,7 +32,7 @@ const ReleasesItemComponent = ( props ) => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         StoreScheduleResultEvents.ReleaseMoveUp( gridEventId, id  );
-        StoreScheduleResultEvents.SetListToStore();
+        StoreScheduleResultEvents.SetListToStore( true );
 
         // ReleaseMoveUp
 
@@ -43,7 +43,7 @@ const ReleasesItemComponent = ( props ) => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         StoreScheduleResultEvents.ReleaseMoveDown( gridEventId, id  );
-        StoreScheduleResultEvents.SetListToStore();
+        StoreScheduleResultEvents.SetListToStore( true );
 
     }
 
@@ -84,7 +84,7 @@ const ReleasesItemComponent = ( props ) => {
                     <span className = 'duration'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span
                         onClick = { () => { remove( id ) } }
-                        className = 'remove'>Снять с эфира</span>
+                        className = 'remove'>Снять</span>
                 </div>
             );
         } );

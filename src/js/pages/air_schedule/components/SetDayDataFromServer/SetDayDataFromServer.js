@@ -16,6 +16,7 @@ import { get_YYYY_MM_DD } from './../../../../helpers/get_YYYY_MM_DD.js';
 
 import { send_request_to_server } from './../../../../helpers/send_request_to_server.js';
 import { set_release_list_to_store } from './../../vendors/set_release_list_to_store.js';
+import { set_release_list_and_schedule_list_to_store } from './../../vendors/set_release_list_and_schedule_list_to_store.js';
 
 
 
@@ -55,10 +56,13 @@ const SetDayDataFromServerComponent = ( props ) => {
                     if( response.ok ){
                         setSpinnerIsActive( false );
                         let { release_list, scheduleEventsList } = response;
+
                         set_release_list_to_store( release_list );
+                        set_release_list_and_schedule_list_to_store( release_list, scheduleEventsList );
+
                         setGridCurrentDay( currentDayNum );
 
-                        setScheduleEventsList( scheduleEventsList );
+                        // setScheduleEventsList( scheduleEventsList );
 
                     }else{
                         if( IS_DEVELOPMENT ){

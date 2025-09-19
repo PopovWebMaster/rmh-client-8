@@ -23,12 +23,12 @@ export const save_schedule_list_on_server = ( callback ) => {
     } = scheduleResult;
 
     let YYYY_MM_DD = get_YYYY_MM_DD( currentYear, currentMonth, currentDate );
-    let list = [];
-    for( let i = 0; i < scheduleEventsList.length; i++ ){
-        let item = structuredClone( scheduleEventsList[ i ] );
-        item.releases = [];
-        list.push( item );
-    };
+    // let list = [];
+    // for( let i = 0; i < scheduleEventsList.length; i++ ){
+    //     let item = structuredClone( scheduleEventsList[ i ] );
+    //     item.releases = [];
+    //     list.push( item );
+    // };
 
     store.dispatch( setSpinnerIsActive( true ) );
 
@@ -36,7 +36,7 @@ export const save_schedule_list_on_server = ( callback ) => {
         route: 'save-schedule-list',
         data: {
             YYYY_MM_DD,
-            list,
+            list: scheduleEventsList,
         },
         successCallback: ( response ) => {
 

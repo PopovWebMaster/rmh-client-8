@@ -9,6 +9,10 @@
         justify-content: flex-start;
         align-items: center;
         align-content: center;
+        background-color: #ffffffe0;
+        border: 1px solid #2d633691;
+        border-radius: 0.1em;
+        margin: 0.2em 0;
 
         >span.arrow{
             font-size: 0.65em;
@@ -17,12 +21,13 @@
             flex-grow: 0;
             width: 1.3em;
             text-align: center;
-            background-color: #c2d8d980;
-            border: 1px solid #a9a9a95c;
+            background-color: #ffffffed;
+            border: 1px solid #2d63368a;
             border-radius: 0.1em;
             opacity: 0;
             cursor: pointer;
             user-select: none;
+            padding: 0.1em 0.1em 0 0;
         }
 
         >span.arrow:hover{

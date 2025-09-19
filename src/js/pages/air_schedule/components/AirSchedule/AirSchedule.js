@@ -29,6 +29,8 @@ import { DownloadExcelButton } from './../DownloadExcelButton/DownloadExcelButto
 
 import { SaveScheduleButton } from './../SaveScheduleButton/SaveScheduleButton.js';
 
+import { ScheduleInfoAlertMessage } from './../ScheduleInfoAlertMessage/ScheduleInfoAlertMessage.js';
+
 
 const AirScheduleComponent = ( props ) => {
 
@@ -41,10 +43,10 @@ const AirScheduleComponent = ( props ) => {
 
             <SetStartingDateNowData>
 
+                <ScheduleInfoAlertMessage />
+                
                 <ScheduleTopPanel>
-
                     <ScheduleCalendar />
-
                     <CreateScheduleButton />
 
                     <div className = 'ScheduleTopPanel_right'>
@@ -57,20 +59,15 @@ const AirScheduleComponent = ( props ) => {
                 <ScheduleBody>
 
                     <SetDayDataFromServer>
-                        
                         <ScheduleStatistics />
-
                         <ScheduleCenter>
-
                             <S_CenterTopButtons></S_CenterTopButtons>
-
                             <S_CenterBody>
 
                                 <S_EventsList />
                                 <S_ReleaseList />
 
                             </S_CenterBody>
-
                         </ScheduleCenter>
 
                         <ScheduleRight>

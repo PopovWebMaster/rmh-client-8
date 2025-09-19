@@ -15,6 +15,9 @@ const AddAllBtnComponent = ( props ) => {
     let {
         scheduleEventsList,
         releaseList,
+        usedReleasesById,
+
+        scheduleResult,
     } = props;
 
     let [ isActive, setIsActive ] = useState( true );
@@ -22,14 +25,11 @@ const AddAllBtnComponent = ( props ) => {
     const click = () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList, false );
-        StoreScheduleResultEvents.AddAllReleases( releaseList );
-        StoreScheduleResultEvents.SetListToStore();
+        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList, true );
+        // StoreScheduleResultEvents.AddAllReleases( releaseList );
+        StoreScheduleResultEvents.AddAllRemainingReleases( releaseList, usedReleasesById );
 
-
-
-
-
+        StoreScheduleResultEvents.SetListToStore( true );
 
     }
 
@@ -58,6 +58,9 @@ export function AddAllBtn( props ){
 
             scheduleEventsList = { scheduleResult.scheduleEventsList }
             releaseList = { scheduleResult.releaseList }
+
+            usedReleasesById = { scheduleResult.usedReleasesById }
+
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

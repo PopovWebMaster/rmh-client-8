@@ -37,6 +37,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddRelease = this.AddRelease.bind(this);
         this.RemoveRelease = this.RemoveRelease.bind(this);
         this.AddAllReleases = this.AddAllReleases.bind(this);
+        this.AddAllRemainingReleases = this.AddAllRemainingReleases.bind(this);
+
         this.RemoveEvent = this.RemoveEvent.bind(this);
         this.AddEvent = this.AddEvent.bind(this);
         this.GetAllUsedEvents = this.GetAllUsedEvents.bind(this);
@@ -281,6 +283,53 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             };
         };
     }
+
+    AddAllRemainingReleases( allReleases, usedReleasesById ){
+
+        let unusedByGEId = {};
+        for( let i = 0; i < allReleases.length; i++ ){
+            let { grid_event_id, id } = allReleases[ i ];
+            if( grid_event_id !== null ){
+                if( usedReleasesById[ id ] ){
+                    // не трогаем
+                }else{
+                    if( unusedByGEId[ grid_event_id ] ){
+                        unusedByGEId[ grid_event_id ].push( id );
+                    }else{
+                        unusedByGEId[ grid_event_id ] = [ id ];
+                    };
+                };
+            }{
+                /*
+                    те что с null не трогаем, если их вручную уже расставили то их не зацепит, 
+                    а те что ещё не расставлены пускай будет видно в буфере
+                */
+            };
+        };
+
+        console.dir( 'usedReleasesById' );
+        console.dir( usedReleasesById );
+
+        console.dir( 'unusedByGEId' );
+        console.dir( unusedByGEId );
+
+        for( let i = 0; i < this.list.length; i++ ){
+            let gridEventId = this.list[ i ].gridEventId;
+            if( gridEventId !== null ){
+                if( unusedByGEId[ gridEventId ] ){
+                    for( let y = 0; y < unusedByGEId[ gridEventId ].length; y++ ){
+                        let releaseId = unusedByGEId[ gridEventId ][ y ];
+                        this.AddRelease( gridEventId, releaseId );
+                        this.list[ i ].UpdateEventData();
+                    };
+                };
+            };
+        };
+        
+    }
+
+
+    
 
     RemoveEvent( gridEventId ){
         let newList = [];

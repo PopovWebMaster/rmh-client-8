@@ -40,6 +40,10 @@ export const scheduleResultSlise = createSlice({
 
 
 
+        infoMessageText: '', // просто записываешь текст и он выскакивает. Реагирует на содержание строки
+
+
+
 
 
 
@@ -146,6 +150,14 @@ export const scheduleResultSlise = createSlice({
         },
 
 
+
+
+
+        setInfoMessageText: ( state, action ) => {
+            state.infoMessageText =  action.payload;
+        },
+
+
         
 
 
@@ -173,6 +185,7 @@ export const {
     setDragebleReleaseId,
     setDragebleReleaseEventId,
     setUsedReleasesById,
+    setInfoMessageText,
 
 
 } = scheduleResultSlise.actions;
@@ -203,6 +216,11 @@ export const selectorData = ( state ) => {
         dragebleReleaseId: state.scheduleResult.dragebleReleaseId,
         dragebleReleaseEventId: state.scheduleResult.dragebleReleaseEventId,
         usedReleasesById: state.scheduleResult.usedReleasesById,
+        infoMessageText: state.scheduleResult.infoMessageText,
+
+
+
+        
 
 
 

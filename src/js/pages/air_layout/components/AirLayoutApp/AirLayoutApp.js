@@ -34,9 +34,9 @@ const AirLayoutAppComponent = ( props ) => {
     useEffect( () => {
         if( currentCompanyAlias !== null ){
             if( IS_DEVELOPMENT ){
-                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
+                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}` );
 
-                navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
+                // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.CATEGORIES}` );
                 // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.EVENTS}` );
                 // navigate( `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_LAYOUT}/${ROUTE.AIR_LAYOUT.KEY_POINTS}` );
 
