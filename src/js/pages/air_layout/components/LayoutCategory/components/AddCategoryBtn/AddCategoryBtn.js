@@ -12,6 +12,8 @@ import { PageBodyAddButton } from './../../../../../../components/PageBodyAddBut
 
 import { AddCategoryComponent } from './../AddCategoryComponent/AddCategoryComponent.js';
 
+import { access_right } from './../../../../../../helpers/access_right.js';
+
 
 const AddCategoryBtnComponent = ( props ) => {
 
@@ -27,25 +29,29 @@ const AddCategoryBtnComponent = ( props ) => {
 
     return (<>
 
-        <AlertWindowContainer
-            isOpen =    { isOpen }
-            setIsOpen = { setIsOpen }
-            width =     '27em'
-            height =    '24em'
-            title = 'Новая категория'
-        >
-            <AddCategoryComponent 
+        { access_right( 'layout_category_add' )? <>
+            <AlertWindowContainer
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
+                width =     '27em'
+                height =    '24em'
+                title = 'Новая категория'
+            >
+                <AddCategoryComponent 
+                    isOpen =    { isOpen }
+                    setIsOpen = { setIsOpen }
+                />
+
+            </AlertWindowContainer>
+
+            <PageBodyAddButton 
+                title =         { 'Добавить' }
+                icon =          { 'icon-plus' }
+                clickHandler =  { click }
             />
+        </>: '' }
 
-        </AlertWindowContainer>
-
-        <PageBodyAddButton 
-            title =         { 'Добавить' }
-            icon =          { 'icon-plus' }
-            clickHandler =  { click }
-        />
+       
 
     </>)
 

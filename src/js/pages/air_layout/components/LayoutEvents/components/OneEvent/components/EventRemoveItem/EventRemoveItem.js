@@ -14,6 +14,8 @@ import { AWConfirm } from './../../../../../../../../components/AlertWindowConta
 
 import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 const EventRemoveItemComponent = ( props ) => {
 
     let {
@@ -148,6 +150,12 @@ const EventRemoveItemComponent = ( props ) => {
 
     }
 
+    const click = () => {
+        access_right( 'layout_event_remove', () => {
+            setIsOpen( true );
+        } );
+    }
+
 
 
     return (
@@ -213,12 +221,16 @@ const EventRemoveItemComponent = ( props ) => {
 
         </AlertWindowContainer>
 
-        <div 
-            className = 'LE_EventRemoveItem'
-            onClick = { () => { setIsOpen( true ) } }
-        >
-            <span className = 'icon-cancel-2'></span>
-        </div>
+        { access_right( 'layout_event_remove' )? (
+            <div 
+                className = 'LE_EventRemoveItem'
+                onClick =   { click }
+            >
+                <span className = 'icon-cancel-2'></span>
+            </div> 
+        ): '' }
+
+
                 
 
     </div>)

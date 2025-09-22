@@ -11,7 +11,7 @@ import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 // import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
 
 import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
-
+import { access_right } from './../../../../../../../../helpers/access_right.js';
 
 const EventNameInputComponent = ( props ) => {
 
@@ -53,8 +53,14 @@ const EventNameInputComponent = ( props ) => {
     };
 
     const change = ( e ) => {
-        let val = e.target.value;
-        setNameValue( val );
+
+        access_right( 'layout_event_edit', () => {
+            let val = e.target.value;
+            setNameValue( val );
+        } );
+
+
+
 
     };
 

@@ -44,7 +44,13 @@ function exclude_outdated_releases( scheduleList, releasesById ){
             let release_id = scheduleList[ i ].releases[ y ].id;
 
             if( releasesById[ release_id ] ){
-                item.releases.push( { ...scheduleList[ i ].releases[ y ] } );
+
+                let relObj = { ...scheduleList[ i ].releases[ y ] };
+                if( relObj.air_notes === null ){
+                    relObj.air_notes = '';
+                };
+
+                item.releases.push( relObj );
             }else{
                 isset_del_releases = true;
             };

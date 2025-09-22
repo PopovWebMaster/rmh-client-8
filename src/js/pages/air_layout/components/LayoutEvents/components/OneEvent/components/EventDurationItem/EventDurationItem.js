@@ -20,6 +20,8 @@ import { send_request_to_server } from './../../../../../../../../helpers/send_r
 import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { AWConfirm } from './../../../../../../../../components/AlertWindowContainer/AWConfirm/AWConfirm.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 
 
 const EventDurationItemComponent = ( props ) => {
@@ -62,35 +64,41 @@ const EventDurationItemComponent = ( props ) => {
 
     const set_changes_to_store = () => {
 
-        let duration_sec = getTimeInSeconds( HH, MM, SS );
+        access_right( 'layout_event_edit', () => {
+            
+            let duration_sec = getTimeInSeconds( HH, MM, SS );
 
-        let new_durationTime = `${HH}:${MM}:${SS}`;
+            let new_durationTime = `${HH}:${MM}:${SS}`;
 
-        if( duration_sec >= MIN_EVENT_DURATION_SEC ){
+            if( duration_sec >= MIN_EVENT_DURATION_SEC ){
 
-        }else{
-            setHH( '00' );
-            setMM( '00' );
-            setSS( '05' );
-            new_durationTime = `00:00:05`;
-        };
-
-        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
-        if( addReport.isErrors ){
-            let arr = durationTime.split( ':' );
-            setHH( arr[ 0 ] );
-            setMM( arr[ 1 ] );
-            setSS( arr[ 2 ] );
-
-            alert( addReport.message );
-
-        }else{
-
-            if( new_durationTime !== durationTime ){
-                setIsOpen( true );
+            }else{
+                setHH( '00' );
+                setMM( '00' );
+                setSS( '05' );
+                new_durationTime = `00:00:05`;
             };
 
-        };
+            let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+            if( addReport.isErrors ){
+                let arr = durationTime.split( ':' );
+                setHH( arr[ 0 ] );
+                setMM( arr[ 1 ] );
+                setSS( arr[ 2 ] );
+
+                alert( addReport.message );
+
+            }else{
+
+                if( new_durationTime !== durationTime ){
+                    setIsOpen( true );
+                };
+
+            };
+
+        } );
+
+        
 
     };
 

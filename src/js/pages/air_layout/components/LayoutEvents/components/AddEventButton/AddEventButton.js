@@ -16,6 +16,8 @@ import { AddEventComponent } from './../AddEventComponent/AddEventComponent.js';
 
 // import { CP_ButtonComponent } from './../../../CP_ButtonComponent/CP_ButtonComponent.js';
 
+import { access_right } from './../../../../../../helpers/access_right.js';
+
 const AddEventButtonComponent = ( props ) => {
 
     let {
@@ -30,23 +32,28 @@ const AddEventButtonComponent = ( props ) => {
     
     return (<>
 
-        <AlertWindowContainer
-            isOpen =    { isOpen }
-            setIsOpen = { setIsOpen }
-            width =     '28em'
-            height =    '40em'
-            title = 'Новое событие'
-        >
-            <AddEventComponent 
+        { access_right( 'layout_event_add' )? <>
+            <AlertWindowContainer
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
+                width =     '28em'
+                height =    '40em'
+                title = 'Новое событие'
+            >
+                <AddEventComponent 
+                    isOpen =    { isOpen }
+                    setIsOpen = { setIsOpen }
+                />
+
+            </AlertWindowContainer>
+
+            <PageBodyAddButton 
+                clickHandler =  { click }
             />
+        
+        </>: '' }
 
-        </AlertWindowContainer>
 
-        <PageBodyAddButton 
-            clickHandler =  { click }
-        />
 
     </>)
 

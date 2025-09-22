@@ -13,6 +13,7 @@ import { AlertWindowContainer } from './../../../../../../../../components/Alert
 // import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
 
 import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
+import { access_right } from './../../../../../../../../helpers/access_right.js';
 
 
 const EventCategoryItemComponent = ( props ) => {
@@ -80,12 +81,20 @@ const EventCategoryItemComponent = ( props ) => {
 
     }
 
+    const click = () => {
+
+        access_right( 'layout_event_edit', () => {
+            setIsOpen( !isOpen )
+        } );
+
+    };
+
 
     return (
 
         <div
             className = 'LE_EventCategoryItem'
-            onClick = { () => { setIsOpen( !isOpen ) } }
+            onClick = { click }
         >
 
             <AlertWindowContainer

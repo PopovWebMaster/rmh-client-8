@@ -11,6 +11,8 @@ import { selectorData as layoutSlice, setEventListAsChanged } from './../../../.
 
 import { set_event_changes_to_store } from './../../../../vendors/set_event_changes_to_store.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 
 const EventNonesInputComponent = ( props ) => {
 
@@ -51,8 +53,11 @@ const EventNonesInputComponent = ( props ) => {
     };
 
     const change = ( e ) => {
-        let val = e.target.value;
-        setNotesValue( val );
+        access_right( 'layout_event_edit', () => {
+            let val = e.target.value;
+            setNotesValue( val );
+        } );
+
 
     };
 

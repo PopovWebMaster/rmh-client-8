@@ -1,5 +1,3 @@
-// SaveScheduleButton
-
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
@@ -19,6 +17,7 @@ const SaveScheduleButtonComponent = ( props ) => {
     let {
         scheduleEventsListIsChanged
     } = props;
+
 
     const click = () => {
         save_schedule_list_on_server( () => {} );

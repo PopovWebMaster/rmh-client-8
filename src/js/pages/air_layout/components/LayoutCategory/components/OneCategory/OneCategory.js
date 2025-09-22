@@ -10,6 +10,8 @@ import { setSpinnerIsActive }                           from './../../../../../.
 
 import { RemoveCategoryButton } from './components/RemoveCategoryButton/RemoveCategoryButton.js';
 
+import { access_right } from './../../../../../../helpers/access_right.js';
+
 const OneCategoryComponent = ( props ) => {
 
     let {
@@ -45,49 +47,65 @@ const OneCategoryComponent = ( props ) => {
     ] );
 
     const set_changes_to_store = () => {
+        access_right( 'layout_category_edit', () => {
+            let newArr = [];
 
-        let newArr = [];
+            for( let i = 0; i < categoryList.length; i++ ){
 
-        for( let i = 0; i < categoryList.length; i++ ){
+                if( categoryList[ i ].id === id ){
+                    let item = { ...categoryList[ i ] };
+                    item.name = nameValue;
+                    item.prefix = prefixValue;
+                    item.colorText = colorTextValue;
+                    item.colorBG = colorBGValue;
+                    newArr.push( item );
+                }else{
+                    newArr.push({ ...categoryList[ i ] });
+                };
 
-            if( categoryList[ i ].id === id ){
-                let item = { ...categoryList[ i ] };
-                item.name = nameValue;
-                item.prefix = prefixValue;
-                item.colorText = colorTextValue;
-                item.colorBG = colorBGValue;
-                newArr.push( item );
-            }else{
-                newArr.push({ ...categoryList[ i ] });
             };
 
-        };
+            setCategoryList( newArr ); 
+        } );
 
-        setCategoryList( newArr );
+
         
     }
 
     const change_prefix = ( e ) => {
-        let val = e.target.value;
-        setPrefixValue( val );
-        setCategoryesIsChanged( true );
+
+        access_right( 'layout_category_edit', () => {
+            let val = e.target.value;
+            setPrefixValue( val );
+            setCategoryesIsChanged( true );
+        } );
+
     }
 
     const change_name = ( e ) => {
-        let val = e.target.value;
-        setNameValue( val );
-        setCategoryesIsChanged( true );
+        access_right( 'layout_category_edit', () => {
+            let val = e.target.value;
+            setNameValue( val );
+            setCategoryesIsChanged( true );
+        } );
+        
     }
 
     const change_colorText = ( e ) => {
-        let val = e.target.value;
-        setColorTextValue( val );
-        setCategoryesIsChanged( true );
+        access_right( 'layout_category_edit', () => {
+            let val = e.target.value;
+            setColorTextValue( val );
+            setCategoryesIsChanged( true );
+        } );
+        
     }
     const change_colorBG = ( e ) => {
-        let val = e.target.value;
-        setColorBGValue( val );
-        setCategoryesIsChanged( true );
+        access_right( 'layout_category_edit', () => {
+           let val = e.target.value;
+            setColorBGValue( val );
+            setCategoryesIsChanged( true ); 
+        } );
+        
     }
 
     const enter = ( e ) => {
@@ -152,9 +170,13 @@ const OneCategoryComponent = ( props ) => {
 
                 <div className = 'LC_OneCategory_control'>
 
-                    <RemoveCategoryButton
-                        categoryId = { id }
-                    />
+                    { access_right( 'layout_category_remove' )? (
+                        <RemoveCategoryButton
+                            categoryId = { id }
+                        />
+                    ): '' }
+
+                    
 
                 </div>
 
