@@ -26,16 +26,35 @@ const FilterCategoryButtonsComponent = ( props ) => {
     let [ list, setList ] = useState( [] );
 
     useEffect( () => {
-        let list = get_list_of_all_used_categories( applicationList, categoryListById ) 
+        let list = get_list_of_all_used_categories( applicationList, categoryListById );
 
-        setList(list );
-        if( list[ 0 ] ){
-            setCurrentCategoryIdOfListFilter( list[ 0 ].id );
-        }else{
-            setCurrentCategoryIdOfListFilter( null );
-        };
+        setList( list );
+
+        let id = get_actual_category_id( list );
+        setCurrentCategoryIdOfListFilter( id );
 
     }, [ applicationList ] );
+
+    const get_actual_category_id = ( list ) => {
+        let result = null;
+        if( currentCategoryIdOfListFilter === null ){
+            if( list[ 0 ] ){
+                result = list[ 0 ].id;
+            };
+        }else{
+            for( let i = 0; i < list.length; i++ ){
+                if( list[ i ].id === currentCategoryIdOfListFilter ){
+                    result = currentCategoryIdOfListFilter;
+                    break;
+                };
+            };
+            if( list.length > 0 && result === null ){
+                result = list[ 0 ].id;
+            };
+        };
+        return result;
+
+    };
 
     const create = ( arr ) => {
 

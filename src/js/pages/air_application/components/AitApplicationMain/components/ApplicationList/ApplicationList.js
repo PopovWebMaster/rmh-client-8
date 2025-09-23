@@ -9,6 +9,7 @@ import './ApplicationList.scss';
 import { FilterList } from './components/FilterList/FilterList.js';
 
 import { FilterCategoryButtons } from './components/FilterCategoryButtons/FilterCategoryButtons.js';
+import { FilterEventsButton } from './components/FilterEventsButton/FilterEventsButton.js';
 
 
 const ApplicationListComponent = ( props ) => {
@@ -24,6 +25,7 @@ const ApplicationListComponent = ( props ) => {
 
             <div className = 'AL_filter_wrap'>
                 <FilterCategoryButtons />
+                <FilterEventsButton />
 
             </div>
 

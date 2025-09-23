@@ -62,8 +62,8 @@ const FilterListComponent = ( props ) => {
 
             
 
-            console.dir( 'item' );
-            console.dir( item );
+            // console.dir( 'item' );
+            // console.dir( item );
 
 
             let category = DEFAULT_CATEGORY;

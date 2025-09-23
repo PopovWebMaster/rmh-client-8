@@ -42,14 +42,28 @@ export const applicationSlice = createSlice({
         // currentAppOrders: [],
         currentAppIsChanged: false,
 
+        managersById: {},
+        managersList: [],
+        currentManagerId: null, // null означает все
+
+
     },
 
     reducers: {
 
         setApplicationList: ( state, action ) => {
             state.applicationList =  action.payload;
-            let { applicationById } = get_all_lists_of_values_from_application_list( action.payload );
+            let { 
+                applicationById,
+                managersById,
+                managersList,
+            } = get_all_lists_of_values_from_application_list( action.payload );
+
             state.applicationById = applicationById;
+            state.managersById = managersById;
+            state.managersList = managersList;
+
+
         },
 
         setCurrentApplicationId: ( state, action ) => {
@@ -112,7 +126,9 @@ export const applicationSlice = createSlice({
 
 
 
-
+        setCurrentManagerId: ( state, action ) => {
+            state.currentManagerId =  action.payload;
+        },
 
 
 
@@ -144,6 +160,7 @@ export const {
     setCurrentAppIsChanged,
 
     setEnvIsOpen,
+    setCurrentManagerId,
 
 
 
@@ -172,6 +189,15 @@ export const selectorData = ( state ) => {
 
 
         envIsOpen:    state.application.envIsOpen,
+
+        managersById:    state.application.managersById,
+        managersList:    state.application.managersList,
+        currentManagerId:    state.application.currentManagerId,
+
+
+
+        
+
 
 
 

@@ -10,6 +10,7 @@ import { PageBodyContainer } from './../../../../components/PageBodyContainer/Pa
 
 import { AddAppButton } from './components/AddAppButton/AddAppButton.js';
 import { ApplicationList } from './components/ApplicationList/ApplicationList.js';
+import { ManagerSelectedButton } from './components/ManagerSelectedButton/ManagerSelectedButton.js';
 
 const AitApplicationMainComponent = ( props ) => {
 
@@ -19,9 +20,9 @@ const AitApplicationMainComponent = ( props ) => {
 
     return (
         <PageBodyContainer
-            className = 'applicationsMain'
-            controlPanelContainer = { <AddAppButton /> }
-            bodyContainer = { <ApplicationList /> }
+            className =                 'applicationsMain'
+            controlPanelContainer =     { <><AddAppButton />  <ManagerSelectedButton /></> }
+            bodyContainer =             { <ApplicationList /> }
         />
     )
 

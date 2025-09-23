@@ -1,4 +1,4 @@
-.AL_FilterCategoryButtons{
+.AL_FilterEventsButton{
     font-size: 1em;
 
     display: flex;
@@ -11,7 +11,7 @@
     padding: 0.2em 1em;
     border-radius: 0.1em;
     background-color: #69b1eb38;
-
+/*
     .AL_btn{
         font-size: 0.95em;
         margin: 0.3em 0.5em;
@@ -30,16 +30,6 @@
         span{
             font-size: 0.8em;
         }
-        // background-color: red;
-        // color: red;
-    }
-
-    .AL_btn:hover{
-        // opacity: 1;
-    }
-
-    .AL_btn.isActive{
-        // opacity: 1;
     }
 
     .AL_btn:hover{
@@ -54,10 +44,7 @@
         -webkit-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
         -moz-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
         box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
-
-        // -webkit-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
-        // -moz-box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
-        // box-shadow: 0px 0px 3px 1px rgba(182, 223, 255, 0.32);
     }
+        */
 
 }

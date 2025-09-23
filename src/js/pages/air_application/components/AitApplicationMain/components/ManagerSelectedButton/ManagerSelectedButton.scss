@@ -1,0 +1,110 @@
+.managerSelectedButton{
+    font-size: 0.8em;
+    margin: 0 0.5em;
+    width: 20em;
+
+    background-color: #ffffff;
+    // #296a82
+
+    padding: .4em 0.5em;
+    border-radius: .15em;
+    border: 1px solid #296a82;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+    z-index: 2000;
+
+    .managerSelectedButton_icon{
+        font-size: 1em;
+        color: #808080;
+        margin-right: 0.4em;
+        padding: 0 0 0.1em 0;
+    }
+    .managerSelectedButton_title{
+        font-size: 0.8em;
+        color: #3f6d92;
+    }
+
+    .managerSelectedButton_name{
+        font-size: 0.8em;
+        color: #444444;
+        font-weight: bold;
+        margin: 0 0.5em;
+        overflow: hidden;
+        max-width: 100%;
+        flex-grow: 1;
+    }
+
+    .managerSelectedButton_arrow{
+        font-size: 0.9em;
+        color: #8b8b8b;
+        font-weight: bold;
+       
+    }
+
+    .MSB_drop_down{
+        font-size: 1em;
+        width: calc( 100% - 2px );
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #ffffff;
+        border: 1px solid #d3d3d3;
+        border-radius: 0 0 0.1em 0.1em;
+
+        max-height: 10em;
+        overflow: hidden;
+
+        .MSB_drop_down_item{
+            font-size: 1em;
+            padding: 0.3em 0.3em 0.3em 0.8em;
+            cursor: pointer;
+            overflow: hidden;
+            
+            span{
+                font-size: 0.8em;
+                color: #343434;
+            }
+        }
+
+        .MSB_drop_down_item:hover{
+            background-color: #dbdbdb52;
+            span{
+                color: #0e0e0e;
+            }
+        }
+
+        .MSB_drop_down_item:active{
+            span{
+                color: #cf4848;
+            }
+        }
+
+    }
+
+
+
+    
+}
+
+.managerSelectedButton.isSelected{
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.managerSelectedButton.isSelected:hover{
+
+    .managerSelectedButton_arrow{
+        color: #000000;
+       
+    }
+
+}

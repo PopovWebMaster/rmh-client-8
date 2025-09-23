@@ -17,6 +17,8 @@ import { PageContainer } from './../../../../components/PageContainer/PageContai
 import { AirApplicationMenu } from './../AirApplicationMenu/AirApplicationMenu.js';
 import { AitApplicationMain } from './../AitApplicationMain/AitApplicationMain.js';
 import { AirApplicationEditor } from './../AirApplicationEditor/AirApplicationEditor.js';
+
+import { SetCurrentManager } from './../SetCurrentManager/SetCurrentManager.js';
  
 
 const AirApplicationAppComponent = ( props ) => {
@@ -41,15 +43,17 @@ const AirApplicationAppComponent = ( props ) => {
 
     return (
         <PageContainer className = 'airApplicationApp'>
+            <SetCurrentManager>
 
-            <AirApplicationMenu />
+                <AirApplicationMenu />
 
-            <Routes>
-                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/` }      element = { <AitApplicationMain /> } />
-                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/:id` }   element = { <AirApplicationEditor /> } />
+                <Routes>
+                    <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/` }      element = { <AitApplicationMain /> } />
+                    <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/:id` }   element = { <AirApplicationEditor /> } />
 
-            </Routes>
+                </Routes>
 
+            </SetCurrentManager>
         </PageContainer>
     )
 
