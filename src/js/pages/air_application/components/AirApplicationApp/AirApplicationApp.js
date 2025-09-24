@@ -19,6 +19,12 @@ import { AitApplicationMain } from './../AitApplicationMain/AitApplicationMain.j
 import { AirApplicationEditor } from './../AirApplicationEditor/AirApplicationEditor.js';
 
 import { SetCurrentManager } from './../SetCurrentManager/SetCurrentManager.js';
+// import { SetCurrentCategoryId } from './../SetCurrentCategoryId/SetCurrentCategoryId.js';
+import { SetCurrentCategoryData } from './../SetCurrentCategoryData/SetCurrentCategoryData.js';
+
+import { SetFilteredListByManager } from './../SetFilteredListByManager/SetFilteredListByManager.js';
+
+import { SetCurrentEventData } from './../SetCurrentEventData/SetCurrentEventData.js';
  
 
 const AirApplicationAppComponent = ( props ) => {
@@ -44,15 +50,22 @@ const AirApplicationAppComponent = ( props ) => {
     return (
         <PageContainer className = 'airApplicationApp'>
             <SetCurrentManager>
+                <SetFilteredListByManager>
+                    <SetCurrentCategoryData>
+                        <SetCurrentEventData>
+                            
+                            <AirApplicationMenu />
 
-                <AirApplicationMenu />
+                            <Routes>
+                                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/` }      element = { <AitApplicationMain /> } />
+                                <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/:id` }   element = { <AirApplicationEditor /> } />
 
-                <Routes>
-                    <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/` }      element = { <AitApplicationMain /> } />
-                    <Route path = { `${ROUTE.COMPANY}/${currentCompanyAlias}/${ROUTE.PAGE.AIR_APPLICATION}/:id` }   element = { <AirApplicationEditor /> } />
+                            </Routes>
 
-                </Routes>
+                        </SetCurrentEventData>
 
+                    </SetCurrentCategoryData>
+                </SetFilteredListByManager>
             </SetCurrentManager>
         </PageContainer>
     )

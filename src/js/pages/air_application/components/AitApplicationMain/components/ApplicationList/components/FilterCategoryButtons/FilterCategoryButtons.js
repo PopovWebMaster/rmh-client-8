@@ -18,43 +18,44 @@ const FilterCategoryButtonsComponent = ( props ) => {
         applicationList,
         categoryListById,
         currentCategoryIdOfListFilter,
+        filterCategoryList,
 
         setCurrentCategoryIdOfListFilter,
 
     } = props;
 
-    let [ list, setList ] = useState( [] );
+    // let [ list, setList ] = useState( [] );
 
     useEffect( () => {
-        let list = get_list_of_all_used_categories( applicationList, categoryListById );
+        // let list = get_list_of_all_used_categories( applicationList, categoryListById );
 
-        setList( list );
+        // setList( list );
 
-        let id = get_actual_category_id( list );
-        setCurrentCategoryIdOfListFilter( id );
+        // let id = get_actual_category_id( list );
+        // setCurrentCategoryIdOfListFilter( id );
 
     }, [ applicationList ] );
 
-    const get_actual_category_id = ( list ) => {
-        let result = null;
-        if( currentCategoryIdOfListFilter === null ){
-            if( list[ 0 ] ){
-                result = list[ 0 ].id;
-            };
-        }else{
-            for( let i = 0; i < list.length; i++ ){
-                if( list[ i ].id === currentCategoryIdOfListFilter ){
-                    result = currentCategoryIdOfListFilter;
-                    break;
-                };
-            };
-            if( list.length > 0 && result === null ){
-                result = list[ 0 ].id;
-            };
-        };
-        return result;
+    // const get_actual_category_id = ( list ) => {
+    //     let result = null;
+    //     if( currentCategoryIdOfListFilter === null ){
+    //         if( list[ 0 ] ){
+    //             result = list[ 0 ].id;
+    //         };
+    //     }else{
+    //         for( let i = 0; i < list.length; i++ ){
+    //             if( list[ i ].id === currentCategoryIdOfListFilter ){
+    //                 result = currentCategoryIdOfListFilter;
+    //                 break;
+    //             };
+    //         };
+    //         if( list.length > 0 && result === null ){
+    //             result = list[ 0 ].id;
+    //         };
+    //     };
+    //     return result;
 
-    };
+    // };
 
     const create = ( arr ) => {
 
@@ -93,7 +94,7 @@ const FilterCategoryButtonsComponent = ( props ) => {
     
     return (
         <div className = 'AL_FilterCategoryButtons'>
-            { create( list ) }
+            { create( filterCategoryList ) }
         </div>
     )
 
@@ -111,6 +112,8 @@ export function FilterCategoryButtons( props ){
             { ...props }
             applicationList = { application.applicationList }
             currentCategoryIdOfListFilter = { application.currentCategoryIdOfListFilter }
+            filterCategoryList = { application.filterCategoryList }
+
 
             categoryListById = { layout.categoryListById }
 

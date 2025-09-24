@@ -15,6 +15,9 @@ export const applicationSlice = createSlice({
         currentApplicationId: null,
 
         currentCategoryIdOfListFilter: null,
+        currentEventIdOfListFilter: null,
+
+
 
 
 
@@ -46,6 +49,11 @@ export const applicationSlice = createSlice({
         managersList: [],
         currentManagerId: null, // null означает все
 
+        filteredList: [],
+        filterCategoryList: [],
+        filterEventList: [],
+
+
 
     },
 
@@ -72,6 +80,10 @@ export const applicationSlice = createSlice({
 
         setCurrentCategoryIdOfListFilter: ( state, action ) => {
             state.currentCategoryIdOfListFilter =  action.payload;
+        },
+
+        setCurrentEventIdOfListFilter: ( state, action ) => {
+            state.currentEventIdOfListFilter =  action.payload;
         },
 
 
@@ -131,6 +143,19 @@ export const applicationSlice = createSlice({
         },
 
 
+        setFilteredList: ( state, action ) => {
+            state.filteredList =  action.payload;
+        },
+
+        setFilterCategoryList: ( state, action ) => {
+            state.filterCategoryList =  action.payload;
+        },
+
+        setFilterEventList: ( state, action ) => {
+            state.filterEventList =  action.payload;
+        },
+
+
 
 
 
@@ -146,6 +171,7 @@ export const {
     setApplicationList,
     setCurrentApplicationId,
     setCurrentCategoryIdOfListFilter,
+    setCurrentEventIdOfListFilter,
 
 
 
@@ -162,6 +188,12 @@ export const {
     setEnvIsOpen,
     setCurrentManagerId,
 
+    setFilterEventList,
+
+
+    setFilteredList,
+    setFilterCategoryList,
+
 
 
 } = applicationSlice.actions;
@@ -172,6 +204,8 @@ export const selectorData = ( state ) => {
         applicationById:                state.application.applicationById,
         currentApplicationId:           state.application.currentApplicationId,
         currentCategoryIdOfListFilter:  state.application.currentCategoryIdOfListFilter,
+        currentEventIdOfListFilter:  state.application.currentEventIdOfListFilter,
+
 
         currentAppName:         state.application.currentAppName,
         currentAppCategoryId:   state.application.currentAppCategoryId,
@@ -193,6 +227,19 @@ export const selectorData = ( state ) => {
         managersById:    state.application.managersById,
         managersList:    state.application.managersList,
         currentManagerId:    state.application.currentManagerId,
+
+        filteredList:    state.application.filteredList,
+        filterCategoryList:    state.application.filterCategoryList,
+        filterEventList:    state.application.filterEventList,
+
+
+
+        
+
+
+
+
+        
 
 
 

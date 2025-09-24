@@ -45,7 +45,7 @@ function exclude_outdated_releases( scheduleList, releasesById ){
 
             if( releasesById[ release_id ] ){
 
-                let relObj = { ...scheduleList[ i ].releases[ y ] };
+                let relObj = { ...scheduleList[ i ].releases[ y ], ...releasesById[ release_id ] };
                 if( relObj.air_notes === null ){
                     relObj.air_notes = '';
                 };
@@ -59,7 +59,7 @@ function exclude_outdated_releases( scheduleList, releasesById ){
         result.push( item );
     };
     if( isset_del_releases ){
-        let text = 'Внимание! В расписании есть удалённые заявки! Возможно, требуется корректировка времён выхода роликов';
+        let text = 'Внимание! В расписании есть изменённые заявки! Возможно, требуется корректировка времени выхода роликов';
         store.dispatch( setInfoMessageText( text ) );
     };
 
