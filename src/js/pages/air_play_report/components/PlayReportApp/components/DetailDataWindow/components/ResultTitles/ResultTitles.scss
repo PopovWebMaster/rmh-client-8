@@ -1,27 +1,169 @@
 .DDW_ResultTitles{
     font-size: 1em;
 
-    p{
+    // p{
+    //     font-size: 1em;
+    //     padding: .3em 1em;
+    //     background-color: #377873;
+    //     color: #ffffff;
+    //     margin: 0.5em;
+    //     span:first-child{
+    //         font-size: 0.7em;
+    //         margin-right: 0.5em;
+    //     }
+    //     span{
+    //         font-size: 0.8em;
+    //         font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    //     }
+    // }
+
+
+    .DDW_ResultTitles_view{
         font-size: 1em;
-        padding: .3em 1em;
-        background-color: #377873;
-        color: #ffffff;
-        margin: 0.5em;
-        span:first-child{
+        margin: 0.2em 0;
+        padding: 0.1em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .DDW_ResultTitles_view_title{
             font-size: 0.7em;
-            margin-right: 0.5em;
-        }
-        span{
-            font-size: 0.8em;
+            color: #969696;
+            margin-right: 0.4em;
             font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
         }
+
+        .DDW_ResultTitles_view_btn{
+            font-size: 0.6em;
+            color: #494747;
+            margin: 0.1em 0.3em;
+            padding: 0.2em 0.6em;
+            border: 1px solid #e3e3e3;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .DDW_ResultTitles_view_btn.isActive{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+        .DDW_ResultTitles_view_btn.isActive:hover{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+
+        .DDW_ResultTitles_btn:hover{
+            border: 1px solid #a0a0a0;
+            color: #333232;
+        }
+
     }
+
+    .DDW_points_separator{
+        font-size: 1em;
+        margin: 0.2em 0;
+        padding: 0.1em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .DDW_points_separator_title{
+            font-size: 0.7em;
+            color: #969696;
+            margin-right: 0.4em;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+            width: 7em;
+        }
+
+        .DDW_points_separator_btn{
+            font-size: 0.6em;
+            color: #1c1075;
+            padding: 0.3em 0.3em 0.1em 0.3em;
+            border-radius: 0.1em;
+            margin-right: 0.1em;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .DDW_points_separator_btn:hover{
+            background-color: #cfcfcf7a;
+        }
+        .DDW_points_separator_btn:active{
+            color: #301cc5;
+        }
+
+        input{
+            font-size: 0.7em;
+            line-height: 1.4em;
+            border: 1px solid #3434342e;
+            border-radius: 0.1em;
+            outline: none;
+            width: calc( 100% - 9em );
+            text-indent: 0.5em;
+        }
+    }
+
+    .DDW_points_file_name_add{
+        font-size: 1em;
+        margin: 0.2em 0;
+        padding: 0.1em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .DDW_points_file_name_add_title{
+            font-size: 0.7em;
+            color: #969696;
+            margin-right: 0.4em;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+            // width: 7em;
+        }
+
+
+        .DDW_points_file_name_add_btn{
+            font-size: 0.6em;
+            color: #494747;
+            margin: 0.1em 0.3em;
+            padding: 0.2em 0.6em;
+            border: 1px solid #e3e3e3;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .DDW_points_file_name_add_btn.isActive{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+        .DDW_points_file_name_add_btn.isActive:hover{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+
+        .DDW_points_file_name_add_btn:hover{
+            border: 1px solid #a0a0a0;
+            color: #333232;
+        }
+    }
+
 
     textarea{
         font-size: .9em;
         width: calc(100% - 2.1em);
 
-        min-height: 5em;
+        min-height: 6em;
 
         color: #000000;
         padding: 1em 1em;

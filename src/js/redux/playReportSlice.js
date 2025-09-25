@@ -36,8 +36,12 @@ export const playReportSlice = createSlice({
 
 
         detailDataWindow_isOpen: false,
+        detailDataIsActive: false,
 
         resultPointsSec: [],
+
+
+
 
 
 
@@ -137,6 +141,12 @@ export const playReportSlice = createSlice({
         },
 
 
+        setDetailDataIsActive: ( state, action ) => {
+            state.detailDataIsActive =  action.payload;
+        },
+
+
+
         
         
         
@@ -171,6 +181,8 @@ export const {
     setDetailDataWindowIsOpen,
     setResultPointsSec,
 
+    setDetailDataIsActive,
+
 } = playReportSlice.actions;
 
 export const selectorData = ( state ) => {
@@ -202,6 +214,10 @@ export const selectorData = ( state ) => {
 
         detailDataWindow_isOpen: state.playReport.detailDataWindow_isOpen,
         resultPointsSec: state.playReport.resultPointsSec,
+
+
+        detailDataIsActive: state.playReport.detailDataIsActive,
+
 
 
 

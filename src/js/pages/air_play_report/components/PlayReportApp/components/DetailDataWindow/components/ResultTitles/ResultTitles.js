@@ -15,11 +15,18 @@ const ResultTitlesComponent = ( props ) => {
     let {
         filteredList,
         resultPointsSec,
+        detailDataIsActive,
 
     } = props;
 
+    let [ view, setView ] = useState( 'yyyy-mm-dd' ); // 'yyyy-mm-dd' 'dd-mm-yyyy'
+    let [ separator, setSeparator ] = useState( `\t` );
+    let [ withFileName, setWithFileName ] = useState( false );
+
+
+
     let [ val, setVal ] = useState( '' );
-    let [ valRev, setValRev ] = useState( '' );
+    // let [ valRev, setValRev ] = useState( '' );
 
 
     const trim_sec_ms = ( str ) => {
@@ -27,6 +34,27 @@ const ResultTitlesComponent = ( props ) => {
         return `${arr[0]}`;
 
     }
+
+
+    //     const trim_sec_ms = ( str ) => {
+    //     let arr = str.split( '.' );
+    //     let arr_2 = arr[0].split( ':' );
+    //     return `${arr_2[0]}:${arr_2[1]}`;
+    // }
+
+    const get_data_format = ( date ) => {
+        let result = '';
+        let { YYYY_MM_DD } = date;
+        if( view === 'yyyy-mm-dd' ){
+            result = YYYY_MM_DD.replaceAll( '-', '.' );
+        }else if( view === 'dd-mm-yyyy' ){
+            let arr = YYYY_MM_DD.split( '-' );
+            result = `${arr[2]}.${arr[1]}.${arr[0]}`;
+        };
+        return result;
+    }
+
+
 
     const get_row = ( date, startTime ) => {
         let { YYYY_MM_DD } = date;
@@ -42,8 +70,7 @@ const ResultTitlesComponent = ( props ) => {
         return result;
     }
 
-    const get_row_rew = ( date, startTime ) => {
-        let { YYYY_MM_DD } = date;
+    const get_time_points = ( startTime ) => {
         let { ms } = startTime;
         let arr = [];
         for( let i = 0; i < resultPointsSec.length; i++ ){
@@ -51,16 +78,15 @@ const ResultTitlesComponent = ( props ) => {
             arr.push( trim_sec_ms( convert_ms_to_time( ms_point ) ) )
         };
         let points_str = arr.join( ', ' );
-        // let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
-        let arr_22 = YYYY_MM_DD.split('-');
-        let date_str =  `${arr_22[2]}.${arr_22[1]}.${arr_22[0]}`
+        // let arr_22 = YYYY_MM_DD.split('-');
+        // let date_str =  `${arr_22[2]}.${arr_22[1]}.${arr_22[0]}`
 
 
-        let result = date_str + '\t' + points_str + '\n';
-        return result;
+        // let result = date_str + '\t' + points_str + '\n';
+        return points_str;
     }
     
-
+/*
     useEffect( () => {
 
         let arr = [];
@@ -99,17 +125,109 @@ const ResultTitlesComponent = ( props ) => {
         setValRev( str_rev );
 
     }, [ filteredList, resultPointsSec ] );
+*/
+
+    useEffect( () => {
+
+        if( detailDataIsActive ){
+            let rows = '';
+
+            for( let i = 0; i < filteredList.length; i++ ){
+                let {
+                    startTime,
+                    type,
+                    file,
+                    date,
+                } = filteredList[ i ];
+
+                if( type === 'movie' ){
+                    // let { time } = startTime;
+                    let dateFormat = get_data_format( date );
+                    let fileName = '';
+                    let timeShort = get_time_points( startTime );
+                    if( withFileName ){
+                        fileName = `${separator}${file.name}`;
+                    };
+                    let row = `${dateFormat}${separator}${timeShort}${fileName}\n`;
+                    rows = rows + row;
+
+                };
+            };
+            setVal( rows );
+
+        }else{
+            setVal( '' );
+
+        };
+
+    }, [
+        filteredList,
+        detailDataIsActive,
+        view,
+        separator,
+        withFileName,
+        resultPointsSec,
+    ] );
 
 
 
 
 
+    const change_separator = ( e ) => {
+        let val = e.target.value;
+        setSeparator( val );
+    }
 
     return (
 
         <div className = 'DDW_ResultTitles'>
 
-            <p> <span>Найдено:</span> <span>{ filteredList.length }</span> </p>
+             <div className = 'DDW_ResultTitles_view'>
+
+                <span className = 'DDW_ResultTitles_view_title'>Формат даты:</span>
+
+                <span 
+                    className = { `DDW_ResultTitles_view_btn ${view === 'yyyy-mm-dd'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'yyyy-mm-dd' ) } }
+                >yyyy.mm.dd</span>
+                <span 
+                    className = { `DDW_ResultTitles_view_btn ${view === 'dd-mm-yyyy'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'dd-mm-yyyy' ) } }
+                >dd.mm.yyyy</span>
+
+            </div>
+
+            <div className = 'DDW_points_separator'>
+                <span className = 'DDW_points_separator_title'>Разделитель:</span>
+
+                <span
+                    className = 'DDW_points_separator_btn'
+                    onClick = { () => { setSeparator( `\t` ); } }
+                >tab</span>
+
+                <span
+                    className = 'DDW_points_separator_btn'
+                    onClick = { () => { setSeparator( ' - ' ); } }
+                > - </span>
+
+                <input
+                    type = 'text'
+                    value = { separator }
+                    onChange = { change_separator }
+                />
+            </div>
+
+            <div className = 'DDW_points_file_name_add'>
+                <span className = 'DDW_points_file_name_add_title'>Включить имя файла</span>
+                <span 
+                    className = { `DDW_points_file_name_add_btn ${withFileName === true? 'isActive': '' }` }
+                    onClick = { () => { setWithFileName( true ) } }
+                >Да</span>
+                <span
+                    className = { `DDW_points_file_name_add_btn ${withFileName === false? 'isActive': '' }` }
+                    onClick = { () => { setWithFileName( false ) } }
+                >Нет</span>
+            </div>
 
             <Points />
 
@@ -120,12 +238,12 @@ const ResultTitlesComponent = ( props ) => {
                 onChange = { () => {} }
             />
 
-            <textarea   
+            {/* <textarea   
                 className = ''
                 value = { valRev }
                 rows = { 2 }
                 onChange = { () => {} }
-            />
+            /> */}
 
         </div>
         
@@ -146,6 +264,7 @@ export function ResultTitles( props ){
 
             filteredList = { playReport.filteredList }
             resultPointsSec = { playReport.resultPointsSec }
+            detailDataIsActive = { playReport.detailDataIsActive }
 
 
             // setAditionalSpecialWindowIsOpen = { ( val ) => { dispatch( setAditionalSpecialWindowIsOpen( val ) ) } }

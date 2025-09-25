@@ -1,24 +1,50 @@
 .DDW_ResultOnlyTimes{
     font-size: 1em;
 
-    p{
+    .DDW_ResultOnlyTimes_view{
         font-size: 1em;
-        padding: .3em 1em;
-        background-color: #377873;
-        color: #ffffff;
-        margin: 0.5em;
+        margin: 0.2em 0;
+        padding: 0.1em 0.4em;
+
         display: flex;
         justify-content: flex-start;
         align-items: center;
         align-content: center;
-        span:first-child{
+
+        .DDW_ResultOnlyTimes_view_title{
             font-size: 0.7em;
-            margin-right: 0.5em;
-        }
-        span{
-            font-size: 0.8em;
+            color: #969696;
+            margin-right: 1em;
             font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
         }
+
+        .DDW_ResultOnlyTimes_view_btn{
+            font-size: 0.7em;
+            color: #494747;
+            margin: 0.1em 0.3em;
+            padding: 0.2em 0.8em;
+            border: 1px solid #e3e3e3;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .DDW_ResultOnlyTimes_view_btn.isActive{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+        .DDW_ResultOnlyTimes_view_btn.isActive:hover{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+
+        .DDW_ResultOnlyTimes_view_btn:hover{
+            border: 1px solid #a0a0a0;
+            color: #333232;
+        }
+
     }
 
     textarea{
@@ -26,23 +52,12 @@
         width: calc(100% - 2.1em);
 
         min-height: 5em;
+        outline: none;
 
         color: #000000;
         padding: 1em 1em;
         resize: vertical;
         white-space: pre-wrap;
-    }
-
-    .countSec{
-        font-size: .8em;
-        padding: 0 0.5em;
-        font-weight: bold;
-    }
-
-    >input{
-        line-height: 1.4em;
-        text-align: center;
-        margin: 0.5em 0;
     }
 
 

@@ -12,8 +12,25 @@ const CurrentDatePointsFormatComponent = ( props ) => {
 
     let {
         dateListSelected,
+        detailDataIsActive,
 
     } = props;
+    let [ data_YYYY_MM_DD, setData_YYYY_MM_DD ] = useState('');
+    let [ data_DD_MM_YYYY, setData_DD_MM_YYYY ] = useState('');
+
+    useEffect( () => {
+        if( detailDataIsActive ){
+
+            setData_YYYY_MM_DD( get_str( dateListSelected ) );
+            setData_DD_MM_YYYY( get_str_revers( dateListSelected ) );
+
+        }else{
+            setData_YYYY_MM_DD( '' );
+            setData_DD_MM_YYYY( '' );
+        };
+
+    }, [ detailDataIsActive, dateListSelected ] );
+
 
 
     const get_str = ( str ) => {
@@ -31,29 +48,21 @@ const CurrentDatePointsFormatComponent = ( props ) => {
         }else{
             return '';
         };
-        
-        // if( str !== null ){
-        //     return str.replaceAll( '-', '.' );
-        // }else{
-        //     return '';
-        // };
     }
 
     return (
 
         <div className = 'DDW_CurrentDatePointsFormat'>
 
-            
-
             <input 
                 type = 'text'
-                value = { get_str( dateListSelected ) }
+                value = { data_YYYY_MM_DD }
                 onChange = { () => {} }
             />
 
             <input 
                 type = 'text'
-                value = { get_str_revers( dateListSelected ) }
+                value = { data_DD_MM_YYYY }
                 onChange = { () => {} }
             />
 
@@ -75,6 +84,8 @@ export function CurrentDatePointsFormat( props ){
    
 
             dateListSelected = { playReport.dateListSelected }
+            detailDataIsActive = { playReport.detailDataIsActive }
+
 
             // setAditionalSpecialWindowIsOpen = { ( val ) => { dispatch( setAditionalSpecialWindowIsOpen( val ) ) } }
             // setDetailDataWindowIsOpen = { ( val ) => { dispatch( setDetailDataWindowIsOpen( val ) ) } }

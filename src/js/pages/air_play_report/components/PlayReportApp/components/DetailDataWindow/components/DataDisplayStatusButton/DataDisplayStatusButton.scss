@@ -1,0 +1,68 @@
+.PR_onOffBtn{
+    font-size: 1em;
+    margin: 0.1em 0.5em;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .PR_onOffBtn_wrap{
+        font-size: 1em;
+        padding: 0.2em 0.5em;
+        // background-color: #f1f1f1;
+        border: 1px solid #c5c5c573;
+        border-radius: 0.1em;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        cursor: pointer;
+        user-select: none;
+
+        .PR_onOffBtn_title{
+            font-size: 0.6em;
+            margin-right: 1em;
+            color: #6f6f6f;
+        }
+
+        .PR_onOffBtn_status{
+            font-size: 0.8em;
+            color: #f0f0f0;
+            padding: 0.1em 0.2em;
+            background-color: #f77676;
+            border-radius: 0.1em;
+            // border: 1px solid #f77676;
+            text-align: center;
+
+            width: 3em;
+
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+        }
+
+    }
+
+    .PR_onOffBtn_wrap:hover{
+        border: 1px solid #b4b4b4;
+        .PR_onOffBtn_title{
+            color: #5a5a5a;
+        }
+    }
+    
+
+}
+
+.PR_onOffBtn.isActive{
+    .PR_onOffBtn_wrap{
+         .PR_onOffBtn_status{
+            color: #f0f0f0;
+            background-color: #19ac0b;
+        }
+        
+    }
+}

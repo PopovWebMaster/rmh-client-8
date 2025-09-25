@@ -11,12 +11,60 @@ const ResultColsDateAndTimeComponent = ( props ) => {
 
     let {
         filteredList,
+        detailDataIsActive,
 
     } = props;
 
+
+    let [ view, setView ] = useState( 'yyyy-mm-dd' ); // 'yyyy-mm-dd' 'dd-mm-yyyy'
+    let [ separator, setSeparator ] = useState( `\t` );
+    let [ withFileName, setWithFileName ] = useState( false );
     let [ val, setVal ] = useState( '' );
+
+
     let [ val_2, setVal_2 ] = useState( '' );
     let [ val_2_revers, setVal_2_revers ] = useState( '' );
+
+    useEffect( () => {
+
+        if( detailDataIsActive ){
+            let rows = '';
+
+            for( let i = 0; i < filteredList.length; i++ ){
+                let {
+                    startTime,
+                    type,
+                    file,
+                    date,
+                } = filteredList[ i ];
+
+                if( type === 'movie' ){
+                    let { time } = startTime;
+                    let dateFormat = get_data_format( date );
+                    let fileName = '';
+                    let timeShort = trim_sec_ms( time );
+                    if( withFileName ){
+                        fileName = `${separator}${file.name}`;
+                    };
+                    let row = `${dateFormat}${separator}${timeShort}${fileName}\n`;
+                    rows = rows + row;
+
+                };
+            };
+            setVal( rows );
+
+        }else{
+            setView( '' );
+
+        };
+
+    }, [
+        filteredList,
+        detailDataIsActive,
+        view,
+        separator,
+        withFileName,
+    ] );
 
 
 
@@ -24,112 +72,82 @@ const ResultColsDateAndTimeComponent = ( props ) => {
         let arr = str.split( '.' );
         let arr_2 = arr[0].split( ':' );
         return `${arr_2[0]}:${arr_2[1]}`;
-
     }
 
-    const get_row = ( date, startTime ) => {
+    const get_data_format = ( date ) => {
+        let result = '';
         let { YYYY_MM_DD } = date;
-        let { time } = startTime;
-
-        let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
-        let time_trim = trim_sec_ms( time );
-        let result = date_str + ' - ' + time_trim + '\n';
-
+        if( view === 'yyyy-mm-dd' ){
+            result = YYYY_MM_DD.replaceAll( '-', '.' );
+        }else if( view === 'dd-mm-yyyy' ){
+            let arr = YYYY_MM_DD.split( '-' );
+            result = `${arr[2]}.${arr[1]}.${arr[0]}`;
+        };
         return result;
-
-    }
-    const get_row_2 = ( date, startTime ) => {
-        let { YYYY_MM_DD } = date;
-        let { time } = startTime;
-
-        let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
-        let time_trim = trim_sec_ms( time );
-        let result = date_str + '\t' + time_trim + '\n';
-        return result;
-
     }
 
-    const get_row_2reverse = ( date, startTime ) => {
-        let { YYYY_MM_DD } = date;
-        let { time } = startTime;
-        // let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
-        let arr = YYYY_MM_DD.split('-');
-        let date_str =  `${arr[2]}.${arr[1]}.${arr[0]}`
-        let time_trim = trim_sec_ms( time );
-        let result = date_str + '\t' + time_trim + '\n';
-        return result;
 
+    const change_separator = ( e ) => {
+        let val = e.target.value;
+        setSeparator( val );
     }
-    
-
-    useEffect( () => {
-
-        let arr = [];
-        let arr_2 = [];
-        let arr_2_rev = [];
-
-
-
-        let lastName = false;
-
-        for( let i = 0; i < filteredList.length; i++ ){
-            let {
-                startTime,
-                type,
-                file,
-                date,
-            } = filteredList[ i ];
-
-            if( type === 'movie' ){
-                
-                if( lastName === false ){
-                    lastName = file.name;
-                    arr.push( get_row( date, startTime ) );
-                    arr_2.push( get_row_2( date, startTime ) );
-                    arr_2_rev.push( get_row_2reverse( date, startTime ) );
-
-
-                }else{
-                    if( lastName === file.name ){
-                        arr.push( get_row( date, startTime ) );
-                        arr_2.push( get_row_2( date, startTime ) );
-                        arr_2_rev.push( get_row_2reverse( date, startTime ) );
-                        lastName = file.name;
-                    }else{
-                        arr = [];
-                        break;
-                    };
-                }
-            };
-        };
-
-        let str = '';
-        for( let i = 0; i < arr.length; i++ ){
-            str = `${ str } ${arr[ i ]}`;
-        };
-
-        let str_2 = '';
-        for( let i = 0; i < arr_2.length; i++ ){
-            str_2 = `${ str_2 } ${arr_2[ i ]}`;
-        };
-
-        let str_2_rev = '';
-        for( let i = 0; i < arr_2_rev.length; i++ ){
-            str_2_rev = `${ str_2_rev } ${arr_2_rev[ i ]}`;
-        }
-
-        setVal( str );
-        setVal_2( str_2 );
-        setVal_2_revers( str_2_rev );
-
-    }, [ filteredList ] );
-
-
 
     return (
 
         <div className = 'DDW_ResultColsDateAndTime'>
-            <p> <span>Найдено:</span> <span>{ filteredList.length }</span> </p>
+
+            <div className = 'DDW_ResultColsDateAndTime_view'>
+
+                <span className = 'DDW_ResultColsDateAndTime_view_title'>Формат даты:</span>
+
+                <span 
+                    className = { `DDW_ResultColsDateAndTime_view_btn ${view === 'yyyy-mm-dd'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'yyyy-mm-dd' ) } }
+                >yyyy.mm.dd</span>
+                <span 
+                    className = { `DDW_ResultColsDateAndTime_view_btn ${view === 'dd-mm-yyyy'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'dd-mm-yyyy' ) } }
+                >dd.mm.yyyy</span>
+
+            </div>
+
+            <div className = 'DDW_separator'>
+                <span className = 'DDW_separator_title'>Разделитель:</span>
+
+                <span
+                    className = 'DDW_separator_btn'
+                    onClick = { () => { setSeparator( `\t` ); } }
+                >tab</span>
+
+                <span
+                    className = 'DDW_separator_btn'
+                    onClick = { () => { setSeparator( ' - ' ); } }
+                > - </span>
+
+                <input
+                    type = 'text'
+                    value = { separator }
+                    onChange = { change_separator }
+                />
+            </div>
+
+            <div className = 'DDW_file_name_add'>
+                <span className = 'DDW_file_name_add_title'>Включить имя файла</span>
+                <span 
+                    className = { `DDW_file_name_add_btn ${withFileName === true? 'isActive': '' }` }
+                    onClick = { () => { setWithFileName( true ) } }
+                >Да</span>
+                <span
+                    className = { `DDW_file_name_add_btn ${withFileName === false? 'isActive': '' }` }
+                    onClick = { () => { setWithFileName( false ) } }
+                >Нет</span>
+            </div>
+
+{/* Pogoda_Донецк_ */}
+
+
+
+
             <textarea   
                 className = ''
                 value = { val }
@@ -137,19 +155,6 @@ const ResultColsDateAndTimeComponent = ( props ) => {
                 onChange = { () => {} }
             />
 
-            <textarea   
-                className = ''
-                value = { val_2 }
-                rows = { 2 }
-                onChange = { () => {} }
-            />
-
-            <textarea   
-                className = ''
-                value = { val_2_revers }
-                rows = { 2 }
-                onChange = { () => {} }
-            />
         </div>
         
     )
@@ -168,6 +173,8 @@ export function ResultColsDateAndTime( props ){
    
 
             filteredList = { playReport.filteredList }
+            detailDataIsActive = { playReport.detailDataIsActive }
+
 
             // setAditionalSpecialWindowIsOpen = { ( val ) => { dispatch( setAditionalSpecialWindowIsOpen( val ) ) } }
             // setDetailDataWindowIsOpen = { ( val ) => { dispatch( setDetailDataWindowIsOpen( val ) ) } }

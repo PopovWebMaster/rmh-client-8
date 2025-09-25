@@ -1,0 +1,30 @@
+.DDW_FoundFiles{
+    font-size: 1em;
+
+    p{
+        font-size: 0.7em;
+        padding: .3em 1em;
+        color: #969696;
+        margin: 0.1em 0.5em;
+
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+    }
+
+    textarea{
+        font-size: .75em;
+        width: calc(100% - 2.1em);
+
+        min-height: 2.5em;
+
+        color: #000000;
+        padding: 0.3em 0.5em;
+        resize: vertical;
+        white-space: pre-wrap;
+    }
+
+    
+
+
+}
+

@@ -12,10 +12,17 @@ import { ResultOnlyTimes } from './components/ResultOnlyTimes/ResultOnlyTimes.js
 import { ResultColsDateAndTime } from './components/ResultColsDateAndTime/ResultColsDateAndTime.js';
 import { ResultTitles } from './components/ResultTitles/ResultTitles.js';
 
+import { DataDisplayStatusButton } from './components/DataDisplayStatusButton/DataDisplayStatusButton.js';
+
+import { FoundFiles } from './components/FoundFiles/FoundFiles.js';
+import { CountOfFiles } from './components/CountOfFiles/CountOfFiles.js';
+import { CurrentDatePointsFormat } from './components/CurrentDatePointsFormat/CurrentDatePointsFormat.js';
+
+import { CountOfAllDuration } from './components/CountOfAllDuration/CountOfAllDuration.js';
+
 const DetailDataWindowComponent = ( props ) => {
 
     let {
-        detailDataWindow_isOpen,
 
     } = props;
 
@@ -37,12 +44,17 @@ const DetailDataWindowComponent = ( props ) => {
         }
 
     }
-
+{/* Pogoda_Донецк_ */}
 
     
     return (
         <div className = 'PR_DetailDataWindow'>
             <WindowControl>
+
+                <DataDisplayStatusButton />
+                <CurrentDatePointsFormat />
+                <CountOfFiles />
+                <FoundFiles />
 
                 <div className = 'DDW_menu'>
                     <span
@@ -63,14 +75,10 @@ const DetailDataWindowComponent = ( props ) => {
                 </div>
 
 
-
-
                 { selectVariant( variant ) }
-                
 
-
-
-
+                <CountOfAllDuration />
+  
             </WindowControl>
         </div>  
 
@@ -86,9 +94,8 @@ export function DetailDataWindow( props ){
     return (
         <DetailDataWindowComponent
             { ...props }
-            detailDataWindow_isOpen = { playReport.detailDataWindow_isOpen }
-            // searchDate = { playReport.searchDate }
-            // setSearchValue = { ( callback ) => { dispatch( setSearchValue( callback ) ) } }
+            // detailDataWindow_isOpen = { playReport.detailDataWindow_isOpen }
+
             // setSearchFocus = { ( callback ) => { dispatch( setSearchFocus( callback ) ) } }
 
 

@@ -6,21 +6,37 @@ import { selectorData as playReportSlice } from './../../../../../../../../redux
 
 import './ResultOnlyTimes.scss';
 
-import { CurrentDatePointsFormat } from './../CurrentDatePointsFormat/CurrentDatePointsFormat.js';
-
-
 const ResultOnlyTimesComponent = ( props ) => {
 
     let {
         filteredList,
+        detailDataIsActive,
 
     } = props;
 
     let [ val, setVal ] = useState( '' );
-    let [ valCol, setValCol ] = useState( '' );
+    let [ view, setView ] = useState( 'string' ); // 'string' 'column'
 
+    useEffect( () => {
+        let str = '';
+        if( detailDataIsActive ){
+            let list = get_time_list( filteredList );
+            if( list.length > 0 ){
+                if( view === 'string' ){
+                    str = list.join(', ');
+                }else if( view === 'column' ){
+                    str = list.join('\n')
+                };
+            };
+        };
 
-    let [ valSec, setValSec ] = useState( 0 );
+        setVal( str );
+
+    }, [
+        detailDataIsActive,
+        filteredList,
+        view,
+    ] );
 
     const trim_sec_ms = ( str ) => {
         let arr = str.split( '.' );
@@ -29,73 +45,45 @@ const ResultOnlyTimesComponent = ( props ) => {
 
     }
 
-    useEffect( () => {
 
-        let arr = [];
-        let arr_ms = [];
-        let lastName = false;
+    const get_time_list = ( arr ) => {
+        let result = [];
 
-        for( let i = 0; i < filteredList.length; i++ ){
+        for( let i = 0; i < arr.length; i++ ){
             let {
                 startTime,
                 type,
-                file,
-                segmentRealDuration,
-
-            } = filteredList[ i ];
+            } = arr[ i ];
 
             if( type === 'movie' ){
-                
-                if( lastName === false ){
-                    lastName = file.name;
-                    arr.push( trim_sec_ms( startTime.time ) );
-                    arr_ms.push( segmentRealDuration.ms );
-
-                }else{
-                    if( lastName === file.name ){
-                        arr.push( trim_sec_ms( startTime.time ) );
-                        arr_ms.push( segmentRealDuration.ms );
-                        lastName = file.name;
-                    }else{
-                        arr = [];
-                        break;
-                    };
-                }
+                result.push( trim_sec_ms( startTime.time ) );
             };
         };
 
-        let str = '';
-        // let strCol = '';
-        for( let i = 0; i < arr.length; i++ ){
-            if( i === 0 ){
-                str = arr[ i ];
-            }else{
-                str = `${ str }, ${arr[ i ]}`;
-            }; 
-        };
 
-        let strCol = arr.join('\n');
+        return result;
 
-        setVal( str );
-        setValCol( strCol );
-
-        let count_ms = 0;
-        for( let i = 0; i < arr_ms.length; i++ ){
-            count_ms = count_ms + arr_ms[ i ];
-        };
-
-        setValSec( Math.round( count_ms/1000 ) );
-
-    }, [ filteredList ] );
+    };
 
 
     return (
 
         <div className = 'DDW_ResultOnlyTimes'>
 
-            <CurrentDatePointsFormat />
+            <div className = 'DDW_ResultOnlyTimes_view'>
 
-            <p> <span>Найдено:</span> <span>{ filteredList.length }</span> </p>
+                <span className = 'DDW_ResultOnlyTimes_view_title'>Вид:</span>
+
+                <span 
+                    className = { `DDW_ResultOnlyTimes_view_btn ${view === 'string'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'string' ) } }
+                >Строка</span>
+                <span 
+                    className = { `DDW_ResultOnlyTimes_view_btn ${view === 'column'? 'isActive': ''}`}
+                    onClick = { () => { setView( 'column' ) } }
+                >Колонка</span>
+
+            </div>
 
             <textarea   
                 className = ''
@@ -103,21 +91,6 @@ const ResultOnlyTimesComponent = ( props ) => {
                 rows = { 2 }
                 onChange = { () => {} }
             />
-
-            <textarea   
-                className = ''
-                value = { valCol }
-                rows = { 2 }
-                onChange = { () => {} }
-            />
-            <span className = 'countSec'>Всего секунд:</span>
-            <input 
-                type = 'text'
-                value = { valSec }
-                onChange = { () => {} }
-            />
-
-
 
         </div>
         
@@ -137,6 +110,8 @@ export function ResultOnlyTimes( props ){
    
 
             filteredList = { playReport.filteredList }
+            detailDataIsActive = { playReport.detailDataIsActive }
+
 
             // setAditionalSpecialWindowIsOpen = { ( val ) => { dispatch( setAditionalSpecialWindowIsOpen( val ) ) } }
             // setDetailDataWindowIsOpen = { ( val ) => { dispatch( setDetailDataWindowIsOpen( val ) ) } }
