@@ -1,0 +1,49 @@
+.PR_ASC_list{
+    font-size: 1em;
+    max-height:9em;
+
+    // overflow: hidden;
+
+    .PR_ASC_list_item{
+        font-size: 0.9em;
+        // margin: 0.1em 0;
+        padding: 0.2em 0.8em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        border-radius: 0.1em;
+
+        .PR_ASC_list_text{
+            font-size: 0.7em;
+            color: #5454cb;
+            flex-grow: 1;
+            max-width: 100%;
+
+        }
+
+        .PR_ASC_list_remove{
+            font-size: 0.7em;
+            width: 1em;
+            height: 1em;
+            border-radius: 0.1em;
+            padding: 0.1em 0.2em;
+            color: rgb(253, 133, 133);
+            flex-grow: 0;
+
+            cursor: pointer;
+            user-select: none;
+
+
+        }
+        .PR_ASC_list_remove:hover{
+            color: red;
+        }
+    }
+
+    .PR_ASC_list_item:hover{
+        background-color: #e3e3e338;
+    }
+}

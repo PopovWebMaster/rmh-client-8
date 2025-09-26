@@ -146,8 +146,6 @@ const ItemSubPeriodComponent = ( props ) => {
                         onChange =  { change_date_to }
                     />
 
-                    
-
                 </div>
 
                 <AlertWindowContainerSaveAdd 

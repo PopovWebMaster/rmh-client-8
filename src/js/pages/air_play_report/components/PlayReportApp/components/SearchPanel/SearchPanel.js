@@ -15,6 +15,7 @@ import { SearchPeriod } from './../SearchPeriod/SearchPeriod.js';
 import { SearchResultCount } from './../SearchResultCount/SearchResultCount.js';
  
 import { get_entier_list_for_search_value } from './../../vendors/get_entier_list_for_search_value.js';
+import { AdvancedSearch } from './../AdvancedSearch/AdvancedSearch.js';
 
 
 
@@ -42,8 +43,11 @@ const SearchPanelComponent = ( props ) => {
                 <SearchPeriod />
                 <SearchResultCount />
 
-
+                <AdvancedSearch />
+                
             </div>
+
+
         </div>
 
     )
