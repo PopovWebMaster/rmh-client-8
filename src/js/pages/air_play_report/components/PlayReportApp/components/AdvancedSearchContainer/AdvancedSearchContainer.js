@@ -14,6 +14,7 @@ import { RequestListEdit } from './components/RequestListEdit/RequestListEdit.js
 import { get_date_now_YYYY_MM_DD } from './../../../../../../helpers/get_date_now_YYYY_MM_DD.js';
 
 import { SearchButton } from './components/SearchButton/SearchButton.js';
+import { DownloadFromFile } from './components/DownloadFromFile/DownloadFromFile.js';
 
 
 const AdvancedSearchContainerComponent = ( props ) => {
@@ -57,7 +58,7 @@ const AdvancedSearchContainerComponent = ( props ) => {
     const callback = ( response ) => {
         console.dir( 'response' );
         console.dir( response );
-        // setIsOpen( false );
+        setIsOpen( false );
     };
  
 
@@ -74,6 +75,13 @@ const AdvancedSearchContainerComponent = ( props ) => {
             <OnlyPremiersEdit
                 isOnlyPremiers =    { isOnlyPremiers }
                 setIsOnlyPremiers = { setIsOnlyPremiers }
+            />
+
+            <br />
+
+            <DownloadFromFile
+                requestList =       { requestList }
+                setRequestList =    { setRequestList }
             />
 
             <AWInputText

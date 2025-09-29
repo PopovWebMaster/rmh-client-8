@@ -12,51 +12,29 @@ export const get_entier_list_for_search_value = ( callback ) => {
         searchPeriod,
         searchValue
     } = playReport;
+
+    if( searchValue.trim() !== '' ){
+        store.dispatch( setSpinnerIsActive( true ) );
+        store.dispatch( setEntireList([]) );
+
+        send_request_to_server({
+            route: 'get-entier-list-for-search-value',
+            data: {
+                searchPeriod,
+                searchValue,
+            },
+            successCallback: ( resp ) => {
+                console.dir( 'resp' );
+                console.dir( resp );
+
+                if( resp.ok ){
+                    store.dispatch( setEntireList( resp.list ) );
+                };
+
+                store.dispatch( setSpinnerIsActive( false ) );
+            },
+        });
+    };
     
-    store.dispatch( setSpinnerIsActive( true ) );
-    store.dispatch( setEntireList([]) );
-
-    send_request_to_server({
-        route: 'get-entier-list-for-search-value',
-        data: {
-            searchPeriod,
-            searchValue,
-        },
-        successCallback: ( resp ) => {
-            console.dir( 'resp' );
-            console.dir( resp );
-
-            if( resp.ok ){
-                store.dispatch( setEntireList( resp.list ) );
-            };
-
-            store.dispatch( setSpinnerIsActive( false ) );
-        },
-    });
-
-
-    // send_request_to_server({
-    //     route: `${ ROUTE.PAGE.PLAY_REPORT }/get-entier-list-for-search-value`,
-    //     data: {
-    //         searchPeriod,
-    //         searchValue,
-    //     },
-    //     callback: ( resp ) => {
-    //         console.dir( 'resp' );
-    //         console.dir( resp );
-
-    //         if( resp.ok ){
-
-    //             store.dispatch( setEntireList( resp.list ) );
-
-                
-
-    //         };
-
-    //         store.dispatch( setSpinnerIsActive( false ) );
-
-
-    //     },
-    // });
 
 };

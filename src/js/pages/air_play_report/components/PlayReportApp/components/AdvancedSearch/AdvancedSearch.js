@@ -18,10 +18,6 @@ const AdvancedSearchComponent = ( props ) => {
 
     let [ isOpen, setIsOpen ] = useState( false );
 
-
-    
-
-
     
     return (
         <>{ searchValue === ''? (

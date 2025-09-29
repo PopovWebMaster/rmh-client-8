@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { selectorData as playReportSlice } from './../../../../../../../../redux/playReportSlice.js';
+import { selectorData as playReportSlice, setEntireList } from './../../../../../../../../redux/playReportSlice.js';
 import { setSpinnerIsActive } from './../../../../../../../../redux/spinnerSlice.js';
 
 
@@ -20,6 +20,7 @@ const SearchButtonComponent = ( props ) => {
         callback,
 
         setSpinnerIsActive,
+        setEntireList,
 
     } = props;
 
@@ -36,15 +37,7 @@ const SearchButtonComponent = ( props ) => {
     }, [ requestList ] );
     
 
-
     const click = () => {
-
-        console.dir({
-            requestList,
-            isOnlyPremiers,
-            dataFrom,
-            dataTo,
-        });
 
         setSpinnerIsActive( true );
 
@@ -59,10 +52,13 @@ const SearchButtonComponent = ( props ) => {
             successCallback: ( response ) => {
                 // console.dir( 'response' );
                 // console.dir( response );
+                if( response.ok ){
+                    setSpinnerIsActive( false );
+                    setEntireList( response.list );
 
-                setSpinnerIsActive( false );
+                    callback( response );
+                };
 
-                callback( response );
 
             },
         });
@@ -105,6 +101,10 @@ export function SearchButton( props ){
             // calendarIsOpen = { playReport.calendarIsOpen }
 
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setEntireList = { ( val ) => { dispatch( setEntireList( val ) ) } }
+
+
+            
 
         />
     );
