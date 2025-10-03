@@ -18,6 +18,7 @@ const SelectedEventWindowComponent = ( props ) => {
     let {
         selectedEventWindow_isOpen,
         setSelectedEventWindow_isOpen,
+        alwaysOpen = false,
 
         selectedEventId,
         setSelectedEventId,
@@ -42,6 +43,7 @@ const SelectedEventWindowComponent = ( props ) => {
                 eventId =       { selectedEventId }
                 setEventId =    { setSelectedEventId }
                 durationLimit = { durationLimit }
+                alwaysOpen =    { alwaysOpen }
             />
 
 

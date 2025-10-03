@@ -11,6 +11,8 @@ import { convert_sec_to_time } from './../../../../../../../../helpers/convert_s
 
 import { StartTimeEditButton } from './../../../StartTimeEditButton/StartTimeEditButton.js';
 
+import { TimePushButtons } from './../TimePushButtons/TimePushButtons.js';
+
 const CompletedTimeSectorComponent = ( props ) => {
 
     let {
@@ -23,12 +25,16 @@ const CompletedTimeSectorComponent = ( props ) => {
 
     return (
         <div className = 'schEventItemTime'>
+
+            <TimePushButtons gridEventId = { gridEventId } />
             
             <StartTimeEditButton
                 startTime =     { startTime }
                 isKeyPoint =    { isKeyPoint }
                 gridEventId =   { gridEventId }
             />
+
+            
 
             <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span>
 

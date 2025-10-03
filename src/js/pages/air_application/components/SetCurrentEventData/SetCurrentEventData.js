@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import './SetCurrentEventData.scss';
 
 import { selectorData as userInfoSlice } from './../../../../redux/userInfoSlice.js';
-import { selectorData as applicationSlice, setFilterCategoryList, setCurrentCategoryIdOfListFilter, setFilterEventList } from './../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice, setFilterEventList, setCurrentEventIdOfListFilter } from './../../../../redux/applicationSlice.js';
 
 
 // import { get_list_of_all_used_categories } from './../../vendors/get_list_of_all_used_categories.js';
@@ -19,51 +19,60 @@ import { get_list_of_all_used_events } from './../../vendors/get_list_of_all_use
 const SetCurrentEventDataComponent = ( props ) => {
 
     let {
-        setFilterCategoryList,
-        setCurrentCategoryIdOfListFilter,
 
+        currentManagerId,
         currentCategoryIdOfListFilter,
         currentEventIdOfListFilter,
         filteredList,
 
         setFilterEventList,
+        setCurrentEventIdOfListFilter,
 
-        children
+        children,
+
     } = props;
 
 
     useEffect( () => {
 
-        // let list = get_list_of_all_used_events( filteredList );
-        // let id = get_actual_category_id( list );
+        let list = get_list_of_all_used_events( filteredList, currentCategoryIdOfListFilter );
+        let id = get_actual_event_id( list );
 
-        // setFilterCategoryList( list );
-        // setCurrentCategoryIdOfListFilter( id );
+        setFilterEventList( list );
+        setCurrentEventIdOfListFilter( id );
+
+    }, [ 
+        filteredList, 
+        currentCategoryIdOfListFilter, 
+        currentManagerId,
+    ] );
+
+    const get_actual_event_id = ( list ) => {
+
+        let result = null;
+        let isset = false;
+
+        for( let i = 0; i < list.length; i++ ){
+            if( list[ i ].id === currentEventIdOfListFilter ){
+                result = currentEventIdOfListFilter;
+                isset = true;
+                break;
+            };
+        };
+
+        if( isset ){
+
+        }else{
+            if( list.length > 0 ){
+                result = list[ 0 ].id;
+            };
+        };
+
+        return result;
+
+    };
 
 
-
-    }, [ filteredList ] );
-
-    // const get_actual_category_id = ( list ) => {
-    //     let result = null;
-    //     if( currentCategoryIdOfListFilter === null ){
-    //         if( list[ 0 ] ){
-    //             result = list[ 0 ].id;
-    //         };
-    //     }else{
-    //         for( let i = 0; i < list.length; i++ ){
-    //             if( list[ i ].id === currentCategoryIdOfListFilter ){
-    //                 result = currentCategoryIdOfListFilter;
-    //                 break;
-    //             };
-    //         };
-    //         if( list.length > 0 && result === null ){
-    //             result = list[ 0 ].id;
-    //         };
-    //     };
-    //     return result;
-
-    // };
 
 
     return (
@@ -86,18 +95,17 @@ export function SetCurrentEventData( props ){
         <SetCurrentEventDataComponent
             { ...props }
 
-            currentManagerId = { application.currentManagerId }
-            currentEventIdOfListFilter = { application.currentEventIdOfListFilter }
+            currentManagerId =              { application.currentManagerId }
+            currentCategoryIdOfListFilter = { application.currentCategoryIdOfListFilter }
+            currentEventIdOfListFilter =    { application.currentEventIdOfListFilter }
+
+
             filteredList = { application.filteredList }
 
 
 
-            setFilterCategoryList =             { ( val ) => { dispatch( setFilterCategoryList( val ) ) } }
-            setCurrentCategoryIdOfListFilter =  { ( val ) => { dispatch( setCurrentCategoryIdOfListFilter( val ) ) } }
-
             setFilterEventList =  { ( val ) => { dispatch( setFilterEventList( val ) ) } }
-
-
+            setCurrentEventIdOfListFilter =  { ( val ) => { dispatch( setCurrentEventIdOfListFilter( val ) ) } }
             
 
 

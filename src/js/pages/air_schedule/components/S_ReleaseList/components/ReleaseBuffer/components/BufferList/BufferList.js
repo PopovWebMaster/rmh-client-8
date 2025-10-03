@@ -40,10 +40,21 @@ const BufferListComponent = ( props ) => {
 
     const drag_start = ( e, item ) => {
         let {
-            event_id, id
+            event_id, 
+            id,
+            force_event_id,
+            category_id,
         } = item;
+
+        let work_event_id = event_id;
+        if( category_id === null && event_id === null ){
+            work_event_id = force_event_id;
+        };
+
         setDragebleReleaseId( id )
-        setDragebleReleaseEventId( event_id )
+        // setDragebleReleaseEventId( event_id );
+        setDragebleReleaseEventId( work_event_id );
+
         
     }
 
@@ -64,6 +75,8 @@ const BufferListComponent = ( props ) => {
                 category_id,
                 grid_event_id,
                 id,
+                force_event_id,
+
 
             } = item;
 

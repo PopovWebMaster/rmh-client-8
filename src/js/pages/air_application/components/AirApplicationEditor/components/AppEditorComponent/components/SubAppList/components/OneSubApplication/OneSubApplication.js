@@ -86,6 +86,7 @@ const OneSubApplicationComponent = ( props ) => {
                 id =                { id }
                 application_id =    { application_id }
             />
+            
             <ItemSubRemove
                 id =                { id }
                 application_id =    { application_id }

@@ -30,10 +30,6 @@ const ReleaseBufferComponent = ( props ) => {
     }, [ bufferButtonsHeight ] );
 
 
-
-
-
-
     return (
        <div 
             className = 'releaseBuffer'

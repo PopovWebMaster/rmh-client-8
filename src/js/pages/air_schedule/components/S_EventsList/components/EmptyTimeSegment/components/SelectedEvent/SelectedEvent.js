@@ -18,13 +18,18 @@ const SelectedEventComponent = ( props ) => {
         eventList,
         eventListById,
 
+        alwaysOpen = false,
+
     } = props;
 
-    let [ listIsOpen, setListIsOpen ] = useState( false );
+    let [ listIsOpen, setListIsOpen ] = useState( alwaysOpen );
 
     const itemClick = ( id ) => {
         setEventId( id );
-        setListIsOpen( false );
+        if( alwaysOpen === false ){
+            setListIsOpen( false );
+        };
+        
     };
 
     const createList = ( arr ) => {
@@ -69,6 +74,12 @@ const SelectedEventComponent = ( props ) => {
         return result;
     }
 
+    const click = () => {
+        if( alwaysOpen === false ){
+            setListIsOpen( !listIsOpen );
+        };
+    }
+
     return (
 
         <div className = 'G_ANG_SelectedEvent'>
@@ -78,11 +89,11 @@ const SelectedEventComponent = ( props ) => {
                 // onMouseLeave = { () => { setListIsOpen( false ) } }
             >
                 <h4
-                    onClick = { () => { setListIsOpen( !listIsOpen ) } }
+                    onClick = { click }
                 >{ getEventName( eventListById, eventId ) }</h4>
                 <div 
                     className = 'G_ANG_btn'
-                    onClick = { () => { setListIsOpen( !listIsOpen ) }}
+                    onClick = { click }
                 >
                     <span className = { `G_ANG_btn_icon ${listIsOpen? 'icon-up-open-1': 'icon-down-open-1'}` }></span>
                 </div>

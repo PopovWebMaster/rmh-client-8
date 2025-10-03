@@ -20,15 +20,21 @@ export class ScheduleClass extends ScheduleMethodsClass {
     constructor( props ){
         super( props );
 
-        this.Category =         new CategoryClass();
-        this.SubApplication =   new SubApplicationClass();
-        this.Application =      new ApplicationClass();
-        this.Event =            new EventClass();
+        // this.Category =             new CategoryClass();
+        // this.SubApplication =       new SubApplicationClass();
+        // this.Application =          new ApplicationClass();
+        // this.Event =                new EventClass();
+        // this.WeekPointsTemplate =   new WeekPointsTemplateClass();
+        // this.Days =                 new DaysClass();
+        // this.GridEventsTable =      new GridEventsTableClass();
 
-        this.WeekPointsTemplate =   new WeekPointsTemplateClass();
-        this.Days =   new DaysClass();
-
-        this.GridEventsTable = new GridEventsTableClass();
+        this.Category =             null;
+        this.SubApplication =       null;
+        this.Application =          null;
+        this.Event =                null;
+        this.WeekPointsTemplate =   null;
+        this.Days =                 null;
+        this.GridEventsTable =      null;
 
         this.charType = null;
 
@@ -45,6 +51,21 @@ export class ScheduleClass extends ScheduleMethodsClass {
     }
 
     Create(){
+
+        this.Category =         new CategoryClass();
+        this.SubApplication =   new SubApplicationClass();
+        this.Application =      new ApplicationClass();
+        this.Event =            new EventClass();
+
+        this.WeekPointsTemplate =   new WeekPointsTemplateClass();
+        this.Days =   new DaysClass();
+
+        this.GridEventsTable = new GridEventsTableClass();
+
+
+
+
+
         this.SetCharType();
         this.SetReleaseNameToStore();
         this.SetReleaseDurationToStore();

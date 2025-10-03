@@ -27,6 +27,7 @@ export class SubApplicationClass{
 
         let { currentSubAppList } = application;
 
+
         for( let i = 0; i < currentSubAppList.length; i++ ){
             if( currentSubAppList[ i ].id === currentSubAppId ){
                 let {

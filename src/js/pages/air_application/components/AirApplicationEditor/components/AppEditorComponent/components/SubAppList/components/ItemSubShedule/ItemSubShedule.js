@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 
 import './ItemSubShedule.scss';
 
-import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice, setApplicationList } from './../../../../../../../../../../redux/applicationSlice.js';
+import { setSpinnerIsActive } from './../../../../../../../../../../redux/spinnerSlice.js';
+
 import { 
     selectorData as currentSubApplicationSlise,
     setCurrentSubAppId,
@@ -19,6 +21,8 @@ import {
 
 import { AlertWindowContainer } from './../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { SheduleEditorComponent } from './../../../SheduleEditorComponent/SheduleEditorComponent.js';
+
+import { send_request_to_server } from './../../../../../../../../../../helpers/send_request_to_server.js';
 
 const ItemSubSheduleComponent = ( props ) => {
 
@@ -37,19 +41,66 @@ const ItemSubSheduleComponent = ( props ) => {
         setPeriodFrom,
         setPeriodTo,
         setModeMix,
+
+        setApplicationList,
+        setSpinnerIsActive,
         
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
 
     const click = () => {
+
+        setSpinnerIsActive( true );
+
         setCurrentSubAppId( id );
         setReleaseDuration( duration_sec );
         setReleaseName( name );
         setPeriodFrom( period_from );
         setPeriodTo( period_to );
-        setIsOpen( true );
         setModeMix( false );
+
+        send_request_to_server({
+            route: 'get_application_list_for_period',
+            data:{
+                period_from,
+                period_to,
+            },
+            successCallback: ( response ) => {
+
+                console.dir( 'response' );
+                console.dir( response );
+
+                if( response.ok ){
+                    let { list } = response;
+                    setApplicationList( list );
+
+                    // let timerId = setTimeout( () => {
+                        // setCurrentSubAppId( id );
+                        // setReleaseDuration( duration_sec );
+                        // setReleaseName( name );
+                        // setPeriodFrom( period_from );
+                        // setPeriodTo( period_to );
+                        setIsOpen( true );
+                        setSpinnerIsActive( false );
+                        // setModeMix( false );
+
+                        // clearTimeout( timerId );
+                    // }, 500 );
+
+
+                };
+
+                
+
+
+            },
+        });
+
+
+/*
+
+        */
     };
 
 
@@ -74,7 +125,7 @@ const ItemSubSheduleComponent = ( props ) => {
                 onClick = { click }
             >Расписание</span>
 
-            <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span>
+            {/* <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span> */}
 
         </div>
     )
@@ -105,6 +156,10 @@ export function ItemSubShedule( props ){
             setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
             setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
             setModeMix = { ( val ) => { dispatch( setModeMix( val ) ) } }
+            setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
+            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+
+
 
 
 

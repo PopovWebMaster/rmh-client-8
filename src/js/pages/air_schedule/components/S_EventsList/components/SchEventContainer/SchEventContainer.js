@@ -199,12 +199,15 @@ const SchEventContainerComponent = ( props ) => {
             
 
             <SelectedEventWindow
-                selectedEventWindow_isOpen = { selectedEventWindow_isOpen }
-                setSelectedEventWindow_isOpen = { setSelectedEventWindow_isOpen }
-                selectedEventId = { selectedEventId }
-                setSelectedEventId = { setSelectedEventId }
-                durationLimit = { durationLimit }
+                selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }
+                setSelectedEventWindow_isOpen =     { setSelectedEventWindow_isOpen }
+                selectedEventId =                   { selectedEventId }
+                setSelectedEventId =                { setSelectedEventId }
+                durationLimit =                     { durationLimit }
+                alwaysOpen =                        { true }
             />
+
+
             <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
 
                 <div className = 'schId'>

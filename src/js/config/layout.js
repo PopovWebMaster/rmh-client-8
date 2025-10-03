@@ -15,6 +15,8 @@ export const BLIND_STYLE = {
     borderColor: '#dfdfdf',
 };
 
+export const BLIND_CHAR_NAME = 'Слепой график';
+
 export const EVENT_TYPE = {
     BLOCK: 'block',
     FILE: 'file',

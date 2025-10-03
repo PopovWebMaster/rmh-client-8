@@ -15,6 +15,7 @@ import { get_list_of_all_used_categories } from './../../vendors/get_list_of_all
 const SetCurrentCategoryDataComponent = ( props ) => {
 
     let {
+        currentManagerId,
         setFilterCategoryList,
         setCurrentCategoryIdOfListFilter,
 
@@ -35,7 +36,7 @@ const SetCurrentCategoryDataComponent = ( props ) => {
 
 
 
-    }, [ filteredList ] );
+    }, [ filteredList, currentManagerId ] );
 
     const get_actual_category_id = ( list ) => {
         let result = null;

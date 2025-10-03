@@ -18,6 +18,7 @@ import { ItemCategory } from './components/ItemCategory/ItemCategory.js';
 import { ItemManagerNotes } from './components/ItemManagerNotes/ItemManagerNotes.js';
 
 import { ItemEvents } from './components/ItemEvents/ItemEvents.js';
+import { ItemForceEventId } from './components/ItemForceEventId/ItemForceEventId.js';
 
 import { AlertWindowContainerButtonAdd } from './../../../../../../components/AlertWindowContainerButtonAdd/AlertWindowContainerButtonAdd.js'
 
@@ -43,7 +44,9 @@ const NewAppComponentComponent = ( props ) => {
     let [ categoryId,       setCategoryId ] = useState( null );
     let [ managerNotes,     setManagerNotes ] = useState( '' );
 
-    let [ eventId,       setEventId ] = useState( null );
+    let [ eventId,          setEventId ] = useState( null );
+    let [ forceEventId,     setForceEventId ] = useState( null );
+
 
 
 
@@ -56,6 +59,7 @@ const NewAppComponentComponent = ( props ) => {
             setCategoryId( null );
             setManagerNotes( '' );
             setEventId( null );
+            setForceEventId( null );
         };
 
     }, [ isOpen ]);
@@ -81,9 +85,8 @@ const NewAppComponentComponent = ( props ) => {
                     applicationNum: appNum,
                     applicationCategoryId: categoryId,
                     applicationEventId: eventId,
-
+                    applicationForceEventId: categoryId === null && eventId === null? forceEventId: null,
                     applicationManagerNotes: managerNotes,
-
                 },
 
                 successCallback: ( response ) => {
@@ -129,6 +132,14 @@ const NewAppComponentComponent = ( props ) => {
                 categoryId =    { categoryId }
                 eventId =       { eventId }
                 setEventId =    { setEventId }
+            />
+
+            <ItemForceEventId
+                forceEventId =      { forceEventId }
+                categoryId =        { categoryId }
+                eventId =           { eventId }
+                setForceEventId =   { setForceEventId }
+            
             />
 
             <ItemManagerNotes 

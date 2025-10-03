@@ -16,7 +16,10 @@ const ReleasesItemComponent = ( props ) => {
     let {
         releases,
         gridEventId,
-        scheduleEventsList
+        scheduleEventsList,
+
+        scheduleEventsListByGridEventId,
+
     } = props;
 
     const remove = ( release_id ) => {
@@ -52,6 +55,8 @@ const ReleasesItemComponent = ( props ) => {
         // console.dir( 'releases' );
         // console.dir( arr );
 
+        let releasStartTimePosition = 0;
+
         let div = arr.map( ( item, index ) => {
             let {
                 applicationName,
@@ -59,7 +64,21 @@ const ReleasesItemComponent = ( props ) => {
                 releaseDuration,
                 file_list,
                 id,
+                startTime,
             } = item;
+
+            // console.dir( 'item' );
+            // console.dir( item );
+
+            let startTime_sec = 0;
+            if( scheduleEventsListByGridEventId[ gridEventId ] ){
+                startTime_sec = scheduleEventsListByGridEventId[ gridEventId ].startTime + releasStartTimePosition;
+            };
+            
+            
+            releasStartTimePosition = releasStartTimePosition + releaseDuration;
+
+
             let file = '';
             if( file_list.length > 0 ){
                 file = `${file_list[ file_list.length - 1 ]}`;
@@ -71,6 +90,14 @@ const ReleasesItemComponent = ( props ) => {
                     className = 'CTS_RI_Item'
                     key = { index }
                 >
+
+                    <div className = 'CTS_RI_Item_time'>
+                        <span className = 'CTS_RI_Item_time_fact' >{ convert_sec_to_time( startTime_sec ) }</span>
+                        <span className = 'CTS_RI_Item_time_plan'>{ convert_sec_to_time( startTime ) }</span>
+
+                    </div>
+
+
                     <span
                         className = 'icon-angle-up arrow'
                         onClick = { () => { releaseMoveUp( id ) } }
@@ -114,6 +141,8 @@ export function ReleasesItem( props ){
         <ReleasesItemComponent
             { ...props }
             scheduleEventsList = { scheduleResult.scheduleEventsList }
+            scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
+
             // categoryListById = { layout.categoryListById }
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

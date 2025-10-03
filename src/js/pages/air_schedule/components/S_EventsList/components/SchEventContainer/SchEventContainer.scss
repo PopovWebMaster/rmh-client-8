@@ -54,10 +54,20 @@
         background-color: #f5f5f585;
     }
 
+    .schEventContainerWrap.isCompletd:hover{
+        // background-color: #f5f5f585;
+    }
+
     
 
     .schEventContainerWrap:hover{
         // background-color: #ffffff30;
+
+        .schEventItemTime{
+            .truePlanTime{
+                color: #1f1f1f;
+            }
+        }
     }
 
     .errorTime{

@@ -110,7 +110,7 @@ const ItemBlockInfoComponent = ( props ) => {
         >
             
 
-            <span className = { `${ className } SEC_CharDayTimePoint_block_title` }>Блок: </span>
+            {/* <span className = { `${ className } SEC_CharDayTimePoint_block_title` }>Блок: </span> */}
             <span className = { `${ className } SEC_CharDayTimePoint_block_filled` }>{ filedTime } </span>
             <span className = { `${ className } SEC_CharDayTimePoint_block_slash` }>/</span>
             <span className = { `${ className } SEC_CharDayTimePoint_block_all` }>{ blockTime }</span>

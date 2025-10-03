@@ -19,6 +19,8 @@ export class ReleaseClass {
         this.releaseName =          null;
         this.startTime =            null;
         this.sub_application_id =   null;
+        this.force_event_id =   null;
+
 
 
         // let release = get_release_by_id( release_id );
@@ -90,6 +92,7 @@ export class ReleaseClass {
                 releaseName,
                 startTime,
                 sub_application_id,
+                force_event_id,
 
             } = release;
 
@@ -107,6 +110,8 @@ export class ReleaseClass {
             this.releaseName =          releaseName;
             this.startTime =            startTime;
             this.sub_application_id =   sub_application_id;
+            this.force_event_id =       force_event_id;
+
 
         };
 
@@ -128,6 +133,7 @@ export class ReleaseClass {
             releaseName,
             startTime,
             sub_application_id,
+            force_event_id,
         } = data;
 
         this.YYYY_MM_DD =           YYYY_MM_DD;
@@ -144,6 +150,8 @@ export class ReleaseClass {
         this.releaseName =          releaseName;
         this.startTime =            startTime;
         this.sub_application_id =   sub_application_id;
+        this.force_event_id =       force_event_id;
+
         
     }
 
@@ -164,6 +172,8 @@ export class ReleaseClass {
             releaseName:        this.releaseName,
             startTime:          this.startTime,
             sub_application_id: this.sub_application_id,
+            force_event_id:     this.force_event_id,
+
         }
 
     }

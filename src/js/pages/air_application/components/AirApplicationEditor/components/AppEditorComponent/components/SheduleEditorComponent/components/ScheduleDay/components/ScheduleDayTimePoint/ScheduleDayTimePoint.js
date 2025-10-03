@@ -133,9 +133,9 @@ const ScheduleDayTimePointComponent = ( props ) => {
 
             ): '' }
 
-            <div className = 'SEC_CharDayTimePoint_environment'>
+            {/* <div className = 'SEC_CharDayTimePoint_environment'>
                 <span className = 'environment icon-eye-4'></span>
-            </div>
+            </div> */}
 
         </div>
     )

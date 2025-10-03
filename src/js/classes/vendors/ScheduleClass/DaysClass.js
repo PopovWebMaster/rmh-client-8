@@ -73,6 +73,7 @@ export class DaysClass {
     }
 
     AddFillCount( YYYY_MM_DD, grid_event_id, sec ){
+
         if( this.days[ YYYY_MM_DD ] ){
             this.days[ YYYY_MM_DD ].AddFillCount( grid_event_id, sec );
         };
@@ -80,6 +81,7 @@ export class DaysClass {
 
     FillDaysWithReleases(){ // предназначен вызываться только один раз
         let release_list = this.SubApplication.GetReleaseList();
+
         for( let i = 0; i < release_list.length; i++ ){
             let {
                 date,

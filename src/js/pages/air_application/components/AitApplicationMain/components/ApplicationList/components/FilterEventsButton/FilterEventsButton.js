@@ -6,35 +6,53 @@ import { useDispatch } from 'react-redux';
 
 import './FilterEventsButton.scss';
 
-import { selectorData as applicationSlice, setCurrentCategoryIdOfListFilter } from './../../../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice, setCurrentEventIdOfListFilter } from './../../../../../../../../redux/applicationSlice.js';
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
-
 
 
 const FilterEventsButtonComponent = ( props ) => {
 
     let {
-        applicationList,
-        categoryListById,
-        currentCategoryIdOfListFilter,
+        filterEventList,
+        currentEventIdOfListFilter,
 
-        setCurrentCategoryIdOfListFilter,
+        setCurrentEventIdOfListFilter,
+
 
     } = props;
 
-    let [ list, setList ] = useState( [] );
+    const create = ( arr ) => {
 
-    useEffect( () => {
+        let div = arr.map( ( item, index ) => {
 
+            let { style, name, id } = item;
 
-    }, [] );
+            let isActive = currentEventIdOfListFilter === id;
+
+            return (
+                <div 
+                    className = { `AL_btn ${ isActive? 'isActive': ''}` }
+                    style = { style }
+                    key = { index }
+
+                    onClick = { () => { setCurrentEventIdOfListFilter( id ) } }
+                >
+                    <span>{ name }</span>
+                </div>
+            );
+
+        } );
+
+        return div;
+
+    };
 
 
 
     
     return (
         <div className = 'AL_FilterEventsButton'>
-            
+            { create( filterEventList ) }
         </div>
     )
 
@@ -50,15 +68,10 @@ export function FilterEventsButton( props ){
     return (
         <FilterEventsButtonComponent
             { ...props }
-            applicationList = { application.applicationList }
-            currentCategoryIdOfListFilter = { application.currentCategoryIdOfListFilter }
+            filterEventList = { application.filterEventList }
+            currentEventIdOfListFilter = { application.currentEventIdOfListFilter }
+            setCurrentEventIdOfListFilter = { ( val ) => { dispatch( setCurrentEventIdOfListFilter( val ) ) } }
 
-            categoryListById = { layout.categoryListById }
-
-            setCurrentCategoryIdOfListFilter = { ( val ) => { dispatch( setCurrentCategoryIdOfListFilter( val ) ) } }
-
-            // currentCompanyAlias = { company.currentCompanyAlias }
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />
     );

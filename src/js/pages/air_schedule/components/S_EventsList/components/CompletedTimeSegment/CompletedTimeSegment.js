@@ -100,6 +100,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
                 releases = { releases }
                 gridEventId = { gridEventId }
             />
+            
         </SchEventContainer>
 
     )

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import './StartTimeEditButton.scss';
 
-// import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 import { selectorData as scheduleResultSlise } from './../../../../../../redux/scheduleResultSlise.js';
 
 
@@ -21,9 +21,13 @@ const StartTimeEditButtonComponent = ( props ) => {
         isKeyPoint,
         gridEventId,
 
+        gridDayEventsListById,
+
         scheduleEventsList
 
     } = props;
+
+    // console.dir( gridDayEventsListById );
 
 
     let [ isOpen, setIsOpen ] = useState( false );
@@ -35,6 +39,9 @@ const StartTimeEditButtonComponent = ( props ) => {
     let [ timeSpaceTo, setTimeSpaceTo ] = useState( 0 );
     let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
     let [ eventId, setEventId ] = useState( null );
+
+    let [ releaseStartTime, setReleaseStartTime ] = useState( null );
+
 
     useEffect( () => {
         get_day_event_data();
@@ -59,7 +66,8 @@ const StartTimeEditButtonComponent = ( props ) => {
                 let { 
                     durationTime, 
                     // startTime, 
-                    eventId 
+                    eventId,
+
                 } = scheduleEventsList[ i ];
 
                 let pointFrom = 0;
@@ -80,6 +88,7 @@ const StartTimeEditButtonComponent = ( props ) => {
 
                 setTimeSpaceFrom( pointFrom );
                 setTimeSpaceTo( pointTo );
+
                 break;
             };
         };
@@ -89,6 +98,20 @@ const StartTimeEditButtonComponent = ( props ) => {
         set_schedule_list_changes_to_store( gridEventId, { startTime: startTimeNext } );
         setIsOpen( false );
     };
+
+
+    
+
+
+
+    const get_plan_time  =( id ) => {
+        if( gridDayEventsListById[ id ] ){
+            return <span className = 'truePlanTime'>{ convert_sec_to_time( gridDayEventsListById[ id ].startTime ) }</span>
+        }else{
+            return ''
+        };
+
+    }
     
 
     return (<>
@@ -108,11 +131,16 @@ const StartTimeEditButtonComponent = ( props ) => {
 
             clickSaveHandler =  { clickSaveHandler }
         />
-    
+
         <span 
             className = { `SEC_time ${isKeyPoint? 'isKeyPoint': ''}` }
             onClick = { clickAdd }
-        >{ convert_sec_to_time( startTimeNext ) }</span>
+        >
+            { convert_sec_to_time( startTimeNext ) }
+
+            {/* <span className = 'truePlanTime'>111111</span> */}
+            { get_plan_time( gridEventId ) }
+        </span>
     </>)
 
 };
@@ -120,12 +148,18 @@ const StartTimeEditButtonComponent = ( props ) => {
 export function StartTimeEditButton( props ){
 
     const scheduleResult = useSelector( scheduleResultSlise );
+    const layout = useSelector( layoutSlice );
+
+
+    
     // const dispatch = useDispatch();
 
     return (
         <StartTimeEditButtonComponent
             { ...props }
             scheduleEventsList = { scheduleResult.scheduleEventsList }
+            gridDayEventsListById = { layout.gridDayEventsListById }
+
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />

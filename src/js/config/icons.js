@@ -36,3 +36,6 @@
 // icon-info
 
 // fa-file-o
+
+{/* <span className = 'icon-up-1' ></span>
+                <span className = 'icon-down-1' ></span> */}

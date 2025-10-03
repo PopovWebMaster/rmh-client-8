@@ -1,12 +1,12 @@
 
 import React, { useRef, useState, useEffect }   from "react";
 
-// import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './SheduleEditorComponent.scss';
 
-// import { selectorData as applicationSlice} from './../../../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice} from './../../../../../../../../redux/applicationSlice.js';
 
 import { UpdateCurrentSubAppData } from './../UpdateCurrentSubAppData/UpdateCurrentSubAppData.js';
 import { ScheduleClass } from './../../../../../../../../classes/ScheduleClass.js';
@@ -26,6 +26,8 @@ const SheduleEditorComponentComponent = ( props ) => {
         isOpen,
         setIsOpen,
 
+        applicationList,
+
 
     } = props;
 
@@ -37,6 +39,7 @@ const SheduleEditorComponentComponent = ( props ) => {
     useEffect( () => {
         if( isOpen ){
             setSchedule( new ScheduleClass() );
+            
         }else{
             if( Schedule !== null ){
                 Schedule.Remove();
@@ -46,14 +49,71 @@ const SheduleEditorComponentComponent = ( props ) => {
         };
     }, [ isOpen ] );
 
+    // useEffect( () => {
+    //     // if( isOpen ){
+    //         setSchedule( new ScheduleClass() );
+    //     // }else{
+    //     //     if( Schedule !== null ){
+    //     //         Schedule.Remove();
+    //     //     };
+    //     //     setSchedule( null );
+
+    //     // };
+    // }, [ applicationList ] );
+
+
+
+
+    // useEffect( () => {
+    //     // if( isOpen ){
+    //         setSchedule( new ScheduleClass() );
+    //     // }else{
+    //     //     if( Schedule !== null ){
+    //     //         Schedule.Remove();
+    //     //     };
+    //     //     setSchedule( null );
+    //     // };
+
+    // }, [ applicationList ] );
+
+    // useEffect( () => {
+    //     if( isOpen ){
+    //         // setSchedule( new ScheduleClass() );
+    //     }else{
+    //         if( Schedule !== null ){
+    //             Schedule.Remove();
+    //         };
+    //         setSchedule( null );
+
+    //     };
+    // }, [ isOpen ] );
+
+
+
+
+
 
     useEffect( () => {
+
+        
+
         if( Schedule === null ){
             setIsReady( false );
         }else{
-            
-            Schedule.Create();
+
+
+            // console.dir( 'Schedule !!!!!!!!!!!!!' );
+            // console.dir( Schedule );
+
+            // setTimeout( () => {
+                Schedule.Create();
             setIsReady( true );
+            // }, 500 );
+
+
+            
+            
+
         };
 
     }, [ Schedule ] );
@@ -113,12 +173,14 @@ const SheduleEditorComponentComponent = ( props ) => {
 
 export function SheduleEditorComponent( props ){
 
-    // const application = useSelector( applicationSlice );
+    const application = useSelector( applicationSlice );
     // const dispatch = useDispatch();
 
     return (
         <SheduleEditorComponentComponent
             { ...props }
+
+            applicationList = { application.applicationList }
 
             // setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
 

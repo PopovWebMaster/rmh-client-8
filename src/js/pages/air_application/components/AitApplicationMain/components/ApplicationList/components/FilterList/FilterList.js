@@ -27,7 +27,9 @@ const FilterListComponent = ( props ) => {
         applicationList,
         categoryListById,
         currentCompanyAlias,
-    
+
+        currentManagerId,
+        currentEventIdOfListFilter,
         currentCategoryIdOfListFilter,
 
         eventListById,
@@ -37,8 +39,18 @@ const FilterListComponent = ( props ) => {
     let [ list, setList ] = useState( [] );
 
     useEffect( () => {
-        setList( get_filtred_app_list( applicationList, currentCategoryIdOfListFilter ) );
-    }, [ applicationList, currentCategoryIdOfListFilter ] );
+        setList( get_filtred_app_list({
+            applicationList,
+            currentManagerId,
+            currentEventIdOfListFilter,
+            currentCategoryIdOfListFilter,
+        }) );
+    }, [ 
+        currentManagerId,
+        applicationList,
+        currentCategoryIdOfListFilter,
+        currentEventIdOfListFilter,
+     ] );
 
 
     let navigate = useNavigate();
@@ -59,12 +71,6 @@ const FilterListComponent = ( props ) => {
                 sub_application_list
 
             } = item;
-
-            
-
-            // console.dir( 'item' );
-            // console.dir( item );
-
 
             let category = DEFAULT_CATEGORY;
 
@@ -91,14 +97,11 @@ const FilterListComponent = ( props ) => {
             if( event !==null ){
                 if( event.type === EVENT_TYPE.BLOCK ){
                     style = {
-                        // backgroundColor: category.colorBG,
                         color: category.colorBG,
                         border: `1px solid ${category.colorBG}`
                     };
                 }
             };
-
-
 
             return (
                 <div 
@@ -109,14 +112,6 @@ const FilterListComponent = ( props ) => {
                         className = 'AL_FilterList_item'
                         onClick = { () => { click( id ) } }
                     >
-                        {/* <span 
-                            className = 'AL_category'
-                            style = {{
-                                backgroundColor: category.colorBG,
-                                color: category.colorBGcolorText,
-                            }}
-                        >{ category.name }</span> */}
-
                         <span 
                             className = 'AL_event'
                             style = { style }
@@ -124,8 +119,10 @@ const FilterListComponent = ( props ) => {
 
 
                         <span className = 'AL_name'>{ name }</span>
-                        <span className = 'AL_num'>№ { num }</span>
-                        <span className = 'AL_release'>выпуски: { sub_application_list.length }</span>
+
+                        { num? <span className = 'AL_num'>№ { num }</span>: '' }
+                        
+                        {/* <span className = 'AL_release'>выпуски: { sub_application_list.length }</span> */}
 
 
                     </div>
@@ -170,7 +167,11 @@ export function FilterList( props ){
             { ...props }
 
             applicationList = { application.applicationList }
+            currentManagerId = { application.currentManagerId }
             currentCategoryIdOfListFilter = { application.currentCategoryIdOfListFilter }
+
+            currentEventIdOfListFilter = { application.currentEventIdOfListFilter }
+
             currentCompanyAlias = { company.currentCompanyAlias }
 
             categoryListById = { layout.categoryListById }

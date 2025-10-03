@@ -1,44 +1,26 @@
 
-import { DEFAULT_CATEGORY } from './../../../config/layout.js';
-
 import store from './../../../redux/store.js';
 
 import { get_event_style } from './../../../helpers/get_event_style.js';
+import { BLIND_STYLE, BLIND_CHAR_NAME, EVENT_TYPE } from './../../../config/layout.js';
 
-export const get_list_of_all_used_events = ( filteredList ) => {
+export const get_list_of_all_used_events = ( filteredList, currentCategoryId ) => {
 
     let listId = [];
-    let withoutIsset = false;
     let result = [];
-
-    let listById = {};
-
-
-    console.dir( 'filteredList' );
-    console.dir( filteredList );
-
 
     let { layout } = store.getState();
     let { eventListById } = layout;
 
     for( let i = 0; i < filteredList.length; i++ ){
-        let { event_id } = filteredList[ i ];
+        let { event_id, category_id } = filteredList[ i ];
 
-        let style = get_event_style( event_id );
+        if( category_id === currentCategoryId ){
 
-
-
-        // if( listId.indexOf( event_id ) === -1 ){
-        //     listId.push( event_id );
-        // };
-
-        // if( category_id === null ){
-        //     withoutIsset = true;
-        // }else{
-        //     if( listId.indexOf( category_id ) === -1 ){
-        //         listId.push( category_id );
-        //     };
-        // };
+            if( listId.indexOf( event_id ) === -1 ){
+                listId.push( event_id );
+            };
+        };
     };
 
     for( let i = 0; i < listId.length; i++ ){
@@ -54,28 +36,31 @@ export const get_list_of_all_used_events = ( filteredList ) => {
         // };
 
         let style = get_event_style( eventId );
+
+        if( style.event_is_not_found ){
+            style = BLIND_STYLE;
+        };
+
         let item = {};
+        
 
         if( eventListById[ eventId ] ){
-            console.dir( eventListById[ eventId ] );
             item = { ...eventListById[ eventId ] };
-            // result.push( { ...eventListById[ eventId ] } );
         }else{
-
-
+            item.category_id = currentCategoryId;
+            item.durationTime = '00:00:00';
+            item.id = null;
+            item.name = BLIND_CHAR_NAME;
+            item.notes = '';
+            item.type = EVENT_TYPE.FILE;
         };
+
+        item.style = style;
+
+        result.push( item );
 
 
     };
-
-    // if( withoutIsset ){
-
-    //     let category = { ...DEFAULT_CATEGORY };
-    //     category.name = 'Без категории';
-    //     result.push( category );
-
-    // };
-
 
     return result;
 

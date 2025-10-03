@@ -53,8 +53,6 @@ export class WeekPointsTemplateClass {
 
     CreateTemplate(){
 
-        console.dir( this.charType );
-
         switch( this.charType ){
             case CHAR_TYPE.BLIND:
                 this.CreateTemplateBlind();
