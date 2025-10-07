@@ -13,6 +13,8 @@ import { save_sub_app_changes_on_server } from './../../../../../../vendors/save
 
 import { new_file_name_is_unic } from './vendors/new_file_name_is_unic.js';
 
+import { YesOrNoTitle } from './../YesOrNoTitle/YesOrNoTitle.js';
+
 const ItemSubFilesComponent = ( props ) => {
 
     let {
@@ -98,22 +100,63 @@ const ItemSubFilesComponent = ( props ) => {
         });
     }
 
+    const removeFileName = ( fileName ) => {
+
+        let fileNames = [];
+        for( let i = 0; i < file_names.length; i++ ){
+            if( fileName !== file_names[ i ] ){
+                fileNames.push( file_names[ i ] );
+            };
+        };
+
+        save_sub_app_changes_on_server({
+            subApplicationId: id,
+            applicationId: application_id,
+            changedData: {
+                file_names: fileNames,
+            },
+            callback: ( response ) => {
+                setIsReady( false );
+                
+                setNameValue( '' );
+                setIsError( false );
+                setErrorText( '' );
+
+            },
+        });
+
+
+    }
+
     const createList = ( arr ) => {
 
         let h4 = arr.map( ( item, index ) => {
             return (
-                <h4
+                <div
                     key = { index }
-                >{ item }</h4>
+                >
+                    <h4>{ item }</h4>
+                    <span
+                        className = 'SA_ItemSubFiles_remove icon-cancel-2'
+                        onClick = { () => { removeFileName( item ) } }
+                    ></span>
+
+                </div>
+                
             );
         } );
         return h4;
 
     };
-    
+
+
     return (
         <div className = 'SA_ItemSubFiles'>
-           <h3>Версии имён файла: { file_names.length }</h3>
+
+           <YesOrNoTitle
+                title = { 'Имя файла' }
+                booleanValue = { file_names.length > 0 }
+           />
 
             <ItemEditComponent>
 

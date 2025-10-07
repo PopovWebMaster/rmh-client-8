@@ -30,6 +30,8 @@ export class AllTimePointsClass {
         // };
 
         let result = [];
+
+        let last_blind_grid_event_id = 1;
         
         result = this.list.sort( ( a, b ) => {
             if( a.sec === b.sec ){ return 0 }
@@ -37,7 +39,23 @@ export class AllTimePointsClass {
             if( a.sec < b.sec ){ return -1 };
         } );
 
-        return result;
+
+
+        let res_2 = [];
+
+        for( let i = 0; i < result.length; i++ ){
+            if( result[ i ].grid_event_id === null  ){
+                let obj = { ...result[ i ] };
+                obj.grid_event_id = `blind_${last_blind_grid_event_id}`;
+                last_blind_grid_event_id++;
+                res_2.push( obj );
+            }else{
+                res_2.push( result[ i ] );
+            };
+
+        };
+
+        return res_2;
     }
     
 }

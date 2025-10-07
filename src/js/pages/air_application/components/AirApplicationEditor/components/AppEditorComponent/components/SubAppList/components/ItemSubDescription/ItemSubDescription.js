@@ -12,6 +12,8 @@ import { AlertWindowContainerSaveAdd } from './../../../../../../../../../../com
 
 import { save_sub_app_changes_on_server } from './../../../../../../vendors/save_sub_app_changes_on_server.js';
 
+import { YesOrNoTitle } from './../YesOrNoTitle/YesOrNoTitle.js';
+
 
 const ItemSubDescriptionComponent = ( props ) => {
 
@@ -40,35 +42,6 @@ const ItemSubDescriptionComponent = ( props ) => {
 
     }, [ description ] );
 
-
-
-    const getTitle = ( val ) => {
-
-        let title = '';
-        let className = '';
-        let classNameIcon = '';
-
-        if( val ){
-            title = 'Есть';
-            className = 'SA_ItemSubDescription_yes';
-            classNameIcon = 'icon-ok-3 icon'
-        }else{
-            title = 'Нет';
-            className = 'SA_ItemSubDescription_no';
-            classNameIcon = 'icon'
-        };
-
-        return (
-            <span className = 'SA_ItemSubDescription_title'>
-                <span className = { classNameIcon }></span>
-                <span className = { className }>{ title }</span>
-            </span>
-        );
-
-    }
-
-
-
     const save_click = () => {
 
         save_sub_app_changes_on_server({
@@ -92,10 +65,11 @@ const ItemSubDescriptionComponent = ( props ) => {
     
     return (
         <div className = 'SA_ItemSubDescription'>
-           
-            <h3>Описание: { getTitle( description ) }</h3>
 
-
+            <YesOrNoTitle
+                title = { 'Описание' }
+                booleanValue = { description }
+            />
             <ItemEditComponent>
                         
                 <div className = 'SA_ItemSubDescription_edit'>

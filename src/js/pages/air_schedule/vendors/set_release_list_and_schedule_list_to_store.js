@@ -9,6 +9,10 @@ import {
 
 } from './../../../redux/scheduleResultSlise.js';
 
+// import { StoreScheduleResultEventsClass } from './../../../../classes/StoreScheduleResultEventsClass.js';
+import { StoreScheduleResultEventsClass } from './../../../classes/StoreScheduleResultEventsClass.js';
+
+
 export const set_release_list_and_schedule_list_to_store = ( release_list, schedule_events_List ) => {
 
     let releasesById = {};
@@ -22,12 +26,19 @@ export const set_release_list_and_schedule_list_to_store = ( release_list, sched
     };
 
 
-    let actual_schedule_list = exclude_outdated_releases( schedule_events_List, releasesById )
+    let actual_schedule_list = exclude_outdated_releases( schedule_events_List, releasesById );
+
+    let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+    StoreScheduleResultEvents.CreateFromScheduleEventsList( actual_schedule_list );
+    StoreScheduleResultEvents.UpdateData();
+    StoreScheduleResultEvents.SetListToStore();
+
+
 
     store.dispatch( setReleaseList( release_list ) );
     store.dispatch( setReleaseListById( releasesById ) );
     store.dispatch( setReleaseListByGridEventId( releasesByGridEventId ) );
-    store.dispatch( setScheduleEventsList( actual_schedule_list ) );
+    // store.dispatch( setScheduleEventsList( actual_schedule_list ) );
 
 }
 

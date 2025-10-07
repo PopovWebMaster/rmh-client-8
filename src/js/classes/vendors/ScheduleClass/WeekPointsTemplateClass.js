@@ -100,11 +100,11 @@ export class WeekPointsTemplateClass {
     CreateTemplateFile(){
         let { all_time_points, week_point_list } = get_week_point_list( this.Event.id, this.SubApplication.GetReleaseList() );
 
-        console.dir( 'all_time_points' );
-        console.dir( all_time_points );
+        // console.dir( 'all_time_points' );
+        // console.dir( all_time_points );
 
-        console.dir( 'week_point_list' );
-        console.dir( week_point_list );
+        // console.dir( 'week_point_list' );
+        // console.dir( week_point_list );
 
         for( let i = 0; i < all_time_points.length; i++ ){
             this.AllTimePoints.AddPoint( all_time_points[ i ] );
@@ -118,7 +118,7 @@ export class WeekPointsTemplateClass {
         return [ ...this.AllTimePoints.GetTimePointList() ];
     }
 
-    GetAllTimePointsGroupList(){
+    GetAllTimePointsGroupList( isBlind = false ){
 
         let all = [];
 
@@ -189,7 +189,12 @@ export class WeekPointsTemplateClass {
 
             let arr_0 = timeFrom.split( ':' );
             let arr_1 = timeTo.split( ':' );
+
             let title = `${arr_0[0]}:${arr_0[1]} - ${arr_1[0]}:${arr_1[1]}`;
+
+            if( isBlind ){
+                title = `${arr_0[0]}:${arr_0[1]}`;
+            };
 
             result.push({
                 title,

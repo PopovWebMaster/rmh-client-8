@@ -108,7 +108,13 @@ export class ScheduleMethodsClass {
 
         if( this.charType === CHAR_TYPE.FILE || this.charType === CHAR_TYPE.BLOCK ){
             list_groupe = this.WeekPointsTemplate.GetAllTimePointsGroupList();
+        }else if( this.charType === CHAR_TYPE.BLIND ){
+            list_groupe = this.WeekPointsTemplate.GetAllTimePointsGroupList( true );
         };
+
+        // console.dir( 'list_groupe' );
+        // console.dir( list_groupe );
+
 
         set_to_store( 'allTimePointsList', list );
         set_to_store( 'allTimePointsGroupeList', list_groupe );

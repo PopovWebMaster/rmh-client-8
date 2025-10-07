@@ -22,6 +22,8 @@
         line-height: 2.2em;
         // margin-right: 1em;
 
+        // width: 10.4em;
+
     }
 
     .SA_ItemSubFiles_edit{
@@ -76,12 +78,55 @@
         .SA_ItemSubFiles_edit_version{
             margin: 1em 0;
             padding: 0.5em;
-            h4{
-                font-size: .65em;
-                padding: 0.2em 0.4em;
-                color: #476edb;
-                text-indent: 2em;
+
+            >div{
+                font-size: 1em;
+
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+
+                border-radius: 0.1em;
+                padding: 0.2em 0.6em;
+
+                h4{
+                    font-size: .65em;
+                    // padding: 0.2em 0.4em;
+                    color: #476edb;
+                    // text-indent: 2em;
+
+                    flex-grow: 1;
+                    max-width: 100%;
+
+                    
+                }
+
+                .SA_ItemSubFiles_remove{
+                    font-size: 0.7em;
+                    width: 1em;
+                    height: 1em;
+                    border-radius: 0.1em;
+                    padding: 0.1em 0.2em;
+                    color: rgb(253, 133, 133);
+                    flex-grow: 0;
+
+                    cursor: pointer;
+                    user-select: none;
+
+
+                }
+                .SA_ItemSubFiles_remove:hover{
+                    color: red;
+                }
             }
+
+            >div:hover{
+                background-color: #e3e3e338;
+            }
+
+
+
         }
     }
 

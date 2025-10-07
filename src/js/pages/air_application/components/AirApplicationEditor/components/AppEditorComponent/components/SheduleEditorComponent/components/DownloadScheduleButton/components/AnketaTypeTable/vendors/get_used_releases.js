@@ -17,7 +17,7 @@ export const get_used_releases = () => {
     for( let YYYY_MM_DD in gridEventTable ){
         let dayList = [];
         for( let grid_id in gridEventTable[ YYYY_MM_DD ] ){
-            
+
             let { content, grid_event } = gridEventTable[ YYYY_MM_DD ][ grid_id ];
             let { startTime, id } = grid_event;
 

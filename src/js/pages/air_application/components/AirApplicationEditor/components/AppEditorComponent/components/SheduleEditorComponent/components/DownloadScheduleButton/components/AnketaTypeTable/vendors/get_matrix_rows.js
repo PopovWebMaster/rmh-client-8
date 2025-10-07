@@ -4,6 +4,13 @@ export const get_matrix_rows = ( used_releases ) => {
     let { schedule } = store.getState();
     let { allTimePointsGroupeList } = schedule;
 
+    // console.dir( 'allTimePointsGroupeList' );
+    // console.dir( allTimePointsGroupeList );
+
+    // console.dir( 'used_releases' );
+    // console.dir( used_releases );
+
+
     let obj = {};
 
     let result = [];
@@ -33,6 +40,11 @@ export const get_matrix_rows = ( used_releases ) => {
 
         obj[ YYYY_MM_DD ] = obj_2;
     };
+
+    //     console.dir( 'obj' );
+    // console.dir( obj );
+
+
 
     let merg_obj = {};
     for( let YYYY_MM_DD in obj ){

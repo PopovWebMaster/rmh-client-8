@@ -62,10 +62,6 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         this.GridEventsTable = new GridEventsTableClass();
 
-
-
-
-
         this.SetCharType();
         this.SetReleaseNameToStore();
         this.SetReleaseDurationToStore();

@@ -75,9 +75,7 @@ const ReleasesItemComponent = ( props ) => {
                 startTime_sec = scheduleEventsListByGridEventId[ gridEventId ].startTime + releasStartTimePosition;
             };
             
-            
             releasStartTimePosition = releasStartTimePosition + releaseDuration;
-
 
             let file = '';
             if( file_list.length > 0 ){

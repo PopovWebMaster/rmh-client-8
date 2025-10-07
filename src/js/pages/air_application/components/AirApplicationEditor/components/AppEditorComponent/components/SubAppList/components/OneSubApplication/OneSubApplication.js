@@ -16,6 +16,8 @@ import { ItemSubShedule }           from './../ItemSubShedule/ItemSubShedule.js'
 import { ItemSubReportInDetail }    from './../ItemSubReportInDetail/ItemSubReportInDetail.js';
 import { ItemSubRemove }            from './../ItemSubRemove/ItemSubRemove.js';
 
+;
+
 const OneSubApplicationComponent = ( props ) => {
 
     let {
@@ -82,10 +84,10 @@ const OneSubApplicationComponent = ( props ) => {
             />
 
 
-            <ItemSubReportInDetail 
+            {/* <ItemSubReportInDetail 
                 id =                { id }
                 application_id =    { application_id }
-            />
+            /> */}
             
             <ItemSubRemove
                 id =                { id }

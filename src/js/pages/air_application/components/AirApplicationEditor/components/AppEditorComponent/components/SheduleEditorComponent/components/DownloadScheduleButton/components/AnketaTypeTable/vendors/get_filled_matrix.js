@@ -20,6 +20,8 @@ export const get_filled_matrix = ( empty_matrix, releases, used_sab_app_id ) => 
     if( empty_matrix[ 0 ] ){
         rows_length = empty_matrix[ 0 ].rows.length;
     };
+
+    // console.dir( 'get_filled_matrix' );
     // console.dir({
     //     empty_matrix,
     //     matrix_obj,
@@ -29,9 +31,26 @@ export const get_filled_matrix = ( empty_matrix, releases, used_sab_app_id ) => 
     // });
 
     const add_to_tartix = ( yyyy_mm_dd, start_time, subAppId ) => {
+// console.dir( '1' );
+
+//             console.dir({
+//                 start_time,
+//                 yyyy_mm_dd,
+//                 subAppId,
+//                 matrix_obj
+//             });
+
         for( let i = 0; i < matrix_obj[ yyyy_mm_dd ].length; i++ ){
             let { interval, sub_app_id, title, rowSubAppId } = matrix_obj[ yyyy_mm_dd ][ i ];
             let { from, to } = interval;
+
+            // console.dir( '2' );
+
+            // console.dir({
+            //     start_time,
+            //     from,
+            //     to
+            // });
 
             if( rowSubAppId === null ){
                 if( start_time >= from && start_time <= to ){
@@ -43,9 +62,6 @@ export const get_filled_matrix = ( empty_matrix, releases, used_sab_app_id ) => 
                             let { YYYY_MM_DD } = empty_matrix[ y ];
                             matrix_obj[ YYYY_MM_DD ][ i ].rowSubAppId = subAppId;
                         };
-
-
-
                         break ;
                     };
                 };
@@ -60,13 +76,6 @@ export const get_filled_matrix = ( empty_matrix, releases, used_sab_app_id ) => 
                 };
             };
 
-            // let { from, to } = interval;
-            // if( start_time >= from && start_time <= to ){
-            //     if( sub_app_id === null ){
-            //         matrix_obj[ yyyy_mm_dd ][ i ].sub_app_id = subAppId;
-            //         break ;
-            //     };
-            // };
         };
     };
 

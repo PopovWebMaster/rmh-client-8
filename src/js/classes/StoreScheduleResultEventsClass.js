@@ -46,7 +46,11 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         this.ReleaseMoveUp = this.ReleaseMoveUp.bind(this);
         this.ReleaseMoveDown = this.ReleaseMoveDown.bind(this);
+        this.UpdateData = this.UpdateData.bind(this);
 
+
+
+        
 
 
     }
@@ -284,6 +288,12 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         };
     }
 
+    UpdateData(){
+        for( let i = 0; i < this.list.length; i++ ){
+            this.list[ i ].UpdateEventData();
+        };
+    }
+
     AddAllRemainingReleases( allReleases, usedReleasesById ){
 
         let unusedByGEId = {};
@@ -307,11 +317,11 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             };
         };
 
-        console.dir( 'usedReleasesById' );
-        console.dir( usedReleasesById );
+        // console.dir( 'usedReleasesById' );
+        // console.dir( usedReleasesById );
 
-        console.dir( 'unusedByGEId' );
-        console.dir( unusedByGEId );
+        // console.dir( 'unusedByGEId' );
+        // console.dir( unusedByGEId );
 
         for( let i = 0; i < this.list.length; i++ ){
             let gridEventId = this.list[ i ].gridEventId;

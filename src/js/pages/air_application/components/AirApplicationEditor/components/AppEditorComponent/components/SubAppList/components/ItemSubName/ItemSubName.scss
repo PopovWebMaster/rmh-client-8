@@ -4,7 +4,8 @@
     margin-right: 0.2em;
     padding: 0.2em 0.4em;
 
-    flex-grow: 0;
+    flex-grow: 2;
+    max-width: 100%;
 
     position: relative;
 
@@ -20,7 +21,12 @@
         padding: 0.4em 0.8em;
         border: 1px solid #ffffff00;
         border-radius: 0.1em;
-        width: 14em;
+        // width: 14em;
+        // width: 14em;
+
+            flex-grow: 1;
+    max-width: 100%;
+
         background-color: #ffffff00;
         outline: none;
     }

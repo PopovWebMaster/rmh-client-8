@@ -78,6 +78,10 @@ export class GridEventsTableClass {
                         duration,
                     } = points[ point_i ];
 
+                    // console.dir( 'points[ point_i ]' );
+                    // console.dir( points[ point_i ] );
+
+
                     this.table[ YYYY_MM_DD ][ grid_event_id ] = {
                         grid_event: {
                             id: grid_event_id,
