@@ -8,6 +8,12 @@ export const get_matrix_array = () => {
 
     let { releases, used_sab_app_id } = get_used_releases();
 
+    // console.dir( 'releases' );
+    // console.dir( releases );
+
+    //  console.dir( 'used_sab_app_id' );
+    // console.dir( used_sab_app_id );
+
     let rows = get_matrix_rows( releases );
 
 

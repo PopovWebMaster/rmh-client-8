@@ -256,15 +256,28 @@ const AnketaComponentComponent = ( props ) => {
                         setMediaName =      { setMediaName }
                         materialName =      { materialName }
                         setMaterialName =   { setMaterialName }
-                        Schedule = { Schedule }
-                        // download_table =    { download_table }
+                        Schedule =          { Schedule }
                     />
                 );
                 break;
 
             case 'thema':
                 result = (
-                    <AnketaTypeThema />
+                    <AnketaTypeThema 
+                        tableHeader =       { tableHeader }
+                        setTableHeader =    { setTableHeader }
+                        executor =          { executor }
+                        setExecutor =       { setExecutor }
+                        customer =          { customer }
+                        setCustomer =       { setCustomer }
+                        price =             { price }
+                        setPrice =          { setPrice }
+                        mediaName =         { mediaName }
+                        setMediaName =      { setMediaName }
+                        materialName =      { materialName }
+                        setMaterialName =   { setMaterialName }
+                        Schedule =          { Schedule }
+                    />
                 );
                 break;
 
@@ -282,7 +295,7 @@ const AnketaComponentComponent = ( props ) => {
 
     return (
         <div  className = 'SEC_AnketaComponent'>
-            {/* <SelectAnketaType 
+            <SelectAnketaType 
                 anketaType =    { anketaType }
                 setAnketaType = { setAnketaType }
                 itemList = { [
@@ -294,12 +307,12 @@ const AnketaComponentComponent = ( props ) => {
                         type: 'thema',
                         name: 'Сюжет',
                     },
-                    {
-                        type: 'list',
-                        name: 'Список',
-                    },
+                    // {
+                    //     type: 'list',
+                    //     name: 'Список',
+                    // },
                 ] }
-            /> */}
+            />
 
             { create( anketaType ) }
         </div>

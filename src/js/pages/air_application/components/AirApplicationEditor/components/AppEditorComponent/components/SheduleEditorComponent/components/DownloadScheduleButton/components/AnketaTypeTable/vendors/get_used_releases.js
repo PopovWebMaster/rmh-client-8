@@ -9,10 +9,14 @@ export const get_used_releases = () => {
 
     let { schedule, application, currentSubApplication } = store.getState();
 
+    let { eventType } = schedule;
+
 
     let { gridEventTable } = schedule;
     let { currentSubAppListById } = application;
     let { currentSubAppId, modeMix } = currentSubApplication;
+
+
 
     for( let YYYY_MM_DD in gridEventTable ){
         let dayList = [];

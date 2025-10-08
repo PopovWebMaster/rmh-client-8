@@ -66,6 +66,7 @@ const AnketaTypeTableComponent = ( props ) => {
 
 
     const download_table = () => {
+
         downloadExcel({
             tableHeader,
             executor,

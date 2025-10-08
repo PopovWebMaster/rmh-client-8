@@ -4,6 +4,7 @@ import { get_matrix_array } from './get_matrix_array.js';
 import { ExcelMediaPlanMixClass } from './../../../../../../../../../../../../../classes/ExcelMediaPlanMixClass.js';
 
 import store from './../../../../../../../../../../../../../redux/store.js';
+import { CHAR_TYPE } from './../../../../../../../../../../../../../config/application.js'
 
 export const downloadExcel = ( params ) => {
     let {
@@ -32,6 +33,13 @@ export const downloadExcel = ( params ) => {
 
     // console.dir( 'used_sub_app_id' );
     // console.dir( used_sub_app_id );
+
+    // let charType = Schedule.charType;
+
+    // let mode_status = false;
+    // if( Schedule.charType === CHAR_TYPE.BLOCK ){
+    //     mode_status = modeMix;
+    // };
 
 
 

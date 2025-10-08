@@ -27,6 +27,9 @@ export const get_day_time_point_object = ( params ) => {
         result.is_reserved = is_reserved;
         result.reserved_name = reserved_name;
 
+        result.fill_count = 0; // !!!!!!!!!!!!!
+
+
         
     };
 

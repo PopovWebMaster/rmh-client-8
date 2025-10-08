@@ -114,8 +114,7 @@ export class DaysClass {
 
                     for( let y = 0; y < sub_application_list.length; y++ ){
                         let { release_list } = sub_application_list[ y ];
-                        console.dir( 'release_list' );
-                        console.dir( release_list );
+
 
                         for( let index = 0; index < release_list.length; index++ ){
                             let {

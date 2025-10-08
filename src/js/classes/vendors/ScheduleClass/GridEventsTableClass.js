@@ -106,11 +106,28 @@ export class GridEventsTableClass {
             let { application } = store.getState();
             let { applicationList } = application;
 
+            // console.dir( 'applicationList' );
+            // console.dir( applicationList );
+
+            // console.dir( 'this.SubApplication' );
+            // console.dir( this.SubApplication );
+
+            // console.dir( 'this.charType' );
+            // console.dir( this.charType );
+
+
+            // this.charType
+
+
+
             for( let i = 0; i < applicationList.length; i++ ){
                 if( applicationList[ i ].event_id  === this.Event.id ){
                     let { sub_application_list } = applicationList[ i ];
                     for( let y = 0; y < sub_application_list.length; y++ ){
+
+
                         let { release_list } = sub_application_list[ y ];
+
                         for( let index = 0; index < release_list.length; index++ ){
                             let {
                                 date,
@@ -129,25 +146,39 @@ export class GridEventsTableClass {
                             // console.dir( 'grid_event_id' );
                             // console.dir( grid_event_id );
 
+                            // let isValid = false;
 
-                            if( this.table[ date ] ){
+                            // if( this.charType === CHAR_TYPE.BLOCK ){
+                            //    isValid = true;
+                            // }else{
+                            //     if( this.SubApplication.id === sub_application_id ){
+                            //         isValid = true;
+                            //     };
+                            // };
 
-                                if( this.table[ date ][ grid_event_id ] ){
-                                    if( this.table[ date ][ grid_event_id ].content[ sub_application_id ] ){
-                                        let { fill_count } = this.table[ date ][ grid_event_id ].content[ sub_application_id ];
-                                        this.table[ date ][ grid_event_id ].content[ sub_application_id ].fill_count = fill_count + 1;
-                                    }else{
-                                        this.table[ date ][ grid_event_id ].content[ sub_application_id ] = {
-                                            duration: duration_sec,
-                                            name,
-                                            fill_count: 1,
+                            // if( isValid ){
+                                if( this.table[ date ] ){
+                                    if( this.table[ date ][ grid_event_id ] ){
+
+                                        if( this.table[ date ][ grid_event_id ].content[ sub_application_id ] ){
+                                            let { fill_count } = this.table[ date ][ grid_event_id ].content[ sub_application_id ];
+                                            this.table[ date ][ grid_event_id ].content[ sub_application_id ].fill_count = fill_count + 1;
+                                        }else{
+                                            
+                                            this.table[ date ][ grid_event_id ].content[ sub_application_id ] = {
+                                                duration: duration_sec,
+                                                name,
+                                                fill_count: 1,
+                                            };
+
                                         };
                                     };
                                 };
+                            // };
 
 
-                                
-                            };
+
+                            
                         };
                     };
                 };
@@ -165,6 +196,10 @@ export class GridEventsTableClass {
     }
 
     GetTable(){
+
+        // console.dir( 'this.table' );
+        // console.dir( this.table );
+
         return { ...this.table };
     }
 
@@ -183,11 +218,22 @@ export class GridEventsTableClass {
 
             let table = structuredClone( this.table );
 
+            // console.dir( 'dayList' );
+            // console.dir( dayList );
+
+            // console.dir( 'table' );
+            // console.dir( table );
+
+
             for( let i = 0; i < dayList.length; i++ ){
                 let { YYYY_MM_DD, timePoints } = dayList[ i ];
 
                 for( let sec in timePoints ){
                     let { fill_count, grid_event_id } = timePoints[ sec ];
+
+
+
+
 
                     if( table[ YYYY_MM_DD ][ grid_event_id ] ){
 
@@ -218,6 +264,7 @@ export class GridEventsTableClass {
                         };
 
                     };
+
 
                 };
 
