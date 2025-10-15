@@ -51,7 +51,7 @@ const AirLayoutMenuComponent = ( props ) => {
             >
                 <MenuItem 
                     icon = { 'icon-ellipsis-vert' }
-                    title = { 'Кл. точки' }
+                    title = { 'График' }
                 />
                 
             </NavLink>

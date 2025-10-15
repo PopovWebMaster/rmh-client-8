@@ -92,10 +92,12 @@ const FilterCategoryButtonsComponent = ( props ) => {
 
 
     
-    return (
-        <div className = 'AL_FilterCategoryButtons'>
-            { create( filterCategoryList ) }
-        </div>
+    return (<>{ filterCategoryList.length > 0? (
+            <div className = 'AL_FilterCategoryButtons'>
+                { create( filterCategoryList ) }
+            </div>
+        ): '' }</>
+
     )
 
 };

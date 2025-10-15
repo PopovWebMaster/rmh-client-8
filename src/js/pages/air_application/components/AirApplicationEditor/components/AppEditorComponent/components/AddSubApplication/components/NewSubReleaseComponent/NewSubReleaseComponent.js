@@ -15,6 +15,8 @@ import { ItemNotes } from './../ItemNotes/ItemNotes.js';
 import { ItemButtonAdd } from './../ItemButtonAdd/ItemButtonAdd.js';
 import { ItemName } from './../ItemName/ItemName.js';
 
+import { ItemReleaseFileName } from './../ItemReleaseFileName/ItemReleaseFileName.js';
+
 import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/layout.js';
 
 import { set_application_data_to_store } from './../../../../../../vendors/set_application_data_to_store.js';
@@ -48,8 +50,12 @@ const NewSubReleaseComponentComponent = ( props ) => {
 
     let [ name, setName ] = useState( '' );
     let [ nameIsError, setNameIsError ] = useState( false );
-    // let [ nameErrorText, setNameErrorText ] = useState( '' );
 
+    let [ releaseFileName, setReleaseFileName ] = useState( false );
+
+
+
+    
 
     useEffect( () => {
         if( nameIsError ){
@@ -86,6 +92,7 @@ const NewSubReleaseComponentComponent = ( props ) => {
                     name,
                     durationSec,
                     airNotes: notes,
+                    releaseFileName: releaseFileName.trim(),
                 },
 
                 successCallback: ( response ) => {
@@ -118,6 +125,13 @@ const NewSubReleaseComponentComponent = ( props ) => {
                 nameIsError =       { nameIsError }
                 setNameIsError =    { setNameIsError }
             
+            />
+
+            <ItemReleaseFileName
+                isOpen =                { isOpen }
+                releaseFileName =       { releaseFileName }
+                setReleaseFileName =    { setReleaseFileName }
+                setDurationSec =        { setDurationSec}
             />
 
             <ItemPeriod 

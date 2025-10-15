@@ -50,10 +50,12 @@ const FilterEventsButtonComponent = ( props ) => {
 
 
     
-    return (
+    return (<>{ filterEventList.length > 0? (
         <div className = 'AL_FilterEventsButton'>
             { create( filterEventList ) }
         </div>
+    ): '' }</>
+
     )
 
 };

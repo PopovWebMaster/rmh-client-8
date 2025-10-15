@@ -1,0 +1,284 @@
+
+.NSA_item_release_file_names{
+    font-size: 0.9em;
+    padding: .5em 1em;
+    margin: 0 .5em;
+
+    border-bottom: 1px solid #d8d4d466;
+
+    h3{
+        font-size: .8em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        margin-right: 1em;
+        // width: 12em;
+
+        span{
+            font-size: 0.8em;
+            color: #ff4d4d94;
+        }
+    }
+
+    .NSA_IRFN_wrap{
+        font-size: 1em;
+        margin: 0.2em 0.8em 0.4em 0.5em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .NSA_IRFN_inp_text{
+            font-size: .75em;
+            padding: 0.2em 0.4em;
+            // width: calc( 100% - 2em );
+            max-width: 100%;
+            margin: 0 1em 0 0.2em;
+            text-align: left;
+            text-indent: 1em;
+
+            border: 1px solid #7474742e;
+            border-radius: 0.1em;
+            outline: none;
+            flex-grow: 1;
+
+            color: rgb(54, 54, 54);
+        }
+
+
+        .NSA_IRFN_inp_text::placeholder { 
+            color: #d3d3d3; 
+        }  
+
+
+
+        .NSA_IRFN_btn{
+            font-size: 0.68em;
+            color: #5b5b5b;
+            padding: 0.16em 1em 0.2em;
+            border-radius: 0.1em;
+            border: 1px solid #dfdfdf;
+            background-color: #dfdfdf73;
+            cursor: pointer;
+            user-select: none;
+        }
+        .NSA_IRFN_btn:hover{
+            color: #5b5b5b;
+            border: 1px solid #bfbfbf;
+            background-color: #dfdfdf3b;
+        }
+        .NSA_IRFN_btn:active{
+            color: #1b1a1a;
+        }
+
+        .NSA_IRFN_inp_file{
+            display: none;
+        }
+
+
+
+
+
+        // .NSA_ISFN_list{
+        //     font-size: 1em;
+        //     // margin: 0.2em 0.8em 0.4em 0.5em;
+        //     background-color: #f7f7f7c7;
+        //     border-radius: 0.1em;
+        //     overflow: hidden;
+
+        //     flex-grow: 1;
+        //     max-width: 60%;
+
+        //     .NSA_ISFN_list_item{
+        //         font-size: 1em;
+        //         margin: 0.2em 0.5em;
+        //         // width: calc( 100% - 2em );
+        //         width: calc( 100% - 2em );
+
+
+        //         display: flex;
+        //         justify-content: flex-start;
+        //         align-items: center;
+        //         align-content: center;
+
+        //         .NSA_ISFN_seriaName{
+        //             font-size: 0.75em;
+        //             padding: 0.15em 0;
+        //             color: #575757;
+        //             text-indent: 0.5em;
+        //             text-align: left;
+        //             border: #34343400;
+        //             border-radius: 0.1em;
+        //             outline: none;
+        //             margin: 0em 0.5em;
+        //             width: 20%;
+        //             flex-grow: 1;
+        //             background-color: #ffffff00;
+        //         }
+
+        //         .NSA_ISFN_fileName{
+        //             font-size: 0.55em;
+        //             padding: 0.5em 0;
+        //             color: #575757;
+        //             text-indent: 0.5em;
+        //             text-align: left;
+        //             border: #00000000;
+        //             border-radius: 0.1em;
+        //             outline: none;
+        //             margin: 0em 0.5em;
+        //             width: 25%;
+        //             flex-grow: 1;
+        //             background-color: #fffffff3;
+        //         }
+
+        //         .NSA_ISFN_fileDuration{
+        //             font-size: 0.7em;
+        //             padding: 0.2em 0;
+        //             color: #14973d;
+        //             background-color: rgb(255, 255, 255);
+        //             border-radius: 0.1em;
+        //             width: 5em;
+        //             text-align: center;
+        //         }
+
+
+        //     }
+        // }
+
+        // .NSA_ISFN_list_from_folder{
+        //     font-size: 1em;
+        //     max-width: 40%;
+        //     flex-grow: 1;
+
+        //     // background-color: red;
+
+        //     .from_folder{
+        //         font-size: 1em;
+
+        //         display: flex;
+        //         justify-content: flex-end;
+        //         align-items: center;
+        //         align-content: center;
+        //         span{
+        //             font-size: 0.68em;
+        //             color: #5b5b5b;
+        //             padding: 0.16em 1em;
+        //             border-radius: 0.1em;
+        //             border: 1px solid #dfdfdf;
+        //             background-color: #dfdfdf73;
+        //             cursor: pointer;
+        //             user-select: none;
+        //         }
+        //         span:hover{
+        //             color: #5b5b5b;
+        //             border: 1px solid #bfbfbf;
+        //             background-color: #dfdfdf3b;
+        //         }
+        //         span:active{
+        //             color: #1b1a1a;
+        //             // border: 1px solid #bfbfbf;
+        //             // background-color: #dfdfdf3b;
+        //         }
+
+        //         .hiddenInput{
+        //             display: none;
+        //         }
+        //     }
+
+        //     .from_folder_list{
+        //         font-size: 1em;
+
+        //         // background-color: red;
+
+        //         .from_folder_list_active{
+        //             font-size: 1em;
+
+        //             display: flex;
+        //             justify-content: flex-start;
+        //             align-items: center;
+        //             align-content: center;
+
+        //             margin: 0.5em 0.2em 0.2em 0.2em;
+        //             padding: 0.2em 0.3em;
+        //             background-color: #d4d4d475;
+
+        //             >input{
+        //                 font-size: 0.7em;
+        //                 padding: 0.2em 0;
+        //                 color: #575757;
+        //                 text-indent: 0.2em;
+        //                 text-align: left;
+        //                 border: #34343400;
+        //                 border-radius: 0.1em;
+        //                 outline: none;
+        //                 margin: 0em 0.5em;
+        //                 max-width: 100%;
+        //                 flex-grow: 1;
+        //                 background-color: #ffffff00;
+        //                 font-weight: bold;
+        //             }
+
+        //             .from_folder_list_item_dur{
+        //                 font-size: 0.7em;
+        //                 padding: 0.2em 0;
+        //                 color: #14973d;
+        //                 background-color: #ffffff21;
+        //                 border-radius: 0.1em;
+        //                 width: 5em;
+        //                 flex-grow: 0;
+        //                 text-align: center;
+        //             }
+
+        //         }
+
+        //         .from_folder_list_item{
+        //             font-size: 1em;
+
+        //             display: flex;
+        //             justify-content: flex-start;
+        //             align-items: center;
+        //             align-content: center;
+
+        //             margin: 0.2em 0;
+
+        //             >input{
+        //                 font-size: 0.65em;
+        //                 padding: 0.15em 0;
+        //                 color: #575757;
+        //                 text-indent: 0.2em;
+        //                 text-align: left;
+        //                 border: #34343400;
+        //                 border-radius: 0.1em;
+        //                 outline: none;
+        //                 margin: 0em 0.5em;
+        //                 max-width: 100%;
+        //                 flex-grow: 1;
+        //                 background-color: #ffffff00;
+        //             }
+
+        //             .from_folder_list_item_dur{
+        //                 font-size: 0.65em;
+        //                 padding: 0.2em 0;
+        //                 color: #14973d;
+        //                 background-color: #ffffff21;
+        //                 border-radius: 0.1em;
+        //                 width: 5em;
+        //                 flex-grow: 0;
+        //                 text-align: center;
+        //             }
+        //         }
+
+        //         .from_folder_list_item:hover{
+        //             background-color: rgba(216, 216, 216, 0.514);
+        //         }
+
+
+        //     }
+        // }
+
+
+    }
+
+    
+
+}

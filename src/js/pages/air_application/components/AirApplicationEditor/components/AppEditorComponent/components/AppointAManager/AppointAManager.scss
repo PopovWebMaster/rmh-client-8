@@ -1,0 +1,110 @@
+.appointAManager{
+    font-size: 1em;
+    margin: 0 0.5em 0 3em;
+    width: 20em;
+
+    background-color: #ffffff;
+    // #296a82
+
+    padding: .24em 0.5em;
+    border-radius: .1em;
+    border: 1px solid #8d7c7c;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    position: relative;
+
+    z-index: 2000;
+
+    .appointAManager_icon{
+        font-size: 1em;
+        color: #808080;
+        margin-right: 0.4em;
+        padding: 0 0 0.1em 0;
+    }
+    .appointAManager_title{
+        font-size: 0.8em;
+        color: #3f6d92;
+    }
+
+    .appointAManager_name{
+        font-size: 0.8em;
+        color: #444444;
+        font-weight: bold;
+        margin: 0 0.5em;
+        overflow: hidden;
+        max-width: 100%;
+        flex-grow: 1;
+    }
+
+    .appointAManager_arrow{
+        font-size: 0.9em;
+        color: #8b8b8b;
+        font-weight: bold;
+       
+    }
+
+    .AAM_drop_down{
+        font-size: 1em;
+        width: calc( 100% - 2px );
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #ffffff;
+        border: 1px solid #d3d3d3;
+        border-radius: 0 0 0.1em 0.1em;
+
+        max-height: 10em;
+        overflow: hidden;
+
+        .AAM_drop_down_item{
+            font-size: 1em;
+            padding: 0.3em 0.3em 0.3em 0.8em;
+            cursor: pointer;
+            overflow: hidden;
+            
+            span{
+                font-size: 0.8em;
+                color: #343434;
+            }
+        }
+
+        .AAM_drop_down_item:hover{
+            background-color: #dbdbdb52;
+            span{
+                color: #0e0e0e;
+            }
+        }
+
+        .AAM_drop_down_item:active{
+            span{
+                color: #cf4848;
+            }
+        }
+
+    }
+
+
+
+    
+}
+
+.appointAManager.isSelected{
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.appointAManager.isSelected:hover{
+
+    .appointAManager_arrow{
+        color: #000000;
+       
+    }
+
+}

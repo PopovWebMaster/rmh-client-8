@@ -132,6 +132,7 @@ const AddNewGridEventComponentComponent = ( props ) => {
                 eventId =       { eventId }
                 setEventId =    { setEventId }
                 durationLimit = { timeSpaceTo - timeSpaceFrom }
+                startingIsOpen = { true }
             />
 
             <AppearanceOfEvent 

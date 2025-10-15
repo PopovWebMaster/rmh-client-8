@@ -26,6 +26,8 @@ const SaveApplicationChangesComponent = ( props ) => {
         setSpinnerIsActive,
         // setCurrentAppIsChanged,
 
+        currentAppManagerId,
+
     } = props;
 
 
@@ -43,6 +45,11 @@ const SaveApplicationChangesComponent = ( props ) => {
                     applicationCategoryId:      currentAppCategoryId,
                     applicationNum:             currentAppNum,
                     applicationManagerNotes:    currentAppManagerNotes,
+
+                    applicationManagerId:    currentAppManagerId,
+
+
+                    
                 },
 
                 successCallback: ( response ) => {
@@ -88,6 +95,8 @@ export function SaveApplicationChanges( props ){
             currentAppManagerNotes =    { application.currentAppManagerNotes }
 
             currentAppIsChanged =  { application.currentAppIsChanged }
+            currentAppManagerId =  { application.currentAppManagerId }
+
 
             setSpinnerIsActive =    { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
             setCurrentAppIsChanged =    { ( val ) => { dispatch( setCurrentAppIsChanged( val ) ) } }

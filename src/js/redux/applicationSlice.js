@@ -30,6 +30,8 @@ export const applicationSlice = createSlice({
 
         currentAppNum: null,
         currentAppManagerNotes: '',
+        currentAppManagerId: null,
+
         currentSubAppList: [],
         currentSubAppListById: {},
 
@@ -63,16 +65,37 @@ export const applicationSlice = createSlice({
             state.applicationList =  action.payload;
             let { 
                 applicationById,
-                managersById,
-                managersList,
+                // managersById,
+                // managersList,
             } = get_all_lists_of_values_from_application_list( action.payload );
 
             state.applicationById = applicationById;
-            state.managersById = managersById;
-            state.managersList = managersList;
+            // state.managersById = managersById;
+            // state.managersList = managersList;
 
 
         },
+
+        setManagersList: ( state, action ) => {
+
+            let managersList = action.payload;
+            let managersById = {};
+
+            for( let i = 0; i < managersList.length; i++ ){
+                let { id } = managersList[ i ];
+                if( managersById[ id ] ){
+
+                }else{
+                    managersById[ id ] = { ...managersList[ i ] };
+                };
+
+            };
+            state.managersById = managersById;
+            state.managersList = managersList;
+
+        },
+
+        
 
         setCurrentApplicationId: ( state, action ) => {
             state.currentApplicationId =  action.payload;
@@ -118,6 +141,13 @@ export const applicationSlice = createSlice({
         setCurrentAppManagerNotes: ( state, action ) => {
             state.currentAppManagerNotes =  action.payload;
         },
+
+        setCurrentAppManagerId: ( state, action ) => {
+            state.currentAppManagerId =  action.payload;
+        },
+
+
+        
 
         // setCurrentAppOrders: ( state, action ) => {
         //     state.currentAppOrders =  action.payload;
@@ -173,7 +203,7 @@ export const {
     setCurrentCategoryIdOfListFilter,
     setCurrentEventIdOfListFilter,
 
-
+setManagersList,
 
 
     setCurrentAppName,
@@ -182,6 +212,7 @@ export const {
     setCurrentAppNum,
     setCurrentSubAppList,
     setCurrentAppManagerNotes,
+    setCurrentAppManagerId,
     // setCurrentAppOrders,
     setCurrentAppIsChanged,
 
@@ -213,6 +244,7 @@ export const selectorData = ( state ) => {
 
         currentAppNum:          state.application.currentAppNum,
         currentAppManagerNotes: state.application.currentAppManagerNotes,
+        currentAppManagerId: state.application.currentAppManagerId,
         currentSubAppList:      state.application.currentSubAppList,
         currentSubAppListById:      state.application.currentSubAppListById,
 

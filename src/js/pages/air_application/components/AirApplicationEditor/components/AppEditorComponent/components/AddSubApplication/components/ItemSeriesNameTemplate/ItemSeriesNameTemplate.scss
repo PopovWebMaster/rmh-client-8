@@ -1,0 +1,87 @@
+
+.NSA_item_serial_name_template{
+    font-size: 0.9em;
+    padding: .5em 1em;
+    margin: 0 .5em;
+
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
+    // align-content: center;
+
+    border-bottom: 1px solid #d8d4d466;
+
+    h3{
+        font-size: .8em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        margin-right: 1em;
+        // width: 12em;
+
+        span{
+            font-size: 0.8em;
+            color: #ff4d4d94;
+        }
+    }
+
+    input{
+        font-size: .75em;
+        padding: 0.4em 0.4em;
+        width: calc( 100% - 2em );
+        // max-width: 100%;
+        margin: 0 1em 0 0.2em;
+        text-align: left;
+        text-indent: 1em;
+
+        border: 1px solid #7474742e;
+        border-radius: 0.1em;
+        outline: none;
+        // flex-grow: 1;
+
+        color: rgb(54, 54, 54);
+    }
+
+    input[type="text"]::placeholder { 
+        color: #d3d3d3; 
+    }  
+
+    .error{
+        font-size: .75em;
+        color: #9d2c2c;
+        line-height: 1.4em;
+        padding: .5em 1em;
+        text-indent: 1em;
+
+    }
+
+    .NSA_ISNT_list{
+        font-size: 1em;
+        margin: 0.2em 0.8em 0.4em 0.5em;
+        background-color: #f7f7f7c7;
+        border-radius: 0.1em;
+        overflow: hidden;
+
+        .NSA_ISNT_list_inp{
+            font-size: 0.75em;
+            // line-height: 1em;
+            padding: 0.15em 0;
+            color: #575757;
+            text-indent: 0.5em;
+            text-align: left;
+            border: #34343400;
+            border-radius: 0.1em;
+            outline: none;
+            margin: 0em 0.5em;
+            width: calc( 100% - 1em );
+            background-color: #ffffff00;
+        }
+        .NSA_ISNT_list_inp:focus{
+            background-color: #ffffffda;
+        }
+    }
+
+}
+
+// .NSA_item_serial_name_template.isError{
+//     background-color: #ffdede;
+// }

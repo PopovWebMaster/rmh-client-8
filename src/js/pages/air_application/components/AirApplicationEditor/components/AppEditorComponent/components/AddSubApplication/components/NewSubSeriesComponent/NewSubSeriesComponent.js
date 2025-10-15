@@ -14,8 +14,11 @@ import { ItemPeriod } from './../ItemPeriod/ItemPeriod.js';
 import { ItemDuration } from './../ItemDuration/ItemDuration.js';
 import { ItemNotes } from './../ItemNotes/ItemNotes.js';
 import { ItemButtonAdd } from './../ItemButtonAdd/ItemButtonAdd.js';
+import { ItemSerialFileNames } from './../ItemSerialFileNames/ItemSerialFileNames.js';
+import { ItemSeriesNameTemplate } from './../ItemSeriesNameTemplate/ItemSeriesNameTemplate.js';
 
 import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/layout.js';
+
 
 import { set_application_data_to_store } from './../../../../../../vendors/set_application_data_to_store.js';
 
@@ -48,10 +51,57 @@ const NewSubSeriesComponentComponent = ( props ) => {
     let [ durationSec, setDurationSec ] = useState( MIN_EVENT_DURATION_SEC );
     let [ notes, setNotes ] = useState( '' );
 
+    let [ nameTemplate, setNameTemplate ] = useState( '' );
+    let [ serialNames, setSerialNames ] = useState( {} );
+    let [ serialFileNames, setSerialFileNames ] = useState( {} );
+
+
+    const get_series_data_list = () => {
+
+        let result = [];
+
+        for( let key in serialNames ){
+            let seriaName = serialNames[ key ];
+            let fileName = serialFileNames[ key ].name;
+            let fileDuration = serialFileNames[ key ].duration;
+
+            result.push({
+                seriaName,
+                fileName: fileName.trim(),
+                fileDuration,
+                serial_num: Number( key ),
+            });
+        };
+
+        return result;
+
+    }
+
+
+
+
 
     const click = () => {
 
         if( isReady ){
+
+            // console.dir({
+            //         applicationId: currentApplicationId,
+            //         applicationName:            currentAppName,
+            //         applicationCategoryId:      currentAppCategoryId,
+            //         applicationNum:             currentAppNum,
+            //         applicationManagerNotes:    currentAppManagerNotes,
+            //         serialNumFrom: numFromValue,
+            //         serialNumTo: numToValue,
+            //         periodFrom: dataFrom,
+            //         periodTo: dataTo,
+            //         durationSec,
+            //         airNotes: notes,
+            //         seriesDataList: get_series_data_list(),
+            // });
+
+
+            
 
             setSpinnerIsActive( true );
 
@@ -71,6 +121,7 @@ const NewSubSeriesComponentComponent = ( props ) => {
                     periodTo: dataTo,
                     durationSec,
                     airNotes: notes,
+                    seriesDataList: get_series_data_list(),
                 },
 
                 successCallback: ( response ) => {
@@ -87,6 +138,8 @@ const NewSubSeriesComponentComponent = ( props ) => {
 
                 },
             });
+
+            
 
 
         };
@@ -125,6 +178,25 @@ const NewSubSeriesComponentComponent = ( props ) => {
                 isOpen =            { isOpen }
                 notes =             { notes }
                 setNotes =          { setNotes }
+            />
+
+            <ItemSeriesNameTemplate
+                isOpen =            { isOpen }
+                nameTemplate =      { nameTemplate }
+                setNameTemplate =   { setNameTemplate }
+                numFrom =           { numFromValue }
+                numTo =             { numToValue }
+                applicationName =   { currentAppName }
+                serialNames =       { serialNames }
+                setSerialNames =    { setSerialNames }
+            />
+
+            <ItemSerialFileNames
+                isOpen =                { isOpen }
+                serialNames =           { serialNames }
+                serialFileNames =       { serialFileNames }
+                setSerialFileNames =    { setSerialFileNames }
+                durationSec =           { durationSec }
             />
 
             <ItemButtonAdd 

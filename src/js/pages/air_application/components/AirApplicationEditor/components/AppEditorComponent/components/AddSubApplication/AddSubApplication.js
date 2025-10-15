@@ -33,7 +33,7 @@ const AddSubApplicationComponent = ( props ) => {
                 isOpen =    { isOpenRelease }
                 setIsOpen = { setIsOpenRelease }
                 width =     '40em'
-                height =    '22em'
+                height =    '25em'
                 title = 'Добавить выпуск'
             >
                 <NewSubReleaseComponent
@@ -45,8 +45,8 @@ const AddSubApplicationComponent = ( props ) => {
             <AlertWindowContainer
                 isOpen =    { isOpenSeries }
                 setIsOpen = { setIsOpenSeries }
-                width =     '40em'
-                height =    '22em'
+                width =     '70vw'
+                height =    '42em'
                 title = 'Добавить серии'
             >
                 <NewSubSeriesComponent

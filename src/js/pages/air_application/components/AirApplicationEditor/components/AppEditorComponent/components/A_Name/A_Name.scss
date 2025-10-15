@@ -26,7 +26,7 @@
         padding: 0.4em 1em;
         border: 1px solid #c9c9c966;
         border-radius: 0.1em;
-        width: 50%;
+        width: 40%;
         outline: none;
         background-color: #ffffff;
         color: #485377;
@@ -36,5 +36,16 @@
         // background-color: red;
         border: 1px solid #a8a8a8;
         background-color: #ffffff;
+    }
+
+    .A_Name_forChildrens{
+        font-size: 1em;
+        flex-grow: 2;
+        max-width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+        z-index: 1000;
     }
 }

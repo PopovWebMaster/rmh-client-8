@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import './SchEventContainer.scss';
 
-import { selectorData as scheduleResultSlise } from './../../../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultSlise, setDragebleReleaseId } from './../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
@@ -17,6 +17,8 @@ import { get_target_state_for_element } from './vendors/get_target_state_for_ele
 import { CompletedTimeSector } from './components/CompletedTimeSector/CompletedTimeSector.js';
 import { EmptyTimeSector } from './components/EmptyTimeSector/EmptyTimeSector.js';
 import { SelectedEventWindow } from './components/SelectedEventWindow/SelectedEventWindow.js';
+
+import { DropZone } from './components/DropZone/DropZone.js';
 
 
 
@@ -43,6 +45,8 @@ const SchEventContainerComponent = ( props ) => {
         scheduleEventsList,
         scheduleEventsListByGridEventId,
 
+        setDragebleReleaseId,
+
         children,
     } = props;
 
@@ -50,6 +54,11 @@ const SchEventContainerComponent = ( props ) => {
     let [ eventType, setEventType ] = useState( '' );
     let [ isLighter, setIsLighter ] = useState( false );
 
+    let [ dropStartTime, setDropStartTime ] = useState( startTime );
+
+
+
+    
 
     let [ selectedEventId, setSelectedEventId ] = useState( null );
     /*
@@ -100,16 +109,21 @@ const SchEventContainerComponent = ( props ) => {
                     
                 let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+
+                // console.dir( '!!!!!!!!!!!!!!!!!!!!' );
                 let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
                     gridCurrentDay,
                     isAKeyPoint: false,
-                    startTime,
+                    startTime: dropStartTime,
                     eventId: selectedEventId,
                     durationTime: event.durationTime,
                 });
                 StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, releaseIdInWork );
                 StoreScheduleResultEvents.SetListToStore( true);
                 setDurationLimit( null );
+
+                setSelectedEventWindow_isOpen( false );
+                setDragebleReleaseId( null );
             };
 
         };
@@ -144,7 +158,11 @@ const SchEventContainerComponent = ( props ) => {
         setIsLighter( false );
    }
 
-   const drop = () => {
+   const drop = ( e ) => {
+
+        // console.dir( e.target );
+
+
 
         setIsLighter( false );
 
@@ -154,12 +172,21 @@ const SchEventContainerComponent = ( props ) => {
             if( isEmpty ){
                 setReleaseIdInWork( dragebleReleaseId );
 
+                let drop_start_time = startTime;
+
+                if( e.target.dataset.dropStartTime ){
+                    drop_start_time = Number( e.target.dataset.dropStartTime );
+                };
+
                 if( dragebleReleaseEventId === null ){
                     setSelectedEventWindow_isOpen( true );
+                    setDropStartTime( drop_start_time );
                     /*
                         Новое событие в сетке создается из useEffect
                     */
                 }else{
+
+
                     let event = eventListById[ dragebleReleaseEventId ];
 
                     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
@@ -167,12 +194,14 @@ const SchEventContainerComponent = ( props ) => {
                     let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
                         gridCurrentDay,
                         isAKeyPoint: false,
-                        startTime,
+                        startTime: drop_start_time,
                         eventId: dragebleReleaseEventId,
                         durationTime: event.durationTime,
                     });
                     StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
                     StoreScheduleResultEvents.SetListToStore( true );
+
+                    setDragebleReleaseId( null );
                 };
 
                 
@@ -182,6 +211,8 @@ const SchEventContainerComponent = ( props ) => {
                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
                 StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
                 StoreScheduleResultEvents.SetListToStore( true );
+
+                setDragebleReleaseId( null );
             };
         };
 
@@ -195,6 +226,7 @@ const SchEventContainerComponent = ( props ) => {
             onDragLeave =   { drag_leave }
             onDrop =        { drop }
         >
+
 
             
 
@@ -233,6 +265,15 @@ const SchEventContainerComponent = ( props ) => {
                     { children }
                 </div>
             </div>
+
+            <DropZone
+                dragebleReleaseId = { dragebleReleaseId }
+                isEmpty =           { isEmpty }
+                startTime =         { startTime }
+                durationTime =      { durationTime }
+
+            />
+            
         </div>
     )
 
@@ -266,7 +307,7 @@ export function SchEventContainer( props ){
             gridCurrentDay = { layout.gridCurrentDay }
 
 
-            // setCounterList = { ( obj ) => { dispatch( setCounterList( obj ) ) } }
+            setDragebleReleaseId = { ( val ) => { dispatch( setDragebleReleaseId( val ) ) } }
 
         />
     );

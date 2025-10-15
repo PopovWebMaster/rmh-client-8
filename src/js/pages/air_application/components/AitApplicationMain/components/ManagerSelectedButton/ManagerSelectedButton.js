@@ -101,7 +101,7 @@ const ManagerSelectedButtonComponent = ( props ) => {
 
                 <div className = 'MSB_drop_down'>
 
-                    <ScrollContainer>
+                    <ScrollContainer height = '10em' >
                         <div 
                             className = 'MSB_drop_down_item'
                             onClick = { () => { set_meneger_id( null ) } }

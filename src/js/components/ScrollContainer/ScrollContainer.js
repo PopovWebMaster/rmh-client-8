@@ -9,12 +9,16 @@ import './ScrollContainer.scss';
 const ScrollContainerComponent = ( props ) => {
 
     let {
-        children
+        children,
+        height = null,
     } = props;
     
 
     return (
-        <div className = 'scrollContainer'>
+        <div 
+            className = 'scrollContainer'
+            style = { height === null? {}: { height } }
+        >
             { children }
         </div>
     )

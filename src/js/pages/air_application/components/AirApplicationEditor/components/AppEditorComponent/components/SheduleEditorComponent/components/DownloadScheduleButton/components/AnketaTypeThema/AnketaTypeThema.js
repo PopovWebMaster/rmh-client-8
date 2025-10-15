@@ -9,8 +9,12 @@ import './AnketaTypeThema.scss';
 // import { selectorData as applicationSlice  } from './../../../../../../../../../../../../redux/applicationSlice.js';
 
 import { AWInputText } from './../../../../../../../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
-import { AWTextarea } from './../../../../../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
+// import { AWTextarea } from './../../../../../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
 import { AWButtonAdd } from './../../../../../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
+
+// import { download_excel_plot } from './vendors/download_excel_plot.js';
+import { download_excel_plot } from './../vendors/download_excel_plot.js';
+
 
 const AnketaTypeThemaComponent = ( props ) => {
 
@@ -48,6 +52,15 @@ const AnketaTypeThemaComponent = ( props ) => {
 
         console.dir( 'props' );
         console.dir( props );
+        console.dir( Schedule );
+
+
+        download_excel_plot({
+            customer,
+            executor,
+            mediaName,
+            Schedule,
+        });
 
 
     }

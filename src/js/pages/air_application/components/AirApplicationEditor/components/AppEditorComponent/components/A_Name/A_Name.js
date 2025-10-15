@@ -12,6 +12,8 @@ const A_NameComponent = ( props ) => {
     let {
         currentAppName,
 
+        children,
+
     } = props;
 
 
@@ -26,6 +28,8 @@ const A_NameComponent = ( props ) => {
                 value =     { currentAppName }
                 onChange =  { () => {} }
             />
+
+            <div className = 'A_Name_forChildrens'>{ children }</div>
 
         </div>
     )

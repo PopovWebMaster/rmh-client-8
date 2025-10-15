@@ -54,7 +54,7 @@ const ItemDurationComponent = ( props ) => {
             setDurationSec( MIN_EVENT_DURATION_SEC );
         };
 
-    }, [ isOpen ] );
+    }, [ isOpen, durationSec ] );
 
     const enter = () => {
         let time = `${HH}:${MM}:${SS}`;

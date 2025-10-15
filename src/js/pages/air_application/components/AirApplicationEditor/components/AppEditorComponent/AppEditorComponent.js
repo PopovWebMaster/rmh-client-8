@@ -17,6 +17,8 @@ import { SubAppList }           from './components/SubAppList/SubAppList.js';
 
 import { A_Chart } from './components/A_Chart/A_Chart.js';
 
+import { AppointAManager } from './components/AppointAManager/AppointAManager.js'
+
 const AppEditorComponentComponent = ( props ) => {
 
     let {
@@ -31,19 +33,30 @@ const AppEditorComponentComponent = ( props ) => {
             <div className = 'AEC_wrap'>
 
                 <A_Header />
-                <A_Name />
+                
+                <A_Name>
+                    <AppointAManager />
+                </A_Name>
+
                 <A_CategoryNoEdit />
                 <A_Chart />
                 <A_ManagerNotes />
 
                 <div className = 'AEC_button_panel'>
+
                     <div className = 'AEC_left'>
                         <AddSubApplication />
                     </div>
 
+                    
+
                     <div className = 'AEC_right'>
                         <RemoveApplication />
                     </div>
+
+                    
+
+
                 </div>
 
                 <div className = 'AEC_orders_wrap'>
