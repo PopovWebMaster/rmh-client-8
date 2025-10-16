@@ -218,7 +218,7 @@ const ItemSerialFileNamesComponent = ( props ) => {
 
     return (
         <div className = 'NSA_item_serial_file_names'>
-            <h3>Названия файлов и хрон:</h3>
+            <h3>Имена файлов и хроноетраж:</h3>
 
             <div className = 'NSA_ISFN_list_wrap'>
                 <div className = 'NSA_ISFN_list'>

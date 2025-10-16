@@ -65,10 +65,14 @@ const ReleasesItemComponent = ( props ) => {
                 file_list,
                 id,
                 startTime,
+                air_notes,
             } = item;
 
-            // console.dir( 'item' );
-            // console.dir( item );
+            let notesValue = air_notes === null? '': air_notes;
+
+            if( notesValue !== '' ){
+                notesValue = <span className = 'air_notes'>{ `(${ notesValue })` }</span>;
+            };
 
             let startTime_sec = 0;
             if( scheduleEventsListByGridEventId[ gridEventId ] ){
@@ -79,10 +83,14 @@ const ReleasesItemComponent = ( props ) => {
 
             let file = '';
             if( file_list.length > 0 ){
-                file = `${file_list[ file_list.length - 1 ]}`;
+                // file = `${file_list[ file_list.length - 1 ]} ${ notesValue }`;
+                file = <>{`${file_list[ file_list.length - 1 ]}`}{ notesValue }</>;
+
             };
 
-            let name = file === ''? `${releaseName}/`: file;
+            // let name = file === ''? <>{`${releaseName}/`} {notesValue}</>`${releaseName}/  ${ notesValue }`: file;
+            let name = file === ''? <>{`${releaseName}/`} {notesValue}</>: file;
+
             return (
                 <div
                     className = 'CTS_RI_Item'

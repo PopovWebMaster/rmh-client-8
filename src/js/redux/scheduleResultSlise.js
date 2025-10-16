@@ -43,7 +43,7 @@ export const scheduleResultSlise = createSlice({
         infoMessageText: '', // просто записываешь текст и он выскакивает. Реагирует на содержание строки
 
 
-
+        allScheduleFileNames: [],
 
 
 
@@ -158,6 +158,13 @@ export const scheduleResultSlise = createSlice({
         },
 
 
+        setAllScheduleFileNames: ( state, action ) => {
+            state.allScheduleFileNames =  action.payload;
+        },
+
+        
+
+
         
 
 
@@ -186,6 +193,7 @@ export const {
     setDragebleReleaseEventId,
     setUsedReleasesById,
     setInfoMessageText,
+    setAllScheduleFileNames,
 
 
 } = scheduleResultSlise.actions;
@@ -217,6 +225,9 @@ export const selectorData = ( state ) => {
         dragebleReleaseEventId: state.scheduleResult.dragebleReleaseEventId,
         usedReleasesById: state.scheduleResult.usedReleasesById,
         infoMessageText: state.scheduleResult.infoMessageText,
+
+        allScheduleFileNames: state.scheduleResult.allScheduleFileNames,
+
 
 
 

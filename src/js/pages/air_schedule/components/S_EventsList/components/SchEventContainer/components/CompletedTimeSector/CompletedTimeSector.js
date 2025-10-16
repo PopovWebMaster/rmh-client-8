@@ -13,6 +13,8 @@ import { StartTimeEditButton } from './../../../StartTimeEditButton/StartTimeEdi
 
 import { TimePushButtons } from './../TimePushButtons/TimePushButtons.js';
 
+import { DurationTimeEditButton } from './../DurationTimeEditButton/DurationTimeEditButton.js';
+
 const CompletedTimeSectorComponent = ( props ) => {
 
     let {
@@ -36,7 +38,12 @@ const CompletedTimeSectorComponent = ( props ) => {
 
             
 
-            <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span>
+            {/* <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span> */}
+
+            <DurationTimeEditButton
+                durationTime =  { durationTime }
+                gridEventId =   { gridEventId }
+            />
 
         </div>
     )

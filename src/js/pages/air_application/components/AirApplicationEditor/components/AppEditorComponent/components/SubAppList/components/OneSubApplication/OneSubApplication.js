@@ -16,6 +16,8 @@ import { ItemSubShedule }           from './../ItemSubShedule/ItemSubShedule.js'
 import { ItemSubReportInDetail }    from './../ItemSubReportInDetail/ItemSubReportInDetail.js';
 import { ItemSubRemove }            from './../ItemSubRemove/ItemSubRemove.js';
 
+import { ItemAirNotes } from './../ItemAirNotes/ItemAirNotes.js';
+
 ;
 
 const OneSubApplicationComponent = ( props ) => {
@@ -69,6 +71,12 @@ const OneSubApplicationComponent = ( props ) => {
                 id =                { id }
                 application_id =    { application_id }
                 description =       { description }
+            />
+
+            <ItemAirNotes
+                id =                { id }
+                application_id =    { application_id }
+                air_notes =         { air_notes }
             />
 
 

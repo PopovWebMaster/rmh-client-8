@@ -20,16 +20,16 @@ const YesOrNoTitleComponent = ( props ) => {
 
     const getTitle = ( val ) => {
 
-        let title = '';
+        let title_ = '';
         let className = '';
         let classNameIcon = '';
 
         if( val ){
-            title = 'Есть';
+            title_ = 'Есть';
             className = 'SA_YesOrNoTitle_yes';
             classNameIcon = 'icon-ok-3 icon'
         }else{
-            title = 'Нет';
+            title_ = 'Нет';
             className = 'SA_YesOrNoTitle_no';
             classNameIcon = 'icon'
         };
@@ -37,14 +37,14 @@ const YesOrNoTitleComponent = ( props ) => {
         return (
             <span className = 'SA_YesOrNoTitle_title'>
                 <span className = { classNameIcon }></span>
-                <span className = { className }>{ title }</span>
+                <span className = { className }>{ title_ }</span>
             </span>
         );
 
     }
 
     return (
-        <h3 className = 'SA_YesOrNoTitle'>{ title }: { getTitle( booleanValue ) }</h3>
+        <h3 className = { `SA_YesOrNoTitle ${ booleanValue? 'isYes': ''}` }><span className = 'titleText'  >{ title }</span>: { getTitle( booleanValue ) }</h3>
 
     )
 

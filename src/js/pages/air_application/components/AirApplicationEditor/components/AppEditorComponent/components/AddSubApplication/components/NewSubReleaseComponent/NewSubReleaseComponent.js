@@ -6,8 +6,12 @@ import { useDispatch } from 'react-redux';
 import './NewSubReleaseComponent.scss';
 
 import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as layoutSlice } from './../../../../../../../../../../redux/layoutSlice.js';
+
 import { setSpinnerIsActive }               from './../../../../../../../../../../redux/spinnerSlice.js';
 import { send_request_to_server }           from './../../../../../../../../../../helpers/send_request_to_server.js';
+import { convert_time_str_to_sec }           from './../../../../../../../../../../helpers/convert_time_str_to_sec.js';
+
 
 import { ItemPeriod } from './../ItemPeriod/ItemPeriod.js';
 import { ItemDuration } from './../ItemDuration/ItemDuration.js';
@@ -38,6 +42,10 @@ const NewSubReleaseComponentComponent = ( props ) => {
         currentPage,
         setSpinnerIsActive,
 
+
+        currentAppEventId,
+        eventListById,
+
     } = props;
 
     let [ isReady, setIsReady ] = useState( false );
@@ -45,13 +53,30 @@ const NewSubReleaseComponentComponent = ( props ) => {
     let [ dataFrom, setDataFrom ] = useState( '' );
     let [ dataTo, setDataTo ] = useState( '' );
 
-    let [ durationSec, setDurationSec ] = useState( MIN_EVENT_DURATION_SEC );
+    let [ durationSec, setDurationSec ] = useState( 0 );
     let [ notes, setNotes ] = useState( '' );
 
     let [ name, setName ] = useState( '' );
     let [ nameIsError, setNameIsError ] = useState( false );
 
     let [ releaseFileName, setReleaseFileName ] = useState( false );
+
+    useEffect(() => {
+
+        if( isOpen ){
+            if( eventListById[ currentAppEventId ] ){
+                let { durationTime } = eventListById[ currentAppEventId ];
+                let dur_sec = convert_time_str_to_sec( durationTime );
+                setDurationSec( dur_sec );
+
+            }else{
+                setDurationSec( MIN_EVENT_DURATION_SEC );
+            };
+        }else{
+
+        };
+
+    }, [ isOpen ]);
 
 
 
@@ -170,6 +195,11 @@ const NewSubReleaseComponentComponent = ( props ) => {
 export function NewSubReleaseComponent( props ){
 
     const application = useSelector( applicationSlice );
+    const layout = useSelector( layoutSlice );
+
+
+
+    
     const dispatch = useDispatch();
 
     return (
@@ -177,6 +207,16 @@ export function NewSubReleaseComponent( props ){
             { ...props }
             // currentAppCategoryId =      { application.currentAppCategoryId }
             currentApplicationId =      { application.currentApplicationId }
+
+            currentAppEventId = { application.currentAppEventId }
+            eventListById =     { layout.eventListById }
+
+
+
+            
+
+
+
 
 
             currentAppName =            { application.currentAppName }

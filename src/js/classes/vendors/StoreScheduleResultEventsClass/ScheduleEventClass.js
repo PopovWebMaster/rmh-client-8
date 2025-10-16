@@ -88,12 +88,13 @@ export class ScheduleEventClass{
         this.releases =             [];
         this.releaseList = [];
 
-        // this.finalNotes = this.notes;
+        let eventData = get_event_by_id( this.eventId );
 
+        this.notes = eventData.notes;
+        this.finalNotes = eventData.notes;
 
-        let { type } = get_event_by_id( this.eventId );
-        if( type ){
-            if( type === EVENT_TYPE.BLOCK ){
+        if( eventData.type ){
+            if( eventData.type === EVENT_TYPE.BLOCK ){
                 this.durationTime  = MIN_EVENT_DURATION_SEC
             };
         }
@@ -291,18 +292,18 @@ export class ScheduleEventClass{
     }
 
     UpdateFinalNotes(){
-        let { type } = get_event_by_id( this.eventId );
-        if( type ){
-            if( type === EVENT_TYPE.BLOCK ){
-                this.finalNotes = this.notes;
-            }else{
-                let releaseNotes = '';
-                for( let i = 0; i < this.releaseList.length; i++ ){
-                    releaseNotes = `${releaseNotes} ${this.releaseList[ i ].air_notes}`;
-                };
-                this.finalNotes = `${this.notes} ${ releaseNotes }`;
-            };
-        }
+        // let { type } = get_event_by_id( this.eventId );
+        // if( type ){
+        //     if( type === EVENT_TYPE.BLOCK ){
+        //         this.finalNotes = this.notes;
+        //     }else{
+        //         let releaseNotes = '';
+        //         for( let i = 0; i < this.releaseList.length; i++ ){
+        //             releaseNotes = `${releaseNotes} ${this.releaseList[ i ].air_notes}`;
+        //         };
+        //         this.finalNotes = `${this.notes} ${ releaseNotes }`;
+        //     };
+        // }
 
     }
 

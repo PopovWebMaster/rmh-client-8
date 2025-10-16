@@ -25,6 +25,7 @@ import { S_EventsList } from './../S_EventsList/S_EventsList.js';
 import { S_ReleaseList } from './../S_ReleaseList/S_ReleaseList.js';
 
 import { CreateScheduleButton } from './../CreateScheduleButton/CreateScheduleButton.js';
+import { RemoveScheduleButton } from './../RemoveScheduleButton/RemoveScheduleButton.js';
 import { DownloadExcelButton } from './../DownloadExcelButton/DownloadExcelButton.js';
 
 import { SaveScheduleButton } from './../SaveScheduleButton/SaveScheduleButton.js';
@@ -48,6 +49,7 @@ const AirScheduleComponent = ( props ) => {
                 <ScheduleTopPanel>
                     <ScheduleCalendar />
                     <CreateScheduleButton />
+                    <RemoveScheduleButton />
 
                     <div className = 'ScheduleTopPanel_right'>
                         <SaveScheduleButton />

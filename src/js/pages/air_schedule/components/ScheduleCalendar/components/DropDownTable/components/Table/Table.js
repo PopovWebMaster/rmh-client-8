@@ -17,6 +17,8 @@ import {
     setCurrentDayNum,
 } from './../../../../../../../../redux/scheduleResultSlise.js';
 
+import { get_YYYY_MM_DD } from './../../../../../../../../helpers/get_YYYY_MM_DD.js';
+
 const TableComponent = ( props ) => {
 
     let {
@@ -35,6 +37,8 @@ const TableComponent = ( props ) => {
         setCurrentYear,
         setCurrentDayNum,
 
+        allScheduleFileNames,
+
     } = props;
 
     const click = ( date, day ) => {
@@ -42,13 +46,7 @@ const TableComponent = ( props ) => {
         setCurrentMonth( calendarMonth );
         setCurrentYear( calendarYear );
         setIsOpen( false );
-
-
-        // if( day === 7 ){
-        //     setCurrentDayNum( 0 );
-        // }else{
-            setCurrentDayNum( day - 1 );
-        // };
+        setCurrentDayNum( day - 1 );
     }
 
 
@@ -71,9 +69,24 @@ const TableComponent = ( props ) => {
                 if( item !== undefined ){
                     date = item.date;
                     day = item.day;
-
                     className = monthAndYearIsActive && currentDate === date? 'isSelected': '';
+
+                    let YYYY_MM_DD = get_YYYY_MM_DD( calendarYear, calendarMonth, date );
+                    if( allScheduleFileNames.indexOf( YYYY_MM_DD ) !== -1 ){
+                        className = `${className} isSet`
+                    };
+
+
+
                 };
+
+
+
+
+
+
+
+
                 return ( 
                     <td
                         key = { index }
@@ -138,6 +151,10 @@ export function Table( props ){
             currentMonth = { scheduleResult.currentMonth }
             currentYear = { scheduleResult.currentYear }
             currentDate = { scheduleResult.currentDate }
+
+
+            allScheduleFileNames = { scheduleResult.allScheduleFileNames }
+
 
 
 

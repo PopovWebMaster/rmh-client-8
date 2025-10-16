@@ -36,6 +36,10 @@ const S_EventsListComponent = ( props ) => {
     useEffect( () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+
+        // console.dir( 'scheduleEventsList' );
+        // console.dir( scheduleEventsList );
+        
         
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         let list = StoreScheduleResultEvents.GetScheduleEventsList();
@@ -53,6 +57,11 @@ const S_EventsListComponent = ( props ) => {
     const create = ( arr ) => {
         if( arr.length > 0 ){
             let sectors = arr.map( ( item, index ) => {
+
+                // console.dir( 'item.sector_list' );
+                // console.dir( item.sector_list );
+
+                
                 return (
                     <SchOneSector 
                         key = { index }

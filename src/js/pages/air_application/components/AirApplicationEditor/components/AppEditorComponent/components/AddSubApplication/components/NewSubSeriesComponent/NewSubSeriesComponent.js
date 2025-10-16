@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import './NewSubSeriesComponent.scss';
 
-import { selectorData as applicationSlice, setApplicationList } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as layoutSlice }      from './../../../../../../../../../../redux/layoutSlice.js';
 import { setSpinnerIsActive }               from './../../../../../../../../../../redux/spinnerSlice.js';
 import { send_request_to_server }           from './../../../../../../../../../../helpers/send_request_to_server.js';
+import { convert_time_str_to_sec }          from './../../../../../../../../../../helpers/convert_time_str_to_sec.js';
 
 import { ItemSerialNum } from './../ItemSerialNum/ItemSerialNum.js';
 import { ItemPeriod } from './../ItemPeriod/ItemPeriod.js';
@@ -36,7 +38,8 @@ const NewSubSeriesComponentComponent = ( props ) => {
 
         currentPage,
         setSpinnerIsActive,
-        // setApplicationList,
+        currentAppEventId,
+        eventListById,
 
     } = props;
 
@@ -48,12 +51,29 @@ const NewSubSeriesComponentComponent = ( props ) => {
     let [ dataFrom, setDataFrom ] = useState( '' );
     let [ dataTo, setDataTo ] = useState( '' );
 
-    let [ durationSec, setDurationSec ] = useState( MIN_EVENT_DURATION_SEC );
+    let [ durationSec, setDurationSec ] = useState( 0 );
     let [ notes, setNotes ] = useState( '' );
 
     let [ nameTemplate, setNameTemplate ] = useState( '' );
     let [ serialNames, setSerialNames ] = useState( {} );
     let [ serialFileNames, setSerialFileNames ] = useState( {} );
+
+    useEffect(() => {
+
+        if( isOpen ){
+            if( eventListById[ currentAppEventId ] ){
+                let { durationTime } = eventListById[ currentAppEventId ];
+                let dur_sec = convert_time_str_to_sec( durationTime );
+                setDurationSec( dur_sec );
+
+            }else{
+                setDurationSec( MIN_EVENT_DURATION_SEC );
+            };
+        }else{
+
+        };
+
+    }, [ isOpen ]);
 
 
     const get_series_data_list = () => {
@@ -78,30 +98,9 @@ const NewSubSeriesComponentComponent = ( props ) => {
     }
 
 
-
-
-
     const click = () => {
 
         if( isReady ){
-
-            // console.dir({
-            //         applicationId: currentApplicationId,
-            //         applicationName:            currentAppName,
-            //         applicationCategoryId:      currentAppCategoryId,
-            //         applicationNum:             currentAppNum,
-            //         applicationManagerNotes:    currentAppManagerNotes,
-            //         serialNumFrom: numFromValue,
-            //         serialNumTo: numToValue,
-            //         periodFrom: dataFrom,
-            //         periodTo: dataTo,
-            //         durationSec,
-            //         airNotes: notes,
-            //         seriesDataList: get_series_data_list(),
-            // });
-
-
-            
 
             setSpinnerIsActive( true );
 
@@ -139,14 +138,8 @@ const NewSubSeriesComponentComponent = ( props ) => {
                 },
             });
 
-            
-
-
         };
     }
-
-
-
 
     return (
         <div className = 'newSubSeriesComponent'>
@@ -215,6 +208,7 @@ const NewSubSeriesComponentComponent = ( props ) => {
 export function NewSubSeriesComponent( props ){
 
     const application = useSelector( applicationSlice );
+    const layout = useSelector( layoutSlice );
     const dispatch = useDispatch();
 
     return (
@@ -227,6 +221,11 @@ export function NewSubSeriesComponent( props ){
             currentAppCategoryId =      { application.currentAppCategoryId }
             currentAppNum =             { application.currentAppNum }
             currentAppManagerNotes =    { application.currentAppManagerNotes }
+
+            currentAppEventId =         { application.currentAppEventId }
+            eventListById =             { layout.eventListById }
+
+            
 
             setSpinnerIsActive =    { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
             // setApplicationList =    { ( val ) => { dispatch( setApplicationList( val ) ) } }

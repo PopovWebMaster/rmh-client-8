@@ -160,10 +160,6 @@ const SchEventContainerComponent = ( props ) => {
 
    const drop = ( e ) => {
 
-        // console.dir( e.target );
-
-
-
         setIsLighter( false );
 
         let isTargetEvent = getTargetState();

@@ -14,6 +14,7 @@ import { set_company_legal_name } from './set_company_legal_name.js';
 // import { set_current_day_shadule_list } from './set_current_day_shadule_list.js'
 
 import { set_managerList } from './set_managerList.js';
+import { set_all_schedule_file_names } from './set_all_schedule_file_names.js';
 
 
 
@@ -35,6 +36,7 @@ export const set_starting_response_to_store = ( response ) => {
         // set_current_day_shadule_list( response );
 
         set_managerList( response );
+        set_all_schedule_file_names( response );
 
 
 

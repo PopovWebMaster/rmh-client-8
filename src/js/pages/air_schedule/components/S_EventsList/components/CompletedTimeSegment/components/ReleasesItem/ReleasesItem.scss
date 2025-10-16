@@ -87,6 +87,11 @@
             margin: 0.1em 0 0.1em 0.4em;
             flex-grow: 1;
             max-width: 100%;
+
+            .air_notes{
+                margin-left: 1em;
+                color: #b1b1b1;
+            }
         }
         >span.duration{
             font-size: 0.55em;
