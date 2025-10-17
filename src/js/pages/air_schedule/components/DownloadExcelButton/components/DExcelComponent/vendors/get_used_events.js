@@ -16,7 +16,17 @@ export const get_used_events = ( scheduleEventsLlist, filterList ) => {
     for( let i = 0; i < scheduleEventsLlist.length; i++ ){
         let { eventId } = scheduleEventsLlist[ i ];
         if( obj[ eventId ] ){
-            result.push( { ...scheduleEventsLlist[ i ], ...obj[ eventId ] } );
+
+            if( obj[ eventId ].withOnlyApplications ){
+
+                if( scheduleEventsLlist[ i ].releases.length > 0 ){
+                    result.push( { ...scheduleEventsLlist[ i ], ...obj[ eventId ] } );
+                };
+
+            }else{
+                result.push( { ...scheduleEventsLlist[ i ], ...obj[ eventId ] } );
+            };
+            
         };
     }
 

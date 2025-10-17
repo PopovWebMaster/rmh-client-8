@@ -125,6 +125,10 @@ export class ResultScheduleClass {
                 isLastBlockRow = true;
             };
 
+            if( is_premiere ){
+                finalNotes = `ПРЕМЬЕРА! ${finalNotes}`
+            };
+
             let cell_A = get_cell_A( startTime, isKeyPoint, isLastBlockRow );
             let cell_B = get_cell_B( durationTime, isLastBlockRow );
             let cell_C = get_cell_C( eventId, isLastBlockRow );
@@ -192,7 +196,9 @@ export class ResultScheduleClass {
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.aoa_to_sheet( this.rows );
 
-        ws['!cols'] = [ { width: 9.8 }, { width: 9.8 }, { width: 20 }, { width: 53 },  ];
+        // ws['!cols'] = [ { width: 9.8 }, { width: 9.8 }, { width: 20 }, { width: 53 },  ];
+        ws['!cols'] = [ { width: 5 }, { width: 6.9 }, { width: 18 }, { width: 65.2 },  ];
+
         ws['!rows'] = [ { hpx: 30 }, ];
         ws["!merges"] = [
             XLSX.utils.decode_range("A1:D1"),

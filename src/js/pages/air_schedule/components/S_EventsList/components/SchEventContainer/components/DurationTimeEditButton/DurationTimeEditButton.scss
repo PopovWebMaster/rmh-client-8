@@ -23,3 +23,13 @@
     text-align: center;
     flex-grow: 0;
 }
+
+.SEC_duration.isEditable{
+    cursor: pointer;
+    user-select: none;
+}
+
+.SEC_duration.isEditable:hover{
+    color: #343434;
+    background-color: #e5e3e3;
+}

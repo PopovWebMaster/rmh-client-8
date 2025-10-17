@@ -16,8 +16,15 @@ export const get_cell_D = ( release, notes, isLastBlockRow ) => {
     };
 
     if( release === false ){
+
+        let value = '';
+
+        if( notes.trim() !== '' ){
+            value = `// ${notes}`;
+        };
+
         return { 
-            v: '', 
+            v: value, 
             t: "s", 
             s: { 
                 font: { 

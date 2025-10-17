@@ -222,10 +222,6 @@ const SchEventContainerComponent = ( props ) => {
             onDragLeave =   { drag_leave }
             onDrop =        { drop }
         >
-
-
-            
-
             <SelectedEventWindow
                 selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }
                 setSelectedEventWindow_isOpen =     { setSelectedEventWindow_isOpen }

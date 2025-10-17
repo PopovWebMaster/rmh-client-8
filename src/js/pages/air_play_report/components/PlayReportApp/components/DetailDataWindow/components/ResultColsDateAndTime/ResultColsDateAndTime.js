@@ -19,6 +19,10 @@ const ResultColsDateAndTimeComponent = ( props ) => {
     let [ view, setView ] = useState( 'yyyy-mm-dd' ); // 'yyyy-mm-dd' 'dd-mm-yyyy'
     let [ separator, setSeparator ] = useState( `\t` );
     let [ withFileName, setWithFileName ] = useState( false );
+    let [ withFileDuration, setWithFileDuration ] = useState( false );
+    let [ withFileExtension, setWithFileExtension ] = useState( true );
+
+
     let [ val, setVal ] = useState( '' );
 
 
@@ -36,6 +40,7 @@ const ResultColsDateAndTimeComponent = ( props ) => {
                     type,
                     file,
                     date,
+                    segmentRealDuration,
                 } = filteredList[ i ];
 
                 if( type === 'movie' ){
@@ -43,10 +48,28 @@ const ResultColsDateAndTimeComponent = ( props ) => {
                     let dateFormat = get_data_format( date );
                     let fileName = '';
                     let timeShort = trim_sec_ms( time );
+                    if( timeShort !== ''){
+                        timeShort = `${separator}${timeShort}`;
+                    };
                     if( withFileName ){
                         fileName = `${separator}${file.name}`;
+                        if( withFileExtension === false ){
+                            fileName = fileName.replace(/\.[^/.]+$/, '');
+                        };
                     };
-                    let row = `${dateFormat}${separator}${timeShort}${fileName}\n`;
+
+                    let fileDuration = '';
+                    if( withFileDuration ){
+                        // fileDuration = `${separator}${trim_sec_ms( segmentRealDuration.time )}`;
+                        fileDuration = `${separator}${ segmentRealDuration.ms/1000 }`;
+
+                    };{/* Pogoda_Донецк_ */}
+
+
+                    
+
+
+                    let row = `${dateFormat}${timeShort}${fileName}${fileDuration}\n`;
                     rows = rows + row;
 
                 };
@@ -64,6 +87,8 @@ const ResultColsDateAndTimeComponent = ( props ) => {
         view,
         separator,
         withFileName,
+        withFileDuration,
+        withFileExtension,
     ] );
 
 
@@ -141,7 +166,44 @@ const ResultColsDateAndTimeComponent = ( props ) => {
                     className = { `DDW_file_name_add_btn ${withFileName === false? 'isActive': '' }` }
                     onClick = { () => { setWithFileName( false ) } }
                 >Нет</span>
+
+
             </div>
+
+
+
+            { withFileName? (
+                <div className = 'DDW_file_name_add'>
+                    <span className = 'DDW_file_name_add_title'>Расширение</span>
+                    <span 
+                        className = { `DDW_file_name_add_btn ${withFileExtension === true? 'isActive': '' }` }
+                        onClick = { () => { setWithFileExtension( true ) } }
+                    >Да</span>
+                    <span
+                        className = { `DDW_file_name_add_btn ${withFileExtension === false? 'isActive': '' }` }
+                        onClick = { () => { setWithFileExtension( false ) } }
+                    >Нет</span>
+                
+                </div>
+            ): '' }
+
+
+
+
+            <div className = 'DDW_file_duration_add'>
+                <span className = 'DDW_file_duration_add_title'>Включить хрономентраж в секундах</span>
+                <span 
+                    className = { `DDW_file_duration_add_btn ${withFileDuration === true? 'isActive': '' }` }
+                    onClick = { () => { setWithFileDuration( true ) } }
+                >Да</span>
+                <span
+                    className = { `DDW_file_duration_add_btn ${withFileDuration === false? 'isActive': '' }` }
+                    onClick = { () => { setWithFileDuration( false ) } }
+                >Нет</span>
+            </div>
+
+            {/* let [ withFileDuration, setWithFilewithFileDuration ] = useState( false ); */}
+            {/* let [ withFileDuration, setWithFileDuration ] = useState( false ); */}
 
 {/* Pogoda_Донецк_ */}
 

@@ -36,7 +36,6 @@ const CompletedTimeSectorComponent = ( props ) => {
                 gridEventId =   { gridEventId }
             />
 
-            
 
             {/* <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span> */}
 

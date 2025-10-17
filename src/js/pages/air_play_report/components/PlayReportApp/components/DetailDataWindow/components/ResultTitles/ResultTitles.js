@@ -23,6 +23,9 @@ const ResultTitlesComponent = ( props ) => {
     let [ separator, setSeparator ] = useState( `\t` );
     let [ withFileName, setWithFileName ] = useState( false );
 
+    let [ withFileDuration, setWithFileDuration ] = useState( false );
+    let [ withFileExtension, setWithFileExtension ] = useState( true );
+
 
 
     let [ val, setVal ] = useState( '' );
@@ -34,13 +37,6 @@ const ResultTitlesComponent = ( props ) => {
         return `${arr[0]}`;
 
     }
-
-
-    //     const trim_sec_ms = ( str ) => {
-    //     let arr = str.split( '.' );
-    //     let arr_2 = arr[0].split( ':' );
-    //     return `${arr_2[0]}:${arr_2[1]}`;
-    // }
 
     const get_data_format = ( date ) => {
         let result = '';
@@ -56,19 +52,19 @@ const ResultTitlesComponent = ( props ) => {
 
 
 
-    const get_row = ( date, startTime ) => {
-        let { YYYY_MM_DD } = date;
-        let { ms } = startTime;
-        let arr = [];
-        for( let i = 0; i < resultPointsSec.length; i++ ){
-            let ms_point = ( resultPointsSec[ i ] * 1000 ) + ms;
-            arr.push( trim_sec_ms( convert_ms_to_time( ms_point ) ) )
-        };
-        let points_str = arr.join( ', ' );
-        let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
-        let result = date_str + '\t' + points_str + '\n';
-        return result;
-    }
+    // const get_row = ( date, startTime ) => {
+    //     let { YYYY_MM_DD } = date;
+    //     let { ms } = startTime;
+    //     let arr = [];
+    //     for( let i = 0; i < resultPointsSec.length; i++ ){
+    //         let ms_point = ( resultPointsSec[ i ] * 1000 ) + ms;
+    //         arr.push( trim_sec_ms( convert_ms_to_time( ms_point ) ) )
+    //     };
+    //     let points_str = arr.join( ', ' );
+    //     let date_str = YYYY_MM_DD.replaceAll( '-', '.' );
+    //     let result = date_str + '\t' + points_str + '\n';
+    //     return result;
+    // }
 
     const get_time_points = ( startTime ) => {
         let { ms } = startTime;
@@ -138,6 +134,7 @@ const ResultTitlesComponent = ( props ) => {
                     type,
                     file,
                     date,
+                    segmentRealDuration,
                 } = filteredList[ i ];
 
                 if( type === 'movie' ){
@@ -145,13 +142,27 @@ const ResultTitlesComponent = ( props ) => {
                     let dateFormat = get_data_format( date );
                     let fileName = '';
                     let timeShort = get_time_points( startTime );
+                    if( timeShort !== ''){
+                        timeShort = `${separator}${timeShort}`;
+                    };
                     if( withFileName ){
                         fileName = `${separator}${file.name}`;
+                        if( withFileExtension === false ){
+                            fileName = fileName.replace(/\.[^/.]+$/, '');
+                        };
                     };
-                    let row = `${dateFormat}${separator}${timeShort}${fileName}\n`;
+                    let fileDuration = '';
+                    if( withFileDuration ){
+                        // fileDuration = `${separator}${trim_sec_ms( segmentRealDuration.time )}`;
+                        fileDuration = `${separator}${ segmentRealDuration.ms/1000 }`;
+
+                    };{/* Pogoda_Донецк_ */}
+
+                    let row = `${dateFormat}${timeShort}${fileName}${fileDuration}\n`;
                     rows = rows + row;
 
                 };
+                {/* Pogoda_Донецк_ */}
             };
             setVal( rows );
 
@@ -167,8 +178,13 @@ const ResultTitlesComponent = ( props ) => {
         separator,
         withFileName,
         resultPointsSec,
+        withFileDuration,
+        withFileExtension
+
     ] );
 
+    // let [ withFileDuration, setWithFileDuration ] = useState( false );
+    // let [ withFileExtension, setWithFileExtension ] = useState( true );
 
 
 
@@ -217,6 +233,10 @@ const ResultTitlesComponent = ( props ) => {
                 />
             </div>
 
+
+
+
+
             <div className = 'DDW_points_file_name_add'>
                 <span className = 'DDW_points_file_name_add_title'>Включить имя файла</span>
                 <span 
@@ -228,6 +248,43 @@ const ResultTitlesComponent = ( props ) => {
                     onClick = { () => { setWithFileName( false ) } }
                 >Нет</span>
             </div>
+
+
+            { withFileName? (
+                <div className = 'DDW_points_file_name_add'>
+                    <span className = 'DDW_points_file_name_add_title'>Расширение</span>
+                    <span 
+                        className = { `DDW_points_file_name_add_btn ${withFileExtension === true? 'isActive': '' }` }
+                        onClick = { () => { setWithFileExtension( true ) } }
+                    >Да</span>
+                    <span
+                        className = { `DDW_points_file_name_add_btn ${withFileExtension === false? 'isActive': '' }` }
+                        onClick = { () => { setWithFileExtension( false ) } }
+                    >Нет</span>
+                
+                </div>
+            ): '' }
+
+
+
+
+
+
+            <div className = 'DDW_points_file_name_add'>
+                <span className = 'DDW_points_file_name_add_title'>Включить хрономентраж в секундах</span>
+                <span 
+                    className = { `DDW_points_file_name_add_btn ${withFileDuration === true? 'isActive': '' }` }
+                    onClick = { () => { setWithFileDuration( true ) } }
+                >Да</span>
+                <span
+                    className = { `DDW_points_file_name_add_btn ${withFileDuration === false? 'isActive': '' }` }
+                    onClick = { () => { setWithFileDuration( false ) } }
+                >Нет</span>
+            </div>
+
+
+
+
 
             <Points />
 

@@ -18,6 +18,8 @@ console.log( 'HOST_TO_API_SERVER', HOST_TO_API_SERVER );
 const container = document.getElementById('app');
 const root = createRoot(container);
 
+
+
 root.render(
     <Provider store={store}>
         <BrowserRouter>

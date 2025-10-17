@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import './DExcelComponent.scss';
 
@@ -19,14 +19,14 @@ import { FilterControlPanel } from './../FilterControlPanel/FilterControlPanel.j
 import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
 
 import { get_used_events } from './vendors/get_used_events.js';
-import { get_rows_from_events } from './vendors/get_rows_from_events.js';
+// import { get_rows_from_events } from './vendors/get_rows_from_events.js';
 
-import * as XLSX from 'xlsx-js-style';
-import { get_first_excel_row } from './vendors/get_first_excel_row.js';
-import { get_excel_rows } from './vendors/get_excel_rows.js';
-import { get_file_name } from './vendors/get_file_name.js'
+// import * as XLSX from 'xlsx-js-style';
+// import { get_first_excel_row } from './vendors/get_first_excel_row.js';
+// import { get_excel_rows } from './vendors/get_excel_rows.js';
+// import { get_file_name } from './vendors/get_file_name.js'
 
-import { MOUNTH_NAME } from './../.././../../../../config/mounth.js';
+// import { MOUNTH_NAME } from './../.././../../../../config/mounth.js';
 
 import { ResultScheduleClass } from './vendors/ResultScheduleClass.js';
 
@@ -107,15 +107,9 @@ const DExcelComponentComponent = ( props ) => {
     const click = () => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-        // console.dir( 'scheduleEventsList' );
-        // console.dir( scheduleEventsList );
 
         let scheduleEventsLlist = StoreScheduleResultEvents.GetScheduleEventsList();
-
         let used_events = get_used_events( scheduleEventsLlist, filterList );
-
-        // console.dir( 'used_events' );
-        // console.dir( used_events );
 
         let ResultSchedule = new ResultScheduleClass();
 
@@ -125,48 +119,9 @@ const DExcelComponentComponent = ( props ) => {
         ResultSchedule.SetCurrentDayNum( currentDayNum );
         ResultSchedule.SetCurrentMonth( currentMonth );
         ResultSchedule.SetCurrentYear( currentYear );
-
         ResultSchedule.Download();
-        /*
-        let rows = get_rows_from_events( used_events );
-
-
-        const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.aoa_to_sheet([
-            get_first_excel_row( {
-                currentDate,
-                currentDayNum,
-                currentMonth,
-                currentYear,
-            } ),
-            ...get_excel_rows( 2, rows ),
-        ]);
-
-        ws['!cols'] = [ { width: 7.45 }, { width: 20 }, { width: 53 }, { width: 9.8 }, { width: 35 }, ];
-        ws['!rows'] = [ { hpx: 30 }, ];
-
-        ws["!merges"] = [
-            XLSX.utils.decode_range("A1:E1"),
-        ];
-
-        let sheetName = `${currentDate} ${MOUNTH_NAME[currentMonth]}`
-
-
-        XLSX.utils.book_append_sheet(wb, ws, sheetName);
-        let fileName = get_file_name({
-            currentDate,
-            currentDayNum,
-            currentMonth,
-            currentYear,
-        });
-        XLSX.writeFile(wb, fileName);
-*/
-        
 
     }
-
-
-
 
     return (
         <div className = 'S_DExcelComponent'>

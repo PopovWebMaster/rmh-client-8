@@ -143,6 +143,56 @@
 
 
 
+    .DDW_file_duration_add{
+        font-size: 1em;
+        margin: 0.2em 0;
+        padding: 0.1em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .DDW_file_duration_add_title{
+            font-size: 0.7em;
+            color: #969696;
+            margin-right: 0.4em;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+            // width: 7em;
+        }
+
+
+        .DDW_file_duration_add_btn{
+            font-size: 0.6em;
+            color: #494747;
+            margin: 0.1em 0.3em;
+            padding: 0.2em 0.6em;
+            border: 1px solid #e3e3e3;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .DDW_file_duration_add_btn.isActive{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+        .DDW_file_duration_add_btn.isActive:hover{
+            color: #211f1f;
+            background-color: #e3e3e3;
+        }
+
+
+        .DDW_file_duration_add_btn:hover{
+            border: 1px solid #a0a0a0;
+            color: #333232;
+        }
+    }
+
+
+
+
     textarea{
         font-size: .9em;
         width: calc(100% - 2.1em);

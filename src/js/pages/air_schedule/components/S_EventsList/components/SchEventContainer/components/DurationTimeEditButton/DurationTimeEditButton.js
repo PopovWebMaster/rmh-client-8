@@ -12,6 +12,7 @@ import { selectorData as scheduleResultSlise } from './../../../../../../../../r
 
 // import { StartTimeEditor } from './../../../../../../components/StartTimeEditor/StartTimeEditor.js';
 // import { set_schedule_list_changes_to_store } from './../../../../vendors/set_schedule_list_changes_to_store.js';
+import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
 
 import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
@@ -25,19 +26,36 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
         durationTime,
         gridEventId,
+        scheduleEventsList,
+        scheduleEventsListByGridEventId,
 
 
 
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+    let [ isEditable, setIsEditable] = useState( false );
+
 
     let [ value, setValue ] = useState( durationTime );
     let [ isReady, setIsReady ] = useState( false );
 
     useEffect( () => {
         setValue( durationTime );
+
     }, [ durationTime ] );
+
+    useEffect( () => {
+        if( scheduleEventsListByGridEventId[ gridEventId ] ){
+            if( scheduleEventsListByGridEventId[ gridEventId ].releases.length === 0 ){
+                setIsEditable( true );
+            }else{
+                setIsEditable( false );
+            };
+        }else{
+            setIsEditable( false );
+        };
+    }, [ gridEventId, scheduleEventsListByGridEventId ] );
 
     useEffect( () => {
         if( value === durationTime ){
@@ -54,16 +72,15 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
     const clickSave = () => {
         if( isReady ){
-            
-
+            set_schedule_list_changes_to_store( gridEventId, { durationTime: value } );
+            setIsOpen( false );
         };
     };
 
-
-
-
     const clickAdd = () => {
-        setIsOpen( true );
+        if( isEditable ){
+            setIsOpen( true );
+        };
     };
 
 
@@ -96,7 +113,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
         </AlertWindowContainer>
 
         <span
-            className = 'SEC_duration'
+            className = { `${isEditable? 'isEditable': '' } SEC_duration` }
             onClick = { clickAdd }
         >{ convert_sec_to_time( durationTime ) }</span>
     </>)
@@ -116,6 +133,9 @@ export function DurationTimeEditButton( props ){
         <DurationTimeEditButtonComponent
             { ...props }
             scheduleEventsList = { scheduleResult.scheduleEventsList }
+            scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
+
+            
             gridDayEventsListById = { layout.gridDayEventsListById }
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
