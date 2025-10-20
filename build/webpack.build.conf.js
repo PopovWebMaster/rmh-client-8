@@ -21,6 +21,8 @@ module.exports = merge(baseWebpackConfig, {
         air_layout:         `${PATHS.src}/js/pages/air_layout/air_layout.js`, 
         air_play_report:    `${PATHS.src}/js/pages/air_play_report/air_play_report.js`, 
         air_logs:           `${PATHS.src}/js/pages/air_logs/air_logs.js`, 
+        air_files:           `${PATHS.src}/js/pages/air_files/air_files.js`, 
+
 
 
 

@@ -17,7 +17,12 @@
         "air-logs": "webpack-dev-server --open --config ./build/webpack.dev.air_logs.conf.js",
         "login": "webpack-dev-server --open --config ./build/webpack.dev.login.conf.js",
         "access-is-closed": "webpack-dev-server --open --config ./build/webpack.dev.accessIsClosed.conf.js",
-        "page-not-found": "webpack-dev-server --open --config ./build/webpack.dev.pageNotFound.conf.js"
+        "page-not-found": "webpack-dev-server --open --config ./build/webpack.dev.pageNotFound.conf.js",
+        "air-files": "webpack-dev-server --open --config ./build/webpack.dev.air_files.conf"
+
+
+
+
 
     },
     "keywords": [],

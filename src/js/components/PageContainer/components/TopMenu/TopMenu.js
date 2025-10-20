@@ -88,9 +88,16 @@ const TopMenuComponent = ( props ) => {
                 result = <MenuForAirPage />
                 break;
 
+            case ROUTE.PAGE.AIR_FILES:
+                result = <MenuForAirPage />
+                break;
+
             case ROUTE.PAGE.ADMIN:
                 result = <MenuForAdmin />
                 break;
+
+
+            
             
 
         };

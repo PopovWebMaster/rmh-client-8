@@ -18,6 +18,8 @@ export const ROUTE = {
         AIR_LAYOUT: 'air-layout',
         AIR_PLAY_REPORT: 'air-play-report',
         AIR_LOGS: 'air-logs',
+        AIR_FILES: 'air-files',
+
 
     
 

@@ -49,6 +49,11 @@ const MenuForAirPageComponent = ( props ) => {
         />
 
         <MenuItemLink 
+            title = { 'Файлы' }
+            page = { ROUTE.PAGE.AIR_FILES }
+        />
+
+        <MenuItemLink 
             title = { 'Logs' }
             page = { ROUTE.PAGE.AIR_LOGS }
         />

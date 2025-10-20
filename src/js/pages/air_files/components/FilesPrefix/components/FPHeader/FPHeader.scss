@@ -1,0 +1,39 @@
+.FPHeader{
+    font-size: 1em;
+    padding: 0.35em 0.8em;
+    background-color: #ccdcff;
+
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+
+    .FPHeader_title{
+        font-size: 0.8em;
+        color: #535353;
+    }
+
+    .FPHeader_btn{
+        font-size: 0.7em;
+        color: #1129dd;
+        text-decoration: underline;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .FPHeader_btn:hover{
+        color: #364dfd;
+    }    
+    .FPHeader_btn:active{
+        color: #1025be;
+        text-decoration: none;
+    }
+
+    .FPHeader_wrap{
+        font-size: 1em;
+        padding: 0.5em;
+    }
+}
