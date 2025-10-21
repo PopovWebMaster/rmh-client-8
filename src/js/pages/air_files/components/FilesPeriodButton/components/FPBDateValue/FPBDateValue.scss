@@ -1,0 +1,21 @@
+.FPBDateValue{
+    font-size: 1em;
+    width: 5.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    // background-color: #f0f0f0;
+    padding: 0.1em 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.1em;
+
+    .FPBDateValue_item{
+        font-size: 0.8em;
+        color: #af2e2e;
+        // font-weight: bold;
+
+        font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        
+    }
+}

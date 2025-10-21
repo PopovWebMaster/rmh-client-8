@@ -1,0 +1,73 @@
+.FPList{
+    font-size: 1em;
+
+    .FPList_wrap{
+        font-size: 1em;
+        padding: 0.3em;
+
+        .FPList_prefix_item{
+            font-size: 1em;
+            // margin: 0.2em 0;
+            border-radius: 0.1em;
+            padding: 0.2em 0.4em 0.2em 0.6em;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            border: 1px solid #34343400;
+
+            .FPList_name{
+                font-size: 0.7em;
+                color: #636262;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+
+            .FPList_event{
+                font-size: 0.64em;
+                padding: 0.2em 0.8em;
+                margin:  0 0.5em;
+                border-radius: 0.1em;
+                flex-grow: 0;
+                border-width: 1px;
+                border-style: solid;
+            }
+
+            .FPList_remove{
+                font-size: 0.6em;
+                padding: 0.18em 0.1em 0.14;
+                border-radius: 0.1em;
+                // background-color: #ff3e3e2c;
+                color: #ffc3c300;
+                flex-grow: 0;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            // .FPList_remove:hover{
+            //     color: #ff0000;
+            // }
+
+
+
+        }
+
+        .FPList_prefix_item:hover{
+            // background-color: #d4d4d44d;
+            border: 1px solid #34343421;
+
+            .FPList_name{
+                color: #161616;
+            }
+
+            .FPList_remove{
+                color: #ffc3c3;
+            }
+            .FPList_remove:hover{
+                color: #ff0000;
+            }
+        }
+    }
+}

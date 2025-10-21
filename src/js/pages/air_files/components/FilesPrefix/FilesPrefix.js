@@ -8,6 +8,7 @@ import './FilesPrefix.scss';
 // import { selectorData as companySlice } from './../../../../redux/companySlice.js';
 
 import { FPHeader } from './components/FPHeader/FPHeader.js';
+import { FPList } from './components/FPList/FPList.js'
 
 
 
@@ -20,6 +21,8 @@ const FilesPrefixComponent = ( props ) => {
     return (
         <div className = 'filesPrefix'>
             <FPHeader />
+
+            <FPList />
 
             
             

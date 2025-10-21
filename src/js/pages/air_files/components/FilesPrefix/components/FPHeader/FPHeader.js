@@ -1,30 +1,38 @@
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './FPHeader.scss';
 
-// import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+import { selectorData as airFilesSlice } from './../../../../../../redux/airFilesSlice.js';
+import { setSpinnerIsActive } from './../../../../../../redux/spinnerSlice.js';
+
 
 import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { AWInputText } from './../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
 import { AWEventSelect } from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
 import { AWButtonAdd } from './../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
+import { AWShowErrors } from './../../../../../../components/AlertWindowContainer/AWShowErrors/AWShowErrors.js';
+
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
+import { set_air_file_prefix_list_to_store } from './../../../../vendors/set_air_file_prefix_list_to_store.js';
 
 
 const FPHeaderComponent = ( props ) => {
 
     let {
+        filePrefixList,
+
+        setSpinnerIsActive,
 
     } = props;
 
+
     let [ isOpen, setIsOpen ] = useState( false );
     let [ isReady, setIsReady ] = useState( false );
-
-
+    let [ errorMessage, setErrorMessage] = useState( [] );
     let [ newPrefix, setNewPrefix ] = useState( '' );
     let [ eventId, setEventId ] = useState( null );
 
@@ -55,6 +63,7 @@ const FPHeaderComponent = ( props ) => {
     const changhePrefix = ( e ) => {
         let val = e.target.value;
         setNewPrefix( val );
+        setErrorMessage([]);
 
     };
 
@@ -65,36 +74,50 @@ const FPHeaderComponent = ( props ) => {
 
     const create_prexix_on_server = () => {
 
-        if( isReady ){
-
-            send_request_to_server({
-                route: 'create-new-file-prefix',
-                data: {
-                    prefix: newPrefix.trim(),
-                    eventId,
-                },
-                successCallback: ( response ) => {
-                    console.dir( 'response' );
-                    console.dir( response );
-                },
-            });
-
-
-
+        let isValid = true;
+        let newPrefixTrim = newPrefix.trim();
+        let error = '';
+        
+        for( let i = 0; i < filePrefixList.length; i++ ){
+            if( filePrefixList[ i ].prefix === newPrefixTrim ){
+                isValid = false;
+                error = newPrefixTrim;
+                break;
+            };
         };
 
-        console.dir({
-            newPrefix,
-            eventId,
+        if( isValid ){
+            if( isReady ){
 
-        });
+                setSpinnerIsActive( true );
+                send_request_to_server({
+                    route: 'create-new-file-prefix',
+                    data: {
+                        prefix: newPrefixTrim,
+                        eventId,
+                    },
+                    successCallback: ( response ) => {
+                        console.dir( 'response' );
+                        console.dir( response );
 
-        
+                        if( response.ok ){
+                            setSpinnerIsActive( false );
+                            if( response.airFilePrefix ){
+                                set_air_file_prefix_list_to_store( response.airFilePrefix );
+
+                                setIsOpen( false );
+                            };
+                        };
+
+
+                    },
+                });
+            };
+        }else{
+            setErrorMessage([ `Такой префикс "${error}" уже существует. Нельзя так.`]);
+        };
 
     }
-
-
-
 
     return (
         <div className = 'FPHeader'>
@@ -104,10 +127,13 @@ const FPHeaderComponent = ( props ) => {
                 setIsOpen = { setIsOpen }
                 title =     'Новый префикс'
                 width =     '30em'
-                height =    '62vh'
+                height =    '65vh'
             >
 
                 <div className = 'FPHeader_wrap'>
+                    <AWShowErrors
+                        errors = { errorMessage }
+                    />
                     <AWInputText
                         title =         'Новый префикс'
                         value =         { newPrefix }
@@ -146,14 +172,16 @@ const FPHeaderComponent = ( props ) => {
 
 export function FPHeader( props ){
 
-    // const company = useSelector( companySlice );
-    // const dispatch = useDispatch();
+    const airFiles = useSelector( airFilesSlice );
+    const dispatch = useDispatch();
 
     return (
         <FPHeaderComponent
             { ...props }
 
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            filePrefixList = { airFiles.filePrefixList }
+
+            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
 
         />
     );

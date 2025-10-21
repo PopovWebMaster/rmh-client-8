@@ -2,6 +2,21 @@
     font-size: 1em;
     position: relative;
 
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
+
+    .filesApp_left{
+        font-size: 1em;
+        flex-grow: 1;
+        max-width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+    }
+
     .filesApp_right{
         font-size: 1em;
         flex-grow: 1;

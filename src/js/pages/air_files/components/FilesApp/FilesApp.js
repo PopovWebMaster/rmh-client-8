@@ -12,6 +12,8 @@ import { FilesBody } from './../FilesBody/FilesBody.js';
 import { FilesPrefix } from './../FilesPrefix/FilesPrefix.js';
 import { FilesList } from './../FilesList/FilesList.js';
 
+import { FilesPeriodButton } from './../FilesPeriodButton/FilesPeriodButton.js';
+
 const FilesAppComponent = ( props ) => {
 
     let {
@@ -21,9 +23,13 @@ const FilesAppComponent = ( props ) => {
         <PageContainer className = 'filesApp' >
 
             <FilesTopPanel>
+
+                <div className = 'filesApp_left'>
+                    <FilesPeriodButton />
+                </div>
                 
                 <div className = 'filesApp_right'>
-                    {/* <div>upload</div> */}
+
                 </div>
 
             </FilesTopPanel>
