@@ -1,7 +1,3 @@
-// FilesList
-
-// ScheduleCenter
-
 
 import React from "react";
 import { useSelector } from 'react-redux';
@@ -10,6 +6,13 @@ import { useSelector } from 'react-redux';
 import './FilesList.scss';
 
 // import { selectorData as companySlice } from './../../../../redux/companySlice.js';
+
+import { FilterSearsh } from './components/FilterSearsh/FilterSearsh.js';
+import { FilterEvent } from './components/FilterEvent/FilterEvent.js';
+ 
+import { FilterItemList } from './components/FilterItemList/FilterItemList.js';
+
+import { ScrollContainer } from './../../../../components/ScrollContainer/ScrollContainer.js';
 
 
 const FilesListComponent = ( props ) => {
@@ -20,6 +23,23 @@ const FilesListComponent = ( props ) => {
 
     return (
         <div className = 'filesList'>
+
+            <div className = 'FS_top_panel'>
+                <FilterEvent />
+                {/* <FilterSearsh /> */}
+            </div>
+
+            <div className = 'FS_top_list_actions'>
+
+            </div>
+
+            
+            <div className = 'FS_file_items'>
+                <ScrollContainer height = 'calc( 100vh - 9em )' >
+                    <FilterItemList />
+                </ScrollContainer>
+                
+            </div>
 
             
         </div>

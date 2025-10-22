@@ -1,9 +1,7 @@
-// PeriodButton
-
 
 import React, { useRef, useState, useEffect }   from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { selectorData as userInfoSlice } from './../../../../redux/userInfoSlice.js';
+import { selectorData as airFilesSlice } from './../../../../redux/airFilesSlice.js';
 
 import './FilesPeriodButton.scss';
 
@@ -16,7 +14,8 @@ import { FPBCalendarBtn } from './components/FPBCalendarBtn/FPBCalendarBtn.js';
 const FilesPeriodButtonComponent = ( props ) => {
 
     let {
-
+        periodFrom,
+        periodTo,
     } = props;
     
     return (
@@ -24,11 +23,11 @@ const FilesPeriodButtonComponent = ( props ) => {
 
             <h4>Период:</h4>
 
-            <FPBDateValue value = { null }/>
+            <FPBDateValue value = { periodFrom }/>
 
             <span className = 'FPB_tire'>‒</span>
 
-            <FPBDateValue value = { 100 }/>
+            <FPBDateValue value = { periodTo }/>
 
             <FPBCalendarBtn />
 
@@ -41,13 +40,15 @@ const FilesPeriodButtonComponent = ( props ) => {
 
 export function FilesPeriodButton( props ){
 
-    // const userInfo = useSelector( userInfoSlice );
+    const airFiles = useSelector( airFilesSlice );
     // const dispatch = useDispatch();
 
     return (
         <FilesPeriodButtonComponent
             { ...props }
-            // userInfo = { userInfo }
+            periodFrom = { airFiles.periodFrom }
+            periodTo = { airFiles.periodTo }
+
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />

@@ -6,5 +6,41 @@
     // background-color: #76cc4eb9;
     position: relative;
 
+    .FS_top_panel{
+        font-size: 1em;
+        height: 2em;
+        // background-color: #76cc4eb9;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        position: relative;
+    }
+
+    .FS_top_list_actions{
+        font-size: 1em;
+        height: 1.6em;
+        // background-color: #4eccacb9;
+
+        position: relative;
+        // display: flex;
+        // justify-content: flex-start;
+        // align-items: center;
+        // align-content: center;
+    }
+
+    .FS_file_items{
+
+        font-size: 1em;
+        // height: calc( 100vh - 7.2em );
+        height: calc( 100vh - 9em );
+
+        // background-color: #a5421ae5;
+        padding: 0.5em;
+        position: relative
+
+    }
+
     
 }

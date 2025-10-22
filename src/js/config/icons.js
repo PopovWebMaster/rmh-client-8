@@ -42,3 +42,5 @@
                 <span className = 'icon-down-1' ></span> */}
 
                 // icon-trash-empty
+
+                // icon-folder-open

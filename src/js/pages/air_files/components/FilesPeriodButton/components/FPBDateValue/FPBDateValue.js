@@ -1,12 +1,10 @@
 
-import React, { useRef, useState, useEffect }   from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import React from "react";
+// import { useSelector, useDispatch } from 'react-redux';
 
 // import { selectorData as userInfoSlice } from './../../../../redux/userInfoSlice.js';
 
 import './FPBDateValue.scss';
-
-
 
 const FPBDateValueComponent = ( props ) => {
 
@@ -14,19 +12,20 @@ const FPBDateValueComponent = ( props ) => {
         value,
     } = props;
 
-        console.dir( value );
-    
+    const getDate = ( str ) => {
+        let result = '---- -- --';
+        if( typeof str === 'string' ){
+            let arr = str.split( '-' );
+            if( arr[ 2 ] ){
+                result = `${arr[0]}.${arr[1]}.${arr[2]}`;
+            };
+        };
+        return result;
+    }
+
     return (
         <div className = 'FPBDateValue'>
-
-            { value === null? (
-                <span className = 'FPBDateValue_item'>---- -- --</span>
-            ): ( 
-                <span className = 'FPBDateValue_item'>2025.10.21</span>
-            )}
-
-
-
+            <span className = 'FPBDateValue_item'>{ getDate( value ) }</span>
         </div>
     )
 

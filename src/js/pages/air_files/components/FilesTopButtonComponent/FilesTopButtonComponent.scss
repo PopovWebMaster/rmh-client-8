@@ -1,0 +1,35 @@
+.filesTopButtonComponent{
+    font-size: 0.7em;
+    padding: 0.3em 1em;
+    border-radius: 0.1em;
+    border: 1px solid #a3a3a3bd;
+    color: #ffffff;
+
+    margin: 0 0.5em;
+    opacity: 0.3;
+
+    .PB_AddButton_icon{
+        margin-right: 0.2em;
+    }
+
+
+}
+
+.filesTopButtonComponent.isActive{
+    cursor: pointer; 
+    user-select: none;
+    opacity: 1;
+}
+
+
+
+.filesTopButtonComponent.isActive:hover{
+    background-color: #a3a3a3bd;
+    border: 1px solid #b7b7b7;
+}
+
+.filesTopButtonComponent.isActive:active{
+    span{
+        color: #cbcbcb;
+    }
+}

@@ -1,27 +1,35 @@
-// FPBCalendarBtn
-
 
 import React, { useRef, useState, useEffect }   from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
-// import { selectorData as userInfoSlice } from './../../../../redux/userInfoSlice.js';
+import { selectorData as airFilesSlice, setPeriodFrom, setPeriodTo } from './../../../../../../redux/airFilesSlice.js';
 
 import './FPBCalendarBtn.scss';
 
-import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js'
-
-
+import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { AWButtonAdd } from './../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
 const FPBCalendarBtnComponent = ( props ) => {
 
     let {
         value,
+
+        periodFrom,
+        periodTo,
+        setPeriodFrom,
+        setPeriodTo,
+
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
 
-    let [ dataFromValue, setDataFromValue ] = useState( '' );
-    let [ dataToValue, setDataToValue ] = useState( '' );
+    // let [ dataFromValue, setDataFromValue ] = useState( '' );
+    // let [ dataToValue, setDataToValue ] = useState( '' );
+
+    // useEffect( () => {
+    //     setDataFromValue( periodFrom );
+    //     setDataToValue( periodTo );
+    // }, [ periodFrom, periodTo ]);
 
 
 
@@ -31,13 +39,16 @@ const FPBCalendarBtnComponent = ( props ) => {
         let date = new Date( val );
         let from_ms = date.getTime();
 
-        let date_2 = new Date( dataToValue );
+        let date_2 = new Date( periodTo );
         let to_ms = date_2.getTime();
         if( from_ms <= to_ms ){
-            setDataFromValue( val );
+            // setDataFromValue( val );
+            setPeriodFrom( val );
         }else{
-            setDataFromValue( val );
-            setDataToValue( val );
+            // setDataFromValue( val );
+            setPeriodFrom( val );
+            // setDataToValue( val );
+            setPeriodTo( val );
         };
 
         
@@ -48,10 +59,11 @@ const FPBCalendarBtnComponent = ( props ) => {
         let date = new Date( val );
         let to_ms = date.getTime();
 
-        let date_2 = new Date( dataFromValue );
+        let date_2 = new Date( periodFrom );
         let from_ms = date_2.getTime();
         if( to_ms >= from_ms ){
-            setDataToValue( val );
+            // setDataToValue( val );
+            setPeriodTo( val );
         };
     };
 
@@ -64,23 +76,31 @@ const FPBCalendarBtnComponent = ( props ) => {
                 width = '25em'
                 height = '15em'
             >
-               <div className = 'FPBCalendarBtn_wrap'>
+                <>
+                    <div className = 'FPBCalendarBtn_wrap'>
+                        <input 
+                            type = 'date'
+                            value =     { periodFrom }
+                            max =       { periodTo }
+                            onChange =  { change_date_from }
+                        />
 
-                    <input 
-                        type = 'date'
-                        value =     { dataFromValue }
-                        max =       { dataToValue }
-                        onChange =  { change_date_from }
-                    />
+                        <span>-</span>
+                        <input 
+                            type = 'date'
+                            value =     { periodTo }
+                            min =       { periodFrom }
+                            onChange =  { change_date_to }
+                        />
+                    </div>
 
-                    <span>-</span>
-                    <input 
-                        type = 'date'
-                        value =     { dataToValue }
-                        min =       { dataFromValue }
-                        onChange =  { change_date_to }
+                    <AWButtonAdd
+                        // title = 'Готово'
+                        isReady = { true }
+                        clickHandler = { () => { setIsOpen( false ) } }
                     />
-               </div>
+                </>
+
 
             </AlertWindowContainer>
 
@@ -100,14 +120,18 @@ const FPBCalendarBtnComponent = ( props ) => {
 
 export function FPBCalendarBtn( props ){
 
-    // const userInfo = useSelector( userInfoSlice );
-    // const dispatch = useDispatch();
+    const airFiles = useSelector( airFilesSlice );
+    const dispatch = useDispatch();
 
     return (
         <FPBCalendarBtnComponent
             { ...props }
-            // userInfo = { userInfo }
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            periodFrom = { airFiles.periodFrom }
+            periodTo = { airFiles.periodTo }
+
+            setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
+            setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
+
 
         />
     );
