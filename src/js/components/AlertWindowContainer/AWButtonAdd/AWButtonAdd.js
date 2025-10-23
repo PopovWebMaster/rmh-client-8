@@ -13,6 +13,7 @@ const AWButtonAddComponent = ( props ) => {
         title = 'Добавить',
         isReady,
         clickHandler,
+        icon = 'icon-plus',
 
     } = props;
 
@@ -26,7 +27,7 @@ const AWButtonAddComponent = ( props ) => {
     return (
         <div className = 'AW_item AWButtonAdd'>
             <span 
-                className = { isReady? 'icon-plus AWButtonAdd_isActive': 'icon-plus ' }
+                className = { isReady? `${icon} AWButtonAdd_isActive`: icon }
 
                 onClick = { click }
             ><span>{ title }</span></span>

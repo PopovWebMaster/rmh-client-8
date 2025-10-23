@@ -1,0 +1,75 @@
+.FL_OneFileItem{
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    border-radius: 0.1em;
+    background-color: #ffffff;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    margin: 0.2em 0;
+
+    .FL_OneFileItem_fileName{
+        font-size: 0.6em;
+        padding: 0.2em 0.4em;
+        color: #302d2d;
+        margin: 0 0.5em;
+        flex-grow: 1;
+        max-width: 100%;
+        border: 1px solid #34343400;
+        outline: none;
+        background-color: #ffffff00;
+
+    }
+
+    .FL_OneFileItem_event{
+        font-size: 0.6em;
+        padding: 0.2em 1em;
+        border-radius: 0.1em;
+        margin: 0 0.5em;
+    }
+
+    .FL_OneFileItem_count{
+        font-size: 0.65em;
+        color: #040404;
+        background-color: #daefe9;
+        padding: 0.2em 0.7em 0.12em;
+        border-radius: 0.1em;
+        margin: 0 0.5em;
+        flex-grow: 0;
+        min-width: 7em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .FL_OneFileItem_count_title{
+            font-size: 0.9em;
+            flex-grow: 0;
+            color: #636363;
+        }
+
+        .FL_OneFileItem_count_val{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+            color: #040404;
+            text-align: center;
+        }
+    }
+
+    .FL_OneFileItem_premiere{
+        font-size: 0.65em;
+        color: #1666ad;
+        background-color: #f1f1f1;
+        padding: 0.2em 0.7em 0.12em;
+        border-radius: 0.1em;
+        margin: 0 0.5em;
+        flex-grow: 0;
+    }
+}
+
+    

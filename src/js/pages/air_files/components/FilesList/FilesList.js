@@ -13,6 +13,12 @@ import { FilterEvent } from './components/FilterEvent/FilterEvent.js';
 import { FilterItemList } from './components/FilterItemList/FilterItemList.js';
 
 import { ScrollContainer } from './../../../../components/ScrollContainer/ScrollContainer.js';
+import { SetFilteredList } from './../SetFilteredList/SetFilteredList.js';
+
+import { FilterButtonCheckAll } from './components/FilterButtonCheckAll/FilterButtonCheckAll.js';
+import { AssignEventForChecked } from './components/AssignEventForChecked/AssignEventForChecked.js';
+import { SortAllCheckedByPrefix } from './components/SortAllCheckedByPrefix/SortAllCheckedByPrefix.js';
+
 
 
 const FilesListComponent = ( props ) => {
@@ -26,17 +32,28 @@ const FilesListComponent = ( props ) => {
 
             <div className = 'FS_top_panel'>
                 <FilterEvent />
-                {/* <FilterSearsh /> */}
+                <FilterSearsh />
             </div>
 
             <div className = 'FS_top_list_actions'>
+                <FilterButtonCheckAll />
 
+                {/* <div className = 'FS_top_list_actions_right'> */}
+
+                    <AssignEventForChecked />
+                    <SortAllCheckedByPrefix />
+
+                {/* </div> */}
             </div>
 
             
             <div className = 'FS_file_items'>
                 <ScrollContainer height = 'calc( 100vh - 9em )' >
-                    <FilterItemList />
+
+                    <SetFilteredList>
+                        <FilterItemList />
+                    </SetFilteredList>
+
                 </ScrollContainer>
                 
             </div>

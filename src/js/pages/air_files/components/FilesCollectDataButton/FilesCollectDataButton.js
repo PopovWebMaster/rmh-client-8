@@ -12,7 +12,6 @@ import { setSpinnerIsActive } from './../../../../redux/spinnerSlice.js';
 import { FilesTopButtonComponent } from './../FilesTopButtonComponent/FilesTopButtonComponent.js';
 
 import { send_request_to_server } from './../../../../helpers/send_request_to_server.js';
-
 import { set_air_files_to_store } from './../../vendors/set_air_files_to_store.js';
 
 const FilesCollectDataButtonComponent = ( props ) => {

@@ -1,0 +1,28 @@
+.FL_FilterButtonCheckAll{
+    font-size: 1em;
+
+    flex-grow: 0;
+    margin: 0 3em 0 0.78em;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    >input{
+        font-size: 1.2em;
+    }
+
+    .FL_FilterButtonCheckAll_input{
+        font-size: 1em;
+        width: 1.05em;
+        height: 1.05em;
+
+    }
+
+    .FL_FilterButtonCheckAll_text{
+        font-size: 0.7em;
+        color: #f5f5f5;
+        padding: 0 0.4em;
+    }
+}

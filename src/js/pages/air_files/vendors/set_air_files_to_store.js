@@ -6,16 +6,20 @@ import {
     setFilterItems,
     setFilterItemsByEventId,
     setCurrentFilterEventId,
+    setFilterSearchValue,
  } from './../../../redux/airFilesSlice.js';
 
 import { get_event_data_by_id } from './get_event_data_by_id.js';
 
 export const set_air_files_to_store = ( airFiles ) => {
 
+    let airFiles_1 = addIsSelectedStatus( airFiles );
+
     let airFilesByEventId = {};
-    for( let name in airFiles ){
-        let { event_id } = airFiles[ name ];
-        let item = { ...airFiles[ name ] };
+
+    for( let name in airFiles_1 ){
+        let { event_id } = airFiles_1[ name ];
+        let item = { ...airFiles_1[ name ] };
         item.name = name;
 
         if( airFilesByEventId[ event_id ] ){
@@ -61,10 +65,12 @@ export const set_air_files_to_store = ( airFiles ) => {
         };
     });
 
-    store.dispatch( setAirFiles( airFiles ) );
+    store.dispatch( setAirFiles( airFiles_1 ) );
     store.dispatch( setAirFilesByEventId( airFilesByEventId ) );
     store.dispatch( setFilterItems( filterItems_sort ) );
     store.dispatch( setFilterItemsByEventId( filterItemsByEventId ) );
+    store.dispatch( setFilterSearchValue( '' ) );
+
 
     set_current_filter_event_id( filterItems_sort, filterItemsByEventId );
 
@@ -88,5 +94,17 @@ function set_current_filter_event_id( filterItems, filterItemsByEventId ){
         };
         store.dispatch( setCurrentFilterEventId( eventId ) );
     };
+}
+
+function addIsSelectedStatus( obj ){
+    let result = {};
+
+    for( let name in obj ){
+        let item = { ...obj[ name ] };
+        item.isSelected = false;
+        result[ name ] = item;
+    };
+    
+    return result;
 
 }

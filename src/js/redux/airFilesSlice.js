@@ -2,7 +2,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-import { get_date_now_YYYY_MM_DD } from './../helpers/get_date_now_YYYY_MM_DD.js'
+import { get_date_now_YYYY_MM_DD } from './../helpers/get_date_now_YYYY_MM_DD.js';
 
 
 export const airFilesSlice = createSlice({
@@ -11,7 +11,10 @@ export const airFilesSlice = createSlice({
 
     initialState: {
         filePrefixList: [],
-        periodFrom: get_date_now_YYYY_MM_DD(),
+        // periodFrom: get_date_now_YYYY_MM_DD(),
+        // periodTo: get_date_now_YYYY_MM_DD(),
+
+        periodFrom: '',
         periodTo: get_date_now_YYYY_MM_DD(),
 
         airFiles: {},
@@ -20,6 +23,12 @@ export const airFilesSlice = createSlice({
         filterItems: [],
         filterItemsByEventId: {},
         filterSearchValue: '',
+
+        filteredList: [],
+        filteredListByName: {},
+
+        issetChackedValues: false,
+
 
         currentFilterEventId: null,
 
@@ -79,6 +88,22 @@ export const airFilesSlice = createSlice({
         },
 
 
+        setFilteredList: ( state, action ) => {
+            state.filteredList = action.payload;
+        },
+
+
+        setFilteredListByName: ( state, action ) => {
+            state.filteredListByName = action.payload;
+        },
+
+        setIssetChackedValues: ( state, action ) => {
+            state.issetChackedValues = action.payload;
+        },
+
+
+
+        
 
         
 
@@ -101,6 +126,9 @@ export const {
     setCurrentFilterEventId,
     setFilterItemsByEventId,
     setFilterSearchValue,
+    setFilteredList,
+    setFilteredListByName,
+    setIssetChackedValues,
 
 
 } = airFilesSlice.actions;
@@ -122,6 +150,11 @@ export const selectorData = ( state ) => {
         
         currentFilterEventId:   state.airFiles.currentFilterEventId,
         filterSearchValue:   state.airFiles.filterSearchValue,
+        filteredList:   state.airFiles.filteredList,
+        filteredListByName:   state.airFiles.filteredListByName,
+        issetChackedValues:   state.airFiles.issetChackedValues,
+
+
 
 
 
