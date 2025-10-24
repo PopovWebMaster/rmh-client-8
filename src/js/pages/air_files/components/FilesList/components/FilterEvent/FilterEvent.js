@@ -6,7 +6,9 @@ import { useDispatch } from 'react-redux';
 
 import './FilterEvent.scss';
 
-import { selectorData as airFilesSlice, setCurrentFilterEventId } from './../../../../../../redux/airFilesSlice.js';
+import { selectorData as airFilesSlice, setCurrentFilterEventId, setFilterSearchValue } from './../../../../../../redux/airFilesSlice.js';
+
+import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
 
 
 const FilterEventComponent = ( props ) => {
@@ -19,6 +21,7 @@ const FilterEventComponent = ( props ) => {
         filterItemsByEventId,
 
         setCurrentFilterEventId,
+        setFilterSearchValue,
 
     } = props;
 
@@ -55,6 +58,7 @@ const FilterEventComponent = ( props ) => {
     const click = ( id ) => {
         setCurrentFilterEventId( id );
         setIsOpen( false );
+        setFilterSearchValue( '' );
     };
 
     const create = ( arr ) => {
@@ -87,15 +91,22 @@ const FilterEventComponent = ( props ) => {
                         className = { `icon ${isOpen? 'icon-up-open-1': 'icon-down-open-1'}`}
                         onClick = { () => { setIsOpen( !isOpen ) } }
                     ></span>
-
-                    <div className = 'btnDD_list'>{ create( filterItems ) }</div>
+                    { isOpen? (
+                        <div className = 'btnDD_list'>
+                            <ScrollContainer height = '60vh' >
+                                { create( filterItems ) }
+                            </ScrollContainer>
+                        </div>
+                    ) : '' }
                 </div>
             ): '' }
-
+                
             { carrentEventName === ''? '': (<>
                 <h4 style = { carrentEventStyle }>{ carrentEventName }</h4>
                 <span className = 'count' >{ carrentCount }</span>
             </>) }
+            { isOpen? <div className = 'FL_cutrain'></div>: '' }
+            
             
         </div>
     )
@@ -119,6 +130,10 @@ export function FilterEvent( props ){
             filterItemsByEventId =  { airFiles.filterItemsByEventId }
 
             setCurrentFilterEventId = { ( val ) => { dispatch( setCurrentFilterEventId( val ) ) } }
+            setFilterSearchValue = { ( val ) => { dispatch( setFilterSearchValue( val ) ) } }
+
+
+            
 
         />
     );

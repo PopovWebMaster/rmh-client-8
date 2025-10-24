@@ -10,6 +10,7 @@ import {
     setFilteredList,
     setFilteredListByName,
     setIssetChackedValues,
+    setFilterSearchValue,
 
 } from './../../../../redux/airFilesSlice.js';
 
@@ -20,48 +21,32 @@ const SetFilteredListComponent = ( props ) => {
 
         currentFilterEventId,
         airFilesByEventId,
+        airFiles,
         filterSearchValue,
         setFilteredList,
         setFilteredListByName,
 
         setIssetChackedValues,
+        setFilterSearchValue,
 
     } = props;
 
     useEffect( () => {
-    
-        let arr = [];
-        let obj = {};
 
         if( airFilesByEventId[ currentFilterEventId ] ){
 
-            for( let i = 0; i < airFilesByEventId[ currentFilterEventId ].length; i++ ){
+            let result = get_new_filtered_list( filterSearchValue );
 
-                let item = { ...airFilesByEventId[ currentFilterEventId ][ i ], isSelected: false }
-                let { name } = item;
-
-                if( filterSearchValue === '' ){
-                    arr.push( item );
-                    obj[ name ] = item;
-                }else{
-                    
-                    if( name.indexOf( filterSearchValue ) !== -1 ){
-                        arr.push( item );
-                        obj[ name ] = item;
-                    };
-                };
+            if( filterSearchValue !== '' && result.filteredList.length === 0 ){
+                let result_2 = get_new_filtered_list( '' );
+                setFilteredList( result_2.filteredList );
+                setFilteredListByName( result_2.filteredListByName );
+                setFilterSearchValue( '' );
+            }else{
+                setFilteredList( result.filteredList );
+                setFilteredListByName( result.filteredListByName );
             };
 
-            let arr_sort = arr.sort( ( a, b ) => {
-                if( a.name > b.name ){
-                    return 1;
-                }else{
-                    return -1;
-                };
-            } );
-
-            setFilteredList( arr_sort );
-            setFilteredListByName( obj );
             setIssetChackedValues( false );
 
 
@@ -71,7 +56,43 @@ const SetFilteredListComponent = ( props ) => {
         currentFilterEventId,
         airFilesByEventId,
         filterSearchValue,
+        airFiles,
     ] );
+
+    const get_new_filtered_list = ( searche_value ) => {
+
+        let arr = [];
+        let obj = {};
+
+        for( let i = 0; i < airFilesByEventId[ currentFilterEventId ].length; i++ ){
+
+            let item = { ...airFilesByEventId[ currentFilterEventId ][ i ], isSelected: false }
+            let { name } = item;
+
+            if( searche_value === '' ){
+                arr.push( item );
+                obj[ name ] = item;
+            }else{
+                if( name.indexOf( searche_value ) !== -1 ){
+                    arr.push( item );
+                    obj[ name ] = item;
+                };
+            };
+        };
+
+        let arr_sort = arr.sort( ( a, b ) => {
+            if( a.name > b.name ){
+                return 1;
+            }else{
+                return -1;
+            };
+        } );
+
+        return {
+            filteredList: arr_sort,
+            filteredListByName: obj,   
+        };
+    }
 
     return (
         <>{ children }</>
@@ -82,20 +103,26 @@ const SetFilteredListComponent = ( props ) => {
 
 export function SetFilteredList( props ){
 
-    const airFiles = useSelector( airFilesSlice );
+    const airFiles_ = useSelector( airFilesSlice );
     const dispatch = useDispatch();
 
     return (
         <SetFilteredListComponent
             { ...props }
 
-            currentFilterEventId =  { airFiles.currentFilterEventId }
-            airFilesByEventId =     { airFiles.airFilesByEventId }
-            filterSearchValue =     { airFiles.filterSearchValue }
+            currentFilterEventId =  { airFiles_.currentFilterEventId }
+            airFiles =              { airFiles_.airFiles }
+            airFilesByEventId =     { airFiles_.airFilesByEventId }
+
+            filterSearchValue =     { airFiles_.filterSearchValue }
 
             setFilteredList = { ( val ) => { dispatch( setFilteredList( val ) ) } }
             setFilteredListByName = { ( val ) => { dispatch( setFilteredListByName( val ) ) } }
             setIssetChackedValues = { ( val ) => { dispatch( setIssetChackedValues( val ) ) } }
+            setFilterSearchValue = { ( val ) => { dispatch( setFilterSearchValue( val ) ) } }
+
+
+            
 
 
 

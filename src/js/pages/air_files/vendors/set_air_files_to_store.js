@@ -7,11 +7,12 @@ import {
     setFilterItemsByEventId,
     setCurrentFilterEventId,
     setFilterSearchValue,
+    setAirFilesIsChanged,
  } from './../../../redux/airFilesSlice.js';
 
 import { get_event_data_by_id } from './get_event_data_by_id.js';
 
-export const set_air_files_to_store = ( airFiles ) => {
+export const set_air_files_to_store = ( airFiles, as_modified = false ) => {
 
     let airFiles_1 = addIsSelectedStatus( airFiles );
 
@@ -69,8 +70,8 @@ export const set_air_files_to_store = ( airFiles ) => {
     store.dispatch( setAirFilesByEventId( airFilesByEventId ) );
     store.dispatch( setFilterItems( filterItems_sort ) );
     store.dispatch( setFilterItemsByEventId( filterItemsByEventId ) );
-    store.dispatch( setFilterSearchValue( '' ) );
-
+    // store.dispatch( setFilterSearchValue( '' ) );
+    store.dispatch( setAirFilesIsChanged( as_modified ) );
 
     set_current_filter_event_id( filterItems_sort, filterItemsByEventId );
 

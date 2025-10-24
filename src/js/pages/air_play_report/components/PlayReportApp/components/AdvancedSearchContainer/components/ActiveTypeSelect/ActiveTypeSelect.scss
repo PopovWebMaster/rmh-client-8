@@ -1,0 +1,35 @@
+.PR_ASC_ActiveTypeSelect{
+    font-size: 1em;
+    margin: 0.5em 0;
+    padding: 0.2em 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .PR_ASC_A_btn{
+        font-size: 0.7em;
+        padding: 0.3em 1em;
+        margin: 0 2em;
+        width: 6em;
+        text-align: center;
+        border: 1px solid #3f73d1;
+        border-radius: 0.1em;
+        color: #3f73d1;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .PR_ASC_A_btn.isActive{
+        color: #f8f8f8;
+        background-color: #3f73d1;
+    }
+
+    .PR_ASC_A_btn:hover{
+        border: 1px solid #123f91;
+    }
+
+   
+
+}

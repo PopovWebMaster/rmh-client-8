@@ -20,6 +20,10 @@ export const airFilesSlice = createSlice({
         airFiles: {},
         airFilesByEventId: {},
 
+        airFilesIsChanged: false,
+
+
+
         filterItems: [],
         filterItemsByEventId: {},
         filterSearchValue: '',
@@ -75,6 +79,16 @@ export const airFilesSlice = createSlice({
             state.filterItemsByEventId = action.payload;
         },
 
+        setAirFilesIsChanged: ( state, action ) => {
+            /*
+                Внимание!!! записывть только через ...\air_files\vendors\set_air_files_to_store.js
+            */
+            state.airFilesIsChanged = action.payload;
+        },
+
+
+        
+
 
         
 
@@ -122,6 +136,7 @@ export const {
     setPeriodTo,
     setAirFiles,
     setAirFilesByEventId,
+    setAirFilesIsChanged,
     setFilterItems,
     setCurrentFilterEventId,
     setFilterItemsByEventId,
@@ -143,6 +158,7 @@ export const selectorData = ( state ) => {
 
         airFiles:               state.airFiles.airFiles,
         airFilesByEventId:      state.airFiles.airFilesByEventId,
+        airFilesIsChanged:      state.airFiles.airFilesIsChanged,
         filterItems:            state.airFiles.filterItems,
         filterItemsByEventId:   state.airFiles.filterItemsByEventId,
 

@@ -13,7 +13,8 @@ import { FilesPrefix } from './../FilesPrefix/FilesPrefix.js';
 import { FilesList } from './../FilesList/FilesList.js';
 
 import { FilesPeriodButton } from './../FilesPeriodButton/FilesPeriodButton.js';
-// import { FilesCollectDataButton } from './../FilesCollectDataButton/FilesCollectDataButton.js';
+
+import { FilesSaveChangesButton } from './../FilesSaveChangesButton/FilesSaveChangesButton.js';
 
 const FilesAppComponent = ( props ) => {
 
@@ -27,11 +28,10 @@ const FilesAppComponent = ( props ) => {
 
                 <div className = 'filesApp_left'>
                     <FilesPeriodButton />
-                    {/* <FilesCollectDataButton /> */}
                 </div>
                 
                 <div className = 'filesApp_right'>
-
+                    <FilesSaveChangesButton />
                 </div>
 
             </FilesTopPanel>

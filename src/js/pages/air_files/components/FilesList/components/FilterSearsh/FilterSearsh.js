@@ -18,7 +18,11 @@ const FilterSearshComponent = ( props ) => {
     let [ value, setValue ] = useState( '' );
 
     useEffect( () => {
+
+        console.log( 'filterSearchValue', filterSearchValue );
+
         setValue( filterSearchValue );
+
     }, [ filterSearchValue ] );
 
     const change = ( e ) => {

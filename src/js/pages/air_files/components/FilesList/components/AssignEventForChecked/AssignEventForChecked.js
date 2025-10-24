@@ -13,10 +13,14 @@ import { AlertWindowContainer } from './../../../../../../components/AlertWindow
 import { AWEventSelect }        from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
 import { AWButtonAdd }          from './../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
+import { set_air_files_to_store } from './../../../../vendors/set_air_files_to_store.js';
+
 const AssignEventForCheckedComponent = ( props ) => {
 
     let {
-        issetChackedValues
+        issetChackedValues,
+        filteredList,
+        airFiles,
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
@@ -42,6 +46,23 @@ const AssignEventForCheckedComponent = ( props ) => {
     }
 
     const applayEvent = () => {
+
+        let obj = {};
+        for( let i = 0; i < filteredList.length; i++ ){
+            let { name, isSelected } = filteredList[ i ];
+            if( isSelected ){
+                obj[ name ] = filteredList[ i ];
+            };
+        };
+
+        let newAirFiles = structuredClone( airFiles );
+
+        for( let name in obj ){
+            newAirFiles[ name ].event_id = eventId;
+        };
+
+        set_air_files_to_store( newAirFiles, true );
+
         setIsOpen( false );
     }
 
@@ -86,14 +107,17 @@ const AssignEventForCheckedComponent = ( props ) => {
 
 export function AssignEventForChecked( props ){
 
-    const airFiles = useSelector( airFilesSlice );
+    const airFiles_ = useSelector( airFilesSlice );
     const dispatch = useDispatch();
 
     return (
         <AssignEventForCheckedComponent
             { ...props }
 
-            issetChackedValues = { airFiles.issetChackedValues }
+            issetChackedValues = { airFiles_.issetChackedValues }
+            filteredList = { airFiles_.filteredList }
+            airFiles = { airFiles_.airFiles }
+
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

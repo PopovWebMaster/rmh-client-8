@@ -7,6 +7,8 @@ import './FilterButtonCheckAll.scss';
 
 import { selectorData as airFilesSlice } from './../../../../../../redux/airFilesSlice.js';
 
+import { set_isChaked_into_filteredList } from './../../../../vendors/set_isChaked_into_filteredList.js';
+
 
 const FilterButtonCheckAllComponent = ( props ) => {
 
@@ -18,10 +20,25 @@ const FilterButtonCheckAllComponent = ( props ) => {
 
     let [ allValue, setAllValue ] = useState( false );
 
-
+    useEffect( () => {
+        if( issetChackedValues === false ){
+            setAllValue( false );
+        };
+    }, [ issetChackedValues ] );
 
     const check = () => {
-        setAllValue( !allValue );
+
+        let nextValue = !allValue;
+        setAllValue( nextValue );
+
+        let arr = [];
+        for( let i = 0; i < filteredList.length; i++ ){
+            let { name } = filteredList[ i ];
+            arr.push( name );
+        };
+
+        set_isChaked_into_filteredList( arr, nextValue );
+
     }
 
     return (<>{ filteredList.length > 0? (

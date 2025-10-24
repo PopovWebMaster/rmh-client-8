@@ -6,6 +6,8 @@ import { selectorData as playReportSlice } from './../../../../../../redux/playR
 import './AdvancedSearchContainer.scss';
 
 import { AWInputText } from './../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
+import { AWEventSelect } from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
+
 
 import { SearchPeriodEdit } from './components/SearchPeriodEdit/SearchPeriodEdit.js';
 import { OnlyPremiersEdit } from './components/OnlyPremiersEdit/OnlyPremiersEdit.js';
@@ -15,6 +17,10 @@ import { get_date_now_YYYY_MM_DD } from './../../../../../../helpers/get_date_no
 
 import { SearchButton } from './components/SearchButton/SearchButton.js';
 import { DownloadFromFile } from './components/DownloadFromFile/DownloadFromFile.js';
+
+import { ActiveTypeSelect } from './components/ActiveTypeSelect/ActiveTypeSelect.js';
+
+import { SelectEventsList } from './components/SelectEventsList/SelectEventsList.js';
 
 
 const AdvancedSearchContainerComponent = ( props ) => {
@@ -31,6 +37,9 @@ const AdvancedSearchContainerComponent = ( props ) => {
     let [ dataToValue, setDataToValue ] = useState( '' );
     let [ isOnlyPremiers, setIsOnlyPremiers ] = useState( false );
 
+
+    let [ activeType, setActiveType ] = useState( 'by_name' ); // 'by_name' 'by_event'
+    let [ selectedEvents, setSelectedEvents ] = useState( [] )
 
     useEffect( () => {
         let nowDate = get_date_now_YYYY_MM_DD();
@@ -77,34 +86,58 @@ const AdvancedSearchContainerComponent = ( props ) => {
                 setIsOnlyPremiers = { setIsOnlyPremiers }
             />
 
-            <br />
-
-            <DownloadFromFile
-                requestList =       { requestList }
-                setRequestList =    { setRequestList }
+            <ActiveTypeSelect
+                activeType =    { activeType }
+                setActiveType = { setActiveType }
             />
 
-            <AWInputText
-                title =             { 'Название файла целиком или часть названия' }
-                value =             { newRequest }
-                onChange =          { changeNewRequest } 
-                buttonAddHandler =  { addRequest }
-                enterHandler =      { addRequest }
-            />
+            { activeType === 'by_name'? (<>
+                <DownloadFromFile
+                    requestList =       { requestList }
+                    setRequestList =    { setRequestList }
+                />
 
-            <RequestListEdit 
-                requestList =       { requestList }
-                setRequestList =    { setRequestList }
-            />
+                <AWInputText
+                    title =             { 'Название файла целиком или часть названия' }
+                    value =             { newRequest }
+                    onChange =          { changeNewRequest } 
+                    buttonAddHandler =  { addRequest }
+                    enterHandler =      { addRequest }
+                />
 
-            <SearchButton
-                requestList =       { requestList }
-                isOnlyPremiers =    { isOnlyPremiers }
-                dataFrom =          { dataFromValue }
-                dataTo =            { dataToValue }
-                callback =          { callback }
+                <RequestListEdit 
+                    requestList =       { requestList }
+                    setRequestList =    { setRequestList }
+                />
 
-            />
+                <SearchButton
+                    requestList =       { requestList }
+                    isOnlyPremiers =    { isOnlyPremiers }
+                    dataFrom =          { dataFromValue }
+                    dataTo =            { dataToValue }
+                    callback =          { callback }
+
+                />
+            </>): (<>
+
+                <SelectEventsList
+                    selectedEvents =    { selectedEvents }
+                    setSelectedEvents = { setSelectedEvents }
+                />
+            
+                <AWEventSelect
+                    value = { null }
+                    changeHandler = { () => {} }
+                    alwaysIsOpen = { true }
+                
+                />
+            
+            
+            
+            
+            </>) }
+
+
 
             
         </div>

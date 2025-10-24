@@ -9,6 +9,8 @@
     align-content: center;
     z-index: 100;
 
+    position: relative;
+
     >.btnDD{
         font-size: 1em;
         width: 1.4em;
@@ -23,6 +25,8 @@
         align-content: center;
 
         position: relative;
+
+        z-index: 200;
 
         >.icon{
             font-size: 1em;
@@ -48,13 +52,14 @@
             border: 1px solid #cacaca;
             border-radius: 0.1em;
             padding: 0.2em;
-            min-width: 20em;
+            min-width: 30em;
 
             .btnDD_list_item{
                 font-size: 1em;
                 border: 1px solid #cacaca00;
                 border-radius: 0.1em;
                 padding: 0.2em 0.5em;
+                margin: 0.2em 0.2em;
 
                 cursor: pointer;
                 user-select: none;
@@ -98,6 +103,7 @@
         border-radius: 0.1em;
         margin: 0 0 0 1em;
         padding: 0.2em 1em;
+        z-index: 200;
     }
 
     >.count{
@@ -109,5 +115,16 @@
         background-color: #ffffff;
         border: 1px solid #9d9d9d;
         border-radius: 0.2em;
+        z-index: 200;
+    }
+
+    >.FL_cutrain{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #00000075;
+        z-index: 100;
     }
 }
