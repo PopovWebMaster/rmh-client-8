@@ -78,12 +78,12 @@ export const send_request_to_server = ( params ) => {
                 let data_respons = await response.json();
                 successCallback( data_respons );
             }else{
-                // send();
+                send();
                 errorCallback( response );
             };
 
         } catch (error) {
-            // send();
+            send();
             console.error( `Ошибка : ${error}. При попытке вызвать fetch` );
             console.error({
                 _token: token,

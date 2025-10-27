@@ -28,7 +28,7 @@ const AdvancedSearchComponent = ( props ) => {
                     setIsOpen = { setIsOpen }
                     title =     'Расширенный поиск'
                     width =     '36em'
-                    height =    '70vh'
+                    height =    '85vh'
                 >
 
                     <AdvancedSearchContainer

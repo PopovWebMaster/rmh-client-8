@@ -10,21 +10,50 @@ import './SelectEventsList.scss';
 
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
+import { OneSelectedEvent } from './../OneSelectedEvent/OneSelectedEvent.js';
+
 const SelectEventsListComponent = ( props ) => {
 
     let {
-        activeType,
-        setActiveType,
+        selectedEvents,
+        removeSelectedEvent,
     } = props;
+
+    const create = ( arr ) => {
+        let div = arr.map( ( item, index ) => {
+            let {
+                category_id, event_id, name, style, type
+            } = item;
+
+            return (
+                <OneSelectedEvent
+                    key =                   { index }
+                    event_id =              { event_id }
+                    category_id =           { category_id }
+                    name =                  { name }
+                    style =                 { style }
+                    type =                  { type }
+                    removeSelectedEvent =   { removeSelectedEvent }
+                />
+            );
+
+        } );
+
+        return div;
+
+    };
+
+
     
 
     return (
         <div className = 'PR_ASC_SelectEventsList'>
 
-            <ScrollContainer height = '7vh' >
+            <ScrollContainer height = '10vh' >
 
-
-
+                <div className = 'PR_ASC_SelectEventsList_wrap'>
+                    { create( selectedEvents ) }
+                </div>
 
             </ScrollContainer>
  

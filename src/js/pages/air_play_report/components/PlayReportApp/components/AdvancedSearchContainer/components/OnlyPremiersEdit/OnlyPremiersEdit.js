@@ -21,7 +21,7 @@ const OnlyPremiersEditComponent = ( props ) => {
     return (
         <div className = 'PR_ASC_premiersOnly'>
 
-            <h3>Включить только примьеры? </h3>
+            <h3>Включить только премьеры? </h3>
             <span
                 className = { `PR_ASC_premiersOnly_btn ${isOnlyPremiers? 'isActive': '' }`}
                 onClick = { () => { setIsOnlyPremiers( !isOnlyPremiers ) } }

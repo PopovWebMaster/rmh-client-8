@@ -1,0 +1,42 @@
+.PR_ASC_OneSelectedEvent{
+    font-size: 1em;
+
+    flex-grow: 0;
+    margin: 0.3em 0.5em;
+    
+    position: relative;
+
+    .PR_ASC_OneSelectedEvent_title{
+        font-size: 0.65em;
+        padding: 0.2em 0.9em;
+        border-radius: 0.1em;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .PR_ASC_OneSelectedEvent_remove{
+        font-size: .7em;
+        padding: .15em 0em .13em 0.01em;
+        position: absolute;
+        top: -0.4em;
+        right: -0.7em;
+
+        // background-color: red;
+        // border: 1px solid #343434;
+        border-radius: 0.2em;
+        cursor: pointer;
+        user-select: none;
+        // background-color: #d78d8d59;
+        color: #eb8080;
+    }
+
+    .PR_ASC_OneSelectedEvent_remove:hover{
+        background-color: #ff0d0d;
+        color: #ffffff;
+    }
+    .PR_ASC_OneSelectedEvent_remove:active{
+        // background-color: #e74c4c;
+        color: #f5d7d7;
+    }
+
+}

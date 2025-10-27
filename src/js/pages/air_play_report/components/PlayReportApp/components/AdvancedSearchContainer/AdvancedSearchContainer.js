@@ -2,6 +2,8 @@
 import React, { useRef, useState, useEffect }   from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { selectorData as playReportSlice } from './../../../../../../redux/playReportSlice.js';
+import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
+
 
 import './AdvancedSearchContainer.scss';
 
@@ -22,12 +24,17 @@ import { ActiveTypeSelect } from './components/ActiveTypeSelect/ActiveTypeSelect
 
 import { SelectEventsList } from './components/SelectEventsList/SelectEventsList.js';
 
+import { SelectedEventsClass } from './vendors/SelectedEventsClass.js';
+import { SearchByEventsButton } from './components/SearchByEventsButton/SearchByEventsButton.js';
+
 
 const AdvancedSearchContainerComponent = ( props ) => {
 
     let {
         isOpen,
         setIsOpen,
+
+        eventListById,
     } = props;
 
     let [ requestList, setRequestList ] = useState( [] );
@@ -69,6 +76,31 @@ const AdvancedSearchContainerComponent = ( props ) => {
         console.dir( response );
         setIsOpen( false );
     };
+
+    const addSelectedEvent = ( id ) => {
+        if( id !== null ){
+            let SelectedEvents = new SelectedEventsClass();
+            SelectedEvents.SetList( selectedEvents );
+            SelectedEvents.AddAsToggle( id );
+            setSelectedEvents( SelectedEvents.GetList() );
+        }
+
+    };
+
+    const removeSelectedEvent = ( id ) => {
+        if( id !== null ){
+            let SelectedEvents = new SelectedEventsClass();
+            SelectedEvents.SetList( selectedEvents );
+            SelectedEvents.Remove( id );
+            setSelectedEvents( SelectedEvents.GetList() );
+        }
+
+    };
+
+
+
+
+    
  
 
     return (
@@ -122,14 +154,22 @@ const AdvancedSearchContainerComponent = ( props ) => {
 
                 <SelectEventsList
                     selectedEvents =    { selectedEvents }
-                    setSelectedEvents = { setSelectedEvents }
+                    removeSelectedEvent = { removeSelectedEvent }
                 />
             
                 <AWEventSelect
-                    value = { null }
-                    changeHandler = { () => {} }
-                    alwaysIsOpen = { true }
+                    value =         { null }
+                    changeHandler = { addSelectedEvent }
+                    alwaysIsOpen =  { true }
                 
+                />
+
+                <SearchByEventsButton
+                    selectedEvents =    { selectedEvents }
+                    isOnlyPremiers =    { isOnlyPremiers }
+                    dataFrom =          { dataFromValue }
+                    dataTo =            { dataToValue }
+                    callback =          { callback }
                 />
             
             
@@ -149,6 +189,11 @@ const AdvancedSearchContainerComponent = ( props ) => {
 export function AdvancedSearchContainer( props ){
 
     const playReport = useSelector( playReportSlice );
+    const layout = useSelector( layoutSlice );
+
+
+
+    
     const dispatch = useDispatch();
 
     return (
@@ -157,6 +202,9 @@ export function AdvancedSearchContainer( props ){
             searchFocus = { playReport.searchFocus }
             searchValue = { playReport.searchValue }
             calendarIsOpen = { playReport.calendarIsOpen }
+
+            eventListById = { layout.eventListById }
+
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />
