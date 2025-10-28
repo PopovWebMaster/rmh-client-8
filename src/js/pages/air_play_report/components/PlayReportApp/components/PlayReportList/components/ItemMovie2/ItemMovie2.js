@@ -33,15 +33,15 @@ const ItemMovie2Component = ( props ) => {
     return (
         <div className = { `PRL_ItemMovie2 ${isBacklight? 'isBacklight': ''}` }>
             <div className = 'PRL_ItemMovie2_wrap'>
-                <DateItem date = { item.date }/>
+                <DateItem
+                    item = { item }
+                />
                 <Time startTime = { item.startTime }/>
-                <FileData file = { item.file }/>
-                {/* <Duration 
-                    fileDuration =          { item.fileDuration }
-                    segmentRealDuration =   { item.segmentRealDuration }
-                    markIn =                { item.markIn }
-                /> */}
+                <FileData 
+                    // file = { item.file }
+                    item = { item }
 
+                />
                 <Duration_v2
                     fileDuration =          { item.fileDuration }
                     segmentRealDuration =   { item.segmentRealDuration }

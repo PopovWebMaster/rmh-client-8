@@ -13,8 +13,13 @@ import currentSubApplicationSlise   from './currentSubApplicationSlise.js';
 import scheduleSlise                from './scheduleSlise.js';
 import scheduleResultSlise          from './scheduleResultSlise.js';
 import cutEventEditorSlise          from './cutEventEditorSlise.js';
-import adminSlice          from './adminSlice.js';
-import airFilesSlice          from './airFilesSlice.js';
+import adminSlice                   from './adminSlice.js';
+import airFilesSlice                from './airFilesSlice.js';
+import playReportAnalyticsSlise     from './playReportAnalyticsSlise.js';
+
+
+
+
 
 
 export default configureStore({
@@ -35,6 +40,8 @@ export default configureStore({
         cutEventEditor: cutEventEditorSlise,
         admin:         adminSlice,
         airFiles: airFilesSlice,
+        playReportAnalytics: playReportAnalyticsSlise,
+
 
 
 

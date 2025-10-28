@@ -1,32 +1,75 @@
 
 import React, { useState, useEffect } from "react";
-// import { useSelector, useDispatch } from 'react-redux';
-// import { selectorData as playReportSlice, setCalendarIsOpen } from './../../../../../../../../redux/playReportSlice.js';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { selectorData as layoutSlice } from './../../../../../../../../../../redux/layoutSlice.js';
 
 import './FileData.scss';
 
 const FileDataComponent = ( props ) => {
 
     let {
-        file
+        // file,
+
+        item,
+
+        eventListById,
     } = props;
-    let [ value, setValue ] = useState( file.name );
+
+    let [ value, setValue ] = useState( '' );
+
+    let [ fileName, setFileName] = useState( '' );
+    let [ filePuth, setfilePuth ] = useState( '' );
+
+    let [ eventStyle, setEventStyle ] = useState( {} );
+    let [ eventName, setEventName ] = useState( '' );
+    let [ eventIdValue, setEventIdValue ] = useState( null );
+
+
+
+
+
     let [ showIsFile, setShowIsFile ] = useState( true );
 
+    // useEffect( () => {
+    //     setValue( file.name );
+    // }, [ file ] );
+
     useEffect( () => {
-        setValue( file.name );
-    }, [ file ] );
+        // setValue( file.name );
+        // console.dir( item );
+
+        let { type } = item;
+        if( type === 'movie' ){
+            let { file, eventId } = item;
+            
+            setValue( file.name );
+            setFileName( file.name );
+            setfilePuth( file.puth );
+
+            if( eventListById[ eventId ] ){
+                setEventStyle( eventListById[ eventId ].style );
+                setEventName( eventListById[ eventId ].name );
+                setEventIdValue( eventId );
+            };
+
+        };
+
+        
+
+    }, [ item ] );
 
 
 
     const clickFile = () => {
         setShowIsFile( true );
-        setValue( file.name );
+        setValue( fileName );
     }
 
     const clickPuth = () => {
         setShowIsFile( false );
-        setValue( file.puth );
+        setValue( filePuth );
 
     }
 
@@ -34,26 +77,43 @@ const FileDataComponent = ( props ) => {
     return (
         <div 
             className = 'PRL_ItemMovie2_FileData'
-            onMouseLeave = { clickFile }
+            // onMouseLeave = { clickFile }
         >
-            <div className = 'PRL_FileData_btn'>
-                <span 
-                    className = { showIsFile? 'PRL_FileData_btn_isActive': '' }
-                    onClick = { clickFile }
-                >file</span>
 
-                <span 
-                    className = { showIsFile? '': 'PRL_FileData_btn_isActive' }
-                    onClick = { clickPuth }
-                >puth</span>
+            <div className = 'PRL_FileData_wrap'>
+
+                <div className = 'PRL_FileData_btn'>
+                    <span 
+                        className = { showIsFile? 'PRL_FileData_btn_isActive': '' }
+                        onClick = { clickFile }
+                    >file</span>
+
+                    <span 
+                        className = { showIsFile? '': 'PRL_FileData_btn_isActive' }
+                        onClick = { clickPuth }
+                    >puth</span>
+
+                </div>
+
+                <input 
+                    type = 'text'
+                    value = { value }
+                    onChange = { () => {} }
+                />
+
+                { eventIdValue === null? '': (
+                    <div className = 'PRL_FileData_event'>
+                        <span
+                            className = 'PRL_FileData_event_name'
+                            style = { eventStyle }
+                        >{ eventName }</span>
+                    </div>
+                ) }
+
+                
+                
 
             </div>
-
-            <input 
-                type = 'text'
-                value = { value }
-                onChange = { () => {} }
-            />
             
 
 
@@ -69,13 +129,13 @@ const FileDataComponent = ( props ) => {
 
 export function FileData( props ){
 
-    // const playReport = useSelector( playReportSlice );
+    const layout = useSelector( layoutSlice );
     // const dispatch = useDispatch();
 
     return (
         <FileDataComponent
             { ...props }
-            // searchValue = { playReport.searchValue }
+            eventListById = { layout.eventListById }
             // setCalendarIsOpen = { ( callback ) => { dispatch( setCalendarIsOpen( callback ) ) } }
 
         />

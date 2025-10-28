@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect }  from "react";
 // import { useSelector, useDispatch } from 'react-redux';
 // import { selectorData as playReportSlice, setCalendarIsOpen } from './../../../../../../../../redux/playReportSlice.js';
 
@@ -8,14 +8,36 @@ import './DateItem.scss';
 const DateItemComponent = ( props ) => {
 
     let {
-        date
+        item,
     } = props;
+
+    let [ isPremiereValue, setIsPremiereValue ] = useState( false );
+    let [ YYYY_MM_DD, setYYYY_MM_DD ] = useState( '' );
+
+    useEffect( () => {
+        let { type } = item;
+        if( type === 'movie' ){
+            let { date, premiere,  } = item;
+
+            setYYYY_MM_DD( date.YYYY_MM_DD );
+            if( premiere.isPremiere ){
+                setIsPremiereValue( true );
+            };
+        };
+    }, [] );
+
+
+
 
 
     
     return (
         <div className = 'PRL_ItemMovie2_date'>
-            <span>{ date.YYYY_MM_DD }</span>
+            <span className = 'PRL_ItemMovie2_date_str' >{ YYYY_MM_DD }</span>
+            { isPremiereValue? (
+                <span className = 'PRL_ItemMovie2_date_premiere' >Премьера!</span>
+            ): '' }
+            
         </div> 
 
     )

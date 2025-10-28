@@ -16,6 +16,8 @@ import { ButtonShowDayAsTextForExcel } from './components/ButtonShowDayAsTextFor
 import { ButtonShowAllDaysAsTextForExcel } from './components/ButtonShowAllDaysAsTextForExcel/ButtonShowAllDaysAsTextForExcel.js';
 import { ButtonDownloadDayAsExcel } from './components/ButtonDownloadDayAsExcel/ButtonDownloadDayAsExcel.js';
 import { ButtonDownloadAllDaysAsExcel } from './components/ButtonDownloadAllDaysAsExcel/ButtonDownloadAllDaysAsExcel.js';
+
+import { ButtonDayAnalytics } from './components/ButtonDayAnalytics/ButtonDayAnalytics.js';
  
 const ListButtonsLeftComponent = ( props ) => {
 
@@ -35,12 +37,13 @@ const ListButtonsLeftComponent = ( props ) => {
                     <ButtonDownloadDayAsExcel />
                     <ButtonDownloadAllDaysAsExcel />
 
-                    {/* <DownloadAsText />
-                    <DownloadAsExel /> */}
+                    
+
                 </div>
 
                 <div className = 'PRL_ListButtonsLeft_wrap_row'>
                     <DetailDataWindowButton />
+                    <ButtonDayAnalytics />
                 </div>
 
             </div>

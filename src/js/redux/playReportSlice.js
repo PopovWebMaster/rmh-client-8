@@ -29,12 +29,7 @@ export const playReportSlice = createSlice({
         filteredList: [],
 
         dateListSelected: null,
-
-
-
         backligthPrefixList: {},
-
-
         detailDataWindow_isOpen: false,
         detailDataIsActive: false,
 

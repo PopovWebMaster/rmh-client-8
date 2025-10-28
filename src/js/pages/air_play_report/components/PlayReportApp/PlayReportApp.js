@@ -16,6 +16,8 @@ import { PlayReportListContainer } from './components/PlayReportListContainer/Pl
 import { GrabScrollingEvent } from './components/GrabScrollingEvent/GrabScrollingEvent.js';
 
 import { DetailDataWindow } from './components/DetailDataWindow/DetailDataWindow.js';
+
+import { AnalyticsWindow } from './components/AnalyticsWindow/AnalyticsWindow.js';
  
 
 const PlayReportAppComponent = ( props ) => {
@@ -40,6 +42,8 @@ const PlayReportAppComponent = ( props ) => {
                 </PlayReportListContainer>
 
                 <DetailDataWindow />
+
+                <AnalyticsWindow />
 
             </SetCalendarData>
         </PageContainer>

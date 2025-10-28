@@ -2,7 +2,7 @@
 import store from './../../../../../../../redux/store.js';
 
 
-import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../../config/layout.js'
+import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../../config/layout.js';
 
 
 export class SelectedEventsClass{

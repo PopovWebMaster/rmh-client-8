@@ -44,3 +44,4 @@
                 // icon-trash-empty
 
                 // icon-folder-open
+                // icon-chart-bar

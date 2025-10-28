@@ -133,14 +133,16 @@ export const layoutSlice = createSlice({
     
         setEventList: ( state, action ) => {
             state.eventList =  action.payload;
-            let { eventListById } = get_all_lists_of_values_from_events_list( action.payload );
+            let categoryListById = state.categoryListById;
+            let { eventListById } = get_all_lists_of_values_from_events_list( action.payload, categoryListById );
             state.eventListById = eventListById;
             
         },
 
         setEventListAsChanged: ( state, action ) => {
             state.eventList =  action.payload;
-            let { eventListById } = get_all_lists_of_values_from_events_list( action.payload );
+            let categoryListById = state.categoryListById;
+            let { eventListById } = get_all_lists_of_values_from_events_list( action.payload, categoryListById );
             state.eventListById = eventListById;
             state.eventsIsChanged =  true;
         },

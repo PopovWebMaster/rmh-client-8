@@ -2,8 +2,8 @@
     font-size: 1em;
     
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     align-content: center;
     
@@ -11,15 +11,30 @@
     width: fit-content;
     height: 1.7em;
 
-    span{
+    .PRL_ItemMovie2_date_str{
         font-size: 0.6em;
         color: #1a1a1a;
         padding: 0.2em 0.5em;
+        width: 6.5em;
+        margin-top: 0.5em;
 
         font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 
         white-space: preserve nowrap;
+
+        text-align: center;
         
 
+    }
+
+    .PRL_ItemMovie2_date_premiere{
+        font-size: 0.6em;
+        padding: .1em .7em .15em;
+        border: 1px solid #6669e7;
+        // margin: 0.1em 0;
+        background-color: #6f71cb;
+        color: #fcfcfc;
+        border-radius: .1em;
+        font-family: Open Sans Semibold;
     }
 }
