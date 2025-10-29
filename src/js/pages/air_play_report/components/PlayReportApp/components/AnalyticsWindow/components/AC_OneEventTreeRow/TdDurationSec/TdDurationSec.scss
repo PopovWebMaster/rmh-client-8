@@ -1,0 +1,26 @@
+.AC_EventsTree{
+    table{
+        tbody{
+            tr{
+                td.TdDurationSec{
+                    // font-size: 0.9em;
+                    padding: 0 0.2em;
+                    border: 1px solid #e5e0e0;
+
+                    >input{
+                        font-size: .6em;
+                        padding: 0.35em 0.1em;
+                        border: 1px solid #d1d1d1;
+                        background-color: #ffffff;
+                        color: #4b4b4b;
+                        border-radius: .1em;
+                        font-family: Open Sans Semibold;
+                        outline: none;
+                        text-align: center;
+                        width: calc( 100% - 2px );
+                    }
+                }
+            }
+        }
+    }
+}

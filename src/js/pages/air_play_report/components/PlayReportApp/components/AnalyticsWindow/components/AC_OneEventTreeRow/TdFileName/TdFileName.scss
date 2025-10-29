@@ -1,0 +1,31 @@
+.AC_EventsTree{
+    table{
+        tbody{
+            tr{
+                td.TdFileName{
+                    // font-size: 0.9em;
+                    padding: 0.2em;
+
+                    // display: flex;
+                    // justify-content: flex-start;
+                    // align-items: center;
+                    // align-content: center;
+                    min-width: 32vw;
+                    border: 1px solid #e5e0e0;
+
+                    >.TdFileName_inp{
+                        font-size: 0.65em;
+                        padding: 0.35em 0.9em;
+                        margin: 0 0.3em;
+                        border-radius: 0.1em;
+                        background-color: #ffffff;
+                        color: #343434;
+                        width: calc( 100% - 6em );
+                        border: 1px solid #c9c9c9;
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}

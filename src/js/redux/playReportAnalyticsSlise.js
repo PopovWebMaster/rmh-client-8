@@ -8,6 +8,8 @@ export const playReportAnalyticsSlise = createSlice({
     initialState: {
         analitycsIsActive: false,
 
+        evenstTree: {},
+
 
     },
 
@@ -17,6 +19,10 @@ export const playReportAnalyticsSlise = createSlice({
             state.analitycsIsActive =  action.payload;
         },
 
+        setEvenstTree: ( state, action ) => {
+            state.evenstTree =  action.payload;
+        },
+
 
     },
 
@@ -24,6 +30,7 @@ export const playReportAnalyticsSlise = createSlice({
 
 export const {  
     setAnalitycsIsActive,
+    setEvenstTree,
 
 
 
@@ -32,6 +39,10 @@ export const {
 export const selectorData = ( state ) => {
     return {
         analitycsIsActive: state.playReportAnalytics.analitycsIsActive,
+        evenstTree: state.playReportAnalytics.evenstTree,
+
+
+        
 
 
     };

@@ -1,0 +1,26 @@
+.analyticsContainer{
+    font-size: 1em;
+    height: calc( 93vh - 1.4em );
+
+    .AC_top_panel{
+        font-size: 1em;
+        height: 5em;
+        // background-color: rgba(71, 204, 149, 0.719);
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+    };
+
+    .AC_body{
+        font-size: 1em;
+        height: calc( 93vh - 6.4em );
+        position: relative;
+        // overflow: hidden;
+        // background-color: rgba(30, 126, 21, 0.719);
+    }
+
+
+}

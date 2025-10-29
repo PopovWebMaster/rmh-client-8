@@ -9,6 +9,8 @@ import { selectorData as playReportAnalyticsSlise, setAnalitycsIsActive } from '
 import './AnalyticsWindow.scss';
 import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
+import { AnalyticsContainer } from './components/AnalyticsContainer/AnalyticsContainer.js';
+
 
 const AnalyticsWindowComponent = ( props ) => {
 
@@ -28,11 +30,15 @@ const AnalyticsWindowComponent = ( props ) => {
             <AlertWindowContainer
                 isOpen =    { analitycsIsActive }
                 setIsOpen = { setAnalitycsIsActive }
-                title =     'Аналитика за текущий день'
+                title =     'Аналитика за день'
                 width =     '97vw'
                 height =    '93vh'
             >
-                <div>Она здесь скоро будет, ждём...</div>
+
+                <AnalyticsContainer
+                
+                />
+                
             </AlertWindowContainer>
             
         </div>
