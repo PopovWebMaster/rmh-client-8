@@ -38,7 +38,7 @@ const AC_EventsTreeComponent = ( props ) => {
     let [ SCH_style_6, setSCH_style_6 ] = useState( {} );
     let [ SCH_style_7, setSCH_style_7 ] = useState( {} );
     let [ SCH_style_8, setSCH_style_8 ] = useState( {} );
-    let [ SCH_style_9, setSCH_style_9 ] = useState( {} );
+    let [ SCH_thead_style, setSCH_thead_style ] = useState( {} );
 
     let SCH_ref_0 = useRef();
     let SCH_ref_1 = useRef();
@@ -49,40 +49,68 @@ const AC_EventsTreeComponent = ( props ) => {
     let SCH_ref_6 = useRef();
     let SCH_ref_7 = useRef();
     let SCH_ref_8 = useRef();
+    let SCH_thead_ref = useRef();
+    let SCH_table_ref = useRef();
+
+
+
 
     useEffect( () => {
 
+        correct_schadow_style();
 
-        let style = window.getComputedStyle( SCH_ref_0.current );
-        setSCH_style_0({ width: parseFloat( style.width ) - 1 + 'px' });
+        window.onresize = correct_schadow_style;
 
-        style = window.getComputedStyle( SCH_ref_1.current );
-        setSCH_style_1({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_2.current );
-        setSCH_style_2({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_3.current );
-        setSCH_style_3({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_4.current );
-        setSCH_style_4({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_5.current );
-        setSCH_style_5({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_6.current );
-        setSCH_style_6({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_7.current );
-        setSCH_style_7({ width: parseFloat( style.width ) - 1 + 'px' });
-
-        style = window.getComputedStyle( SCH_ref_8.current );
-        setSCH_style_8({ width: parseFloat( style.width ) - 1 + 'px' });
-
+        return () => {
+            window.onresize = null;
+        }
 
 
     }, [] );
+
+    const correct_schadow_style = () => {
+        let style_thead = window.getComputedStyle( SCH_thead_ref.current );
+        let thead_width_px = parseFloat( style_thead.width );
+
+
+        setSCH_thead_style( { width: thead_width_px + 1 + 'px' } );
+
+        const get_stile_width = ( width_str ) => {
+
+            let width_px = parseFloat( width_str ) - 1;
+            let proc = width_px * 100 / thead_width_px;
+
+            return { width: proc + '%' };
+
+        };
+
+        let style = window.getComputedStyle( SCH_ref_0.current );
+        setSCH_style_0( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_1.current );
+        setSCH_style_1( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_2.current );
+        setSCH_style_2( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_3.current );
+        setSCH_style_3( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_4.current );
+        setSCH_style_4( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_5.current );
+        setSCH_style_5( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_6.current );
+        setSCH_style_6( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_7.current );
+        setSCH_style_7( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_8.current );
+        setSCH_style_8( get_stile_width( style.width ) );
+    }
 
 
 
@@ -148,10 +176,6 @@ const AC_EventsTreeComponent = ( props ) => {
 
             });
 
-            console.dir( 'matrix' );
-            console.dir( matrix );
-
-
         };
 
 
@@ -159,10 +183,8 @@ const AC_EventsTreeComponent = ( props ) => {
 
     }
 
-
-    
     return (<>
-            <div className = 'AC_EventsTree_header_schadow'>
+            <div className = 'AC_EventsTree_header_schadow' style = { SCH_thead_style }>
 
                 <span className = 'AC_SCH_0' style = { SCH_style_0 }>Категория</span>
                 <span className = 'AC_SCH_1' style = { SCH_style_1 }>Событие</span>
@@ -176,29 +198,15 @@ const AC_EventsTreeComponent = ( props ) => {
 
             </div>
         <div className = 'AC_EventsTree'>
-            {/* <div className = 'AC_EventsTree_header_schadow'>
-
-                <span className = 'AC_SCH_0' style = { SCH_style_0 }>Категория</span>
-                <span className = 'AC_SCH_1' style = { SCH_style_1 }>Событие</span>
-                <span className = 'AC_SCH_2' style = { SCH_style_2 }>Файл</span>
-                <span className = 'AC_SCH_3' style = { SCH_style_3 }>Премьеры</span>
-                <span className = 'AC_SCH_4' style = { SCH_style_4 }>шт.</span>
-                <span className = 'AC_SCH_5' style = { SCH_style_5 }>хрон.</span>
-                <span className = 'AC_SCH_6' style = { SCH_style_6 }>всего сек.</span>
-                <span className = 'AC_SCH_7' style = { SCH_style_7 }>всего время</span>
-                <span className = 'AC_SCH_8' style = { SCH_style_8 }>%/сутки</span>
-
-            </div> */}
-
             <table>
-                <thead>
+                <thead ref = { SCH_thead_ref }>
                     <tr>
                         <th ref = { SCH_ref_0 } >Категория</th>
                         <th ref = { SCH_ref_1 } >Событие</th>
                         <th ref = { SCH_ref_2 } >Файл</th>
                         <th ref = { SCH_ref_3 } >Премьеры</th>
-                        <th ref = { SCH_ref_4 } >шт.</th>
-                        <th ref = { SCH_ref_5 } >хрон.</th>
+                        <th ref = { SCH_ref_4 } className = 'th_count'>шт.</th>
+                        <th ref = { SCH_ref_5 } className = 'th_duration'>хрон.</th>
                         <th ref = { SCH_ref_6 } >всего сек.</th>
                         <th ref = { SCH_ref_7 } >всего время</th>
                         <th ref = { SCH_ref_8 } >%/сутки</th>
@@ -206,7 +214,7 @@ const AC_EventsTreeComponent = ( props ) => {
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody ref = { SCH_table_ref }>
 
                     { create( analitycsIsActive, evenstTree ) }
 

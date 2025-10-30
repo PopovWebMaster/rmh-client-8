@@ -1,0 +1,25 @@
+.AC_EventsTree{
+    table{
+        tbody{
+            tr{
+                td.AC_RowCounter_TdItemName{
+                    font-size: 1em;
+
+                    text-align: right;
+                    padding: 0.1em;
+                    span{
+                        font-size: 0.7em;
+                        color: rgb(82, 82, 82);
+                        padding: 0.23em 0.5em;
+                    }
+                    
+
+                }
+
+                td.AC_RowCounter_TdItemName.isHidden{
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

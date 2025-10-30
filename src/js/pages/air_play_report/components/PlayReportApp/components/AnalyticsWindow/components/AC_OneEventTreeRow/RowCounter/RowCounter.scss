@@ -1,0 +1,57 @@
+.AC_EventsTree{
+    table{
+        tbody{
+            tr.AC_RowCounter_all{
+                height: 1.5em;
+                
+                td.AC_RowCounter_TdItemName{
+                    padding-top: 0.3em;
+                    span{
+                        color: rgb(31, 165, 82);
+                    }
+                }
+                td.AC_RowCounter_IdItemValue{
+                    padding-top: 0.3em;
+                    >input{
+                        background-color: #e9fff2;
+                    }
+                }
+            }
+            tr.AC_RowCounter_all_premiers{
+                height: 1.5em;
+                td.AC_RowCounter_TdItemName{
+                    span{
+                        color: #6f71cb;
+                    }
+                }
+                td.AC_RowCounter_IdItemValue{
+                    
+                    >input{
+                        background-color: #f2f2ff;
+                    }
+                }
+            }
+
+            tr.AC_RowCounter_all_repeats{
+                height: 1.5em;
+                td.AC_RowCounter_TdItemName{
+                    span{
+                        color: #585858;
+                    }
+                }
+                td.AC_RowCounter_IdItemValue{
+                    
+                    >input{
+                        background-color: #fcfcfc;
+                    }
+                }
+            }
+
+
+
+
+        }
+    }
+}
+
+

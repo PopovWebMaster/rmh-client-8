@@ -36,7 +36,7 @@ const AnalyticsWindowComponent = ( props ) => {
             >
 
                 <AnalyticsContainer
-                
+                    isOpen =    { analitycsIsActive }
                 />
                 
             </AlertWindowContainer>

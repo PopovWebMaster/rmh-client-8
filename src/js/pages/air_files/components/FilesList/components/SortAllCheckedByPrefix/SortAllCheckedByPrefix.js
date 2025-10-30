@@ -42,7 +42,17 @@ const SortAllCheckedByPrefixComponent = ( props ) => {
 
         for( let name in newAirFiles ){
             for( let i = 0; i < sort_list.length; i++ ){
-                if( name.indexOf( sort_list[ i ].prefix ) === 0 ){
+
+                let fileName = name.toLowerCase();
+                let prefix = sort_list[ i ].prefix.toLowerCase();
+
+
+                // if( name.indexOf( sort_list[ i ].prefix ) === 0 ){
+                //     newAirFiles[ name ].event_id = sort_list[ i ].eventId;
+                //     break;
+                // };
+
+                if( fileName.indexOf( prefix ) === 0 ){
                     newAirFiles[ name ].event_id = sort_list[ i ].eventId;
                     break;
                 };

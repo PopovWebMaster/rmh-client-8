@@ -1,13 +1,5 @@
-// TdFileName
 
-// TdEvent
-
-// TdCategory
-
-// AC_OneEventTreeRow
-
-
-import React, { useRef, useState, useEffect }   from "react";
+import React from "react";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -17,10 +9,7 @@ import { selectorData as layoutSlice } from './../../../../../../../../../redux/
 
 import './TdFileName.scss';
 
-
-// import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-
+import { set_evenstTree_changes_to_store } from './../../../vendors/set_evenstTree_changes_to_store.js';
 
 const TdFileNameComponent = ( props ) => {
 
@@ -32,17 +21,19 @@ const TdFileNameComponent = ( props ) => {
         event_id,
         fileName,
 
+        isUsed,
+
 
     } = props;
 
-    let [ chackValue, setChackValue ] = useState( false );
-
-
     const chack = ( e ) => {
-        console.dir({
+        set_evenstTree_changes_to_store({
             category_id,
             event_id,
             fileName,
+            changeObject: {
+                isUsed: !isUsed
+            }
         });
     };
 
@@ -54,12 +45,12 @@ const TdFileNameComponent = ( props ) => {
             <input
                 type =      'checkbox'
                 value =     { true }
-                checked =   { chackValue }
+                checked =   { isUsed }
                 onChange =  { chack }
             />
             <input
                 type =      'text'
-                className = 'TdFileName_inp'
+                className = { `TdFileName_inp ${isUsed? 'isUsed': ''}` }
                 value =     { fileName }
                 onChange =  { () => {} }
 

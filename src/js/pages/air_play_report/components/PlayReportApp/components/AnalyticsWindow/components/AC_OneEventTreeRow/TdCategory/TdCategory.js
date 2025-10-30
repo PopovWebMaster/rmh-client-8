@@ -9,14 +9,12 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { selectorData as layoutSlice } from './../../../../../../../../../redux/layoutSlice.js';
+import { selectorData as playReportAnalyticsSlise } from './../../../../../../../../../redux/playReportAnalyticsSlise.js';
 
 
 import './TdCategory.scss';
 
-
-// import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-
+import { AnalitycsEventsTreeClass } from './../../../../../../../../../classes/AnalitycsEventsTreeClass.js';
 
 const TdCategoryComponent = ( props ) => {
 
@@ -28,17 +26,50 @@ const TdCategoryComponent = ( props ) => {
 
         categoryListById,
 
+        evenstTree,
+
     } = props;
 
     let [ chackValue, setChackValue ] = useState( false );
 
+    useEffect( () => {
+    
+        let val = true;
+        for( let event_id in evenstTree[ category_id ] ){
+            for( let fileName in evenstTree[ category_id ][ event_id ] ){
+                let { isUsed } = evenstTree[ category_id ][ event_id ][ fileName ];
+                if( isUsed === false ){
+                    val = false;
+                    break;
+                };
+            };
+        };
+       
+        setChackValue( val );
+
+    }, [ evenstTree ] );
+
 
     const chack = ( e ) => {
-        console.dir({
-            index,
-            list_length,
-            category_id,
-        });
+        let AnalitycsEventsTree = new AnalitycsEventsTreeClass();
+        AnalitycsEventsTree.CreateFromStore();
+
+        let next_value = !chackValue;
+
+        for( let event_id in evenstTree[ category_id ] ){
+            for( let fileName in evenstTree[ category_id ][ event_id ] ){
+                AnalitycsEventsTree.SetChanges({
+                    category_id,
+                    event_id,
+                    fileName,
+                    changeObject: {
+                        isUsed: next_value
+                    },
+                });
+            };
+        };
+
+        AnalitycsEventsTree.SetEventsTreeToStore();
     };
 
 
@@ -46,7 +77,7 @@ const TdCategoryComponent = ( props ) => {
 
         let { name, colorBG, colorText } = categoryListById[ category_id ];
 
-        console.dir( categoryListById[ category_id ] );
+        // console.dir( categoryListById[ category_id ] );
 
         return (
             <td 
@@ -80,6 +111,7 @@ const TdCategoryComponent = ( props ) => {
 export function TdCategory( props ){
 
     const layout = useSelector( layoutSlice );
+    const playReportAnalytics = useSelector( playReportAnalyticsSlise );
     const dispatch = useDispatch();
 
     return (
@@ -88,6 +120,8 @@ export function TdCategory( props ){
 
             eventListById = { layout.eventListById }
             categoryListById = { layout.categoryListById }
+            
+            evenstTree = { playReportAnalytics.evenstTree }
 
 
 

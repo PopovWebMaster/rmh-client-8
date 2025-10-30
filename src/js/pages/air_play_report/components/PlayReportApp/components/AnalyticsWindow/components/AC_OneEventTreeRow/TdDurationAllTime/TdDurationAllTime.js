@@ -17,13 +17,13 @@ const TdDurationAllTimeComponent = ( props ) => {
     let {
 
         durationAllSec,
-
+        isUsed,
 
     } = props;
 
     
     return (
-        <td className = 'TdDurationAllTime'>
+        <td className = { `TdDurationAllTime ${isUsed? 'isUsed': ''}` }>
 
             <input
                 type = 'text'

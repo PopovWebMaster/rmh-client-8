@@ -1,5 +1,7 @@
 
-import store from './../redux/store.js'
+import store from './../redux/store.js';
+
+let sendCount = 0;
 
 export const send_request_to_server = ( params ) => {
     let {
@@ -77,6 +79,7 @@ export const send_request_to_server = ( params ) => {
             if ( response.ok ) { 
                 let data_respons = await response.json();
                 successCallback( data_respons );
+                sendCount = 0;
             }else{
                 send();
                 errorCallback( response );
@@ -98,7 +101,13 @@ export const send_request_to_server = ( params ) => {
     if( isError ){
 
     }else{
-        send();
+
+        if( sendCount < 3 ){
+            send();
+        }else{
+            sendCount = 0;
+        };
+        
     };
 
 }

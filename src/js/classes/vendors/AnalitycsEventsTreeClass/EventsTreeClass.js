@@ -11,8 +11,11 @@ export class EventsTreeClass {
         this.SetTreeToStore = this.SetTreeToStore.bind(this);
         this.ClearStore = this.ClearStore.bind(this);
 
+        this.GetTree = this.GetTree.bind(this);
+        this.ResetTree = this.ResetTree.bind(this);
 
-        
+
+
 
 
     }
@@ -72,5 +75,13 @@ export class EventsTreeClass {
 
     ClearStore(){
         store.dispatch( setEvenstTree( {} ) );
+    }
+
+    GetTree(){
+        return structuredClone( this.tree );
+    }
+
+    ResetTree( tree ){
+        this.tree = tree
     }
 }

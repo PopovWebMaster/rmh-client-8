@@ -1,56 +1,48 @@
-// TdIsPremiere
 
-import React, { useRef, useState, useEffect }   from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { selectorData as layoutSlice } from './../../../../../../../../../redux/layoutSlice.js';
 
-
 import './TdIsPremiere.scss';
 
-
-// import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-
+import { set_evenstTree_changes_to_store } from './../../../vendors/set_evenstTree_changes_to_store.js';
 
 const TdIsPremiereComponent = ( props ) => {
 
     let {
-
-        // index,
-        // list_length = 0,
         category_id,
         event_id,
         fileName,
-        isPremiere
-
-
+        isPremiere,
+        isUsed,
     } = props;
 
-    let [ chackValue, setChackValue ] = useState( false );
-
-
     const chack = ( e ) => {
-        console.dir({
-            category_id,
-            event_id,
-            fileName,
-            isPremiere,
-        });
+        if( isUsed ){
+            set_evenstTree_changes_to_store({
+                category_id,
+                event_id,
+                fileName,
+                changeObject: {
+                    isPremiere: !isPremiere
+                }
+            });
+        }
+       
     };
 
-
-
-    
     return (
         <td 
             className = 'TdIsPremiere'
             onClick = { chack }
         >
-            
-            <span>Премьера</span>
+            {
+                isUsed? isPremiere? <span className = 'TdIsPremiere_yes'>Есть</span>: <span className = 'TdIsPremiere_no'>Нет</span>: <span></span>
+            }
+        
         </td>
     )
 

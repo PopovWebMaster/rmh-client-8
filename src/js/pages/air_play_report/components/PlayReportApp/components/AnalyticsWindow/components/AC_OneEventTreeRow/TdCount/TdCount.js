@@ -9,13 +9,9 @@ import { useDispatch } from 'react-redux';
 
 import { selectorData as layoutSlice } from './../../../../../../../../../redux/layoutSlice.js';
 
-
 import './TdCount.scss';
 
-
-// import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
-
-
+import { set_evenstTree_changes_to_store } from './../../../vendors/set_evenstTree_changes_to_store.js';
 
 const TdCountComponent = ( props ) => {
 
@@ -26,16 +22,38 @@ const TdCountComponent = ( props ) => {
         category_id,
         event_id,
         fileName,
-        count
+        count,
+        isUsed,
 
 
     } = props;
 
+   
+    const change =  ( e ) => {
+        if( isUsed ){
+            let val = Number( e.target.value );
+            if( val >= 0 ){
+                set_evenstTree_changes_to_store({
+                    category_id,
+                    event_id,
+                    fileName,
+                    changeObject: {
+                        count: val
+                    }
+                });
+            }
+        };
+        
+    }
+
     
     return (
-        <td className = 'TdCount'>
-            
-            <span>{ count }</span>
+        <td className = { `TdCount ${isUsed? 'isUsed': ''}` }>
+            <input
+                type = 'number'
+                value = { count }
+                onChange = { change }
+            />
         </td>
     )
 
