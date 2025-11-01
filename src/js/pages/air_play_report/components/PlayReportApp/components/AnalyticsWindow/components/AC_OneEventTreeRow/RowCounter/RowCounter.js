@@ -32,7 +32,7 @@ const RowCounterComponent = ( props ) => {
     } = props;
 
     const get_procent = ( sec ) => {
-        return round_to_number( ( sec * 100 / day_sec ), 5 );
+        return round_to_number( ( sec * 100 / day_sec ), 4 );
 
     }
 
@@ -44,9 +44,10 @@ const RowCounterComponent = ( props ) => {
             <td></td>
             <IdItemValue value = { allCount } />
             <td></td>
+            <td></td>
             <IdItemValue value = { allDuration } />
             <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration ) } />
-            <IdItemValue value = { get_procent( allDuration ) } />
+            <IdItemValue value = { get_procent( allDuration ) } subZnak = '%'/>
         </tr>
 
         <tr className = 'AC_RowCounter_all_premiers'>
@@ -56,9 +57,10 @@ const RowCounterComponent = ( props ) => {
             <td></td>
             <IdItemValue value = { allPremiersCount } />
             <td></td>
+            <td></td>
             <IdItemValue value = { allPremiersDuration } />
             <IdItemValue value = { allPremiersDuration === 0? 0: convert_sec_to_time( allPremiersDuration ) } />
-            <IdItemValue value = { get_procent( allPremiersDuration ) } />
+            <IdItemValue value = { get_procent( allPremiersDuration ) } subZnak = '%'/>
         </tr>
 
         <tr className = 'AC_RowCounter_all_repeats'>
@@ -68,9 +70,10 @@ const RowCounterComponent = ( props ) => {
             <td></td>
             <IdItemValue value = { allCount - allPremiersCount } />
             <td></td>
+            <td></td>
             <IdItemValue value = { allDuration - allPremiersDuration } />
             <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration - allPremiersDuration ) } />
-            <IdItemValue value = { get_procent( allDuration - allPremiersDuration ) } />
+            <IdItemValue value = { get_procent( allDuration - allPremiersDuration ) } subZnak = '%'/>
         </tr>
     
     </>)

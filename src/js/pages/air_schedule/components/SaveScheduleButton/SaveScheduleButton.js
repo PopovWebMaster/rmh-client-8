@@ -11,6 +11,8 @@ import { PageBodySaveButton } from './../../../../components/PageBodySaveButton/
 
 import { save_schedule_list_on_server } from './../../vendors/save_schedule_list_on_server.js';
 
+import { IsAllowedContainer } from './../../../../components/IsAllowedContainer/IsAllowedContainer.js';
+
 
 const SaveScheduleButtonComponent = ( props ) => {
 
@@ -18,18 +20,31 @@ const SaveScheduleButtonComponent = ( props ) => {
         scheduleEventsListIsChanged
     } = props;
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
 
     const click = () => {
-        save_schedule_list_on_server( () => {} );
+        if( isAllowed ){
+            save_schedule_list_on_server( () => {} );
+        };
+        
     }
 
     return (
-        <div className = 'saveScheduleButton'>
-            <PageBodySaveButton 
-                isChanged = { scheduleEventsListIsChanged }
-                clickHandler = { click }
-            />
-        </div>
+
+        <IsAllowedContainer
+            accessName =            'schedule_edit'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <div className = 'saveScheduleButton'>
+                <PageBodySaveButton 
+                    isChanged = { scheduleEventsListIsChanged }
+                    clickHandler = { click }
+                />
+            </div>
+
+        </IsAllowedContainer>
+
 
     )
 

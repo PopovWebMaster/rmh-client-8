@@ -61,13 +61,16 @@ const ItemReleaseFileNameComponent = ( props ) => {
 
         const recursive_get = ( files, index ) => {
             if( files[ index ] ){
+
                 let file = files[index];
                 let file_name = file.name;
                 let file_duration = 0;
                 let video = document.createElement('video');
                 video.preload = `metadata`;
                 video.src = URL.createObjectURL( file );
+
                 video.onloadedmetadata = function() {
+
                     window.URL.revokeObjectURL(video.src);
                     file_duration = Math.round( video.duration );
                     arr.push( {

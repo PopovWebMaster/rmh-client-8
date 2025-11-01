@@ -20,7 +20,14 @@ export class AnalitycsEventsTreeClass extends AET_MetodsClass {
     }
 
     Create(){
+        console.dir('11111');
         this.EventsTree.CreateFromFilteredList();
+        console.dir('22222');
+        console.dir( 'this' );
+        console.dir( this );
+
+
+
     }
 
     CreateFromStore(){

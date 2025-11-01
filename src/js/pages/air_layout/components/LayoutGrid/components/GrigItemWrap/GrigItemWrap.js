@@ -14,6 +14,8 @@ import { EVENT_TYPE } from './../../../../../../config/layout.js';
 // import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
 import { set_grid_event_changes_to_store } from './../../vendors/set_grid_event_changes_to_store.js';
 
+import { access_right } from './../../../../../../helpers/access_right.js';
+
 const GrigItemWrapComponent = ( props ) => {
 
     let {
@@ -122,45 +124,63 @@ const GrigItemWrapComponent = ( props ) => {
 
 
     const drag_start = ( e, gridEventId ) => {
-        if( isCompletd ){
-            setDragebleGridEventId( gridEventId );
-        };  
+        if( access_right( 'layout_grid_edit' ) ){
+            if( isCompletd ){
+                setDragebleGridEventId( gridEventId );
+            };     
+        };
+
     }
 
     const drag_end = () => {
-        setDragebleGridEventId( null );
+        if( access_right( 'layout_grid_edit' ) ){
+            setDragebleGridEventId( null )
+        };
+        
     }
 
     const drag_over = ( e ) => {
-        e.preventDefault();
-        let isTargetEvent = getTargetState();
-        if( isTargetEvent ){
-            setIsLighter( true );
-        }else{
-            setIsLighter( false );
+        if( access_right( 'layout_grid_edit' ) ){
+            e.preventDefault();
+            let isTargetEvent = getTargetState();
+            if( isTargetEvent ){
+                setIsLighter( true );
+            }else{
+                setIsLighter( false );
+            };
         };
+
     }
     
     const drag_leave = ( e ) => {
-        setIsLighter( false );
+        if( access_right( 'layout_grid_edit' ) ){
+            setIsLighter( false );
+        };
+        
     }
     
     const drop = () => {
 
-        setIsLighter( false );
+        if( access_right( 'layout_grid_edit' ) ){
 
-        let isTargetEvent = getTargetState();
-        if( isTargetEvent ){ 
+            setIsLighter( false );
 
-            set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
+            let isTargetEvent = getTargetState();
+            if( isTargetEvent ){ 
+
+                set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
 
 
-            // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-            // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-            // StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
-            // StoreScheduleResultEvents.SetListToStore();
+                // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+                // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+                // StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
+                // StoreScheduleResultEvents.SetListToStore();
+
+            };
 
         };
+
+        
 
     }
 

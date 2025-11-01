@@ -9,6 +9,8 @@ import { selectorData as layoutSlice } from './../../../../../../../../redux/lay
 
 import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 
 const EventNameItemComponent = ( props ) => {
 
@@ -78,12 +80,10 @@ const EventNameItemComponent = ( props ) => {
     }
 
     const clickCut = () => {
-        
-
-        console.dir( `cut_button_${firstSegmentId}` );
-
-        let elem = document.getElementById( `cut_button_${firstSegmentId}` );
-        elem.click();
+        if( access_right( 'layout_grid_edit' ) ){
+            let elem = document.getElementById( `cut_button_${firstSegmentId}` );
+            elem.click();
+        };
     }
     
 

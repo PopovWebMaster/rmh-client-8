@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -9,6 +9,8 @@ import './CutItem.scss';
 
 import { CutSegmentButton } from './../../../CutSegmentButton/CutSegmentButton.js';
 
+import { IsAllowedContainer } from './../../../../../../../../components/IsAllowedContainer/IsAllowedContainer.js';
+
 
 const CutItemComponent = ( props ) => {
 
@@ -17,15 +19,22 @@ const CutItemComponent = ( props ) => {
         // firstSegmentId,
     } = props;
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
 
 
     return (
-        <div className = 'CTS_CutItem'>
+        <IsAllowedContainer
+            accessName =            'layout_grid_edit'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <div className = 'CTS_CutItem'>
 
-            <CutSegmentButton 
-                id = { id }
-            />
-        </div>
+                <CutSegmentButton 
+                    id = { id }
+                />
+            </div> 
+        </IsAllowedContainer>
     )
 
 };

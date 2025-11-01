@@ -11,6 +11,8 @@ import { AlertWindowContainer } from './../../../../../../../../components/Alert
 // import { StartTimeEditComponent } from './../StartTimeEditComponent/StartTimeEditComponent.js';
 import { DurationEditComponent } from './../DurationEditComponent/DurationEditComponent.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 const DurationTimeEditComponent = ( props ) => {
 
     let {
@@ -21,7 +23,10 @@ const DurationTimeEditComponent = ( props ) => {
     let [ isOpen, setIsOpen ] = useState( false );
 
     const clickAdd = () => {
-        setIsOpen( true );
+        if( access_right( 'layout_grid_edit' ) ){
+            setIsOpen( true );
+        };
+
     };
     
     return (<>

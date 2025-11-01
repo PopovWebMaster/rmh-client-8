@@ -12,6 +12,7 @@ import { StartTimeEditComponent } from './../StartTimeEditComponent/StartTimeEdi
 
 import { StartTimeEditor } from './../../../../../../../../components/StartTimeEditor/StartTimeEditor.js';
 import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
+import { access_right } from './../../../../../../../../helpers/access_right.js';
 
 const StartTimeWithEditComponent = ( props ) => {
 
@@ -41,7 +42,9 @@ const StartTimeWithEditComponent = ( props ) => {
     }, [ id, isOpen, startTimeValue ] )
 
     const clickAdd = () => {
-        setIsOpen( true );
+        if( access_right( 'layout_grid_edit' ) ){
+            setIsOpen( true );
+        };
     };
 
     const get_day_event_data = () => {
@@ -72,39 +75,14 @@ const StartTimeWithEditComponent = ( props ) => {
     }
 
     const clickSaveHandler = () => {
-        set_grid_event_changes_to_store( id, { startTime } );
-        setIsOpen( false );
+        if( access_right( 'layout_grid_edit' ) ){
+            set_grid_event_changes_to_store( id, { startTime } );
+            setIsOpen( false );
+        };
+
     };
     
     return (<>
-        {/* <AlertWindowContainer
-            isOpen =    { isOpen }
-            setIsOpen = { setIsOpen }
-            width =     '90vw'
-            height =    '60vh'
-            title = 'Редактр времени выхода'
-            showCurrentDayName = { true }
-        >
-            <StartTimeEditComponent 
-                // isOpen =    { isOpen }
-                // setIsOpen = { setIsOpen }
-                // id = { id }
-
-
-                // новое
-                durationTime =      { durationTime }
-                startTime =         { startTime }
-                timeSpaceTo =       { timeSpaceTo }
-                timeSpaceFrom =     { timeSpaceFrom }
-                eventId =           { eventId }
-
-                setStartTime =      { setStartTime }
-                clickSaveHandler =  { clickSaveHandler }
-
-
-            />
-        </AlertWindowContainer> */}
-
         <StartTimeEditor 
             isOpen =            { isOpen }
             setIsOpen =         { setIsOpen }

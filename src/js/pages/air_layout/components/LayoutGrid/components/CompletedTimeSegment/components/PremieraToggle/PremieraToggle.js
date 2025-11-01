@@ -9,7 +9,7 @@ import { selectorData as layoutSlice } from './../../../../../../../../redux/lay
 
 import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
 
-
+import { access_right } from './../../../../../../../../helpers/access_right.js';
 
 const PremieraToggleComponent = ( props ) => {
 
@@ -38,30 +38,25 @@ const PremieraToggleComponent = ( props ) => {
 
     const click = () => {
 
-        console.dir( {
-            layout,
-            id,
-        } );
+        if( access_right( 'layout_grid_edit' ) ){
+            if( isShow ){
+                if( firstSegmentId === null ){
+                    set_grid_event_changes_to_store( id, { is_premiere: !is_premiere } );
+                }else{
 
-
-
-        if( isShow ){
-            if( firstSegmentId === null ){
-                set_grid_event_changes_to_store( id, { is_premiere: !is_premiere } );
-            }else{
-
-                let idList = [];
-                for( let i = 0; i < gridDayEventsList[ gridCurrentDay ].length; i++ ){
-                    if( firstSegmentId === gridDayEventsList[ gridCurrentDay ][ i ].firstSegmentId ){
-                        idList.push( gridDayEventsList[ gridCurrentDay ][ i ].id );
+                    let idList = [];
+                    for( let i = 0; i < gridDayEventsList[ gridCurrentDay ].length; i++ ){
+                        if( firstSegmentId === gridDayEventsList[ gridCurrentDay ][ i ].firstSegmentId ){
+                            idList.push( gridDayEventsList[ gridCurrentDay ][ i ].id );
+                        };
                     };
-                };
-                for( let i = 0; i < idList.length; i++ ){
-                    set_grid_event_changes_to_store( idList[ i ], { is_premiere: !is_premiere } );
+                    for( let i = 0; i < idList.length; i++ ){
+                        set_grid_event_changes_to_store( idList[ i ], { is_premiere: !is_premiere } );
+                    };
                 };
             };
         };
-        
+
     }
 
     return (

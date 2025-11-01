@@ -17,6 +17,8 @@ import { AWConfirm } from './../../../../components/AlertWindowContainer/AWConfi
 import { send_request_to_server } from './../../../../helpers/send_request_to_server.js';
 import { get_YYYY_MM_DD } from './../../../../helpers/get_YYYY_MM_DD.js';
 
+import { IsAllowedContainer } from './../../../../components/IsAllowedContainer/IsAllowedContainer.js';
+
 
 const RemoveScheduleButtonComponent = ( props ) => {
 
@@ -36,86 +38,90 @@ const RemoveScheduleButtonComponent = ( props ) => {
 
     let [ isOpen, setIsOpen ] = useState( false );
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
 
     const remove = () => {
+        if( isAllowed ){
+            let YYYY_MM_DD = get_YYYY_MM_DD( currentYear, currentMonth, currentDate );
 
-        let YYYY_MM_DD = get_YYYY_MM_DD( currentYear, currentMonth, currentDate );
+            setSpinnerIsActive( true );
+            send_request_to_server({
+                route: 'remove-schedule',
+                data: {
+                    YYYY_MM_DD,
+                },
+                successCallback: ( response ) => {
 
+                    console.dir( response );
 
-        setSpinnerIsActive( true );
-        send_request_to_server({
-            route: 'remove-schedule',
-            data: {
-                YYYY_MM_DD,
-            },
-            successCallback: ( response ) => {
+                    if( response.ok ){
+                        setSpinnerIsActive( false );
 
-                console.dir( response );
+                        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+                        StoreScheduleResultEvents.CreateFromScheduleEventsList([]);
+                        StoreScheduleResultEvents.SetListToStore( false );
+                        setIsOpen( false );
 
-                if( response.ok ){
-                    setSpinnerIsActive( false );
+                        let { allScheduleFileNames } = response;
 
-                    let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-                    StoreScheduleResultEvents.CreateFromScheduleEventsList([]);
-                    StoreScheduleResultEvents.SetListToStore( false );
-                    setIsOpen( false );
+                        setAllScheduleFileNames( allScheduleFileNames );
 
-                    let { allScheduleFileNames } = response;
-
-                    setAllScheduleFileNames( allScheduleFileNames );
-
-
-
-                };
-            },
-        });
-
-
-
-
+                    };
+                },
+            });
+        };
 
     };
     
 
     const click = () => {
-
-        if( scheduleEventsList.length > 0 ){
-            setIsOpen( true );
+        if( isAllowed ){
+            if( scheduleEventsList.length > 0 ){
+                setIsOpen( true );
+            };
         };
-
     };
 
     return (
-        <>{ scheduleEventsList.length > 0? (
-            <div className = 'removeScheduleButton'>
 
-                <AlertWindowContainer
-                    isOpen =        { isOpen }
-                    setIsOpen =     { setIsOpen }
-                    title =         'Удалить расписание?'
-                    width =         '30em'
-                    height =        '13em'
-                >
-                    <AWConfirm
-                        text = { [ 'Пожалуйста, подтвердите удаление расписания' ] }
-                        type = 'warning'
-                        continueHandler =   { remove }
-                        cancelHandler =     { () => { setIsOpen( false ) } }
-                        titleContinue = 'Удалить'
+        <IsAllowedContainer
+            accessName =            'schedule_remove'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <>{ scheduleEventsList.length > 0? (
+                <div className = 'removeScheduleButton'>
+
+                    <AlertWindowContainer
+                        isOpen =        { isOpen }
+                        setIsOpen =     { setIsOpen }
+                        title =         'Удалить расписание?'
+                        width =         '30em'
+                        height =        '13em'
+                    >
+                        <AWConfirm
+                            text = { [ 'Пожалуйста, подтвердите удаление расписания' ] }
+                            type = 'warning'
+                            continueHandler =   { remove }
+                            cancelHandler =     { () => { setIsOpen( false ) } }
+                            titleContinue = 'Удалить'
+                        />
+                        
+                    </AlertWindowContainer>
+
+                    <TopCenterButtonComponent
+                        icon =          'icon-trash-empty'
+                        title =         'Удалить расписание'
+                        isActive =      { true }
+                        clickHandler =  { click }
                     />
-                    
-                </AlertWindowContainer>
-
-                <TopCenterButtonComponent
-                    icon =          'icon-trash-empty'
-                    title =         'Удалить расписание'
-                    isActive =      { true }
-                    clickHandler =  { click }
-                />
-            </div>
+                </div>
 
 
-        ): '' }</>
+            ): '' }</>
+
+        </IsAllowedContainer>
+        
 
 
         

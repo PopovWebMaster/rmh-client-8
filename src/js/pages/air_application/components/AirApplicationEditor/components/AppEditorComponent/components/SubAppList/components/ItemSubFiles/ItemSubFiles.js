@@ -59,13 +59,14 @@ const ItemSubFilesComponent = ( props ) => {
         if( nameTrim === '' ){
             setIsReady( false );
         }else{
-            let chackRes = new_file_name_is_unic( nameTrim );
-            if( chackRes.isUnic ){
+            // let chackRes = new_file_name_is_unic( nameTrim );
+            // if( chackRes.isUnic ){
                 setNameValue( nameTrim );
-            }else{
-                setIsError( true );
-                setErrorText( `В эфире уже существует файл с таким именем, это имя нельзя использовать. Повтор в заявке - "${chackRes.repeatApplication}", выпуск -  ${chackRes.repeatSubApplication}` );
-            };
+            // }else{
+                
+                // setIsError( true );
+            //     setErrorText( `В эфире уже существует файл с таким именем, это имя нельзя использовать. Повтор в заявке - "${chackRes.repeatApplication}", выпуск -  ${chackRes.repeatSubApplication}` );
+            // };
         };
     };
 

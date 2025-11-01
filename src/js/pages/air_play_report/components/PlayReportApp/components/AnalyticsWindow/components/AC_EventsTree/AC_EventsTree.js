@@ -35,6 +35,8 @@ const AC_EventsTreeComponent = ( props ) => {
     let [ SCH_style_3, setSCH_style_3 ] = useState( {} );
     let [ SCH_style_4, setSCH_style_4 ] = useState( {} );
     let [ SCH_style_5, setSCH_style_5 ] = useState( {} );
+    let [ SCH_style_5_2, setSCH_style_5_2 ] = useState( {} );
+
     let [ SCH_style_6, setSCH_style_6 ] = useState( {} );
     let [ SCH_style_7, setSCH_style_7 ] = useState( {} );
     let [ SCH_style_8, setSCH_style_8 ] = useState( {} );
@@ -46,6 +48,8 @@ const AC_EventsTreeComponent = ( props ) => {
     let SCH_ref_3 = useRef();
     let SCH_ref_4 = useRef();
     let SCH_ref_5 = useRef();
+    let SCH_ref_5_2 = useRef();
+
     let SCH_ref_6 = useRef();
     let SCH_ref_7 = useRef();
     let SCH_ref_8 = useRef();
@@ -101,6 +105,9 @@ const AC_EventsTreeComponent = ( props ) => {
 
         style = window.getComputedStyle( SCH_ref_5.current );
         setSCH_style_5( get_stile_width( style.width ) );
+
+        style = window.getComputedStyle( SCH_ref_5_2.current );
+        setSCH_style_5_2( get_stile_width( style.width ) );
 
         style = window.getComputedStyle( SCH_ref_6.current );
         setSCH_style_6( get_stile_width( style.width ) );
@@ -191,9 +198,11 @@ const AC_EventsTreeComponent = ( props ) => {
                 <span className = 'AC_SCH_2' style = { SCH_style_2 }>Файл</span>
                 <span className = 'AC_SCH_3' style = { SCH_style_3 }>Премьеры</span>
                 <span className = 'AC_SCH_4' style = { SCH_style_4 }>шт.</span>
-                <span className = 'AC_SCH_5' style = { SCH_style_5 }>хрон.</span>
-                <span className = 'AC_SCH_6' style = { SCH_style_6 }>всего сек.</span>
-                <span className = 'AC_SCH_7' style = { SCH_style_7 }>всего время</span>
+                <span className = 'AC_SCH_5' style = { SCH_style_5 }>Хрон. сек</span>
+                <span className = 'AC_SCH_5_2' style = { SCH_style_5_2 }>Хрон.</span>
+
+                <span className = 'AC_SCH_6' style = { SCH_style_6 }>Хрон. сек.</span>
+                <span className = 'AC_SCH_7' style = { SCH_style_7 }>Хрон.</span>
                 <span className = 'AC_SCH_8' style = { SCH_style_8 }>%/сутки</span>
 
             </div>
@@ -206,10 +215,11 @@ const AC_EventsTreeComponent = ( props ) => {
                         <th ref = { SCH_ref_2 } >Файл</th>
                         <th ref = { SCH_ref_3 } >Премьеры</th>
                         <th ref = { SCH_ref_4 } className = 'th_count'>шт.</th>
-                        <th ref = { SCH_ref_5 } className = 'th_duration'>хрон.</th>
-                        <th ref = { SCH_ref_6 } >всего сек.</th>
-                        <th ref = { SCH_ref_7 } >всего время</th>
-                        <th ref = { SCH_ref_8 } >%/сутки</th>
+                        <th ref = { SCH_ref_5 } className = 'th_duration'>Хрон. сек</th>
+                        <th ref = { SCH_ref_5_2 } className = 'th_duration'>Хрон.</th>
+                        <th ref = { SCH_ref_6 } >Хрон. сек.</th>
+                        <th ref = { SCH_ref_7 } >Хрон.</th>
+                        <th ref = { SCH_ref_8 } >% от суток</th>
                         
                     </tr>
                 </thead>

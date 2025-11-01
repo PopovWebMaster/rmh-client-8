@@ -12,6 +12,7 @@ import { StoreScheduleResultEventsClass } from './../../../../classes/StoreSched
 import { AlertWindowContainer } from './../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { AWConfirm } from './../../../../components/AlertWindowContainer/AWConfirm/AWConfirm.js';
 
+import { IsAllowedContainer } from './../../../../components/IsAllowedContainer/IsAllowedContainer.js';
 
 const CreateScheduleButtonComponent = ( props ) => {
 
@@ -21,56 +22,69 @@ const CreateScheduleButtonComponent = ( props ) => {
 
     let [ isOpen, setIsOpen ] = useState( false );
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
 
     const create = () => {
-        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromGridEvents();
-        let isChanged = true; // тут только для наглядности
-        StoreScheduleResultEvents.SetListToStore( isChanged );
-        setIsOpen( false );
+        if( isAllowed ){
+            let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+            StoreScheduleResultEvents.CreateFromGridEvents();
+            let isChanged = true; // тут только для наглядности
+            StoreScheduleResultEvents.SetListToStore( isChanged );
+            setIsOpen( false );
+        };
+        
     };
     
 
     const click = () => {
-
-        if( scheduleEventsList.length > 0 ){
-            setIsOpen( true );
-        }else{
-            create();
+        if( isAllowed ){
+            if( scheduleEventsList.length > 0 ){
+                setIsOpen( true );
+            }else{
+                create();
+            };
         };
-
     };
 
     return (
 
-        <div className = 'createScheduleButton'>
+        <IsAllowedContainer 
+            accessName =            'schedule_create_new'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <div className = 'createScheduleButton'>
 
-            <AlertWindowContainer
-                isOpen =        { isOpen }
-                setIsOpen =     { setIsOpen }
-                title =         'Подтвердите пересоздание расписания'
-                width =         '30em'
-                height =        '13em'
-            >
-                <AWConfirm
-                    text = { [ 'Вы действительно хотите создать новое расписание?', 'Текущее расписание будет удалено.' ] }
-                    type = 'warning'
+                <AlertWindowContainer
+                    isOpen =        { isOpen }
+                    setIsOpen =     { setIsOpen }
+                    title =         'Подтвердите пересоздание расписания'
+                    width =         '30em'
+                    height =        '13em'
+                >
+                    <AWConfirm
+                        text = { [ 'Вы действительно хотите создать новое расписание?', 'Текущее расписание будет удалено.' ] }
+                        type = 'warning'
 
-                    continueHandler =   { create }
-                    cancelHandler =     { () => { setIsOpen( false ); } }
+                        continueHandler =   { create }
+                        cancelHandler =     { () => { setIsOpen( false ); } }
 
-                    titleContinue = 'Удалить'
+                        titleContinue = 'Удалить'
+                    />
+                    
+                </AlertWindowContainer>
+
+                <TopCenterButtonComponent
+                    icon =          'icon-feather'
+                    title =         'Создать из сетки'
+                    isActive =      { true }
+                    clickHandler =  { click }
                 />
-                
-            </AlertWindowContainer>
+            </div>
 
-            <TopCenterButtonComponent
-                icon =          'icon-feather'
-                title =         'Создать из сетки'
-                isActive =      { true }
-                clickHandler =  { click }
-            />
-        </div>
+        </IsAllowedContainer>
+
+
         
     )
 

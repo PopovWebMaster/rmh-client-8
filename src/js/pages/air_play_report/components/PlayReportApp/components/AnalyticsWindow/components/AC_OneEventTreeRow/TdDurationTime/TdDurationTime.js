@@ -1,47 +1,52 @@
+// TdDurationSec
 
-import React from "react";
+// TdCount
+
+// TdIsPremiere
+
+import React, { useRef, useState, useEffect }   from "react";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { selectorData as layoutSlice } from './../../../../../../../../../redux/layoutSlice.js';
 
-import './TdDurationAllDayProcent.scss';
+import './TdDurationTime.scss';
 
-const TdDurationAllDayProcentComponent = ( props ) => {
+import { convert_sec_to_time } from './../../../../../../../../../helpers/convert_sec_to_time.js'
+
+
+const TdDurationTimeComponent = ( props ) => {
 
     let {
 
-        procent,
+        duration,
         isUsed,
-
 
     } = props;
 
     
     return (
-        <td className = { `TdDurationAllDayProcent ${isUsed? 'isUsed': ''}` }>
+        <td className = { `TdDurationTime ${isUsed? 'isUsed': ''}` }>
 
             <input
                 type = 'text'
-                value = { procent }
+                value = { convert_sec_to_time( duration ) }
                 onChange = { () => {} }
             />
-
-            <span className = 'procZnak' >%</span>
         
         </td>
     )
 
 };
 
-export function TdDurationAllDayProcent( props ){
+export function TdDurationTime( props ){
 
     const layout = useSelector( layoutSlice );
     const dispatch = useDispatch();
 
     return (
-        <TdDurationAllDayProcentComponent
+        <TdDurationTimeComponent
             { ...props }
 
             eventListById = { layout.eventListById }

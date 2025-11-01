@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -9,7 +9,9 @@ import { selectorData as layoutSlice } from './../../../../../../redux/layoutSli
 
 import { PageBodySaveButton } from './../../../../../../components/PageBodySaveButton/PageBodySaveButton.js';
 
-import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js'
+import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js';
+
+import { IsAllowedContainer } from './../../../../../../components/IsAllowedContainer/IsAllowedContainer.js';
 
 const SaveGridEventsListComponent = ( props ) => {
 
@@ -18,16 +20,27 @@ const SaveGridEventsListComponent = ( props ) => {
 
     } = props;
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
     const click = () => {
-        save_grid_events_changes_on_server( () => {} );
+        if( isAllowed ){
+            save_grid_events_changes_on_server( () => {} );
+        };
     }
     
     return (
-        <PageBodySaveButton 
-            isChanged = { gridDayEventsIsChanges }
-            clickHandler = { click }
 
-        />
+        <IsAllowedContainer
+            accessName =            'layout_grid_edit'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <PageBodySaveButton 
+                isChanged = { gridDayEventsIsChanges }
+                clickHandler = { click }
+
+            />
+        </IsAllowedContainer>
+
     )
 
 };

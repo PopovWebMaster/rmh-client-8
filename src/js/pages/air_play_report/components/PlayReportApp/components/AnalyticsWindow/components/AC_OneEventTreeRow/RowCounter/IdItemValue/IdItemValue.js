@@ -11,7 +11,9 @@ const IdItemValueComponent = ( props ) => {
 
     let {
         value,
-        className = ''
+        className = '',
+
+        subZnak = null,
 
     } = props;
 
@@ -23,6 +25,7 @@ const IdItemValueComponent = ( props ) => {
                 value = { value }
                 onChange = { () => {} }
             />
+            { subZnak === null? '': <span className = 'subZnak' >{ subZnak }</span> }
         </td>
     )
 

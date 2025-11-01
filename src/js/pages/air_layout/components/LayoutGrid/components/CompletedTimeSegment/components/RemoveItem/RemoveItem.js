@@ -18,6 +18,8 @@ import { RemoveSegmentButton } from './../../../RemoveSegmentButton/RemoveSegmen
 
 import { remove_grid_event_from_curren_day_in_store } from './../../../../vendors/remove_grid_event_from_curren_day_in_store.js';
 
+import { IsAllowedContainer } from './../../../../../../../../components/IsAllowedContainer/IsAllowedContainer.js';
+
 const RemoveItemComponent = ( props ) => {
 
     let {
@@ -28,68 +30,82 @@ const RemoveItemComponent = ( props ) => {
     } = props;
 
     let [ isOpen, setIsOpen] = useState( false );
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
 
     const remove_event = () => {
-        setIsOpen( false );
-        setSpinnerIsActive( true );
 
-        let gridEventId = id;
+        if( isAllowed ){
+            setIsOpen( false );
+            setSpinnerIsActive( true );
 
-        send_request_to_server({
-            route: `remove-grid-event`,
-            data: { 
-                gridEventId: gridEventId,
-            },
+            let gridEventId = id;
 
-            successCallback: ( response ) => {
-                console.dir( 'response' );
-                console.dir( response );
+            send_request_to_server({
+                route: `remove-grid-event`,
+                data: { 
+                    gridEventId: gridEventId,
+                },
 
-                if( response.ok ){
-                    setSpinnerIsActive( false );
+                successCallback: ( response ) => {
+                    console.dir( 'response' );
+                    console.dir( response );
 
-                    remove_grid_event_from_curren_day_in_store( gridEventId );
+                    if( response.ok ){
+                        setSpinnerIsActive( false );
+
+                        remove_grid_event_from_curren_day_in_store( gridEventId );
 
 
 
-                    // setGridDayEventsList( response.list );
-                };
+                        // setGridDayEventsList( response.list );
+                    };
 
-            },
-        });
+                },
+            });
+        };
+
     }
 
 
     return (
-        <div className = 'CTS_RemoveItem'>
-            <AlertWindowContainer
-                isOpen = { isOpen }
-                setIsOpen = { setIsOpen }
-                width = '25em'
-                height = '10em'
-            >
-                <div className = 'CTS_Event_remove'>
-                    <p>Пожалуйста, подтвердите удаление события</p>
-                    <p>
-                        <span 
-                            className = 'CTS_Event_remove_btn'
-                            onClick = { remove_event}
-                        >Удалить</span>
-                        <span 
-                            className = 'CTS_Event_no_remove_btn'
-                            onClick = { () => { setIsOpen( false ) } }
-                        >Отмена</span>
-                    </p>
-                </div>
-    
-            </AlertWindowContainer>
 
-            <RemoveSegmentButton 
-                id = { id }
-                clickHandler = { () => { setIsOpen( true ) } }
-            />
-            
-        </div>
+        <IsAllowedContainer
+            accessName =            'layout_grid_edit'
+            setIsAllowedResult =    { setIsAllowedResult }
+        >
+            <div className = 'CTS_RemoveItem'>
+                <AlertWindowContainer
+                    isOpen = { isOpen }
+                    setIsOpen = { setIsOpen }
+                    width = '25em'
+                    height = '10em'
+                >
+                    <div className = 'CTS_Event_remove'>
+                        <p>Пожалуйста, подтвердите удаление события</p>
+                        <p>
+                            <span 
+                                className = 'CTS_Event_remove_btn'
+                                onClick = { remove_event}
+                            >Удалить</span>
+                            <span 
+                                className = 'CTS_Event_no_remove_btn'
+                                onClick = { () => { setIsOpen( false ) } }
+                            >Отмена</span>
+                        </p>
+                    </div>
+        
+                </AlertWindowContainer>
+
+                <RemoveSegmentButton 
+                    id = { id }
+                    clickHandler = { () => { setIsOpen( true ) } }
+                />
+                
+            </div>
+        </IsAllowedContainer>
+
+
+        
     )
 
 };

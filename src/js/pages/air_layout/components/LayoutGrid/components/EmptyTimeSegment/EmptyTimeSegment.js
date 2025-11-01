@@ -13,6 +13,8 @@ import { AddNewGridEventComponent } from './../AddNewGridEventComponent/AddNewGr
 import { ConfirmationOfSaving } from './../ConfirmationOfSaving/ConfirmationOfSaving.js';
 import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js';
 
+import { IsAllowedContainer } from './../../../../../../components/IsAllowedContainer/IsAllowedContainer.js';
+
 const EmptyTimeSegmentComponent = ( props ) => {
 
     let {
@@ -31,6 +33,8 @@ const EmptyTimeSegmentComponent = ( props ) => {
     let [ isOpen, setIsOpen ] = useState( false );
     let [ isConfirm, setIsConfirm ] = useState( false );
 
+    let [ isAllowed, setIsAllowedResult ] = useState( false );
+
     const clickAdd = () => {
 
         // if( gridDayEventsIsChanges ){
@@ -39,12 +43,14 @@ const EmptyTimeSegmentComponent = ( props ) => {
         //     setIsOpen( true );
         // };
 
-        if( gridDayEventsIsChanges ){
-            save_grid_events_changes_on_server( () => {
+        if( isAllowed ){
+            if( gridDayEventsIsChanges ){
+                save_grid_events_changes_on_server( () => {
+                    setIsOpen( true );
+                } );
+            }else{
                 setIsOpen( true );
-            } );
-        }else{
-            setIsOpen( true );
+            };
         };
 
     };
@@ -92,12 +98,20 @@ const EmptyTimeSegmentComponent = ( props ) => {
                 className = 'emptyTimeSegment'
                 style = { { height: get_height_em( durationTime, gridEmptySegmentMinHeightEm, gridEmptySegmentMaxHeightEm ) } }
             >
-                <div className = 'ETS_add'>
-                    <span 
-                        className = 'icon-plus'
-                        onClick = { clickAdd }
-                    ></span>
-                </div>
+
+                <IsAllowedContainer
+                    accessName =            'layout_grid_edit'
+                    setIsAllowedResult =    { setIsAllowedResult }
+                >
+
+                    <div className = 'ETS_add'>
+                        <span 
+                            className = 'icon-plus'
+                            onClick = { clickAdd }
+                        ></span>
+                    </div>
+                </IsAllowedContainer>
+                
             </div>
 
         </GrigItemWrap>

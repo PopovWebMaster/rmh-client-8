@@ -9,6 +9,8 @@ import { selectorData as layoutSlice } from './../../../../../../../../redux/lay
 
 import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 
 const EventNotesItemComponent = ( props ) => {
 
@@ -48,19 +50,23 @@ const EventNotesItemComponent = ( props ) => {
     }, [ eventNotes, notesValue ]);
 
     const set_changes_to_store = () => {
-        if( notesValue !== notes ){
-            set_grid_event_changes_to_store( id, { notes: notesValue } );
+        if( access_right( 'layout_grid_edit' ) ){
+            if( notesValue !== notes ){
+                set_grid_event_changes_to_store( id, { notes: notesValue } );
+            }; 
         };
     };
 
     const change = ( e ) => {
-        let val = e.target.value;
-        if( eventNotes === '' ){
-            setNotesValue( val );
-        }else{
-            if( val.indexOf( `${eventNotes} ` ) !== -1 ){
-                let val_2 = val.replace( `${eventNotes} `, '' );
-                setNotesValue( val_2 );
+        if( access_right( 'layout_grid_edit' ) ){
+            let val = e.target.value;
+            if( eventNotes === '' ){
+                setNotesValue( val );
+            }else{
+                if( val.indexOf( `${eventNotes} ` ) !== -1 ){
+                    let val_2 = val.replace( `${eventNotes} `, '' );
+                    setNotesValue( val_2 );
+                };
             };
         };
     };

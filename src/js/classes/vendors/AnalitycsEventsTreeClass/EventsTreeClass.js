@@ -27,7 +27,15 @@ export class EventsTreeClass {
 
         let tree = {};
 
+        console.dir({
+            filteredList,
+            eventListById
+        });
+
         for( let i = 0; i < filteredList.length; i++ ){
+
+            // console.dir( 'filteredList[ i ]' );
+            //     console.dir( filteredList[ i ] );
             let { eventId } = filteredList[ i ];
             if( eventId !== null ){
                 let { 
@@ -40,15 +48,29 @@ export class EventsTreeClass {
 
                 let fileName = file.name;
 
+                // console.dir( 'eventListById[ eventId ]' );
+                // console.dir( eventListById[ eventId ] );
                 let { category_id } = eventListById[ eventId ];
+
+                
+                // console.dir( 'tree' );
+                // console.dir( tree );
+
+                // console.dir( 'category_id' );
+                // console.dir( category_id );
+
+
 
                 if( tree[ category_id ] ){  }else{
                     tree[ category_id ] = {};
                 };
 
+                // console.dir( '1' );
+
                 if( tree[ category_id ][ eventId ] ){}else{
                     tree[ category_id ][ eventId ] = {};
                 };
+                // console.dir( '2' );
 
                 if( tree[ category_id ][ eventId ][ fileName ] ){
                     tree[ category_id ][ eventId ][ fileName ].count = tree[ category_id ][ eventId ][ fileName ].count + 1;
@@ -60,11 +82,17 @@ export class EventsTreeClass {
                         count:          1,
                         isUsed:         false,
                     };  
+                    // console.dir( '3' );
                 };
+
+                // 
             };
 
         }
 
+//         console.dir( 'tree' );
+//                 console.dir( tree );
+// console.dir( '!!!!!!!!!!!! конец' );
         this.tree = tree;
 
     }

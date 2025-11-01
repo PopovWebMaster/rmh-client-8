@@ -6,6 +6,8 @@
                     font-size: 1em;
                     padding: 0.1em;
 
+                    position: relative;
+
                     >input{
                         font-size: .6em;
                         padding: 0.25em 0.1em;
@@ -17,6 +19,18 @@
                         outline: none;
                         text-align: center;
                         width: calc( 100% - 0.4em );
+                    }
+
+                    >span.subZnak{
+                        font-size: 0.6em;
+                        color: #9b9b9b;
+                        position: absolute;
+                        width: 1em;
+                        // height: 100%;
+                        top: 0.9em;
+                        right: 0.5em;
+                        font-family: Open Sans Semibold;
+
                     }
     
 

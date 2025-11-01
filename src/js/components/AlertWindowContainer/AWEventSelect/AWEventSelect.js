@@ -56,7 +56,6 @@ const AWEventSelectComponent = ( props ) => {
             setEventIsOpen( false );
         };
 
-
     }
 
     const getCategoryElem = ( category_id ) => {

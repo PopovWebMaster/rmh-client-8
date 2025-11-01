@@ -29,6 +29,7 @@ import { TdDurationAllDayProcent } from './TdDurationAllDayProcent/TdDurationAll
 import { RowCounter } from './RowCounter/RowCounter.js';
 
 import { round_to_number } from './../../../../../../../../helpers/round_to_number.js';
+import { TdDurationTime } from './TdDurationTime/TdDurationTime.js'
 
 
 
@@ -169,6 +170,12 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                         duration = { duration }
                         isUsed =    { isUsed }
                     />
+
+                    <TdDurationTime
+                        duration = { duration }
+                        isUsed =    { isUsed }
+                    />
+
                     <TdDurationAllSec
                         durationAllSec = { durationAllSec }
                         isUsed =    { isUsed }
@@ -205,7 +212,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                 allPremiersCount = { allPremiersCount }
                 allPremiersDuration = { allPremiersDuration }
             />
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
         </>
 
     )
