@@ -30,7 +30,7 @@ const AC_CreateEventsTreeAtStartComponent = ( props ) => {
             AnalitycsEventsTree.Create();
             AnalitycsEventsTree.SetEventsTreeToStore();
 
-            console.dir( AnalitycsEventsTree );
+            // console.dir( AnalitycsEventsTree );
 
             setIsReady( true );
 

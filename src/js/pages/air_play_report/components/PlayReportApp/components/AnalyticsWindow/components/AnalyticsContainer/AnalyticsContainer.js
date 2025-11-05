@@ -12,6 +12,7 @@ import { AC_ResultCounter }             from './../AC_ResultCounter/AC_ResultCou
 import { AC_CurrentDay }                from './../AC_CurrentDay/AC_CurrentDay.js';
 import { AC_EventsTree }                from './../AC_EventsTree/AC_EventsTree.js';
 import { AC_CreateEventsTreeAtStart }   from './../AC_CreateEventsTreeAtStart/AC_CreateEventsTreeAtStart.js';
+import { AC_AllCounterTable }           from './../AC_AllCounterTable/AC_AllCounterTable.js';
 
 const AnalyticsContainerComponent = ( props ) => {
 
@@ -32,6 +33,9 @@ const AnalyticsContainerComponent = ( props ) => {
                 <div className = 'AC_top_panel'>
 
                     <AC_CurrentDay />
+
+
+                    { isOpen? <AC_AllCounterTable />: '' }
 
                 </div>
 

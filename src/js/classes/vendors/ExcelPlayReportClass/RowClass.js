@@ -15,7 +15,7 @@ export class RowClass {
 
         this.row = [
             {
-                v: date, t: "s", 
+                v: date, t: "d", 
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -57,7 +57,14 @@ export class RowClass {
                 } 
             },
             {
-                v: fileDuration, t: "s", 
+                v: fileDuration, 
+                t: "s", 
+                // z: "$00:00:00",
+                // "z": "h/m/s",
+                // "z": "hh:mm:ss",
+                // "z": "h:m:s",
+
+
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -67,11 +74,16 @@ export class RowClass {
                     },
                     alignment: {
                         horizontal: 'left',
-                    } 
-                } 
+                    },
+                    // numFmt: 'h:m:ss',
+                },
+                // 
             },
             {
-                v: fileDurationSec, t: "s", 
+                v: Number( fileDurationSec ), 
+                // t: "s", 
+                t: "n", 
+
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -81,8 +93,9 @@ export class RowClass {
                     },
                     alignment: {
                         horizontal: 'left',
-                    } 
-                } 
+                    },
+                    // numFmt: "0",
+                },
             },
             {
                 v: segmentDuration, t: "s", 
@@ -95,11 +108,11 @@ export class RowClass {
                     },
                     alignment: {
                         horizontal: 'left',
-                    } 
+                    }
                 } 
             },
             {
-                v: segmentDurationSec, t: "s", 
+                v: segmentDurationSec, t: "n", 
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -109,8 +122,10 @@ export class RowClass {
                     },
                     alignment: {
                         horizontal: 'left',
-                    } 
-                } 
+                    },
+                    numFmt: 0,
+                },
+
             },
             {
                 v: segmentStart, t: "s", 

@@ -20,11 +20,13 @@ const DateItemComponent = ( props ) => {
             let { date, premiere,  } = item;
 
             setYYYY_MM_DD( date.YYYY_MM_DD );
-            if( premiere.isPremiere ){
+            if( premiere.isPremiere === true ){
                 setIsPremiereValue( true );
+            }else{
+                setIsPremiereValue( false );
             };
         };
-    }, [] );
+    }, [ item ] );
 
 
 

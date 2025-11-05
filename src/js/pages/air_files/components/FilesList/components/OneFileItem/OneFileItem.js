@@ -54,7 +54,7 @@ const OneFileItemComponent = ( props ) => {
             setChackValue( isSelected );
         };
 
-    }, [ filteredListByName, filteredList ] );
+    }, [ filteredListByName, filteredList, fileName ] );
 
     const chack = ( e ) => {
         set_isChaked_into_filteredList( [ fileName ], !chackValue );

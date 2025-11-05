@@ -25,6 +25,10 @@ const PlayReportListComponent = ( props ) => {
 
     const create = ( arr, obj ) => {
 
+        // console.dir( 'arr' );
+        // console.dir( arr );
+        
+
         let keyList = [];
         for( let key in obj ){
             if( obj[ key ]){

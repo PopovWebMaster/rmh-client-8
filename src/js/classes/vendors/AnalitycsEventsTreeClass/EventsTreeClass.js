@@ -27,10 +27,10 @@ export class EventsTreeClass {
 
         let tree = {};
 
-        console.dir({
-            filteredList,
-            eventListById
-        });
+        // console.dir({
+        //     filteredList,
+        //     eventListById
+        // });
 
         for( let i = 0; i < filteredList.length; i++ ){
 

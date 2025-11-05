@@ -45,7 +45,9 @@ export const get_martix_values_cells = ( params ) => {
         }else{
             result.push({
                 v: value, 
-                t: "s", 
+                // t: "s", 
+                t: "n", 
+
                 s: { 
                     font: { 
                         name: "Arial Cyr", 
