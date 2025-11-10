@@ -80,15 +80,18 @@ const TdEventComponent = ( props ) => {
                 rowSpan = { eventCount.count } 
                 className = 'TdEvent'
             >
-                <input
-                    type =      'checkbox'
-                    value =     { true }
-                    checked =   { chackValue }
-                    onChange =  { chack }
-                />
-                <span
-                    style = { style }
-                >{ name }</span>
+                <div>
+                    <input
+                        type =      'checkbox'
+                        value =     { true }
+                        checked =   { chackValue }
+                        onChange =  { chack }
+                    />
+                    <span
+                        style = { style }
+                    >{ name }</span>
+                </div>
+
             </td>
         ) 
 

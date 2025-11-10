@@ -42,19 +42,22 @@ const TdFileNameComponent = ( props ) => {
     
     return (
         <td className = 'TdFileName'>
-            <input
-                type =      'checkbox'
-                value =     { true }
-                checked =   { isUsed }
-                onChange =  { chack }
-            />
-            <input
-                type =      'text'
-                className = { `TdFileName_inp ${isUsed? 'isUsed': ''}` }
-                value =     { fileName }
-                onChange =  { () => {} }
+            <div>
+                <input
+                    type =      'checkbox'
+                    value =     { true }
+                    checked =   { isUsed }
+                    onChange =  { chack }
+                />
+                <input
+                    type =      'text'
+                    className = { `TdFileName_inp ${isUsed? 'isUsed': ''}` }
+                    value =     { fileName }
+                    onChange =  { () => {} }
 
-            />
+                />
+            </div>
+
         </td>
     )
 

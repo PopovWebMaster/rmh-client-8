@@ -1,44 +1,10 @@
-
-.AC_EventsTree_header_schadow{
-    font-size: 1em;
-    width: 100%;
-    // background-color: #dfdfdf;
-
-    position: absolute;
-    top: -1px;
-    left: 0px;
-    z-index: 100;
-    // padding: 0 0.5em 0.5em 0.5em;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
-    
-    >span{
-        font-size: 0.7em;
-        border-top: 1px solid #c3c3c3;
-        border-left: 1px solid #c3c3c3;
-        border-bottom: 1px solid #c3c3c3;
-        border-right: 1px solid #c3c3c300;
-        padding: 0.22em 0.2em;
-        background-color: #dfdfdf;
-        text-align: center;
-        white-space: preserve nowrap;
-        overflow: hidden;
-    }
-    >span:last-child{
-        border-right: 1px solid #c3c3c3;
-    }
-}
+$tbody-tr-height: 1.9em;
 
 .AC_EventsTree{
     font-size: 1em;
 
     height: calc( 93vh - 6.4em );
     overflow: scroll;
-    // padding: 0 0.5em 0.5em 0.5em;
-
 
     table {
         font-size: 1em;
@@ -51,27 +17,6 @@
             font-size: 1em;
             width: 100%;
             background-color: #dfdfdf;
-
-            tr{
-                font-size: 1em;
-                opacity: 0;
-                th {
-                    font-size: 0.7em;
-                    border: 1px solid #c3c3c3;
-                    padding: 0.2em;
-                    background-color: #dfdfdf;
-                    opacity: 0;
-                    white-space: preserve nowrap;
-                    overflow: hidden;
-
-                }
-            }
-
-            .th_count{
-                color: #4284d9;
-            }
-
-
             
         }
 
@@ -82,10 +27,16 @@
             border: 1px solid #e5e5e5;
             tr{
                 font-size: 1em;
-                height: 1.9em;
+                // height: 1.9em;
+                // height: $tbody-tr-height;
+
+
                 td{
                     font-size: 1em;
+                    height: $tbody-tr-height;
                     // opacity: 0.2;
+                    // text-align: center; 
+                    // vertical-align: middle;
                 }
 
             }

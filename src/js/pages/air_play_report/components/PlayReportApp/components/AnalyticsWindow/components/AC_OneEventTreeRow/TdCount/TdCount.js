@@ -49,11 +49,16 @@ const TdCountComponent = ( props ) => {
     
     return (
         <td className = { `TdCount ${isUsed? 'isUsed': ''}` }>
-            <input
-                type = 'number'
-                value = { count }
-                onChange = { change }
-            />
+            <div>
+                <input
+                    type = 'number'
+                    value = { count }
+                    onChange = { change }
+                />
+                {/* <span>999</span> */}
+            </div>
+            
+
         </td>
     )
 

@@ -1,25 +1,40 @@
+@import './../../AC_EventsTree/AC_EventsTree.scss';
+
 .AC_EventsTree{
     table{
         tbody{
             tr{
                 td.TdCategory{
-                    // font-size: 0.9em;
                     padding: 0.2em;
+                    width: 14em;
 
-                    // display: flex;
-                    // justify-content: flex-start;
-                    // align-items: center;
-                    // align-content: center;
-                    min-width: 14vw;
                     border: 1px solid #e5e0e0;
 
+                    >div{
+                        font-size: 1em;
+                        width: 14em;
 
-                    >span{
-                        font-size: 0.75em;
-                        padding: 0.2em 0.9em;
-                        margin: 0 0.3em;
-                        border-radius: 0.1em;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        align-content: center;
+                        white-space: nowrap; 
+                        overflow: hidden; 
+                        height: $tbody-tr-height;
+
+                        >span{
+                            font-size: 0.75em;
+                            padding: 0.2em 0.9em;
+                            margin: 0 0.3em;
+                            border-radius: 0.1em;
+                            display: inline-block;
+                            text-overflow: ellipsis; 
+                            white-space: nowrap; 
+                            overflow: hidden; 
+                        }  
                     }
+
+                    
                 }
             }
         }

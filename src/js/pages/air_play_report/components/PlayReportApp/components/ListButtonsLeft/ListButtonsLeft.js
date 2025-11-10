@@ -18,6 +18,8 @@ import { ButtonDownloadDayAsExcel } from './components/ButtonDownloadDayAsExcel/
 import { ButtonDownloadAllDaysAsExcel } from './components/ButtonDownloadAllDaysAsExcel/ButtonDownloadAllDaysAsExcel.js';
 
 import { ButtonDayAnalytics } from './components/ButtonDayAnalytics/ButtonDayAnalytics.js';
+
+import { ButtonDownloadAsReport } from './components/ButtonDownloadAsReport/ButtonDownloadAsReport.js';
  
 const ListButtonsLeftComponent = ( props ) => {
 
@@ -36,6 +38,8 @@ const ListButtonsLeftComponent = ( props ) => {
                     <ButtonShowAllDaysAsTextForExcel />
                     <ButtonDownloadDayAsExcel />
                     <ButtonDownloadAllDaysAsExcel />
+
+                    {/* <ButtonDownloadAsReport /> */}
 
                     
 

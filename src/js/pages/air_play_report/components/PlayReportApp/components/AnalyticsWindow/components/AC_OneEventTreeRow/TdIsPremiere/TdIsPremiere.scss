@@ -3,33 +3,42 @@
         tbody{
             tr{
                 td.TdIsPremiere{
-                    // font-size: 0.9em;
-                    padding: 0.2em;
-                    text-align: center;
                     border: 1px solid #e5e0e0;
-
                     cursor: pointer;
                     user-select: none;
+                    width: 4em;
+                    padding: 0;
+                    vertical-align: middle;
+                    >div{
+                        font-size: 1em;
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                        align-content: flex-start;
+                        // height: 1.4em;
 
-                    >span{
-                        font-size: .6em;
-                        padding: .1em .7em .15em;
-                        font-family: Open Sans Semibold;
-                        border-radius: .1em;
+                        >span{
+                            font-size: .6em;
+                            padding: .1em .7em .15em;
+                            font-family: Open Sans Semibold;
+                            border-radius: .1em;
+                        }
+
+                        >.TdIsPremiere_yes{ 
+                            border: 1px solid #6669e7;
+                            background-color: #6f71cb;
+                            color: #fcfcfc;
+                            
+                        }
+                        >.TdIsPremiere_no{ 
+                            border: 1px solid #6669e700;
+                            background-color: #6f71cb00;
+                            color: #a7a7a7;
+                        }
                     }
 
-                    >.TdIsPremiere_yes{ 
-                        border: 1px solid #6669e7;
-                        background-color: #6f71cb;
-                        color: #fcfcfc;
-                        
-                    }
-                    >.TdIsPremiere_no{ 
-                        border: 1px solid #6669e700;
-                        background-color: #6f71cb00;
-                        color: #a7a7a7;
-                        // border-radius: .1em;
-                    }
+                    
                 }
 
                 td.TdIsPremiere:hover{

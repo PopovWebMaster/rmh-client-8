@@ -76,26 +76,27 @@ const TdCategoryComponent = ( props ) => {
     const get_td = () => {
 
         let { name, colorBG, colorText } = categoryListById[ category_id ];
-
-        // console.dir( categoryListById[ category_id ] );
-
+        
         return (
             <td 
                 rowSpan = { list_length + 1 } 
                 className = 'TdCategory'
             >
-                <input
-                    type =      'checkbox'
-                    value =     { true }
-                    checked =   { chackValue }
-                    onChange =  { chack }
-                />
-                <span
-                    style = {{
-                        backgroundColor: colorBG,
-                        color: colorText
-                    }}
-                >{ name }</span>
+                <div>
+                    <input
+                        type =      'checkbox'
+                        value =     { true }
+                        checked =   { chackValue }
+                        onChange =  { chack }
+                    />
+                    <span
+                        style = {{
+                            backgroundColor: colorBG,
+                            color: colorText
+                        }}
+                    >{ name }</span>  
+                </div>
+
             </td>
         ) 
 

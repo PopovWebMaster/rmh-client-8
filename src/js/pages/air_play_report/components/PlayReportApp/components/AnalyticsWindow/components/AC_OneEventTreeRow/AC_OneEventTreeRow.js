@@ -29,7 +29,9 @@ import { TdDurationAllDayProcent } from './TdDurationAllDayProcent/TdDurationAll
 import { RowCounter } from './RowCounter/RowCounter.js';
 
 import { round_to_number } from './../../../../../../../../helpers/round_to_number.js';
-import { TdDurationTime } from './TdDurationTime/TdDurationTime.js'
+import { TdDurationTime } from './TdDurationTime/TdDurationTime.js';
+
+import { AC_EmptyRow } from './../AC_EmptyRow/AC_EmptyRow.js';
 
 
 
@@ -212,7 +214,8 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                 allPremiersCount = { allPremiersCount }
                 allPremiersDuration = { allPremiersDuration }
             />
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+            <AC_EmptyRow />
         </>
 
     )

@@ -39,9 +39,12 @@ const TdIsPremiereComponent = ( props ) => {
             className = 'TdIsPremiere'
             onClick = { chack }
         >
-            {
-                isUsed? isPremiere? <span className = 'TdIsPremiere_yes'>Есть</span>: <span className = 'TdIsPremiere_no'>Нет</span>: <span></span>
-            }
+            <div>
+                {
+                    isUsed? isPremiere? <span className = 'TdIsPremiere_yes'>Есть</span>: <span className = 'TdIsPremiere_no'>Нет</span>: <span></span>
+                } 
+            </div>
+
         
         </td>
     )

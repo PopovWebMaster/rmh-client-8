@@ -14,3 +14,19 @@ export const MONTH_NANES = {
     '11': 'Ноябрь',
     '12': 'Декабрь',
 };
+
+export const ANALYTICS_TABLE = {
+    HEADER: [
+        { title: 'Категория',  name: 'category' },
+        { title: 'Событие',    name: 'event' },
+        { title: 'Файл',       name: 'file' },
+        { title: 'Премьеры',   name: 'premiere' },
+        { title: 'шт.',        name: 'count' },
+        { title: 'Хрон. сек',  name: 'duration_sec' },
+        { title: 'Хрон.',      name: 'duration' },
+        { title: 'Хрон. сек',  name: 'all_duration_sec' },
+        { title: 'Хрон.',      name: 'all_duration' },
+        { title: '% от суток', name: 'procent' },
+    ],
+};
+

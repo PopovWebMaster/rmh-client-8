@@ -1,0 +1,24 @@
+.AC_EventsTree{
+    table {
+        thead{
+            // font-size: 1em;
+            // width: 100%;
+            // background-color: #dfdfdf;
+
+            tr.AC_TableHeaderRow{
+                font-size: 1em;
+                // opacity: 0;
+                th {
+                    font-size: 0.7em;
+                    border: 1px solid #c3c3c3;
+                    padding: 0.2em;
+                    background-color: #dfdfdf;
+                    // opacity: 0;
+                    white-space: preserve nowrap;
+                    overflow: hidden;
+
+                }
+            } 
+        }
+    }
+}

@@ -31,12 +31,8 @@ const AnalyticsContainerComponent = ( props ) => {
             <div className = 'analyticsContainer'>
 
                 <div className = 'AC_top_panel'>
-
                     <AC_CurrentDay />
-
-
                     { isOpen? <AC_AllCounterTable />: '' }
-
                 </div>
 
                 <div className = 'AC_body'>
