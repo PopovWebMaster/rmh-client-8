@@ -20,6 +20,7 @@ const TdFileNameComponent = ( props ) => {
         category_id,
         event_id,
         fileName,
+        count,
 
         isUsed,
 
@@ -45,6 +46,7 @@ const TdFileNameComponent = ( props ) => {
             <div>
                 <input
                     type =      'checkbox'
+                    disabled = { count === 0? true: false }
                     value =     { true }
                     checked =   { isUsed }
                     onChange =  { chack }

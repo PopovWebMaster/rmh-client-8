@@ -15,19 +15,17 @@ export class AnalitycsEventsTreeClass extends AET_MetodsClass {
         this.SetEventsTreeToStore = this.SetEventsTreeToStore.bind(this);
         this.ClearStore = this.ClearStore.bind(this);
         this.SetChanges = this.SetChanges.bind(this);
+        this.SetReleaseCount = this.SetReleaseCount.bind(this);
+
+
+
+        
 
 
     }
 
     Create(){
-        // console.dir('11111');
         this.EventsTree.CreateFromFilteredList();
-        // console.dir('22222');
-        // console.dir( 'this' );
-        // console.dir( this );
-
-
-
     }
 
     CreateFromStore(){
@@ -54,11 +52,19 @@ export class AnalitycsEventsTreeClass extends AET_MetodsClass {
 
         let tree = this.EventsTree.GetTree();
         let item = { ...tree[ category_id ][ event_id ][ fileName ] };
-
-        tree[ category_id ][ event_id ][ fileName ] = { ...item, ...changeObject };
+        if( tree[ category_id ][ event_id ][ fileName ].count > 0 ){
+            tree[ category_id ][ event_id ][ fileName ] = { ...item, ...changeObject };
+        };
 
         this.EventsTree.ResetTree( tree );
 
+    }
+
+    SetReleaseCount( release_list ){
+
+        // for( let i = 0; i < release_list.length; i++ ){
+            this.EventsTree.AddReleaseCounts( release_list );
+        // };
 
     }
 }

@@ -46,12 +46,15 @@ const AC_EventsTreeComponent = ( props ) => {
                 for( let event_id in tree[ category_id ] ){
                     
                     for( let fileName in tree[ category_id ][ event_id ] ){
+
+                        // console.dir( tree[ category_id ][ event_id ][ fileName ] );
                         let {
                             count,
                             duration,
                             isPremiere,
                             isUsed,
                             startTime,
+                            releaseCount,
                         } = tree[ category_id ][ event_id ][ fileName ];
 
                         if( eventsCount[event_id] ){
@@ -72,6 +75,7 @@ const AC_EventsTreeComponent = ( props ) => {
                             isUsed,
                             startTime,
                             eventCount: 0,
+                            releaseCount,
                         });
                     };
                 };

@@ -11,7 +11,6 @@ import { AlertWindowContainer } from './../../../../../../components/AlertWindow
 
 import { AnalyticsContainer } from './components/AnalyticsContainer/AnalyticsContainer.js';
 
-
 const AnalyticsWindowComponent = ( props ) => {
 
     let {
@@ -35,10 +34,8 @@ const AnalyticsWindowComponent = ( props ) => {
                 height =    '93vh'
             >
 
-                <AnalyticsContainer
-                    isOpen =    { analitycsIsActive }
-                />
-                
+                <AnalyticsContainer isOpen = { analitycsIsActive } />
+
             </AlertWindowContainer>
             
         </div>

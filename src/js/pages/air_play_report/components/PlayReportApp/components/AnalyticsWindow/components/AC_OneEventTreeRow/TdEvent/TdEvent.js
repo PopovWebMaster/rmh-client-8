@@ -11,6 +11,17 @@ import './TdEvent.scss';
 
 import { AnalitycsEventsTreeClass } from './../../../../../../../../../classes/AnalitycsEventsTreeClass.js';
 
+import { BLIND_STYLE, BLIND_CHAR_NAME } from './../../../../../../../../../config/layout.js';
+
+
+// export const BLIND_STYLE = {
+//     backgroundColor: '#fff2e4',
+//     color: '#e76969',
+//     borderColor: '#dfdfdf',
+// };
+
+// export const BLIND_CHAR_NAME = 'Слепой график';
+
 const TdEventComponent = ( props ) => {
 
     let {
@@ -34,11 +45,14 @@ const TdEventComponent = ( props ) => {
 
         let val = true;
         for( let fileName in evenstTree[ category_id ][ event_id ] ){
-            let { isUsed } = evenstTree[ category_id ][ event_id ][ fileName ];
-            if( isUsed === false ){
-                val = false;
-                break;
+            let { isUsed, count } = evenstTree[ category_id ][ event_id ][ fileName ];
+            if( count > 0 ){
+                if( isUsed === false ){
+                    val = false;
+                    break;
+                };
             };
+
         };
 
         setChackValue( val );
@@ -73,7 +87,20 @@ const TdEventComponent = ( props ) => {
 
     const get_td = () => {
 
-        let { name, style } = eventListById[ event_id ];
+        let name = BLIND_CHAR_NAME;
+        let style = BLIND_STYLE;
+        
+        if( event_id === null ){
+
+        }else{
+            if( eventListById[ event_id ] ){
+                name = eventListById[ event_id ].name;
+                style = eventListById[ event_id ].style;
+            };
+        };
+// BLIND_STYLE, BLIND_CHAR_NAME
+
+        // let { name, style } = eventListById[ event_id ];
 
         return (
             <td 

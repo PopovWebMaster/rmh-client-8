@@ -14,6 +14,8 @@ import { AC_EventsTree }                from './../AC_EventsTree/AC_EventsTree.j
 import { AC_CreateEventsTreeAtStart }   from './../AC_CreateEventsTreeAtStart/AC_CreateEventsTreeAtStart.js';
 import { AC_AllCounterTable }           from './../AC_AllCounterTable/AC_AllCounterTable.js';
 
+import { SetApplicationsForThisDay } from './../../../SetApplicationsForThisDay/SetApplicationsForThisDay.js';
+
 const AnalyticsContainerComponent = ( props ) => {
 
     let {
@@ -27,6 +29,8 @@ const AnalyticsContainerComponent = ( props ) => {
     
     return (
         <AC_CreateEventsTreeAtStart>
+
+            <SetApplicationsForThisDay isOpen = { isOpen }/>
 
             <div className = 'analyticsContainer'>
 

@@ -120,6 +120,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                 isUsed,
                 startTime,
                 eventCount,
+                releaseCount,
             } = item;
 
             let isFirstEvent = true;
@@ -152,6 +153,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                         event_id =      { event_id }
                         fileName =      { fileName }
                         isUsed =        { isUsed }
+                        count =         { count }
                     />
                     <TdIsPremiere
                         category_id =   { category_id }
@@ -166,6 +168,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                         fileName =      { fileName }
                         count =         { count }
                         isUsed =    { isUsed }
+                        releaseCount = { releaseCount }
                     />
 
                     <TdDurationSec

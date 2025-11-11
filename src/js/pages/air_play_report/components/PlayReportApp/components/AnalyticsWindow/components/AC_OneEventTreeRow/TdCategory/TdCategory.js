@@ -16,6 +16,8 @@ import './TdCategory.scss';
 
 import { AnalitycsEventsTreeClass } from './../../../../../../../../../classes/AnalitycsEventsTreeClass.js';
 
+import { DEFAULT_CATEGORY } from './../../../../../../../../../config/layout.js';
+
 const TdCategoryComponent = ( props ) => {
 
     let {
@@ -37,11 +39,14 @@ const TdCategoryComponent = ( props ) => {
         let val = true;
         for( let event_id in evenstTree[ category_id ] ){
             for( let fileName in evenstTree[ category_id ][ event_id ] ){
-                let { isUsed } = evenstTree[ category_id ][ event_id ][ fileName ];
-                if( isUsed === false ){
-                    val = false;
-                    break;
+                let { isUsed, count } = evenstTree[ category_id ][ event_id ][ fileName ];
+                if( count > 0 ){
+                    if( isUsed === false ){
+                        val = false;
+                        break;
+                    };
                 };
+
             };
         };
        
@@ -75,8 +80,20 @@ const TdCategoryComponent = ( props ) => {
 
     const get_td = () => {
 
-        let { name, colorBG, colorText } = categoryListById[ category_id ];
-        
+        let name = 'Без категории';
+        let colorBG = DEFAULT_CATEGORY.colorBG;
+        let colorText = DEFAULT_CATEGORY.colorText;
+
+        if( category_id !== null ){
+            if( categoryListById[ category_id ] ){
+
+                name = categoryListById[ category_id ].name;
+                colorBG = categoryListById[ category_id ].colorBG;
+                colorText = categoryListById[ category_id ].colorText;
+
+            };
+        };
+
         return (
             <td 
                 rowSpan = { list_length + 1 } 
