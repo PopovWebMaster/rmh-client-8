@@ -103,13 +103,13 @@ const ItemSubDurationComponent = ( props ) => {
                     <h3>Длительность файла:</h3>
 
                     <InputDuration 
-                        HH = { HH }
-                        MM = { MM }
-                        SS = { SS }
-                        setHH = { setHH }
-                        setMM = { setMM }
-                        setSS = { setSS }
-                        enterHandler = { enter }
+                        HH =            { HH }
+                        MM =            { MM }
+                        SS =            { SS }
+                        setHH =         { setHH }
+                        setMM =         { setMM }
+                        setSS =         { setSS }
+                        enterHandler =  { enter }
                     />
 
                 </div>

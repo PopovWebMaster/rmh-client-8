@@ -13,6 +13,7 @@
                     width: 4.6em;
                     opacity: 0;
                     vertical-align: middle;
+
                     >div{
                         font-size: 1em;
                         display: flex;
@@ -20,40 +21,67 @@
                         align-items: center;
                         align-content: center;
 
-                        >input{
-                            font-size: .6em;
-                            padding: .23em 0em;
-                            border: 1px solid #e4e4e4;
-                            // border-width: 0px;
-                            background-color: #ffffff;
-                            line-height: 1.6em;
-                            text-indent: 0.4em;
-                            outline: none;
-                            color: #b1b1b1;
-                            border-radius: .1em;
-                            font-family: Open Sans Semibold;
-                            width: 4em;
-                            text-align: center;
-                            margin: 0 0.5em;
+                        >div{
+                            font-size: 1em;
+
+                            h5{
+                                font-size: .5em;
+                                color: #999999;
+                                line-height: 0.6em;
+                            }
+
+                            >input{
+                                font-size: .6em;
+                                padding: .2em 0em;
+                                border: 1px solid #e4e4e4;
+                                // border-width: 0px;
+                                background-color: #ffffff;
+                                line-height: 1.4em;
+                                text-indent: 0.4em;
+                                outline: none;
+                                color: #b1b1b1;
+                                border-radius: .1em;
+                                font-family: Open Sans Semibold;
+                                width: 4em;
+                                text-align: center;
+                                margin: 0 0 0 0.5em;
+
+                            }
+
+
+                            span{
+                                font-size: .6em;
+                                color: #818f7b;
+                                width: 3.4em;
+                                text-align: center;
+                                padding: .32em 0em;
+                                line-height: 1.4em;
+                                display: block;
+                            }
 
                         }
-                        span{
-                            font-size: .6em;
-                            color: #818f7b;
-                            width: 2em;
-                        }
-                        .attention{
-                            color: #ff4444;
-                        }
+
+
+
+                        // >input.attention{
+                        //     color: #ff4444;
+                        // }
                     }
                 }
                 td.TdCount.isUsed{
                     opacity: 1;
                     >div{
-                        >input{
-                            // color: #4b4b4b;
-                            color: #4284d9;
+
+                        >div{
+                           >input{
+                                // color: #4b4b4b;
+                                color: #4284d9;
+                            }
+                            >input.attention{
+                                color: #ff4444;
+                            } 
                         }
+                        
                     }
                     
                 }

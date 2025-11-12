@@ -50,17 +50,36 @@ const TdCountComponent = ( props ) => {
 
     
     return (
-        <td className = { `TdCount ${count === 0 || isUsed? 'isUsed': ''}` }>
-            <div>
-                <input
-                    type = 'number'
-                    value = { count }
-                    onChange = { change }
-                />
-                <>{ releaseCount === 0? '': <span className = { count === releaseCount? '': count === 0? '': 'attention' } >{ releaseCount }</span> }</>
-            </div>
-            
+        // <td className = { `TdCount ${count === 0 || isUsed? 'isUsed': ''}` }>
+        //     <div>
+        //         <input
+        //             type =      'number'
+        //             value =     { count }
+        //             onChange =  { change }
+        //         />
+        //         <>{ releaseCount === 0? '': <span className = { count === releaseCount? '': count === 0? '': 'attention' } >{ releaseCount }</span> }</>
+        //     </div>
+        // </td>
 
+        <td className = { `TdCount ${isUsed? 'isUsed': ''}` }>
+            <div>
+                <div>
+                    <h5>факт</h5>
+                    <input
+                        type =      'number'
+                        value =     { count }
+                        onChange =  { change }
+                        className = { releaseCount === 0? '': count === releaseCount? '': 'attention' }
+                    /> 
+                </div>
+                
+                <div>
+                    <>{ releaseCount === 0? '': <h5>заявки</h5> }</>
+                    <>{ releaseCount === 0? '': <span >{ releaseCount }</span> }</>
+                </div>
+            </div>
+
+            
         </td>
     )
 

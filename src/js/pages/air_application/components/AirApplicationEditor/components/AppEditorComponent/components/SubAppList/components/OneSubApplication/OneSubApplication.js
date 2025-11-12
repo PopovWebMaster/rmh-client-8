@@ -58,7 +58,7 @@ const OneSubApplicationComponent = ( props ) => {
             <ItemSubFiles 
                 id =                { id }
                 application_id =    { application_id }
-                file_names = { file_names }
+                file_names =        { file_names }
             />
 
             <ItemSubDuration 

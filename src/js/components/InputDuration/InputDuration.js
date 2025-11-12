@@ -29,6 +29,7 @@ const InputDurationComponent = ( props ) => {
     let ssRef = useRef();
 
     const enter = () => {
+
         if( HH === '' && MM === '' && SS === '' ){
 
         }else{

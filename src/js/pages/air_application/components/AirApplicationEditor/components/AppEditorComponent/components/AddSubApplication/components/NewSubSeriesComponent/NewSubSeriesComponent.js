@@ -165,6 +165,7 @@ const NewSubSeriesComponentComponent = ( props ) => {
                 isOpen =            { isOpen }
                 durationSec =       { durationSec }
                 setDurationSec =    { setDurationSec }
+                setIsReady =        { setIsReady }
             />
 
             <ItemNotes 

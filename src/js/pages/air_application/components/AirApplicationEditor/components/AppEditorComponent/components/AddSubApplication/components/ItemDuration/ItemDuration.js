@@ -23,15 +23,39 @@ const ItemDurationComponent = ( props ) => {
         durationSec,
         setDurationSec,
 
+        setIsReady = () => {},
+        name = null,
+
     } = props;
 
     let [ HH, setHH ] = useState( '00' );
     let [ MM, setMM ] = useState( '00' );
     let [ SS, setSS ] = useState( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
 
-
     useEffect( () => {
-        enter();
+        let time = `${HH}:${MM}:${SS}`;
+        let sec = convert_time_str_to_sec( time );
+        if( sec > MIN_EVENT_DURATION_SEC ){
+            if( name === null ){
+                setIsReady( true );
+            }else{
+                if( name.trim() === '' ){
+                    setIsReady( false );
+                }else{
+                    setIsReady( true );
+                };
+            };
+           
+            
+        }else{
+            setIsReady( false );
+        };
+
+        if( HH.length === 2 && MM.length === 2 && SS.length === 2){
+            enter();
+        };
+
+        
     }, [
         HH,
         MM,
@@ -46,7 +70,7 @@ const ItemDurationComponent = ( props ) => {
             setHH( arr[ 0 ] );
             setMM( arr[ 1 ] );
             setSS( arr[ 2 ] );
-  
+
         }else{
             setHH( '00' );
             setMM( '00' );

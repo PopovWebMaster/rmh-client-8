@@ -26,6 +26,8 @@
 
     }
 
+
+
     .SA_ItemSubFiles_edit{
         font-size: 0.9em;
         padding: 1em;
@@ -75,8 +77,42 @@
 
         }
 
+        .SA_ItemSubFiles_edit_version_take_from_folder{
+            font-size: 1em;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
+            margin: 0.3em 0.6em;
+
+            .SA_take_from_folder_btn{
+                font-size: 0.68em;
+                color: #5b5b5b;
+                padding: 0.16em 1em 0.2em;
+                border-radius: 0.1em;
+                border: 1px solid #dfdfdf;
+                background-color: #dfdfdf73;
+                cursor: pointer;
+                user-select: none;
+            }
+            .SA_take_from_folder_btn:hover{
+                color: #5b5b5b;
+                border: 1px solid #bfbfbf;
+                background-color: #dfdfdf3b;
+            }
+            .SA_take_from_folder_btn:active{
+                color: #1b1a1a;
+            }
+
+            .SA_take_from_folder_inp_file{
+                display: none;
+            }
+
+        }
+
+
         .SA_ItemSubFiles_edit_version{
-            margin: 1em 0;
+            margin: 0 0 0-.5em 0;
             padding: 0.5em;
 
             >div{

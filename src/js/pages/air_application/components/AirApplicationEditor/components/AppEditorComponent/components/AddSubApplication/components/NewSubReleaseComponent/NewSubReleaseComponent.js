@@ -80,8 +80,6 @@ const NewSubReleaseComponentComponent = ( props ) => {
 
 
 
-    
-
     useEffect( () => {
         if( nameIsError ){
             setIsReady( false );
@@ -89,11 +87,20 @@ const NewSubReleaseComponentComponent = ( props ) => {
             if( name === '' ){
                 setIsReady( false );
             }else{
-                setIsReady( true );
+                if( durationSec < MIN_EVENT_DURATION_SEC ){
+                    setIsReady( false );
+                }else{
+                    setIsReady( true );
+                };
             };
         };
 
-    }, [ nameIsError, name ] );
+    }, [ 
+        nameIsError,
+        name,
+        durationSec,
+    ] );
+
 
 
     const click = () => {
@@ -149,6 +156,7 @@ const NewSubReleaseComponentComponent = ( props ) => {
                 setName =           { setName }
                 nameIsError =       { nameIsError }
                 setNameIsError =    { setNameIsError }
+                setIsReady = { setIsReady }
             
             />
 
@@ -172,6 +180,8 @@ const NewSubReleaseComponentComponent = ( props ) => {
                 isOpen =            { isOpen }
                 durationSec =       { durationSec }
                 setDurationSec =    { setDurationSec }
+                setIsReady =        { setIsReady }
+                name =              { name }
             />
 
             <ItemNotes 

@@ -34,14 +34,17 @@ export const get_wheel_value = ( params ) => {
         ss = arr[ 2 ];
 
     }else{
-        hh = HH_str;
-        mm = MM_str;
-        ss = SS_str;
+        if( res_sec < MIN_EVENT_DURATION_SEC ){
+            hh = HH_str;
+            mm = MM_str;
+            ss = MIN_EVENT_DURATION_SEC.toString().padStart( 2, "0" );
+        }else{
+            hh = HH_str;
+            mm = MM_str;
+            ss = SS_str;
+        };
+
     };
-
-
-
-    // next_val.padStart( 2, "0" )
 
     return {
         hh,

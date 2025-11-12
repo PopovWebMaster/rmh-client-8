@@ -17,6 +17,7 @@ const ItemNameComponent = ( props ) => {
 
         nameIsError,
         setNameIsError,
+        setIsReady,
 
     } = props;
 
@@ -82,6 +83,11 @@ const ItemNameComponent = ( props ) => {
         setNameValue( val );
         setNameIsError( false );
         setErrorText( '' );
+        if( val.trim() === '' ){
+            setIsReady( false );
+        }else{
+            setIsReady( true );
+        };
     };
 
     

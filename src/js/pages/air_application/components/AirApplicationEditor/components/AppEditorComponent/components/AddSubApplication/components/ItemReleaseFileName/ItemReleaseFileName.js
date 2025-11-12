@@ -7,6 +7,10 @@ import './ItemReleaseFileName.scss';
 
 // import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
 
+// import nanoMetadata from 'nano-metadata'
+
+import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
+
 
 const ItemReleaseFileNameComponent = ( props ) => {
 
@@ -45,45 +49,14 @@ const ItemReleaseFileNameComponent = ( props ) => {
         if( !e.target.files.length ){
             return;
         };
-        let files = e.target.files;
-        let arr = [];
-        const finish = () => {
-            if( arr.length > 0 ){
-                let {
-                    file_name,
-                    file_duration,
-                } = arr[ 0 ];
-                setReleaseFileName( file_name );
-                setDurationSec( file_duration );
 
+        get_metadata_from_video_file( e.target.files[0], ( fileName, fileDuration ) => {
+            setReleaseFileName( fileName );
+            if( fileDuration !== null ){
+                setDurationSec( fileDuration )
             };
-        };
+        } );
 
-        const recursive_get = ( files, index ) => {
-            if( files[ index ] ){
-
-                let file = files[index];
-                let file_name = file.name;
-                let file_duration = 0;
-                let video = document.createElement('video');
-                video.preload = `metadata`;
-                video.src = URL.createObjectURL( file );
-
-                video.onloadedmetadata = function() {
-
-                    window.URL.revokeObjectURL(video.src);
-                    file_duration = Math.round( video.duration );
-                    arr.push( {
-                        file_name,
-                        file_duration,
-                    } );
-                    recursive_get( files, index + 1 )
-                };
-            }else{
-                finish();
-            };
-        };
-        recursive_get( files, 0 );
     };
 
 

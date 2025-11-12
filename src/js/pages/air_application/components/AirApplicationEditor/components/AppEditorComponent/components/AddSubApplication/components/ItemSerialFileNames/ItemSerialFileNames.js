@@ -9,7 +9,8 @@ import './ItemSerialFileNames.scss';
 
 import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
-import { convert_sec_to_time } from './../../../../../../../../../../helpers/convert_sec_to_time.js'
+import { convert_sec_to_time } from './../../../../../../../../../../helpers/convert_sec_to_time.js';
+import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
 
 
 const ItemSerialFileNamesComponent = ( props ) => {
@@ -145,6 +146,9 @@ const ItemSerialFileNamesComponent = ( props ) => {
 
     const inputHandler = (e) => {
 
+
+
+
         if( !e.target.files.length ){
             return;
         };
@@ -162,26 +166,44 @@ const ItemSerialFileNamesComponent = ( props ) => {
 
         const recursive_get = ( files, index ) => {
             if( files[ index ] ){
-                let file = files[index];
-                let file_name = file.name;
-                let file_duration = 0;
-                let video = document.createElement('video');
-                video.preload = `metadata`;
-                video.src = URL.createObjectURL( file );
-                video.onloadedmetadata = function() {
-                    window.URL.revokeObjectURL(video.src);
-                    file_duration = Math.round( video.duration );
+                // let file = files[index];
+                // let file_name = file.name;
+                // let file_duration = 0;
+                // let video = document.createElement('video');
+                // video.preload = `metadata`;
+                // video.src = URL.createObjectURL( file );
+                // video.onloadedmetadata = function() {
+                //     window.URL.revokeObjectURL(video.src);
+                //     file_duration = Math.round( video.duration );
+                //     arr.push( {
+                //         file_name,
+                //         file_duration,
+                //     } );
+                //     recursive_get( files, index + 1 )
+                // };
+
+                get_metadata_from_video_file( files[ index ], ( fileName, fileDuration ) => {
+                    // setReleaseFileName( fileName );
+                    // if( fileDuration !== null ){
+                    //     setDurationSec( fileDuration )
+                    // };
                     arr.push( {
-                        file_name,
-                        file_duration,
+                        file_name: fileName,
+                        file_duration: fileDuration === null? durationSec: fileDuration,
                     } );
                     recursive_get( files, index + 1 )
-                };
+                } );
             }else{
                 finish();
             };
         };
         recursive_get( files, 0 );
+
+
+
+
+
+
     };
 
     const create_dataFolder = ( arr ) => {

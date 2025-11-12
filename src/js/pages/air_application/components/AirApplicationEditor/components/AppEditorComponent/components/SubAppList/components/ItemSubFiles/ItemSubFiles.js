@@ -15,6 +15,8 @@ import { new_file_name_is_unic } from './vendors/new_file_name_is_unic.js';
 
 import { YesOrNoTitle } from './../YesOrNoTitle/YesOrNoTitle.js';
 
+import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
+
 const ItemSubFilesComponent = ( props ) => {
 
     let {
@@ -30,7 +32,41 @@ const ItemSubFilesComponent = ( props ) => {
     let [ isError,      setIsError ] =  useState( false );
     let [ errorText,    setErrorText ] = useState( '' );
 
+    let [ fileDuration, setFileDuration ] = useState( null );
+
+
     let inputRef = useRef();
+
+        const inputRef_hidden = useRef();
+    
+    const click = () => {
+
+        let accept = [ '.mp4', '.mxf' ];
+        let input = inputRef_hidden.current;
+        input.setAttribute('accept', accept.join(',') );
+        input.click();
+
+    };
+
+    const inputHandler = (e) => {
+
+        if( !e.target.files.length ){
+            return;
+        };
+
+        get_metadata_from_video_file( e.target.files[0], ( fileName, fileDuration ) => {
+
+            setNameValue( fileName );
+            setIsError( false );
+            setErrorText( '' );
+
+            if( fileDuration !== null ){
+                setFileDuration( fileDuration )
+            };
+
+        } );
+
+    };
 
     useEffect( () => {
         if( nameValue === '' ){
@@ -84,18 +120,26 @@ const ItemSubFilesComponent = ( props ) => {
     }
 
     const save_click = () => {
+
+        let changedData = {
+            file_names: [ ...file_names, nameValue.trim() ],
+        };
+
+        if( fileDuration !== null ){
+            changedData.duration_sec = fileDuration;
+        };
+
         save_sub_app_changes_on_server({
             subApplicationId: id,
             applicationId: application_id,
-            changedData: {
-                file_names: [ ...file_names, nameValue.trim() ],
-            },
+            changedData,
             callback: ( response ) => {
                 setIsReady( false );
                 
                 setNameValue( '' );
                 setIsError( false );
                 setErrorText( '' );
+                setFileDuration( null );
 
             },
         });
@@ -122,6 +166,7 @@ const ItemSubFilesComponent = ( props ) => {
                 setNameValue( '' );
                 setIsError( false );
                 setErrorText( '' );
+                setFileDuration( null );
 
             },
         });
@@ -179,9 +224,21 @@ const ItemSubFilesComponent = ( props ) => {
                         <p className = 'error'>{ errorText }</p>
                     ): '' }
 
-                    
+                    <div className = 'SA_ItemSubFiles_edit_version_take_from_folder'>
+                            <span
+                                onClick = { click }
+                                className = 'SA_take_from_folder_btn'
+                            >Взять из папки</span>
+                            <input 
+                                type =          'file' 
+                                ref =           { inputRef_hidden }
+                                className =     'SA_take_from_folder_inp_file'
+                                onChange =      { inputHandler }
+                            />
+                        </div>
                     <div className = 'SA_ItemSubFiles_edit_version'>
                         <h3>Существующие версии:</h3>
+                        
 
                         { createList( file_names ) }
 
