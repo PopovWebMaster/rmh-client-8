@@ -62,6 +62,8 @@ export class LogListClass{
 
             };
 
+
+
             this.FileDate.AddItem( this.log_list[i] );
 
         };
@@ -93,10 +95,15 @@ export class LogListClass{
         let arrMovies = [];
 
         for( let i = 0; i < sortArr.length; i++ ){
+
             if( sortArr[ i ].Type === 'movie' ){
                 arrMovies.push( sortArr[ i ] );
             }else{
-                arrMovies[ arrMovies.length - 1 ].AddGraphics( sortArr[ i ] );
+
+                if( arrMovies[ arrMovies.length - 1 ] ){
+                    arrMovies[ arrMovies.length - 1 ].AddGraphics( sortArr[ i ] );
+                };
+
             };
         };
 

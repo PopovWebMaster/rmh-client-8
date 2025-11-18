@@ -73,54 +73,15 @@ const DownloadButtonComponent = ( props ) => {
         };
 
         if( type === 'text/plain' ){
-            // read_log_as_sll_text_file( file, ( list ) => {} );
             read_log_as_sll_text_file( file, addData );
             inputRef.current.value = "";
 
         }else{
             read_log_file( file, addData );
-            // read_log_file( file, ( list ) => {
-
-            // // let LogList = new LogListClass( list );
-
-            // // if( serverName === 'main' ){
-            // //     setProcessedListOfLogsMain( LogList.GetResult() );
-            // //     setLogFileDateMain( LogList.GetFileDate() );
-            // //     setLogFileDurationMain( LogList.GetFileDurationTime() );
-
-            // // }else if( serverName === 'backup' ){
-            // //     setProcessedListOfLogsBackup( LogList.GetResult() );
-            // //     setLogFileDateBackup( LogList.GetFileDate() );
-            // //     setLogFileDurationBackup( LogList.GetFileDurationTime() );
-            // // };
-
-            // } );
 
             inputRef.current.value = "";
         };
 
-
-
-        /*
-        read_log_file( file, ( list ) => {
-
-            let LogList = new LogListClass( list );
-
-            if( serverName === 'main' ){
-                setProcessedListOfLogsMain( LogList.GetResult() );
-                setLogFileDateMain( LogList.GetFileDate() );
-                setLogFileDurationMain( LogList.GetFileDurationTime() );
-
-            }else if( serverName === 'backup' ){
-                setProcessedListOfLogsBackup( LogList.GetResult() );
-                setLogFileDateBackup( LogList.GetFileDate() );
-                setLogFileDurationBackup( LogList.GetFileDurationTime() );
-            };
-
-        } );
-
-        inputRef.current.value = "";
-        */
 
     }
 

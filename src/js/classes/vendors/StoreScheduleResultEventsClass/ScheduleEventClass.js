@@ -4,6 +4,8 @@ import { get_grid_event_by_id } from './get_grid_event_by_id.js';
 import { get_event_by_id } from './../StoreScheduleResultEventsClass/get_event_by_id.js';
 import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../../../config/layout.js';
 
+import { convert_time_str_to_sec } from './../../../helpers/convert_time_str_to_sec.js'
+
 export class ScheduleEventClass{
     constructor(){
 
@@ -75,7 +77,7 @@ export class ScheduleEventClass{
 
         this.cutPart =              cutPart;
         this.dayNum =               dayNum;
-        this.durationTime =         durationTime;
+        this.durationTime =         Number( durationTime )? durationTime: typeof durationTime === 'string'? convert_time_str_to_sec( durationTime ): 0;
         this.eventId =              eventId;
         this.firstSegmentId =       firstSegmentId;
         this.id =                   id;
@@ -137,7 +139,8 @@ export class ScheduleEventClass{
 
         this.cutPart =              cutPart;
         this.dayNum =               dayNum;
-        this.durationTime =         durationTime;
+        // this.durationTime =         durationTime;
+        this.durationTime =         Number( durationTime )? durationTime: typeof durationTime === 'string'? convert_time_str_to_sec( durationTime ): 0;
         this.eventId =              eventId;
         this.firstSegmentId =       firstSegmentId;
         this.id =                   id;
@@ -180,6 +183,13 @@ export class ScheduleEventClass{
     }
     AddRelease( release_id ){
         let Release = new ReleaseClass();
+
+        // console.dir( 'Release' );
+        // console.dir( Release );
+
+        // console.dir( 'release_id' );
+        // console.dir( release_id );
+
 
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
@@ -251,37 +261,46 @@ export class ScheduleEventClass{
 
     UpdateDurationTime(){
         let { type } = get_event_by_id( this.eventId );  
+
+        
         if( type ){
 
             let durationTime = 0;
+            let allReleaseDuration = null;
+
             if( this.releaseList.length > 0 ){
                 for( let i = 0; i < this.releaseList.length; i++ ){
-                    durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
+                    // durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
+                    allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
+
                 };
             }else{
                 if( type === EVENT_TYPE.BLOCK ){
-                    durationTime = MIN_EVENT_DURATION_SEC
+                    // durationTime = MIN_EVENT_DURATION_SEC;
+                    allReleaseDuration = MIN_EVENT_DURATION_SEC;
+
                 }else{
 
-                    if( this.gridEventId !== null ){
-                        let event = get_grid_event_by_id( this.gridEventId );
+                    // if( this.gridEventId !== null ){
+                    //     let event = get_grid_event_by_id( this.gridEventId );
 
-                        if( event === null ){
-                            durationTime = this.durationTime;
-                        }else{
-                            durationTime = event.durationTime;
-                        };
+                    //     if( event === null ){
+                    //         durationTime = this.durationTime;
+                    //     }else{
+                    //         durationTime = event.durationTime;
+                    //     };
 
-                    }else{
-
-
-
-
-                        durationTime = this.durationTime;
-                    }
+                    // }else{
+                    //     durationTime = this.durationTime;
+                    // }
                 };
             };
-            this.durationTime = durationTime;
+            // this.durationTime = durationTime;
+            if( allReleaseDuration !== null ){
+                this.durationTime = allReleaseDuration;
+            }
+            
+
         }
 
     }

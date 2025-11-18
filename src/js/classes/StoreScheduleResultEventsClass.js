@@ -14,6 +14,8 @@ import { get_remaining_place_for_key_block } from './vendors/StoreScheduleResult
 
 import { get_last_grid_event_id_from_store } from './vendors/StoreScheduleResultEventsClass/get_last_grid_event_id_from_store.js';
 
+import { setDailyEventsList } from './../redux/dailySchaduleEditorSlice.js';
+
 
 // import { setCounterList } from './../redux/countersSlise.js';
 
@@ -133,6 +135,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     SetListToStore( isChanged = null ){
         let scheduleEventsList = this.GetScheduleEventsList();
+
+
+        store.dispatch( setDailyEventsList( scheduleEventsList ) ); // это здесь только для разработки
+
+        // setDailyEventsList
+
+
         let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
 
         store.dispatch( setScheduleEventsList( arr_2 ) );
@@ -156,10 +165,26 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             list: this.list
         });
 
+        // console.dir( 'AddRelease' );
+        // console.dir( {
+        //     gridEventId,
+        //     releaseId,
+        //     Event,
+        //     rest_sec,
+        //     releaseData,
+        // } );
+
+        // console.dir( 'this.list' );
+        // console.dir( this.list );
+
         if( rest_sec >= 0 ){
             if( Event ){
                 if( Event.firstSegmentId === null ){
                     let type = this.GetEventType( Event.eventId );
+
+                    // console.dir( 'Event' );
+                    // console.dir( Event );
+
                     if( type === EVENT_TYPE.BLOCK ){
                         Event.AddRelease( releaseId );
                         Event.UpdateEventData();

@@ -16,6 +16,11 @@ import cutEventEditorSlise          from './cutEventEditorSlise.js';
 import adminSlice                   from './adminSlice.js';
 import airFilesSlice                from './airFilesSlice.js';
 import playReportAnalyticsSlise     from './playReportAnalyticsSlise.js';
+import dailySchaduleEditorSlice     from './dailySchaduleEditorSlice.js';
+
+
+
+
 
 
 
@@ -41,6 +46,9 @@ export default configureStore({
         admin:         adminSlice,
         airFiles: airFilesSlice,
         playReportAnalytics: playReportAnalyticsSlise,
+
+        dailySchaduleEditor: dailySchaduleEditorSlice,
+
 
 
 

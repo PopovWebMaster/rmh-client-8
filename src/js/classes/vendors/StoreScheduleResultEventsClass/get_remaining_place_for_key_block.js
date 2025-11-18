@@ -91,6 +91,12 @@ export const get_remaining_place_for_key_block = ( params ) => {
 
     let durationCount = 0;
 
+    // console.dir( 'startIndex' );
+    // console.dir( startIndex );
+    // console.dir( 'finishIndex' );
+    // console.dir( finishIndex );
+
+
     for( let i = startIndex; i < finishIndex + 1; i++ ){ 
         let { durationTime, releaseList } = list[ i ];
         // console.dir( 'list[ i ]' );
@@ -120,6 +126,10 @@ export const get_remaining_place_for_key_block = ( params ) => {
 
         // arr.push( list[ i ] );
     };
+
+    // console.dir({
+    //     startTime_to,startTime_from,durationCount
+    // });
 
     let result = startTime_to - startTime_from - durationCount;
 

@@ -76,6 +76,10 @@ export class ReleaseClass {
     AddRelease( release_id ){
         let release = get_release_by_id( release_id );
 
+        // console.dir( 'release' );
+        // console.dir( release );
+
+
         if( release !== null ){
             let {
                 YYYY_MM_DD,

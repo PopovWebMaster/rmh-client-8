@@ -18,6 +18,10 @@ export class GraphicsClass {
 
         } = attributes;
 
+        // console.dir( 'item' );
+        // console.dir( item );
+
+
         this.Type = 'graphics';
 
         this.Date =                     new DateClass( date );

@@ -19,6 +19,9 @@ import { set_release_list_to_store } from './../../vendors/set_release_list_to_s
 import { set_release_list_and_schedule_list_to_store } from './../../vendors/set_release_list_and_schedule_list_to_store.js';
 
 
+import { setDailyEventsList } from './../../../../redux/dailySchaduleEditorSlice.js';
+
+
 
 
 const SetDayDataFromServerComponent = ( props ) => {
@@ -33,6 +36,8 @@ const SetDayDataFromServerComponent = ( props ) => {
         setSpinnerIsActive,
         setGridCurrentDay,
         setScheduleEventsList,
+
+        setDailyEventsList,
 
 
     } = props;
@@ -63,6 +68,8 @@ const SetDayDataFromServerComponent = ( props ) => {
                         setGridCurrentDay( currentDayNum );
 
                         // setScheduleEventsList( scheduleEventsList );
+
+                        // setDailyEventsList( scheduleEventsList );
 
                     }else{
                         if( IS_DEVELOPMENT ){
@@ -125,6 +132,10 @@ export function SetDayDataFromServer( props ){
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
             setGridCurrentDay = { ( val ) => { dispatch( setGridCurrentDay( val ) ) } }
             setScheduleEventsList = { ( val ) => { dispatch( setScheduleEventsList( val ) ) } }
+
+
+            setDailyEventsList = { ( val ) => { dispatch( setDailyEventsList( val ) ) } }
+
 
 
             

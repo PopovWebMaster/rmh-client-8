@@ -111,6 +111,10 @@ const SchEventContainerComponent = ( props ) => {
                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
 
                 // console.dir( '!!!!!!!!!!!!!!!!!!!!' );
+                // console.dir( 'event' );
+                // console.dir( event );
+
+
                 let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
                     gridCurrentDay,
                     isAKeyPoint: false,
@@ -185,6 +189,20 @@ const SchEventContainerComponent = ( props ) => {
 
                     let event = eventListById[ dragebleReleaseEventId ];
 
+                    // console.dir( 'drop event' );
+                    // console.dir( event );
+
+                    // console.dir( 'eventListById' );
+                    // console.dir( eventListById );
+
+                    // console.dir( 'dragebleReleaseEventId' );
+                    // console.dir( dragebleReleaseEventId );
+
+                    // console.dir( 'eventListById[ dragebleReleaseEventId ]' );
+                    // console.dir( eventListById[ dragebleReleaseEventId ] );
+
+
+
                     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
                     StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
                     let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
@@ -196,6 +214,9 @@ const SchEventContainerComponent = ( props ) => {
                     });
                     StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
                     StoreScheduleResultEvents.SetListToStore( true );
+
+
+                    // console.dir( StoreScheduleResultEvents );
 
                     setDragebleReleaseId( null );
                 };
