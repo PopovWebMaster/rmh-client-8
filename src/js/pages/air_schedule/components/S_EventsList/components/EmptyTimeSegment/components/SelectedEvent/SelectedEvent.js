@@ -6,7 +6,10 @@ import { useSelector } from 'react-redux';
 import './SelectedEvent.scss';
 
 import { selectorData as layoutSlice }    from './../../../../../../../../redux/layoutSlice.js';
-import { convert_time_str_to_sec } from './../../../../../../../../helpers/convert_time_str_to_sec.js'
+import { convert_time_str_to_sec } from './../../../../../../../../helpers/convert_time_str_to_sec.js';
+import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
+
+import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
 const SelectedEventComponent = ( props ) => {
 
@@ -37,9 +40,17 @@ const SelectedEventComponent = ( props ) => {
         let li = arr.map( ( item, index ) => {
             let { id, type, durationTime, name } = item;
 
-            let typeText = type === 'file'? 'файл': 'блок' ;
+            let typeText = type === EVENT_TYPE.FILE? 'файл': 'блок' ;
             let duration_sec = convert_time_str_to_sec( durationTime );
+
+            let durationTitle = durationTime;
+
+            if( type === EVENT_TYPE.BLOCK ){
+                duration_sec = MIN_EVENT_DURATION_SEC;
+                durationTitle = convert_sec_to_time( duration_sec );
+            };
             let isActive = duration_sec <= durationLimit? true: false;
+
 
             return (
                 <li
@@ -52,7 +63,7 @@ const SelectedEventComponent = ( props ) => {
                     } }
                 >
                     <span className = { type === 'file'? 'G_ANG_list_file': 'G_ANG_list_block' } >{ typeText }</span>
-                    <span className = 'G_ANG_list_duration'>{ durationTime }</span>
+                    <span className = 'G_ANG_list_duration'>{ durationTitle }</span>
                     <span className = 'G_ANG_list_name'>{ name }</span>
                 </li>
             );

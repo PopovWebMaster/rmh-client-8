@@ -37,7 +37,22 @@ export const adjust_startTime_in_day_list = ( list ) => {
         result = [ ...result, ...segmArr ];
     };
 
-    return result;
+    let sort_result = []
+
+    sort_result = result.sort( ( a, b ) => {
+        let res = 0;
+        if( a.startTime > b.startTime ){ res = 1 };
+        if( a.startTime < b.startTime ){ res = -1 };
+        return res;
+
+    } );
+
+
+
+
+
+
+    return sort_result;
 }
 
 function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){

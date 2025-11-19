@@ -132,7 +132,18 @@ const CutSegmentButtonComponent = ( props ) => {
 
     const saveHandler = () => {
 
+        // console.dir( 'scheduleEventsList' );
+        // console.dir( scheduleEventsList );
+
+        // console.dir( 'eventsPartsList' );
+        // console.dir( eventsPartsList );
+
+
         let dayList = marge_dayList_and_catList( scheduleEventsList, eventsPartsList );
+
+        // console.dir( 'dayList' ) ;
+        // console.dir( dayList ) ;
+
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateFromScheduleEventsList( dayList );

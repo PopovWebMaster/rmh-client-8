@@ -106,13 +106,26 @@ const SchEventContainerComponent = ( props ) => {
         if( selectedEventId !== null ){
             if( eventListById[ selectedEventId ] ){
                 let event = eventListById[ selectedEventId ];
-                    
+
+
+                let arr = [];
+
+                for( let i = 0; i < scheduleEventsList.length; i++ ){
+                    arr.push( structuredClone( scheduleEventsList[ i ] ) );
+                };
+
+                // console.dir( 'scheduleEventsList drop' );
+                // console.dir( arr ); 
+
+
                 let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
 
                 // console.dir( '!!!!!!!!!!!!!!!!!!!!' );
                 // console.dir( 'event' );
                 // console.dir( event );
+
+
 
 
                 let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
@@ -174,9 +187,15 @@ const SchEventContainerComponent = ( props ) => {
 
                 let drop_start_time = startTime;
 
-                if( e.target.dataset.dropStartTime ){
-                    drop_start_time = Number( e.target.dataset.dropStartTime );
-                };
+                // console.log( 'drop_start_time 1', drop_start_time );
+
+                // if( e.target.dataset.dropStartTime ){
+                //     // drop_start_time = Number( e.target.dataset.dropStartTime );
+
+                //     // console.log( 'e.target.dataset.dropStartTime', e.target.dataset.dropStartTime );
+                // };
+
+                // console.log( 'drop_start_time 2', drop_start_time );
 
                 if( dragebleReleaseEventId === null ){
                     setSelectedEventWindow_isOpen( true );
@@ -202,8 +221,24 @@ const SchEventContainerComponent = ( props ) => {
                     // console.dir( eventListById[ dragebleReleaseEventId ] );
 
 
+                    // let arr = [];
+
+                    // for( let i = 0; i < scheduleEventsList.length; i++ ){
+                    //     arr.push( structuredClone( scheduleEventsList[ i ] ) );
+                    // };
+
+                    // console.dir( 'scheduleEventsList' );
+                    // console.dir( arr );
+
+
+
+
+
 
                     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+
+                    
+
                     StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
                     let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
                         gridCurrentDay,

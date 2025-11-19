@@ -118,7 +118,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     GetListBySectors(){
         let schedule_events_list = this.GetScheduleEventsList();
+        // console.dir( 'schedule_events_list' );
+        // console.dir( schedule_events_list );
+
         let arr = divide_day_into_sectors( schedule_events_list );
+
+        // console.dir( 'arr divide_day_into_sectors' );
+        // console.dir( arr );
         let result = add_empty_segments_and_types( arr );
         return result;
     }
@@ -137,12 +143,17 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         let scheduleEventsList = this.GetScheduleEventsList();
 
 
-        store.dispatch( setDailyEventsList( scheduleEventsList ) ); // это здесь только для разработки
+        // store.dispatch( setDailyEventsList( scheduleEventsList ) ); // это здесь только для разработки
 
         // setDailyEventsList
 
+        // console.dir( 'scheduleEventsList' );
+        // console.dir( scheduleEventsList );
 
         let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
+
+        // console.dir( 'adjust_startTime_in_day_list' );
+        // console.dir( arr_2 );
 
         store.dispatch( setScheduleEventsList( arr_2 ) );
         if( isChanged !== null ){

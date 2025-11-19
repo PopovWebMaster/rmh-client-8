@@ -32,6 +32,8 @@ export class SSRE_Methods{
     }
 
     GetScheduleEventsList(){
+
+        this.SortList();
         let result = [];
         for( let i = 0; i < this.list.length; i++ ){
             result.push( this.list[ i ].GetData() );

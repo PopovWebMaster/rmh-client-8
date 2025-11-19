@@ -25,7 +25,7 @@ export const DropZone = ( props ) => {
 
     return (
         <div className = { `${dragebleReleaseId === null? 'displayNone': isEmpty === false? 'displayNone': ''}  SEC_DropZone` }>
-            <div 
+            {/* <div 
                 className = 'SEC_DropZone_0'
                 data-drop-start-time = { startTime } ></div>
             <div   
@@ -43,6 +43,26 @@ export const DropZone = ( props ) => {
             <div 
                 className = 'SEC_DropZone_4' 
                 data-drop-start-time = { startTime + durationTime } 
+            ></div> */}
+
+            <div 
+                className = 'SEC_DropZone_0'
+                data-drop-start-time = { 1 } ></div>
+            <div   
+                className = 'SEC_DropZone_1' 
+                data-drop-start-time = { 2 }
+            ></div>
+            <div 
+                className = 'SEC_DropZone_2' 
+                data-drop-start-time = { 3 }
+            ></div>
+            <div 
+                className = 'SEC_DropZone_3' 
+                data-drop-start-time = { 4 }
+            ></div>
+            <div 
+                className = 'SEC_DropZone_4' 
+                data-drop-start-time = { 5 } 
             ></div>
         </div> 
     )

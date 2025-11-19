@@ -32,6 +32,8 @@ export const adjust_startTime_in_day_list = ( list ) => {
             timeSpaceTo = 24 * 60 * 60;
         }
 
+        // console.log( 'segments i', i );
+
         let segmArr = adjust_segment( segments[ i ], timeSpaceFrom, timeSpaceTo );
 
         result = [ ...result, ...segmArr ];
@@ -44,6 +46,10 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
     let result = [];
     let arr_0 = [];
 
+    // console.dir( 'adjust_segment arr' );
+    // console.dir( arr );
+
+
     
 
     let next_startTime = arr[ 0 ].startTime;
@@ -51,15 +57,22 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
     for( let i = 0; i < arr.length; i++ ){
 
         let { startTime, durationTime } = arr[ i ];
+        // console.dir({
+        //     next_startTime,
+        //     startTime,
+        //     durationTime,
+        // });
 
         if( startTime >= next_startTime ){
             arr_0.push( { ...arr[ i ] } );
+            next_startTime = startTime + durationTime + 1;
         }else{
             let item = { ...arr[ i ] };
             item.startTime = next_startTime;
             arr_0.push( { ...item } );
+            next_startTime = next_startTime + durationTime + 1;
         };
-        next_startTime = startTime + durationTime + 1;
+        // next_startTime = startTime + durationTime + 1;
 
     };
 
@@ -96,7 +109,12 @@ function adjust_segment( arr, timeSpaceFrom, timeSpaceTo ){
             
         } );
 
+        
+
         result = sortArr;
+
+    //         console.dir( 'adjust_segment result' );
+    // console.dir( result );
 
     };
 

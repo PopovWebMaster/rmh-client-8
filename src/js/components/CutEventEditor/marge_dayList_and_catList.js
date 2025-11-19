@@ -6,6 +6,10 @@ export const marge_dayList_and_catList = ( dayList, cutList ) => {
     let result = [];
 
     let arr = add_cut_group_into_day_list( dayList, cutList );
+
+    // console.dir( 'arr add_cut_group_into_day_list' );
+    // console.dir( arr );
+
     result = adjust_startTime_in_day_list( arr );
 
 

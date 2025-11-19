@@ -19,7 +19,10 @@ import { TimeSelected } from './../TimeSelected/TimeSelected.js';
 
 import { CreateButton } from './../CreateButton/CreateButton.js';
 
-import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js'
+import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+
+
+import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
 const AddNewEventComponentComponent = ( props ) => {
 
@@ -68,7 +71,14 @@ const AddNewEventComponentComponent = ( props ) => {
 
     useEffect( () => {
         if( eventId !== null ){
-            setDurationTime( convert_time_str_to_sec( eventListById[ eventId ].durationTime ) );
+
+            if( eventListById[ eventId ].type === EVENT_TYPE.FILE ){
+                setDurationTime( convert_time_str_to_sec( eventListById[ eventId ].durationTime ) );
+            }else if( eventListById[ eventId ].type === EVENT_TYPE.BLOCK ){
+                setDurationTime( MIN_EVENT_DURATION_SEC );
+            };
+
+            
         }else{
             setDurationTime( 0 );
         }
@@ -108,6 +118,7 @@ const AddNewEventComponentComponent = ( props ) => {
                 eventId =       { eventId }
                 setEventId =    { setEventId }
                 durationLimit = { timeSpaceTo - timeSpaceFrom }
+                // alwaysOpen =    { true }
             />
 
             <AppearanceOfEvent 

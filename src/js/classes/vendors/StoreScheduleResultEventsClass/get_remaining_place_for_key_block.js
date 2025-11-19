@@ -99,28 +99,39 @@ export const get_remaining_place_for_key_block = ( params ) => {
 
     for( let i = startIndex; i < finishIndex + 1; i++ ){ 
         let { durationTime, releaseList } = list[ i ];
-        // console.dir( 'list[ i ]' );
+        // console.log( 'durationTime', durationTime );
         // console.dir( list[ i ] );
 
         // gridEventId
+// durationCount = durationCount + durationTime;
 
-
-        if( releaseList.length === 0 ){
             if( list[ i ].gridEventId === gridEventId ){
                 
             }else{
                 durationCount = durationCount + durationTime;
             };
-        }else{
-            for( let y = 0; y < releaseList.length; y++ ){
-                let { releaseDuration } = releaseList[ y ];
-                durationCount = durationCount + releaseDuration;
-            };
-        };
 
-        if( list[ i ].gridEventId === gridEventId ){
-            durationCount = durationCount + releaseDuration;
-        };
+        // if( releaseList.length === 0 ){
+        //     if( list[ i ].gridEventId === gridEventId ){
+                
+        //     }else{
+        //         durationCount = durationCount + durationTime;
+        //     };
+        // }else{
+        //     for( let y = 0; y < releaseList.length; y++ ){
+        //         let { releaseDuration } = releaseList[ y ];
+        //         durationCount = durationCount + releaseDuration;
+        //     };
+        // };
+
+        // if( list[ i ].gridEventId === gridEventId ){
+        //     durationCount = durationCount + releaseDuration;
+        // };
+
+        // console.log( 'durationTime', durationTime );
+        // console.log( 'durationCount', durationCount );
+
+        // console.dir( list[ i ] );
 
 
 
