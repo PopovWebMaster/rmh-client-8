@@ -1,0 +1,59 @@
+.FRL_TopButton{
+    font-size: 1em;
+    margin: 0 0.4em;
+    padding: 0.15em 0.4em;
+    background-color: #dcebef00;
+    border: 1px solid #7790959c;
+    border-radius: 0.1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    cursor: pointer;
+    user-select: none;
+
+    >.icon{
+        font-size: 0.64em;
+        margin-top: 0.1em;
+        margin-right: 0.1em;
+
+        color: #757f96;
+    }
+
+    >.title{
+        font-size: 0.64em;
+        color: #465371;
+    }
+
+}
+
+.FRL_TopButton:hover{
+
+    background-color: #9ceaff30;
+    border: 1px solid #516569d3;
+
+    >.icon{
+        color: #303a53;
+    }
+
+    >.title{
+        color: #303a53;
+    }
+
+}
+
+.FRL_TopButton:active{
+
+    border: 1px solid #77a3acd3;
+
+    >.icon{
+        color: #8491b1;
+    }
+
+    >.title{
+        color: #8491b1;
+    }
+
+}

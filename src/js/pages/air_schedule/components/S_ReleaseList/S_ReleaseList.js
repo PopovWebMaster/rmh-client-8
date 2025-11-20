@@ -11,6 +11,8 @@ import { TopSwitchButtons } from './components/TopSwitchButtons/TopSwitchButtons
 import { ReleaseBuffer } from './components/ReleaseBuffer/ReleaseBuffer.js';
 import { ReleaseList } from './components/ReleaseList/ReleaseList.js';
 
+import { FreeReleaseList } from './components/FreeReleaseList/FreeReleaseList.js';
+
 
 const S_ReleaseListComponent = ( props ) => {
 
@@ -18,7 +20,7 @@ const S_ReleaseListComponent = ( props ) => {
 
     } = props;
 
-    let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list'
+    let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list' 'free_release'
 
     const create = ( val ) => {
         let result = '';
@@ -30,6 +32,10 @@ const S_ReleaseListComponent = ( props ) => {
 
             case 'list':
                 result = <ReleaseList />
+                break;
+
+            case 'free_release':
+                result = <FreeReleaseList />
                 break;
         };
 

@@ -31,19 +31,19 @@ export const scheduleResultSlise = createSlice({
         scheduleEventsListByGridEventId: {},
         scheduleEventsListIsChanged: false,
 
-
-
         dragebleReleaseId: null,
         dragebleReleaseEventId: null,
 
         usedReleasesById: {},
 
-
-
         infoMessageText: '', // просто записываешь текст и он выскакивает. Реагирует на содержание строки
 
-
         allScheduleFileNames: [],
+
+
+
+        freeReleasesIsChanges: false,
+        freeReleasesList: [],
 
 
 
@@ -162,6 +162,18 @@ export const scheduleResultSlise = createSlice({
             state.allScheduleFileNames =  action.payload;
         },
 
+        setFreeReleasesIsChanges: ( state, action ) => {
+            state.freeReleasesIsChanges =  action.payload;
+        },
+
+        setFreeReleasesList: ( state, action ) => {
+            state.freeReleasesList =  action.payload;
+        },
+
+
+
+        
+        
         
 
 
@@ -195,6 +207,9 @@ export const {
     setInfoMessageText,
     setAllScheduleFileNames,
 
+    setFreeReleasesIsChanges,
+    setFreeReleasesList,
+
 
 } = scheduleResultSlise.actions;
 
@@ -227,6 +242,12 @@ export const selectorData = ( state ) => {
         infoMessageText: state.scheduleResult.infoMessageText,
 
         allScheduleFileNames: state.scheduleResult.allScheduleFileNames,
+
+
+        freeReleasesIsChanges: state.scheduleResult.freeReleasesIsChanges,
+        freeReleasesList: state.scheduleResult.freeReleasesList,
+
+
 
 
 

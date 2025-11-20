@@ -184,13 +184,6 @@ export class ScheduleEventClass{
     AddRelease( release_id ){
         let Release = new ReleaseClass();
 
-        // console.dir( 'Release' );
-        // console.dir( Release );
-
-        // console.dir( 'release_id' );
-        // console.dir( release_id );
-
-
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
     }
