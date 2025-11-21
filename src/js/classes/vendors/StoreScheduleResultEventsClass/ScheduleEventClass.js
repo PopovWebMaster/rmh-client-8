@@ -124,14 +124,9 @@ export class ScheduleEventClass{
 
         if( withReleses ){
             for( let i = 0; i < releases.length; i++ ){
-                let releases_id = releases[ i ].id;
+                // let releases_id = releases[ i ].id;
                 let data = { ...releases[ i ] };
                 this.AddReleaseByData( data );
-
-
-
-
-                // this.AddRelease( releases_id );
             };
         }else{
 
@@ -183,7 +178,6 @@ export class ScheduleEventClass{
     }
     AddRelease( release_id ){
         let Release = new ReleaseClass();
-
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
     }
@@ -255,18 +249,25 @@ export class ScheduleEventClass{
     UpdateDurationTime(){
         let { type } = get_event_by_id( this.eventId );  
 
-        
         if( type ){
-
             let durationTime = 0;
             let allReleaseDuration = null;
 
             if( this.releaseList.length > 0 ){
-                for( let i = 0; i < this.releaseList.length; i++ ){
-                    // durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
-                    allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
+                if( type === EVENT_TYPE.BLOCK ){
+                    for( let i = 0; i < this.releaseList.length; i++ ){
+                        // durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
+                        allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
+                    };
+                }else{
 
-                };
+                    if( this.firstSegmentId === null ){
+                        allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
+                    }else{
+                        allReleaseDuration = this.durationTime;
+                    };
+                }
+
             }else{
                 if( type === EVENT_TYPE.BLOCK ){
                     // durationTime = MIN_EVENT_DURATION_SEC;
@@ -300,22 +301,9 @@ export class ScheduleEventClass{
 
     UpdateEventData(){
         this.UpdateDurationTime();
-        this.UpdateFinalNotes();
     }
 
     UpdateFinalNotes(){
-        // let { type } = get_event_by_id( this.eventId );
-        // if( type ){
-        //     if( type === EVENT_TYPE.BLOCK ){
-        //         this.finalNotes = this.notes;
-        //     }else{
-        //         let releaseNotes = '';
-        //         for( let i = 0; i < this.releaseList.length; i++ ){
-        //             releaseNotes = `${releaseNotes} ${this.releaseList[ i ].air_notes}`;
-        //         };
-        //         this.finalNotes = `${this.notes} ${ releaseNotes }`;
-        //     };
-        // }
 
     }
 
@@ -330,16 +318,3 @@ export class ScheduleEventClass{
 }
 
 
-// cutPart: null
-// dayNum: 3
-// durationTime: 180
-// eventId: 11
-// firstSegmentId: null
-// gridEventId: 311
-// isKeyPoint: false
-// is_premiere: false
-// notes: ""
-// pushIt: null
-// releases: []
-// startTime: 62343
-// totalDurationTime

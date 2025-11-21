@@ -52,7 +52,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
 
-        
+        // AddReleaseByData
 
 
     }
@@ -118,49 +118,26 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     GetListBySectors(){
         let schedule_events_list = this.GetScheduleEventsList();
-        // console.dir( 'schedule_events_list' );
-        // console.dir( schedule_events_list );
-
         let arr = divide_day_into_sectors( schedule_events_list );
-
-        // console.dir( 'arr divide_day_into_sectors' );
-        // console.dir( arr );
         let result = add_empty_segments_and_types( arr );
         return result;
     }
 
     SetCounterDataToStore( list ){
-
         let EventsDayCounters = new EventsDayCountersClass();
         EventsDayCounters.CreateTypeDay( list );
         EventsDayCounters.CreateTypeHour( list );
         EventsDayCounters.SetToStore();
-
-
     }
 
     SetListToStore( isChanged = null ){
         let scheduleEventsList = this.GetScheduleEventsList();
-
-
-        // store.dispatch( setDailyEventsList( scheduleEventsList ) ); // это здесь только для разработки
-
-        // setDailyEventsList
-
-        // console.dir( 'scheduleEventsList' );
-        // console.dir( scheduleEventsList );
-
         let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
-
-        // console.dir( 'adjust_startTime_in_day_list' );
-        // console.dir( arr_2 );
-
         store.dispatch( setScheduleEventsList( arr_2 ) );
         if( isChanged !== null ){
             store.dispatch( setScheduleEventsListIsChanged( isChanged ) );
         };
         
-
         this.SetCounterDataToStore( arr_2 );
     }
 
@@ -176,26 +153,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             list: this.list
         });
 
-        // console.dir( 'AddRelease' );
-        // console.dir( {
-        //     gridEventId,
-        //     releaseId,
-        //     Event,
-        //     rest_sec,
-        //     releaseData,
-        // } );
-
-        // console.dir( 'this.list' );
-        // console.dir( this.list );
-
         if( rest_sec >= 0 ){
             if( Event ){
                 if( Event.firstSegmentId === null ){
                     let type = this.GetEventType( Event.eventId );
-
-                    // console.dir( 'Event' );
-                    // console.dir( Event );
-
                     if( type === EVENT_TYPE.BLOCK ){
                         Event.AddRelease( releaseId );
                         Event.UpdateEventData();

@@ -1,0 +1,27 @@
+.ELF_EventDuration{
+    font-size: 1em;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    margin: 0.2em 0.5;
+
+    .ELF_EventDuration_title{
+        font-size: 0.7em;
+        color: #435b49;
+        border: 1px solid #6d8773;
+        padding: 0.3em 0.4em;
+        border-radius: 0.1em 0 0 0.1em;
+    }
+
+    .ELF_EventDuration_dur{
+        font-size: 0.7em;
+        color: rgb(255, 255, 255);
+        background-color: #6d8773;
+        padding: 0.3em 0.4em;
+        border: 1px solid #6d8773;
+        border-radius: 0 0.1em 0.1em 0;
+        font-family: Courier New, Courier, monospace;
+    }
+}

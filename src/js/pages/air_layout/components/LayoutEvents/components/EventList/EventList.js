@@ -53,6 +53,10 @@ const EventListComponent = ( props ) => {
 
     const create = ( arr, arr_2, current_category_id ) => {
 
+        console.dir( 'arr !!!!!!' );
+        console.dir( arr );
+
+
         let category_obj = get_category_object( arr_2 );
 
         let div = arr.map( ( item, index ) => {
@@ -63,6 +67,7 @@ const EventListComponent = ( props ) => {
                 notes,
                 type,
                 durationTime,
+                linked_file,
             } = item;
 
             if( category_id === current_category_id ){
@@ -74,6 +79,7 @@ const EventListComponent = ( props ) => {
                         notes =         { notes }
                         type =          { type }
                         durationTime =  { durationTime }
+                        linked_file =   { linked_file }
                         key =           { index }
                     />
                 );

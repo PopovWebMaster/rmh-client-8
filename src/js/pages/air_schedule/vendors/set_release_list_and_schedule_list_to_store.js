@@ -25,12 +25,13 @@ export const set_release_list_and_schedule_list_to_store = ( release_list, sched
         releasesByGridEventId[ grid_event_id ] = { ...release_list[ i ] };
     };
 
-
     let actual_schedule_list = exclude_outdated_releases( schedule_events_List, releasesById );
 
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
     StoreScheduleResultEvents.CreateFromScheduleEventsList( actual_schedule_list );
     StoreScheduleResultEvents.UpdateData();
+
+
     StoreScheduleResultEvents.SetListToStore();
 
 

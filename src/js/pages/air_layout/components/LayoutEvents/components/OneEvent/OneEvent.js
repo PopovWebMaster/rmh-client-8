@@ -13,6 +13,8 @@ import { EventNonesInput } from './components/EventNonesInput/EventNonesInput.js
 import { EventCategoryItem } from './components/EventCategoryItem/EventCategoryItem.js';
 import { EventRemoveItem } from './components/EventRemoveItem/EventRemoveItem.js';
 
+import { EventLinkedFileItem } from './components/EventLinkedFileItem/EventLinkedFileItem.js';
+
 
 const OneEventComponent = ( props ) => {
 
@@ -23,6 +25,7 @@ const OneEventComponent = ( props ) => {
         notes,
         type,
         durationTime,
+        linked_file,
     } = props;
 
 
@@ -59,6 +62,13 @@ const OneEventComponent = ( props ) => {
                 <EventCategoryItem 
                     id = { id }
                     category = { category }
+                />
+
+                <EventLinkedFileItem
+                    id =            { id }
+                    type =          { type }
+                    durationTime =  { durationTime }
+                    linked_file =   { linked_file }
                 />
 
                 <EventRemoveItem 
