@@ -16,6 +16,8 @@ import { set_grid_event_changes_to_store } from './../../vendors/set_grid_event_
 
 import { access_right } from './../../../../../../helpers/access_right.js';
 
+import { GridTimePushButtons } from './components/GridTimePushButtons/GridTimePushButtons.js';
+
 const GrigItemWrapComponent = ( props ) => {
 
     let {
@@ -201,6 +203,11 @@ const GrigItemWrapComponent = ( props ) => {
             <div className = { `grigItemWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
                 { isCompletd? (
                     <div className = 'grigItemTime'>
+
+                        <GridTimePushButtons
+                            id = { id }
+                        />
+
                         <StartTimeWithEdit 
                             startTimeValue =    { startTime }
                             isKeyPoint =        { isKeyPoint }

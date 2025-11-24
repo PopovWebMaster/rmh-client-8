@@ -1,0 +1,22 @@
+.gridTimePushButtons{
+    font-size: 1em;
+    width: 1.2em;
+
+    span{
+        font-size: 0.8em;
+        color: #5f5f5f;
+        border-radius: 0.1em;
+        cursor: pointer;
+        user-select: none;
+        padding: 0.1em 0;
+
+    }
+
+    span:hover{
+        color: #3a3a3a;
+        background-color: #e5e3e3;
+    }
+    span:active{
+        color: #f59e4c;
+    }
+}
