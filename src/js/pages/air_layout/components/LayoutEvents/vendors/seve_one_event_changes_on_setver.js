@@ -17,6 +17,10 @@ export const seve_one_event_changes_on_setver = ( params ) => {
 
     let event = { ...eventListById[ eventId ], ...eventData };
 
+    // console.dir( 'event' );
+    // console.dir( event );
+
+
     let data = {
         eventId,
         categoryId:        event.category_id,
@@ -24,18 +28,19 @@ export const seve_one_event_changes_on_setver = ( params ) => {
         eventNotes:        event.notes,
         eventType:         event.type,
         eventDurationTime: event.durationTime,
+        eventLinkedFile:   event.linked_file,
     };
 
     if( event.durationSec ){ // внимание на эту штуку, добавляется только когда меняем время хрон
         data.durationSec = event.durationSec;
     };
 
-    console.dir( {
-        event,
-        eventId,
-        eventData,
-        data,
-    } );
+    // console.dir( {
+    //     event,
+    //     eventId,
+    //     eventData,
+    //     data,
+    // } );
 
     store.dispatch( setSpinnerIsActive( true ) );
 

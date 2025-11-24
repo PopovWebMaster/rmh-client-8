@@ -53,10 +53,6 @@ const EventListComponent = ( props ) => {
 
     const create = ( arr, arr_2, current_category_id ) => {
 
-        console.dir( 'arr !!!!!!' );
-        console.dir( arr );
-
-
         let category_obj = get_category_object( arr_2 );
 
         let div = arr.map( ( item, index ) => {

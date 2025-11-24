@@ -22,6 +22,8 @@ import { AWConfirm } from './../../../../../../../../components/AlertWindowConta
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 
+import { seve_on_server_new_grid_event_list } from './../../../../vendors/seve_on_server_new_grid_event_list.js';
+
 
 
 const EventDurationItemComponent = ( props ) => {
@@ -30,10 +32,10 @@ const EventDurationItemComponent = ( props ) => {
         id,
         durationTime,
 
-        eventList,
-        setGridDayEventsList,
-        setGridDayEventsIsChanges,
-        setSpinnerIsActive,
+        // eventList,
+        // setGridDayEventsList,
+        // setGridDayEventsIsChanges,
+        // setSpinnerIsActive,
 
     } = props;
 
@@ -117,6 +119,19 @@ const EventDurationItemComponent = ( props ) => {
             new_durationTime = `00:00:05`;
         };
 
+        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+
+        seve_on_server_new_grid_event_list( addReport.gridDayEventsList, () => {
+            seve_one_event_changes_on_setver({
+                eventId: id,
+                eventData: { 
+                    durationTime: new_durationTime,
+                    durationSec: duration_sec,
+                },
+                callback: () => {},
+            });
+        } );
+/*
         setSpinnerIsActive( true );
 
         let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
@@ -149,6 +164,7 @@ const EventDurationItemComponent = ( props ) => {
 
             },
         });
+        */
 
     }
 
@@ -198,24 +214,21 @@ const EventDurationItemComponent = ( props ) => {
 
 export function EventDurationItem( props ){
 
-    const layout = useSelector( layoutSlice );
+    // const layout = useSelector( layoutSlice );
     const dispatch = useDispatch();
 
     return (
         <EventDurationItemComponent
             { ...props }
-            eventList = { layout.eventList }
+            // eventList = { layout.eventList }
 
             setEventListAsChanged = { ( val ) => { dispatch( setEventListAsChanged( val ) ) } }
-            setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
-            setGridDayEventsIsChanges = { ( val ) => { dispatch( setGridDayEventsIsChanges( val ) ) } }
-            setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            // setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
+            // setGridDayEventsIsChanges = { ( val ) => { dispatch( setGridDayEventsIsChanges( val ) ) } }
+            // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
 
 
-            
 
-
-            
 
 
         />

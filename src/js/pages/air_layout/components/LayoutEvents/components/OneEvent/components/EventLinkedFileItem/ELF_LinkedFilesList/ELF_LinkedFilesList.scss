@@ -1,0 +1,70 @@
+.ELF_LinkedFilesList{
+    font-size: 1em;
+
+    height: 5em;
+    margin: 0.3em 0;
+
+    // background-color: red;
+
+    overflow: hidden;
+    padding: 0.5em;
+
+    .ELF_LinkedFilesList_item{
+        font-size: 1em;
+        margin: 0 0.2em;
+        padding: 0.3em 0.5em;
+        border-radius: 0.1em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .ELF_L_time{
+            font-size: 0.6em;
+            padding: 0.3em 0.8em;
+            background-color: #197721;
+            border-radius: 0.1em;
+            color: #ffffff;
+            margin-right: 0.5em;
+            flex-grow: 0;
+            width: 4em;
+            text-align: center;
+        }
+
+        .ELF_L_name{
+            font-size: 0.6em;
+            flex-grow: 1;
+            max-width: 100%;
+            background-color: #ffffff00;
+            border: 1px solid #34343400;
+            outline: none;
+            color: #476edb;
+
+        }
+
+        .ELF_L_remove{
+            font-size: .7em;
+            width: 1em;
+            height: 1em;
+            border-radius: .1em;
+            padding: .1em .2em;
+            color: #fd8585;
+            flex-grow: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+
+        .ELF_L_remove:hover{
+            color: red;
+        }
+        .ELF_L_remove:active{
+            color: rgb(214, 169, 169);
+        }
+
+    }
+    .ELF_LinkedFilesList_item:hover{
+        background-color: #86868621;
+    }
+}

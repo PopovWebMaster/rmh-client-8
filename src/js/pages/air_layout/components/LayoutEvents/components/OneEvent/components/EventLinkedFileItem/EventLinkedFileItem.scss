@@ -3,7 +3,7 @@
     margin-right: 1em;
 
     flex-grow: 1;
-    width: 11em;
+    width: 18em;
 
     white-space: nowrap; 
     overflow: hidden; 
@@ -18,21 +18,21 @@
     position: relative;
 
     .LE_ELF_addBtn{
-        font-size: 0.6em;
-        padding: 0.3em 0.2em;
+        font-size: 0.55em;
+        padding: 0.4em 0.8em;
         border-radius: 0.1em;
 
         display: inline-block;
 
-        width: 11em;
+        width: 18em;
 
         text-overflow: ellipsis; 
         white-space: nowrap; 
         overflow: hidden; 
         text-align: center;
-        background-color: #49b6f3a6;
-        color: #0c222f;
-        border: 1px solid #84c5e9;
+        background-color: #7e7f7fa6;
+        color: #ffffff;
+        border: 1px solid #e7e7e787;
         cursor: pointer;
         user-select: none;
         
