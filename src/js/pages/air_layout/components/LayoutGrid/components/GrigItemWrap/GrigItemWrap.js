@@ -42,6 +42,8 @@ const GrigItemWrapComponent = ( props ) => {
     let [ isLighter, setIsLighter ] = useState( false );
 
     let [ gridEventType, setGridEventType ] = useState( '' );
+    let [ linkedFile, setLinkedFile ] = useState( null );
+
 
 
     useEffect( () => {
@@ -49,8 +51,11 @@ const GrigItemWrapComponent = ( props ) => {
 
             let { eventId } = gridDayEventsListById[ id ];
             if( eventListById[ eventId ] ){
-                let { type } = eventListById[ eventId ];
+                let { type, linked_file } = eventListById[ eventId ];
                 setGridEventType( type );
+                setLinkedFile( linked_file );
+            }else{
+                setLinkedFile( null );
             };
         };
 
@@ -214,10 +219,13 @@ const GrigItemWrapComponent = ( props ) => {
                             id =                { id }
                         />
 
-                        { gridEventType === EVENT_TYPE.BLOCK? ( <DurationTimeEdit
-                            durationTime = { durationTime }
-                            id = { id }
-                        />): (
+                        { gridEventType === EVENT_TYPE.BLOCK? ( 
+                            <DurationTimeEdit
+                                durationTime = { durationTime }
+                                id = { id }
+                                linkedFile = { linkedFile }
+                            />
+                        ): (
                             <span className = 'ETS_duration'>{ convert_sec_to_time( durationTime ) }</span>
                         )  }
 

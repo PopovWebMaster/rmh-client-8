@@ -156,6 +156,10 @@ export class ReleaseClass {
         this.sub_application_id =   sub_application_id;
         this.force_event_id =       force_event_id;
 
+        if( id === null ){
+            this.id = releaseName;
+        };
+
         
     }
 

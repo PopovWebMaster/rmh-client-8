@@ -179,6 +179,10 @@ export class EventsListClass{
     }
 
     GetOffsetReport(){
+        // console.dir( this );
+        // console.dir( 'this.offsetReport' );
+        // console.dir( structuredClone( this.offsetReport )   );
+
         return this.offsetReport;
     }
 

@@ -82,6 +82,12 @@ export class TimeAdjustmentForDayEventsClass{
         };
 
         for( let i = 0; i < this.segments.length; i++ ){
+
+            // console.dir( {
+            //     gridEventId, 
+            //     duration,
+            //     segments_i: this.segments[ i ],
+            // } );
             let offsetReport = this.segments[ i ].SetDurationForGridEvent( gridEventId, duration );
             if( offsetReport.isErrors ){
                 result = offsetReport;
@@ -109,7 +115,7 @@ export class TimeAdjustmentForDayEventsClass{
 
     Make(){
 
-        console.dir( this );
+        // console.dir( this );
 
     }
 

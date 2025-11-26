@@ -4,7 +4,8 @@ import { get_grid_event_by_id } from './get_grid_event_by_id.js';
 import { get_event_by_id } from './../StoreScheduleResultEventsClass/get_event_by_id.js';
 import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../../../config/layout.js';
 
-import { convert_time_str_to_sec } from './../../../helpers/convert_time_str_to_sec.js'
+import { convert_time_str_to_sec } from './../../../helpers/convert_time_str_to_sec.js';
+import { get_date_now_YYYY_MM_DD } from './../../../helpers/get_date_now_YYYY_MM_DD.js';
 
 export class ScheduleEventClass{
     constructor(){
@@ -42,6 +43,11 @@ export class ScheduleEventClass{
 
         this.MoveUp = this.MoveUp.bind(this);
         this.MoveDown = this.MoveDown.bind(this);
+        this.AddLinkedFileToRelease = this.AddLinkedFileToRelease.bind(this);
+
+
+
+        
 
 
 
@@ -92,6 +98,10 @@ export class ScheduleEventClass{
 
         let eventData = get_event_by_id( this.eventId );
 
+        // console.dir( 'eventData' );
+        // console.dir( eventData );
+
+
         this.notes = eventData.notes;
         this.finalNotes = eventData.notes;
 
@@ -99,7 +109,26 @@ export class ScheduleEventClass{
             if( eventData.type === EVENT_TYPE.BLOCK ){
                 this.durationTime  = MIN_EVENT_DURATION_SEC
             };
-        }
+        };
+
+
+        if( eventData.linked_file ){
+            if( eventData.linked_file !== null ){
+                let { linked_file, category_id } = eventData;
+                for( let i = 0; i < linked_file.length; i++ ){
+                    let { name, duration } = linked_file[ i ];
+                    this.AddLinkedFileToRelease( {
+                        category_id,
+                        eventId,
+                        name,
+                        duration,
+                        startTime,
+                    } );
+
+                };
+            };
+        };
+
        
     }
 
@@ -187,7 +216,46 @@ export class ScheduleEventClass{
         this.releaseList.push( Release );
     }
 
+    AddLinkedFileToRelease( params ){
+        let {
+            category_id,
+            eventId,
+            name,
+            duration,
+            startTime
+        } = params;
+
+        let YYYY_MM_DD = get_date_now_YYYY_MM_DD();
+
+        let relData = {
+            YYYY_MM_DD,
+            air_notes: '',
+            applicationName: 'no name',
+            application_id: null,
+            category_id,
+            event_id: eventId,
+            file_list: [ name ],
+            grid_event_id: null,
+            id: null,
+            manager_id: null,
+            releaseDuration: duration,
+            releaseName: name,
+            startTime,
+            sub_application_id: null,
+            force_event_id: null,
+        };
+        this.AddReleaseByData( relData );
+
+    }
+
     RemoveRelease( release_id ){
+
+        // console.dir( 'release_id' );
+        // console.dir( release_id );
+
+
+
+
         let arr = [];
 
         for( let i = 0; i < this.releaseList.length; i++ ){

@@ -15,10 +15,10 @@ $path: '/public/assets/fonts/fonts/';
 // EuropeExt Normal
 
 
+// BankGothic RUSS Medium
 
 
-
-
+// Courier New, Courier, monospace
 
 
 
@@ -504,10 +504,10 @@ $path: '/public/assets/fonts/fonts/';
 //     font-family: "Futuris Bold";
 //     src: url('#{$path}Futuris_Bold.ttf') format("truetype"); 
 // }
-// @font-face { 
-//     font-family: "Courier New";
-//     src: url('#{$path}Courier_New.ttf') format("truetype"); 
-// }
+@font-face { 
+    font-family: "Courier New";
+    src: url('#{$path}Courier_New.ttf') format("truetype"); 
+}
 // @font-face { 
 //     font-family: "Alexandra Script";
 //     src: url('#{$path}Alexandra_Script.ttf') format("truetype"); 
@@ -564,10 +564,10 @@ $path: '/public/assets/fonts/fonts/';
 //     font-family: "EuropeExt Bold";
 //     src: url('#{$path}EuropeExt_Bold.ttf') format("truetype"); 
 // }
-// @font-face { 
-//     font-family: "BankGothic RUSS Medium";
-//     src: url('#{$path}BankGothic_RUSS_Medium.ttf') format("truetype"); 
-// }
+@font-face { 
+    font-family: "BankGothic RUSS Medium";
+    src: url('#{$path}BankGothic_RUSS_Medium.ttf') format("truetype"); 
+}
 // @font-face { 
 //     font-family: "Minion Cyrillic Bold";
 //     src: url('#{$path}Minion_Cyrillic_Bold.ttf') format("truetype"); 

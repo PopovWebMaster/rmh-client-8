@@ -91,6 +91,15 @@ const ReleasesItemComponent = ( props ) => {
             // let name = file === ''? <>{`${releaseName}/`} {notesValue}</>`${releaseName}/  ${ notesValue }`: file;
             let name = file === ''? <>{`${releaseName}/`} {notesValue}</>: file;
 
+            let is_app = false;
+            if( typeof id === 'number' ){
+                /*
+                    да, именно так по-тупому. 
+                    Если не заявка, то в релизе в id записано имя этого файла а не номер
+                */
+                is_app = true;
+            };
+
             return (
                 <div
                     className = 'CTS_RI_Item'
@@ -98,6 +107,9 @@ const ReleasesItemComponent = ( props ) => {
                 >
 
                     <div className = 'CTS_RI_Item_time'>
+                        
+
+
                         <span className = 'CTS_RI_Item_time_fact' >{ convert_sec_to_time( startTime_sec ) }</span>
                         <span className = 'CTS_RI_Item_time_plan'>{ convert_sec_to_time( startTime ) }</span>
 
@@ -114,6 +126,10 @@ const ReleasesItemComponent = ( props ) => {
                     ></span>
 
                     <span className = 'name'>{ name }</span>
+
+                    { is_app? <span className = 'is_app'>Заявка!</span>: '' }
+
+                
                     <span className = 'duration'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span
                         onClick = { () => { remove( id ) } }

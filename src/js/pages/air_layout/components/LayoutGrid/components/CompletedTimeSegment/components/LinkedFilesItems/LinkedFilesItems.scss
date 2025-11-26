@@ -1,0 +1,81 @@
+.CTS_LinkedFilesItems{
+    font-size: 1em;
+
+    .CTS_LinkedFilesItems_item{
+        font-size: 1em;
+        padding: 0.2em 0.2em 0.2em 0.2em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        background-color: #ffffffe0;
+        border: 1px solid #2d63365e;
+        border-radius: 0.1em;
+        margin: 0.2em 0;
+
+        .CTS_LFI_time{
+            font-size: 1em;
+            flex-grow: 0;
+            height: 1em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            position: relative;
+
+            .CTS_LFI_time_fact{
+                font-size: 0.6em;
+                color: #424242;
+                background-color: #ebbaba87;
+                padding: 0.1em 0.4em;
+                margin: 0 0.4em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                flex-grow: 0;
+                text-align: center;
+                border: 1px solid #e7c1c1c9;
+            }
+
+            .CTS_LFI_duration{
+                font-size: 0.6em;
+                background-color: #ebebeb87;
+                padding: 0.1em 0.4em;
+                margin: 0 0.4em;
+                width: 4.6em;
+                border-radius: 0.1em;
+                flex-grow: 0;
+                text-align: center;
+                border: 1px solid #e7c1c1c9;
+                color: #424242;
+            }
+        }
+
+        .CTS_LFI_file_name_inp{
+            font-size: 0.55em;
+            color: #343434;
+            font-weight: bold;
+            margin: 0.1em 0 0.1em 0.4em;
+            flex-grow: 1;
+            max-width: 100%;
+            border: 1px solid #34343400;
+            background-color: none;
+            outline: none;
+        }
+
+        .CTS_LFI_file_name_inp_free{
+            font-size: 0.55em;
+            color: #919191;
+            font-weight: bold;
+            margin: 0.1em 0 0.1em 0.4em;
+            flex-grow: 1;
+            max-width: 100%;
+            border: 1px solid #34343400;
+            background-color: none;
+            outline: none;
+        }
+
+
+    }
+}

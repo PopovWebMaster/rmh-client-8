@@ -18,6 +18,7 @@ const DurationTimeEditComponent = ( props ) => {
     let {
         durationTime,
         id = null,
+        linkedFile,
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
@@ -44,6 +45,7 @@ const DurationTimeEditComponent = ( props ) => {
                 setIsOpen =     { setIsOpen }
                 id =            { id }
                 durationTime =  { durationTime }
+                linkedFile =    { linkedFile }
             />
 
         </AlertWindowContainer>

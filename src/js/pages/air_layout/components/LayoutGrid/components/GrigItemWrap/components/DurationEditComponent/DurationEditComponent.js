@@ -8,14 +8,16 @@ import './DurationEditComponent.scss';
 import { selectorData as layoutSlice, setGridDayEventsList, setGridDayEventsIsChanges } from './../../../../../../../../redux/layoutSlice.js';
 import { setSpinnerIsActive } from './../../../../../../../../redux/spinnerSlice.js';
 
-import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
-
 import { AlertWindowContainerSaveAdd } from './../../../../../../../../components/AlertWindowContainerSaveAdd/AlertWindowContainerSaveAdd.js';
 import { AWInputDuration } from './../../../../../../../../components/AlertWindowContainer/AWInputDuration/AWInputDuration.js';
 
 import { make_analysis_of_reset_duration } from './vendors/make_analysis_of_reset_duration.js';
 
 import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
+
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/layout.js';
+
+import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
 const DurationEditComponentComponent = ( props ) => {
 
@@ -24,10 +26,11 @@ const DurationEditComponentComponent = ( props ) => {
         setIsOpen,
         id,
         durationTime,
+        linkedFile,
 
 
-        gridDayEventsList,
-        gridCurrentDay,
+        // gridDayEventsList,
+        // gridCurrentDay,
 
         setGridDayEventsList,
         setGridDayEventsIsChanges,
@@ -41,6 +44,8 @@ const DurationEditComponentComponent = ( props ) => {
 
     let [ isReady, setIsReady ] = useState( false );
 
+    let [ minDuration, setMinDuration ] = useState( MIN_EVENT_DURATION_SEC );
+
     useEffect( () => {
         setValue( durationTime );
         setIsError( false );
@@ -48,14 +53,33 @@ const DurationEditComponentComponent = ( props ) => {
     }, [ durationTime ] );
 
     useEffect( () => {
+        if( linkedFile === null ){
+            setMinDuration( MIN_EVENT_DURATION_SEC );
+        }else{
+            let allDuration = 0;
+            for( let i = 0; i < linkedFile.length; i++ ){
+                let { duration } = linkedFile[ i ];
+                allDuration = allDuration + duration;
+            };
+            setMinDuration( allDuration );
+        };
+
+    }, [ linkedFile ] );
+
+    useEffect( () => {
         if( value === durationTime ){
             setIsReady( false );
         }else{
-            setIsReady( true );
+            if( value < minDuration ){
+                setIsReady( false );
+            }else{
+                setIsReady( true );
+            };
         };
 
         setIsError( false );
-                setErrorMessage( '' );
+        setErrorMessage( '' );
+
     }, [ value ] );
 
     const change = ( sec, time ) => {
@@ -68,9 +92,10 @@ const DurationEditComponentComponent = ( props ) => {
 
     const clickSave = () => {
         if( isReady ){
+            
             let addReport = make_analysis_of_reset_duration( id, value );
 
-                if( addReport.isErrors ){
+            if( addReport.isErrors ){
                 setIsError( true );
                 setErrorMessage( addReport.message );
             }else{
@@ -111,6 +136,8 @@ const DurationEditComponentComponent = ( props ) => {
                 changeHandler = { change }
             />
 
+            <span className = 'DEC_min_time' >{ convert_sec_to_time( minDuration ) } (min)</span>
+
             { isError? (
                 <p className = 'DEC_error' >{ errorMessage }</p>
             ): '' }
@@ -128,15 +155,15 @@ const DurationEditComponentComponent = ( props ) => {
 
 export function DurationEditComponent( props ){
 
-    const layout = useSelector( layoutSlice );
+    // const layout = useSelector( layoutSlice );
     const dispatch = useDispatch();
 
     return (
         <DurationEditComponentComponent
             { ...props }
             // gridOneDayList = { layout.gridOneDayList }
-            gridDayEventsList = { layout.gridDayEventsList }
-            gridCurrentDay = { layout.gridCurrentDay }
+            // gridDayEventsList = { layout.gridDayEventsList }
+            // gridCurrentDay = { layout.gridCurrentDay }
 
             setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
 

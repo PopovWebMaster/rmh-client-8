@@ -9,6 +9,13 @@ import { convert_sec_to_time } from './../../../../../../../../../helpers/conver
 
 export const make_analysis_of_reset_duration = ( gridEventId, duration_sec ) => {
 
+    // console.dir( 'gridEventId' );
+    // console.dir( gridEventId );
+
+    // console.dir( 'duration_sec' );
+    // console.dir( duration_sec );
+
+
     let result = {
         isErrors: false,
         message: '',

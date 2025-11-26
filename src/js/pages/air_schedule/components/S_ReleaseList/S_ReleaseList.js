@@ -20,7 +20,7 @@ const S_ReleaseListComponent = ( props ) => {
 
     } = props;
 
-    let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list' 'free_release'
+    let [ activeTab, setActiveTab ] = useState( 'free_release' ); // 'buffer' 'list' 'free_release'
 
     const create = ( val ) => {
         let result = '';

@@ -19,6 +19,8 @@ import { FreeReleasesListClass } from './../../../../../../../../classes/FreeRel
 
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+
 
 const FRL_AddNewFilesComponent = ( props ) => {
 
@@ -99,16 +101,16 @@ const FRL_AddNewFilesComponent = ( props ) => {
 
 
     const add_new_free_releases = () => {
+        if( access_right( 'schedule_edit' ) ){
+            let FreeReleasesList = new FreeReleasesListClass();
+            FreeReleasesList.SetListFromStore();
+            FreeReleasesList.AddNewFiles( newFilesList, eventId );
+            FreeReleasesList.SetToStore( true );
 
-        let FreeReleasesList = new FreeReleasesListClass();
-        FreeReleasesList.SetListFromStore();
-        FreeReleasesList.AddNewFiles( newFilesList, eventId );
-
-        setFreeReleasesIsChanges( true );
-
-        // console.dir( 'scheduleResult' );
-        // console.dir( scheduleResult );
-
+            setNewFilesList( [] );
+            setEventId( null );
+            setIsReady( false );
+        };
     }
 
     const remove = ( fileName ) => {

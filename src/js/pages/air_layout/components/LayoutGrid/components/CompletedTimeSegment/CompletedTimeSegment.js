@@ -14,6 +14,7 @@ import { EventNotesItem } from './components/EventNotesItem/EventNotesItem.js';
 import { RemoveItem } from './components/RemoveItem/RemoveItem.js';
 import { CutItem } from './components/CutItem/CutItem.js';
 import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
+import { LinkedFilesItems } from './components/LinkedFilesItems/LinkedFilesItems.js';
 
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
@@ -93,7 +94,17 @@ const CompletedTimeSegmentComponent = ( props ) => {
                     />
                 </div>
 
+                
+
             </div>
+
+            <LinkedFilesItems
+                eventId =   { eventId }
+                id =        { id }
+                startTime = { startTime }
+                durationTime =  { duration }
+            />
+
         </GrigItemWrap>
 
     )
