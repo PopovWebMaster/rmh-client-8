@@ -1,0 +1,50 @@
+.FRL_CategoryButtons{
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+
+    .FRL_CategoryBtnAll{
+        font-size: 0.65em;
+        padding: 0.3em 0.8em;
+        border-radius: 0.1em;
+        margin: 0.2em 0.4em;
+        background-color: #919191;
+        color: #ffffff;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ffffff00;
+    }
+
+    .FRL_CategoryBtn{
+        font-size: 0.65em;
+        padding: 0.3em 0.8em;
+        border-radius: 0.1em;
+        margin: 0.2em 0.4em;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ffffff00;
+    }
+
+    .FRL_CategoryBtn.isActive, .FRL_CategoryBtnAll.isActive{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+    .FRL_CategoryBtn:hover{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+    .FRL_CategoryBtnAll:hover{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+
+
+        
+}

@@ -31,9 +31,9 @@ const FRL_EditContainerComponent = ( props ) => {
         isOpen,
         setIsOpen,
 
-        
-       
     } = props;
+
+    let [ buttonsHeight, setButtonsHeight ] = useState( 0 );
 
     
 
@@ -54,12 +54,15 @@ const FRL_EditContainerComponent = ( props ) => {
                 isOpen = { isOpen }
             />
 
-            <FRL_FilterButtons />
-            <FRL_FilterList />
+            <FRL_FilterButtons
+                isOpen = { isOpen }
+                setButtonsHeight = { setButtonsHeight }
+            />
 
-
-
-
+            <FRL_FilterList
+                isOpen =        { isOpen }
+                buttonsHeight = { buttonsHeight }
+            />
 
         </div>
     )

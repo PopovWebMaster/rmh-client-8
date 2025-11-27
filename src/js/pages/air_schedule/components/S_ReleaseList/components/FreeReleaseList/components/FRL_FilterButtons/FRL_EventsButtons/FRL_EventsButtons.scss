@@ -1,0 +1,50 @@
+.FRL_EventsButtons{
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+
+    .FRL_EventsBtnAll{
+        font-size: 0.6em;
+        padding: 0.3em 0.8em;
+        border-radius: 0.1em;
+        margin: 0.2em 0.4em;
+        background-color: #919191;
+        color: #ffffff;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ffffff00;
+    }
+
+    .FRL_EventsBtn{
+        font-size: 0.6em;
+        padding: 0.3em 0.8em;
+        border-radius: 0.1em;
+        margin: 0.2em 0.4em;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ffffff00;
+    }
+
+    .FRL_EventsBtn.isActive, .FRL_EventsBtnAll.isActive{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+    .FRL_EventsBtn:hover{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+    .FRL_EventsBtn:hover{
+        box-shadow: 0 0 3px 2px #7a86e9;
+        border: 1px solid #ffffff;
+    }
+
+
+
+        
+}

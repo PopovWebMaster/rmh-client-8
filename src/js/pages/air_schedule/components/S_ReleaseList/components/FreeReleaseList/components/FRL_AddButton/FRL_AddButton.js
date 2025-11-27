@@ -19,10 +19,15 @@ const FRL_AddButtonComponent = ( props ) => {
         title,
         icon = '',
         clickHandler = () => {},
+        setListIsActive = () => {},
        
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+
+    useEffect( () => {
+        setListIsActive( !isOpen );
+    }, [ isOpen ] );
 
     const click = () => {
         setIsOpen( true );
@@ -37,7 +42,7 @@ const FRL_AddButtonComponent = ( props ) => {
                 isOpen = { isOpen }
                 setIsOpen = { setIsOpen }
                 title = 'Межпрограммные ролики'
-                width = '98vw'
+                width = '60vw'
                 height = '94vh'
 
                 showCurrentDayName = { true }

@@ -106,6 +106,7 @@ const FRL_AddNewFilesComponent = ( props ) => {
             FreeReleasesList.SetListFromStore();
             FreeReleasesList.AddNewFiles( newFilesList, eventId );
             FreeReleasesList.SetToStore( true );
+            FreeReleasesList.SetToStoreLastCurrentData();
 
             setNewFilesList( [] );
             setEventId( null );

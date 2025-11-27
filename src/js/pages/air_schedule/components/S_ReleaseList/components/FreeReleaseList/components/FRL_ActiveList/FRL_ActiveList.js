@@ -1,9 +1,11 @@
+// FRL_ActiveList
+
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
-import './FRL_FilterList.scss';
+import './FRL_ActiveList.scss';
 
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 
@@ -19,7 +21,7 @@ import { get_filtered_list } from './../../vendors/get_filtered_list.js';
 
 
 
-const FRL_FilterListComponent = ( props ) => {
+const FRL_ActiveListComponent = ( props ) => {
 
     let {
         isOpen,
@@ -50,14 +52,39 @@ const FRL_FilterListComponent = ( props ) => {
         freeReleasesFiltered,
     ] );
 
-    const remove = ( fileName ) => {
-        if( access_right( 'schedule_edit' ) ){
-            let FreeReleasesList = new FreeReleasesListClass();
-            FreeReleasesList.SetListFromStore();
-            FreeReleasesList.RemoveFile( fileName );
-            FreeReleasesList.SetToStore( true );
-        };
-    };
+    // const remove = ( fileName ) => {
+    //     if( access_right( 'schedule_edit' ) ){
+    //         let FreeReleasesList = new FreeReleasesListClass();
+    //         FreeReleasesList.SetListFromStore();
+    //         FreeReleasesList.RemoveFile( fileName );
+    //         FreeReleasesList.SetToStore( true );
+    //     };
+    // };
+
+    const drag_start = ( e, fileName, duration, eventId ) => {
+        // let {
+        //     event_id, 
+        //     id,
+        //     force_event_id,
+        //     category_id,
+        // } = item;
+
+        // let work_event_id = event_id;
+        // if( category_id === null && event_id === null ){
+        //     work_event_id = force_event_id;
+        // };
+
+        // setDragebleReleaseId( id )
+        // // setDragebleReleaseEventId( event_id );
+        // setDragebleReleaseEventId( work_event_id );
+
+        
+    }
+
+    const drag_end = () => {
+        // setDragebleReleaseId( null )
+        // setDragebleReleaseEventId( null )
+    }
 
     const create = ( arr ) => {
 
@@ -69,27 +96,17 @@ const FRL_FilterListComponent = ( props ) => {
                 eventId,
             } = item;
 
-            let event = get_event_by_id( eventId );
-            let { style, name } = event;
-
             return (
                 <div 
-                    className = 'FRL_FilterList_item'
-                    key = { index }
+                    className =     'FRL_ActiveList_item'
+                    key =           { index }
+                    draggable = { true }
+                    onDragStart = { ( e ) => { drag_start( e, fileName, duration, eventId ) } }
+                    onDragEnd = { drag_end }
                 >
-                    <span className = 'FRL_FilterList_item_event' style = { style }>{ name }</span>
-                    <span className = 'FRL_FilterList_item_duration'>{ convert_sec_to_time( duration ) }</span>
-                    {/* <span className = 'FRL_FilterList_item_name'>{ fileName }</span> */}
-
-                    <input
-                        type = 'text'
-                        className = 'FRL_FilterList_item_name'
-                        value = { fileName }
-                        onChange = { () => {} }
-                    />
-
-
-                    <span className = 'FRL_FilterList_item_remove icon-cancel-2' onClick = { () => { remove( fileName ) } }></span>
+                    <span className = 'FRL_ActiveList_item_duration'>{ convert_sec_to_time( duration ) }</span>
+                    <span className = 'FRL_ActiveList_item_name'>{ fileName }</span>
+                    <span className = 'FRL_ActiveList_item_count'>{ 0 }</span>
                 </div>
             );
 
@@ -100,34 +117,34 @@ const FRL_FilterListComponent = ( props ) => {
     }
 
     const getHeight = ( buttons_height ) => {
-        return `calc( 94vh - ${ 13 + buttons_height + 7.6 }em )`;
+        let height_1 = 8.4;
+        let height_2 = 1.4;
+        return `calc( 100vh - ${ height_1 + height_2 + buttons_height }em )`;
     }
 
-    
 
     return (
         <div 
-            className = 'FRL_FilterList'
+            className = 'FRL_ActiveList'
             style = { { height: getHeight( buttonsHeight ) } }
         >
             <ScrollContainer
                 height = { getHeight( buttonsHeight ) }
             >
                 { create( list ) }
-
             </ScrollContainer>
         </div>
     )
 
 };
 
-export function FRL_FilterList( props ){
+export function FRL_ActiveList( props ){
 
     const scheduleResult = useSelector( scheduleResultSlise );
     // const dispatch = useDispatch();
 
     return (
-        <FRL_FilterListComponent
+        <FRL_ActiveListComponent
             { ...props }
 
             freeReleasesFilterCategoryId = { scheduleResult.freeReleasesFilterCategoryId }
