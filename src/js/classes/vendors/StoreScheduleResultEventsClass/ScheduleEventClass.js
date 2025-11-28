@@ -329,11 +329,11 @@ export class ScheduleEventClass{
                     };
                 }else{
 
-                    if( this.firstSegmentId === null ){
+                    // if( this.firstSegmentId === null ){
                         allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
-                    }else{
-                        allReleaseDuration = this.durationTime;
-                    };
+                    // }else{
+                    //     allReleaseDuration = this.durationTime;
+                    // };
                 }
 
             }else{

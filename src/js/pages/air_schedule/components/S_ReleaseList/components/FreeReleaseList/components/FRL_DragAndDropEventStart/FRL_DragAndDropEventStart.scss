@@ -1,0 +1,11 @@
+.FRL_DragAndDropEventStart{
+    font-size: 1em;
+}
+
+.FRL_DragAndDropEventStart:hover{
+    cursor: grab;
+}
+
+.FRL_DragAndDropEventStart:active{
+    cursor: grabbing;
+}

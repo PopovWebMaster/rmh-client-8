@@ -17,6 +17,8 @@ import adminSlice                   from './adminSlice.js';
 import airFilesSlice                from './airFilesSlice.js';
 import playReportAnalyticsSlise     from './playReportAnalyticsSlise.js';
 import dailySchaduleEditorSlice     from './dailySchaduleEditorSlice.js';
+import scheduleResultDragEventSlise     from './scheduleResultDragEventSlise.js';
+
 
 
 
@@ -48,6 +50,7 @@ export default configureStore({
         playReportAnalytics: playReportAnalyticsSlise,
 
         dailySchaduleEditor: dailySchaduleEditorSlice,
+        scheduleResultDragEvent: scheduleResultDragEventSlise,
 
 
 

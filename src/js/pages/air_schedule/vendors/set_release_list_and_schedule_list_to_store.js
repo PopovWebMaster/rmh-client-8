@@ -54,17 +54,25 @@ function exclude_outdated_releases( scheduleList, releasesById ){
 
         for( let y = 0; y < scheduleList[ i ].releases.length; y++ ){
             let release_id = scheduleList[ i ].releases[ y ].id;
+            if( typeof release_id === 'number' ){
+                if( releasesById[ release_id ] ){
 
-            if( releasesById[ release_id ] ){
+                    let relObj = { ...scheduleList[ i ].releases[ y ], ...releasesById[ release_id ] };
+                    if( relObj.air_notes === null ){
+                        relObj.air_notes = '';
+                    };
 
+                    item.releases.push( relObj );
+                }else{
+                    isset_del_releases = true;
+                };
+            }else if( typeof release_id === 'string' ){
                 let relObj = { ...scheduleList[ i ].releases[ y ], ...releasesById[ release_id ] };
                 if( relObj.air_notes === null ){
                     relObj.air_notes = '';
                 };
 
                 item.releases.push( relObj );
-            }else{
-                isset_del_releases = true;
             };
         };
 

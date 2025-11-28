@@ -24,6 +24,7 @@ const SelectedEventWindowComponent = ( props ) => {
         setSelectedEventId,
         durationLimit,
         setDurationLimit,
+        eventClickHandler = () => {}
 
         
 
@@ -44,6 +45,7 @@ const SelectedEventWindowComponent = ( props ) => {
                 setEventId =    { setSelectedEventId }
                 durationLimit = { durationLimit }
                 alwaysOpen =    { alwaysOpen }
+                eventClickHandler = { eventClickHandler }
             />
 
 

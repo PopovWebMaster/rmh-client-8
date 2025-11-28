@@ -1,5 +1,3 @@
-// FRL_ActiveList
-
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
@@ -11,23 +9,17 @@ import { selectorData as scheduleResultSlise } from './../../../../../../../../r
 
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
-import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
-import { get_event_by_id } from './../../../../../../../../helpers/get_event_by_id.js';
-
-import { FreeReleasesListClass } from './../../../../../../../../classes/FreeReleasesListClass.js';
-import { access_right } from './../../../../../../../../helpers/access_right.js';
-
 import { get_filtered_list } from './../../vendors/get_filtered_list.js';
 
+import { FRL_OneActiveListItem } from './../FRL_OneActiveListItem/FRL_OneActiveListItem.js';
+import { FRL_DragAndDropEventStart } from './../FRL_DragAndDropEventStart/FRL_DragAndDropEventStart.js';
 
 
 const FRL_ActiveListComponent = ( props ) => {
 
     let {
         isOpen,
-
         buttonsHeight,
-
 
         freeReleasesFilterCategoryId,
         freeReleasesFilterEventId,
@@ -52,40 +44,6 @@ const FRL_ActiveListComponent = ( props ) => {
         freeReleasesFiltered,
     ] );
 
-    // const remove = ( fileName ) => {
-    //     if( access_right( 'schedule_edit' ) ){
-    //         let FreeReleasesList = new FreeReleasesListClass();
-    //         FreeReleasesList.SetListFromStore();
-    //         FreeReleasesList.RemoveFile( fileName );
-    //         FreeReleasesList.SetToStore( true );
-    //     };
-    // };
-
-    const drag_start = ( e, fileName, duration, eventId ) => {
-        // let {
-        //     event_id, 
-        //     id,
-        //     force_event_id,
-        //     category_id,
-        // } = item;
-
-        // let work_event_id = event_id;
-        // if( category_id === null && event_id === null ){
-        //     work_event_id = force_event_id;
-        // };
-
-        // setDragebleReleaseId( id )
-        // // setDragebleReleaseEventId( event_id );
-        // setDragebleReleaseEventId( work_event_id );
-
-        
-    }
-
-    const drag_end = () => {
-        // setDragebleReleaseId( null )
-        // setDragebleReleaseEventId( null )
-    }
-
     const create = ( arr ) => {
 
         let div = arr.map( ( item, index ) => {
@@ -94,20 +52,25 @@ const FRL_ActiveListComponent = ( props ) => {
                 fileName,
                 duration,
                 eventId,
+                count,
             } = item;
 
             return (
-                <div 
-                    className =     'FRL_ActiveList_item'
-                    key =           { index }
-                    draggable = { true }
-                    onDragStart = { ( e ) => { drag_start( e, fileName, duration, eventId ) } }
-                    onDragEnd = { drag_end }
-                >
-                    <span className = 'FRL_ActiveList_item_duration'>{ convert_sec_to_time( duration ) }</span>
-                    <span className = 'FRL_ActiveList_item_name'>{ fileName }</span>
-                    <span className = 'FRL_ActiveList_item_count'>{ 0 }</span>
-                </div>
+                <React.Fragment key = { index }>
+                    <FRL_DragAndDropEventStart
+                            fileName =  { fileName }
+                            duration =  { duration }
+                            eventId =   { eventId }
+                    >
+                        <FRL_OneActiveListItem
+                            fileName =  { fileName }
+                            duration =  { duration }
+                            count =     { count }
+                            eventId =   { eventId }
+                        />
+                    </FRL_DragAndDropEventStart>
+
+                </React.Fragment>
             );
 
         } );

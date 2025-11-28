@@ -20,6 +20,8 @@ import { SelectedEventWindow } from './components/SelectedEventWindow/SelectedEv
 
 import { DropZone } from './components/DropZone/DropZone.js';
 
+import { ScheduleDragAndDropEvent } from './components/ScheduleDragAndDropEvent/ScheduleDragAndDropEvent.js';
+
 
 
 const SchEventContainerComponent = ( props ) => {
@@ -54,23 +56,23 @@ const SchEventContainerComponent = ( props ) => {
     let [ eventType, setEventType ] = useState( '' );
     let [ isLighter, setIsLighter ] = useState( false );
 
-    let [ dropStartTime, setDropStartTime ] = useState( startTime );
+    // let [ dropStartTime, setDropStartTime ] = useState( startTime );
 
 
 
     
 
-    let [ selectedEventId, setSelectedEventId ] = useState( null );
+    // let [ selectedEventId, setSelectedEventId ] = useState( null );
     /*
         selectedEventId 
         Здесь null - это отслеживаемое состояние. Если не null значит компонент создаст новое событие в сетке
         по этому нужно обязателдьно после создания события записывать в setSelectedEventId null
     */
-    let [ durationLimit, setDurationLimit ] = useState( 0 );
+    // let [ durationLimit, setDurationLimit ] = useState( 0 );
 
-    let [ selectedEventWindow_isOpen, setSelectedEventWindow_isOpen ] = useState( 0 );
+    // let [ selectedEventWindow_isOpen, setSelectedEventWindow_isOpen ] = useState( 0 );
 
-    let [ releaseIdInWork, setReleaseIdInWork ] = useState( null );
+    // let [ releaseIdInWork, setReleaseIdInWork ] = useState( null );
 
 
 
@@ -92,237 +94,212 @@ const SchEventContainerComponent = ( props ) => {
     }, [ gridEventId ] );
 
 
-    useEffect( () => {
-        if( durationTime >= 0 ){
-            setIsError( false );
-            setDurationLimit( durationTime );
-        }else{
-            setIsError( true );
-            setDurationLimit( 0 );
-        };
-    }, [ durationTime ] );
+    // useEffect( () => {
+    //     if( durationTime >= 0 ){
+    //         setIsError( false );
+    //         setDurationLimit( durationTime );
+    //     }else{
+    //         setIsError( true );
+    //         setDurationLimit( 0 );
+    //     };
+    // }, [ durationTime ] );
 
-    useEffect( () => {
-        if( selectedEventId !== null ){
-            if( eventListById[ selectedEventId ] ){
-                let event = eventListById[ selectedEventId ];
-
-
-                let arr = [];
-
-                for( let i = 0; i < scheduleEventsList.length; i++ ){
-                    arr.push( structuredClone( scheduleEventsList[ i ] ) );
-                };
-
-                // console.dir( 'scheduleEventsList drop' );
-                // console.dir( arr ); 
+    // useEffect( () => {
+    //     if( selectedEventId !== null ){
+    //         if( eventListById[ selectedEventId ] ){
+    //             let event = eventListById[ selectedEventId ];
 
 
-                let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-                StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+    //             let arr = [];
 
-                // console.dir( '!!!!!!!!!!!!!!!!!!!!' );
-                // console.dir( 'event' );
-                // console.dir( event );
+    //             for( let i = 0; i < scheduleEventsList.length; i++ ){
+    //                 arr.push( structuredClone( scheduleEventsList[ i ] ) );
+    //             };
 
-
-
-
-                let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
-                    gridCurrentDay,
-                    isAKeyPoint: false,
-                    startTime: dropStartTime,
-                    eventId: selectedEventId,
-                    durationTime: event.durationTime,
-                });
-                StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, releaseIdInWork );
-                StoreScheduleResultEvents.SetListToStore( true);
-                setDurationLimit( null );
-
-                setSelectedEventWindow_isOpen( false );
-                setDragebleReleaseId( null );
-            };
-
-        };
-
-    }, [ selectedEventId ] );
-
-    const getTargetState = () => {
-
-        let result = get_target_state_for_element({
-            durationTime,
-            eventId,
-            eventType,
-            gridEventId,
-            isEmpty,
-            isCompletd,
-        });
-        return result;
-
-    }
-
-    const drag_over = ( e ) => {
-        e.preventDefault();
-        let isTargetEvent = getTargetState();
-        if( isTargetEvent ){
-            setIsLighter( true );
-        }else{
-            setIsLighter( false );
-        };
-   }
-
-   const drag_leave = ( e ) => {
-        setIsLighter( false );
-   }
-
-   const drop = ( e ) => {
-
-        setIsLighter( false );
-
-        let isTargetEvent = getTargetState();
-        if( isTargetEvent ){ 
-
-            if( isEmpty ){
-                setReleaseIdInWork( dragebleReleaseId );
-
-                let drop_start_time = startTime;
-
-                // console.log( 'drop_start_time 1', drop_start_time );
-
-                // if( e.target.dataset.dropStartTime ){
-                //     // drop_start_time = Number( e.target.dataset.dropStartTime );
-
-                //     // console.log( 'e.target.dataset.dropStartTime', e.target.dataset.dropStartTime );
-                // };
-
-                // console.log( 'drop_start_time 2', drop_start_time );
-
-                if( dragebleReleaseEventId === null ){
-                    setSelectedEventWindow_isOpen( true );
-                    setDropStartTime( drop_start_time );
-                    /*
-                        Новое событие в сетке создается из useEffect
-                    */
-                }else{
+    //             // console.dir( 'scheduleEventsList drop' );
+    //             // console.dir( arr ); 
 
 
-                    let event = eventListById[ dragebleReleaseEventId ];
+    //             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+    //             StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
 
-                    // console.dir( 'drop event' );
-                    // console.dir( event );
-
-                    // console.dir( 'eventListById' );
-                    // console.dir( eventListById );
-
-                    // console.dir( 'dragebleReleaseEventId' );
-                    // console.dir( dragebleReleaseEventId );
-
-                    // console.dir( 'eventListById[ dragebleReleaseEventId ]' );
-                    // console.dir( eventListById[ dragebleReleaseEventId ] );
-
-
-                    // let arr = [];
-
-                    // for( let i = 0; i < scheduleEventsList.length; i++ ){
-                    //     arr.push( structuredClone( scheduleEventsList[ i ] ) );
-                    // };
-
-                    // console.dir( 'scheduleEventsList' );
-                    // console.dir( arr );
+    //             // console.dir( '!!!!!!!!!!!!!!!!!!!!' );
+    //             // console.dir( 'event' );
+    //             // console.dir( event );
 
 
 
 
+    //             let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
+    //                 gridCurrentDay,
+    //                 isAKeyPoint: false,
+    //                 startTime: dropStartTime,
+    //                 eventId: selectedEventId,
+    //                 durationTime: event.durationTime,
+    //             });
+    //             StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, releaseIdInWork );
+    //             StoreScheduleResultEvents.SetListToStore( true);
+    //             setDurationLimit( null );
+
+    //             setSelectedEventWindow_isOpen( false );
+    //             setDragebleReleaseId( null );
+    //         };
+
+    //     };
+
+    // }, [ selectedEventId ] );
+
+    // const getTargetState = () => {
+
+    //     let result = get_target_state_for_element({
+    //         durationTime,
+    //         eventId,
+    //         eventType,
+    //         gridEventId,
+    //         isEmpty,
+    //         isCompletd,
+    //     });
+    //     return result;
+
+    // }
+
+//     const drag_over = ( e ) => {
+//         e.preventDefault();
+//         let isTargetEvent = getTargetState();
+//         if( isTargetEvent ){
+//             setIsLighter( true );
+//         }else{
+//             setIsLighter( false );
+//         };
+//    }
+
+//    const drag_leave = ( e ) => {
+//         setIsLighter( false );
+//    }
+
+//    const drop = ( e ) => {
+
+//         setIsLighter( false );
+
+//         let isTargetEvent = getTargetState();
+//         if( isTargetEvent ){ 
+
+//             if( isEmpty ){
+//                 setReleaseIdInWork( dragebleReleaseId );
+
+//                 let drop_start_time = startTime;
+
+//                 if( dragebleReleaseEventId === null ){
+//                     setSelectedEventWindow_isOpen( true );
+//                     setDropStartTime( drop_start_time );
+//                     /*
+//                         Новое событие в сетке создается из useEffect
+//                     */
+//                 }else{
+
+//                     let event = eventListById[ dragebleReleaseEventId ];
+
+//                     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+
+//                     StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+//                     let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
+//                         gridCurrentDay,
+//                         isAKeyPoint: false,
+//                         startTime: drop_start_time,
+//                         eventId: dragebleReleaseEventId,
+//                         durationTime: event.durationTime,
+//                     });
+//                     StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
+//                     StoreScheduleResultEvents.SetListToStore( true );
 
 
-                    let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+//                     // console.dir( StoreScheduleResultEvents );
 
-                    
-
-                    StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-                    let ScheduleEvent = StoreScheduleResultEvents.AddEvent({
-                        gridCurrentDay,
-                        isAKeyPoint: false,
-                        startTime: drop_start_time,
-                        eventId: dragebleReleaseEventId,
-                        durationTime: event.durationTime,
-                    });
-                    StoreScheduleResultEvents.AddRelease( ScheduleEvent.id, dragebleReleaseId );
-                    StoreScheduleResultEvents.SetListToStore( true );
-
-
-                    // console.dir( StoreScheduleResultEvents );
-
-                    setDragebleReleaseId( null );
-                };
+//                     setDragebleReleaseId( null );
+//                 };
 
                 
 
-            }else{
-                let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-                StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-                StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
-                StoreScheduleResultEvents.SetListToStore( true );
+//             }else{
+//                 let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+//                 StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+//                 StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
+//                 StoreScheduleResultEvents.SetListToStore( true );
 
-                setDragebleReleaseId( null );
-            };
-        };
+//                 setDragebleReleaseId( null );
+//             };
+//         };
 
-   }
+//    }
 
     return (
 
-       <div 
-            className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }
-            onDragOver =    { drag_over }
-            onDragLeave =   { drag_leave }
-            onDrop =        { drop }
+        <ScheduleDragAndDropEvent
+            setIsLighter =  { setIsLighter }
+            startTime =     { startTime }
+            durationTime =  { durationTime }
+            eventId =       { eventId }
+            eventType =     { eventType }
+            gridEventId =   { gridEventId }
+            isEmpty =       { isEmpty }
+            isCompletd =    { isCompletd }
         >
-            <SelectedEventWindow
-                selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }
-                setSelectedEventWindow_isOpen =     { setSelectedEventWindow_isOpen }
-                selectedEventId =                   { selectedEventId }
-                setSelectedEventId =                { setSelectedEventId }
-                durationLimit =                     { durationLimit }
-                alwaysOpen =                        { true }
-            />
+            <div 
+                className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }
+                // onDragOver =    { drag_over }
+                // onDragLeave =   { drag_leave }
+                // onDrop =        { drop }
+            >
+                {/* <SelectedEventWindow
+                    selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }
+                    setSelectedEventWindow_isOpen =     { setSelectedEventWindow_isOpen }
+                    selectedEventId =                   { selectedEventId }
+                    setSelectedEventId =                { setSelectedEventId }
+                    durationLimit =                     { durationLimit }
+                    alwaysOpen =                        { true }
+                /> */}
 
 
-            <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
+                <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
 
-                <div className = 'schId'>
-                    <span>{ gridEventId }</span>
+                    <div className = 'schId'>
+                        <span>{ gridEventId }</span>
+                    </div>
+                    { isCompletd? (
+                        <CompletedTimeSector
+                            startTime =     { startTime }
+                            isKeyPoint =    { isKeyPoint }
+                            gridEventId =   { gridEventId }
+                            durationTime =  { durationTime }
+                        />
+                    ): (
+
+                        <EmptyTimeSector
+                            startTime =     { startTime }
+                            isError =       { isError }
+                            durationTime =  { durationTime }
+                        />
+                    ) }
+                    
+                    <div className = 'schEventItemBody'>
+                        { children }
+                    </div>
                 </div>
-                { isCompletd? (
-                    <CompletedTimeSector
-                        startTime =     { startTime }
-                        isKeyPoint =    { isKeyPoint }
-                        gridEventId =   { gridEventId }
-                        durationTime =  { durationTime }
-                    />
-                ): (
 
-                    <EmptyTimeSector
-                        startTime =     { startTime }
-                        isError =       { isError }
-                        durationTime =  { durationTime }
-                    />
-                ) }
+                <DropZone
+                    dragebleReleaseId = { dragebleReleaseId }
+                    isEmpty =           { isEmpty }
+                    startTime =         { startTime }
+                    durationTime =      { durationTime }
+
+                />
                 
-                <div className = 'schEventItemBody'>
-                    { children }
-                </div>
             </div>
 
-            <DropZone
-                dragebleReleaseId = { dragebleReleaseId }
-                isEmpty =           { isEmpty }
-                startTime =         { startTime }
-                durationTime =      { durationTime }
 
-            />
-            
-        </div>
+        </ScheduleDragAndDropEvent>
+
+
     )
 
 };

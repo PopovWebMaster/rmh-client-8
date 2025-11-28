@@ -17,6 +17,7 @@ const SelectedEventComponent = ( props ) => {
         eventId,
         setEventId,
         durationLimit,
+        eventClickHandler = () => {},
 
         eventList,
         eventListById,
@@ -32,6 +33,7 @@ const SelectedEventComponent = ( props ) => {
         if( alwaysOpen === false ){
             setListIsOpen( false );
         };
+        eventClickHandler( id );
         
     };
 

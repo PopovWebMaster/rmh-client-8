@@ -15,6 +15,11 @@ import { ScrollContainer } from './../../../../../../../../components/ScrollCont
 import { get_free_list } from './vendors/get_free_list.js';
 import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
+import { access_right } from './../../../../../../../../helpers/access_right.js';
+import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
+
+import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
+
 
 const BufferListComponent = ( props ) => {
 
@@ -39,6 +44,7 @@ const BufferListComponent = ( props ) => {
     }, [ releaseList ] );
 
     const drag_start = ( e, item ) => {
+        /*
         let {
             event_id, 
             id,
@@ -52,15 +58,44 @@ const BufferListComponent = ( props ) => {
         };
 
         setDragebleReleaseId( id )
-        // setDragebleReleaseEventId( event_id );
         setDragebleReleaseEventId( work_event_id );
+        */
+
+        access_right( 'schedule_edit', () => {
+
+            let {
+                event_id, 
+                id,
+                force_event_id,
+                category_id,
+                releaseDuration,
+            } = item;
+
+            let work_event_id = event_id;
+            if( category_id === null && event_id === null ){
+                work_event_id = force_event_id;
+            };
+
+                    
+            let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+
+            ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_APPLICATION );
+            ScheduleReleaseDragEvent.DragStart.SetEventId( work_event_id );
+            ScheduleReleaseDragEvent.DragStart.SetReleaseId( id );
+            ScheduleReleaseDragEvent.DragStart.SetDuration( releaseDuration );
+            ScheduleReleaseDragEvent.DragStart.SetToStore();
+
+        } );
 
         
     }
 
     const drag_end = () => {
-        setDragebleReleaseId( null )
-        setDragebleReleaseEventId( null )
+        // setDragebleReleaseId( null )
+        // setDragebleReleaseEventId( null )
+        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        ScheduleReleaseDragEvent.ClearData();
+
     }
 
 
