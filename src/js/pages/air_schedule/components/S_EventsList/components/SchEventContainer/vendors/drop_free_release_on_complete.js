@@ -3,14 +3,10 @@ import store from './../../../../../../../redux/store.js';
 
 import { StoreScheduleResultEventsClass } from './../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
-import { get_event_by_id } from './../../../../../../../helpers/get_event_by_id.js';
-
-
 export const drop_free_release_on_complete = ( gridEventId ) => {
 
-    let { scheduleResultDragEvent, layout, scheduleResult } = store.getState();
+    let { scheduleResultDragEvent, scheduleResult } = store.getState();
     let { 
-        // dragStartFrom,
         dragStartDuration,
         dragStartStartTime,
         dragStartEventId,
@@ -18,7 +14,6 @@ export const drop_free_release_on_complete = ( gridEventId ) => {
         dragStartFileName,
     } = scheduleResultDragEvent;
 
-    let { gridCurrentDay } = layout;
     let { scheduleEventsList } = scheduleResult;
 
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
@@ -35,9 +30,5 @@ export const drop_free_release_on_complete = ( gridEventId ) => {
     });
 
     StoreScheduleResultEvents.SetListToStore( true );
-
-
-
-
 
 };

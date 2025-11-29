@@ -1,31 +1,15 @@
-// ScheduleDragAndDropEvent
-
-
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import './ScheduleDragAndDropEvent.scss';
 
-import { selectorData as scheduleResultSlise, setDragebleReleaseId } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as scheduleResultDragEventSlise } from './../../../../../../../../redux/scheduleResultDragEventSlise.js';
 
-import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
-
-// import { EVENT_TYPE } from './../../../../../../config/layout.js';
-
-// import { StoreScheduleResultEventsClass } from './../../../../../../classes/StoreScheduleResultEventsClass.js';
-
-// import { get_target_state_for_element } from './vendors/get_target_state_for_element.js';
-
-// import { CompletedTimeSector } from './components/CompletedTimeSector/CompletedTimeSector.js';
-// import { EmptyTimeSector } from './components/EmptyTimeSector/EmptyTimeSector.js';
-// import { SelectedEventWindow } from './components/SelectedEventWindow/SelectedEventWindow.js';
-
 // import { DropZone } from './components/DropZone/DropZone.js';
+import { DropZone } from './../DropZone/DropZone.js';
 
-import { get_target_state_for_element } from './../../vendors/get_target_state_for_element.js';
 
 import { target_event_is_aparticipant } from './../../vendors/target_event_is_aparticipant.js';
 
@@ -39,13 +23,11 @@ import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
 import { drop_free_release_on_empty } from './../../vendors/drop_free_release_on_empty.js';
 import { drop_free_release_on_complete } from './../../vendors/drop_free_release_on_complete.js';
 import { drop_schedule_event_on_empty } from './../../vendors/drop_schedule_event_on_empty.js';
-import { drop_schedule_event_on_complete } from './../../vendors/drop_schedule_event_on_complete.js';
+// import { drop_schedule_event_on_complete } from './../../vendors/drop_schedule_event_on_complete.js';
 import { drop_app_release_on_empty } from './../../vendors/drop_app_release_on_empty.js';
 import { drop_app_release_on_complete } from './../../vendors/drop_app_release_on_complete.js';
 
 import { SelectedEventWindow } from './../../components/SelectedEventWindow/SelectedEventWindow.js';
-
-
 
 const ScheduleDragAndDropEventComponent = ( props ) => {
 
@@ -58,17 +40,13 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         isEmpty,
         isCompletd,
 
-
         setIsLighter,
 
         dragStartEventId,
         dragStartDuration,
 
-
         children,
-
         dragStartFrom,
-
 
     } = props;
 
@@ -113,11 +91,9 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     }
     
     const drag_end = () => {
-        // setDragebleReleaseId( null )
-        // setDragebleReleaseEventId( null )
+        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        ScheduleReleaseDragEvent.ClearData();
     }
-
-
 
 
     const drag_over = ( e ) => {
@@ -138,9 +114,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
     const drop = ( e ) => {
         setIsLighter( false );
-
         let isTargetEvent = getTargetState();
-
         if( isTargetEvent ){
             if( dragStartFrom === START_FROM.RELEASE_FREE ){
                 if( isEmpty ){
@@ -149,38 +123,25 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                     drop_free_release_on_complete( gridEventId );
                 };
             }else if( dragStartFrom === START_FROM.RELEASE_APPLICATION ){
-
                 if( isEmpty ){
                     if( dragStartEventId === null ){
                         setSelectedEventWindow_isOpen( true );
                         setDurationLimit( dragStartDuration );
-
                     }else{
                         drop_app_release_on_empty( startTime );
                     };
-
                 }else{
                     drop_app_release_on_complete( gridEventId );
                 };
-
-
             }else if( dragStartFrom === START_FROM.SCHEDULE_EVENT ){
-
                 if( isEmpty ){
                     drop_schedule_event_on_empty( startTime );
                 }else{
                     // drop_schedule_event_on_complete( gridEventId );
                 };
-                
             };
         };
-
-
     }
-
-
-    
-   
 
     return (
 
@@ -206,28 +167,28 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             />
 
             { children }
+
+            <DropZone 
+                isEmpty = { isEmpty }
+            />
+
+
         </div>
     )
 
 };
 
-
 export function ScheduleDragAndDropEvent( props ){
 
     const scheduleResultDragEvent = useSelector( scheduleResultDragEventSlise );
-    // const layout = useSelector( layoutSlice );
-
     // const dispatch = useDispatch();
 
     return (
         <ScheduleDragAndDropEventComponent
             { ...props }
-            dragStartFrom = { scheduleResultDragEvent.dragStartFrom }
-            dragStartEventId = { scheduleResultDragEvent.dragStartEventId }
-            dragStartDuration = { scheduleResultDragEvent.dragStartDuration }
-
-
-            // scheduleEventsList = { scheduleResult.scheduleEventsList }
+            dragStartFrom =         { scheduleResultDragEvent.dragStartFrom }
+            dragStartEventId =      { scheduleResultDragEvent.dragStartEventId }
+            dragStartDuration =     { scheduleResultDragEvent.dragStartDuration }
 
             // setDragebleReleaseId = { ( val ) => { dispatch( setDragebleReleaseId( val ) ) } }
 

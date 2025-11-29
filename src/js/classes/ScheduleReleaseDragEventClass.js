@@ -22,7 +22,7 @@ export class ScheduleReleaseDragEventClass {
     }
 
     ClearData(){
-
+        this.DragStart.SetStartFrom();
     }
 
     

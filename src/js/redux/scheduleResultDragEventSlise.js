@@ -9,19 +9,13 @@ export const scheduleResultDragEventSlise = createSlice({
     initialState: {
 
         dragStartFrom: '',
-
-
         dragStartFileName : '',
         dragStartDuration : 0,
         dragStartEventId: null,
         dragStartCategoryId: null,
-
-
         dragStartStartTime: 0,
         dragStartGridEventId: null,
         dragStartReleaseId: null,
-
-
 
     },
 

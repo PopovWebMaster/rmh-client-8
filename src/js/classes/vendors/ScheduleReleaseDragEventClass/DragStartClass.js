@@ -19,17 +19,15 @@ import { get_event_by_id } from './../../../helpers/get_event_by_id.js';
 export class DragStartClass {
     constructor(){
 
-        this.startFrom = null;
+        this.startFrom = '';
 
         this.fileName = '';
         this.duration = 0;
         this.eventId = null;
-        this.startTime = null;
+        this.startTime = 0;
         this.gridEventId = null;
         this.categoryId = null;
         this.releaseId = null;
-
-
 
         this.SetFileName = this.SetFileName.bind(this);
         this.SetDuration = this.SetDuration.bind(this);
@@ -92,8 +90,6 @@ export class DragStartClass {
         store.dispatch( setDragStartEventId( this.eventId ) );
         store.dispatch( setDragStartCategoryId( this.categoryId ) );
 
-
-
         if( this.startFrom === START_FROM.RELEASE_FREE ){
             store.dispatch( setDragStartFileName( this.fileName ) );
             
@@ -103,7 +99,12 @@ export class DragStartClass {
         }else if( this.startFrom === START_FROM.SCHEDULE_EVENT ){
             store.dispatch( setDragStartStartTime( this.startTime ) );
             store.dispatch( setDragStartGridEventId( this.gridEventId ) );
-
+        }else{
+            /*
+                Это мест используется для того, чтоб записать в стор всё что выше в if
+                чтоб можно было создать эекземпляр класса, просто вызвать .SetToStore()
+                и в store всё очистилось
+            */
 
         };
     }
