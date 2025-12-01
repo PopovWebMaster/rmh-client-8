@@ -41,22 +41,14 @@ const FRL_DragAndDropEventStartComponent = ( props ) => {
             ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
             ScheduleReleaseDragEvent.DragStart.SetToStore();
 
-
-            console.dir( ScheduleReleaseDragEvent );
-
-
         } );
     }
 
     const drag_end = () => {
-        // setDragebleReleaseId( null )
-        // setDragebleReleaseEventId( null )
         let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
         ScheduleReleaseDragEvent.ClearData();
+
     }
-
-
-
 
     return (
         <div 

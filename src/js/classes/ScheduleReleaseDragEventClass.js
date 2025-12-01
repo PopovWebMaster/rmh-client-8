@@ -6,7 +6,7 @@ import { DragStartClass } from './vendors/ScheduleReleaseDragEventClass/DragStar
 export class ScheduleReleaseDragEventClass {
     constructor(){
 
-        this.startFrom = null;
+        this.startFrom = '';
 
         this.DragStart = new DragStartClass();
 
@@ -22,7 +22,7 @@ export class ScheduleReleaseDragEventClass {
     }
 
     ClearData(){
-        this.DragStart.SetStartFrom();
+        this.DragStart.SetToStore();
     }
 
     

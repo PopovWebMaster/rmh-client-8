@@ -16,6 +16,9 @@ export const scheduleResultDragEventSlise = createSlice({
         dragStartStartTime: 0,
         dragStartGridEventId: null,
         dragStartReleaseId: null,
+        dragStartLinkedFileDuration: 0,
+
+
 
     },
 
@@ -54,6 +57,9 @@ export const scheduleResultDragEventSlise = createSlice({
             state.dragStartReleaseId =  action.payload;
         },
 
+        setDragStartLinkedFileDuration: ( state, action ) => {
+            state.dragStartLinkedFileDuration =  action.payload;
+        },
 
         
 
@@ -72,6 +78,7 @@ export const {
     setDragStartGridEventId,
     setDragStartCategoryId,
     setDragStartReleaseId,
+    setDragStartLinkedFileDuration,
 
 
 } = scheduleResultDragEventSlise.actions;
@@ -90,6 +97,7 @@ export const selectorData = ( state ) => {
         dragStartStartTime: state.scheduleResultDragEvent.dragStartStartTime,
         dragStartGridEventId: state.scheduleResultDragEvent.dragStartGridEventId,
         dragStartReleaseId: state.scheduleResultDragEvent.dragStartReleaseId,
+        dragStartLinkedFileDuration: state.scheduleResultDragEvent.dragStartLinkedFileDuration,
 
 
 

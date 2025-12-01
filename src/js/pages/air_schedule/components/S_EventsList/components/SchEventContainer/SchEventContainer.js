@@ -34,6 +34,8 @@ const SchEventContainerComponent = ( props ) => {
     let [ isError, setIsError ] = useState( false );
     let [ eventType, setEventType ] = useState( '' );
     let [ isLighter, setIsLighter ] = useState( false );
+    let [ isDragOver, setIsDragOver ] = useState( false );
+
 
     useEffect( () => {
         if( eventListById[ eventId ] ){
@@ -48,6 +50,15 @@ const SchEventContainerComponent = ( props ) => {
 
     }, [ gridEventId ] );
 
+    const dragOverHandler = () => {
+        setIsDragOver( true )
+    }
+
+    const dragLeaveHandler = () => {
+        setIsDragOver( false )
+    }
+    
+
     return (
 
         <ScheduleDragAndDropEvent
@@ -59,6 +70,8 @@ const SchEventContainerComponent = ( props ) => {
             gridEventId =   { gridEventId }
             isEmpty =       { isEmpty }
             isCompletd =    { isCompletd }
+            dragOverHandler = { dragOverHandler }
+            dragLeaveHandler = { dragLeaveHandler }
         >
             <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }>
 
@@ -74,18 +87,21 @@ const SchEventContainerComponent = ( props ) => {
                             gridEventId =   { gridEventId }
                             durationTime =  { durationTime }
                         />
-                    ): (
+                    ): (<>
+                        { isDragOver? '': (
+                            <EmptyTimeSector
+                                startTime =     { startTime }
+                                isError =       { isError }
+                                durationTime =  { durationTime }
+                            />
+                        ) }
+                    </>) }
 
-                        <EmptyTimeSector
-                            startTime =     { startTime }
-                            isError =       { isError }
-                            durationTime =  { durationTime }
-                        />
-                    ) }
                     
                     <div className = 'schEventItemBody'>
                         { children }
                     </div>
+                  
                 </div>
 
             </div>

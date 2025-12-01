@@ -24,9 +24,10 @@ const EmptyTimeSectorComponent = ( props ) => {
 
     return (
         <div className = 'schEventItemRemains'>
-            <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
-            <span className = 'text'>{ isError? text_error: text_seccess }</span>
-            <span className = 'time'>{ get_dutation_str_from_sec( durationTime ) }</span>
+        <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
+        <span className = 'text'>{ isError? text_error: text_seccess }</span>
+        <span className = 'time'>{ get_dutation_str_from_sec( durationTime ) }</span>
+            
         </div>
     )
 

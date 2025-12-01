@@ -45,6 +45,10 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         dragStartEventId,
         dragStartDuration,
 
+        dragOverHandler = () => {},
+        dragLeaveHandler = () => {},
+
+
         children,
         dragStartFrom,
 
@@ -53,6 +57,26 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     let [ selectedEventWindow_isOpen, setSelectedEventWindow_isOpen ] = useState( false );
     let [ selectedEventId, setSelectedEventId ] = useState( null );
     let [ durationLimit, setDurationLimit ] = useState( 0 );
+
+    let [ dragStartTime, setDragStartTime ] = useState( 0 );
+    let [ startTimePlus, setStartTimePlus ] = useState( 0 );
+
+
+
+    let [ dropZoneIsActive, setDropZoneIsActive ] = useState( false );
+
+    useEffect( () => {
+        if( dragStartFrom === '' ){
+            setDropZoneIsActive( false );
+        }else{
+            setDropZoneIsActive( true );
+        }
+
+    }, [ dragStartFrom ] );
+
+
+
+
 
     const getTargetState = () => {
         let result = target_event_is_aparticipant({
@@ -93,6 +117,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     const drag_end = () => {
         let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
         ScheduleReleaseDragEvent.ClearData();
+
+        
     }
 
 
@@ -106,10 +132,18 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         }else{
             setIsLighter( false );
         };
+
+        dragOverHandler();
+
+        setDropZoneIsActive( true );
+        
     }
 
     const drag_leave = ( e ) => {
         setIsLighter( false );
+        dragLeaveHandler();
+        // setDragStartTime( 0 );
+        setDropZoneIsActive( false );
     }
 
     const drop = ( e ) => {
@@ -118,7 +152,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         if( isTargetEvent ){
             if( dragStartFrom === START_FROM.RELEASE_FREE ){
                 if( isEmpty ){
-                    drop_free_release_on_empty( startTime );
+                    drop_free_release_on_empty( startTime + startTimePlus );
                 }else{
                     drop_free_release_on_complete( gridEventId );
                 };
@@ -128,26 +162,32 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                         setSelectedEventWindow_isOpen( true );
                         setDurationLimit( dragStartDuration );
                     }else{
-                        drop_app_release_on_empty( startTime );
+                        drop_app_release_on_empty( startTime + startTimePlus );
                     };
                 }else{
                     drop_app_release_on_complete( gridEventId );
                 };
             }else if( dragStartFrom === START_FROM.SCHEDULE_EVENT ){
                 if( isEmpty ){
-                    drop_schedule_event_on_empty( startTime );
+                    drop_schedule_event_on_empty( startTime + startTimePlus );
                 }else{
                     // drop_schedule_event_on_complete( gridEventId );
                 };
             };
         };
+        setDropZoneIsActive( false );
+        setStartTimePlus( 0 );
+        dragLeaveHandler();
+
+         let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        ScheduleReleaseDragEvent.ClearData();
     }
 
     return (
 
        <div 
             className = 'ScheduleDragAndDropEvent'
-            draggable =     { true }
+            draggable =     { isEmpty? false: true }
             onDragStart =   { drag_start }
             onDragEnd =     { drag_end }
 
@@ -168,9 +208,23 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
             { children }
 
-            <DropZone 
-                isEmpty = { isEmpty }
-            />
+            { dropZoneIsActive? (
+                <DropZone 
+                    isEmpty =           { isEmpty }
+                    durationTime =      { durationTime }
+                    startTime =         { startTime }
+                    startTimePlus =     { startTimePlus }
+                    setStartTimePlus =  { setStartTimePlus }
+
+
+                    dropZoneIsActive = { dropZoneIsActive }
+                />
+
+            ): '' }
+
+
+
+
 
 
         </div>

@@ -11,6 +11,7 @@ import {
     setDragStartGridEventId,
     setDragStartCategoryId,
     setDragStartReleaseId,
+    setDragStartLinkedFileDuration,
 
 } from './../../../redux/scheduleResultDragEventSlise.js';
 
@@ -23,6 +24,8 @@ export class DragStartClass {
 
         this.fileName = '';
         this.duration = 0;
+        this.linked_files_duration = 0;
+
         this.eventId = null;
         this.startTime = 0;
         this.gridEventId = null;
@@ -37,9 +40,10 @@ export class DragStartClass {
         this.SetStartTime = this.SetStartTime.bind(this);
         this.SetGridEventId = this.SetGridEventId.bind(this);
         this.SetReleaseId = this.SetReleaseId.bind(this);
+        this.SetLinkedFilesDuration = this.SetLinkedFilesDuration.bind(this);
+
 
         
-
 
 
     }
@@ -61,11 +65,31 @@ export class DragStartClass {
 
         if( eventId !== null ){
             let event = get_event_by_id( eventId );
+
             if( event ){
-                this.categoryId = event.category_id;
+                let { category_id, linked_file } = event;
+                this.categoryId = category_id;
+
+                if( linked_file !== null ){
+                    this.SetLinkedFilesDuration( linked_file );
+                };
+
+
             };
         }
         
+    }
+
+    SetLinkedFilesDuration( linked_file ){
+        let all_dutation = 0;
+
+        for( let i = 0; i < linked_file.length; i++ ){
+            let { duration } = linked_file[ i ];
+            all_dutation = all_dutation + duration;
+        };
+
+        this.linked_files_duration = all_dutation;
+
     }
 
     SetStartTime( startTime ){
@@ -87,8 +111,11 @@ export class DragStartClass {
 
         store.dispatch( setDragStartFrom( this.startFrom ) );
         store.dispatch( setDragStartDuration( this.duration ) );
+
         store.dispatch( setDragStartEventId( this.eventId ) );
         store.dispatch( setDragStartCategoryId( this.categoryId ) );
+        store.dispatch( setDragStartLinkedFileDuration( this.linked_files_duration ) );
+
 
         if( this.startFrom === START_FROM.RELEASE_FREE ){
             store.dispatch( setDragStartFileName( this.fileName ) );
@@ -107,5 +134,6 @@ export class DragStartClass {
             */
 
         };
+
     }
 }

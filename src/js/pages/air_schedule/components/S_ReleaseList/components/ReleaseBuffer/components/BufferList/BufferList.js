@@ -36,7 +36,6 @@ const BufferListComponent = ( props ) => {
     }, [ releaseList ] );
 
     const drag_start = ( e, item ) => {
-
         access_right( 'schedule_edit', () => {
 
             let {

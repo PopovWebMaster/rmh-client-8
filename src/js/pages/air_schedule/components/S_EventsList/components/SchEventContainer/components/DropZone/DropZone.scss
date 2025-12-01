@@ -1,41 +1,124 @@
 .SEC_DropZone{
     font-size: 1em;
     position: absolute;
-    top: 0;
+    top: 0.1em;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc( 100% - 0.2em );
+
+    >.SEC_DropZone_event{
+        font-size: 1em;
+        background-color: #f5f5f585;
+        border-radius: .1em;
+        padding: .3em .4em;
+        display: none;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        // opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc( 100% - 0.8em );
+        
+        
+
+        .DropZone_time{
+            font-size: .7em;
+            color: #343434;
+            background-color: #fff;
+            padding: .2em .5em .1em;
+            margin: 0 1.2em 0 5.3em;
+            width: 4.6em;
+            border-radius: .1em;
+            flex-grow: 0;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            
+        }
+
+        .DropZone_dur{
+            font-size: .7em;
+            color: #343434;
+            background-color: #fff;
+            padding: .2em .5em .1em;
+            margin: 0 1em 0 0;
+            width: 4.6em;
+            border-radius: .1em;
+            text-align: center;
+            flex-grow: 0;
+        }
+        .DropZone_event{
+            font-size: .8em;
+            margin-right: 1em;
+            flex-grow: 0;
+            width: 15em;
+            position: relative;
+            margin-left: 5.4em;
+            input{
+                font-size: .85em;
+                padding: .3em .8em;
+                width: calc(100% - 2em);
+                text-align: left;
+                line-height: 1em;
+                border: 1px solid rgba(52, 52, 52, 0);
+                outline: none;
+                // background-color: rgb(160, 171, 3);
+                // color: rgb(255, 255, 255);
+            }
+
+        }
+
+    }
+
+    >.SEC_DropZone_event.show{
+        // opacity: 1;
+        display: flex;
+    }
+
+    >canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // background-color: rgba(255, 0, 0, 0.486);
+    }
+
 
     // background-color: #d300a598;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: flex-start;
 
-    >div{
-        flex-grow: 1;
-        max-width: 100%;
-        max-height: 100%;
+    // >div{
+    //     flex-grow: 1;
+    //     max-width: 100%;
+    //     max-height: 100%;
 
-    }
-    .SEC_DropZone_0{
-        background-color: rgba(48, 184, 218, 0.856);
-    }
-    .SEC_DropZone_1{
-        background-color: rgba(124, 218, 48, 0.856);
-    }
-    .SEC_DropZone_2{
-        background-color: rgba(150, 199, 104, 0.856);
-    }
-    .SEC_DropZone_3{
-        background-color: rgba(218, 48, 190, 0.856);
-    }
-    .SEC_DropZone_4{
-        background-color: rgba(218, 96, 48, 0.856);
-    }
+    // }
+    // .SEC_DropZone_0{
+    //     background-color: rgba(48, 184, 218, 0.856);
+    // }
+    // .SEC_DropZone_1{
+    //     background-color: rgba(124, 218, 48, 0.856);
+    // }
+    // .SEC_DropZone_2{
+    //     background-color: rgba(150, 199, 104, 0.856);
+    // }
+    // .SEC_DropZone_3{
+    //     background-color: rgba(218, 48, 190, 0.856);
+    // }
+    // .SEC_DropZone_4{
+    //     background-color: rgba(218, 96, 48, 0.856);
+    // }
     
 }
 
-.SEC_DropZone.displayNone{
-    display: none;
-}
+
+
+// .SEC_DropZone.displayNone{
+//     display: none;
+// }
