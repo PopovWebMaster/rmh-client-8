@@ -2,11 +2,11 @@
 
 export const adjust_startTime_in_day_list = ( list ) => {
 
-    let segments = [];
+    let segments = [ [] ];
 
     for( let i = 0; i < list.length; i++ ){
         if( i === 0 ){
-            segments.push( [] );
+            // segments.push( [] );
             segments[ segments.length - 1 ].push( list[ 0 ] );
         }else{
             if( list[ i ].isKeyPoint === true ){

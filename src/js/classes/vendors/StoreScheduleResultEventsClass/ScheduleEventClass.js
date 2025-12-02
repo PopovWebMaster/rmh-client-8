@@ -6,6 +6,7 @@ import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../../../config/layout.js'
 
 import { convert_time_str_to_sec } from './../../../helpers/convert_time_str_to_sec.js';
 import { get_date_now_YYYY_MM_DD } from './../../../helpers/get_date_now_YYYY_MM_DD.js';
+import { get_dayNum_from_store } from './get_dayNum_from_store.js';
 
 export class ScheduleEventClass{
     constructor(){
@@ -47,18 +48,68 @@ export class ScheduleEventClass{
 
 
 
-        
-
-
-
-
-        
+        this.GetDayNum = this.GetDayNum.bind(this);
+        this.GetDutationTime = this.GetDutationTime.bind(this);
 
 
 
 
 
-        
+    }
+
+    GetDayNum( dayNum = null ){
+        let result = dayNum;
+        if( dayNum === null ){
+            result = get_dayNum_from_store();
+        };
+        return result;
+    }
+    GetDutationTime( durationTime ){
+        /*
+            Это костыль. Почему-то иногда в durationTime записывается строка вокмата HH:MM:SS
+        */
+        return Number( durationTime )? durationTime: typeof durationTime === 'string'? convert_time_str_to_sec( durationTime ): 0;
+    }
+
+    SetData( params ){
+        let {
+            durationTime,   // обязательно !!!
+            eventId,        // обязательно !!!
+            id,             // обязательно !!!
+            startTime,      // обязательно !!!
+            cutPart = null,
+            dayNum = null,
+            firstSegmentId = null,
+            gridEventId = null,
+            isKeyPoint = false,
+            is_premiere = false,
+            notes = '',
+            finalNotes = '',
+            pushIt = null,
+            releases = [],
+
+        } = params;
+
+        this.cutPart =          cutPart;
+        this.dayNum =           this.GetDayNum( dayNum );
+        this.durationTime =     this.GetDutationTime( durationTime );
+        this.eventId =          eventId;
+        this.firstSegmentId =   firstSegmentId;
+        this.id =               id;
+        this.gridEventId =      gridEventId === null? id: gridEventId;  
+        this.isKeyPoint =       isKeyPoint;
+        this.is_premiere =      is_premiere;
+        this.notes =            notes;
+        this.finalNotes =       finalNotes;
+        this.pushIt =           pushIt;
+        this.startTime =        startTime;
+        this.releases =         null;
+
+        for( let i = 0; i < releases.length; i++ ){
+            let data = { ...releases[ i ] };
+            this.AddReleaseByData( data );
+        };
+
 
 
     }
@@ -150,6 +201,12 @@ export class ScheduleEventClass{
             releases,
             finalNotes,
         } = data;
+
+
+
+
+
+
 
         if( withReleses ){
             for( let i = 0; i < releases.length; i++ ){
@@ -317,23 +374,25 @@ export class ScheduleEventClass{
     UpdateDurationTime(){
         let { type } = get_event_by_id( this.eventId );  
 
-        if( type ){
-            let durationTime = 0;
+        // if( type ){
+            // let durationTime = 0;
             let allReleaseDuration = null;
 
             if( this.releaseList.length > 0 ){
                 if( type === EVENT_TYPE.BLOCK ){
                     for( let i = 0; i < this.releaseList.length; i++ ){
-                        // durationTime = durationTime + this.releaseList[ i ].GetDurationTime();
                         allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
                     };
                 }else{
 
-                    // if( this.firstSegmentId === null ){
+                    if( this.firstSegmentId === null ){
                         allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
-                    // }else{
-                    //     allReleaseDuration = this.durationTime;
-                    // };
+                    }else{
+                        /*
+                            никогда не выполнится, так как нельзя резать события с релизами больше одного
+                        */
+                        allReleaseDuration = this.durationTime;
+                    };
                 }
 
             }else{
@@ -342,7 +401,7 @@ export class ScheduleEventClass{
                     allReleaseDuration = MIN_EVENT_DURATION_SEC;
 
                 }else{
-
+                    allReleaseDuration = this.durationTime;
                     // if( this.gridEventId !== null ){
                     //     let event = get_grid_event_by_id( this.gridEventId );
 
@@ -360,10 +419,10 @@ export class ScheduleEventClass{
             // this.durationTime = durationTime;
             if( allReleaseDuration !== null ){
                 this.durationTime = allReleaseDuration;
-            }
+            };
             
 
-        }
+        // }
 
     }
 

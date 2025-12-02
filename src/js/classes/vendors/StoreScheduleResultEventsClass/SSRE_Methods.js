@@ -15,6 +15,7 @@ export class SSRE_Methods{
         this.GetEventParts = this.GetEventParts.bind(this);
         this.GetEventType = this.GetEventType.bind(this);
         this.GetReleaseData = this.GetReleaseData.bind(this);
+         this.GetIdForNewGridEvent = this.GetIdForNewGridEvent.bind(this);
 
 
 
@@ -39,6 +40,15 @@ export class SSRE_Methods{
             result.push( this.list[ i ].GetData() );
         };
         return result
+    }
+
+    GetIdForNewGridEvent( id = null ){
+        if( id === null ){
+            this.lastGridEventId = this.lastGridEventId + 1;
+            return this.lastGridEventId;
+        }else{
+            return id;
+        };
     }
 
     SetLastGridEventId( ScheduleEvent ){

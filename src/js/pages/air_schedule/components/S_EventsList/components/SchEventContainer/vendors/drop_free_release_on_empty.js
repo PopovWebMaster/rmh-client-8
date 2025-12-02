@@ -19,6 +19,30 @@ export const drop_free_release_on_empty = ( startTime ) => {
     let { gridCurrentDay } = layout;
     let { scheduleEventsList } = scheduleResult;
 
+
+    let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+
+    StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+    StoreScheduleResultEvents.CreateNewGridEvent({
+        startTime:      startTime,
+        eventId:        dragStartEventId,
+    });
+    StoreScheduleResultEvents.AddLinkedFileReleasesToNewGridEvent();
+    StoreScheduleResultEvents.AddReleaseAsFreeApp({
+        name:       dragStartFileName,
+        duration:   dragStartDuration,
+        startTime:  dragStartStartTime,
+    });
+    StoreScheduleResultEvents.AddNewGridEvent();
+    
+    StoreScheduleResultEvents.SetListToStore( true );
+    
+
+
+    
+
+    /*
+
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
 
     StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
@@ -41,5 +65,7 @@ export const drop_free_release_on_empty = ( startTime ) => {
 
 
     StoreScheduleResultEvents.SetListToStore( true );
+
+    */
 
 }

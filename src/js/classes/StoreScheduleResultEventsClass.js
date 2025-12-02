@@ -19,15 +19,22 @@ import { setDailyEventsList } from './../redux/dailySchaduleEditorSlice.js';
 
 // import { setCounterList } from './../redux/countersSlise.js';
 
-import { EVENT_TYPE } from './../config/layout.js';
+import { EVENT_TYPE, MIN_EVENT_DURATION_SEC } from './../config/layout.js';
 
 import { EventsDayCountersClass } from './EventsDayCountersClass.js';
+import { NewGridEventGroupClass } from './vendors/StoreScheduleResultEventsClass/NewGridEventGroupClass.js';
+import { add_new_grid_event_group_to_list } from './vendors/StoreScheduleResultEventsClass/add_new_grid_event_group_to_list.js';
+
+
+
 
 export class StoreScheduleResultEventsClass extends SSRE_Methods{
     constructor( props ){
         super( props );
 
         this.list = [];
+
+        this.NewGridEventGroup = null;
 
 
         this.lastGridEventId = get_last_grid_event_id_from_store();
@@ -53,6 +60,14 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddReleaseAsLinkedFile = this.AddReleaseAsLinkedFile.bind(this);
 
         this.AddReleaseByReleaseData = this.AddReleaseByReleaseData.bind(this);
+        this.CreateNewGridEvent = this.CreateNewGridEvent.bind(this);
+        this.AddReleaseAsLinkedFileToNewGridEvents = this.AddReleaseAsLinkedFileToNewGridEvents.bind(this);
+        this.AddLinkedFileReleasesToNewGridEvent = this.AddLinkedFileReleasesToNewGridEvent.bind(this);
+        this.AddNewGridEvent = this.AddNewGridEvent.bind(this);
+        this.AddReleaseAsFreeApp = this.AddReleaseAsFreeApp.bind(this);
+
+
+
 
 
 
@@ -75,6 +90,11 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         };
     }
 
+
+
+
+
+
     CreateFromScheduleEventsList( arr, withReleses = true ){
         for( let i = 0; i < arr.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
@@ -89,6 +109,77 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             this.SetLastGridEventId( this.list[ i ] );
         }
     }
+
+    
+
+    CreateNewGridEvent( params ){
+        let {
+            startTime,
+            eventId,
+        } = params;
+
+        this.NewGridEventGroup = new NewGridEventGroupClass();
+        this.NewGridEventGroup.AddNewEvent({
+            durationTime: MIN_EVENT_DURATION_SEC,
+            id: this.GetIdForNewGridEvent(),
+            eventId,
+            startTime,
+        });
+    }
+
+    AddLinkedFileReleasesToNewGridEvent(){
+        this.NewGridEventGroup.AddLinkedFilesFromEvent();
+    }
+
+    AddReleaseAsFreeApp( params ){
+        let {
+            name,
+            duration,
+            startTime,
+        } = params;
+        this.NewGridEventGroup.AddReleaseAsLinkedFile({ name, duration, startTime });
+    }
+
+
+    AddNewGridEvent(){
+
+        let list = this.GetScheduleEventsList();
+
+        let result = add_new_grid_event_group_to_list( list, this.NewGridEventGroup );
+
+        if( result.isError ){
+            console.dir( 'ошибка AddNewGridEvent' );
+            console.dir( result );
+        }else{
+
+            this.list = [];
+
+
+            console.dir( result );
+            for( let i = 0; i < result.newList.length; i++ ){
+                let ScheduleEvent = new ScheduleEventClass();
+                ScheduleEvent.SetDataFromGridEvent( result.newList[ i ] );
+
+                this.list.push( ScheduleEvent );
+                this.SetLastGridEventId( ScheduleEvent );
+            };
+
+            console.dir( this );
+            
+        }
+
+
+
+    }
+
+    AddReleaseAsLinkedFileToNewGridEvents( params ){
+        let {
+            name,
+            duration,
+        } = params;
+    }
+
+
 
     AddEvent( params ){
         let {
