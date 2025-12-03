@@ -5,19 +5,14 @@ import { StoreScheduleResultEventsClass } from './../../../../../../../classes/S
 
 export const drop_app_release_on_complete = ( gridEventId ) => {
 
-        let { scheduleResultDragEvent, layout, scheduleResult } = store.getState();
+        let { scheduleResultDragEvent } = store.getState();
         let { 
-            // dragStartDuration,
-            // dragStartStartTime,
-            // dragStartEventId,
             dragStartReleaseId,
         } = scheduleResultDragEvent;
-    
-        let { scheduleEventsList } = scheduleResult;
-    
-        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
 
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateList();
+
         StoreScheduleResultEvents.AddRelease( gridEventId, dragStartReleaseId );
         StoreScheduleResultEvents.SetListToStore( true );
 

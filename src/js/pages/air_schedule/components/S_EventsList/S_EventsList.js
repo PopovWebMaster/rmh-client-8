@@ -9,7 +9,7 @@ import { selectorData as scheduleResultSlise } from './../../../../redux/schedul
 import { selectorData as countersSlise, setCounterList } from './../../../../redux/countersSlise.js';
 
 import { ScrollContainer } from './../../../../components/ScrollContainer/ScrollContainer.js';
-import { StoreScheduleResultEventsClass } from './../../../../classes/StoreScheduleResultEventsClass.js';
+// import { StoreScheduleResultEventsClass } from './../../../../classes/StoreScheduleResultEventsClass.js';
 
 import { SchOneSector } from './components/SchOneSector/SchOneSector.js';
 
@@ -19,13 +19,14 @@ import { set_max_height_em_for_empty_time_segment } from './vendors/set_max_heig
 const S_EventsListComponent = ( props ) => {
 
     let {
-        scheduleEventsList,
+        // scheduleEventsList,
+        scheduleEventBySectors,
         // setCounterList,
     } = props;
 
     let refEd = useRef();
 
-    let [ listBySectors, setListBySectors ] = useState( [] );
+    // let [ listBySectors, setListBySectors ] = useState( [] );
     let [ isReady, setIsReady ] = useState( false );
 
     useEffect( () => {
@@ -33,35 +34,35 @@ const S_EventsListComponent = ( props ) => {
         setIsReady( true );
     }, [] );
 
-    useEffect( () => {
+    // useEffect( () => {
 
-        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+    //     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
 
-        // console.dir( 'scheduleEventsList' );
-        // console.dir( scheduleEventsList );
         
-        
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-        let list = StoreScheduleResultEvents.GetScheduleEventsList();
-        StoreScheduleResultEvents.SetCounterDataToStore( list );
+    //     // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+    //     // let list = StoreScheduleResultEvents.GetScheduleEventsList();
+    //     // StoreScheduleResultEvents.SetCounterDataToStore( list );
 
-        let list_by_sectirs = StoreScheduleResultEvents.GetListBySectors();
-        setListBySectors( list_by_sectirs );
+    //     // let list_by_sectirs = StoreScheduleResultEvents.GetListBySectors();
+    //     // setListBySectors( list_by_sectirs );
 
-        // let counter_list = StoreScheduleResultEvents.GetCounterList();
-        // setCounterList( counter_list );
 
-    }, [ scheduleEventsList ] );
+    // }, [ scheduleEventsList ] );
+
+    // useEffect( () => {
+
+    //     console.dir( 'scheduleEventBySectors' );
+    //     console.dir( scheduleEventBySectors );
+
+    //     setListBySectors( scheduleEventBySectors );
+
+
+    // }, [scheduleEventsList] )
 
 
     const create = ( arr ) => {
         if( arr.length > 0 ){
             let sectors = arr.map( ( item, index ) => {
-
-                // console.dir( 'item.sector_list' );
-                // console.dir( item.sector_list );
-
-                
                 return (
                     <SchOneSector 
                         key = { index }
@@ -96,7 +97,7 @@ const S_EventsListComponent = ( props ) => {
         >
             { isReady? (
                 <ScrollContainer>
-                    { create( listBySectors ) }
+                    { create( scheduleEventBySectors ) }
                 </ScrollContainer>
 
             ): '' }
@@ -116,7 +117,9 @@ export function S_EventsList( props ){
         <S_EventsListComponent
             { ...props }
 
-            scheduleEventsList = { scheduleResult.scheduleEventsList }
+            // scheduleEventsList = { scheduleResult.scheduleEventsList }
+            scheduleEventBySectors = { scheduleResult.scheduleEventBySectors }
+
 
             setCounterList = { ( obj ) => { dispatch( setCounterList( obj ) ) } }
 

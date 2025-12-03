@@ -24,19 +24,15 @@ const CreateScheduleButtonComponent = ( props ) => {
 
     let [ isAllowed, setIsAllowedResult ] = useState( false );
 
-
     const create = () => {
         if( isAllowed ){
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-            StoreScheduleResultEvents.CreateFromGridEvents();
-            let isChanged = true; // тут только для наглядности
-            StoreScheduleResultEvents.SetListToStore( isChanged );
+            StoreScheduleResultEvents.CreateFromGridEvents( false );
+            StoreScheduleResultEvents.SetListToStore( true );
             setIsOpen( false );
         };
-        
     };
     
-
     const click = () => {
         if( isAllowed ){
             if( scheduleEventsList.length > 0 ){

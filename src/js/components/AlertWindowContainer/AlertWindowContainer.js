@@ -36,45 +36,49 @@ const AlertWindowContainerComponent = ( props ) => {
     }, [] );
     
     return (
-        <div 
-            className = { `AlertWindowContainer ${isOpen === true? 'isOpen': 'isClose'}` }
-            style = { { opacity } }
-        >
-
+        <>{ isOpen? (
             <div 
-                className = { `AWC_window ${isOpen === true? 'isOpen': 'isClose'}` }
-                style = {{
-                    width,
-                    height,
-                }}
+                className = { `AlertWindowContainer ${isOpen === true? 'isOpen': 'isClose'}` }
+                style = { { opacity } }
             >
-                <div className = 'AWC_window_header'>
-                    <div className = 'AWC_window_header_title'>
-                        <h2>{ title }</h2>
-                    </div>
-                    <div className = 'AWC_window_header_close'>
-                        <span 
-                            className = 'icon-cancel-2'
-                            onClick = { () => { setIsOpen( false ) } }
-                        ></span>
-                    </div>
-                </div>
 
-                { showCurrentDayName? (
-                    <div className = 'AWC_window_body_carrentDay'>
-                        <span>{ gridCurrentDayName }</span>
+                <div 
+                    className = { `AWC_window ${isOpen === true? 'isOpen': 'isClose'}` }
+                    style = {{
+                        width,
+                        height,
+                    }}
+                >
+                    <div className = 'AWC_window_header'>
+                        <div className = 'AWC_window_header_title'>
+                            <h2>{ title }</h2>
+                        </div>
+                        <div className = 'AWC_window_header_close'>
+                            <span 
+                                className = 'icon-cancel-2'
+                                onClick = { () => { setIsOpen( false ) } }
+                            ></span>
+                        </div>
                     </div>
-                ): '' }
 
-                
+                    { showCurrentDayName? (
+                        <div className = 'AWC_window_body_carrentDay'>
+                            <span>{ gridCurrentDayName }</span>
+                        </div>
+                    ): '' }
 
-                <div className = { showCurrentDayName? 'AWC_window_body heightShort': 'AWC_window_body heightFull' }>
-                    { children } 
+                    
+
+                    <div className = { showCurrentDayName? 'AWC_window_body heightShort': 'AWC_window_body heightFull' }>
+                        { children } 
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+        ): '' }</>
+
     )
 
 };

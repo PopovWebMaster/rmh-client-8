@@ -1,7 +1,7 @@
 
 import { PUSH_IT } from './../../../config/layout.js';
 
-export const adjust_startTime_in_list_v2 = ( list ) => {
+export const adjust_startTime_in_list_v2 = ( list, makeCorrectByPushIt = true ) => {
 
     let result = {
         isError: false,
@@ -24,7 +24,6 @@ export const adjust_startTime_in_list_v2 = ( list ) => {
             timeSpaceTo = 24 * 60 * 60 - 1;
         };
 
-
         let segmArr = adjust_segment( segments[ i ], timeSpaceFrom, timeSpaceTo );
 
         if( segmArr.isError ){
@@ -33,17 +32,20 @@ export const adjust_startTime_in_list_v2 = ( list ) => {
             newList = [ ...newList, ...segmArr.newList ];
         }
 
-        
     };
 
-    result.newList = newList;
+    if( result.isError ){
 
+    }else{
+        if( makeCorrectByPushIt ){
+            result.newList = correct_by_push_it( newList );
+        }else{
+            result.newList = newList;
+        };
 
+    };
 
-
-
-
-
+    // result.newList = correct_by_push_it( newList );
 
     return result;
 };
@@ -82,26 +84,17 @@ function adjust_segment( segment_list, timeSpaceFrom, timeSpaceTo ){
 
     if( last_startTime + last_duration <= timeSpaceTo ){
 
-        result.newList = correct_by_push_it( list_all_bottom );
-
-
-        // newList = [ ...list_all_bottom ];
+        // result.newList = correct_by_push_it( list_all_bottom );
+        result.newList = [ ...list_all_bottom ];
     }else{
-        let list_all_top = push_all_top( list_all_bottom );
+        let list_all_top = push_all_top( list_all_bottom, timeSpaceTo );
         let first_start_time = list_all_top[ 0 ].startTime;
 
         if( first_start_time < timeSpaceFrom ){
             result.isError = true;
         }else{
-
-            // console.dir( 'list_all_top' );
-            // console.dir( list_all_top );
-
-
-
-            result.newList = correct_by_push_it( list_all_top );
-
-            // newList = [ ...list_all_top ];
+            // result.newList = correct_by_push_it( list_all_top );
+            result.newList = [ ...list_all_top ];
         };
     };
 
@@ -120,6 +113,10 @@ function push_all_bottom( segment_list ){
 
     for( let i = 0; i < segment_list.length; i++ ){
 
+        // console.dir( 'segment_list' );
+        // console.dir( segment_list );
+
+
         let { startTime, durationTime } = segment_list[ i ];
 
         if( startTime >= next_startTime ){
@@ -130,6 +127,8 @@ function push_all_bottom( segment_list ){
             item.startTime = next_startTime;
             result.push( { ...item } );
             next_startTime = next_startTime + durationTime + 1;
+            // next_startTime = next_startTime + durationTime;
+
         };
 
     };
@@ -137,7 +136,7 @@ function push_all_bottom( segment_list ){
     return result;
 };
 
-function push_all_top( list_all_bottom ){
+function push_all_top( list_all_bottom, timeSpaceTo ){
 
     let result = [];
     let arr_1 = [];

@@ -48,6 +48,8 @@ const SchOneSectorComponent = ( props ) => {
 
                 } = item;
 
+                
+
                 return (
                     <CompletedTimeSegment 
                         key =               { index }
@@ -73,13 +75,16 @@ const SchOneSectorComponent = ( props ) => {
                 let {
                     startTime,
                     durationTime,
+                    nextStartTime,
                 } = item;
+
                 return (
                     <EmptyTimeSegment 
                         segmentIndex =  { index }
                         key =           { index }
                         startTime =     { startTime }
                         durationTime =  { durationTime }
+                        nextStartTime = { nextStartTime }
                     />
                 );
             };

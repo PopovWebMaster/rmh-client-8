@@ -61,10 +61,8 @@ const SetDayDataFromServerComponent = ( props ) => {
                     if( response.ok ){
                         setSpinnerIsActive( false );
                         let { release_list, scheduleEventsList } = response;
-
                         set_release_list_and_schedule_list_to_store( release_list, scheduleEventsList );
                         setGridCurrentDay( currentDayNum );
-
 
                     }else{
                         if( IS_DEVELOPMENT ){

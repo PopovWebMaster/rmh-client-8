@@ -24,6 +24,8 @@ const SchEventContainerComponent = ( props ) => {
         isKeyPoint = false,
         gridEventId = null,
         isEmpty = false,
+
+        nextStartTime = null,
         
         children,
 
@@ -72,6 +74,7 @@ const SchEventContainerComponent = ( props ) => {
             isCompletd =    { isCompletd }
             dragOverHandler = { dragOverHandler }
             dragLeaveHandler = { dragLeaveHandler }
+            nextStartTime = { nextStartTime }
         >
             <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }>
 

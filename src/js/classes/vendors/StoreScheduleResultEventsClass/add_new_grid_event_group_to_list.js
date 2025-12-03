@@ -9,22 +9,17 @@ export const add_new_grid_event_group_to_list = ( list, NewGridEventGroup ) => {
         newList: [],
     };
 
-    let list_with_push_it = add_push_it_data_to_list( list );
-
-    let newList = [ ...list_with_push_it ];
-
-    let vrem = {};
+    let margeList = [ ...list ];
     for( let i = 0; i < NewGridEventGroup.scheduleEventsGroup.length; i++ ){
-        newList.push( NewGridEventGroup.scheduleEventsGroup[ i ].GetData() );
-        vrem = { ...NewGridEventGroup.scheduleEventsGroup[ i ].GetData() }
+        let data = NewGridEventGroup.scheduleEventsGroup[ i ].GetData()
+        margeList.push( data );
     };
 
-    let sortList = newList.sort( ( a, b ) => {
+    let margeListSort = margeList.sort( ( a, b ) => {
         if( a.startTime > b.startTime ){ return 1 }else{ return -1 };
     } );
 
-
-    result = adjust_startTime_in_list_v2( sortList );
+    result = adjust_startTime_in_list_v2( margeListSort, false );
 
     return result;
 

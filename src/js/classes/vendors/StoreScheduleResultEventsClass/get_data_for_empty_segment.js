@@ -14,6 +14,7 @@ export const get_data_for_empty_segment = ( next_startTime, pointTo ) => {
         type: GRID_SEGMENT_TYPE.EMPTY,
         startTime, 
         durationTime,
+        nextStartTime: next_startTime,
     };
     result.type = GRID_SEGMENT_TYPE.EMPTY;
 

@@ -17,6 +17,9 @@ import {
 
 import { get_event_by_id } from './../../../helpers/get_event_by_id.js';
 
+import { MIN_EVENT_DURATION_SEC } from './../../../config/layout.js';
+import { convert_time_str_to_sec } from './../../../helpers/convert_time_str_to_sec.js'
+
 export class DragStartClass {
     constructor(){
 
@@ -27,6 +30,8 @@ export class DragStartClass {
         this.linked_files_duration = 0;
 
         this.eventId = null;
+        this.event_duration = MIN_EVENT_DURATION_SEC;
+
         this.startTime = 0;
         this.gridEventId = null;
         this.categoryId = null;
@@ -67,9 +72,9 @@ export class DragStartClass {
             let event = get_event_by_id( eventId );
 
             if( event ){
-                let { category_id, linked_file } = event;
+                let { category_id, linked_file, durationTime } = event;
                 this.categoryId = category_id;
-
+                this.event_duration = convert_time_str_to_sec( durationTime );
                 if( linked_file !== null ){
                     this.SetLinkedFilesDuration( linked_file );
                 };
@@ -110,7 +115,12 @@ export class DragStartClass {
     SetToStore(){
 
         store.dispatch( setDragStartFrom( this.startFrom ) );
-        store.dispatch( setDragStartDuration( this.duration ) );
+        // if( this.duration + this.linked_files_duration === 0 ){
+        //     store.dispatch( setDragStartDuration( this.event_duration ) );
+        // }else{
+            store.dispatch( setDragStartDuration( this.duration  ) );
+        // };
+        
 
         store.dispatch( setDragStartEventId( this.eventId ) );
         store.dispatch( setDragStartCategoryId( this.categoryId ) );

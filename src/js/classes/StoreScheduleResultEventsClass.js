@@ -3,13 +3,14 @@ import { SSRE_Methods } from './vendors/StoreScheduleResultEventsClass/SSRE_Meth
 import { ScheduleEventClass } from './vendors/StoreScheduleResultEventsClass/ScheduleEventClass.js';
 
 import store from './../redux/store.js';
-import { setScheduleEventsList, setScheduleEventsListIsChanged } from './../redux/scheduleResultSlise.js';
+import { setScheduleEventsList, setScheduleEventsListIsChanged, setScheduleEventBySectors } from './../redux/scheduleResultSlise.js';
 
 import { divide_day_into_sectors } from './vendors/StoreScheduleResultEventsClass/divide_day_into_sectors.js';
 import { add_empty_segments_and_types } from './vendors/StoreScheduleResultEventsClass/add_empty_segments_and_types.js';
-import { get_category_by_event_id } from './vendors/StoreScheduleResultEventsClass/get_category_by_event_id.js';
+// import { get_category_by_event_id } from './vendors/StoreScheduleResultEventsClass/get_category_by_event_id.js';
 
-import { adjust_startTime_in_day_list } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_day_list.js';
+// import { adjust_startTime_in_day_list } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_day_list.js';
+import { adjust_startTime_in_list_v2 } from './vendors/StoreScheduleResultEventsClass/adjust_startTime_in_list_v2.js';
 import { get_remaining_place_for_key_block } from './vendors/StoreScheduleResultEventsClass/get_remaining_place_for_key_block.js';
 
 import { get_last_grid_event_id_from_store } from './vendors/StoreScheduleResultEventsClass/get_last_grid_event_id_from_store.js';
@@ -40,6 +41,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.lastGridEventId = get_last_grid_event_id_from_store();
 
         this.CreateFromGridEvents = this.CreateFromGridEvents.bind(this);
+        this.CreateList = this.CreateList.bind(this);
+
         this.SetListToStore = this.SetListToStore.bind(this);
         this.CreateFromScheduleEventsList = this.CreateFromScheduleEventsList.bind(this);
         this.GetListBySectors = this.GetListBySectors.bind(this);
@@ -67,6 +70,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddReleaseAsFreeApp = this.AddReleaseAsFreeApp.bind(this);
 
 
+        this.AddAppRelease = this.AddAppRelease.bind(this);
+
+
+
 
 
 
@@ -84,18 +91,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         for( let i = 0; i < gridEventsList.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromGridEvent( gridEventsList[ i ] );
-
             this.list.push( ScheduleEvent );
             this.SetLastGridEventId( ScheduleEvent );
         };
     }
 
+    CreateFromScheduleEventsList( arr, withReleses = true ){ // не использовать!
 
-
-
-
-
-    CreateFromScheduleEventsList( arr, withReleses = true ){
         for( let i = 0; i < arr.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromScheduleEvent( arr[ i ], withReleses );
@@ -108,6 +110,37 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             this.list[ i ].SetIdIfNull( this.lastGridEventId + 1 );
             this.SetLastGridEventId( this.list[ i ] );
         }
+    }
+
+    CreateList( params = {} ){
+        let {
+            gridEventsList = null,
+            withReleses = true,
+        } = params;
+
+        if( gridEventsList === null ){
+            gridEventsList = this.GetScheduleEventsListFromStore();
+        }else{
+            gridEventsList = this.AddPushIt( gridEventsList );
+        };
+
+        let list = [];
+
+        for( let i = 0; i < gridEventsList.length; i++ ){
+            let ScheduleEvent = new ScheduleEventClass();
+            ScheduleEvent.SetDataFromScheduleEvent( gridEventsList[ i ], withReleses );
+
+            list.push( ScheduleEvent );
+            this.SetLastGridEventId( ScheduleEvent );
+        };
+
+        for( let i = 0; i < list.length; i++ ){
+            list[ i ].SetIdIfNull( this.lastGridEventId + 1 );
+            this.SetLastGridEventId( list[ i ] );
+        };
+
+        this.list = list;
+
     }
 
     
@@ -129,6 +162,14 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     AddLinkedFileReleasesToNewGridEvent(){
         this.NewGridEventGroup.AddLinkedFilesFromEvent();
+        // this.NewGridEventGroup.Update();
+    }
+
+    AddAppRelease( params ){
+        let {
+            releaseId
+        } = params;
+        this.NewGridEventGroup.AddAppRelease( releaseId );
     }
 
     AddReleaseAsFreeApp( params ){
@@ -141,35 +182,29 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     }
 
 
-    AddNewGridEvent(){
+    AddNewGridEvent( isChanged = true ){
 
         let list = this.GetScheduleEventsList();
 
         let result = add_new_grid_event_group_to_list( list, this.NewGridEventGroup );
 
         if( result.isError ){
-            console.dir( 'ошибка AddNewGridEvent' );
-            console.dir( result );
+            this.AlertMessage( 'Событие не может быть добавлено, не достаточно места' );
         }else{
+            let list = [];
 
-            this.list = [];
-
-
-            console.dir( result );
             for( let i = 0; i < result.newList.length; i++ ){
                 let ScheduleEvent = new ScheduleEventClass();
-                ScheduleEvent.SetDataFromGridEvent( result.newList[ i ] );
-
-                this.list.push( ScheduleEvent );
+                ScheduleEvent.SetData( result.newList[ i ] );
+                list.push( ScheduleEvent );
                 this.SetLastGridEventId( ScheduleEvent );
             };
 
-            console.dir( this );
-            
-        }
+            this.list = list;
 
-
-
+            this.SetListToStore( isChanged );
+            this.NewGridEventGroup = null;
+        };
     }
 
     AddReleaseAsLinkedFileToNewGridEvents( params ){
@@ -231,13 +266,30 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
     SetListToStore( isChanged = null ){
         let scheduleEventsList = this.GetScheduleEventsList();
-        let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
-        store.dispatch( setScheduleEventsList( arr_2 ) );
+        // let scheduleEventsList = this.GetScheduleEventsList();
+
+
+        // GetScheduleEventsListFromStore
+
+        console.dir( 'scheduleEventsList' );
+        console.dir( scheduleEventsList );
+
+
+        // let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
+        // let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
+        let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
+
+        let arr = divide_day_into_sectors( scheduleEventsList );
+        let listByectors = add_empty_segments_and_types( arr );
+        store.dispatch( setScheduleEventBySectors( listByectors ) );
+
+
+        store.dispatch( setScheduleEventsList( newList ) );
         if( isChanged !== null ){
             store.dispatch( setScheduleEventsListIsChanged( isChanged ) );
         };
         
-        this.SetCounterDataToStore( arr_2 );
+        this.SetCounterDataToStore( newList );
     }
 
     AddReleaseByReleaseData( gridEventId, release ){
@@ -245,6 +297,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         // console.dir( Event );
     }
+
+     
 
     AddRelease( gridEventId, releaseId ){
 
@@ -262,6 +316,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             rest_sec,
             releaseDuration: releaseData.releaseDuration
         });
+
+        /*
 
         if( rest_sec >= releaseData.releaseDuration ){
             if( Event ){
@@ -344,7 +400,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         };
 
-        
+        */
 
     }
 

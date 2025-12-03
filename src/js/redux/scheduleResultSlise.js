@@ -28,6 +28,8 @@ export const scheduleResultSlise = createSlice({
 
 
         scheduleEventsList: [],
+        scheduleEventBySectors: [],
+
         scheduleEventsListByGridEventId: {},
         scheduleEventsListIsChanged: false,
 
@@ -192,6 +194,10 @@ export const scheduleResultSlise = createSlice({
             state.freeReleasesFilterEventId =  action.payload;
         },
 
+        setScheduleEventBySectors: ( state, action ) => {
+            state.scheduleEventBySectors =  action.payload;
+        },
+
 
         
         
@@ -229,6 +235,7 @@ export const {
     setFreeReleasesIsChanges,
     setFreeReleasesList,
     setFreeReleasesFiltered,
+    setScheduleEventBySectors,
 
 
             
@@ -277,6 +284,8 @@ export const selectorData = ( state ) => {
 
         freeReleasesFilterCategoryId: state.scheduleResult.freeReleasesFilterCategoryId,
         freeReleasesFilterEventId: state.scheduleResult.freeReleasesFilterEventId,
+        scheduleEventBySectors: state.scheduleResult.scheduleEventBySectors,
+
 
         
 

@@ -67,7 +67,9 @@ export const add_empty_segments_and_types = ( sectors_arr ) => {
     };
 
 
-    
+    // console.dir( 'add_empty_segments_and_types' );
+    // console.dir( result );
+
 
 
 

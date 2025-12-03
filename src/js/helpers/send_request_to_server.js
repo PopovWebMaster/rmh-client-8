@@ -86,7 +86,18 @@ export const send_request_to_server = ( params ) => {
             };
 
         } catch (error) {
-            send();
+
+            let conf = confirm( 'Ошибка соединения, попробовать снова?' );
+            if( conf ){
+                send();
+            }else{
+
+            };
+
+
+
+
+            // send();
             console.error( `Ошибка : ${error}. При попытке вызвать fetch` );
             console.error({
                 _token: token,

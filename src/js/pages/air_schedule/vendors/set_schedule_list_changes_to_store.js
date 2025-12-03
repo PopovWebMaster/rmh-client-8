@@ -2,6 +2,8 @@
 import store from './../../../redux/store.js';
 import { setScheduleEventsList, setScheduleEventsListIsChanged } from './../../../redux/scheduleResultSlise.js';
 
+import { StoreScheduleResultEventsClass } from './../../../classes/StoreScheduleResultEventsClass.js';
+
 export const set_schedule_list_changes_to_store = ( gridEventId, objWithChanges, chackFlag = true ) => {
     if( chackFlag ){
 
@@ -21,10 +23,18 @@ export const set_schedule_list_changes_to_store = ( gridEventId, objWithChanges,
                 newArr.push( { ...scheduleEventsList[ i ] } );
             };
         };
+
+         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        StoreScheduleResultEvents.CreateList({
+            gridEventsList: newArr,
+        });
+
+        StoreScheduleResultEvents.UpdateData();
+        StoreScheduleResultEvents.SetListToStore( true );
         
 
-        store.dispatch( setScheduleEventsList( newArr ) );
-        store.dispatch( setScheduleEventsListIsChanged( true ) );
+        // store.dispatch( setScheduleEventsList( newArr ) );
+        // store.dispatch( setScheduleEventsListIsChanged( true ) );
 
 
     };

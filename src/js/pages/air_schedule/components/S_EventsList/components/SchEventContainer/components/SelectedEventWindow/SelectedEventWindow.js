@@ -31,6 +31,9 @@ const SelectedEventWindowComponent = ( props ) => {
 
     } = props;
 
+
+
+
     return (
         <AlertWindowContainer
             isOpen =    { selectedEventWindow_isOpen }

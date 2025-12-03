@@ -3,6 +3,9 @@
 import store from './../../../redux/store.js';
 
 import { EVENT_TYPE } from './../../../config/layout.js';
+import { setInfoMessageText } from './../../../redux/scheduleResultSlise.js';
+
+import { add_push_it_data_to_list } from './add_push_it_data_to_list.js';
 
 export class SSRE_Methods{
     constructor( props ){
@@ -15,31 +18,67 @@ export class SSRE_Methods{
         this.GetEventParts = this.GetEventParts.bind(this);
         this.GetEventType = this.GetEventType.bind(this);
         this.GetReleaseData = this.GetReleaseData.bind(this);
-         this.GetIdForNewGridEvent = this.GetIdForNewGridEvent.bind(this);
+        this.GetIdForNewGridEvent = this.GetIdForNewGridEvent.bind(this);
+
+        this.AddPushIt = this.AddPushIt.bind(this);
+
+        this.AlertMessage = this.AlertMessage.bind(this);
+        this.GetScheduleEventsListFromStore = this.GetScheduleEventsListFromStore.bind(this);
 
 
 
+
+
+
+
+    }
+
+    AlertMessage( messsage ){
+        store.dispatch( setInfoMessageText( messsage ) );  
     }
 
     GetGridEventsList(){
         let { layout, scheduleResult } = store.getState();
         let { gridDayEventsList } = layout;
         let { currentDayNum } = scheduleResult;
-        let result = [];
-        for( let i = 0; i < gridDayEventsList[ currentDayNum ].length; i++ ){
-            result.push({ ...gridDayEventsList[ currentDayNum ][ i ] });
-        };
+
+        let result = this.AddPushIt( gridDayEventsList[ currentDayNum ] );
+
         return result;
     }
 
-    GetScheduleEventsList(){
+    AddPushIt( list ){
+        let result = add_push_it_data_to_list( list );
+        return result;
 
+    }
+
+    GetScheduleEventsList( makePushIt = true){
         this.SortList();
+
         let result = [];
+        let list = [];
+
         for( let i = 0; i < this.list.length; i++ ){
-            result.push( this.list[ i ].GetData() );
+            let data = this.list[ i ].GetData();
+            list.push( data );
         };
-        return result
+
+        if( makePushIt ){
+            result = this.AddPushIt( list );
+        }else{
+            result = list;
+        };
+
+        return list;
+    }
+    GetScheduleEventsListFromStore(){
+
+        let { scheduleResult } = store.getState();
+        let { scheduleEventsList } = scheduleResult;
+        let result = this.AddPushIt( scheduleEventsList );
+        return result;
+
     }
 
     GetIdForNewGridEvent( id = null ){

@@ -22,6 +22,7 @@ const EmptyTimeSegmentComponent = ( props ) => {
     let {
         startTime,
         durationTime,
+        nextStartTime,
         gridEmptySegmentMaxHeightEm,
         gridEmptySegmentMinHeightEm,
 
@@ -39,6 +40,7 @@ const EmptyTimeSegmentComponent = ( props ) => {
             startTime =     { startTime }
             durationTime =  { durationTime }
             isEmpty = { true }
+            nextStartTime = { nextStartTime }
         >
 
             <AlertWindowContainer

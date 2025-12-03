@@ -43,6 +43,10 @@ export const divide_day_into_sectors = ( day_array ) => {
 
     };
 
+    // console.dir( 'divide_day_into_sectors' );
+    // console.dir( result );
+
+
     return result;
 
 

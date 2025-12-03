@@ -28,18 +28,16 @@ export const set_release_list_and_schedule_list_to_store = ( release_list, sched
     let actual_schedule_list = exclude_outdated_releases( schedule_events_List, releasesById );
 
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-    StoreScheduleResultEvents.CreateFromScheduleEventsList( actual_schedule_list );
+    StoreScheduleResultEvents.CreateList({
+        gridEventsList: actual_schedule_list,
+    });
+
     StoreScheduleResultEvents.UpdateData();
-
-
     StoreScheduleResultEvents.SetListToStore();
-
-
 
     store.dispatch( setReleaseList( release_list ) );
     store.dispatch( setReleaseListById( releasesById ) );
     store.dispatch( setReleaseListByGridEventId( releasesByGridEventId ) );
-    // store.dispatch( setScheduleEventsList( actual_schedule_list ) );
 
 }
 
@@ -47,6 +45,8 @@ function exclude_outdated_releases( scheduleList, releasesById ){
     let result = [];
 
     let isset_del_releases = false;
+
+    
 
     for( let i = 0; i < scheduleList.length; i++ ){
         let item = structuredClone( scheduleList[ i ] );
@@ -82,6 +82,8 @@ function exclude_outdated_releases( scheduleList, releasesById ){
         let text = 'Внимание! В расписании есть изменённые заявки! Возможно, требуется корректировка времени выхода роликов';
         store.dispatch( setInfoMessageText( text ) );
     };
+
+
 
     return result;
 

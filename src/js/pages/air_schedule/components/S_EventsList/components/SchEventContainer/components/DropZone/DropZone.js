@@ -1,10 +1,12 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 import './DropZone.scss';
 
+import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as scheduleResultDragEventSlise } from './../../../../../../../../redux/scheduleResultDragEventSlise.js';
+
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 
@@ -24,11 +26,17 @@ const DropZoneComponent = ( props ) => {
         startTimePlus,
         setStartTimePlus,
         dropZoneIsActive,
+        // nextStartTime,
 
 
         dragStartEventId,
         dragStartDuration,
         dragStartLinkedFileDuration,
+
+        scheduleEventsList,
+
+        nextStartTime,
+        setNextStartTime,
 
         eventListById,
 
@@ -47,6 +55,8 @@ const DropZoneComponent = ( props ) => {
 
 
 
+
+
     useEffect( () => {
         if( dropZoneIsActive ){
             if( eventListById[ dragStartEventId ] ){
@@ -58,6 +68,21 @@ const DropZoneComponent = ( props ) => {
                 setEventStyle( BLIND_STYLE );
                 setEventName( BLIND_CHAR_NAME );
             };
+
+            // if( nextStartTime === null ){
+
+            //     setNextStartTime( 100 );
+
+            //     console.dir('!!!!!!!!!');
+
+            // }
+
+
+
+        //     nextStartTime,
+        // setNextStartTime,
+
+
             
         }else{
             setEventStyle( {} );
@@ -67,11 +92,29 @@ const DropZoneComponent = ( props ) => {
 
     }, [ dropZoneIsActive ] );
 
+    const getNextStartTime = () => {
+        let res = 24*60*60;
+        for( let i = 0; i < scheduleEventsList.length; i++ ){
+            if( scheduleEventsList[ i ].startTime > startTime ){
+                res = scheduleEventsList[ i ].startTime;
+                break;
+            };
+        };
+        return res;
+
+    }
+
 
     const drag_over = ( e ) => {
 
         
         if( dropZoneIsActive ){
+
+            let next_StartTime = nextStartTime;
+            if( next_StartTime === null ){
+                next_StartTime = getNextStartTime()
+                setNextStartTime( next_StartTime );
+            };
 
             let zone_height = get_zone_height();
             let event_height = get_event_height();
@@ -94,7 +137,8 @@ const DropZoneComponent = ( props ) => {
                         zone_height,
                         event_height,
                         top_position,
-                        dutation: durationTime
+                        dutation: durationTime,
+                        next_StartTime
                     });
 
                     setStartTimePlus( start_time_plus );
@@ -156,28 +200,70 @@ const DropZoneComponent = ( props ) => {
         return result;
     }
 
+    
+
     const get_start_time_plus = ( params ) => {
         let {
             zone_height,
             event_height,
             top_position,
             dutation,
+            next_StartTime,
         } = params;
         let max_limit = zone_height - event_height;
         let proc = top_position * 100 / max_limit;
+        // console.log( 'startTime', startTime );
 
-        let val =  ((dutation - dragStartDuration + dragStartLinkedFileDuration) * proc) / 100;
+        // let next_StartTime = startTime + dutation + 1;
+        // if( nextStartTime !== null ){
+        //     next_StartTime = nextStartTime
+        // }else{
+        //     next_StartTime = startTime + dutation + 1;
+        // }
+
+        let gridEventDuration = dragStartDuration + dragStartLinkedFileDuration;
+
+
+        let val =  ((dutation - dragStartDuration - dragStartLinkedFileDuration) * proc) / 100;
+
         let plus = Math.round( val );
         if( plus < 0 ){
             plus = 0;
         }else{
-            if( ( startTime + plus + dragStartDuration + dragStartLinkedFileDuration ) < startTime + dutation ){
 
+
+            let startTimePos = startTime + plus;
+
+            if( startTimePos + gridEventDuration < next_StartTime ){
+                // console.dir('!!!!!!!!');
             }else{
-                plus = ( dutation - dragStartDuration + dragStartLinkedFileDuration - 1 );
+                plus = next_StartTime - startTime - gridEventDuration - 1;
             };
 
+
+
+
+            // if( ( startTime + plus + dragStartDuration + dragStartLinkedFileDuration ) < startTime + dutation ){
+            //     // plus = plus - 1;
+
+            // }else{
+            //     // console.dir( 'plus !!!!!!!!!!!!!!!!!' );
+            //     // console.dir( plus );
+            //     // console.dir( '( dutation - dragStartDuration - dragStartLinkedFileDuration - 1 )' );
+            //     // console.dir( ( dutation - dragStartDuration - dragStartLinkedFileDuration - 1 ) );
+
+            //     // plus = ( dutation - dragStartDuration + dragStartLinkedFileDuration - 1 );
+            //     plus = ( dutation - dragStartDuration - dragStartLinkedFileDuration - 1 );
+
+            // };
+
         };
+        // console.log( 'dutation', dutation );
+        // console.log( 'startTime', startTime );
+        // console.log( 'plus', plus );
+        // console.log( 'dragStartDuration', dragStartDuration );
+        // console.log( 'dragStartLinkedFileDuration', dragStartLinkedFileDuration );
+
 
         return plus;
     }
@@ -233,6 +319,11 @@ const DropZoneComponent = ( props ) => {
 export function DropZone( props ){
 
     const scheduleResultDragEvent = useSelector( scheduleResultDragEventSlise );
+
+    const scheduleResult = useSelector( scheduleResultSlise );
+
+
+    
     const layout = useSelector( layoutSlice );
 
 
@@ -246,6 +337,10 @@ export function DropZone( props ){
             dragStartEventId =      { scheduleResultDragEvent.dragStartEventId }
             dragStartDuration =     { scheduleResultDragEvent.dragStartDuration }
             dragStartLinkedFileDuration =     { scheduleResultDragEvent.dragStartLinkedFileDuration }
+
+
+            scheduleEventsList =     { scheduleResult.scheduleEventsList }
+
 
 
             eventListById =     { layout.eventListById }

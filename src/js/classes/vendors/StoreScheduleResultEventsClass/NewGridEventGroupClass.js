@@ -1,3 +1,5 @@
+import store from './../../../redux/store.js';
+
 
 import { ScheduleEventClass } from './ScheduleEventClass.js';
 
@@ -29,6 +31,13 @@ export class NewGridEventGroupClass {
         this.AddReleaseAsLinkedFile = this.AddReleaseAsLinkedFile.bind(this);
 
         this.SetEventData = this.SetEventData.bind(this);
+        this.Update = this.Update.bind(this);
+        this.AddAppRelease = this.AddAppRelease.bind(this);
+
+
+
+        
+
 
 
 
@@ -108,24 +117,28 @@ export class NewGridEventGroupClass {
                 }
                 
             }else{
+
                 let { releases } = this.scheduleEventsGroup[ 0 ];
-                if( releases.length === 0 ){
-                    if( this.linked_file[ 0 ] ){
-                        let {
-                            duration,
-                            name,
-                        } = this.linked_file[ 0 ];
-                        let { startTime } = this.scheduleEventsGroup[ 0 ];
-                        this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
-                            category_id: this.category_id,
-                            eventId: this.eventId,
-                            name,
-                            duration,
-                            startTime
-                        });
-                        this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                if( releases ){
+                    if( releases.length === 0 ){
+                        if( this.linked_file[ 0 ] ){
+                            let {
+                                duration,
+                                name,
+                            } = this.linked_file[ 0 ];
+                            let { startTime } = this.scheduleEventsGroup[ 0 ];
+                            this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                                category_id: this.category_id,
+                                eventId: this.eventId,
+                                name,
+                                duration,
+                                startTime
+                            });
+                            this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                        };
                     };
                 };
+
             };
         }else{
             console.dir('Здесь часть по добавлению привязанного файла к порезанному событию');
@@ -150,6 +163,8 @@ export class NewGridEventGroupClass {
                 });
                 this.scheduleEventsGroup[ 0 ].UpdateEventData();
             }else{
+
+
                 if( releases.length === 0 ){
                     this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
                         category_id:    this.category_id,
@@ -164,6 +179,34 @@ export class NewGridEventGroupClass {
         }else{
             console.dir('Здесь часть по добавлению межпрограммки к порезанному событию');
         };
+    }
+    // AddLinkedFilesFromEvent
+
+    AddAppRelease( releaseId ){
+
+        if( this.firstSegmentId === null ){
+            for( let i = 0; i < this.scheduleEventsGroup.length; i++ ){
+                console.dir(  '!!!!!!!!!!!!!!!!!');
+                this.scheduleEventsGroup[ i ].AddRelease( releaseId );
+                this.scheduleEventsGroup[ i ].UpdateEventData();
+            };
+        }else{
+            console.dir( 'для порезанных файлов не прописана NewGridEventGroup.AddAppReleaseFromDrag()' )
+        };
+
+        console.dir( this );
+
+    }
+
+    Update(){// дучше не использовать
+        if( this.firstSegmentId === null ){
+            for( let i = 0; i < this.scheduleEventsGroup.length; i++ ){
+                this.scheduleEventsGroup[ i ].UpdateEventData();
+            };
+        }else{
+            console.dir( 'для порезанных файлов не прописана NewGridEventGroup.Update()' )
+        }
+
     }
 
 
