@@ -15,6 +15,7 @@ import { convert_sec_to_time } from './../../../../../../../../helpers/convert_s
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
+import { get_linked_file_dutation_by_event_id } from './../../../../../../../../helpers/get_linked_file_dutation_by_event_id.js';
 
 const BufferListComponent = ( props ) => {
 
@@ -50,13 +51,15 @@ const BufferListComponent = ( props ) => {
             if( category_id === null && event_id === null ){
                 work_event_id = force_event_id;
             };
+
+            let linked_file_dutation = get_linked_file_dutation_by_event_id( work_event_id );
    
             let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
 
             ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_APPLICATION );
             ScheduleReleaseDragEvent.DragStart.SetEventId( work_event_id );
             ScheduleReleaseDragEvent.DragStart.SetReleaseId( id );
-            ScheduleReleaseDragEvent.DragStart.SetDuration( releaseDuration );
+            ScheduleReleaseDragEvent.DragStart.SetDuration( releaseDuration + linked_file_dutation );
             ScheduleReleaseDragEvent.DragStart.SetToStore();
 
         } );
@@ -64,8 +67,8 @@ const BufferListComponent = ( props ) => {
     }
 
     const drag_end = () => {
-        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        ScheduleReleaseDragEvent.ClearData();
+        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        // ScheduleReleaseDragEvent.ClearData();
     }
 
     const create = ( arr ) => {

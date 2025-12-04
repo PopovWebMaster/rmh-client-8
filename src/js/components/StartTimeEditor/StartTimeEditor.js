@@ -16,6 +16,7 @@ const StartTimeEditorComponent = ( props ) => {
     let {
         isOpen,
         setIsOpen,
+        isKeyPoint,
         durationTime,
         startTime,
         timeSpaceTo,
@@ -23,6 +24,8 @@ const StartTimeEditorComponent = ( props ) => {
         eventId,
         setStartTime,
         clickSaveHandler,
+        isAKeyOneEvent,
+            setIsAKeyOneEvent,
         
     } = props;
 
@@ -37,6 +40,7 @@ const StartTimeEditorComponent = ( props ) => {
                 showCurrentDayName = { true }
             >
                 <ST_AlertComponent 
+                    // isOpen = { isOpen }
                     durationTime =      { durationTime }
                     startTime =         { startTime }
                     timeSpaceTo =       { timeSpaceTo }
@@ -44,6 +48,14 @@ const StartTimeEditorComponent = ( props ) => {
                     eventId =           { eventId }
                     setStartTime =      { setStartTime }
                     clickSaveHandler =  { clickSaveHandler }
+                    // isKeyPoint = { isKeyPoint }
+
+                    setIsAKeyOneEvent = { setIsAKeyOneEvent }
+
+                    isAKeyOneEvent = { isAKeyOneEvent }
+
+
+                   
                 />
             </AlertWindowContainer>
         </div>

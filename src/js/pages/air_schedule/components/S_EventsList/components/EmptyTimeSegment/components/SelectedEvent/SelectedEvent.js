@@ -26,9 +26,6 @@ const SelectedEventComponent = ( props ) => {
 
     } = props;
 
-        console.dir( 'durationLimit' );
-    console.dir( durationLimit );
-
     let [ listIsOpen, setListIsOpen ] = useState( alwaysOpen );
 
     const itemClick = ( id ) => {
@@ -55,7 +52,7 @@ const SelectedEventComponent = ( props ) => {
                 durationTitle = convert_sec_to_time( duration_sec );
             };
 
-            let isActive = duration_sec >= durationLimit? true: false;
+            let isActive = duration_sec <= durationLimit? true: false;
 
             return (
                 <li

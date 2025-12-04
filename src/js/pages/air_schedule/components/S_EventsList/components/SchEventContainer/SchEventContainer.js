@@ -95,7 +95,7 @@ const SchEventContainerComponent = ( props ) => {
                             <EmptyTimeSector
                                 startTime =     { startTime }
                                 isError =       { isError }
-                                durationTime =  { durationTime }
+                                durationTime =  { durationTime + 1 }
                             />
                         ) }
                     </>) }

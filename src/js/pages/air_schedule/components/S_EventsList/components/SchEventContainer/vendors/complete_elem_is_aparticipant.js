@@ -78,6 +78,18 @@ export const complete_elem_is_aparticipant = ( params ) => {
             //         };
             //     };
             // };
+        }else if( dragStartFrom === START_FROM.RELEASE_LIST ){
+            let event = get_event_by_id( eventId );
+            if( event ){
+                let { type } = event;
+                if( type === EVENT_TYPE.BLOCK ){
+                    result = true;
+                }else{
+                    if( releases.length === 0 ){
+                        result = true;
+                    };
+                };
+            };
         };
     };
 

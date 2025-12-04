@@ -124,6 +124,8 @@ export class DragStartClass {
 
         store.dispatch( setDragStartEventId( this.eventId ) );
         store.dispatch( setDragStartCategoryId( this.categoryId ) );
+
+
         store.dispatch( setDragStartLinkedFileDuration( this.linked_files_duration ) );
 
 
@@ -136,12 +138,8 @@ export class DragStartClass {
         }else if( this.startFrom === START_FROM.SCHEDULE_EVENT ){
             store.dispatch( setDragStartStartTime( this.startTime ) );
             store.dispatch( setDragStartGridEventId( this.gridEventId ) );
-        }else{
-            /*
-                Это мест используется для того, чтоб записать в стор всё что выше в if
-                чтоб можно было создать эекземпляр класса, просто вызвать .SetToStore()
-                и в store всё очистилось
-            */
+        }else if( this.startFrom === START_FROM.RELEASE_LIST ){
+            store.dispatch( setDragStartFileName( this.fileName ) );
 
         };
 

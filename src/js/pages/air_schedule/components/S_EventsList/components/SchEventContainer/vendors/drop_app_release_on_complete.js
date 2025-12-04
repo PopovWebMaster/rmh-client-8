@@ -14,7 +14,11 @@ export const drop_app_release_on_complete = ( gridEventId ) => {
         StoreScheduleResultEvents.CreateList();
 
         StoreScheduleResultEvents.AddRelease( gridEventId, dragStartReleaseId );
-        StoreScheduleResultEvents.SetListToStore( true );
+        // StoreScheduleResultEvents.SetListToStore( true );
+        StoreScheduleResultEvents.SetListToStoreOnlySaccess( true );
+
+
+        // SetListToStoreOnlySaccess
 
 
 

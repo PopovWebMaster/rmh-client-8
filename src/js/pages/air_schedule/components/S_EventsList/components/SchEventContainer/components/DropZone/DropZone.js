@@ -31,7 +31,7 @@ const DropZoneComponent = ( props ) => {
 
         dragStartEventId,
         dragStartDuration,
-        dragStartLinkedFileDuration,
+        // dragStartLinkedFileDuration,
 
         scheduleEventsList,
 
@@ -124,7 +124,7 @@ const DropZoneComponent = ( props ) => {
 
             if( zone_height > (event_height + min_raznica_px) ){
 
-                if( durationTime >= dragStartDuration + dragStartLinkedFileDuration ){
+                if( durationTime >= dragStartDuration ){
                     setEventIsShow( true );
                     let top_position = get_top_position({
                         zone_height,
@@ -221,10 +221,10 @@ const DropZoneComponent = ( props ) => {
         //     next_StartTime = startTime + dutation + 1;
         // }
 
-        let gridEventDuration = dragStartDuration + dragStartLinkedFileDuration;
+        let gridEventDuration = dragStartDuration;
 
 
-        let val =  ((dutation - dragStartDuration - dragStartLinkedFileDuration) * proc) / 100;
+        let val =  ((dutation - dragStartDuration) * proc) / 100;
 
         let plus = Math.round( val );
         if( plus < 0 ){
@@ -284,7 +284,7 @@ const DropZoneComponent = ( props ) => {
                 >
                     <span className = 'DropZone_time'>{ convert_sec_to_time( startTime + startTimePlus ) }</span>
 
-                    <span className = 'DropZone_dur'>{ convert_sec_to_time( dragStartDuration + dragStartLinkedFileDuration ) }</span>
+                    <span className = 'DropZone_dur'>{ convert_sec_to_time( dragStartDuration ) }</span>
                     <div className = 'DropZone_event' >
                         <input
                             type = 'text'

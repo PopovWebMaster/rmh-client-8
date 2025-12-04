@@ -40,11 +40,19 @@ const StartTimeEditButtonComponent = ( props ) => {
     let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
     let [ eventId, setEventId ] = useState( null );
 
-    let [ releaseStartTime, setReleaseStartTime ] = useState( null );
+
+
+    let [ isAKeyOneEvent, setIsAKeyOneEvent ] = useState( false );
 
 
     useEffect( () => {
         get_day_event_data();
+
+        if( isOpen ){
+            setIsAKeyOneEvent( isKeyPoint );
+        }else{
+            setIsAKeyOneEvent( false );
+        };
 
     }, [ 
         gridEventId, 
@@ -95,7 +103,7 @@ const StartTimeEditButtonComponent = ( props ) => {
     }
 
     const clickSaveHandler = () => {
-        set_schedule_list_changes_to_store( gridEventId, { startTime: startTimeNext } );
+        set_schedule_list_changes_to_store( gridEventId, { startTime: startTimeNext, isKeyPoint: isAKeyOneEvent } );
         setIsOpen( false );
     };
 
@@ -118,6 +126,7 @@ const StartTimeEditButtonComponent = ( props ) => {
 
         <StartTimeEditor 
             isOpen =            { isOpen }
+            isKeyPoint =        { isKeyPoint }
             setIsOpen =         { setIsOpen }
             durationTime =      { durationTime }
             // startTime =         { startTime }
@@ -130,6 +139,9 @@ const StartTimeEditButtonComponent = ( props ) => {
             setStartTime =      { setStartTimeNext }
 
             clickSaveHandler =  { clickSaveHandler }
+
+            isAKeyOneEvent =  { isAKeyOneEvent }
+            setIsAKeyOneEvent =  { setIsAKeyOneEvent }
         />
 
         <span 

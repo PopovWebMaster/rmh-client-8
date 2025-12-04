@@ -8,10 +8,13 @@ import './ST_AlertComponent.scss';
 import { selectorData as layoutSlice } from './../../../../redux/layoutSlice.js';
 import { AppearanceOfEvent } from './../AppearanceOfEvent/AppearanceOfEvent.js';
 import { TimeSelected } from './../TimeSelected/TimeSelected.js';
+import { KeyPointSelect } from './../KeyPointSelect/KeyPointSelect.js';
 
 const ST_AlertComponentComponent = ( props ) => {
 
     let {
+        // isOpen,
+        // isKeyPoint,
         durationTime,
         startTime,
         timeSpaceTo,
@@ -20,14 +23,33 @@ const ST_AlertComponentComponent = ( props ) => {
         setStartTime,
 
         clickSaveHandler,
+
+        isAKeyOneEvent,
+        setIsAKeyOneEvent,
         
     } = props;
 
     let [ timeTarget, setTimeTarget ] = useState( 'start' );
+    // let [ isAKeyOneEvent, setIsAKeyOneEvent ] = useState( false );
+
+    // useEffect( () => {
+    //     if( isOpen ){
+    //         setIsAKeyOneEvent( isKeyPoint );
+    //     }else{
+    //         setIsAKeyOneEvent( false );
+    //     };
+
+    // }, [ isOpen ] );
+
 
     
     return (
         <div className = 'ST_AlertComponent'>
+
+            <KeyPointSelect
+                isAKeyOneEvent =     { isAKeyOneEvent }
+                setIsAKeyOneEvent = { setIsAKeyOneEvent }
+            />
 
             <AppearanceOfEvent
                 eventId = { eventId }

@@ -24,11 +24,13 @@ export const target_event_is_aparticipant = ( params ) => {
     let result = false;
 
     if( isEmpty ){
+        // result = true;
         result = empty_elem_is_aparticipant({
             durationTime, 
             startTime,
         });
     }else{
+        // result = true;
         result = complete_elem_is_aparticipant({
             gridEventId,
         });

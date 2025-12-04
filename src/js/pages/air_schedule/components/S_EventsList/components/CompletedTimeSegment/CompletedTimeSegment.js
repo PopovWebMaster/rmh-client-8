@@ -41,6 +41,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
     let [ duration, setDuration ] = useState( 0 );
 
+
     useEffect( () => {
 
         if( firstSegmentId === null ){
@@ -99,6 +100,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
             <ReleasesItem
                 releases = { releases }
                 gridEventId = { gridEventId }
+                firstSegmentId = { firstSegmentId }
             />
             
         </SchEventContainer>

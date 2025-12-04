@@ -16,7 +16,7 @@ export const scheduleResultDragEventSlise = createSlice({
         dragStartStartTime: 0,
         dragStartGridEventId: null,
         dragStartReleaseId: null,
-        dragStartLinkedFileDuration: 0,
+        dragStartLinkedFileDuration: 0,// // НЕ ИСПОЛЬЗОВАТЬ !!
 
 
 

@@ -123,33 +123,20 @@ const CutSegmentButtonComponent = ( props ) => {
 
             };
 
-
-
         };
     }
 
-
-
     const saveHandler = () => {
-
-        // console.dir( 'scheduleEventsList' );
-        // console.dir( scheduleEventsList );
-
-        // console.dir( 'eventsPartsList' );
-        // console.dir( eventsPartsList );
-
-
         let dayList = marge_dayList_and_catList( scheduleEventsList, eventsPartsList );
 
-        // console.dir( 'dayList' ) ;
-        // console.dir( dayList ) ;
-
-
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( dayList );
+
+        StoreScheduleResultEvents.CreateList( {
+            gridEventsList: dayList,
+        } );
+
         StoreScheduleResultEvents.SetListToStore( true );
 
-        // setScheduleEventsList( dayList );
         setIsOpen( false );
 
     }
@@ -184,13 +171,8 @@ export function CutSegmentButton( props ){
         const scheduleResult = useSelector( scheduleResultSlise );
         const cutEventEditor = useSelector( cutEventEditorSlise );
 
-
-        
-
-        // const navigation = useSelector( navigationSlice );
         const dispatch = useDispatch();
     
-
     return (
         <CutSegmentButtonComponent
             { ...props }
@@ -199,13 +181,10 @@ export function CutSegmentButton( props ){
 
             eventsPartsList = { cutEventEditor.eventsPartsList }
 
-
             scheduleEventsList = { scheduleResult.scheduleEventsList }
             scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
 
 
-            // aaa = { cutEventEditor.e }
-            // setGridDayEventsList = { ( val ) => { dispatch( setGridDayEventsList( val ) ) } }
             setSutEventData = { ( obj ) => { dispatch( setSutEventData( obj ) ) } }
             setScheduleEventsList = { ( arr ) => { dispatch( setScheduleEventsList( arr ) ) } }
 

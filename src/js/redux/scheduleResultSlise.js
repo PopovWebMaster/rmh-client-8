@@ -37,6 +37,8 @@ export const scheduleResultSlise = createSlice({
         dragebleReleaseEventId: null,
 
         usedReleasesById: {},
+        usedFreeReleaseById: {},
+
 
         infoMessageText: '', // просто записываешь текст и он выскакивает. Реагирует на содержание строки
 
@@ -50,6 +52,10 @@ export const scheduleResultSlise = createSlice({
 
         freeReleasesFilterCategoryId: null,
         freeReleasesFilterEventId: null,
+
+        eventsAsReleaseFilterCategoryId: null,
+        eventsAsReleaseFiltered: null,
+
 
 
 
@@ -123,6 +129,8 @@ export const scheduleResultSlise = createSlice({
 
             let obj = {};
             let usedReleses = {};
+            let usedFreeReleses = {};
+
             for( let i = 0; i < action.payload.length; i++ ){
                 if( action.payload[ i ].gridEventId !== null ){
                     obj[ action.payload[ i ].gridEventId ] = { ...action.payload[ i ] };
@@ -130,11 +138,24 @@ export const scheduleResultSlise = createSlice({
                     for( let y = 0; y < releases.length; y++ ){
                         let { id } = releases[ y ];
                         usedReleses[ id ] = true;
+
+                        if( typeof id === 'string' ) {
+                            if( usedFreeReleses[ id ] ){
+                                usedFreeReleses[ id ].count = usedFreeReleses[ id ].count + 1;
+                            }else{
+                                usedFreeReleses[ id ] = {
+                                    count: 1,
+                                };
+                            };
+                        }
                     };
                 };
             };
+            // usedFreeReleaseById
             state.scheduleEventsListByGridEventId = obj;
             state.usedReleasesById = usedReleses;
+            state.usedFreeReleaseById = usedFreeReleses;
+
 
         },
 
@@ -199,10 +220,17 @@ export const scheduleResultSlise = createSlice({
         },
 
 
-        
-        
+        setEventsAsReleaseFilterCategoryId: ( state, action ) => {
+            state.eventsAsReleaseFilterCategoryId =  action.payload;
+        },
 
-        
+
+        setEventsAsReleaseFiltered: ( state, action ) => {
+            state.eventsAsReleaseFiltered =  action.payload;
+        },
+
+
+
 
 
         
@@ -241,6 +269,8 @@ export const {
             
     setFreeReleasesFilterCategoryId,
     setFreeReleasesFilterEventId,
+    setEventsAsReleaseFilterCategoryId,
+    setEventsAsReleaseFiltered,
 
 
 
@@ -285,13 +315,20 @@ export const selectorData = ( state ) => {
         freeReleasesFilterCategoryId: state.scheduleResult.freeReleasesFilterCategoryId,
         freeReleasesFilterEventId: state.scheduleResult.freeReleasesFilterEventId,
         scheduleEventBySectors: state.scheduleResult.scheduleEventBySectors,
+        usedFreeReleaseById: state.scheduleResult.usedFreeReleaseById,
+
+
+        eventsAsReleaseFilterCategoryId: state.scheduleResult.eventsAsReleaseFilterCategoryId,
+        eventsAsReleaseFiltered: state.scheduleResult.eventsAsReleaseFiltered,
+
+
 
 
         
 
 
 
-
+        
 
         
         

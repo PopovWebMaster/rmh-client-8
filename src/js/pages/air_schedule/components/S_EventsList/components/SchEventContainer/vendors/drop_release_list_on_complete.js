@@ -1,20 +1,20 @@
-
 import store from './../../../../../../../redux/store.js';
 
 import { StoreScheduleResultEventsClass } from './../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
-export const drop_free_release_on_complete = ( gridEventId ) => {
-
+export const drop_release_list_on_complete = ( gridEventId ) => {
     let { scheduleResultDragEvent } = store.getState();
     let { 
         dragStartDuration,
         dragStartStartTime,
         dragStartEventId,
-        // dragStartCategoryId,
+        dragStartLinkedFileDuration,
         dragStartFileName,
     } = scheduleResultDragEvent;
 
     // let { scheduleEventsList } = scheduleResult;
+
+    console.dir( dragStartFileName );
 
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
     StoreScheduleResultEvents.CreateList();
@@ -25,30 +25,23 @@ export const drop_free_release_on_complete = ( gridEventId ) => {
     });
     StoreScheduleResultEvents.AddFreeRelease({
         name:       dragStartFileName,
-        duration:   dragStartDuration,
+        duration:   dragStartDuration - dragStartLinkedFileDuration,
         startTime:  dragStartStartTime,
     });
 
     StoreScheduleResultEvents.AddReleasesFromNewGridEvent( gridEventId );
     StoreScheduleResultEvents.SetListToStore( true );
 
-
-
-
-
-    // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-
-    // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-
-    // StoreScheduleResultEvents.AddReleaseAsLinkedFile({
-    //     gridEventId,
-    //     category_id:    dragStartCategoryId,
-    //     eventId:        dragStartEventId,
-    //     name:           dragStartFileName,
-    //     duration:       dragStartDuration,
+    // StoreScheduleResultEvents.CreateNewGridEvent({
     //     startTime:      dragStartStartTime,
+    //     eventId:        dragStartEventId,
+    // });
+    // StoreScheduleResultEvents.AddFreeRelease({
+    //     name:       dragStartFileName,
+    //     duration:   dragStartDuration,
+    //     startTime:  dragStartStartTime,
     // });
 
+    // StoreScheduleResultEvents.AddReleasesFromNewGridEvent( gridEventId );
     // StoreScheduleResultEvents.SetListToStore( true );
-
-};
+}

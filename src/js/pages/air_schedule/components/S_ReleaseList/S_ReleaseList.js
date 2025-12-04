@@ -13,6 +13,8 @@ import { ReleaseList } from './components/ReleaseList/ReleaseList.js';
 
 import { FreeReleaseList } from './components/FreeReleaseList/FreeReleaseList.js';
 
+import { EventsAsReleaseList } from './components/EventsAsReleaseList/EventsAsReleaseList.js';
+
 
 const S_ReleaseListComponent = ( props ) => {
 
@@ -20,7 +22,7 @@ const S_ReleaseListComponent = ( props ) => {
 
     } = props;
 
-    let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list' 'free_release'
+    let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list' 'free_release' 'events_as_release'
 
     const create = ( val ) => {
         let result = '';
@@ -36,6 +38,10 @@ const S_ReleaseListComponent = ( props ) => {
 
             case 'free_release':
                 result = <FreeReleaseList />
+                break;
+
+            case 'events_as_release':
+                result = <EventsAsReleaseList />
                 break;
         };
 

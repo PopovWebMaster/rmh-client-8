@@ -33,6 +33,8 @@ export class NewGridEventGroupClass {
         this.SetEventData = this.SetEventData.bind(this);
         this.Update = this.Update.bind(this);
         this.AddAppRelease = this.AddAppRelease.bind(this);
+        this.AddFreeRelease = this.AddFreeRelease.bind(this);
+
 
 
 
@@ -186,7 +188,6 @@ export class NewGridEventGroupClass {
 
         if( this.firstSegmentId === null ){
             for( let i = 0; i < this.scheduleEventsGroup.length; i++ ){
-                console.dir(  '!!!!!!!!!!!!!!!!!');
                 this.scheduleEventsGroup[ i ].AddRelease( releaseId );
                 this.scheduleEventsGroup[ i ].UpdateEventData();
             };
@@ -194,8 +195,44 @@ export class NewGridEventGroupClass {
             console.dir( 'для порезанных файлов не прописана NewGridEventGroup.AddAppReleaseFromDrag()' )
         };
 
-        console.dir( this );
 
+    }
+
+    AddFreeRelease( params ){
+        let {
+            name,
+            duration,
+            startTime,
+        } = params;
+
+        if( this.firstSegmentId === null ){
+            if( this.event_type === EVENT_TYPE.BLOCK ){
+
+                
+                this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                    category_id:    this.category_id,
+                    eventId:        this.eventId,
+                    name,
+                    duration,
+                    startTime
+                });
+                this.scheduleEventsGroup[ 0 ].UpdateEventData();
+            }else{
+
+                if( this.scheduleEventsGroup[ 0 ].releases.length === 0 ){
+                    this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                        category_id:    this.category_id,
+                        eventId:        this.eventId,
+                        name,
+                        duration,
+                        startTime
+                    });
+                    this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                };
+            };
+        }else{
+            console.dir('Здесь часть по добавлению межпрограммки к порезанному событию AddFreeRelease');
+        };
     }
 
     Update(){// дучше не использовать

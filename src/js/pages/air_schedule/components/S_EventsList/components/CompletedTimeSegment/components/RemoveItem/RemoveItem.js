@@ -1,15 +1,15 @@
 
 import React, { useRef, useState, useEffect }   from "react";
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import './RemoveItem.scss';
 
-import { selectorData as layoutSlice, setGridDayEventsList } from './../../../../../../../../redux/layoutSlice.js';
-import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
+// import { selectorData as layoutSlice, setGridDayEventsList } from './../../../../../../../../redux/layoutSlice.js';
+// import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 
 
-import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+// import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
 // import { send_request_to_server } from './../../../../../../../../helpers/send_request_to_server.js';
 
@@ -24,26 +24,29 @@ const RemoveItemComponent = ( props ) => {
 
     let {
         gridEventId,
-        scheduleEventsList,
+        // scheduleEventsList,
 
     } = props;
 
-    let [ isOpen, setIsOpen] = useState( false );
+    // let [ isOpen, setIsOpen] = useState( false );
 
     const remove_event = () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.CreateList();
+
+
         StoreScheduleResultEvents.RemoveEvent( gridEventId );
         StoreScheduleResultEvents.SetListToStore( true );
-        setIsOpen( false );
+        // setIsOpen( false );
 
     }
 
 
     return (
         <div className = 'CTS_RemoveItem'>
-            <AlertWindowContainer
+            {/* <AlertWindowContainer
                 isOpen = { isOpen }
                 setIsOpen = { setIsOpen }
                 width = '25em'
@@ -63,11 +66,11 @@ const RemoveItemComponent = ( props ) => {
                     </p>
                 </div>
     
-            </AlertWindowContainer>
+            </AlertWindowContainer> */}
 
             <RemoveSegmentButton 
                 gridEventId = { gridEventId }
-                clickHandler = { () => { setIsOpen( true ) } }
+                clickHandler = { remove_event }
             />
             
         </div>
@@ -77,15 +80,15 @@ const RemoveItemComponent = ( props ) => {
 
 export function RemoveItem( props ){
 
-        const scheduleResult = useSelector( scheduleResultSlise );
-        const dispatch = useDispatch();
+        // const scheduleResult = useSelector( scheduleResultSlise );
+        // const dispatch = useDispatch();
     
 
     return (
         <RemoveItemComponent
             { ...props }
 
-            scheduleEventsList = { scheduleResult.scheduleEventsList }
+            // scheduleEventsList = { scheduleResult.scheduleEventsList }
 
             
             // setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }

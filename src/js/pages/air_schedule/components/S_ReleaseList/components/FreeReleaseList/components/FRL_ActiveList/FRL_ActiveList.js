@@ -24,6 +24,7 @@ const FRL_ActiveListComponent = ( props ) => {
         freeReleasesFilterCategoryId,
         freeReleasesFilterEventId,
         freeReleasesFiltered,
+        usedFreeReleaseById,
        
     } = props;
 
@@ -52,8 +53,14 @@ const FRL_ActiveListComponent = ( props ) => {
                 fileName,
                 duration,
                 eventId,
-                count,
+                // count,
             } = item;
+
+            let count = 0;
+
+            if( usedFreeReleaseById[ fileName ] ){
+                count = usedFreeReleaseById[ fileName ].count;
+            };
 
             return (
                 <React.Fragment key = { index }>
@@ -113,6 +120,10 @@ export function FRL_ActiveList( props ){
             freeReleasesFilterCategoryId = { scheduleResult.freeReleasesFilterCategoryId }
             freeReleasesFilterEventId = { scheduleResult.freeReleasesFilterEventId }
             freeReleasesFiltered = { scheduleResult.freeReleasesFiltered }
+
+
+            usedFreeReleaseById = { scheduleResult.usedFreeReleaseById }
+
 
 
 

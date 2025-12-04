@@ -3,7 +3,7 @@ import { SSRE_Methods } from './vendors/StoreScheduleResultEventsClass/SSRE_Meth
 import { ScheduleEventClass } from './vendors/StoreScheduleResultEventsClass/ScheduleEventClass.js';
 
 import store from './../redux/store.js';
-import { setScheduleEventsList, setScheduleEventsListIsChanged, setScheduleEventBySectors } from './../redux/scheduleResultSlise.js';
+import { setScheduleEventsList, setScheduleEventsListIsChanged, setScheduleEventBySectors, setInfoMessageText } from './../redux/scheduleResultSlise.js';
 
 import { divide_day_into_sectors } from './vendors/StoreScheduleResultEventsClass/divide_day_into_sectors.js';
 import { add_empty_segments_and_types } from './vendors/StoreScheduleResultEventsClass/add_empty_segments_and_types.js';
@@ -44,6 +44,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.CreateList = this.CreateList.bind(this);
 
         this.SetListToStore = this.SetListToStore.bind(this);
+        this.SetListToStoreOnlySaccess = this.SetListToStoreOnlySaccess.bind(this);
+
+
+        
         this.CreateFromScheduleEventsList = this.CreateFromScheduleEventsList.bind(this);
         this.GetListBySectors = this.GetListBySectors.bind(this);
         this.AddRelease = this.AddRelease.bind(this);
@@ -71,6 +75,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
         this.AddAppRelease = this.AddAppRelease.bind(this);
+        this.AddFreeRelease = this.AddFreeRelease.bind(this);
+        this.AddReleasesFromNewGridEvent = this.AddReleasesFromNewGridEvent.bind(this);
 
 
 
@@ -78,22 +84,31 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
 
-        
-
-
-        // AddReleaseByData
 
 
     }
 
     CreateFromGridEvents(){
         let gridEventsList = this.GetGridEventsList();
+
         for( let i = 0; i < gridEventsList.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromGridEvent( gridEventsList[ i ] );
             this.list.push( ScheduleEvent );
             this.SetLastGridEventId( ScheduleEvent );
         };
+
+        let list = this.GetScheduleEventsList( false );
+
+        let { isError, newList } = adjust_startTime_in_list_v2( list );
+        let list_2 = [];
+        for( let i = 0; i < newList.length; i++ ){
+            let ScheduleEvent = new ScheduleEventClass();
+            ScheduleEvent.SetDataFromGridEvent( newList[ i ] );
+            ScheduleEvent.UpdateEventData();
+            list_2.push( ScheduleEvent );
+        };
+        this.list = list_2;
     }
 
     CreateFromScheduleEventsList( arr, withReleses = true ){ // не использовать!
@@ -149,11 +164,12 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         let {
             startTime,
             eventId,
+            durationTime = MIN_EVENT_DURATION_SEC,
         } = params;
 
         this.NewGridEventGroup = new NewGridEventGroupClass();
         this.NewGridEventGroup.AddNewEvent({
-            durationTime: MIN_EVENT_DURATION_SEC,
+            durationTime,
             id: this.GetIdForNewGridEvent(),
             eventId,
             startTime,
@@ -179,6 +195,27 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             startTime,
         } = params;
         this.NewGridEventGroup.AddReleaseAsLinkedFile({ name, duration, startTime });
+    }
+
+    AddFreeRelease( params ){
+        let {
+            name,
+            duration,
+            startTime,
+        } = params;
+        this.NewGridEventGroup.AddFreeRelease({ name, duration, startTime });
+    }
+
+    AddReleasesFromNewGridEvent( gridEventId ){
+        for( let i = 0; i < this.list.length; i++ ){
+            if( this.list[ i ].id === gridEventId ){
+                let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
+                for( let y = 0; y < newEventData.releases.length; y++ ){
+                    this.list[ i ].AddReleaseByData( newEventData.releases[ y ] );
+                };
+                break;
+            };
+        };
     }
 
 
@@ -271,8 +308,8 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         // GetScheduleEventsListFromStore
 
-        console.dir( 'scheduleEventsList' );
-        console.dir( scheduleEventsList );
+        // console.dir( 'scheduleEventsList' );
+        // console.dir( scheduleEventsList );
 
 
         // let arr_2 = adjust_startTime_in_day_list( scheduleEventsList );
@@ -291,6 +328,28 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         
         this.SetCounterDataToStore( newList );
     }
+
+    SetListToStoreOnlySaccess( isChanged = null ){
+         let scheduleEventsList = this.GetScheduleEventsList();
+
+        let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
+
+        if( isError ){
+            store.dispatch( setInfoMessageText( 'Не может быть добавлено. Не достаточно места') );
+
+        }else{
+            let arr = divide_day_into_sectors( scheduleEventsList );
+            let listByectors = add_empty_segments_and_types( arr );
+            store.dispatch( setScheduleEventBySectors( listByectors ) );
+            store.dispatch( setScheduleEventsList( newList ) );
+            if( isChanged !== null ){
+                store.dispatch( setScheduleEventsListIsChanged( isChanged ) );
+            };
+            this.SetCounterDataToStore( newList );
+        };
+    }
+
+    
 
     AddReleaseByReleaseData( gridEventId, release ){
         let Event = this.GetEventData( gridEventId );
@@ -311,13 +370,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             releaseData,
             list: this.list
         });
-
-        console.dir({
-            rest_sec,
-            releaseDuration: releaseData.releaseDuration
-        });
-
-        /*
 
         if( rest_sec >= releaseData.releaseDuration ){
             if( Event ){
@@ -350,14 +402,16 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                             if( rest_duration >= durationTime ){
                                 if( EventParts[ i + 1 ] ){
                                     duration = durationTime;
+                                    // duration = rest_duration;
+
                                     rest_duration = rest_duration - durationTime;
                                 }else{
 
-                                    console.dir({
-                                        rest_duration,
-                                        duration,
-                                        durationTime
-                                    });
+                                    // console.dir({
+                                    //     rest_duration,
+                                    //     duration,
+                                    //     durationTime
+                                    // });
 
                                     // if( durationTime >= rest_duration ){
 
@@ -377,12 +431,18 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                                 rest_duration = 0
                             };
 
+                            // console.dir( 'duration' );
+                            // console.dir( duration );
+
+
                             if( duration > 0 ){
                                 let data = { ...releaseData };
-                                data.releaseDuration = duration;
+                                // data.releaseDuration = duration;
                                 data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                                EventParts[ i ].durationTime = duration;
                                 EventParts[ i ].AddReleaseByData( data );
                                 EventParts[ i ].UpdateEventData();
+
                             }else{
                                 let { gridEventId } = EventParts[ i ];
                                 removeEventList.push( gridEventId );
@@ -399,8 +459,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             };
 
         };
-
-        */
 
     }
 
@@ -563,11 +621,26 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
     RemoveRelease(  gridEventId, releaseId ){
+
+        let firstSegmentId = null;
+
         for( let i = 0; i < this.list.length; i++ ){
             if( this.list[ i ].gridEventId === gridEventId ){
+                firstSegmentId = this.list[ i ].firstSegmentId;
                 this.list[ i ].RemoveRelease( releaseId );
                 this.list[ i ].UpdateEventData();
                 break;
+            };
+        };
+
+        if( firstSegmentId !== null ){
+            for( let i = 0; i < this.list.length; i++ ){
+                if( this.list[ i ].gridEventId !== gridEventId ){
+                    if( this.list[ i ].firstSegmentId === firstSegmentId ){
+                        this.list[ i ].RemoveRelease( releaseId );
+                        this.list[ i ].UpdateEventData();
+                    };
+                };
             };
         };
     }

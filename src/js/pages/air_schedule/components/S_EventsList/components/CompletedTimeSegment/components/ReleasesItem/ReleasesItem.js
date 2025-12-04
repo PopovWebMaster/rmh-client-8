@@ -16,7 +16,8 @@ const ReleasesItemComponent = ( props ) => {
     let {
         releases,
         gridEventId,
-        scheduleEventsList,
+        // scheduleEventsList,
+        firstSegmentId,
 
         scheduleEventsListByGridEventId,
 
@@ -24,36 +25,27 @@ const ReleasesItemComponent = ( props ) => {
 
     const remove = ( release_id ) => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.RemoveRelease( gridEventId, release_id  );
         StoreScheduleResultEvents.SetListToStore( true );
     }
 
-
     const releaseMoveUp = ( id ) => {
-
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.ReleaseMoveUp( gridEventId, id  );
         StoreScheduleResultEvents.SetListToStore( true );
-
-        // ReleaseMoveUp
 
     }
 
     const releaseMoveDown = ( id ) => {
-
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.ReleaseMoveDown( gridEventId, id  );
         StoreScheduleResultEvents.SetListToStore( true );
-
     }
 
     const create = ( arr ) => {
-
-        // console.dir( 'releases' );
-        // console.dir( arr );
 
         let releasStartTimePosition = 0;
 
@@ -67,6 +59,7 @@ const ReleasesItemComponent = ( props ) => {
                 startTime,
                 air_notes,
             } = item;
+
 
             let notesValue = air_notes === null? '': air_notes;
 
@@ -100,6 +93,8 @@ const ReleasesItemComponent = ( props ) => {
                 is_app = true;
             };
 
+            let removeActive = firstSegmentId === null || firstSegmentId === gridEventId? true: false;
+
             return (
                 <div
                     className = 'CTS_RI_Item'
@@ -108,14 +103,10 @@ const ReleasesItemComponent = ( props ) => {
 
                     <div className = 'CTS_RI_Item_time'>
                         
-
-
                         <span className = 'CTS_RI_Item_time_fact' >{ convert_sec_to_time( startTime_sec ) }</span>
                         <span className = 'CTS_RI_Item_time_plan'>{ convert_sec_to_time( startTime ) }</span>
 
                     </div>
-
-
                     <span
                         className = 'icon-angle-up arrow'
                         onClick = { () => { releaseMoveUp( id ) } }
@@ -132,8 +123,8 @@ const ReleasesItemComponent = ( props ) => {
                 
                     <span className = 'duration'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span
-                        onClick = { () => { remove( id ) } }
-                        className = 'remove'>Снять</span>
+                        onClick = { () => { removeActive? remove( id ): () => {} } }
+                        className = { `remove ${removeActive? '': 'removeHidden'}` }>Снять</span>
                 </div>
             );
         } );
@@ -162,7 +153,7 @@ export function ReleasesItem( props ){
     return (
         <ReleasesItemComponent
             { ...props }
-            scheduleEventsList = { scheduleResult.scheduleEventsList }
+            // scheduleEventsList = { scheduleResult.scheduleEventsList }
             scheduleEventsListByGridEventId = { scheduleResult.scheduleEventsListByGridEventId }
 
             // categoryListById = { layout.categoryListById }

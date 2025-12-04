@@ -21,20 +21,20 @@ export const empty_elem_is_aparticipant = ( params  ) => {
 
     if( dragStartFrom === START_FROM.SCHEDULE_EVENT ){
 
-        let is_neighbor = empty_elem_is_neighbor({
-            durationTime, 
-            startTime,
-            dragStartStartTime,
-            dragStartDuration,
-        });
+        // let is_neighbor = empty_elem_is_neighbor({
+        //     durationTime, 
+        //     startTime,
+        //     dragStartStartTime,
+        //     dragStartDuration,
+        // });
 
-        if( is_neighbor ){
+        // if( is_neighbor ){
 
-        }else{
+        // }else{
             if( durationTime >= dragStartDuration ){
                 result = true;
             };
-        };
+        // };
 
     }else{
         if( durationTime >= dragStartDuration ){

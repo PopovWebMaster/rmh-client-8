@@ -12,7 +12,7 @@ const TopSwitchButtonsComponent = ( props ) => {
 
     let {
         activeTab,
-        setActiveTab, // 'buffer' 'list' 'free_release'
+        setActiveTab, // 'buffer' 'list' 'free_release' events_as_release
 
     } = props;
 
@@ -36,9 +36,15 @@ const TopSwitchButtonsComponent = ( props ) => {
                 className = { `TSB_btn ${ activeTab === 'free_release'? 'isActive': '' }` }
                 onClick = { () => { setActiveTab( 'free_release' ) } }
             >
-                <span>Межпрогр. ролики</span>
+                <span>Меж.прогр.</span>
             </div>
 
+            <div
+                className = { `TSB_btn ${ activeTab === 'events_as_release'? 'isActive': '' }` }
+                onClick = { () => { setActiveTab( 'events_as_release' ) } }
+            >
+                <span>События</span>
+            </div>
        </div>
     )
 

@@ -50,6 +50,8 @@ export class ScheduleEventClass{
 
         this.GetDayNum = this.GetDayNum.bind(this);
         this.GetDutationTime = this.GetDutationTime.bind(this);
+        this.SetData = this.SetData.bind(this);
+
 
 
 
@@ -103,13 +105,12 @@ export class ScheduleEventClass{
         this.finalNotes =       finalNotes;
         this.pushIt =           pushIt;
         this.startTime =        startTime;
-        this.releases =         null;
+        this.releases =         [];
 
         for( let i = 0; i < releases.length; i++ ){
             let data = { ...releases[ i ] };
             this.AddReleaseByData( data );
         };
-
 
 
     }
@@ -392,6 +393,8 @@ export class ScheduleEventClass{
                             никогда не выполнится, так как нельзя резать события с релизами больше одного
                         */
                         allReleaseDuration = this.durationTime;
+                        // allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
+
                     };
                 }
 

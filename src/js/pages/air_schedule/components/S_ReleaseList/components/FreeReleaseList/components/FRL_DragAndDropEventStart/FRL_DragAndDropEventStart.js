@@ -12,6 +12,8 @@ import './FRL_DragAndDropEventStart.scss';
 // import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
+import { get_linked_file_dutation_by_event_id } from './../../../../../../../../helpers/get_linked_file_dutation_by_event_id.js';
+
 
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 
@@ -35,9 +37,13 @@ const FRL_DragAndDropEventStartComponent = ( props ) => {
             
             let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
 
+            let linked_file_dutation = get_linked_file_dutation_by_event_id( eventId );
+
             ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_FREE );
             ScheduleReleaseDragEvent.DragStart.SetFileName( fileName );
-            ScheduleReleaseDragEvent.DragStart.SetDuration( duration );
+            ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
+            ScheduleReleaseDragEvent.DragStart.SetLinkedFilesDuration( linked_file_dutation );
+
             ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
             ScheduleReleaseDragEvent.DragStart.SetToStore();
 
@@ -45,8 +51,8 @@ const FRL_DragAndDropEventStartComponent = ( props ) => {
     }
 
     const drag_end = () => {
-        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        ScheduleReleaseDragEvent.ClearData();
+        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        // ScheduleReleaseDragEvent.ClearData();
 
     }
 

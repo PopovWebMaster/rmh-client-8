@@ -127,18 +127,26 @@
         >span.remove{
             font-size: 0.55em;
             flex-grow: 0;
-            padding: 0.1em 0.3em;
+            padding: 0.15em 0.3em;
             border-radius: 0.1em;
             cursor: pointer;
             user-select: none;
             // background-color: red;
             color: #df7070;
+            width: 3.4em;
+            text-align: center;
+        }
+
+        >span.remove.removeHidden{
+            opacity: 0;
+            cursor: default;
         }
         >span.remove:hover{
-            color: #eb4848;
+            color: #eeeeee;
+            background-color: #e16a6a;
         }
         >span.remove:active{
-            color: #ad3131;
+            color: #d49191;
         }
     }
 

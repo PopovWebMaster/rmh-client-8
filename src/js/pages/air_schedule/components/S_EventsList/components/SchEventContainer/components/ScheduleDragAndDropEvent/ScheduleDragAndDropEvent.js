@@ -7,12 +7,9 @@ import './ScheduleDragAndDropEvent.scss';
 
 import { selectorData as scheduleResultDragEventSlise } from './../../../../../../../../redux/scheduleResultDragEventSlise.js';
 
-// import { DropZone } from './components/DropZone/DropZone.js';
 import { DropZone } from './../DropZone/DropZone.js';
 
-
 import { target_event_is_aparticipant } from './../../vendors/target_event_is_aparticipant.js';
-
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 
@@ -26,6 +23,14 @@ import { drop_schedule_event_on_empty } from './../../vendors/drop_schedule_even
 // import { drop_schedule_event_on_complete } from './../../vendors/drop_schedule_event_on_complete.js';
 import { drop_app_release_on_empty } from './../../vendors/drop_app_release_on_empty.js';
 import { drop_app_release_on_complete } from './../../vendors/drop_app_release_on_complete.js';
+import { drag_start_for_schedule_event } from './../../vendors/drag_start_for_schedule_event.js';
+import { drop_release_as_event_on_empty } from './../../vendors/drop_release_as_event_on_empty.js';
+import { drop_release_list_on_empty } from './../../vendors/drop_release_list_on_empty.js';
+import { drop_release_list_on_complete } from './../../vendors/drop_release_list_on_complete.js';
+
+
+
+
 
 import { SelectedEventWindow } from './../../components/SelectedEventWindow/SelectedEventWindow.js';
 
@@ -59,7 +64,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     let [ selectedEventId, setSelectedEventId ] = useState( null );
     let [ durationLimit, setDurationLimit ] = useState( 0 );
 
-    let [ dragStartTime, setDragStartTime ] = useState( 0 );
+    // let [ dragStartTime, setDragStartTime ] = useState( 0 );
     let [ startTimePlus, setStartTimePlus ] = useState( 0 );
     let [ nextStartTime, setNextStartTime ] = useState( null );
 
@@ -71,15 +76,9 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             setDropZoneIsActive( false );
         }else{
             setDropZoneIsActive( true );
-
-            
-        }
+        };
 
     }, [ dragStartFrom ] );
-
-
-
-
 
     const getTargetState = () => {
         let result = target_event_is_aparticipant({
@@ -96,64 +95,50 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
     const selectEventClick = ( event_id ) => {
 
-        console.dir({
-            startTime,
-            startTimePlus,
-        });
-        drop_app_release_on_empty( startTime + startTimePlus, event_id );
-        setSelectedEventWindow_isOpen( false );
-        setStartTimePlus( 0 );
+        if( dragStartFrom === START_FROM.RELEASE_APPLICATION ){
+            drop_app_release_on_empty( startTime + startTimePlus, event_id );
+            setSelectedEventWindow_isOpen( false );
+            setStartTimePlus( 0 );
+        }else if( dragStartFrom === START_FROM.RELEASE_LIST ){
+            drop_release_list_on_empty( startTime + startTimePlus, event_id );
+            setStartTimePlus( 0 );
+            setSelectedEventWindow_isOpen( false );
+        };  
+
+        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        ScheduleReleaseDragEvent.ClearData();
 
     }
 
     const drag_start = ( e ) => {
-        /*
-            для перетаскивания событий в расписании
-        */
         access_right( 'schedule_edit', () => {
-            
-            let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-            ScheduleReleaseDragEvent.SetStartFrom( START_FROM.SCHEDULE_EVENT );
-            ScheduleReleaseDragEvent.DragStart.SetStartTime( startTime );
-            ScheduleReleaseDragEvent.DragStart.SetDuration( durationTime );
-            ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
-            ScheduleReleaseDragEvent.DragStart.SetGridEventId( gridEventId );
-            ScheduleReleaseDragEvent.DragStart.SetToStore();
-
+            if( isCompletd ){
+                drag_start_for_schedule_event( gridEventId );
+            };
         } );
     }
     
     const drag_end = () => {
-        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        ScheduleReleaseDragEvent.ClearData();
-
-        
+        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        // ScheduleReleaseDragEvent.ClearData();  
     }
 
 
     const drag_over = ( e ) => {
         e.preventDefault();
-
-        setIsLighter( true );
-        let isTargetEvent = getTargetState();
-        if( isTargetEvent ){
+        if( getTargetState() ){
             setIsLighter( true );
         }else{
             setIsLighter( false );
         };
-
         dragOverHandler();
-
         setDropZoneIsActive( true );
-        
     }
 
     const drag_leave = ( e ) => {
         setIsLighter( false );
         dragLeaveHandler();
-        // setDragStartTime( 0 );
         setDropZoneIsActive( false );
-
         setNextStartTime( null )
     }
 
@@ -165,30 +150,70 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                 if( isEmpty ){
                     drop_free_release_on_empty( startTime + startTimePlus );
                     setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
                 }else{
-                    // drop_free_release_on_complete( gridEventId );
+                    drop_free_release_on_complete( gridEventId );
                     setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
                 };
             }else if( dragStartFrom === START_FROM.RELEASE_APPLICATION ){
                 if( isEmpty ){
                     if( dragStartEventId === null ){
                         setSelectedEventWindow_isOpen( true );
-                        setDurationLimit( dragStartDuration );
+                        setDurationLimit( durationTime );
                     }else{
                         drop_app_release_on_empty( startTime + startTimePlus, dragStartEventId );
                         setStartTimePlus( 0 );
+                        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                        ScheduleReleaseDragEvent.ClearData();
                     };
                 }else{
                     drop_app_release_on_complete( gridEventId );
                     setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
                 };
             }else if( dragStartFrom === START_FROM.SCHEDULE_EVENT ){
                 if( isEmpty ){
-                    // drop_schedule_event_on_empty( startTime + startTimePlus );
+                    drop_schedule_event_on_empty( startTime + startTimePlus );
                     setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
                 }else{
                     // drop_schedule_event_on_complete( gridEventId );
                     setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
+                };
+            }else if( dragStartFrom === START_FROM.RELEASE_AS_EVENT ){
+                if( isEmpty ){
+                    drop_release_as_event_on_empty( startTime + startTimePlus );
+                    setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
+                }
+            }else if( dragStartFrom === START_FROM.RELEASE_LIST ){
+
+                if( isEmpty ){
+                    // drop_release_list_on_empty( startTime + startTimePlus );
+                    // setStartTimePlus( 0 );
+
+                    if( dragStartEventId === null ){
+                        setSelectedEventWindow_isOpen( true );
+                        setDurationLimit( durationTime );
+                    }else{
+                        drop_release_list_on_empty( startTime + startTimePlus, dragStartEventId );
+                        setStartTimePlus( 0 );
+                        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                        ScheduleReleaseDragEvent.ClearData();
+                    };
+                }else{
+                    drop_release_list_on_complete( gridEventId );
+                    setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
                 };
             };
         };
@@ -197,8 +222,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         dragLeaveHandler();
         setNextStartTime( null );
 
-        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        ScheduleReleaseDragEvent.ClearData();
+        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+        // ScheduleReleaseDragEvent.ClearData();
     }
 
     return (
