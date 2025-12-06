@@ -33,7 +33,7 @@ const EventsAsReleaseListComponent = ( props ) => {
 
     let [ filterHeight, setFilterHeight ] = useState( 0 );
 
-    let [ listIsActive, setListIsActive ] = useState( false );
+    // let [ listIsActive, setListIsActive ] = useState( false );
 
 
 

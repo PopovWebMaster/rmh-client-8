@@ -60,7 +60,7 @@ const StartTimeEditButtonComponent = ( props ) => {
         scheduleEventsList,
     ] )
 
-    useEffect( () => { setStartTimeNext( startTime ) }, [startTime] );
+    useEffect( () => { setStartTimeNext( startTime ) }, [startTime ] );
 
     const clickAdd = () => {
         
@@ -149,6 +149,9 @@ const StartTimeEditButtonComponent = ( props ) => {
             onClick = { clickAdd }
         >
             { convert_sec_to_time( startTimeNext ) }
+
+
+            
 
             {/* <span className = 'truePlanTime'>111111</span> */}
             { get_plan_time( gridEventId ) }

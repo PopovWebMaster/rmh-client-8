@@ -21,10 +21,8 @@ export const drop_release_list_on_empty = ( startTime, event_id ) => {
         eventId:        event_id,
     });
 
-    StoreScheduleResultEvents.AddLinkedFileReleasesToNewGridEvent();
-
-    // console.dir( dragStartDuration );
-    StoreScheduleResultEvents.AddFreeRelease({
+    StoreScheduleResultEvents.NewGridEventGroup.AddLinkedFilesFromEvent();
+    StoreScheduleResultEvents.NewGridEventGroup.AddFreeRelease({
         name:       dragStartFileName,
         duration:   dragStartDuration - dragStartLinkedFileDuration,
         startTime:  dragStartStartTime,

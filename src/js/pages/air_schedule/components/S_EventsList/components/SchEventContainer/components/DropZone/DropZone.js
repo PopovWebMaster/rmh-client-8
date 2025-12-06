@@ -68,22 +68,7 @@ const DropZoneComponent = ( props ) => {
                 setEventStyle( BLIND_STYLE );
                 setEventName( BLIND_CHAR_NAME );
             };
-
-            // if( nextStartTime === null ){
-
-            //     setNextStartTime( 100 );
-
-            //     console.dir('!!!!!!!!!');
-
-            // }
-
-
-
-        //     nextStartTime,
-        // setNextStartTime,
-
-
-            
+  
         }else{
             setEventStyle( {} );
             setEventName( '' );
@@ -191,7 +176,9 @@ const DropZoneComponent = ( props ) => {
 
         if( top < lim_px ){
             result = 0;
-        }else if( top > (zone_height - event_height - ( event_height / 2 ) - lim_px) ){
+        // }else if( top > (zone_height - event_height - ( event_height / 2 ) - lim_px) ){
+        }else if( top > (zone_height - event_height - lim_px) ){
+
             result = zone_height - event_height;
         }else{
             result = top;

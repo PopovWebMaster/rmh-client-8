@@ -59,7 +59,9 @@ const RemoveScheduleButtonComponent = ( props ) => {
                         setSpinnerIsActive( false );
 
                         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-                        StoreScheduleResultEvents.CreateFromScheduleEventsList([]);
+                        StoreScheduleResultEvents.CreateList({
+                            gridEventsList: [],
+                        });
                         StoreScheduleResultEvents.SetListToStore( false );
                         setIsOpen( false );
 

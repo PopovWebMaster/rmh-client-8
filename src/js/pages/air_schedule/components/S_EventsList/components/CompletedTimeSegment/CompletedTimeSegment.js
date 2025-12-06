@@ -15,6 +15,7 @@ import { CutItem } from './components/CutItem/CutItem.js';
 import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
 
 import { ReleasesItem } from './components/ReleasesItem/ReleasesItem.js';
+import { AddFreeReleaseItem } from './components/AddFreeReleaseItem/AddFreeReleaseItem.js';
 
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
@@ -82,6 +83,13 @@ const CompletedTimeSegmentComponent = ( props ) => {
                 <EventNotesItem 
                     gridEventId =   { gridEventId }
                     finalNotes =    { finalNotes }
+                />
+
+                <AddFreeReleaseItem
+                    gridEventId =   { gridEventId }
+                    releases =    { releases }
+                    eventId = { eventId }
+                    firstSegmentId = { firstSegmentId }
                 />
 
                 <div className = 'SEC_right_buttons_wrap'>

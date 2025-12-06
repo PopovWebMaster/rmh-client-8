@@ -174,26 +174,13 @@ const GrigItemWrapComponent = ( props ) => {
 
             let isTargetEvent = getTargetState();
             if( isTargetEvent ){ 
-
                 set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
-
-
-                // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-                // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-                // StoreScheduleResultEvents.AddRelease( gridEventId, dragebleReleaseId );
-                // StoreScheduleResultEvents.SetListToStore();
-
             };
 
         };
 
-        
-
     }
 
-
-
-    
     return (
         <div
             className = { `grigItem ${ isLighter? 'isLighter': '' } ${isCompletd? 'isCompletd_': ''}` }

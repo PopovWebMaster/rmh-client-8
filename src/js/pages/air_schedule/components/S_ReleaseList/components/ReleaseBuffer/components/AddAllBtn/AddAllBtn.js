@@ -25,7 +25,11 @@ const AddAllBtnComponent = ( props ) => {
     const click = () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList, true );
+        StoreScheduleResultEvents.CreateList({
+            withReleses: true
+        });
+
+
         // StoreScheduleResultEvents.AddAllReleases( releaseList );
         StoreScheduleResultEvents.AddAllRemainingReleases( releaseList, usedReleasesById );
 

@@ -62,6 +62,9 @@ const BufferListComponent = ( props ) => {
             ScheduleReleaseDragEvent.DragStart.SetDuration( releaseDuration + linked_file_dutation );
             ScheduleReleaseDragEvent.DragStart.SetToStore();
 
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
+
         } );
 
     }

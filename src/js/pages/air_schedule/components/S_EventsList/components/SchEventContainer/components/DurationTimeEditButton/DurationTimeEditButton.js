@@ -41,9 +41,14 @@ const DurationTimeEditButtonComponent = ( props ) => {
     let [ isReady, setIsReady ] = useState( false );
 
     useEffect( () => {
-        setValue( durationTime );
+        // if( isOpen ){
+            setValue( durationTime );
+        // }else{
 
-    }, [ durationTime ] );
+        // }
+        
+
+    }, [ gridEventId, isOpen ] );
 
     useEffect( () => {
         if( scheduleEventsListByGridEventId[ gridEventId ] ){

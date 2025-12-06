@@ -41,8 +41,6 @@ export class NewGridEventGroupClass {
         
 
 
-
-
     }
 
     AddNewEvent( gridEventData ){
@@ -69,6 +67,10 @@ export class NewGridEventGroupClass {
             let { eventId } = this.scheduleEventsGroup[0];
             let event = get_event_by_id( eventId );
             if( event ){
+
+                // console.dir( 'get_event_by_id' );
+                // console.dir( event );
+
                 let {
                     category_id,
                     durationTime,
@@ -101,11 +103,17 @@ export class NewGridEventGroupClass {
         if( this.firstSegmentId === null ){  // событие не является порезаным на части
             if( this.event_type === EVENT_TYPE.BLOCK ){
                 if( this.linked_file !== null ){
+
+                    // console.dir( 'AddLinkedFilesFromEvent' );
+                    // console.dir( this.linked_file );
+
                     for( let i = 0; i < this.linked_file.length; i++ ){
                         let {
                             duration,
                             name,
                         } = this.linked_file[ i ];
+
+                        
                         let { startTime } = this.scheduleEventsGroup[ 0 ];
                         this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
                             category_id: this.category_id,
@@ -121,13 +129,24 @@ export class NewGridEventGroupClass {
             }else{
 
                 let { releases } = this.scheduleEventsGroup[ 0 ];
+
+                // console.dir( 'releases <<<<<<<<<' );
+                // console.dir( this );
+                // console.dir( releases );
+
+
                 if( releases ){
                     if( releases.length === 0 ){
+
+                        // console.dir( 'this.linked_file[ 0 ]' );
+                        // console.dir( this.linked_file[ 0 ] );
+
                         if( this.linked_file[ 0 ] ){
                             let {
                                 duration,
                                 name,
                             } = this.linked_file[ 0 ];
+
                             let { startTime } = this.scheduleEventsGroup[ 0 ];
                             this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
                                 category_id: this.category_id,
@@ -140,7 +159,7 @@ export class NewGridEventGroupClass {
                         };
                     };
                 };
-
+// console.dir( ' <<<<<<<<<!!!!!!!' );
             };
         }else{
             console.dir('Здесь часть по добавлению привязанного файла к порезанному событию');
@@ -218,6 +237,8 @@ export class NewGridEventGroupClass {
                 });
                 this.scheduleEventsGroup[ 0 ].UpdateEventData();
             }else{
+                // console.dir( this);
+
 
                 if( this.scheduleEventsGroup[ 0 ].releases.length === 0 ){
                     this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({

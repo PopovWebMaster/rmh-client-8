@@ -23,7 +23,12 @@ export const drop_release_list_on_complete = ( gridEventId ) => {
         startTime:      dragStartStartTime,
         eventId:        dragStartEventId,
     });
-    StoreScheduleResultEvents.AddFreeRelease({
+    // StoreScheduleResultEvents.AddFreeRelease({
+    //     name:       dragStartFileName,
+    //     duration:   dragStartDuration - dragStartLinkedFileDuration,
+    //     startTime:  dragStartStartTime,
+    // });
+    StoreScheduleResultEvents.NewGridEventGroup.AddFreeRelease({
         name:       dragStartFileName,
         duration:   dragStartDuration - dragStartLinkedFileDuration,
         startTime:  dragStartStartTime,
@@ -32,16 +37,6 @@ export const drop_release_list_on_complete = ( gridEventId ) => {
     StoreScheduleResultEvents.AddReleasesFromNewGridEvent( gridEventId );
     StoreScheduleResultEvents.SetListToStore( true );
 
-    // StoreScheduleResultEvents.CreateNewGridEvent({
-    //     startTime:      dragStartStartTime,
-    //     eventId:        dragStartEventId,
-    // });
-    // StoreScheduleResultEvents.AddFreeRelease({
-    //     name:       dragStartFileName,
-    //     duration:   dragStartDuration,
-    //     startTime:  dragStartStartTime,
-    // });
 
-    // StoreScheduleResultEvents.AddReleasesFromNewGridEvent( gridEventId );
-    // StoreScheduleResultEvents.SetListToStore( true );
+    
 }

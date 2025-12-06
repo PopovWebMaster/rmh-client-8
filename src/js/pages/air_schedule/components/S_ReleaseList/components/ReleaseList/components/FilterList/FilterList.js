@@ -66,7 +66,8 @@ const FilterListComponent = ( props ) => {
             ScheduleReleaseDragEvent.DragStart.SetToStore();
 
 
-
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
             
             // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
 

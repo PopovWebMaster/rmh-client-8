@@ -38,7 +38,6 @@ const SchEventContainerComponent = ( props ) => {
     let [ isLighter, setIsLighter ] = useState( false );
     let [ isDragOver, setIsDragOver ] = useState( false );
 
-
     useEffect( () => {
         if( eventListById[ eventId ] ){
             let { type } = eventListById[ eventId ];

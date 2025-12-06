@@ -46,8 +46,6 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         isCompletd,
 
         setIsLighter,
-        // nextStartTime,
-
         dragStartEventId,
         dragStartDuration,
 
@@ -63,26 +61,14 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     let [ selectedEventWindow_isOpen, setSelectedEventWindow_isOpen ] = useState( false );
     let [ selectedEventId, setSelectedEventId ] = useState( null );
     let [ durationLimit, setDurationLimit ] = useState( 0 );
-
-    // let [ dragStartTime, setDragStartTime ] = useState( 0 );
     let [ startTimePlus, setStartTimePlus ] = useState( 0 );
     let [ nextStartTime, setNextStartTime ] = useState( null );
-
-
     let [ dropZoneIsActive, setDropZoneIsActive ] = useState( false );
 
-    useEffect( () => {
-        if( dragStartFrom === '' ){
-            setDropZoneIsActive( false );
-        }else{
-            setDropZoneIsActive( true );
-        };
-
-    }, [ dragStartFrom ] );
 
     const getTargetState = () => {
         let result = target_event_is_aparticipant({
-            startTime,
+            startTime: startTime + startTimePlus,
             durationTime,
             eventId,
             eventType,
@@ -105,46 +91,44 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             setSelectedEventWindow_isOpen( false );
         };  
 
-        let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        ScheduleReleaseDragEvent.ClearData();
-
     }
 
     const drag_start = ( e ) => {
         access_right( 'schedule_edit', () => {
             if( isCompletd ){
                 drag_start_for_schedule_event( gridEventId );
+                var img = document.createElement("img");
+                e.dataTransfer.setDragImage(img, 0, 0);
             };
         } );
     }
-    
+
     const drag_end = () => {
-        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        // ScheduleReleaseDragEvent.ClearData();  
     }
 
 
     const drag_over = ( e ) => {
         e.preventDefault();
-        if( getTargetState() ){
-            setIsLighter( true );
-        }else{
-            setIsLighter( false );
-        };
-        dragOverHandler();
-        setDropZoneIsActive( true );
+
+        
+
+        let targetState= getTargetState();
+
+        setDropZoneIsActive( targetState );
+        setIsLighter( targetState );
+
     }
 
     const drag_leave = ( e ) => {
         setIsLighter( false );
         dragLeaveHandler();
-        setDropZoneIsActive( false );
         setNextStartTime( null )
     }
 
     const drop = ( e ) => {
         setIsLighter( false );
         let isTargetEvent = getTargetState();
+
         if( isTargetEvent ){
             if( dragStartFrom === START_FROM.RELEASE_FREE ){
                 if( isEmpty ){
@@ -179,6 +163,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                 if( isEmpty ){
                     drop_schedule_event_on_empty( startTime + startTimePlus );
                     setStartTimePlus( 0 );
+
+
                     let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
                     ScheduleReleaseDragEvent.ClearData();
                 }else{
@@ -197,9 +183,6 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             }else if( dragStartFrom === START_FROM.RELEASE_LIST ){
 
                 if( isEmpty ){
-                    // drop_release_list_on_empty( startTime + startTimePlus );
-                    // setStartTimePlus( 0 );
-
                     if( dragStartEventId === null ){
                         setSelectedEventWindow_isOpen( true );
                         setDurationLimit( durationTime );
@@ -218,12 +201,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             };
         };
         setDropZoneIsActive( false );
-        // setStartTimePlus( 0 );
         dragLeaveHandler();
         setNextStartTime( null );
-
-        // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
-        // ScheduleReleaseDragEvent.ClearData();
     }
 
     return (
@@ -231,6 +210,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
        <div 
             className = 'ScheduleDragAndDropEvent'
             draggable =     { isEmpty? false: true }
+
             onDragStart =   { drag_start }
             onDragEnd =     { drag_end }
 
@@ -259,8 +239,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                     startTimePlus =     { startTimePlus }
                     setStartTimePlus =  { setStartTimePlus }
 
-                    nextStartTime = { nextStartTime }
-                    setNextStartTime = { setNextStartTime }
+                    nextStartTime =     { nextStartTime }
+                    setNextStartTime =  { setNextStartTime }
 
 
 

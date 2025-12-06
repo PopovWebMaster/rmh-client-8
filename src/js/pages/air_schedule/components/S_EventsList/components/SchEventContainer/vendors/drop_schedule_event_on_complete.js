@@ -16,11 +16,7 @@ export const drop_schedule_event_on_complete = ( gridEventId ) => {
     let { scheduleEventsListByGridEventId, scheduleEventsList } = scheduleResult;
     let { releases } = scheduleEventsListByGridEventId[ dragStartGridEventId ];
 
-
-    console.dir( scheduleEventsListByGridEventId[ dragStartGridEventId ] );
-
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
     
-    StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
 
 }

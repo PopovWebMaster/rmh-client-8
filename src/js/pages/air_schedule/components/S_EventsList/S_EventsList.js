@@ -19,7 +19,7 @@ import { set_max_height_em_for_empty_time_segment } from './vendors/set_max_heig
 const S_EventsListComponent = ( props ) => {
 
     let {
-        // scheduleEventsList,
+        scheduleEventsList,
         scheduleEventBySectors,
         // setCounterList,
     } = props;
@@ -34,35 +34,11 @@ const S_EventsListComponent = ( props ) => {
         setIsReady( true );
     }, [] );
 
-    // useEffect( () => {
-
-    //     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-
-        
-    //     // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
-    //     // let list = StoreScheduleResultEvents.GetScheduleEventsList();
-    //     // StoreScheduleResultEvents.SetCounterDataToStore( list );
-
-    //     // let list_by_sectirs = StoreScheduleResultEvents.GetListBySectors();
-    //     // setListBySectors( list_by_sectirs );
-
-
-    // }, [ scheduleEventsList ] );
-
-    // useEffect( () => {
-
-    //     console.dir( 'scheduleEventBySectors' );
-    //     console.dir( scheduleEventBySectors );
-
-    //     setListBySectors( scheduleEventBySectors );
-
-
-    // }, [scheduleEventsList] )
-
-
-    const create = ( arr ) => {
+    const create = ( arr, arr_2 ) => {
         if( arr.length > 0 ){
+            
             let sectors = arr.map( ( item, index ) => {
+
                 return (
                     <SchOneSector 
                         key = { index }
@@ -97,7 +73,7 @@ const S_EventsListComponent = ( props ) => {
         >
             { isReady? (
                 <ScrollContainer>
-                    { create( scheduleEventBySectors ) }
+                    { create( scheduleEventBySectors, /*scheduleEventsList*/ ) }
                 </ScrollContainer>
 
             ): '' }
@@ -117,7 +93,7 @@ export function S_EventsList( props ){
         <S_EventsListComponent
             { ...props }
 
-            // scheduleEventsList = { scheduleResult.scheduleEventsList }
+            scheduleEventsList = { scheduleResult.scheduleEventsList }
             scheduleEventBySectors = { scheduleResult.scheduleEventBySectors }
 
 

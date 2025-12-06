@@ -8,3 +8,8 @@ export const START_FROM = {
     RELEASE_LIST:       'release_list',
 
 };
+
+export const RELEASE_TYPE = {
+    APP: 'app',
+    FREE: 'free',
+};

@@ -18,6 +18,8 @@ export const scheduleResultDragEventSlise = createSlice({
         dragStartReleaseId: null,
         dragStartLinkedFileDuration: 0,// // НЕ ИСПОЛЬЗОВАТЬ !!
 
+        dragStartMinStartTime: 0,
+        dragStartMaxStartTime: 24*60*60,
 
 
     },
@@ -61,6 +63,18 @@ export const scheduleResultDragEventSlise = createSlice({
             state.dragStartLinkedFileDuration =  action.payload;
         },
 
+        setDragStartMinStartTime: ( state, action ) => {
+            state.dragStartMinStartTime =  action.payload;
+        },
+
+        setDragStartMaxStartTime: ( state, action ) => {
+            state.dragStartMaxStartTime =  action.payload;
+        },
+
+
+
+
+
         
 
 
@@ -80,6 +94,9 @@ export const {
     setDragStartReleaseId,
     setDragStartLinkedFileDuration,
 
+    setDragStartMinStartTime,
+    setDragStartMaxStartTime,
+
 
 } = scheduleResultDragEventSlise.actions;
 
@@ -98,6 +115,10 @@ export const selectorData = ( state ) => {
         dragStartGridEventId: state.scheduleResultDragEvent.dragStartGridEventId,
         dragStartReleaseId: state.scheduleResultDragEvent.dragStartReleaseId,
         dragStartLinkedFileDuration: state.scheduleResultDragEvent.dragStartLinkedFileDuration,
+
+        dragStartMinStartTime: state.scheduleResultDragEvent.dragStartMinStartTime,
+
+        dragStartMaxStartTime: state.scheduleResultDragEvent.dragStartMaxStartTime,
 
 
 

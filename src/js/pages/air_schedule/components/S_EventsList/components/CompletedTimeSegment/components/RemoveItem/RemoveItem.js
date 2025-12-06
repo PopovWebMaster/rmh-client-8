@@ -33,10 +33,7 @@ const RemoveItemComponent = ( props ) => {
     const remove_event = () => {
 
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        // StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
         StoreScheduleResultEvents.CreateList();
-
-
         StoreScheduleResultEvents.RemoveEvent( gridEventId );
         StoreScheduleResultEvents.SetListToStore( true );
         // setIsOpen( false );

@@ -35,6 +35,17 @@ export const set_release_list_and_schedule_list_to_store = ( release_list, sched
     StoreScheduleResultEvents.UpdateData();
     StoreScheduleResultEvents.SetListToStore();
 
+
+
+
+
+
+
+
+
+
+    
+
     store.dispatch( setReleaseList( release_list ) );
     store.dispatch( setReleaseListById( releasesById ) );
     store.dispatch( setReleaseListByGridEventId( releasesByGridEventId ) );

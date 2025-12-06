@@ -50,7 +50,8 @@ const DExcelComponentComponent = ( props ) => {
     useEffect( () => {
         if( isOpen ){
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-            StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+            StoreScheduleResultEvents.CreateList();
+
             let eventsList = StoreScheduleResultEvents.GetAllUsedEvents();
             setFilterList( get_filter_list_from_events_list( eventsList ) );
         }else{
@@ -106,7 +107,7 @@ const DExcelComponentComponent = ( props ) => {
 
     const click = () => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+        StoreScheduleResultEvents.CreateList();
 
         let scheduleEventsLlist = StoreScheduleResultEvents.GetScheduleEventsList();
         let used_events = get_used_events( scheduleEventsLlist, filterList );

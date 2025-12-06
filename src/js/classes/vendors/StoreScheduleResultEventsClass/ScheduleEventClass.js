@@ -55,8 +55,6 @@ export class ScheduleEventClass{
 
 
 
-
-
     }
 
     GetDayNum( dayNum = null ){
@@ -268,7 +266,7 @@ export class ScheduleEventClass{
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
     }
-    AddReleaseByData( data ){
+    AddReleaseByData( data ){ // проверить на актуальность !!!!!!!!!!
         let Release = new ReleaseClass();
         Release.AddReleaseByData( data );
         this.releaseList.push( Release );

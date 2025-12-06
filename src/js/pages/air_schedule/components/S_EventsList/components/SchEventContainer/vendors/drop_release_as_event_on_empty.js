@@ -22,10 +22,16 @@ export const drop_release_as_event_on_empty = ( startTime ) => {
         durationTime:   dragStartDuration,
     });
 
-    StoreScheduleResultEvents.AddLinkedFileReleasesToNewGridEvent();
+    StoreScheduleResultEvents.NewGridEventGroup.AddLinkedFilesFromEvent();
 
     // console.dir( dragStartDuration );
     // StoreScheduleResultEvents.AddFreeRelease({
+    //     name:       dragStartFileName,
+    //     duration:   dragStartDuration - dragStartLinkedFileDuration,
+    //     startTime:  dragStartStartTime,
+    // });
+
+    // StoreScheduleResultEvents.NewGridEventGroup.AddFreeRelease({
     //     name:       dragStartFileName,
     //     duration:   dragStartDuration - dragStartLinkedFileDuration,
     //     startTime:  dragStartStartTime,

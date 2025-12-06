@@ -1,5 +1,12 @@
 .ScheduleDragAndDropEvent{
     font-size: 1em;
     position: relative;
+    user-select: none;
+
+    //  -webkit-user-drag: none; 
+    //  -khtml-user-drag: none; 
+    //  -moz-user-drag: none; 
+    //  -o-user-drag: none; 
+    //  user-drag: none; 
 }
 

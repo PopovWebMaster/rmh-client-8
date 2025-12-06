@@ -13,6 +13,9 @@ import {
     setDragStartReleaseId,
     setDragStartLinkedFileDuration,
 
+    setDragStartMinStartTime,
+    setDragStartMaxStartTime,
+
 } from './../../../redux/scheduleResultDragEventSlise.js';
 
 import { get_event_by_id } from './../../../helpers/get_event_by_id.js';
@@ -37,6 +40,10 @@ export class DragStartClass {
         this.categoryId = null;
         this.releaseId = null;
 
+        this.minStartTime = 0;
+        this.maxStartTime = 24*60*60;
+
+
         this.SetFileName = this.SetFileName.bind(this);
         this.SetDuration = this.SetDuration.bind(this);
         this.SetEventId = this.SetEventId.bind(this);
@@ -46,6 +53,9 @@ export class DragStartClass {
         this.SetGridEventId = this.SetGridEventId.bind(this);
         this.SetReleaseId = this.SetReleaseId.bind(this);
         this.SetLinkedFilesDuration = this.SetLinkedFilesDuration.bind(this);
+
+        this.SetMinStartTime = this.SetMinStartTime.bind(this);
+        this.SetMaxStartTime = this.SetMaxStartTime.bind(this);
 
 
         
@@ -111,6 +121,16 @@ export class DragStartClass {
 
     }
 
+    SetMinStartTime( minStartTime ){
+        this.minStartTime = minStartTime;
+
+    }
+
+    SetMaxStartTime( maxStartTime ){
+        this.maxStartTime = maxStartTime;
+
+    }
+
 
     SetToStore(){
 
@@ -127,6 +147,11 @@ export class DragStartClass {
 
 
         store.dispatch( setDragStartLinkedFileDuration( this.linked_files_duration ) );
+
+
+        store.dispatch( setDragStartMinStartTime( this.minStartTime ) );
+        store.dispatch( setDragStartMaxStartTime( this.maxStartTime ) );
+
 
 
         if( this.startFrom === START_FROM.RELEASE_FREE ){

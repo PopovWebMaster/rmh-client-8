@@ -97,6 +97,9 @@ const EARL_ActiveListComponent = ( props ) => {
             // ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
             // ScheduleReleaseDragEvent.DragStart.SetToStore();
 
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
+
         } );
     }
 

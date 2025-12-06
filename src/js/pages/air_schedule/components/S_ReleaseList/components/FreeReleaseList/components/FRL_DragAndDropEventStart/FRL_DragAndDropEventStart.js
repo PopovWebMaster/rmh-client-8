@@ -19,8 +19,6 @@ import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes
 
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
 
-
-
 const FRL_DragAndDropEventStartComponent = ( props ) => {
 
     let {
@@ -42,10 +40,14 @@ const FRL_DragAndDropEventStartComponent = ( props ) => {
             ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_FREE );
             ScheduleReleaseDragEvent.DragStart.SetFileName( fileName );
             ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
+            ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
             ScheduleReleaseDragEvent.DragStart.SetLinkedFilesDuration( linked_file_dutation );
 
             ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
             ScheduleReleaseDragEvent.DragStart.SetToStore();
+
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
 
         } );
     }

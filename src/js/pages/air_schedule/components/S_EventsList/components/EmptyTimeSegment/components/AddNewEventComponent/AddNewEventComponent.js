@@ -89,7 +89,7 @@ const AddNewEventComponentComponent = ( props ) => {
         if( eventId !== null ){
 
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-            StoreScheduleResultEvents.CreateFromScheduleEventsList( scheduleEventsList );
+            StoreScheduleResultEvents.CreateList();
             StoreScheduleResultEvents.AddEvent({
                 gridCurrentDay,
                 isAKeyPoint: isAKeyOneEvent,
