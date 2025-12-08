@@ -15,7 +15,7 @@ export const get_space_data_after = ( list, i ) => {
                 break;
             };
 
-            filledDuration = filledDuration + durationTime;
+            filledDuration = filledDuration + durationTime + 1;
         };
     };
 

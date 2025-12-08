@@ -12,11 +12,17 @@ import {
 // import { StoreScheduleResultEventsClass } from './../../../../classes/StoreScheduleResultEventsClass.js';
 import { StoreScheduleResultEventsClass } from './../../../classes/StoreScheduleResultEventsClass.js';
 
+import { separate_events_and_releases } from './separate_events_and_releases.js';
+
 
 export const set_release_list_and_schedule_list_to_store = ( release_list, schedule_events_List ) => {
 
     let releasesById = {};
     let releasesByGridEventId = {};
+
+    // store.dispatch( setReleaseList( release_list ) );
+    // store.dispatch( setReleaseListById( releasesById ) );
+    // store.dispatch( setReleaseListByGridEventId( releasesByGridEventId ) );
 
 
     for( let i = 0; i < release_list.length; i++ ){
@@ -27,10 +33,29 @@ export const set_release_list_and_schedule_list_to_store = ( release_list, sched
 
     let actual_schedule_list = exclude_outdated_releases( schedule_events_List, releasesById );
 
+    let separete = separate_events_and_releases( actual_schedule_list );
+
     let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
     StoreScheduleResultEvents.CreateList({
-        gridEventsList: actual_schedule_list,
+        gridEventsList: separete.scheduleEvents,
     });
+
+    // console.dir( separete );
+
+    for( let i = 0; i < separete.only_releases.length; i++ ){
+
+        let { gridEventId, releases } = separete.only_releases[ i ];
+
+        for( let y = 0; y < releases.length; y++ ){
+            StoreScheduleResultEvents.AddAnyReleaseByData( gridEventId, releases[ y ] );
+        };
+
+
+    };
+
+    // StoreScheduleResultEvents.CreateList({
+    //     gridEventsList: schedule_events_List,
+    // });
 
     StoreScheduleResultEvents.UpdateData();
     StoreScheduleResultEvents.SetListToStore();
@@ -57,7 +82,6 @@ function exclude_outdated_releases( scheduleList, releasesById ){
 
     let isset_del_releases = false;
 
-    
 
     for( let i = 0; i < scheduleList.length; i++ ){
         let item = structuredClone( scheduleList[ i ] );

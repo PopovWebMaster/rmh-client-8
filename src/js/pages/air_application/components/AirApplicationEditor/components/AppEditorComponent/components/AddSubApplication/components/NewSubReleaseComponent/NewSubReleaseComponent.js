@@ -59,12 +59,13 @@ const NewSubReleaseComponentComponent = ( props ) => {
     let [ name, setName ] = useState( '' );
     let [ nameIsError, setNameIsError ] = useState( false );
 
-    let [ releaseFileName, setReleaseFileName ] = useState( false );
+    let [ releaseFileName, setReleaseFileName ] = useState( '' );
 
     useEffect(() => {
 
         if( isOpen ){
             if( eventListById[ currentAppEventId ] ){
+
                 let { durationTime } = eventListById[ currentAppEventId ];
                 let dur_sec = convert_time_str_to_sec( durationTime );
                 setDurationSec( dur_sec );

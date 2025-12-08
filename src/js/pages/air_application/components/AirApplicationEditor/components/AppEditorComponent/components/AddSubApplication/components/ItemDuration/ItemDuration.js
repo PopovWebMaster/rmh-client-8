@@ -65,17 +65,19 @@ const ItemDurationComponent = ( props ) => {
     useEffect( () => {
 
         if( isOpen ){
-            let time = convert_sec_to_time( durationSec );
-            let arr = time.split( ':' );
-            setHH( arr[ 0 ] );
-            setMM( arr[ 1 ] );
-            setSS( arr[ 2 ] );
+            // let time = convert_sec_to_time( durationSec );
+
+            // let arr = time.split( ':' );
+
+            // setHH( arr[ 0 ] );
+            // setMM( arr[ 1 ] );
+            // setSS( arr[ 2 ] );
 
         }else{
-            setHH( '00' );
-            setMM( '00' );
-            setSS( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
-            setDurationSec( MIN_EVENT_DURATION_SEC );
+            // setHH( '00' );
+            // setMM( '00' );
+            // setSS( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
+            // setDurationSec( MIN_EVENT_DURATION_SEC );
         };
 
     }, [ isOpen, durationSec ] );

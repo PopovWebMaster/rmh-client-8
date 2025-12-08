@@ -51,6 +51,8 @@ export class ScheduleEventClass{
         this.GetDayNum = this.GetDayNum.bind(this);
         this.GetDutationTime = this.GetDutationTime.bind(this);
         this.SetData = this.SetData.bind(this);
+        this.SetFirstSegmentIdAsNull = this.SetFirstSegmentIdAsNull.bind(this);
+
 
 
 
@@ -69,6 +71,11 @@ export class ScheduleEventClass{
             Это костыль. Почему-то иногда в durationTime записывается строка вокмата HH:MM:SS
         */
         return Number( durationTime )? durationTime: typeof durationTime === 'string'? convert_time_str_to_sec( durationTime ): 0;
+    }
+
+    SetFirstSegmentIdAsNull(){
+        this.firstSegmentId =   null;
+        this.cutPart =   null;
     }
 
     SetData( params ){
@@ -266,7 +273,7 @@ export class ScheduleEventClass{
         Release.AddRelease( release_id );
         this.releaseList.push( Release );
     }
-    AddReleaseByData( data ){ // проверить на актуальность !!!!!!!!!!
+    AddReleaseByData( data ){ 
         let Release = new ReleaseClass();
         Release.AddReleaseByData( data );
         this.releaseList.push( Release );

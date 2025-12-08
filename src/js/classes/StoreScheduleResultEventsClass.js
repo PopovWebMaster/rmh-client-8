@@ -59,6 +59,12 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.AddReleasesFromNewGridEvent = this.AddReleasesFromNewGridEvent.bind(this);
 
 
+        this.AddAnyReleaseByData = this.AddAnyReleaseByData.bind(this);
+
+
+        
+
+
     }
 
     CreateFromGridEvents(){
@@ -131,38 +137,46 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     }
 
     AddReleasesFromNewGridEvent( gridEventId ){
-        // let firstSegmentId = null;
+
+
         for( let i = 0; i < this.list.length; i++ ){
             if( this.list[ i ].id === gridEventId ){
-                // firstSegmentId = this.list[ i ].firstSegmentId;
 
                 if( this.list[ i ].firstSegmentId === null ){
                     let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
                     for( let y = 0; y < newEventData.releases.length; y++ ){
                         let releaseId = newEventData.releases[ y ].id;
-                        let releaseType = this.GetReleaseType( releaseId );
-                        if( releaseType === RELEASE_TYPE.APP ){
-                            this.AddAppReleaseToUncutEvent({
-                                Event: this.list[ i ],
-                                releaseId,
-                            })
-                        }else if( releaseType === RELEASE_TYPE.FREE ){
-                            let {
-                                releaseDuration,
-                                releaseName,
-                                event_id,
-                                category_id,
-                                startTime
-                            } = newEventData.releases[ y ];
-                            this.AddFreeReleaseToUncutEvent({
-                                Event: this.list[ i ],
-                                eventId: event_id,
-                                category_id,
-                                name: releaseName,
-                                duration: releaseDuration,
-                                startTime,
-                            });
-                        };
+
+                        this.AddAnyReleaseByData( gridEventId, newEventData.releases[ y ] );
+
+                        // let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, newEventData.releases[ y ].releaseDuration );
+
+                        // if( isEnoughSpace ){
+                        //     let releaseType = this.GetReleaseType( releaseId );
+                        //     if( releaseType === RELEASE_TYPE.APP ){
+                        //         this.AddAppReleaseToUncutEvent({
+                        //             Event: this.list[ i ],
+                        //             releaseId,
+                        //         })
+                        //     }else if( releaseType === RELEASE_TYPE.FREE ){
+                        //         let {
+                        //             releaseDuration,
+                        //             releaseName,
+                        //             event_id,
+                        //             category_id,
+                        //             startTime
+                        //         } = newEventData.releases[ y ];
+                        //         this.AddFreeReleaseToUncutEvent({
+                        //             Event: this.list[ i ],
+                        //             eventId: event_id,
+                        //             category_id,
+                        //             name: releaseName,
+                        //             duration: releaseDuration,
+                        //             startTime,
+                        //         });
+                        //     };
+                        // };
+
                     };
                     
                 }else{
@@ -175,162 +189,59 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
                         let releaseData = newEventData.releases[y];
 
-                        let { releaseDuration, applicationName, releaseName } = releaseData;
-                        let rest_duration = releaseDuration;
-                        let removeEventList = [];
-                        for( let i = 0; i < EventParts.length; i++ ){
-                            let { durationTime, releases } = EventParts[ i ];
-                            if( releases.length === 0 ){
-                                let duration = 0;
+                        // let { releaseDuration, applicationName, releaseName } = releaseData;
 
-                                if( rest_duration >= durationTime ){
-                                    if( EventParts[ i + 1 ] ){
-                                        duration = durationTime;
-                                        rest_duration = rest_duration - durationTime;
+                        this.AddAnyReleaseByData( gridEventId, newEventData.releases[y] );
+                        /*
+                        let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, releaseDuration );
+
+                        if( isEnoughSpace ){
+                            let rest_duration = releaseDuration;
+                            let removeEventList = [];
+                            for( let i = 0; i < EventParts.length; i++ ){
+                                let { durationTime, releases } = EventParts[ i ];
+                                if( releases.length === 0 ){
+                                    let duration = 0;
+
+                                    if( rest_duration >= durationTime ){
+                                        if( EventParts[ i + 1 ] ){
+                                            duration = durationTime;
+                                            rest_duration = rest_duration - durationTime;
+                                        }else{
+                                            duration = rest_duration;
+                                        };
                                     }else{
                                         duration = rest_duration;
+                                        rest_duration = 0
                                     };
-                                }else{
-                                    duration = rest_duration;
-                                    rest_duration = 0
-                                };
 
-                                if( duration > 0 ){
-                                    let data = { ...releaseData };
-                                    data.releaseName = `${releaseName} (Порезка ${i+1})`;
-                                    EventParts[ i ].durationTime = duration;
-                                    EventParts[ i ].AddReleaseByData( data );
-                                    EventParts[ i ].UpdateEventData();
+                                    if( duration > 0 ){
+                                        let data = { ...releaseData };
+                                        data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                                        EventParts[ i ].durationTime = duration;
+                                        EventParts[ i ].AddReleaseByData( data );
+                                        EventParts[ i ].UpdateEventData();
 
-                                }else{
-                                    let { gridEventId } = EventParts[ i ];
-                                    removeEventList.push( gridEventId );
+                                    }else{
+                                        let { gridEventId } = EventParts[ i ];
+                                        removeEventList.push( gridEventId );
+                                    };
                                 };
                             };
-                        };
 
-                        for( let i = 0; i < removeEventList.length; i++ ){
-                            this.RemoveEvent( removeEventList[ i ] )
+                            for( let i = 0; i < removeEventList.length; i++ ){
+                                this.RemoveEvent( removeEventList[ i ] )
+                            };
+                        }else{
+                            break;
                         };
-
+                        */
                     };
-
                 };
                 break;
             };
         };
 
-        // if( firstSegmentId !== null ){
-
-            
-
-
-
-                    
-
-                    // for( let i = 0; i < EventParts.length; i++ ){
-                    //     let { durationTime, releases } = EventParts[ i ];
-                    //     if( releases.length === 0 ){
-                    //         let duration = 0;
-
-                    //         if( rest_duration >= durationTime ){
-                    //             if( EventParts[ i + 1 ] ){
-                    //                 duration = durationTime;
-                    //                 rest_duration = rest_duration - durationTime;
-                    //             }else{
-                    //                 duration = rest_duration;
-                    //             };
-                    //         }else{
-                    //             duration = rest_duration;
-                    //             rest_duration = 0
-                    //         };
-
-                    //         if( duration > 0 ){
-                    //             let data = { ...releaseData };
-                    //             // data.releaseDuration = duration;
-                    //             data.releaseName = `${releaseName} (Порезка ${i+1})`;
-                    //             EventParts[ i ].durationTime = duration;
-                    //             EventParts[ i ].AddReleaseByData( data );
-                    //             EventParts[ i ].UpdateEventData();
-
-                    //         }else{
-                    //             let { gridEventId } = EventParts[ i ];
-                    //             removeEventList.push( gridEventId );
-                    //         };
-                    //     };
-                    // };
-
-                    // for( let i = 0; i < removeEventList.length; i++ ){
-                    //     this.RemoveEvent( removeEventList[ i ] )
-                    // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // for( let i = 0; i < this.list.length; i++ ){
-            //     if( this.list[ i ].id !== gridEventId && this.list[ i ].firstSegmentId === firstSegmentId ){
-                    // let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
-                    // for( let y = 0; y < newEventData.releases.length; y++ ){
-                    //     let releaseId = newEventData.releases[ y ].id;
-                    //     let releaseType = this.GetReleaseType( releaseId );
-                    //     if( releaseType === RELEASE_TYPE.APP ){
-                    //         this.AddAppReleaseToUncutEvent({
-                    //             Event: this.list[ i ],
-                    //             releaseId,
-                    //         })
-                    //     }else if( releaseType === RELEASE_TYPE.FREE ){
-                    //         let {
-                    //             releaseDuration,
-                    //             releaseName,
-                    //             event_id,
-                    //             category_id,
-                    //             startTime
-                    //         } = newEventData.releases[ y ];
-                    //         this.AddFreeReleaseToUncutEvent({
-                    //             Event: this.list[ i ],
-                    //             eventId: event_id,
-                    //             category_id,
-                    //             name: releaseName,
-                    //             duration: releaseDuration,
-                    //             startTime,
-                    //         });
-                    //     };
-                    // };
-            //     };
-            // };
-
-        // }
     }
 
 
@@ -411,7 +322,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     SetListToStore( isChanged = null ){
         let scheduleEventsList = this.GetScheduleEventsList();
 
+
+
         let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
+
+        // console.dir( 'newList' );
+        // console.dir( structuredClone( newList ) );
+
 
         let arr = divide_day_into_sectors( newList );
         let listByectors = add_empty_segments_and_types( arr );
@@ -448,17 +365,84 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     }
 
 
-    AddRelease( gridEventId, releaseId ){
+    AddAnyReleaseByData( gridEventId, releaseData ){
+
+        let EventParts = this.GetEventParts( gridEventId );
+
+        let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, releaseData.releaseDuration );
+
+        if( isEnoughSpace ){
+            let Event = this.GetEventData( gridEventId );
+            if( Event ){
+                if( Event.firstSegmentId === null ){
+                    let type = this.GetEventType( Event.eventId );
+                    if( type === EVENT_TYPE.BLOCK ){
+                        Event.AddReleaseByData( releaseData );
+                        Event.UpdateEventData();
+                    }else{
+                        if( Event.releases.length === 0 ){
+                            Event.AddReleaseByData( releaseData );
+                            Event.UpdateEventData();
+                        };
+                    };
+
+                }else if( Event.gridEventId === gridEventId ){
+
+                    let { releaseDuration, applicationName, releaseName } = releaseData;
+                    let rest_duration = releaseDuration;
+
+                    let removeEventList = [];
+
+                    for( let i = 0; i < EventParts.length; i++ ){
+                        let { durationTime, releases } = EventParts[ i ];
+                        if( releases.length === 0 ){
+                            let duration = 0;
+
+                            if( rest_duration >= durationTime ){
+                                if( EventParts[ i + 1 ] ){
+                                    duration = durationTime;
+                                    rest_duration = rest_duration - durationTime;
+                                }else{
+                                    duration = rest_duration;
+                                };
+                            }else{
+                                duration = rest_duration;
+                                rest_duration = 0
+                            };
+
+                            if( duration > 0 ){
+                                let data = { ...releaseData };
+                                // data.releaseDuration = duration;
+                                data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                                EventParts[ i ].durationTime = duration;
+                                EventParts[ i ].AddReleaseByData( data );
+                                EventParts[ i ].UpdateEventData();
+
+                            }else{
+                                let { gridEventId } = EventParts[ i ];
+                                removeEventList.push( gridEventId );
+                            };
+                        };
+                    };
+
+                    for( let i = 0; i < removeEventList.length; i++ ){
+                        this.RemoveEvent( removeEventList[ i ] )
+                    };
+                };
+            };
+        };
+    }
+
+
+    AddRelease( gridEventId, releaseId ){ // устарела, не использовать !!!!!!!!!!!!
 
         let Event = this.GetEventData( gridEventId );
 
         let releaseData = this.GetReleaseData( releaseId );
 
-        // let rest_sec = get_remaining_place_for_key_block({
-        //     Event,
-        //     releaseData,
-        //     list: this.list
-        // });
+        this.AddAnyReleaseByData( gridEventId, releaseData );
+
+        /*
 
         let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, releaseData.releaseDuration );
 
@@ -521,108 +505,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         };
 
+        */
+
     }
 
-
-    // AddReleaseAsLinkedFile( params ){
-    //     let {
-    //         gridEventId,
-    //         category_id,
-    //         eventId,
-    //         name,
-    //         duration,
-    //         startTime,
-    //     } = params;
-
-    //     let Event = this.GetEventData( gridEventId );
-
-    //     let rest_sec = get_remaining_place_for_key_block({
-    //         Event,
-    //         releaseData: {},
-    //         list: this.list
-    //     });
-
-    //     if( rest_sec >= duration ){
-    //         if( Event ){
-    //             if( Event.firstSegmentId === null ){
-    //                 // let type = this.GetEventType( Event.eventId );
-    //                 // if( type === EVENT_TYPE.BLOCK ){
-    //                 //     Event.AddLinkedFileToRelease({
-    //                 //         category_id,
-    //                 //         eventId,
-    //                 //         name,
-    //                 //         duration,
-    //                 //         startTime,
-    //                 //     });
-    //                 //     Event.UpdateEventData();
-    //                 // }else{
-    //                 //     if( Event.releases.length === 0 ){
-    //                 //         Event.AddLinkedFileToRelease({
-    //                 //             category_id,
-    //                 //             eventId,
-    //                 //             name,
-    //                 //             duration,
-    //                 //             startTime,
-    //                 //         });
-
-    //                 //         console.dir( Event );
-    //                 //         Event.UpdateEventData();
-    //                 //     };
-    //                 // };
-    //             }else if( Event.gridEventId === gridEventId ){
-
-    //                 let EventParts = this.GetEventParts( gridEventId );
-
-    //                 let rest_duration = duration;
-
-    //                 let removeEventList = [];
-
-    //                 for( let i = 0; i < EventParts.length; i++ ){
-    //                     let { durationTime, releases } = EventParts[ i ];
-    //                     if( releases.length === 0 ){
-    //                         let duration = 0;
-
-    //                         if( rest_duration >= durationTime ){
-    //                             if( EventParts[ i + 1 ] ){
-    //                                 duration = durationTime;
-    //                                 rest_duration = rest_duration - durationTime;
-    //                             }else{
-    //                                 duration = rest_duration;
-    //                                 rest_duration = 0;
-    //                             };
-    //                         }else{
-    //                             duration = rest_duration;
-    //                             rest_duration = 0
-    //                         };
-
-    //                         if( duration > 0 ){
-    //                             EventParts[ i ].AddLinkedFileToRelease({
-    //                                 category_id,
-    //                                 eventId,
-    //                                 name: `${name} (Порезка ${i+1})`,
-    //                                 duration,
-    //                                 startTime,
-    //                             });
-    //                             EventParts[ i ].UpdateEventData();
-
-    //                         }else{
-    //                             let { gridEventId } = EventParts[ i ];
-    //                             removeEventList.push( gridEventId );
-    //                         };
-    //                     };
-    //                 };
-
-    //                 for( let i = 0; i < removeEventList.length; i++ ){
-    //                     this.RemoveEvent( removeEventList[ i ] )
-    //                 };
-
-    //             };
-
-    //         };
-
-    //     };
-
-    // }
 
     RemoveRelease(  gridEventId, releaseId ){
 
@@ -681,6 +567,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         let allByGEId = {};
         for( let i = 0; i < allReleases.length; i++ ){
             let { grid_event_id, id } = allReleases[ i ];
+
             if( grid_event_id !== null ){
                 if( allByGEId[ grid_event_id ] ){
                     allByGEId[ grid_event_id ].push( id );
@@ -696,7 +583,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                     for( let y = 0; y < allByGEId[ gridEventId ].length; y++ ){
                         let releaseId = allByGEId[ gridEventId ][ y ];
                         this.AddRelease( gridEventId, releaseId );
-                        this.list[ i ].UpdateEventData();
+                        // this.list[ i ].UpdateEventData();
                     };
                 };
             };

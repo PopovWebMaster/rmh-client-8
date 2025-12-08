@@ -10,6 +10,9 @@ export const adjust_startTime_in_list_v2 = ( list, makeCorrectByPushIt = true ) 
 
     let segments = get_segments( list );
 
+        //     console.dir( 'segments <<<<<<<<<<<' );
+        // console.dir( segments );
+
     let newList = [];
 
     let timeSpaceFrom = 0;
@@ -39,6 +42,7 @@ export const adjust_startTime_in_list_v2 = ( list, makeCorrectByPushIt = true ) 
     }else{
         if( makeCorrectByPushIt ){
             result.newList = correct_by_push_it( newList );
+
         }else{
             result.newList = newList;
         };
@@ -163,6 +167,7 @@ function push_all_top( list_all_bottom, timeSpaceTo ){
     result = arr_1.sort(  ( a, b ) => { 
         if( a.startTime > b.startTime ){ return 1 }else{ return -1 ;}
     } );
+
 
     return result;
 

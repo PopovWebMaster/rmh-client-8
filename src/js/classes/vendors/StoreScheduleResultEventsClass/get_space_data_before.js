@@ -15,7 +15,7 @@ export const get_space_data_before = ( list, i ) => {
         if( list[ i - 1 ]){
             for( let index = i - 1; index >= 0; index-- ){
                 let { isKeyPoint, durationTime, startTime } = list[ index ];
-                filledDuration = filledDuration + durationTime;
+                filledDuration = filledDuration + durationTime + 1;
                 if( isKeyPoint === true ){
                     startTimeFrom = startTime;
                     break;
@@ -24,7 +24,7 @@ export const get_space_data_before = ( list, i ) => {
                         if( startTime > 0 ){
                             startTimeFrom = startTime;
                             let rest_duration = startTime - 1;
-                            filledDuration = filledDuration + rest_duration;
+                            filledDuration = filledDuration + rest_duration + 1;
                         };
                     };
                 };
@@ -35,7 +35,7 @@ export const get_space_data_before = ( list, i ) => {
             if( startTime > 0 ){
                 startTimeFrom = startTime;
                 let rest_duration = startTime - 1;
-                filledDuration = filledDuration + rest_duration;
+                filledDuration = filledDuration + rest_duration + 1;
             };
         };
 

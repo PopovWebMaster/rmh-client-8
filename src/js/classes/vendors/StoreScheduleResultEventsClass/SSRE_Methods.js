@@ -172,6 +172,13 @@ export class SSRE_Methods{
             };
         };
 
+        if( result.length === 1 ){
+            if( result[ 0 ].firstSegmentId !== null ){
+                result[ 0 ].SetFirstSegmentIdAsNull();
+                // result[ 0 ].firstSegmentId = null;
+            };
+        };
+
         return result;
 
     }
@@ -253,6 +260,7 @@ export class SSRE_Methods{
             Event.AddRelease( releaseId );
             Event.UpdateEventData();
         }else{
+
             if( Event.releases.length === 0 ){
                 Event.AddRelease( releaseId );
                 Event.UpdateEventData();
@@ -316,8 +324,11 @@ export class SSRE_Methods{
         let rest_duration = releaseDuration;
 
         for( let i = 0; i < this.list.length; i++ ){
+
             if( this.list[ i ].id === gridEventId || this.list[ i ].firstSegmentId === gridEventId ){
                 let { firstSegmentId, durationTime, startTime } = this.list[ i ].GetData();
+
+                let item = this.list[ i ].GetData();
 
                 if( first_segment_id === null ){ // запишет только первое событие
                     first_segment_id = firstSegmentId;
@@ -351,11 +362,29 @@ export class SSRE_Methods{
 
                 let remaining_duration = calculate_remaining_duration_for_space( space_before, space_after, allEvents ); 
 
-                if( remaining_duration >= 0 ){
+                if( remaining_duration > 0 ){
                     
                 }else{
-                    isEnoughSpace = false;
-                    break;
+
+                                            console.dir( {
+                            remaining_duration,
+                            rest_duration,
+                            item
+                        } );
+                    if( remaining_duration === 0 ){
+
+
+                        if( this.list[ i + 1 ] ){
+
+                        }else{
+
+                        };
+
+                    }else{
+                        isEnoughSpace = false;
+                        break;
+                    }
+                    
                 };
 
                 if( first_segment_id === null ){ 
