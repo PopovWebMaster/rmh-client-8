@@ -60,6 +60,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
         this.AddAnyReleaseByData = this.AddAnyReleaseByData.bind(this);
+        this.GetAllUsedFiles = this.GetAllUsedFiles.bind(this);
+
+
+        
 
 
         
@@ -670,6 +674,44 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             result.push( key );
         };
         return result;
+
+    }
+
+    GetAllUsedFiles( eventsList ){
+
+        let obj = {};
+
+        for( let i = 0; i < this.list.length; i++ ){
+            let { releases, eventId } = this.list[ i ].GetData();
+            if( eventsList.indexOf( `${eventId}` !== -1 ) ){
+                if( obj[ eventId ] ){
+
+                }else{
+                    obj[ eventId ] = {};
+                };
+
+                for( let y = 0; y < releases.length; y++ ){
+                    let { file_list, id, releaseName } = releases[ y ];
+                    let fileName = null;
+                    if( typeof id === 'string' ){
+                        fileName = id;
+                    }else{
+                        if( file_list.length > 0 ){
+                            fileName = file_list[ file_list.length - 1 ];
+                        }else{
+                            fileName = releaseName;
+                        };
+                    };
+
+                    obj[ eventId ][ fileName ] = true;
+                }
+
+            };
+
+            
+        };
+
+        return obj;
 
     }
     

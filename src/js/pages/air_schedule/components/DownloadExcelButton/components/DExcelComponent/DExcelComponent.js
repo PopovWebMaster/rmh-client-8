@@ -11,12 +11,16 @@ import { selectorData as scheduleResultSlise } from './../../../../../../redux/s
 import { StoreScheduleResultEventsClass } from './../../../../../../classes/StoreScheduleResultEventsClass.js';
 
 import { get_filter_list_from_events_list } from './../../vendors/get_filter_list_from_events_list.js';
+import { get_filter_list } from './../../vendors/get_filter_list.js';
 import { get_changet_filter_list } from './../../vendors/get_changet_filter_list.js';
 
 import { FilterItem } from './../FilterItem/FilterItem.js';
 import { FilterControlPanel } from './../FilterControlPanel/FilterControlPanel.js';
+import { FilterCategoryItem } from './../FilterCategoryItem/FilterCategoryItem.js';
+import { ExportTypeButtons } from './../ExportTypeButtons/ExportTypeButtons.js';
  
 import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
+import { HighlightFiles } from './../HighlightFiles/HighlightFiles.js';
 
 import { get_used_events } from './vendors/get_used_events.js';
 // import { get_rows_from_events } from './vendors/get_rows_from_events.js';
@@ -46,6 +50,12 @@ const DExcelComponentComponent = ( props ) => {
     } = props;
 
     let [ filterList, setFilterList ] = useState( [] );
+    let [ exportType, setExportType ] = useState( 'schedule' ); // 'schedule' TV_program
+
+    let [ allUsedFiles, setAllUsedFiles ] = useState( [] );
+    let [ allFiles, setAllFiles ] = useState( {} );
+
+
 
     useEffect( () => {
         if( isOpen ){
@@ -53,7 +63,14 @@ const DExcelComponentComponent = ( props ) => {
             StoreScheduleResultEvents.CreateList();
 
             let eventsList = StoreScheduleResultEvents.GetAllUsedEvents();
+
+            // let allUsedFiles = StoreScheduleResultEvents.GetAllUsedFiles( eventsList );
+
+            setAllFiles( StoreScheduleResultEvents.GetAllUsedFiles( eventsList ) );
+
             setFilterList( get_filter_list_from_events_list( eventsList ) );
+
+
         }else{
             setFilterList( [] );
         };
@@ -72,24 +89,45 @@ const DExcelComponentComponent = ( props ) => {
 
     const createList = ( arr ) => {
 
+        let categories = {};
+
         let div = arr.map( ( item, index ) => {
             let {
                 eventId,
+                category_id,
                 isUsed,
                 withOnlyApplications,
             } = item;
 
-            return (
-                <FilterItem
-                    key =                   { index }
-                    eventId =               { eventId }
-                    isUsed =                { isUsed }
-                    withOnlyApplications =  { withOnlyApplications }
-                    item_change_isUsed =    { item_change_isUsed }
-                    item_change_whatTake =  { item_change_whatTake }
+            let with_category = true;
+            if( categories[ category_id ] === true ){
+                with_category = false;
+            };
 
-                />
-            )
+            categories[ category_id ] = true;
+
+            return (
+                <React.Fragment key = { index }>
+
+                    { with_category? (
+                        <FilterCategoryItem
+                            category_id =   { category_id }
+                            filterList =    { arr }
+                            setFilterList = { setFilterList }
+                        />
+                    ): '' }
+
+                    <FilterItem
+                        key =                   { index }
+                        eventId =               { eventId }
+                        isUsed =                { isUsed }
+                        withOnlyApplications =  { withOnlyApplications }
+                        item_change_isUsed =    { item_change_isUsed }
+                        item_change_whatTake =  { item_change_whatTake }
+
+                    />
+                </React.Fragment>
+            );
 
         } );
 
@@ -104,6 +142,20 @@ const DExcelComponentComponent = ( props ) => {
             return 'url( /public/assets/img/Gagarin_icon.jpg )';
         };
     };
+
+    const get_used_files_list = ( arr ) => {
+        let result = [];
+
+        for( let i = 0; i < arr.length; i++ ){
+            if( arr[ i ].isUsed === true ){
+                result.push( arr[ i ].fileName );
+            };
+            
+        };
+
+        return result;
+
+    }
 
     const click = () => {
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
@@ -120,12 +172,24 @@ const DExcelComponentComponent = ( props ) => {
         ResultSchedule.SetCurrentDayNum( currentDayNum );
         ResultSchedule.SetCurrentMonth( currentMonth );
         ResultSchedule.SetCurrentYear( currentYear );
+
+
+        ResultSchedule.SetHilightFiles( get_used_files_list( allUsedFiles ) );
+
         ResultSchedule.Download();
 
     }
 
     return (
         <div className = 'S_DExcelComponent'>
+
+            <ExportTypeButtons
+                exportType = { exportType }
+                setExportType = { setExportType }
+            />
+
+
+
             <h4 className = 'S_DExcelComponent_header'>Что включить в экспорт?</h4>
 
             <FilterControlPanel
@@ -139,6 +203,17 @@ const DExcelComponentComponent = ( props ) => {
                     { createList( filterList ) }
                 </ScrollContainer>
             </div>
+
+
+
+            <HighlightFiles
+                allUsedFiles =      { allUsedFiles }
+                setAllUsedFiles =   { setAllUsedFiles }
+                allFiles =          { allFiles }
+                filterList =        { filterList }
+
+            />
+
 
             <div className = 'S_DExcelComponent_btn'>
                 <span

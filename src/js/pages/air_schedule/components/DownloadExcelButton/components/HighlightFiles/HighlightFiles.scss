@@ -1,0 +1,47 @@
+.S_DExcelComponent_HighlightFiles{
+    font-size: 1em;
+    margin: 0.5em;
+    padding: 0.2em 0.3em;
+
+    // border: 1px solid #343434;
+    // border-radius: 0.1em;
+    // height: 6em;
+
+    .exportFilesTitle{
+        font-size: 0.65em;
+        color: #838383;
+        padding: 0 0.2em;
+    }
+
+    .exportFilesWrap{
+        font-size: 1em;
+        // margin: 0.5em;
+        // padding: 0.2em 0.3em;
+
+        border: 1px solid #d1d1d1;
+        border-radius: 0.1em;
+        height: 6em;
+
+        overflow: hidden;
+
+        .exportFile{
+            font-size: 0.56em;
+            padding: .3em .6em;
+            margin: 0.1em 0.5em;
+            color: #b7afaf;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid #d1d1d100;
+            border-radius: 0.1em;
+        }
+        .exportFile:hover{
+            border: 1px solid #d1d1d1d5;
+            border-radius: 0.1em;
+        }
+
+        .exportFile.isActive{
+            color: #5e5e5e;
+            font-weight: bold;
+        }
+    }
+}

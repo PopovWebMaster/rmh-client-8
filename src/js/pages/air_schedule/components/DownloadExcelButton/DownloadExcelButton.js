@@ -28,8 +28,8 @@ const DownloadExcelButtonComponent = ( props ) => {
             isOpen =        { isOpen }
             setIsOpen =     { setIsOpen }
             title =         'Настройки экспорта'
-            width =         '40vw'
-            height =        '70vh'
+            width =         '45vw'
+            height =        '90vh'
         >
             <DExcelComponent
                 isOpen =        { isOpen }

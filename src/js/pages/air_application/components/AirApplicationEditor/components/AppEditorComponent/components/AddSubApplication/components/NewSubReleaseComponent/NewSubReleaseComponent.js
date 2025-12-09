@@ -53,7 +53,7 @@ const NewSubReleaseComponentComponent = ( props ) => {
     let [ dataFrom, setDataFrom ] = useState( '' );
     let [ dataTo, setDataTo ] = useState( '' );
 
-    let [ durationSec, setDurationSec ] = useState( 0 );
+    let [ durationSec, setDurationSec ] = useState( MIN_EVENT_DURATION_SEC );
     let [ notes, setNotes ] = useState( '' );
 
     let [ name, setName ] = useState( '' );
@@ -64,6 +64,7 @@ const NewSubReleaseComponentComponent = ( props ) => {
     useEffect(() => {
 
         if( isOpen ){
+
             if( eventListById[ currentAppEventId ] ){
 
                 let { durationTime } = eventListById[ currentAppEventId ];
