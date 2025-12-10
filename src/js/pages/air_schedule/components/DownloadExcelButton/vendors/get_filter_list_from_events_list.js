@@ -22,6 +22,8 @@ export const get_filter_list_from_events_list = ( eventsList ) => {
 
             isUsed: false,
             withOnlyApplications: true,
+            quotationMarks: false,
+            upperCase: true,
         });
     };
 

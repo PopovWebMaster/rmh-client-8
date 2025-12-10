@@ -7,7 +7,14 @@ export const get_file_name = ( params ) => {
         currentDayNum,
         currentMonth,
         currentYear,
+        exportType = 'schedule', // 'schedule' TV_program
     } = params;
+    let title = '---';
+    if( exportType === 'schedule' ){
+        title = 'Расписание передач';
+    }else if( exportType === 'TV_program' ){
+        title = 'Программа передач';
+    };
 
-    return `Расписание передач - ${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}.xlsx`;
+    return `${ title } - ${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}.xlsx`;
 }

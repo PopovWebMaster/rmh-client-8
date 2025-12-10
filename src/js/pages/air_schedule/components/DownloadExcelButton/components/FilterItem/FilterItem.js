@@ -16,10 +16,15 @@ const FilterItemComponent = ( props ) => {
         eventId,
         isUsed,
         withOnlyApplications,
+        quotationMarks,
+        upperCase,
         item_change_isUsed,
         item_change_whatTake,
+        item_change_quotationMarks,
+        item_change_upperCase,
 
         eventListById,
+        exportType,
 
     } = props;
 
@@ -43,6 +48,10 @@ const FilterItemComponent = ( props ) => {
         item_change_whatTake( val, eventId );
     };
 
+// quotationMarks: false,
+//             upperCase: false,
+
+
 
     return (
         <div className = { `S_DExcelComponent_FilterItem ${ isUsed? 'isUsed': '' }` }>
@@ -57,7 +66,7 @@ const FilterItemComponent = ( props ) => {
                 <span style = { style }>{ eventName }</span>
             </div>
 
-            { isUsed? (
+            { isUsed && exportType === 'schedule'? (
                 <div className = 'whatTake'>
                     <span
                         className = { `${withOnlyApplications? 'isActive': '' }` }
@@ -71,7 +80,20 @@ const FilterItemComponent = ( props ) => {
 
                 </div>
 
-            ): '' }
+            ): isUsed && exportType === 'TV_program'? (
+                <div className = 'whatTake'>
+                    <span
+                        className = { `${quotationMarks? 'isActive': '' }` }
+                        onClick = { () => { item_change_quotationMarks( !quotationMarks, eventId ) } }
+                    >кавычки</span>
+
+                    <span
+                        className = { `${upperCase? 'isActive': '' }` }
+                        onClick = { () => { item_change_upperCase( !upperCase, eventId ) } }
+                    >верх. регистр</span>
+
+                </div>
+            ): ''  }
 
 
             

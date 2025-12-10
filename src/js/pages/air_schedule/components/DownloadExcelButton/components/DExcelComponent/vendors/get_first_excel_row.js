@@ -9,11 +9,17 @@ export const get_first_excel_row = ( params ) => {
         currentDayNum,
         currentMonth,
         currentYear,
+        exportType,
     } = params;
 
-    let value = `Расписание ${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}`
+    let title = 'Заголовок';
+    if( exportType === 'schedule' ){
+        title = 'Расписание';
+    }else if( exportType === 'TV_program' ){
+        title = 'Телепрограмма';
+    };
 
-
+    let value = `${title} ${currentDate} ${ MOUNTH_NAME[ currentMonth ] } ${currentYear} ${WEEK_NAME[ currentDayNum ]}`
 
     return [
         { 
@@ -27,7 +33,7 @@ export const get_first_excel_row = ( params ) => {
                     bold: true,
                 },
                 alignment: {
-                    horizontal: 'center',
+                    horizontal: 'left',
                     vertical: 'center',
                 } 
             } 

@@ -2,50 +2,5 @@
     font-size: 1em;
     padding: 0.5em;
 
-    .S_DExcelComponent_header{
-        font-size: .8em;
-        padding: 0.2em 0.4em;
-        color: #636363;
-    }
-
-    .S_DExcelComponent_listWrap{
-        font-size: 1em;
-        height: 45vh;
-        padding: 0.5em 0;
-    }
-
-    .S_DExcelComponent_btn{
-        font-size: 1em;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-
-        .S_DExcelComponent_icon{
-            font-size: 0.65em;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: bottom left;
-            overflow: hidden;
-            padding: 0.6em 0.9em 0.6em 3.3em;
-            background-color: #c9c9c954;
-            border: 1px solid #3434342b;
-            border-radius: 0.1em;
-            color: #373737;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-        }
-        .S_DExcelComponent_icon:hover{
-            color: #202020;
-            background-color: #c9c9c9;
-        }
-        .S_DExcelComponent_icon:active{
-            border: 1px solid #34343493;
-        }
-    }
-
-
     
 }

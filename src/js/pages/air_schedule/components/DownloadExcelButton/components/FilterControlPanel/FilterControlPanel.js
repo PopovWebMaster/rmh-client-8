@@ -16,6 +16,7 @@ const FilterControlPanelComponent = ( props ) => {
         filterList,
         setFilterList,
         isOpen,
+        exportType,
 
     } = props;
 
@@ -90,16 +91,20 @@ const FilterControlPanelComponent = ( props ) => {
                 <span>Включить всё</span>
             </div>
 
-            <div className = 'whatTake'>
-                <span
-                    onClick = { click_what_take_all }
-                >только заявки</span>
+            {/* 'schedule' TV_program */}
 
-                <span
-                    onClick = { click_what_take_only_applications }
-                >всё</span>
+            { exportType === 'schedule'? (
+                <div className = 'whatTake'>
+                    <span
+                        onClick = { click_what_take_all }
+                    >только заявки</span>
+                    <span
+                        onClick = { click_what_take_only_applications }
+                    >всё</span>
+                </div>
+            ): '' }
 
-            </div>
+
 
 
             
