@@ -43,7 +43,6 @@ const DownloadExcelButtonComponent = ( props ) => {
         >
             <span className = 'icon-download-alt icon'></span>
             <span className = 'text'>Скачать Excel</span>
-
         </div>
     </>
         

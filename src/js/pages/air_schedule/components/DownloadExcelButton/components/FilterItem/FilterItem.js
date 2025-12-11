@@ -23,6 +23,9 @@ const FilterItemComponent = ( props ) => {
         item_change_quotationMarks,
         item_change_upperCase,
 
+        staples,
+        item_change_staples,
+
         eventListById,
         exportType,
 
@@ -86,6 +89,10 @@ const FilterItemComponent = ( props ) => {
                         className = { `${quotationMarks? 'isActive': '' }` }
                         onClick = { () => { item_change_quotationMarks( !quotationMarks, eventId ) } }
                     >кавычки</span>
+                    <span
+                        className = { `${staples? 'isActive': '' }` }
+                        onClick = { () => { item_change_staples( !staples, eventId ) } }
+                    >скобки</span>
 
                     <span
                         className = { `${upperCase? 'isActive': '' }` }

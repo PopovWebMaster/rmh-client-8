@@ -141,105 +141,18 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     }
 
     AddReleasesFromNewGridEvent( gridEventId ){
-
-
         for( let i = 0; i < this.list.length; i++ ){
             if( this.list[ i ].id === gridEventId ){
 
                 if( this.list[ i ].firstSegmentId === null ){
                     let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
                     for( let y = 0; y < newEventData.releases.length; y++ ){
-                        let releaseId = newEventData.releases[ y ].id;
-
                         this.AddAnyReleaseByData( gridEventId, newEventData.releases[ y ] );
-
-                        // let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, newEventData.releases[ y ].releaseDuration );
-
-                        // if( isEnoughSpace ){
-                        //     let releaseType = this.GetReleaseType( releaseId );
-                        //     if( releaseType === RELEASE_TYPE.APP ){
-                        //         this.AddAppReleaseToUncutEvent({
-                        //             Event: this.list[ i ],
-                        //             releaseId,
-                        //         })
-                        //     }else if( releaseType === RELEASE_TYPE.FREE ){
-                        //         let {
-                        //             releaseDuration,
-                        //             releaseName,
-                        //             event_id,
-                        //             category_id,
-                        //             startTime
-                        //         } = newEventData.releases[ y ];
-                        //         this.AddFreeReleaseToUncutEvent({
-                        //             Event: this.list[ i ],
-                        //             eventId: event_id,
-                        //             category_id,
-                        //             name: releaseName,
-                        //             duration: releaseDuration,
-                        //             startTime,
-                        //         });
-                        //     };
-                        // };
-
                     };
-                    
                 }else{
-
-                    let EventParts = this.GetEventParts( gridEventId );
-
                     let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
-
                     for( let y = 0; y < newEventData.releases.length; y++ ){
-
-                        let releaseData = newEventData.releases[y];
-
-                        // let { releaseDuration, applicationName, releaseName } = releaseData;
-
                         this.AddAnyReleaseByData( gridEventId, newEventData.releases[y] );
-                        /*
-                        let isEnoughSpace = this.ChackPlaceForReleaseDuration( gridEventId, releaseDuration );
-
-                        if( isEnoughSpace ){
-                            let rest_duration = releaseDuration;
-                            let removeEventList = [];
-                            for( let i = 0; i < EventParts.length; i++ ){
-                                let { durationTime, releases } = EventParts[ i ];
-                                if( releases.length === 0 ){
-                                    let duration = 0;
-
-                                    if( rest_duration >= durationTime ){
-                                        if( EventParts[ i + 1 ] ){
-                                            duration = durationTime;
-                                            rest_duration = rest_duration - durationTime;
-                                        }else{
-                                            duration = rest_duration;
-                                        };
-                                    }else{
-                                        duration = rest_duration;
-                                        rest_duration = 0
-                                    };
-
-                                    if( duration > 0 ){
-                                        let data = { ...releaseData };
-                                        data.releaseName = `${releaseName} (Порезка ${i+1})`;
-                                        EventParts[ i ].durationTime = duration;
-                                        EventParts[ i ].AddReleaseByData( data );
-                                        EventParts[ i ].UpdateEventData();
-
-                                    }else{
-                                        let { gridEventId } = EventParts[ i ];
-                                        removeEventList.push( gridEventId );
-                                    };
-                                };
-                            };
-
-                            for( let i = 0; i < removeEventList.length; i++ ){
-                                this.RemoveEvent( removeEventList[ i ] )
-                            };
-                        }else{
-                            break;
-                        };
-                        */
                     };
                 };
                 break;
@@ -274,7 +187,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         };
     }
 
-
     AddEvent( params ){
         let {
             gridCurrentDay,
@@ -283,7 +195,6 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             eventId,
             durationTime,
         } = params;
-        // console.dir( ' !!!!!!');
 
         let newId = this.lastGridEventId + 1;
         let ScheduleEvent = new ScheduleEventClass();
@@ -417,7 +328,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
                             if( duration > 0 ){
                                 let data = { ...releaseData };
                                 // data.releaseDuration = duration;
-                                data.releaseName = `${releaseName} (Порезка ${i+1})`;
+                                // data.releaseName = `${releaseName} (Порезка ${i+1})`;
                                 EventParts[ i ].durationTime = duration;
                                 EventParts[ i ].AddReleaseByData( data );
                                 EventParts[ i ].UpdateEventData();

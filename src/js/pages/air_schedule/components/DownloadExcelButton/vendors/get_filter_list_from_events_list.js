@@ -21,9 +21,10 @@ export const get_filter_list_from_events_list = ( eventsList ) => {
             category_id,
 
             isUsed: false,
-            withOnlyApplications: true,
+            withOnlyApplications: false,
             quotationMarks: false,
             upperCase: true,
+            staples: false,
         });
     };
 

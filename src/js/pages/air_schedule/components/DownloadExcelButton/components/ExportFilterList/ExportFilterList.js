@@ -49,6 +49,11 @@ const ExportFilterListComponent = ( props ) => {
         setFilterList( changed_list );
     }
 
+    const item_change_staples = ( val, eventId ) => {
+        let changed_list = get_changet_filter_list( filterList, eventId, { staples: val } );
+        setFilterList( changed_list );
+    }
+
 
 
     const createList = ( arr ) => {
@@ -63,6 +68,7 @@ const ExportFilterListComponent = ( props ) => {
                 withOnlyApplications,
                 quotationMarks,
                 upperCase,
+                staples,
             } = item;
 
             let with_category = true;
@@ -95,6 +101,8 @@ const ExportFilterListComponent = ( props ) => {
                         item_change_quotationMarks = { item_change_quotationMarks }
                         item_change_upperCase = { item_change_upperCase }
                         exportType =            { exportType }
+                        staples = { staples }
+                        item_change_staples = { item_change_staples }
 
                     />
                 </React.Fragment>
