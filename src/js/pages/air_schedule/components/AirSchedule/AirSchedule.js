@@ -32,7 +32,6 @@ import { SaveScheduleButton } from './../SaveScheduleButton/SaveScheduleButton.j
 
 import { ScheduleInfoAlertMessage } from './../ScheduleInfoAlertMessage/ScheduleInfoAlertMessage.js';
 
-
 const AirScheduleComponent = ( props ) => {
 
     let {

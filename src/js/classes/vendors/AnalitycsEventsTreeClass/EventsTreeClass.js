@@ -4,6 +4,8 @@ import { setEvenstTree } from './../../../redux/playReportAnalyticsSlise.js';
 
 import { check_file_name_for_extension } from './../../../helpers/check_file_name_for_extension.js';
 
+import { TreeFileNameDataClass } from './TreeFileNameDataClass.js';
+
 export class EventsTreeClass {
     constructor(){
 
@@ -32,15 +34,10 @@ export class EventsTreeClass {
 
         let tree = {};
 
-        // console.dir({
-        //     filteredList,
-        //     eventListById
-        // });
+        let tree_list = {};
 
         for( let i = 0; i < filteredList.length; i++ ){
 
-            // console.dir( 'filteredList[ i ]' );
-            //     console.dir( filteredList[ i ] );
             let { eventId } = filteredList[ i ];
             if( eventId !== null ){
                 let { 
@@ -48,38 +45,39 @@ export class EventsTreeClass {
                     file,
                     premiere,
                     segmentRealDuration,
+                    markIn,
+                    fileDuration,
 
                 } = filteredList[ i ];
 
+                // console.dir( filteredList[ i ] );
+
                 let fileName = file.name;
 
-                // console.dir( 'eventListById[ eventId ]' );
-                // console.dir( eventListById[ eventId ] );
                 let { category_id } = eventListById[ eventId ];
-
-                
-                // console.dir( 'tree' );
-                // console.dir( tree );
-
-                // console.dir( 'category_id' );
-                // console.dir( category_id );
-
-
 
                 if( tree[ category_id ] ){  }else{
                     tree[ category_id ] = {};
                 };
 
-                // console.dir( '1' );
+                if( tree_list[ category_id ] ){  }else{
+                    tree_list[ category_id ] = {};
+                };
 
                 if( tree[ category_id ][ eventId ] ){}else{
                     tree[ category_id ][ eventId ] = {};
                 };
-                // console.dir( '2' );
+
+                if( tree_list[ category_id ][ eventId ] ){}else{
+                    tree_list[ category_id ][ eventId ] = {};
+                };
 
                 if( tree[ category_id ][ eventId ][ fileName ] ){
                     tree[ category_id ][ eventId ][ fileName ].count = tree[ category_id ][ eventId ][ fileName ].count + 1;
                 }else{
+                    let mark_in_sec = markIn.ms/1000;
+                    let file_duration_sec = fileDuration.ms/1000;
+
                     tree[ category_id ][ eventId ][ fileName ] = {
                         startTime:      startTime.ms/1000,
                         duration:       segmentRealDuration.ms/1000,
@@ -87,19 +85,73 @@ export class EventsTreeClass {
                         count:          1,
                         isUsed:         false,
                         releaseCount:   0,
+
+                        markIn: mark_in_sec,
+                        fileDuration: file_duration_sec
                     };  
-                    // console.dir( '3' );
+
+                    // tree_list
                 };
 
-                // 
+
+                if( tree_list[ category_id ][ eventId ][ fileName ] ){
+
+                }else{
+                    tree_list[ category_id ][ eventId ][ fileName ] = new TreeFileNameDataClass;
+                };
+
+                tree_list[ category_id ][ eventId ][ fileName ].AddData( filteredList[ i ] );
+
+                // tree_list[ category_id ][ eventId ][ fileName ].push( {
+                //     startTime:      startTime.ms/1000,
+                //     duration:       segmentRealDuration.ms/1000,
+                //     isPremiere:     premiere.isPremiere,
+                //     count:          1,
+                //     isUsed:         false,
+                //     releaseCount:   0,
+
+                //     markIn: markIn.ms/1000,
+                //     fileDuration: fileDuration.ms/1000,
+                // } );
+
+
             };
 
-        }
+        };
 
-//         console.dir( 'tree' );
-//                 console.dir( tree );
-// console.dir( '!!!!!!!!!!!! конец' );
-        this.tree = tree;
+        let tree_v2 = {};
+        for( let category_id in tree_list ){
+            for( let eventId in tree_list[ category_id ] ){
+                for( let fileName in tree_list[ category_id ][ eventId ] ){
+                    if( tree_v2[ category_id ]){}else{ tree_v2[ category_id ] = {} };
+                    if( tree_v2[ category_id ][ eventId ]){}else{ tree_v2[ category_id ][ eventId ] = {} };
+
+                    let items = tree_list[ category_id ][ eventId ][ fileName ].GetData();
+
+                    for( let file_name in items ){
+                        tree_v2[ category_id ][ eventId ][ file_name ] = items[ file_name ]
+                    };
+
+
+
+                    // tree_v2[ category_id ][ eventId ][ fileName ] = tree_list[ category_id ][ eventId ][ fileName ].GetData();
+                };
+            };
+        };
+
+        console.dir( 'tree' );
+        console.dir( tree );
+
+        // console.dir( 'tree_list' );
+        // console.dir( tree_list );
+
+        console.dir( 'tree_v2' );
+        console.dir( tree_v2 );
+
+
+
+
+        this.tree = tree_v2;
 
     }
 

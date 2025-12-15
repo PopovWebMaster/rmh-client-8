@@ -51,7 +51,7 @@ const NewSubSeriesComponentComponent = ( props ) => {
     let [ dataFrom, setDataFrom ] = useState( '' );
     let [ dataTo, setDataTo ] = useState( '' );
 
-    let [ durationSec, setDurationSec ] = useState( 0 );
+    let [ durationSec, setDurationSec ] = useState( MIN_EVENT_DURATION_SEC );
     let [ notes, setNotes ] = useState( '' );
 
     let [ nameTemplate, setNameTemplate ] = useState( '' );
