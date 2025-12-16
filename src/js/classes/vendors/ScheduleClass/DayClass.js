@@ -104,14 +104,6 @@ export class DayClass {
                 grid_event_id,
             } = arr[ i ];
 
-            // obj[ sec ] = {
-            //     time,
-            //     sec,
-            //     title,
-            //     fill_count: 0,
-            //     grid_event_id,
-            // };
-
             obj[ sec ] = get_day_time_point_object( {
                 time,
                 sec,
@@ -121,6 +113,10 @@ export class DayClass {
             } );
 
         };
+
+        // console.dir( 'obj' );
+        // console.dir( obj );
+
 
         this.timePoints = { ...obj };
 

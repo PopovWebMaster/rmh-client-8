@@ -32,6 +32,7 @@ const ScheduleDayTimePointComponent = ( props ) => {
         grid_event_id,
         is_reserved,
         reserved_name,
+        className = '',
 
         setEnvIsOpen,
 
@@ -91,7 +92,7 @@ const ScheduleDayTimePointComponent = ( props ) => {
 
     return (
         <div 
-            className = { `SEC_CharDayTimePoint ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
+            className = { `SEC_CharDayTimePoint ${className} ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
             onClick = { click }
         >
 

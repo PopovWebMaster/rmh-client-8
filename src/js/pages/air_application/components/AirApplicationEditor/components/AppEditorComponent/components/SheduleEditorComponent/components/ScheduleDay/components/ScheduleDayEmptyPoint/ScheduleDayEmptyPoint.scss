@@ -1,0 +1,25 @@
+.scheduleDayEmptyPoint.SEC_CharDayTimePoint{
+    font-size: 1em;
+    min-height: 1.31em;
+    // height: 1.31em;
+
+    // width: calc( 100% - 0.4em );
+
+    // margin: 0;
+    display: block;
+    // padding: 0;
+    background-color: #ffffff00;
+    border-radius: 0.1em;
+    border: 0px solid #deeaf47d;
+
+    // margin: 0.2em 0.2em;
+    margin: 0.2em 0.2em;
+
+
+    padding: 0.2em 0.3em;
+    // background-color: red;
+}
+
+.scheduleDayEmptyPoint.SEC_CharDayTimePoint:hover{
+    background-color: none;
+}

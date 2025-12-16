@@ -61,8 +61,16 @@ const ScheduleTimeColumnComponent = ( props ) => {
 
         let div = list.map( ( item, index ) => {
             let { sec, title } = item;
+
+            let className = `day_item_${sec}_${sec}`;
+
             return (
-                <div className = 'SEC_time_list_item' key = { index }>
+                <div 
+                    className = { `SEC_time_list_item ${className}` }
+                    key = { index }
+                    onMouseOver = { () => { mouse_over( className ) } }
+                    onMouseLeave = { () => { mouse_leave( className ) } }
+                >
                     <span 
                         key = { index }
                         onClick = { () => { click_time_point( sec ) } }
@@ -83,13 +91,35 @@ const ScheduleTimeColumnComponent = ( props ) => {
     }
 
 
+    const mouse_over = ( className ) => {
+        const boxes = document.querySelectorAll( `.SEC_CharDayTimePoint.${className}` ); 
+        boxes.forEach( ( box ) => { 
+            box.style.backgroundColor = '#bcf5ca'; 
+        });
+    }
+
+    const mouse_leave = ( className ) => {
+        const boxes = document.querySelectorAll( `.SEC_CharDayTimePoint.${className}` ); 
+        boxes.forEach( ( box ) => { 
+            box.style.backgroundColor = ''; 
+        });
+    }
 
     const crateGroupe = ( list ) => {
 
         let div = list.map( ( item, index ) => {
-            let { sec, title, sec_list } = item;
+            let { sec, title, sec_list, interval } = item;
+            // console.dir( 'item' );
+            // console.dir( item );
+            let className = `day_item_${interval.from}_${interval.to}`;
+
             return (
-                <div className = 'SEC_time_list_item' key = { index }>
+                <div 
+                    className = { `SEC_time_list_item ${className}` } 
+                    key = { index }
+                    onMouseOver = { () => { mouse_over( className ) } }
+                    onMouseLeave = { () => { mouse_leave( className ) } }
+                >
                     <span 
                         key = { index }
                         onClick = { () => { clickGroupe( sec_list ) } }

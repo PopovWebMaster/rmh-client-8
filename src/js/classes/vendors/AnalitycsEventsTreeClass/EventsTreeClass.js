@@ -32,7 +32,7 @@ export class EventsTreeClass {
         let { filteredList } = playReport;
         let { eventListById } = layout;
 
-        let tree = {};
+        // let tree = {};
 
         let tree_list = {};
 
@@ -41,12 +41,12 @@ export class EventsTreeClass {
             let { eventId } = filteredList[ i ];
             if( eventId !== null ){
                 let { 
-                    startTime,
+                    // startTime,
                     file,
-                    premiere,
-                    segmentRealDuration,
-                    markIn,
-                    fileDuration,
+                    // premiere,
+                    // segmentRealDuration,
+                    // markIn,
+                    // fileDuration,
 
                 } = filteredList[ i ];
 
@@ -56,42 +56,40 @@ export class EventsTreeClass {
 
                 let { category_id } = eventListById[ eventId ];
 
-                if( tree[ category_id ] ){  }else{
-                    tree[ category_id ] = {};
-                };
+                // if( tree[ category_id ] ){  }else{
+                //     tree[ category_id ] = {};
+                // };
 
                 if( tree_list[ category_id ] ){  }else{
                     tree_list[ category_id ] = {};
                 };
 
-                if( tree[ category_id ][ eventId ] ){}else{
-                    tree[ category_id ][ eventId ] = {};
-                };
+                // if( tree[ category_id ][ eventId ] ){}else{
+                //     tree[ category_id ][ eventId ] = {};
+                // };
 
                 if( tree_list[ category_id ][ eventId ] ){}else{
                     tree_list[ category_id ][ eventId ] = {};
                 };
 
-                if( tree[ category_id ][ eventId ][ fileName ] ){
-                    tree[ category_id ][ eventId ][ fileName ].count = tree[ category_id ][ eventId ][ fileName ].count + 1;
-                }else{
-                    let mark_in_sec = markIn.ms/1000;
-                    let file_duration_sec = fileDuration.ms/1000;
+                // if( tree[ category_id ][ eventId ][ fileName ] ){
+                //     tree[ category_id ][ eventId ][ fileName ].count = tree[ category_id ][ eventId ][ fileName ].count + 1;
+                // }else{
+                //     let mark_in_sec = markIn.ms/1000;
+                //     let file_duration_sec = fileDuration.ms/1000;
 
-                    tree[ category_id ][ eventId ][ fileName ] = {
-                        startTime:      startTime.ms/1000,
-                        duration:       segmentRealDuration.ms/1000,
-                        isPremiere:     premiere.isPremiere,
-                        count:          1,
-                        isUsed:         false,
-                        releaseCount:   0,
+                //     tree[ category_id ][ eventId ][ fileName ] = {
+                //         startTime:      startTime.ms/1000,
+                //         duration:       segmentRealDuration.ms/1000,
+                //         isPremiere:     premiere.isPremiere,
+                //         count:          1,
+                //         isUsed:         false,
+                //         releaseCount:   0,
 
-                        markIn: mark_in_sec,
-                        fileDuration: file_duration_sec
-                    };  
-
-                    // tree_list
-                };
+                //         markIn: mark_in_sec,
+                //         fileDuration: file_duration_sec
+                //     };  
+                // };
 
 
                 if( tree_list[ category_id ][ eventId ][ fileName ] ){
@@ -139,8 +137,8 @@ export class EventsTreeClass {
             };
         };
 
-        console.dir( 'tree' );
-        console.dir( tree );
+        // console.dir( 'tree' );
+        // console.dir( tree );
 
         // console.dir( 'tree_list' );
         // console.dir( tree_list );

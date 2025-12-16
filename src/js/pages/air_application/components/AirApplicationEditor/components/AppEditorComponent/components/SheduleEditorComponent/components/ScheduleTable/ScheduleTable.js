@@ -15,6 +15,7 @@ const ScheduleTableComponent = ( props ) => {
     let {
         Schedule,
         dayList,
+
     } = props;
 
     const create = ( arr ) => {
@@ -89,6 +90,9 @@ export function ScheduleTable( props ){
             charType =      { schedule.charType }
             dayList =       { schedule.dayList }
             releaseName =   { schedule.releaseName }
+
+
+            
 
         />
     );

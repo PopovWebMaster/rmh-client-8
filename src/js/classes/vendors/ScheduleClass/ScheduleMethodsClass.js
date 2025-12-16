@@ -112,7 +112,10 @@ export class ScheduleMethodsClass {
             list_groupe = this.WeekPointsTemplate.GetAllTimePointsGroupList( true );
         };
 
-        // console.dir( 'list_groupe' );
+        // console.dir( 'allTimePointsList' );
+        // console.dir( list );
+
+        //         console.dir( 'allTimePointsGroupeList' );
         // console.dir( list_groupe );
 
 

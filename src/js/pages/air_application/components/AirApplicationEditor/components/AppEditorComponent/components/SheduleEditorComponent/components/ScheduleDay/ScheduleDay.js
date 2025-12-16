@@ -1,14 +1,16 @@
 
 import React from "react";
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
 import './ScheduleDay.scss';
 
 // import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as scheduleSlise } from './../../../../../../../../../../redux/scheduleSlise.js';
 
 import { ScheduleDayHeader } from './components/ScheduleDayHeader/ScheduleDayHeader.js';
 import { ScheduleDayTimePoint } from './components/ScheduleDayTimePoint/ScheduleDayTimePoint.js';
+import { ScheduleDayEmptyPoint } from './components/ScheduleDayEmptyPoint/ScheduleDayEmptyPoint.js';
 
 const ScheduleDayComponent = ( props ) => {
 
@@ -26,43 +28,132 @@ const ScheduleDayComponent = ( props ) => {
         releaseLength,
         dayDuration,
 
+
+        allTimePointsGroupeList,
+
     } = props;
+
+    const get_list = ( time_points ) => {
+        let result = [];
+        // console.dir({
+        //     time_points,
+        //     allTimePointsGroupeList
+        // });
+
+        for( let i = 0; i < allTimePointsGroupeList.length; i++ ){
+            let { sec_list, interval } = allTimePointsGroupeList[ i ];
+
+            // console.dir( allTimePointsGroupeList[ i ] );
+
+            let item = {
+                is_empty: true,
+            };
+
+            for( let y = 0; y < sec_list.length; y++ ){
+                if( time_points[ sec_list[ y ] ] ){
+                    item = { ...time_points[ sec_list[ y ] ] };
+                    item.is_empty = false;
+                    item.className = `day_item_${interval.from}_${interval.to}`;
+                    break;
+                };
+            };
+
+            result.push( item );
+
+        }
+
+
+
+        return result;
+    }
 
 
 
     const create = ( obj ) => {
 
-        let arr = Object.keys( obj );
+        // let arr = Object.keys( obj );
 
-        let div = arr.map( ( obj_key, index ) => {
-            let {
-                fill_count,
-                sec,
-                title,
-                time,
-                grid_event_id,
-                is_reserved = null,
-                reserved_name = null,
+        // console.dir({
+        //     arr,
+        //     allTimePointsGroupeList
+        // });
 
-            } = obj[ obj_key ];
+        let list = get_list( obj );
+        // console.dir({
+        //     time_points: obj,
+        //     allTimePointsGroupeList,
+        //     list
+        // });
 
-            return (
-                <ScheduleDayTimePoint
-                    key =           { index }
-                    fill_count =    { fill_count }
-                    sec =           { sec }
-                    title =         { title }
-                    time =          { time }
-                    YYYY_MM_DD =    { YYYY_MM_DD }
-                    Schedule =      { Schedule }
-                    grid_event_id = { grid_event_id }
-                    is_reserved =   { is_reserved }
-                    reserved_name = { reserved_name }
+        
+        let div = list.map( ( item, index ) => {
+
+            if( item.is_empty ){
+                return <ScheduleDayEmptyPoint key =           { index }/>
+
+            }else{
+                let {
+                    fill_count,
+                    sec,
+                    title,
+                    time,
+                    grid_event_id,
+                    is_reserved = null,
+                    reserved_name = null,
+                    className,
+
+                } = item;
+
+                return (
+                    <ScheduleDayTimePoint
+                        key =           { index }
+                        fill_count =    { fill_count }
+                        sec =           { sec }
+                        title =         { title }
+                        time =          { time }
+                        YYYY_MM_DD =    { YYYY_MM_DD }
+                        Schedule =      { Schedule }
+                        grid_event_id = { grid_event_id }
+                        is_reserved =   { is_reserved }
+                        reserved_name = { reserved_name }
+                        className = { className }
 
 
-                />
-            );
+                    />
+                ); 
+            };
+
         } );
+
+        // let div = arr.map( ( obj_key, index ) => {
+        //     let {
+        //         fill_count,
+        //         sec,
+        //         title,
+        //         time,
+        //         grid_event_id,
+        //         is_reserved = null,
+        //         reserved_name = null,
+
+        //     } = obj[ obj_key ];
+
+        //     return (
+        //         <ScheduleDayTimePoint
+        //             key =           { index }
+        //             fill_count =    { fill_count }
+        //             sec =           { sec }
+        //             title =         { title }
+        //             time =          { time }
+        //             YYYY_MM_DD =    { YYYY_MM_DD }
+        //             Schedule =      { Schedule }
+        //             grid_event_id = { grid_event_id }
+        //             is_reserved =   { is_reserved }
+        //             reserved_name = { reserved_name }
+
+
+        //         />
+        //     );
+        // } );
 
         return div
 
@@ -94,12 +185,14 @@ const ScheduleDayComponent = ( props ) => {
 
 export function ScheduleDay( props ){
 
-    // const application = useSelector( applicationSlice );
+    const schedule = useSelector( scheduleSlise );
     // const dispatch = useDispatch();
 
     return (
         <ScheduleDayComponent
             { ...props }
+
+            allTimePointsGroupeList = { schedule.allTimePointsGroupeList }
 
             // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
 

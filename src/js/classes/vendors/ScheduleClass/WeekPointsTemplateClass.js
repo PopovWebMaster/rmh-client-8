@@ -204,9 +204,7 @@ export class WeekPointsTemplateClass {
             });
 
         };
-
         return result;
-
 
     }
 

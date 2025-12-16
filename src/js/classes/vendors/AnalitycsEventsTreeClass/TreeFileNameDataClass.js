@@ -84,11 +84,9 @@ export class TreeFileNameDataClass {
         };
 
         for( let i = 0 ; i < cutList.length; i++ ){
-            result[ `${this.fileName} (Порезка ${i})` ] = { ...cutList[ i ] };
+            result[ `${this.fileName} (Порезка ${i + 1})` ] = { ...cutList[ i ] };
         };
 
-        
-            
           
         return result
 

@@ -1,0 +1,25 @@
+.ScheduleBodyTypeTable{
+    font-size: 1em;
+    height: 100%;
+    // height: calc( 100% - 5em );
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+
+    .SEC_body_left{
+        font-size: 1em;
+        height: 100%;
+        width: 8em;
+        background-color: #edf3f770;
+    }
+
+    .SEC_body_center{
+        font-size: 1em;
+        height: 100%;
+        width: calc( 100% - 8em );
+        overflow: hidden;
+        padding: 0 0.5em;
+    }
+
+    
+}

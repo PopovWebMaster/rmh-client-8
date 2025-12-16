@@ -19,6 +19,8 @@ import { ScheduleTable }        from './components/ScheduleTable/ScheduleTable.j
 import { DownloadScheduleButton } from './components/DownloadScheduleButton/DownloadScheduleButton.js';
 import { MixModeButton } from './components/MixModeButton/MixModeButton.js';
 
+import { ScheduleBodyTypeTable } from './components/ScheduleBodyTypeTable/ScheduleBodyTypeTable.js';
+
 
 const SheduleEditorComponentComponent = ( props ) => {
 
@@ -49,72 +51,18 @@ const SheduleEditorComponentComponent = ( props ) => {
         };
     }, [ isOpen ] );
 
-    // useEffect( () => {
-    //     // if( isOpen ){
-    //         setSchedule( new ScheduleClass() );
-    //     // }else{
-    //     //     if( Schedule !== null ){
-    //     //         Schedule.Remove();
-    //     //     };
-    //     //     setSchedule( null );
-
-    //     // };
-    // }, [ applicationList ] );
-
-
-
-
-    // useEffect( () => {
-    //     // if( isOpen ){
-    //         setSchedule( new ScheduleClass() );
-    //     // }else{
-    //     //     if( Schedule !== null ){
-    //     //         Schedule.Remove();
-    //     //     };
-    //     //     setSchedule( null );
-    //     // };
-
-    // }, [ applicationList ] );
-
-    // useEffect( () => {
-    //     if( isOpen ){
-    //         // setSchedule( new ScheduleClass() );
-    //     }else{
-    //         if( Schedule !== null ){
-    //             Schedule.Remove();
-    //         };
-    //         setSchedule( null );
-
-    //     };
-    // }, [ isOpen ] );
-
-
-
-
 
 
     useEffect( () => {
 
-        
-
         if( Schedule === null ){
             setIsReady( false );
         }else{
-
-
-            // console.dir( 'Schedule !!!!!!!!!!!!!' );
-            // console.dir( Schedule );
-
-            // setTimeout( () => {
-                Schedule.Create();
+            Schedule.Create();
             setIsReady( true );
-            // }, 500 );
-
-
-            
-            
-
         };
+
+        console.dir( Schedule );
 
     }, [ Schedule ] );
 
@@ -145,7 +93,11 @@ const SheduleEditorComponentComponent = ( props ) => {
                     
 
                     <div className = 'SEC_body'>
-                        <div className = 'SEC_body_left'>
+
+                        <ScheduleBodyTypeTable Schedule = { Schedule } />
+
+                        
+                        {/* <div className = 'SEC_body_left'>
                             <ScheduleTimeColumn 
                                 Schedule = { Schedule }
                             />
@@ -158,7 +110,7 @@ const SheduleEditorComponentComponent = ( props ) => {
                                 Schedule = { Schedule }
                             />
 
-                        </div>
+                        </div> */}
                         
                     </div>
                 

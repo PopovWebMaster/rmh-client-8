@@ -125,7 +125,7 @@ const ItemSubSheduleComponent = ( props ) => {
                 onClick = { click }
             >Расписание</span>
 
-            {/* <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span> */}
+            <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span>
 
         </div>
     )
