@@ -35,30 +35,39 @@ const ScheduleDayComponent = ( props ) => {
 
     const get_list = ( time_points ) => {
         let result = [];
-        // console.dir({
-        //     time_points,
-        //     allTimePointsGroupeList
-        // });
+        console.dir({
+            time_points,
+            allTimePointsGroupeList
+        });
 
         for( let i = 0; i < allTimePointsGroupeList.length; i++ ){
             let { sec_list, interval } = allTimePointsGroupeList[ i ];
 
             // console.dir( allTimePointsGroupeList[ i ] );
 
-            let item = {
+            let empty_item = {
                 is_empty: true,
             };
 
+            let items = [];
+
             for( let y = 0; y < sec_list.length; y++ ){
                 if( time_points[ sec_list[ y ] ] ){
-                    item = { ...time_points[ sec_list[ y ] ] };
+                    let item = { ...time_points[ sec_list[ y ] ] };
                     item.is_empty = false;
                     item.className = `day_item_${interval.from}_${interval.to}`;
-                    break;
+                    items.push( item );
                 };
             };
 
-            result.push( item );
+            if( items.length > 0 ){
+                result = [ ...result, ...items ];
+
+            }else{
+                result.push( empty_item );
+            };
+
+            
 
         }
 
