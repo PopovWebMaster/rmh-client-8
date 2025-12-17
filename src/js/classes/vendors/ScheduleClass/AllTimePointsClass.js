@@ -14,11 +14,15 @@ export class AllTimePointsClass {
     }
 
     AddPoint( time_sec ){
-        if( this.list_sec.indexOf( time_sec ) === -1){
+
+        let list = [ ...this.list_sec ];
+
+        if( list.indexOf( time_sec ) === -1){
 
             let TimePoint = new TimePointClass({ time_sec: time_sec });
             this.list.push( TimePoint.GetData() );
             this.list_sec.push( time_sec );
+
         };
     }
 

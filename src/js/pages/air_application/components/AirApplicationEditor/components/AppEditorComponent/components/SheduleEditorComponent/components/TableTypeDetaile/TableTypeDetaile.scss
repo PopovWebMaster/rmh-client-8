@@ -1,0 +1,41 @@
+.SB_tableTypeDetaile{
+    font-size: 1em;
+    height: 77vh;
+    // height: calc( 100% - 5em );
+    width: 97vw;
+    // display: flex;
+    // justify-content: flex-start;
+
+    background-color: rgb(160, 160, 160);
+    overflow: scroll;
+    position: relative;
+
+
+    .SB_tableTypeDetaile_header{
+        font-size: 1em;
+
+        position: sticky;
+        top: 0;   
+        z-index: 10; 
+        width: 100%;
+
+        background-color: red;
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 1em;
+            padding: 0.3em 0.5em;
+        }
+
+    }
+
+
+
+
+    
+}

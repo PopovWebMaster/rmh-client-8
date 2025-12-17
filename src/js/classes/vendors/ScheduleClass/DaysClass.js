@@ -65,6 +65,7 @@ export class DaysClass {
         for( let i = 0; i < dayList.length; i++ ){
             let { dayNum, YYYY_MM_DD } = dayList[ i ];
             let Day = new DayClass( { ...dayList[ i ] } );
+            Day.SetCharType( this.charType );
             Day.Bind( { SubApplication: this.SubApplication } )
             Day.AddTimePoints( this.WeekPointsTemplate.GetPoints( dayNum ) );
             this.days[ YYYY_MM_DD ] = Day;

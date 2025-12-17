@@ -106,6 +106,10 @@ export class ScheduleMethodsClass {
 
         let list_groupe = [];
 
+        // console.dir( 'his.charType' );
+        // console.dir( this.charType );
+
+
         if( this.charType === CHAR_TYPE.FILE || this.charType === CHAR_TYPE.BLOCK ){
             list_groupe = this.WeekPointsTemplate.GetAllTimePointsGroupList();
         }else if( this.charType === CHAR_TYPE.BLIND ){
@@ -144,6 +148,8 @@ export class ScheduleMethodsClass {
     AddNewTimePoint( sec ){
 
         this.WeekPointsTemplate.AllTimePoints.AddPoint( sec );
+
+        this.WeekPointsTemplate.CreateTemplate(); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         this.SetAllTimePointsListToStore();
         this.Days.AddTimePointInAllDays( sec );
         this.SetDayListToStore();

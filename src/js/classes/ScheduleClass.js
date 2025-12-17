@@ -113,6 +113,8 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
     AddTimePoint( sec ){
         this.AddNewTimePoint( sec );
+
+        // this.SetAllTimePointsListToStore(); // !!!!!!!!!!! <<<<<<<<<<< 
     }
 
     AllTimePointsToggle( sec ){

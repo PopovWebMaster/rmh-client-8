@@ -3,12 +3,22 @@ import store from './../../../../redux/store.js';
 
 import { TimePointClass } from './../TimePointClass.js';
 import { get_full_day_info_from_day_seconds } from './../../../../helpers/get_full_day_info_from_day_seconds.js';
+import { get_used_week_day_nums } from './get_used_week_day_nums.js';
 
 
-export const get_week_point_list = ( /*TimePoints,*/ event_id, releaseList ) => {
+export const get_week_point_list = ( event_id, SubApplication ) => {
 
     let result =  [ [], [], [], [], [], [], [], ];
     let week_point_list =  [ [], [], [], [], [], [], [], ];
+
+    let releaseList = SubApplication.GetReleaseList();
+    let period_from = SubApplication.period_from;
+    let period_to = SubApplication.period_to;
+
+
+    let usedDayNum = get_used_week_day_nums( period_from, period_to );
+
+
 
     let { layout } = store.getState();
     let { gridDayEventsList, gridDayEventsListById } = layout;
@@ -35,9 +45,14 @@ export const get_week_point_list = ( /*TimePoints,*/ event_id, releaseList ) => 
                         duration:       durationTime,
                     });
 
-                    week_point_list[ dayNum ].push( TimePoint.GetData() );
+                    
 
-                    obj[ startTime ] = true;
+                    if( usedDayNum[ dayNum ] === true ){
+                        week_point_list[ dayNum ].push( TimePoint.GetData() );
+                        obj[ startTime ] = true;
+                    };
+
+                    
 
                     // TimePoints.AddPoint( startTime );
                     

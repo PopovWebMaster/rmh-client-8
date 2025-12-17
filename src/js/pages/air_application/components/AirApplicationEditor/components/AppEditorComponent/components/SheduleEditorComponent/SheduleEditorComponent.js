@@ -20,6 +20,7 @@ import { DownloadScheduleButton } from './components/DownloadScheduleButton/Down
 import { MixModeButton } from './components/MixModeButton/MixModeButton.js';
 
 import { ScheduleBodyTypeTable } from './components/ScheduleBodyTypeTable/ScheduleBodyTypeTable.js';
+import { TableTypeDetaile } from './components/TableTypeDetaile/TableTypeDetaile.js';
 
 
 const SheduleEditorComponentComponent = ( props ) => {
@@ -62,8 +63,6 @@ const SheduleEditorComponentComponent = ( props ) => {
             setIsReady( true );
         };
 
-        console.dir( Schedule );
-
     }, [ Schedule ] );
 
 
@@ -96,22 +95,9 @@ const SheduleEditorComponentComponent = ( props ) => {
 
                         <ScheduleBodyTypeTable Schedule = { Schedule } />
 
-                        
-                        {/* <div className = 'SEC_body_left'>
-                            <ScheduleTimeColumn 
-                                Schedule = { Schedule }
-                            />
+                        {/* <TableTypeDetaile isActive = { true }/> */}
 
-                        </div>
-
-                        <div className = 'SEC_body_center'>
-
-                            <ScheduleTable 
-                                Schedule = { Schedule }
-                            />
-
-                        </div> */}
-                        
+                    
                     </div>
                 
                 </>): '' }

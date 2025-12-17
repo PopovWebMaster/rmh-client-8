@@ -3,6 +3,10 @@ import { TimePointClass } from './TimePointClass.js';
 
 import { get_day_time_point_object } from './vendors/get_day_time_point_object.js';
 
+import { CHAR_TYPE } from './../../../config/application.js';
+
+import store from './../../../redux/store.js';
+
 export class DayClass {
 
     constructor( props ){
@@ -33,6 +37,8 @@ export class DayClass {
         // this.timeToints = {};
         this.timePoints = {};
 
+        this.charType = null;
+
 
         this.AddTimePoints = this.AddTimePoints.bind(this);
         this.GetData = this.GetData.bind(this);
@@ -48,8 +54,7 @@ export class DayClass {
         this.AddFillCount = this.AddFillCount.bind(this);
         this.AddTimePoint = this.AddTimePoint.bind(this);
         this.AddReservedFillCount = this.AddReservedFillCount.bind(this);
-
-
+        this.SetCharType = this.SetCharType.bind(this);
 
 
 
@@ -60,6 +65,10 @@ export class DayClass {
 
     }
 
+    SetCharType( charType ){
+        this.charType = charType;
+    }
+
     Bind( data ){
         let {
             SubApplication,
@@ -68,6 +77,7 @@ export class DayClass {
     }
 
     AddTimePoint( time_sec, grid_event_id = null, duration = null ){
+
 
         if( this.timePoints[ time_sec ] ){
 
@@ -146,14 +156,31 @@ export class DayClass {
     ToggleRelease( sec ){
 
         if( this.timePoints[ sec ] ){
-            let { fill_count, is_reserved } = this.timePoints[ sec ];
+            let { fill_count, is_reserved, grid_event_id } = this.timePoints[ sec ];
             if( is_reserved ){
 
             }else{
                 if( fill_count === 0 ){
-                    let data = { ...this.timePoints[ sec ] };
-                    data.fill_count = 1;
-                    this.timePoints[ sec ] = { ...data };
+
+                    let { layout } = store.getState();
+                    let { gridDayEventsListById } = layout;
+                    let isActive = false;
+
+                    if( this.charType === CHAR_TYPE.BLOCK || this.charType === CHAR_TYPE.BLOCK ){
+                        if( gridDayEventsListById[ grid_event_id ] ){
+                            isActive = true;
+                        };
+                    }else{
+                        isActive = true;
+                    };
+
+                    if( isActive ){
+                        let data = { ...this.timePoints[ sec ] };
+                        data.fill_count = 1;
+                        this.timePoints[ sec ] = { ...data };
+                    };
+
+
                 }else{
                     let data = { ...this.timePoints[ sec ] };
                     data.fill_count = 0;
@@ -263,6 +290,8 @@ export class DayClass {
 
     GetReleaseListForServer(){
 
+        console.dir( this );
+
         let result = [];
 
         let date = this.YYYY_MM_DD;
@@ -275,6 +304,14 @@ export class DayClass {
                 is_reserved,
             } = this.timePoints[ secName ];
 
+            let gridEventId = null;
+            if( grid_event_id !== null ){
+                if( typeof grid_event_id === 'number' ){
+                    gridEventId = grid_event_id;
+                }
+
+            };
+
             if( is_reserved ){
 
             }else{
@@ -282,7 +319,7 @@ export class DayClass {
                     let time_sec = sec;
                     for( let i = 0; i < fill_count; i++ ){
                         result.push({
-                            grid_event_id,
+                            grid_event_id: gridEventId,
                             date,
                             time_sec,
                         });

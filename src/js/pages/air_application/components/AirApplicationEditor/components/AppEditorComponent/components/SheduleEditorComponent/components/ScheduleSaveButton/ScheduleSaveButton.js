@@ -33,10 +33,15 @@ const ScheduleSaveButtonComponent = ( props ) => {
 
         setSpinnerIsActive( true );
 
+        let send_data = Schedule.GetReseaseData();
+
+        console.dir( 'send_data' );
+        console.dir( send_data );
+
         const send = () => {
             send_request_to_server({
                 route: 'save-sub-application-release',
-                data: Schedule.GetReseaseData(),
+                data: send_data,
                 successCallback: ( response ) => {
                     console.dir( 'response' );
                     console.dir( response );

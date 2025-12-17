@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -33,12 +33,25 @@ const ScheduleDayComponent = ( props ) => {
 
     } = props;
 
-    const get_list = ( time_points ) => {
+    let [ pointsList, setPointsList ] = useState( [] );
+
+    useEffect( () => {
+        let list = get_list( timePoints, allTimePointsGroupeList );
+        setPointsList( list );
+    }, [
+        timePoints,
+        allTimePointsGroupeList,
+    ]);
+
+
+
+    const get_list = ( timePoints, allTimePointsGroupeList ) => {
         let result = [];
-        console.dir({
-            time_points,
-            allTimePointsGroupeList
-        });
+
+        // console.dir({
+        //     timePoints,
+        //     allTimePointsGroupeList
+        // });
 
         for( let i = 0; i < allTimePointsGroupeList.length; i++ ){
             let { sec_list, interval } = allTimePointsGroupeList[ i ];
@@ -51,21 +64,40 @@ const ScheduleDayComponent = ( props ) => {
 
             let items = [];
 
+            let empty_count = 0;
+
             for( let y = 0; y < sec_list.length; y++ ){
-                if( time_points[ sec_list[ y ] ] ){
-                    let item = { ...time_points[ sec_list[ y ] ] };
+                if( timePoints[ sec_list[ y ] ] ){
+                    let item = { ...timePoints[ sec_list[ y ] ] };
                     item.is_empty = false;
                     item.className = `day_item_${interval.from}_${interval.to}`;
                     items.push( item );
+                }else{
+                    // items.push( empty_item );
+                    empty_count++;
                 };
             };
 
-            if( items.length > 0 ){
+            // for( let y = 0; y < empty_count + 1; y++ ){
+            //     if( y < sec_list.length ){
+            //         items.push( empty_item );
+            //     };
+                
+            // };
+
+            // console.dir( 'items' );
+            // console.dir( items );
+
+
+
+
+
+            // if( items.length > 0 ){
                 result = [ ...result, ...items ];
 
-            }else{
-                result.push( empty_item );
-            };
+            // }else{
+            //     result.push( empty_item );
+            // };
 
             
 
@@ -78,7 +110,7 @@ const ScheduleDayComponent = ( props ) => {
 
 
 
-    const create = ( obj ) => {
+    const create = ( list /*obj, all_TimePointsGroupeList*/ ) => {
 
         // let arr = Object.keys( obj );
 
@@ -87,7 +119,7 @@ const ScheduleDayComponent = ( props ) => {
         //     allTimePointsGroupeList
         // });
 
-        let list = get_list( obj );
+        // let list = get_list( obj, all_TimePointsGroupeList );
         // console.dir({
         //     time_points: obj,
         //     allTimePointsGroupeList,
@@ -185,7 +217,7 @@ const ScheduleDayComponent = ( props ) => {
                 dayDuration = { dayDuration }
             />
 
-            { create( timePoints ) }
+            { create( pointsList ) }
 
         </div>
     )
