@@ -24,6 +24,9 @@ import { SheduleEditorComponent } from './../../../SheduleEditorComponent/Shedul
 
 import { send_request_to_server } from './../../../../../../../../../../helpers/send_request_to_server.js';
 
+// import { set_application_data_to_store } from './../../vendors/set_application_data_to_store.js'
+import { set_application_data_to_store } from './../../../../../../vendors/set_application_data_to_store.js';
+
 const ItemSubSheduleComponent = ( props ) => {
 
     let {
@@ -34,6 +37,9 @@ const ItemSubSheduleComponent = ( props ) => {
         period_from,
         period_to,
         name,
+        release_list_count,
+
+        currentAppEventId,
 
         setCurrentSubAppId,
         setReleaseDuration,
@@ -48,6 +54,7 @@ const ItemSubSheduleComponent = ( props ) => {
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+    
 
     const click = () => {
 
@@ -65,6 +72,8 @@ const ItemSubSheduleComponent = ( props ) => {
             data:{
                 period_from,
                 period_to,
+                eventId: currentAppEventId,
+                applicationId: application_id,
             },
             successCallback: ( response ) => {
 
@@ -74,6 +83,15 @@ const ItemSubSheduleComponent = ( props ) => {
                 if( response.ok ){
                     let { list } = response;
                     setApplicationList( list );
+
+                    for( let i = 0; i < list.length; i++ ){
+                        if( list[ i ].id === application_id ){
+                            set_application_data_to_store( list[ i ] );
+                            break;
+                        };
+                    };
+
+                    // set_application_data_to_store
 
                     // let timerId = setTimeout( () => {
                         // setCurrentSubAppId( id );
@@ -125,7 +143,7 @@ const ItemSubSheduleComponent = ( props ) => {
                 onClick = { click }
             >Расписание</span>
 
-            <span className = 'SA_ItemSubShedule_count'>{ release_list.length }</span>
+            <span className = 'SA_ItemSubShedule_count'>{ release_list_count }</span>
 
         </div>
     )
@@ -152,6 +170,7 @@ export function ItemSubShedule( props ){
             setCurrentSubAppId = { ( val ) => { dispatch( setCurrentSubAppId( val ) ) } }
             setReleaseDuration = { ( val ) => { dispatch( setReleaseDuration( val ) ) } }
             setReleaseName = { ( val ) => { dispatch( setReleaseName( val ) ) } }
+            currentAppEventId = { application.currentAppEventId }
 
             setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
             setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }

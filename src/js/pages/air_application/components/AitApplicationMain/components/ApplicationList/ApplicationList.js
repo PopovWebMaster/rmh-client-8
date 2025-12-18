@@ -11,6 +11,7 @@ import { FilterList } from './components/FilterList/FilterList.js';
 import { FilterCategoryButtons } from './components/FilterCategoryButtons/FilterCategoryButtons.js';
 import { FilterEventsButton } from './components/FilterEventsButton/FilterEventsButton.js';
 
+import { SetApplicationListFromServer } from './../SetApplicationListFromServer/SetApplicationListFromServer.js';
 
 const ApplicationListComponent = ( props ) => {
 
@@ -21,21 +22,25 @@ const ApplicationListComponent = ( props ) => {
 
     
     return (
-        <div className = 'applicationList'>
 
-            <div className = 'AL_filter_wrap'>
-                <FilterCategoryButtons />
-                <FilterEventsButton />
+        <SetApplicationListFromServer>
+            <div className = 'applicationList'>
+
+                <div className = 'AL_filter_wrap'>
+                    <FilterCategoryButtons />
+                    <FilterEventsButton />
+
+                </div>
+
+                <div className = 'AL_list_wrap'>
+
+                    <FilterList />
+
+                </div>
 
             </div>
+        </SetApplicationListFromServer>
 
-            <div className = 'AL_list_wrap'>
-
-                <FilterList />
-
-            </div>
-
-        </div>
     )
 
 };

@@ -36,6 +36,7 @@ const OneSubApplicationComponent = ( props ) => {
         file_names,
         description,
         release_list,
+        release_list_count,
 
     } = props;
     
@@ -88,6 +89,7 @@ const OneSubApplicationComponent = ( props ) => {
                 period_from =       { period_from }
                 period_to =         { period_to }
                 name = { name }
+                release_list_count = { release_list_count }
 
             />
 

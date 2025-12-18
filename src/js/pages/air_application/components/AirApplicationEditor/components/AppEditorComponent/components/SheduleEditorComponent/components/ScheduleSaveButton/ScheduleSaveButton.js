@@ -53,10 +53,22 @@ const ScheduleSaveButtonComponent = ( props ) => {
                         setIsChanged( false );
 
                         setSchedule( new ScheduleClass() );
+                    }else{
+                        let conf = confirm( 'Ошибка соединения, попробовать снова?' );
+                        if( conf ){
+                            send();
+                        }else{
+
+                        };
                     };
                 },
                 errorCallback: () => {
-                    send();
+                    let conf = confirm( 'Ошибка соединения, попробовать снова?' );
+                    if( conf ){
+                        send();
+                    }else{
+
+                    };
                 }
             });
         };

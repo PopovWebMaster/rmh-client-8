@@ -32,6 +32,15 @@ const SetStartingDataFromServerComponent = ( props ) => {
 
         setSpinnerIsActive( true );
 
+//         let elem = document.getElementById( 'starting_data_hidden' );
+
+//         console.dir( elem );
+
+//         // JSON.stringify( elem.innerText );
+
+//  console.dir( JSON.parse( elem.innerText ) );
+
+
         // let route = 'get-starting-data';
 
         // switch( currentPage ){

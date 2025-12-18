@@ -290,7 +290,7 @@ export class DayClass {
 
     GetReleaseListForServer(){
 
-        console.dir( this );
+        // console.dir( this );
 
         let result = [];
 
@@ -307,9 +307,12 @@ export class DayClass {
             let gridEventId = null;
             if( grid_event_id !== null ){
                 if( typeof grid_event_id === 'number' ){
-                    gridEventId = grid_event_id;
-                }
-
+                    let { layout } = store.getState();
+                    let { gridDayEventsListById } = layout;
+                    if( gridDayEventsListById[ grid_event_id ] ){
+                        gridEventId = grid_event_id;
+                    };
+                };
             };
 
             if( is_reserved ){

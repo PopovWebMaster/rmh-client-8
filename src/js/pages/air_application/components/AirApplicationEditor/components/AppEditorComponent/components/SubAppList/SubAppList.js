@@ -34,6 +34,7 @@ const SubAppListComponent = ( props ) => {
                 file_names,
                 description,
                 release_list,
+                release_list_count,
             } = item;
 
             return (
@@ -52,6 +53,7 @@ const SubAppListComponent = ( props ) => {
                     file_names =        { file_names }
                     description =       { description }
                     release_list =      { release_list }
+                    release_list_count = { release_list_count }
 
                 />
             );
