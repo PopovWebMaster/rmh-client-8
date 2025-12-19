@@ -48,6 +48,8 @@ export const scheduleResultSlise = createSlice({
 
         freeReleasesIsChanges: false,
         freeReleasesList: [],
+        freeReleasesListFromServerIsGetting: false,
+
         freeReleasesFiltered: {},
 
         freeReleasesFilterCategoryId: null,
@@ -200,6 +202,12 @@ export const scheduleResultSlise = createSlice({
             state.freeReleasesList =  action.payload;
         },
 
+        setFreeReleasesListFromServerIsGetting: ( state, action ) => {
+            state.freeReleasesListFromServerIsGetting =  action.payload;
+        },
+
+        
+
 
         setFreeReleasesFiltered: ( state, action ) => {
             state.freeReleasesFiltered =  action.payload;
@@ -262,6 +270,7 @@ export const {
 
     setFreeReleasesIsChanges,
     setFreeReleasesList,
+    setFreeReleasesListFromServerIsGetting,
     setFreeReleasesFiltered,
     setScheduleEventBySectors,
 
@@ -310,6 +319,7 @@ export const selectorData = ( state ) => {
 
         freeReleasesIsChanges: state.scheduleResult.freeReleasesIsChanges,
         freeReleasesList: state.scheduleResult.freeReleasesList,
+        freeReleasesListFromServerIsGetting: state.scheduleResult.freeReleasesListFromServerIsGetting,
         freeReleasesFiltered: state.scheduleResult.freeReleasesFiltered,
 
         freeReleasesFilterCategoryId: state.scheduleResult.freeReleasesFilterCategoryId,

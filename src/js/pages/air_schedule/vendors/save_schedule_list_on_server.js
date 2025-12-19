@@ -9,6 +9,8 @@ import { get_YYYY_MM_DD } from './../../../helpers/get_YYYY_MM_DD.js';
 
 import { send_request_to_server } from './../../../helpers/send_request_to_server.js';
 
+import { set_all_schedule_file_names } from './../../../components/SetStartingDataFromServer/vendors/set_all_schedule_file_names.js'
+
 
 export const save_schedule_list_on_server = ( callback ) => {
 
@@ -40,11 +42,16 @@ export const save_schedule_list_on_server = ( callback ) => {
         },
         successCallback: ( response ) => {
 
-            // console.dir( 'response' );
-            // console.dir( response );
+            console.dir( 'response' );
+            console.dir( response );
+            // allScheduleFileNames
+
+            set_all_schedule_file_names( response );
 
             store.dispatch( setScheduleEventsListIsChanged( false ) );
             store.dispatch( setSpinnerIsActive( false ) );
+
+            callback( response );
 
         }
     });

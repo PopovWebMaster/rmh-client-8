@@ -19,6 +19,8 @@ import { FRL_AddButton } from './components/FRL_AddButton/FRL_AddButton.js';
 import { FRL_FilterButtons } from './components/FRL_FilterButtons/FRL_FilterButtons.js';
 import { FRL_ActiveList } from './components/FRL_ActiveList/FRL_ActiveList.js';
 
+import { SetFreeReleaseListFromServer } from './../SetFreeReleaseListFromServer/SetFreeReleaseListFromServer.js';
+
 
 
 const FreeReleaseListComponent = ( props ) => {
@@ -32,30 +34,26 @@ const FreeReleaseListComponent = ( props ) => {
 
     let [ listIsActive, setListIsActive ] = useState( false );
 
-
-
-
     return (
        <div className = 'freeReleaseList'>
-            <div className = 'freeReleaseList_buttons'>
-                <FRL_AddButton
-                    setListIsActive = { setListIsActive }
+            <SetFreeReleaseListFromServer>
+                <div className = 'freeReleaseList_buttons'>
+                    <FRL_AddButton
+                        setListIsActive = { setListIsActive }
+                    />
+                </div>
+
+                <FRL_FilterButtons 
+                    isOpen  =           { listIsActive }
+                    setButtonsHeight =  { setButtonsHeight }
+                    fontSize =          { '0.9em' }
                 />
-            </div>
 
-            <FRL_FilterButtons 
-                isOpen  =           { listIsActive }
-                setButtonsHeight =  { setButtonsHeight }
-                fontSize =          { '0.9em' }
-            />
-
-            <FRL_ActiveList
-                isOpen =            { listIsActive }
-                buttonsHeight =     { buttonsHeight }
-            />
-
-
-        
+                <FRL_ActiveList
+                    isOpen =            { listIsActive }
+                    buttonsHeight =     { buttonsHeight }
+                />
+            </SetFreeReleaseListFromServer>
        </div>
     )
 

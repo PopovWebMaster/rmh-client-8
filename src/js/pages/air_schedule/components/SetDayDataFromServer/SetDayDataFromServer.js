@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import './SetDayDataFromServer.scss';
 
 import { selectorData as scheduleResultSlise, setScheduleEventsList } from './../../../../redux/scheduleResultSlise.js';
-import { setGridCurrentDay } from './../../../../redux/layoutSlice.js';
+import { selectorData as layoutSlice, setGridCurrentDay } from './../../../../redux/layoutSlice.js';
 
 
 import { selectorData as spinnerSlice, setSpinnerIsActive } from './../../../../redux/spinnerSlice.js';
@@ -20,6 +20,8 @@ import { set_release_list_and_schedule_list_to_store } from './../../vendors/set
 
 
 import { setDailyEventsList } from './../../../../redux/dailySchaduleEditorSlice.js';
+
+import { set_one_dayNum_of_gridEventsList_to_store } from './../../vendors/set_one_dayNum_of_gridEventsList_to_store.js';
 
 
 
@@ -40,7 +42,18 @@ const SetDayDataFromServerComponent = ( props ) => {
         setDailyEventsList,
 
 
+        gridDayEventsList,
+
+
     } = props;
+
+    const get_day_num = () => {
+        let result = null;
+        if( gridDayEventsList[ currentDayNum ].length === 0 ){
+            result = currentDayNum;
+        };
+        return result;
+    }
 
     useEffect( () => {
 
@@ -49,10 +62,12 @@ const SetDayDataFromServerComponent = ( props ) => {
         setSpinnerIsActive( true );
 
         let send = () => {
+
             send_request_to_server({
                 route: 'get-schedule-result-day-data',
                 data: {
                     YYYY_MM_DD,
+                    dayNum: get_day_num(),
                 },
                 successCallback: ( response ) => {
                     console.dir( 'response' );
@@ -60,9 +75,14 @@ const SetDayDataFromServerComponent = ( props ) => {
 
                     if( response.ok ){
                         setSpinnerIsActive( false );
-                        let { release_list, scheduleEventsList } = response;
+                        let { release_list, scheduleEventsList, gridEventsList } = response;
+
+                        set_one_dayNum_of_gridEventsList_to_store( gridEventsList );
+                        
                         set_release_list_and_schedule_list_to_store( release_list, scheduleEventsList );
                         setGridCurrentDay( currentDayNum );
+
+                        
 
                     }else{
                         if( IS_DEVELOPMENT ){
@@ -109,6 +129,12 @@ const SetDayDataFromServerComponent = ( props ) => {
 export function SetDayDataFromServer( props ){
 
     const scheduleResult = useSelector( scheduleResultSlise );
+    const layout = useSelector( layoutSlice );
+
+
+
+    
+
     const dispatch = useDispatch();
 
     return (
@@ -118,7 +144,12 @@ export function SetDayDataFromServer( props ){
             currentDate =   { scheduleResult.currentDate }
             currentMonth =  { scheduleResult.currentMonth }
             currentYear =   { scheduleResult.currentYear }
+
             currentDayNum =   { scheduleResult.currentDayNum }
+
+            gridDayEventsList = { layout.gridDayEventsList }
+
+
 
 
 
