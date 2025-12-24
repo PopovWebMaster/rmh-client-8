@@ -71,6 +71,8 @@ const ScheduleDayComponent = ( props ) => {
                     let item = { ...timePoints[ sec_list[ y ] ] };
                     item.is_empty = false;
                     item.className = `day_item_${interval.from}_${interval.to}`;
+
+                    
                     items.push( item );
                 }else{
                     // items.push( empty_item );
@@ -128,6 +130,8 @@ const ScheduleDayComponent = ( props ) => {
 
         
         let div = list.map( ( item, index ) => {
+
+            console.dir( item );
 
             if( item.is_empty ){
                 return <ScheduleDayEmptyPoint key =           { index }/>

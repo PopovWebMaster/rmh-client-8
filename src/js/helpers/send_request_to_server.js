@@ -81,7 +81,15 @@ export const send_request_to_server = ( params ) => {
                 successCallback( data_respons );
                 sendCount = 0;
             }else{
-                send();
+
+                // send();
+                let conf = confirm( 'Ошибка соединения, попробовать снова?' );
+                if( conf ){
+                    send();
+                }else{
+
+                };
+
                 errorCallback( response );
             };
 

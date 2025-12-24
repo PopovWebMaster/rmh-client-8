@@ -102,7 +102,7 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         this.SetDayListToStore();
 
-        // console.dir( this );
+        console.dir( this );
         
 
     }
@@ -118,6 +118,16 @@ export class ScheduleClass extends ScheduleMethodsClass {
     }
 
     AllTimePointsToggle( sec ){
+
+        // let body = document.querySelector( 'body' );
+        // body.style.cursor = 'wait';
+
+        // console.dir( 'wait' );
+
+        this.AddDOMWait();
+
+
+
         this.Days.TimePointReleaseToggle( sec );
         this.SetDayListToStore();
         set_to_store( 'isChanged', true );
@@ -136,6 +146,7 @@ export class ScheduleClass extends ScheduleMethodsClass {
     }
 
     GetReseaseData(){
+        
         return {
             application_id:         this.SubApplication.application_id,
             sub_application_id:     this.SubApplication.id,

@@ -23,6 +23,7 @@ export const save_sub_app_changes_on_server = ( params ) => {
         currentAppCategoryId,
         currentAppNum,
         currentAppManagerNotes,
+        currentSubAppListById,
 
     } = application;
 
@@ -31,13 +32,28 @@ export const save_sub_app_changes_on_server = ( params ) => {
 
     let subApplication = {};
 
-    for( let i = 0; i < sub_application_list.length; i++ ){
-        let { id } = sub_application_list[ i ];
-        if( id === subApplicationId ){
-            subApplication = { ...sub_application_list[ i ] };
-            break;
-        };
-    };
+    // console.dir( 'subApplicationId' );
+    // console.dir( subApplicationId );
+
+
+    // for( let i = 0; i < sub_application_list.length; i++ ){
+    //     let { id } = sub_application_list[ i ];
+    //     if( id === subApplicationId ){
+    //         subApplication = { ...sub_application_list[ i ] };
+    //         break;
+    //     };
+    // };
+
+    // for( let i = 0; i < currentSubAppListById[].length; i++ ){
+    //     let { id } = sub_application_list[ i ];
+    //     if( id === subApplicationId ){
+            // subApplication = { ...currentSubAppListById[ subApplicationId ],  };
+    //         break;
+    //     };
+    // };
+
+    // console.dir( 'application' );
+    // console.dir( application );
 
     store.dispatch( setSpinnerIsActive( true ) );
 
@@ -50,7 +66,11 @@ export const save_sub_app_changes_on_server = ( params ) => {
             applicationNum:             currentAppNum,
             applicationManagerNotes:    currentAppManagerNotes,
 
-            subApplication:             { ...subApplication, ...changedData },
+            subApplicationId: subApplicationId,
+
+            // subApplication:             { ...subApplication, ...changedData },
+            subApplication:             { ...currentSubAppListById[ subApplicationId ], ...changedData },
+
         },
 
         successCallback: ( response ) => {

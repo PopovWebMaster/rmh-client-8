@@ -1,0 +1,40 @@
+.SB_TTD_MatrixFirstCell{
+    font-size: 1em;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    // margin: 0.2em 0;
+    width: 7em;
+    background-color: #f7fafb;
+
+    position: sticky;
+    left: 0;   
+    z-index: 9;
+
+
+    span{
+        font-size: 0.64em;
+        padding: 0.35em 0.5em 0.35em 0.5em;
+        // width: 4em;
+        border-radius: 0.1em;
+
+        // background-color: #f0f0f063;
+        cursor: pointer;
+        user-select: none;
+        color: #373737;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        border: 1px solid #a4ebff;
+        margin: 0.3em 0;
+
+        background-color: #7ff5ff6e;
+    }
+    
+    span:hover{
+        background-color: #4392af;
+        color: #ffffff;
+        border-color: #4392af;
+    };
+}

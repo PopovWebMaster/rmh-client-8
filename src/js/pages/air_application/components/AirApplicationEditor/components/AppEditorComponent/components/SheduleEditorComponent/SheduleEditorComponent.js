@@ -18,7 +18,8 @@ import { ScheduleTimeColumn }   from './components/ScheduleTimeColumn/ScheduleTi
 import { ScheduleTable }        from './components/ScheduleTable/ScheduleTable.js';
 import { DownloadScheduleButton } from './components/DownloadScheduleButton/DownloadScheduleButton.js';
 import { MixModeButton } from './components/MixModeButton/MixModeButton.js';
-
+import { ShortModeButton } from './components/ShortModeButton/ShortModeButton.js';
+ 
 import { ScheduleBodyTypeTable } from './components/ScheduleBodyTypeTable/ScheduleBodyTypeTable.js';
 import { TableTypeDetaile } from './components/TableTypeDetaile/TableTypeDetaile.js';
 
@@ -77,6 +78,8 @@ const SheduleEditorComponentComponent = ( props ) => {
 
                     <ScheduleHeader>
 
+                        <ShortModeButton />
+
                         <MixModeButton />
 
                         <DownloadScheduleButton 
@@ -93,9 +96,13 @@ const SheduleEditorComponentComponent = ( props ) => {
 
                     <div className = 'SEC_body'>
 
-                        <ScheduleBodyTypeTable Schedule = { Schedule } />
+                        {/* <ScheduleBodyTypeTable Schedule = { Schedule } /> */}
 
-                        {/* <TableTypeDetaile isActive = { true }/> */}
+                        <TableTypeDetaile 
+                            isActive = { true }
+                            Schedule = { Schedule }
+
+                        />
 
                     
                     </div>

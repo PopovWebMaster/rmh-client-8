@@ -1,0 +1,22 @@
+.SB_TTD_MartixHeader{
+    font-size: 1em;
+
+    position: sticky;
+    top: 0;   
+    z-index: 10; 
+    width: fit-content;
+
+    // background-color: red;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    // align-items: center;
+    // align-content: center;
+
+    // span{
+    //     font-size: 1em;
+    //     padding: 0.3em 0.5em;
+    // }
+
+}

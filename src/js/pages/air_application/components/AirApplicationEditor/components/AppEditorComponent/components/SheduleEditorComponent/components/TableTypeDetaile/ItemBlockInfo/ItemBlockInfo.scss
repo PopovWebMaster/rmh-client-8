@@ -1,0 +1,125 @@
+.SB_TTD_MatrixCell_block{
+    font-size: 1em;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0.25em 0.2em 0 0;
+    flex-grow: 0;
+    max-width: 100%;
+
+    cursor: pointer;
+
+    .SEC_block_list{
+        font-size: 1em;
+        position: absolute;
+        top: 0;
+        right: -0.5em;
+        width: fit-content;
+        background-color: #c5c5c5;
+        padding: 0 0.25em;
+        border: 1px solid #abababb5;
+        min-width: 11em;
+
+        z-index: 1000;
+
+        .SEC_block_list_item{
+            font-size: 1em;
+            // margin: 0.2em;
+            padding: 0.15em 0.5em;
+
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            align-items: center;
+
+            background-color: #ffffff;
+            margin: 0.25em 0;
+            border-radius: 0.1em;
+
+            .SEC_block_list_name{
+                font-size: 0.6em;
+                color: #343434;
+            }
+
+            .SEC_block_list_time{
+                font-size: 0.6em;
+                color: #343434;
+
+            }
+
+
+        }
+    }
+
+
+    .SB_TTD_MatrixCell_block_title{
+        font-size: 0.55em;
+        color: #817979;
+        margin-right: 0.2em;
+    }
+
+    .SB_TTD_MatrixCell_block_filled{
+        font-size: 0.55em;
+        color: #343434;
+        font-weight: bold;
+    }
+
+    .SB_TTD_MatrixCell_block_slash{
+        font-size: 0.55em;
+        color: #343434;
+        margin: 0 0.1em;
+    }
+
+    .SB_TTD_MatrixCell_block_all{
+        font-size: 0.55em;
+        color: #343434;
+    }
+
+
+}
+
+.SB_TTD_MatrixCell_block.block_few{
+    .SB_TTD_MatrixCell_block_title{
+        color: #4db510;
+    }
+    .SB_TTD_MatrixCell_block_filled{
+        color: #4db510;
+    }
+    .SB_TTD_MatrixCell_block_slash{
+        color: #4db510;
+    }
+    .SB_TTD_MatrixCell_block_all{
+        color: #4db510;
+    }
+}
+.SB_TTD_MatrixCell_block.block_middle{
+    .SB_TTD_MatrixCell_block_title{
+        color: #99b301;
+    }
+    .SB_TTD_MatrixCell_block_filled{
+        color: #99b301;
+    }
+    .SB_TTD_MatrixCell_block_slash{
+        color: #99b301;
+    }
+    .SB_TTD_MatrixCell_block_all{
+        color: #99b301;
+    }
+}
+.SB_TTD_MatrixCell_block.block_isOverflowing{
+    .SB_TTD_MatrixCell_block_title{
+        color: #dd0808;
+    }
+    .SB_TTD_MatrixCell_block_filled{
+        color: #dd0808;
+    }
+    .SB_TTD_MatrixCell_block_slash{
+        color: #dd0808;
+    }
+    .SB_TTD_MatrixCell_block_all{
+        color: #dd0808;
+    }
+}

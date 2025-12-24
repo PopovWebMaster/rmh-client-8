@@ -16,6 +16,7 @@ import {
     setPeriodFrom,
     setPeriodTo,
     setModeMix,
+    setModeShort
 } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
 
 
@@ -47,6 +48,7 @@ const ItemSubSheduleComponent = ( props ) => {
         setPeriodFrom,
         setPeriodTo,
         setModeMix,
+        setModeShort,
 
         setApplicationList,
         setSpinnerIsActive,
@@ -66,6 +68,7 @@ const ItemSubSheduleComponent = ( props ) => {
         setPeriodFrom( period_from );
         setPeriodTo( period_to );
         setModeMix( false );
+        setModeShort( false );
 
         send_request_to_server({
             route: 'get_application_list_for_period',
@@ -175,6 +178,7 @@ export function ItemSubShedule( props ){
             setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
             setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
             setModeMix = { ( val ) => { dispatch( setModeMix( val ) ) } }
+            setModeShort = { ( val ) => { dispatch( setModeShort( val ) ) } }
             setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
 

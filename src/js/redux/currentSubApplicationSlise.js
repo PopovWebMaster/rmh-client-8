@@ -31,6 +31,8 @@ export const currentSubApplicationSlise = createSlice({
         periodTo: null,
 
         modeMix: false,
+        modeShort: false,
+
 
 
 
@@ -115,6 +117,10 @@ export const currentSubApplicationSlise = createSlice({
             state.modeMix =  action.payload;
         },
 
+        setModeShort: ( state, action ) => {
+            state.modeShort =  action.payload;
+        },
+
 
 
         
@@ -138,6 +144,7 @@ export const {
     setPeriodFrom,
     setPeriodTo,
     setModeMix,
+    setModeShort,
 
 
 
@@ -162,6 +169,7 @@ export const selectorData = ( state ) => {
         periodFrom: state.currentSubApplication.periodFrom,
         periodTo: state.currentSubApplication.periodTo,
         modeMix: state.currentSubApplication.modeMix,
+        modeShort: state.currentSubApplication.modeShort,
 
 
 

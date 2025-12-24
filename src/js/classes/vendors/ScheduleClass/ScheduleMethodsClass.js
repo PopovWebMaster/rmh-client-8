@@ -25,7 +25,43 @@ export class ScheduleMethodsClass {
         this.SetDayListToStore = this.SetDayListToStore.bind(this);
         this.AddNewTimePoint = this.AddNewTimePoint.bind(this);
 
+        this.AddDOMWait = this.AddDOMWait.bind(this);
+        this.RemoveDOMWait = this.RemoveDOMWait.bind(this);
 
+
+
+    }
+
+    AddDOMWait(){
+
+        // let elem = document.getElementById( 'scheduleWait' );
+        // if( elem ){
+            
+        // }else{
+        //     let curtElem = document.createElement( 'div' );
+        //     curtElem.id = 'scheduleWait';
+        //     curtElem.style.position = 'fixed';
+        //     curtElem.style.top = '0';
+        //     curtElem.style.left = '0';
+        //     curtElem.style.width = '100vw';
+        //     curtElem.style.height = '100vh';
+        //     curtElem.style.backgroundColor = '#ffffff00';
+        //     curtElem.style.zIndex = '3000';
+        //     curtElem.style.cursor = 'wait';
+
+        //     let body = document.querySelector( 'body' );
+        //     body.prepend( curtElem );
+        // };
+
+
+
+    }
+
+    RemoveDOMWait(){
+        // let elem = document.getElementById( 'scheduleWait' );
+        // if( elem ){
+        //     elem.remove();
+        // };
     }
 
     SetCharType(){
@@ -141,6 +177,8 @@ export class ScheduleMethodsClass {
 
         set_to_store( 'allReleaseLength', allReleaseLength );
         set_to_store( 'allReleaseDuration', allReleaseDuration );
+
+        this.RemoveDOMWait();
         
     }
 

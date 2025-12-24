@@ -1,0 +1,251 @@
+$border_color: #b5efffe0;
+
+.SB_TTD_CharDayHeader{
+    font-size: 1em;
+    min-width: 16em;
+    // background-color: #badfa2;
+    // background-color: #c4e2fb45;
+    // background-color: #eff7fe;
+    // background-color: #c3f8fd;
+    background-color: #e5fdff;
+
+
+
+
+
+
+    flex-grow: 1;
+    margin: 0 0.2em;
+
+
+
+    .SB_TTD_CharDay_date{
+        font-size: 1em;
+        // background-color: #89ab73;
+        background-color: #4f85d3;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.75em;
+            padding: 0.3em 0.5em;
+            color: #ffffff;
+            margin: 0 0.6em;
+        }
+
+        .SB_TTD_CharDay_day{
+            font-size: 0.75em;
+            color: #4b4444;
+        }
+    }
+
+    .SB_TTD_CharDay_release_count{
+        font-size: 1em;
+
+        padding: 0.3em 0;
+        // border-bottom: 1px solid #dfdfdf;
+        border-bottom: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+
+
+
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.65em;
+            margin: 0 0.2em;
+        }
+
+        .SB_TTD_CharDay_release_count_title{
+            // font-size: 1em;
+            color: #797979;
+            
+        }
+
+        .SB_TTD_CharDay_release_count_filled{
+            color: #252323;
+            font-weight: bold;
+
+        }
+
+        .SB_TTD_CharDay_release_count_slash{
+            // font-size: 1em;
+            color: #797979;
+        }
+
+        .SB_TTD_CharDay_release_count_all{
+            // font-size: 1em;
+            color: #797979;
+            padding-right: 0.8em;
+        }
+    }
+
+
+
+    .SB_TTD_CharDay_release_duration{
+        font-size: 1em;
+
+        padding: 0.3em 0;
+        // border-bottom: 1px solid #dfdfdf;
+        border-bottom: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.65em;
+            margin: 0 0.2em;
+        }
+
+        .SB_TTD_CharDay_release_count_title{
+            // font-size: 1em;
+            color: #797979;
+            flex-grow: 1;
+            max-width: 100%;
+            text-align: left;
+            padding: 0 0.8em;
+        }
+
+        .SB_TTD_CharDay_release_count_time{
+            color: #252323;
+            font-weight: bold;
+            width: 4em;
+            flex-grow: 0;
+        }
+
+        .SB_TTD_CharDay_release_count_sec{
+            // font-size: 1em;
+            color: #797979;
+            padding-right: 0.3em;
+            width: 4em;
+            flex-grow: 0;
+            text-align: center;
+        }
+    }
+
+    .SB_TTD_CharDay_release_all_toggle{
+
+       font-size: 1em;
+
+        padding: 0.2em 0;
+        // border-bottom: 1px solid #dfdfdf;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        border-bottom: 1px solid $border_color;
+        border-left: 1px solid $border_color;
+        border-right: 1px solid $border_color;
+
+        .SB_TTD_CharDay_btn{
+            font-size: 1em;
+            margin: 0 1em;
+            padding: 0.16em 0.5em;
+            border-radius: 0.1em;
+            cursor: pointer;
+            user-select: none;
+
+            // background-color: #699ca3;
+            background-color: #8aaaff;
+
+
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            .SB_TTD_CharDay_btn_all{
+                font-size: 0.6em;
+                margin: 0 .8em 0 0;
+                color: #ffffff;
+            }
+
+            .SB_TTD_CharDay_btn_tog{
+                font-size: 0.5em;
+                color: #676464;
+                padding: .1em .1em .1em;
+            }
+        }
+        .SB_TTD_CharDay_btn:hover{
+            // background-color: #73b8c1;
+            background-color: #5a86f9;
+        }
+
+        .SB_TTD_CharDay_btn:active{
+            .SB_TTD_CharDay_btn_tog{
+                color: #b4acac;
+            }
+        }
+
+
+    }
+}
+.SB_TTD_CharDayHeader.modeShort{
+    min-width: 2.4em;
+    width: 2.4em;
+    margin: 0 0.1em;
+
+    .SB_TTD_CharDay_date_short{
+        font-size: 0.9em;
+        background-color: #4f85d3;
+        height: 100%;
+        
+
+        .SB_TTD_CharDay_day_short{
+            font-size: 0.7em;
+            width: 100%;
+            text-align: center;
+            color: #d8fffc;
+            padding-top: 0.3em;
+        }
+
+        .SB_TTD_CharDay_rotate_short{
+            width: 2.4em;
+            height: 4em;
+            // background-color: red;
+
+            .SB_TTD_CharDay_rotate_val_short{
+                font-size: 0.65em;
+                // height: 2.4em;
+                width: 6.4em;
+                color: #ffffff;
+                transform: rotate(-63deg) scale(1) translate(-2.3em,0em);
+            }
+        }
+
+        .SB_TTD_CharDay_count_short{
+            font-size: .7em;
+            text-align: center;
+            color: #000000;
+            padding: .1em 0.2em;
+            margin: 0.1em 0.3em;
+            background-color: #ffffff;
+            border-radius: 0.1em;
+        }
+    }
+
+}
+
+.SB_TTD_CharDayHeader.modeShort:hover{
+    .SB_TTD_CharDay_date_short{
+        font-size: 0.9em;
+        background-color: #2c5c9e;
+        cursor: pointer;
+    }
+
+}

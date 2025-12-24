@@ -1,3 +1,6 @@
+$active_background_color: #c2faff6e;
+$active_border_color: #81f1fcab;
+
 .SB_tableTypeDetaile{
     font-size: 1em;
     height: 77vh;
@@ -6,31 +9,60 @@
     // display: flex;
     // justify-content: flex-start;
 
-    background-color: rgb(160, 160, 160);
+    
     overflow: scroll;
     position: relative;
 
-
-    .SB_tableTypeDetaile_header{
+    .SB_tableTypeDetaile_body{
         font-size: 1em;
+        width: fit-content;
 
-        position: sticky;
-        top: 0;   
-        z-index: 10; 
-        width: 100%;
-
-        background-color: red;
-
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        align-content: center;
-
-        span{
+        .SB_TTD_row{
             font-size: 1em;
-            padding: 0.3em 0.5em;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: stretch;
+            align-content: stretch;
+
+            .SB_TTD_cellWrap{
+                font-size: 1em;
+                min-width: 16em;
+                width: 16em;
+
+                margin: 0 0.2em;
+                background-color: #fafdff;
+                min-height: 2em;
+            }
+
+            .SB_TTD_cellWrap.mode_short{
+                min-width: 2.4em;
+                width: 2.4em;
+                margin: 0 0.1em;
+            }
+
+
+
         }
+
+        .SB_TTD_row:has( .SB_TTD_MatrixFirstCell>span:hover) {
+            .SB_TTD_MatrixCell{
+
+                background-color: $active_background_color;
+                border-color: $active_border_color;
+
+            }
+        }
+
+        
+        .SB_TTD_row:has( .SB_TTD_MatrixCell:hover) {
+            .SB_TTD_MatrixCell{
+                background-color: $active_background_color;
+                border-color: $active_border_color;
+
+            }
+        }
+
 
     }
 

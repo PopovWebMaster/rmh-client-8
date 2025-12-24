@@ -51,6 +51,14 @@ const ItemAirNotesComponent = ( props ) => {
 
 
     const save_click = () => {
+
+        // console.dir( {
+        //                 subApplicationId: id,
+        //     applicationId: application_id,
+        //     changedData: {
+        //         air_notes:  notesValue.trim(),
+        //     },
+        // } )
         save_sub_app_changes_on_server({
             subApplicationId: id,
             applicationId: application_id,
