@@ -1,6 +1,14 @@
 $active_background_color: #c2faff6e;
 $active_border_color: #81f1fcab;
 
+$text_color_few: #4db510;
+// $text_color_many: #aec71f;
+$text_color_many: #f8b230;
+
+$text_color_overflowing: #dd0808;
+
+
+
 .SB_tableTypeDetaile{
     font-size: 1em;
     height: 77vh;
@@ -46,21 +54,32 @@ $active_border_color: #81f1fcab;
         }
 
         .SB_TTD_row:has( .SB_TTD_MatrixFirstCell>span:hover) {
-            .SB_TTD_MatrixCell{
 
+
+            .SB_TTD_MatrixCell{
                 background-color: $active_background_color;
                 border-color: $active_border_color;
-
             }
         }
 
         
         .SB_TTD_row:has( .SB_TTD_MatrixCell:hover) {
-            .SB_TTD_MatrixCell{
-                background-color: $active_background_color;
-                border-color: $active_border_color;
 
+            .SB_TTD_MatrixFirstCell{
+                span{
+                    background-color: #4392af;
+                    color: #ffffff;
+                    border-color: #4392af;
+                };
             }
+
+            .SB_TTD_cellWrap.mode_short{
+                .SB_TTD_MatrixCell:first-child{
+                    background-color: $active_background_color;
+                    border-color: $active_border_color;
+                }
+            }
+
         }
 
 

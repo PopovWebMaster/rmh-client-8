@@ -23,6 +23,8 @@ const ScheduleBodyTypeTableComponent = ( props ) => {
 
             let timerId = setTimeout( () => {
 
+                // я не знаю что здксь происходит
+
                 let dom_list = document.querySelectorAll( '.SEC_CharDay' );
                 let arr_height_px = [];
                 let font_size = 1;

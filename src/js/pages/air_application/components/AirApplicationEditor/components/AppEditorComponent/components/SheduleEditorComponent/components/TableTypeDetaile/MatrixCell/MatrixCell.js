@@ -19,6 +19,10 @@ import { MixContent } from './../MixContent/MixContent.js';
 import { ItemBlockInfo } from './../ItemBlockInfo/ItemBlockInfo.js';
 import { CHAR_TYPE } from './../../../../../../../../../../../config/application.js';
 import { MatrixCellTime } from './../MatrixCellTime/MatrixCellTime.js';
+import { MatrixCellShortValue } from './../MatrixCellShortValue/MatrixCellShortValue.js';
+import { MatrixCellInput } from './../MatrixCellInput/MatrixCellInput.js';
+
+import { convert_sec_to_time } from './../../../../../../../../../../../helpers/convert_sec_to_time.js';
 
 const MatrixCellComponent = ( props ) => {
 
@@ -39,6 +43,7 @@ const MatrixCellComponent = ( props ) => {
 
         setEnvIsOpen,
         modeShort,
+        gridEventTable,
         
     } = props;
 
@@ -46,7 +51,9 @@ const MatrixCellComponent = ( props ) => {
     let [ isFilled, setIsFilled ] = useState( false );
     let [ isReserved, setIsReserved ] = useState( false );
 
-
+    let [ blockTime, setBlockTime ] = useState( 0 );
+    let [ filedTime, setFiledTime ] = useState( 0 );
+    let [ contentList, setContentList ] = useState( [] );
 
 
     useEffect( () => {
@@ -64,7 +71,6 @@ const MatrixCellComponent = ( props ) => {
                 setIsFilled( false );
                 setValue( '' );
             }else{
-                // setValue( releaseName );
 
                 if( modeShort ){
                     setValue( Schedule.SubApplication.duration_sec );
@@ -72,24 +78,54 @@ const MatrixCellComponent = ( props ) => {
                     setValue( releaseName );
                 };
 
-
                 setIsFilled( true );
             };
             setIsReserved( false );
         };
 
-        // Schedule.SubApplication.duration_sec
-        
-
     }, [ fill_count, modeShort ] );
+
+
+    useEffect( () => {
+        if( gridEventTable[ YYYY_MM_DD ][ grid_event_id ] ){
+            setBlockTime( gridEventTable[ YYYY_MM_DD ][ grid_event_id ].grid_event.duration );
+            let { content } = gridEventTable[ YYYY_MM_DD ][ grid_event_id ];
+            let duration_count = 0;
+            let arr = [];
+
+            for( let sub_app_id in content ){
+                let {
+                    duration,
+                    fill_count,
+                    name
+                } = content[ sub_app_id ];
+                duration_count = duration_count + ( duration * fill_count );
+
+                arr.push( {
+                    name,
+                    time: convert_sec_to_time( duration ),
+                } );
+            };
+
+            setFiledTime( duration_count );
+            setContentList( arr );
+
+            // setReleaseDuration( Schedule.SubApplication.duration_sec );
+
+        };
+
+    }, [ gridEventTable, fill_count ] );
+
+
+
+
     
     const releaseToggle = ( YYYY_MM_DD, sec ) => {
         if( is_reserved ){
 
         }else{
             Schedule.ReleaseToggle( YYYY_MM_DD, sec );
-        }
-        
+        };
     };
 
     const click = ( e ) => {
@@ -103,21 +139,18 @@ const MatrixCellComponent = ( props ) => {
             }else{
                 releaseToggle( YYYY_MM_DD, sec );
             };
-            
         };
-        
     };
-
-
 
     const mouse_over = () => {
         if( modeShort ){
             const boxes = document.querySelectorAll( `.SB_TTD_MatrixCell.${col_class_name}` ); 
-
             boxes.forEach( ( box ) => { 
                 box.style.backgroundColor = '#c2faff6e'; 
                 box.style.borderColor = '#81f1fcab';
             });
+            const headerItem = document.querySelector( `.SB_TTD_CharDay_date_short.${col_class_name}` ); 
+            headerItem.style.backgroundColor = '#2c5c9e';
         };
         
     }
@@ -130,61 +163,52 @@ const MatrixCellComponent = ( props ) => {
                 box.style.borderColor = '';
 
             });
+            const headerItem = document.querySelector( `.SB_TTD_CharDay_date_short.${col_class_name}` ); 
+            headerItem.style.backgroundColor = ''; 
         };
     }
 
 
     return (
-            // <div className = 'SB_TTD_MatrixCell'>
-            <div 
-                className = { `SB_TTD_MatrixCell ${modeShort? 'SB_TTD_modeShort': ''} ${col_class_name} ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
-                onClick = { click }
-                onMouseOver = { mouse_over }
-                onMouseLeave = { mouse_leave }
-            >
-                { modeShort? (
-                    <span className = { `SB_TTD_MatrixCell_short ${isReserved? 'short_res': ''}'` }>{ isReserved? 'x': value }</span>
-                ):
-                (<>
-                    <MatrixCellTime time = { title }/>
+        <div 
+            className = { `SB_TTD_MatrixCell ${modeShort? 'SB_TTD_modeShort': ''} ${col_class_name} ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
+            onClick = { click }
+            onMouseOver = { mouse_over }
+            onMouseLeave = { mouse_leave }
+        >
+            { modeShort? (
+                <MatrixCellShortValue
+                    value =         { value }
+                    isReserved =    { isReserved }
 
-                    <div className = 'SB_TTD_MatrixCell_inp'>
-        
-                        <div className = 'SB_TTD_MatrixCell_inp_wrap'>
-                            <input 
-                                type = 'text'
-                                value = { value }
-                                onChange = { () => {} }
-                            />
-                        </div>
-        
-                        { charType === CHAR_TYPE.BLOCK? (
-                            <MixContent 
-                                grid_event_id = { grid_event_id }
-                                YYYY_MM_DD =    { YYYY_MM_DD }
-                            />
-                        ): '' }
-        
-                        <div className = 'SB_TTD_MatrixCell_inp_curt'></div>
-                    </div>
+                    blockTime =    { blockTime }
+                    filedTime =    { filedTime }
+                    contentList =  { contentList }
 
-                    { charType === CHAR_TYPE.BLOCK? (
-                        <ItemBlockInfo 
-                            className =     { 'SEC_block' }
-                            Schedule =      { Schedule }
-                            grid_event_id = { grid_event_id }
-                            fill_count =    { fill_count }
-                            YYYY_MM_DD =    { YYYY_MM_DD }
-        
-                        />
-                    ): '' }
+                />
+            ):
+            (<>
+                <MatrixCellTime time = { title }/>
 
-                </>) }
-                
+                <MatrixCellInput
+                    grid_event_id = { grid_event_id }
+                    YYYY_MM_DD =    { YYYY_MM_DD }
+                    value =         { value }
+                />
 
-            </div>
+                { charType === CHAR_TYPE.BLOCK? (
+                    <ItemBlockInfo 
+                        blockTime =     { blockTime }
+                        filedTime =     { filedTime }
+                        contentList =   { contentList }
+                    />
+                ): '' }
 
-        
+            </>) }
+            
+
+        </div>
+
     )
 
 };
@@ -202,8 +226,9 @@ export function MatrixCell( props ){
         <MatrixCellComponent
             { ...props }
 
-            charType = { schedule.charType }
-            releaseName = { schedule.releaseName }
+            charType =          { schedule.charType }
+            releaseName =       { schedule.releaseName }
+            gridEventTable =    { schedule.gridEventTable }
 
             modeShort = { currentSubApplication.modeShort }
 

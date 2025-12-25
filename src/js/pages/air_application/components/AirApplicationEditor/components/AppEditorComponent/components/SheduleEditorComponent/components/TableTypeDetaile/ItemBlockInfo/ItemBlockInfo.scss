@@ -1,3 +1,5 @@
+@import './../TableTypeDetaile.scss';
+
 .SB_TTD_MatrixCell_block{
     font-size: 1em;
     position: relative;
@@ -12,6 +14,7 @@
 
     cursor: pointer;
 
+
     .SEC_block_list{
         font-size: 1em;
         position: absolute;
@@ -21,7 +24,7 @@
         background-color: #c5c5c5;
         padding: 0 0.25em;
         border: 1px solid #abababb5;
-        min-width: 11em;
+        min-width: 15em;
 
         z-index: 1000;
 
@@ -50,15 +53,7 @@
 
             }
 
-
         }
-    }
-
-
-    .SB_TTD_MatrixCell_block_title{
-        font-size: 0.55em;
-        color: #817979;
-        margin-right: 0.2em;
     }
 
     .SB_TTD_MatrixCell_block_filled{
@@ -78,48 +73,41 @@
         color: #343434;
     }
 
-
 }
 
 .SB_TTD_MatrixCell_block.block_few{
-    .SB_TTD_MatrixCell_block_title{
-        color: #4db510;
-    }
+
     .SB_TTD_MatrixCell_block_filled{
-        color: #4db510;
+        color: $text_color_few;
     }
     .SB_TTD_MatrixCell_block_slash{
-        color: #4db510;
+        color: $text_color_few;
     }
     .SB_TTD_MatrixCell_block_all{
-        color: #4db510;
+        color: $text_color_few;
     }
 }
 .SB_TTD_MatrixCell_block.block_middle{
-    .SB_TTD_MatrixCell_block_title{
-        color: #99b301;
-    }
+
     .SB_TTD_MatrixCell_block_filled{
-        color: #99b301;
+        color: $text_color_many;
     }
     .SB_TTD_MatrixCell_block_slash{
-        color: #99b301;
+        color: $text_color_many;
     }
     .SB_TTD_MatrixCell_block_all{
-        color: #99b301;
+        color: $text_color_many;
     }
 }
 .SB_TTD_MatrixCell_block.block_isOverflowing{
-    .SB_TTD_MatrixCell_block_title{
-        color: #dd0808;
-    }
+
     .SB_TTD_MatrixCell_block_filled{
-        color: #dd0808;
+        color: $text_color_overflowing;
     }
     .SB_TTD_MatrixCell_block_slash{
-        color: #dd0808;
+        color: $text_color_overflowing;
     }
     .SB_TTD_MatrixCell_block_all{
-        color: #dd0808;
+        color: $text_color_overflowing;
     }
 }

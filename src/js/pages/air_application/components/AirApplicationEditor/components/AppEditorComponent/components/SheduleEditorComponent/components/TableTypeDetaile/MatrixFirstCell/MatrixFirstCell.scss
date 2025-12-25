@@ -26,10 +26,13 @@
         color: #373737;
         font-family: 'Courier New', Courier, monospace;
         text-align: center;
-        border: 1px solid #a4ebff;
+        border: 1px solid #ace8f9;
         margin: 0.3em 0;
 
-        background-color: #7ff5ff6e;
+        // background-color: #7ff5ff6e;
+        background-color: #c7ecef;
+
+
     }
     
     span:hover{
@@ -37,4 +40,11 @@
         color: #ffffff;
         border-color: #4392af;
     };
+}
+
+.SB_TTD_MatrixFirstCell.mode_Short{
+    span{
+        padding: 0.22em 0.5em;
+    }
+
 }

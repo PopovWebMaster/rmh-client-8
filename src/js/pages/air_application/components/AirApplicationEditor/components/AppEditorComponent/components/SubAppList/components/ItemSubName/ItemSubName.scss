@@ -4,7 +4,7 @@
     margin-right: 0.2em;
     padding: 0.2em 0.4em;
 
-    flex-grow: 2;
+    flex-grow: 1;
     max-width: 100%;
 
     position: relative;
@@ -24,8 +24,8 @@
         // width: 14em;
         // width: 14em;
 
-            flex-grow: 1;
-    max-width: 100%;
+        flex-grow: 1;
+        max-width: calc( 100% - 2em );
 
         background-color: #ffffff00;
         outline: none;

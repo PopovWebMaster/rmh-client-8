@@ -1,0 +1,146 @@
+@import './../TableTypeDetaile.scss';
+
+
+.SB_TTD_MatrixCell{
+    .SB_TTD_MatrixCell_short{
+        font-size: 0.55em;
+        text-align: center;
+        min-height: 1.2em;
+        display: inline-block;
+        text-align: center;
+
+        position: relative;
+
+        padding: 0.2em 0;
+        width: 100%;
+
+
+        .SB_TTD_MatrixCell_sh_info{
+            font-size: 1.6em;
+            position: absolute;
+            // top: 1.4em;
+            // left: -7.5em;
+            width: fit-content;
+            background-color: #c5c5c5;
+            padding: 0 0.25em;
+            border: 1px solid #abababb5;
+            min-width: 15em;
+            min-height: 1em;
+
+            z-index: 1000;
+
+            display: none;
+            opacity: 0;
+            // transition: opacity 1s;
+
+            // animation-duration: 1s;
+            // // animation-name: slidein;
+
+            .SEC_ttd_block_list_item{
+                font-size: 1em;
+                // margin: 0.2em;
+                padding: 0.15em 0.5em;
+
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+                align-items: center;
+
+                background-color: #ffffff;
+                margin: 0.25em 0;
+                border-radius: 0.1em;
+
+                .SEC_block_list_name{
+                    font-size: 0.6em;
+                    color: #343434;
+                }
+
+                .SEC_block_list_time{
+                    font-size: 0.6em;
+                    color: #343434;
+
+                }
+
+            }
+        }
+        .SB_TTD_MatrixCell_sh_info.pos_y_top{
+            top: 1.4em;
+            // left: 0;
+        }
+        .SB_TTD_MatrixCell_sh_info.pos_y_center{
+            top: 1.4em;
+            // left: -7.5em;
+        }
+        .SB_TTD_MatrixCell_sh_info.pos_y_bottom{
+            bottom: 1.4em;
+            // right: 0;
+        }
+
+        .SB_TTD_MatrixCell_sh_info.pos_x_left{
+            // top: 1.4em;
+            left: 0;
+        }
+        .SB_TTD_MatrixCell_sh_info.pos_x_center{
+            // top: 1.4em;
+            left: -7.5em;
+        }
+        .SB_TTD_MatrixCell_sh_info.pos_x_right{
+            // top: 1.4em;
+            right: 0;
+        }
+
+
+
+
+    }
+
+    @keyframes slidein {
+        0% {
+            // display: block;
+            opacity: 0;
+        }
+
+        80% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .SB_TTD_MatrixCell_short:hover{
+        .SB_TTD_MatrixCell_sh_info{
+            display: block;
+            animation-duration: 1s;
+            animation-name: slidein;
+            animation-fill-mode: forwards
+            // display: block;
+            // opacity: 1;
+        }
+    }
+
+    .SB_TTD_MatrixCell_short.block_few{
+        color: $text_color_few;
+    }
+
+    .SB_TTD_MatrixCell_short.block_isOverflowing{
+        color: $text_color_overflowing;
+    }
+
+    .SB_TTD_MatrixCell_short.block_middle{
+        color: $text_color_many;
+    }
+
+
+
+}
+
+.SB_TTD_modeShort.SB_TTD_modeShort{
+    padding: 0;
+}
+
+.SB_TTD_MatrixCell.reserved{
+    .SB_TTD_MatrixCell_short{
+        color: #7a7a7aad;
+    }
+}

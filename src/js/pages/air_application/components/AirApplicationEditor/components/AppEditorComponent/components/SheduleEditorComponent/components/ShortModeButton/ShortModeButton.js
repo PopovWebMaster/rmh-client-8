@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import './ShortModeButton.scss';
 
 // import { selectorData as applicationSlice  } from './../../../../../../../../../../redux/applicationSlice.js';
-import { selectorData as currentSubApplicationSlise, setModeShort  } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+import { selectorData as currentSubApplicationSlise, setModeShort, setModeMix } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
 import { selectorData as scheduleSlise }     from './../../../../../../../../../../redux/scheduleSlise.js';
 // import { CHAR_TYPE } from './../../../../../../../../../../config/application.js';
 
@@ -16,13 +16,18 @@ const ShortModeButtonComponent = ( props ) => {
     let {
         // modeMix,
         modeShort,
-        // setModeMix,
+        setModeMix,
         setModeShort,
         // charType,
     } = props;
 
     const click = () => {
+
         setModeShort( !modeShort );
+        if( !modeShort ){
+            setModeMix( false );
+        };
+        
     }
 
     return (
@@ -53,7 +58,7 @@ export function ShortModeButton( props ){
             modeShort =   { currentSubApplication.modeShort }
             // charType =  { schedule.charType }
 
-            // setModeMix = { ( val ) => { dispatch( setModeMix( val ) ) } }
+            setModeMix = { ( val ) => { dispatch( setModeMix( val ) ) } }
             setModeShort = { ( val ) => { dispatch( setModeShort( val ) ) } }
 
 

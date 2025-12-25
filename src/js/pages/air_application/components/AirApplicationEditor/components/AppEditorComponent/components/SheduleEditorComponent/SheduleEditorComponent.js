@@ -1,12 +1,12 @@
 
 import React, { useRef, useState, useEffect }   from "react";
 
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import './SheduleEditorComponent.scss';
 
-import { selectorData as applicationSlice} from './../../../../../../../../redux/applicationSlice.js';
+// import { selectorData as applicationSlice} from './../../../../../../../../redux/applicationSlice.js';
 
 import { UpdateCurrentSubAppData } from './../UpdateCurrentSubAppData/UpdateCurrentSubAppData.js';
 import { ScheduleClass } from './../../../../../../../../classes/ScheduleClass.js';
@@ -14,13 +14,13 @@ import { ScheduleClass } from './../../../../../../../../classes/ScheduleClass.j
 import { EnvironmentShow }      from './components/EnvironmentShow/EnvironmentShow.js';
 import { ScheduleHeader }       from './components/ScheduleHeader/ScheduleHeader.js';
 import { ScheduleSaveButton }   from './components/ScheduleSaveButton/ScheduleSaveButton.js';
-import { ScheduleTimeColumn }   from './components/ScheduleTimeColumn/ScheduleTimeColumn.js';
-import { ScheduleTable }        from './components/ScheduleTable/ScheduleTable.js';
+// import { ScheduleTimeColumn }   from './components/ScheduleTimeColumn/ScheduleTimeColumn.js';
+// import { ScheduleTable }        from './components/ScheduleTable/ScheduleTable.js';
 import { DownloadScheduleButton } from './components/DownloadScheduleButton/DownloadScheduleButton.js';
 import { MixModeButton } from './components/MixModeButton/MixModeButton.js';
 import { ShortModeButton } from './components/ShortModeButton/ShortModeButton.js';
  
-import { ScheduleBodyTypeTable } from './components/ScheduleBodyTypeTable/ScheduleBodyTypeTable.js';
+// import { ScheduleBodyTypeTable } from './components/ScheduleBodyTypeTable/ScheduleBodyTypeTable.js';
 import { TableTypeDetaile } from './components/TableTypeDetaile/TableTypeDetaile.js';
 
 
@@ -28,9 +28,9 @@ const SheduleEditorComponentComponent = ( props ) => {
 
     let {
         isOpen,
-        setIsOpen,
+        // setIsOpen,
 
-        applicationList,
+        // applicationList,
 
 
     } = props;
@@ -118,14 +118,14 @@ const SheduleEditorComponentComponent = ( props ) => {
 
 export function SheduleEditorComponent( props ){
 
-    const application = useSelector( applicationSlice );
+    // const application = useSelector( applicationSlice );
     // const dispatch = useDispatch();
 
     return (
         <SheduleEditorComponentComponent
             { ...props }
 
-            applicationList = { application.applicationList }
+            // applicationList = { application.applicationList }
 
             // setCurrentApplicationId = { ( val ) => { dispatch( setCurrentApplicationId( val ) ) } }
 

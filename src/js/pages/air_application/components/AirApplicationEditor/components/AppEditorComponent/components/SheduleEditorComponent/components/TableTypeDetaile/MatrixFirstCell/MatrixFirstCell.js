@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import './MatrixFirstCell.scss';
 
 import { selectorData as scheduleSlise } from './../../../../../../../../../../../redux/scheduleSlise.js';
+import { selectorData as currentSubApplicationSlise } from './../../../../../../../../../../../redux/currentSubApplicationSlise.js';
+
 // import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 // import { BlindTimePointAddRow } from './BlindTimePointAddRow/BlindTimePointAddRow.js';
 // import { SetMatrixToStore } from './SetMatrixToStore/SetMatrixToStore.js';
@@ -25,6 +27,7 @@ const MatrixFirstCellComponent = ( props ) => {
         interval,
 
         charType,
+        modeShort,
         
     } = props;
 
@@ -41,7 +44,7 @@ const MatrixFirstCellComponent = ( props ) => {
 
     return (
         <div
-            className = 'SB_TTD_MatrixFirstCell'
+            className = { `SB_TTD_MatrixFirstCell ${modeShort? 'mode_Short': ''}` }
             onClick = { click }
         >
             <span>{ title }</span>
@@ -53,6 +56,10 @@ const MatrixFirstCellComponent = ( props ) => {
 export function MatrixFirstCell( props ){
 
     const schedule = useSelector( scheduleSlise );
+    const currentSubApplication = useSelector( currentSubApplicationSlise );
+
+
+    
     // const dispatch = useDispatch();
 
     return (
@@ -60,6 +67,8 @@ export function MatrixFirstCell( props ){
             { ...props }
 
             charType = { schedule.charType }
+
+            modeShort = { currentSubApplication.modeShort }
 
             // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
 

@@ -55,7 +55,7 @@ const OneHeaderItemComponent = ( props ) => {
             { modeShort? (<>
 
                 <div
-                    className = 'SB_TTD_CharDay_date_short'
+                    className = { `SB_TTD_CharDay_date_short ${col_class_name}` }
                     onMouseOver = { () => { mouse_over( col_class_name ) } }
                     onMouseLeave = { () => { mouse_leave( col_class_name ) } }
                     onClick = { () => { dayReleaseToggle() } }
