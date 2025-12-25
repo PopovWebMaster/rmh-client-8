@@ -16,7 +16,6 @@ export class RowMartixClass extends RowClass {
             name,
             duration,
             price,
-            pricePrime,
             withName = false,
 
         } = data;
@@ -27,8 +26,6 @@ export class RowMartixClass extends RowClass {
         this.name =     name;
         this.duration = duration;
         this.price =    price;
-        this.pricePrime = pricePrime;
-
         this.withName = withName;
 
         this.Create = this.Create.bind(this);
@@ -44,7 +41,6 @@ export class RowMartixClass extends RowClass {
             releaseDuration:    this.duration,
             releaseName:        this.name,
             price:              this.price,
-            pricePrime:         this.pricePrime,
             rowNum:             this.rowNumber,
         }, this.withName );
 

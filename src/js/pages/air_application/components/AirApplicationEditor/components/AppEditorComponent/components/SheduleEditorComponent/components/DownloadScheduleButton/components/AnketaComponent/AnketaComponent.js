@@ -17,6 +17,7 @@ import { SelectAnketaType } from './../SelectAnketaType/SelectAnketaType.js';
 import { AnketaTypeTable } from './../AnketaTypeTable/AnketaTypeTable.js';
 import { AnketaTypeThema } from './../AnketaTypeThema/AnketaTypeThema.js';
 import { AnketaTypeList } from './../AnketaTypeList/AnketaTypeList.js';
+import { AnketaTypeTableVisitka } from './../AnketaTypeTableVisitka/AnketaTypeTableVisitka.js';
 
 import { get_array_of_colum_width } from './../../vendors/get_array_of_colum_width.js';
 import { get_row_1 } from './../../vendors/get_row_1.js';
@@ -47,12 +48,14 @@ const AnketaComponentComponent = ( props ) => {
 
     } = props;
 
-    let [ anketaType, setAnketaType ] = useState( 'table' ); // 'table' 'thema'
+    let [ anketaType, setAnketaType ] = useState( 'table_vizitka' ); // 'table' 'thema' table_vizitka
 
     let [ tableHeader, setTableHeader ] = useState( '' )
     let [ executor, setExecutor ] = useState( '' );
     let [ customer, setCustomer ] = useState( '' );
     let [ price, setPrice ] = useState( 0 );
+    let [ pricePrime, setPricePrime ] = useState( 0 );
+
     let [ mediaName, setMediaName] = useState( '' );
     let [ materialName, setMaterialName] = useState( '' );
 
@@ -75,6 +78,7 @@ const AnketaComponentComponent = ( props ) => {
             setExecutor( data.executor );
             setCustomer( data.customer );
             setPrice( data.price );
+            setPricePrime( data.pricePrime );
             setMediaName( data.mediaName );
             setMaterialName( data.releaseName );
 
@@ -98,6 +102,7 @@ const AnketaComponentComponent = ( props ) => {
             setExecutor( '' );
             setCustomer( '' );
             setPrice( '' );
+            setPricePrime( '' );
             setMediaName( '' );
             setMaterialName( '' );
 
@@ -252,11 +257,15 @@ const AnketaComponentComponent = ( props ) => {
                         setCustomer =       { setCustomer }
                         price =             { price }
                         setPrice =          { setPrice }
+                        pricePrime =        { pricePrime }
+                        setPricePrime =     { setPricePrime }
+
                         mediaName =         { mediaName }
                         setMediaName =      { setMediaName }
                         materialName =      { materialName }
                         setMaterialName =   { setMaterialName }
                         Schedule =          { Schedule }
+
                     />
                 );
                 break;
@@ -287,6 +296,25 @@ const AnketaComponentComponent = ( props ) => {
                 );
                 break;
 
+            case 'table_vizitka':
+                result = (
+                    <AnketaTypeTableVisitka
+                        tableHeader =       { tableHeader }
+                        setTableHeader =    { setTableHeader }
+                        executor =          { executor }
+                        setExecutor =       { setExecutor }
+                        customer =          { customer }
+                        setCustomer =       { setCustomer }
+                        price =             { price }
+                        setPrice =          { setPrice }
+                        mediaName =         { mediaName }
+                        setMediaName =      { setMediaName }
+                        materialName =      { materialName }
+                        setMaterialName =   { setMaterialName }
+                        Schedule =          { Schedule }
+                    />
+                );
+                break;
         };
 
         return result;
@@ -307,10 +335,10 @@ const AnketaComponentComponent = ( props ) => {
                         type: 'thema',
                         name: 'Сюжет',
                     },
-                    // {
-                    //     type: 'list',
-                    //     name: 'Список',
-                    // },
+                    {
+                        type: 'table_vizitka',
+                        name: 'Визитка',
+                    },
                 ] }
             />
 

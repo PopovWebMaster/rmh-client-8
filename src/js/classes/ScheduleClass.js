@@ -169,6 +169,7 @@ export class ScheduleClass extends ScheduleMethodsClass {
             executor:   'ГУП ДНР  "РМХ"',
             customer:   this.Application.name,
             price: 28,
+            pricePrime: 36,
             // mediaName: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ',
             mediaName: companyLegalName,
             

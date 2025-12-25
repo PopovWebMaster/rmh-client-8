@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect }   from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import { selectorData as applicationSlice } from './../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice, setCurrentAppIsChanged } from './../../../../../../redux/applicationSlice.js';
 import { setSpinnerIsActive }               from './../../../../../../redux/spinnerSlice.js';
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
@@ -18,6 +18,7 @@ const GetCurrentApplicationDataFromServerComponent = ( props ) => {
 
         currentApplicationId,
         setSpinnerIsActive,
+        setCurrentAppIsChanged,
 
 
     } = props;
@@ -43,6 +44,7 @@ const GetCurrentApplicationDataFromServerComponent = ( props ) => {
                     set_application_data_to_store( response.application );
                     setSpinnerIsActive( false );
                     setIsReady( true );
+                    // setCurrentAppIsChanged( false );
                 };
 
             },
@@ -67,6 +69,10 @@ export function GetCurrentApplicationDataFromServer( props ){
             currentApplicationId = { application.currentApplicationId }
 
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setCurrentAppIsChanged = { ( val ) => { dispatch( setCurrentAppIsChanged( val ) ) } }
+
+
+            
 
 
 

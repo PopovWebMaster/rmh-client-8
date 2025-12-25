@@ -12,6 +12,7 @@ export const downloadExcel = ( params ) => {
         executor,
         customer,
         price,
+        pricePrime,
         mediaName,
         materialName,
         Schedule,
@@ -21,25 +22,10 @@ export const downloadExcel = ( params ) => {
     let { modeMix } = currentSubApplication;
 
 
-
-
     let {
         matrix,
         used_sub_app_id
     } = get_matrix_array();
-
-    // console.dir( 'matrix' );
-    // console.dir( matrix );
-
-    // console.dir( 'used_sub_app_id' );
-    // console.dir( used_sub_app_id );
-
-    // let charType = Schedule.charType;
-
-    // let mode_status = false;
-    // if( Schedule.charType === CHAR_TYPE.BLOCK ){
-    //     mode_status = modeMix;
-    // };
 
 
 
@@ -51,21 +37,13 @@ export const downloadExcel = ( params ) => {
     ExcelMediaPlanMix.SetExecutor( executor );
     ExcelMediaPlanMix.SetCustomer( customer );
     ExcelMediaPlanMix.SetPrice( price );
+    ExcelMediaPlanMix.SetPricePrime( pricePrime );
+
     ExcelMediaPlanMix.SetMediaName( mediaName );
     ExcelMediaPlanMix.SetSubAppList( used_sub_app_id );
     ExcelMediaPlanMix.SetMatrix( matrix );
 
     ExcelMediaPlanMix.Download();
-
-    // console.dir( ExcelMediaPlanMix );
-
-
-
-
-
-
-
-
 
 
 }

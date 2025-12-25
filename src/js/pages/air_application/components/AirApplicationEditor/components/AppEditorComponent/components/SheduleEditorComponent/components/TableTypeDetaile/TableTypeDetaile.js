@@ -40,8 +40,8 @@ const TableTypeDetaileComponent = ( props ) => {
             if( day_list[ index ] ){
 
             }else{
-                console.dir( 'day_list[ index ] <<<<<<<<<<<<<<<<<<<<<<<' );
-                console.dir( day_list[ index ] );
+                // console.dir( 'day_list[ index ] <<<<<<<<<<<<<<<<<<<<<<<' );
+                // console.dir( day_list[ index ] );
                 return '';
             };
 
@@ -123,6 +123,9 @@ const TableTypeDetaileComponent = ( props ) => {
             };
 
             let { sec, title, sec_list, interval } = pointsGroup[ index ];
+
+            // console.dir( 'pointsGroup[ index ] <<<<<<<<<<<<<<<<<<<<<<<' );
+            //     console.dir( pointsGroup[ index ] );
             
             return (
                 <div

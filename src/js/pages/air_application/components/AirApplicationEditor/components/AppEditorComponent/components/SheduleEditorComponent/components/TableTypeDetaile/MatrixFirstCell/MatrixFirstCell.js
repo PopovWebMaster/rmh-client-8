@@ -37,7 +37,15 @@ const MatrixFirstCellComponent = ( props ) => {
                 Schedule.AllTimePointsToggle( sec_list[ i ] );
             };
         }else if( charType === CHAR_TYPE.BLIND ){
-            Schedule.AllTimePointsToggle( sec );
+
+            // console.dir( sec );
+            // console.dir( sec_list );
+
+            // Schedule.AllTimePointsToggle( sec );
+
+            for( let i = 0; i < sec_list.length; i++ ){
+                Schedule.AllTimePointsToggle( sec_list[ i ] );
+            };
         };
     }
 

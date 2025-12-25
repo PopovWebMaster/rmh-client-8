@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import './ItemSubShedule.scss';
 
 import { selectorData as applicationSlice, setApplicationList } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as scheduleSlise, setIsChanged }     from './../../../../../../../../../../redux/scheduleSlise.js';
 import { setSpinnerIsActive } from './../../../../../../../../../../redux/spinnerSlice.js';
 
 import { 
@@ -52,6 +53,7 @@ const ItemSubSheduleComponent = ( props ) => {
 
         setApplicationList,
         setSpinnerIsActive,
+        setIsChanged,
         
     } = props;
 
@@ -69,6 +71,8 @@ const ItemSubSheduleComponent = ( props ) => {
         setPeriodTo( period_to );
         setModeMix( false );
         setModeShort( false );
+
+        setIsChanged( false );
 
         send_request_to_server({
             route: 'get_application_list_for_period',
@@ -104,6 +108,7 @@ const ItemSubSheduleComponent = ( props ) => {
                         // setPeriodTo( period_to );
                         setIsOpen( true );
                         setSpinnerIsActive( false );
+                        // setCurrentAppIsChanged( false );
                         // setModeMix( false );
 
                         // clearTimeout( timerId );
@@ -181,6 +186,8 @@ export function ItemSubShedule( props ){
             setModeShort = { ( val ) => { dispatch( setModeShort( val ) ) } }
             setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
+            setIsChanged = { ( val ) => { dispatch( setIsChanged( val ) ) } }
+
 
 
 

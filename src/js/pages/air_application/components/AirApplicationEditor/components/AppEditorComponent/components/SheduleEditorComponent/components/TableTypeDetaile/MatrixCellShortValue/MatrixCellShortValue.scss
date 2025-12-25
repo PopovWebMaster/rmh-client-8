@@ -24,7 +24,7 @@
             background-color: #c5c5c5;
             padding: 0 0.25em;
             border: 1px solid #abababb5;
-            min-width: 15em;
+            // min-width: 15em;
             min-height: 1em;
 
             z-index: 1000;
@@ -53,6 +53,8 @@
                 .SEC_block_list_name{
                     font-size: 0.6em;
                     color: #343434;
+                    white-space: preserve nowrap;
+                    margin-right: 0.6em;
                 }
 
                 .SEC_block_list_time{

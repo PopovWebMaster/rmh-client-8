@@ -1,10 +1,9 @@
 
-
 import React, { useState, useEffect }   from "react";
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import './AnketaTypeTable.scss';
+import './AnketaTypeTableVisitka.scss';
 
 // import { selectorData as applicationSlice  } from './../../../../../../../../../../../../redux/applicationSlice.js';
 
@@ -12,10 +11,12 @@ import { AWTextarea } from './../../../../../../../../../../../../components/Ale
 import { AWInputText } from './../../../../../../../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
 import { AWButtonAdd } from './../../../../../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
-import { downloadExcel } from './vendors/downloadExcel.js';
+// import { downloadExcel } from './vendors/downloadExcel.js';
+
+import { downloadVisitkaExcel } from './vendors/downloadVisitkaExcel.js';
 
 
-const AnketaTypeTableComponent = ( props ) => {
+const AnketaTypeTableVisitkaComponent = ( props ) => {
 
     let {
         tableHeader,
@@ -30,8 +31,6 @@ const AnketaTypeTableComponent = ( props ) => {
         setMediaName,
         materialName,
         setMaterialName,
-        pricePrime,
-        setPricePrime,
         Schedule,
 
         // download_table,
@@ -54,36 +53,12 @@ const AnketaTypeTableComponent = ( props ) => {
         setMediaName( e.target.value )
     }
 
-    const change_price = ( e ) => {
-        let val = Number( e.target.value );
-        if( /^-?\d+$/.test( val ) ){
-            setPrice( val )
-        };
-    }
-
-    const change_price_prime = ( e ) => {
-        let val = Number( e.target.value );
-        if( /^-?\d+$/.test( val ) ){
-            setPricePrime( val )
-        };
-    }
-
-
-
-    
-    // const change_materialName = ( e ) => {
-    //     setMaterialName( e.target.value )
-    // }
-
-
     const download_table = () => {
 
-        downloadExcel({
+        downloadVisitkaExcel({
             tableHeader,
             executor,
             customer,
-            price,
-            pricePrime,
             mediaName,
             materialName,
             Schedule,
@@ -94,7 +69,7 @@ const AnketaTypeTableComponent = ( props ) => {
 
 
     return (
-        <div  className = 'SEC_AnketaTypeTable'>
+        <div  className = 'SEC_AnketaTypeTableVisitka'>
 
             <AWTextarea 
                 title =     'Колонтитул'
@@ -121,25 +96,6 @@ const AnketaTypeTableComponent = ( props ) => {
                 onChange =  { change_mediaName }
             />
 
-            {/* <AWInputText 
-                title =     'Видеоролик'
-                value =     { materialName }
-                onChange =  { change_materialName }
-            /> */}
-
-            <AWInputText 
-                title =     'Стоимость 1 рос. руб.'
-                value =     { price }
-                onChange =  { change_price }
-            />
-
-            <AWInputText 
-                title =     'Стоимость ПРАЙМ (17:00-23:00) 1 рос. руб.'
-                value =     { pricePrime }
-                onChange =  { change_price_prime }
-            />
-
-
             <AWButtonAdd
                 title =         "Скачать"
                 isReady =       { true }
@@ -152,14 +108,14 @@ const AnketaTypeTableComponent = ( props ) => {
 
 };
 
-export function AnketaTypeTable( props ){
+export function AnketaTypeTableVisitka( props ){
 
     // const application = useSelector( applicationSlice );
 
     // const dispatch = useDispatch();
 
     return (
-        <AnketaTypeTableComponent
+        <AnketaTypeTableVisitkaComponent
             { ...props }
 
             // currentApplicationId = { application.currentApplicationId }

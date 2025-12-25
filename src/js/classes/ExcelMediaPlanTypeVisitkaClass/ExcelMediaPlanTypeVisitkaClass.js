@@ -1,65 +1,54 @@
 
 import * as XLSX from 'xlsx-js-style';
 
-import { TableHeaderClass } from './vendors/ExcelMediaPlanMixClass/TableHeaderClass.js';
-import { EmptyRowClass } from './vendors/ExcelMediaPlanMixClass/EmptyRowClass.js';
-import { RowExecutorClass } from './vendors/ExcelMediaPlanMixClass/RowExecutorClass.js';
-import { RowCustomerClass } from './vendors/ExcelMediaPlanMixClass/RowCustomerClass.js';
-import { RowMediaNameClass } from './vendors/ExcelMediaPlanMixClass/RowMediaNameClass.js';
-import { RowPeriodClass } from './vendors/ExcelMediaPlanMixClass/RowPeriodClass.js';
-import { RowAdvertisingTypeClass } from './vendors/ExcelMediaPlanMixClass/RowAdvertisingTypeClass.js';
-import { RowMovieNameClass } from './vendors/ExcelMediaPlanMixClass/RowMovieNameClass.js';
-import { RowMediaNameAsHeaderClass } from './vendors/ExcelMediaPlanMixClass/RowMediaNameAsHeaderClass.js';
-import { RowMartixHeaderDayNamesClass } from './vendors/ExcelMediaPlanMixClass/RowMartixHeaderDayNamesClass.js';
-import { RowMartixHeaderDatesClass } from './vendors/ExcelMediaPlanMixClass/RowMartixHeaderDatesClass.js';
+import { SubAppListClass } from './vendors/SubAppListClass.js';
+import { MatrixClass } from './vendors/MatrixClass.js';
+import { PeriodClass } from './vendors/PeriodClass.js';
 
-import { RowMartixClass } from './vendors/ExcelMediaPlanMixClass/RowMartixClass.js';
-import { RowMatrixFooterClass } from './vendors/ExcelMediaPlanMixClass/RowMatrixFooterClass.js';
-import { TableFooterClass } from './vendors/ExcelMediaPlanMixClass/TableFooterClass.js';
+import { TableHeaderClass } from './vendors/TableHeaderClass.js';
+import { EmptyRowClass } from './vendors/EmptyRowClass.js';
+import { RowExecutorClass } from './vendors/RowExecutorClass.js';
+import { RowCustomerClass } from './vendors/RowCustomerClass.js';
+import { RowMediaNameClass } from './vendors/RowMediaNameClass.js';
+import { RowPeriodClass } from './vendors/RowPeriodClass.js';
+import { RowAdvertisingTypeClass } from './vendors/RowAdvertisingTypeClass.js';
+import { RowMovieNameClass } from './vendors/RowMovieNameClass.js';
+import { RowMediaNameAsHeaderClass } from './vendors/RowMediaNameAsHeaderClass.js';
+import { RowMartixHeaderDayNamesClass } from './vendors/RowMartixHeaderDayNamesClass.js';
+import { RowMartixHeaderDatesClass } from './vendors/RowMartixHeaderDatesClass.js';
+import { RowMartixClass } from './vendors/RowMartixClass.js';
+import { RowMatrixFooterClass } from './vendors/RowMatrixFooterClass.js';
 
+import { TableFooterClass } from './vendors/TableFooterClass.js';
 
+import { get_array_of_colum_width } from './vendors/get_array_of_colum_width.js';
+ 
 
-import { SubAppListClass } from './vendors/ExcelMediaPlanMixClass/SubAppListClass.js';
-import { MatrixClass } from './vendors/ExcelMediaPlanMixClass/MatrixClass.js';
-import { PeriodClass } from './vendors/ExcelMediaPlanMixClass/PeriodClass.js';
-import { get_array_of_colum_width } from './vendors/ExcelMediaPlanMixClass/get_array_of_colum_width.js'
-
-export class ExcelMediaPlanMixClass {
+export class ExcelMediaPlanTypeVisitkaClass {
     constructor(){
-        this.modeMixStatus = false;
         this.tableHeader = '';
         this.executor = '';
         this.customer = '';
-        this.price = '';
-        this.pricePrime = '';
         this.mediaName = '';
-
         this.excelRows = [];
         this.excelRangeValues = [];
         this.excelRowHeights = [];
         this.nextRowNumber = 1;
 
-
         this.SubAppList = new SubAppListClass();
         this.Matrix = new MatrixClass();
         this.Period = new PeriodClass();
 
-        this.SetModeMixStatus =   this.SetModeMixStatus.bind(this);
         this.SetTableHeader =   this.SetTableHeader.bind(this);
-
-
-        
-
         this.SetExecutor =      this.SetExecutor.bind(this);
         this.SetCustomer =      this.SetCustomer.bind(this);
-        this.SetPrice =         this.SetPrice.bind(this);
-        this.SetPricePrime =         this.SetPricePrime.bind(this);
-
         this.SetMediaName =     this.SetMediaName.bind(this);
         this.SetSubAppList =    this.SetSubAppList.bind(this);
         this.SetMatrix =        this.SetMatrix.bind(this);
+
+
         this.Download =         this.Download.bind(this);
-        this.CreateExcelRows =         this.CreateExcelRows.bind(this);
+        this.CreateExcelRows =   this.CreateExcelRows.bind(this);
 
         this.AddRow =           this.AddRow.bind(this);
         this.GetRangeArray =    this.GetRangeArray.bind(this);
@@ -67,13 +56,6 @@ export class ExcelMediaPlanMixClass {
 
 
 
-
-        
-
-
-    }
-    SetModeMixStatus( value ){
-        this.modeMixStatus = value;
     }
 
     SetTableHeader( value ){
@@ -87,14 +69,6 @@ export class ExcelMediaPlanMixClass {
 
     SetCustomer( value ){
         this.customer = value;
-    }
-
-    SetPrice( value ){
-        this.price = Number( value );
-    }
-
-    SetPricePrime( value ){
-        this.pricePrime = Number( value );
     }
 
     SetMediaName( value ){
@@ -113,6 +87,22 @@ export class ExcelMediaPlanMixClass {
         this.Period.SetFromMatrix( matrix );
     }
 
+    AddRow( Row ){
+        this.excelRangeValues = [ ...this.excelRangeValues, ...Row.GetRange() ];
+        this.excelRows = [ ...this.excelRows, ...Row.GetRows() ];
+        this.nextRowNumber = Row.GetNextRowNumber();
+        this.excelRowHeights.push( Row.GetRowHeight() );
+    }
+
+    GetRangeArray(){
+        let result = [];
+        for( let i = 0; i < this.excelRangeValues.length; i++ ){
+            result.push( XLSX.utils.decode_range( this.excelRangeValues[ i ] ) );
+        }
+        return result;
+    }
+
+    
     CreateExcelRows(){
 
         this.AddRow( new TableHeaderClass( this.nextRowNumber, this.tableHeader ) );
@@ -160,7 +150,6 @@ export class ExcelMediaPlanMixClass {
                 duration,
                 withName: this.modeMixStatus,
                 price: this.price,
-                pricePrime: this.pricePrime,
             };
 
             this.AddRow( new RowMartixClass( this.nextRowNumber, data ) );
@@ -179,66 +168,36 @@ export class ExcelMediaPlanMixClass {
 
 
 
+        
+
+
+        
+
+
     }
-
-    AddRow( Row ){
-        this.excelRangeValues = [ ...this.excelRangeValues, ...Row.GetRange() ];
-        this.excelRows = [ ...this.excelRows, ...Row.GetRows() ];
-        this.nextRowNumber = Row.GetNextRowNumber();
-        this.excelRowHeights.push( Row.GetRowHeight() );
-    }
-
-    GetRangeArray(){
-        let result = [];
-        for( let i = 0; i < this.excelRangeValues.length; i++ ){
-            result.push( XLSX.utils.decode_range( this.excelRangeValues[ i ] ) );
-        }
-        return result;
-    }
-
-
-
 
     Download(){
-
         this.CreateExcelRows();
-
-
         const wb = XLSX.utils.book_new();
-
+        
         const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
-/*
-        const ws = XLSX.utils.aoa_to_sheet([
-            // this.TableHeader.GetRow(),
-        ]);
-    */
-
         ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
         ws['!rows'] = this.excelRowHeights;
-        /*
-        ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
-        */
+
         ws["!merges"] = this.GetRangeArray();
-/*
-        ws["!merges"] = [
-            XLSX.utils.decode_range("A1:AO1"),
-            XLSX.utils.decode_range("A2:AO2"),
-            XLSX.utils.decode_range("A3:AO3"),
-            XLSX.utils.decode_range("A4:AO4"),
-            XLSX.utils.decode_range("D6:AO6"),
-            XLSX.utils.decode_range("D7:AO7"),
-            XLSX.utils.decode_range("D8:AO8"),
-            XLSX.utils.decode_range("D9:AO9"),
-            XLSX.utils.decode_range("D10:R10"),XLSX.utils.decode_range("S10:AO10"),
-            XLSX.utils.decode_range("F13:AO13"),
-            XLSX.utils.decode_range("A14:A15"),XLSX.utils.decode_range("B14:B15"),XLSX.utils.decode_range("C14:C15"),XLSX.utils.decode_range("D14:D15"),XLSX.utils.decode_range("E14:E15"),
-            XLSX.utils.decode_range("AM14:AM15"),XLSX.utils.decode_range("AN14:AN15"),
-        ];
-*/
+        
+
         XLSX.utils.book_append_sheet(wb, ws, "1");
 
+       
+
+        
         XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
     }
 
-}
 
+
+
+
+
+}
