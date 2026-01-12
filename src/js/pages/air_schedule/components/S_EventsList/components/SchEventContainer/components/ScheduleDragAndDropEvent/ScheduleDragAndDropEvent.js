@@ -48,6 +48,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         setIsLighter,
         dragStartEventId,
         dragStartDuration,
+        dragIsActive,
 
         dragOverHandler = () => {},
         dragLeaveHandler = () => {},
@@ -209,7 +210,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
        <div 
             className = 'ScheduleDragAndDropEvent'
-            draggable =     { isEmpty? false: true }
+            draggable =     { isEmpty? false: dragIsActive? true: false }
 
             onDragStart =   { drag_start }
             onDragEnd =     { drag_end }

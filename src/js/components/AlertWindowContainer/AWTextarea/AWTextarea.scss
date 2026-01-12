@@ -11,6 +11,7 @@
         width: calc(100% - 2em);
         color: #575757;
         min-height: 4em;
+        user-select: all;
     }
 
     .AW_textarea::placeholder {

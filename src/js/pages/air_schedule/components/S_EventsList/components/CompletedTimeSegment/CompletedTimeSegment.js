@@ -39,26 +39,28 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
     } = props;
 
-
-    let [ duration, setDuration ] = useState( 0 );
-
-
-    useEffect( () => {
-
-        if( firstSegmentId === null ){
-            let event = eventListById[ eventId ];
-            if( event.type === EVENT_TYPE.BLOCK ){
-                setDuration( durationTime );
-            }else if( event.type === EVENT_TYPE.FILE ){
-                setDuration( convert_time_str_to_sec( event.durationTime ) );
-            };
-
-        }else{
-            setDuration( durationTime );
-        };
+    let [ dragIsActive, setDragIsActive ] = useState( true );
 
 
-    }, [ eventListById, durationTime ]);
+    // let [ duration, setDuration ] = useState( 0 );
+
+
+    // useEffect( () => {
+
+    //     if( firstSegmentId === null ){
+    //         let event = eventListById[ eventId ];
+    //         if( event.type === EVENT_TYPE.BLOCK ){
+    //             setDuration( durationTime );
+    //         }else if( event.type === EVENT_TYPE.FILE ){
+    //             setDuration( convert_time_str_to_sec( event.durationTime ) );
+    //         };
+
+    //     }else{
+    //         setDuration( durationTime );
+    //     };
+
+
+    // }, [ eventListById, durationTime ]);
 
 
     return (
@@ -69,6 +71,9 @@ const CompletedTimeSegmentComponent = ( props ) => {
             isCompletd =    { true }
             isKeyPoint =    { isKeyPoint }
             gridEventId =   { gridEventId }
+            firstSegmentId = { firstSegmentId }
+            dragIsActive = { dragIsActive }
+            setDragIsActive = { setDragIsActive }
         >
             <div className = 'completedTimeSegment'>
 
@@ -83,23 +88,28 @@ const CompletedTimeSegmentComponent = ( props ) => {
                 <EventNotesItem 
                     gridEventId =   { gridEventId }
                     finalNotes =    { finalNotes }
+                    setDragIsActive = { setDragIsActive }
                 />
 
-                <AddFreeReleaseItem
-                    gridEventId =   { gridEventId }
-                    releases =    { releases }
-                    eventId = { eventId }
-                    firstSegmentId = { firstSegmentId }
-                />
+                
 
                 <div className = 'SEC_right_buttons_wrap'>
 
+                    <AddFreeReleaseItem
+                        gridEventId =   { gridEventId }
+                        releases =    { releases }
+                        eventId = { eventId }
+                        firstSegmentId = { firstSegmentId }
+                    />
+
                     <CutItem 
                         gridEventId = { gridEventId }
+                        setDragIsActive = { setDragIsActive }
                     />
 
                     <RemoveItem 
                         gridEventId = { gridEventId }
+
                     />
                 </div> 
 

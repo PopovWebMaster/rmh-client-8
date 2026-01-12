@@ -231,10 +231,10 @@ export class ResultScheduleClass {
                 quotationMarks,
                 upperCase,
                 staples,
+                itemNameValue,
             } = this.eventsList[ i ];
 
 
-            
 
             // console.dir( convert_sec_to_time( startTime ) );
             // console.dir( this.eventsList[ i ] );
@@ -252,7 +252,7 @@ export class ResultScheduleClass {
                 } = release_names_list[ i ];
 
                 let start_time = get_TV_P_startTime( startTime + startTimePlus );
-                let event_name = get_TV_P_eventName( eventId, quotationMarks );
+                let event_name = get_TV_P_eventName( eventId, quotationMarks, itemNameValue );
                 let final_notes = get_TV_P_finalNotes( finalNotes, is_premiere, staples  );
 
                 let value = `${start_time} ${event_name} ${releaseName} ${final_notes}`;

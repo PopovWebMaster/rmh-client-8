@@ -23,6 +23,8 @@ const EventNotesItemComponent = ( props ) => {
         gridEventId,
         finalNotes,
 
+        setDragIsActive = () => {},
+
         // scheduleEventsList,
     } = props;
 
@@ -33,12 +35,19 @@ const EventNotesItemComponent = ( props ) => {
 
     useEffect( () => {
         setInputValue( finalNotes );
-    }, [ finalNotes ] )
+    }, [ finalNotes ] );
+
+    useEffect( () => {
+        if( isOpen === false ){
+            setDragIsActive( true );
+        };
+    }, [ isOpen ] );
 
 
 
     const clickOpen = () => {
         setIsOpen( true );
+        setDragIsActive( false );
     }
     const change = ( e ) => {
         let val = e.target.value;

@@ -8,6 +8,7 @@ import './ExportFilterList.scss';
 // import { selectorData as scheduleResultSlise } from './../../../../../../redux/scheduleResultSlise.js';
 
 import { get_changet_filter_list } from './../../vendors/get_changet_filter_list.js';
+import { get_item_name_value } from './../../vendors/get_item_name_value.js';
 
 import { FilterItem } from './../FilterItem/FilterItem.js';
 import { FilterControlPanel } from './../FilterControlPanel/FilterControlPanel.js';
@@ -45,13 +46,29 @@ const ExportFilterListComponent = ( props ) => {
     }
 
     const item_change_upperCase = ( val, eventId ) => {
+
         let changed_list = get_changet_filter_list( filterList, eventId, { upperCase: val } );
         setFilterList( changed_list );
+
+        get_item_name_value({
+            filterList: changed_list,
+            eventId,
+        });
+
     }
 
     const item_change_staples = ( val, eventId ) => {
         let changed_list = get_changet_filter_list( filterList, eventId, { staples: val } );
         setFilterList( changed_list );
+    }
+
+    const change_itemNameValue = (  val, eventId  ) => {
+
+        let changed_list = get_changet_filter_list( filterList, eventId, { itemNameValue: val } );
+        setFilterList( changed_list );
+
+        // console.dir( {val, eventId} );
+
     }
 
 
@@ -69,6 +86,7 @@ const ExportFilterListComponent = ( props ) => {
                 quotationMarks,
                 upperCase,
                 staples,
+                itemNameValue,
             } = item;
 
             let with_category = true;
@@ -103,6 +121,8 @@ const ExportFilterListComponent = ( props ) => {
                         exportType =            { exportType }
                         staples = { staples }
                         item_change_staples = { item_change_staples }
+                        itemNameValue = { itemNameValue }
+                        change_itemNameValue = { change_itemNameValue }
 
                     />
                 </React.Fragment>

@@ -40,6 +40,7 @@ const AlertWindowContainerComponent = ( props ) => {
             <div 
                 className = { `AlertWindowContainer ${isOpen === true? 'isOpen': 'isClose'}` }
                 style = { { opacity } }
+                draggable = { false }
             >
 
                 <div 

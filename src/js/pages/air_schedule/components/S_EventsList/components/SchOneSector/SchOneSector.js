@@ -96,7 +96,10 @@ const SchOneSectorComponent = ( props ) => {
     };
 
     return (
-        <div className = 'SEC_OneSector'>
+        <div
+            className = 'SEC_OneSector'
+            id = { `sector_${sector_start_time}` }
+        >
             <div className = 'SEC_OS_header'>
                 <div className = 'SEC_OS_header_time'>
                     <span>{ convert_sec_to_time( sector_start_time ) }</span>

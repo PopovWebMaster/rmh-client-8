@@ -16,6 +16,7 @@ const CutItemComponent = ( props ) => {
 
     let {
         gridEventId,
+        setDragIsActive,
         // firstSegmentId,
     } = props;
 
@@ -26,6 +27,7 @@ const CutItemComponent = ( props ) => {
 
             <CutSegmentButton 
                 gridEventId = { gridEventId }
+                setDragIsActive = { setDragIsActive }
             />
         </div>
     )

@@ -2,9 +2,10 @@
     font-size: 1em;
     margin-right: 1em;
     flex-grow: 0;
-    width: 4em;
+    max-width: 12em;
+    min-width: 4em;
     // max-width: 10em;
-    // flex-grow: 1;
+    flex-grow: 1;
     position: relative;
 
     display: flex;

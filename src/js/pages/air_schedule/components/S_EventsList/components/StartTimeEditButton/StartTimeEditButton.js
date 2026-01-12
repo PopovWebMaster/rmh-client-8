@@ -23,7 +23,8 @@ const StartTimeEditButtonComponent = ( props ) => {
 
         gridDayEventsListById,
 
-        scheduleEventsList
+        scheduleEventsList,
+        setDragIsActive = () => {},
 
     } = props;
 
@@ -52,6 +53,7 @@ const StartTimeEditButtonComponent = ( props ) => {
             setIsAKeyOneEvent( isKeyPoint );
         }else{
             setIsAKeyOneEvent( false );
+            setDragIsActive( true );
         };
 
     }, [ 
@@ -65,6 +67,7 @@ const StartTimeEditButtonComponent = ( props ) => {
     const clickAdd = () => {
         
         setIsOpen( true );
+        setDragIsActive( false );
     };
 
     const get_day_event_data = () => {

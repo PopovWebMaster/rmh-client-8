@@ -24,8 +24,13 @@ const SchEventContainerComponent = ( props ) => {
         isKeyPoint = false,
         gridEventId = null,
         isEmpty = false,
+        dragIsActive = true,
 
         nextStartTime = null,
+
+        firstSegmentId = null,
+
+        setDragIsActive = () => {},
         
         children,
 
@@ -74,6 +79,7 @@ const SchEventContainerComponent = ( props ) => {
             dragOverHandler = { dragOverHandler }
             dragLeaveHandler = { dragLeaveHandler }
             nextStartTime = { nextStartTime }
+            dragIsActive = { dragIsActive }
         >
             <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }>
 
@@ -88,6 +94,9 @@ const SchEventContainerComponent = ( props ) => {
                             isKeyPoint =    { isKeyPoint }
                             gridEventId =   { gridEventId }
                             durationTime =  { durationTime }
+                            firstSegmentId =  { firstSegmentId }
+                            setDragIsActive = { setDragIsActive }
+
                         />
                     ): (<>
                         { isDragOver? '': (

@@ -25,6 +25,7 @@ export const get_filter_list_from_events_list = ( eventsList ) => {
             quotationMarks: false,
             upperCase: true,
             staples: false,
+            itemNameValue: name,
         });
     };
 

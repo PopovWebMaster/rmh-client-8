@@ -22,6 +22,8 @@ const CompletedTimeSectorComponent = ( props ) => {
         durationTime,
         isKeyPoint = false,
         gridEventId = null,
+        firstSegmentId,
+        setDragIsActive = () => {},
 
     } = props;
 
@@ -34,15 +36,24 @@ const CompletedTimeSectorComponent = ( props ) => {
                 startTime =     { startTime }
                 isKeyPoint =    { isKeyPoint }
                 gridEventId =   { gridEventId }
+                setDragIsActive = { setDragIsActive }
             />
 
+            { firstSegmentId === null? (
+                <DurationTimeEditButton
+                    durationTime =  { durationTime }
+                    gridEventId =   { gridEventId }
+                    setDragIsActive = { setDragIsActive }
+                />
+            ): <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span> }
 
-            {/* <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span> */}
 
-            <DurationTimeEditButton
+            
+
+            {/* <DurationTimeEditButton
                 durationTime =  { durationTime }
                 gridEventId =   { gridEventId }
-            />
+            /> */}
 
         </div>
     )

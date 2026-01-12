@@ -24,7 +24,9 @@ const AWTextareaComponent = ( props ) => {
 
 
     return (
-        <div className = 'AW_item AWTextarea'>
+        <div
+            className = 'AW_item AWTextarea'
+        >
             <h3>{ title }</h3>
             <textarea 
                 className = 'AW_textarea'

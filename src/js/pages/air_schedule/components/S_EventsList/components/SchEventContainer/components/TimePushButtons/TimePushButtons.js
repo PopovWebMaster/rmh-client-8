@@ -27,15 +27,17 @@ const TimePushButtonsComponent = ( props ) => {
                         durationTime, 
                         startTime, 
                     } = scheduleEventsList[ i ];
-
                     if( scheduleEventsList[ i - 1 ] ){
                         let nextStartTime = scheduleEventsList[ i - 1 ].startTime + scheduleEventsList[ i - 1 ].durationTime + 1;
                         if( startTime !== nextStartTime ){
                             set_schedule_list_changes_to_store( gridEventId, { startTime: nextStartTime });
                         };
+                    }else{
+                        set_schedule_list_changes_to_store( gridEventId, { startTime: 0 });
                     };
                 };
             };
+
         }
 
     }
@@ -55,6 +57,9 @@ const TimePushButtonsComponent = ( props ) => {
                         if( startTime !== nextStartTime ){
                             set_schedule_list_changes_to_store( gridEventId, { startTime: nextStartTime });
                         };
+                    }else{
+                        let nextStartTime = 24*60*60 - durationTime - 1;
+                        set_schedule_list_changes_to_store( gridEventId, { startTime: nextStartTime });
                     };
                 };
             };

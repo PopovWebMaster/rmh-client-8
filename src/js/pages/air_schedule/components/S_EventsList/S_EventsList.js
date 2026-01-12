@@ -14,6 +14,7 @@ import { ScrollContainer } from './../../../../components/ScrollContainer/Scroll
 import { SchOneSector } from './components/SchOneSector/SchOneSector.js';
 
 import { set_max_height_em_for_empty_time_segment } from './vendors/set_max_height_em_for_empty_time_segment.js';
+import { EventsScrollButtons } from './components/EventsScrollButtons/EventsScrollButtons.js';
 
 
 const S_EventsListComponent = ( props ) => {
@@ -71,6 +72,9 @@ const S_EventsListComponent = ( props ) => {
             className = 'S_EventsList'
             ref = { refEd }
         >
+
+            <EventsScrollButtons />
+            
             { isReady? (
                 <ScrollContainer>
                     { create( scheduleEventBySectors, /*scheduleEventsList*/ ) }

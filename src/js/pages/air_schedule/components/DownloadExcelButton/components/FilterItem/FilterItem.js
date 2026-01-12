@@ -28,6 +28,8 @@ const FilterItemComponent = ( props ) => {
 
         eventListById,
         exportType,
+        itemNameValue,
+        change_itemNameValue,
 
     } = props;
 
@@ -54,6 +56,14 @@ const FilterItemComponent = ( props ) => {
 // quotationMarks: false,
 //             upperCase: false,
 
+    const change_input = ( e ) => {
+        let val = e.target.value;
+        
+
+        change_itemNameValue( val, eventId )
+
+    }
+
 
 
     return (
@@ -65,9 +75,28 @@ const FilterItemComponent = ( props ) => {
                 { isUsed? (<span className = 'icon-ok-3'></span>): '' }
             </div>
 
-            <div className = 'eventName'>
-                <span style = { style }>{ eventName }</span>
+            <div 
+                className = 'eventName'
+                style = { style }
+            >
+                {/* <span style = { style }>{ eventName }</span> */}
+                <span>{ eventName }</span>
+
             </div>
+{/* 
+            <div className = 'itemNameValue'>
+                <input
+                    type = 'text'
+                    value = { itemNameValue }
+                    onChange = { ( ) => {} }
+                />
+                
+            </div> */}
+
+
+
+
+
 
             { isUsed && exportType === 'schedule'? (
                 <div className = 'whatTake'>
@@ -85,6 +114,19 @@ const FilterItemComponent = ( props ) => {
 
             ): isUsed && exportType === 'TV_program'? (
                 <div className = 'whatTake'>
+
+                    
+                    <div className = 'itemNameValue'>
+                        <input
+                            type = 'text'
+                            value = { itemNameValue }
+                            onChange = { change_input }
+                        />
+                        
+                    </div>
+
+
+
                     <span
                         className = { `${quotationMarks? 'isActive': '' }` }
                         onClick = { () => { item_change_quotationMarks( !quotationMarks, eventId ) } }

@@ -5,7 +5,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    align-content: center;
+    // align-content: center;
     padding: 0.1em 0.5em 0.1em 2em;
     // padding: 0.1em 0.5em 0.1em 0.5em;
     margin: 0.1em 0.2em;
@@ -37,27 +37,81 @@
         font-size: 1em;
         flex-grow: 0;
 
-        margin-bottom: 0.15em;
+        // margin-bottom: 0.15em;
+        // max-width: 4em;
+        padding: 0em .6em;
+        margin: 0.1em 0;
+        // white-space: preserve nowrap;
+
+        text-overflow: ellipsis; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        // height: 1em;
+
+        border-radius: 0.1em;
+        border-width: 1px;
+        border-style: solid;
+        // display: flex;
+        // justify-content: flex-start;
+        // align-items: center;
+        // align-content: center;
 
         span{
-            font-size: .65em;
-            padding: .2em .8em;
-            border-radius: 0.1em;
-            border-width: 1px;
-            border-style: solid;
+            font-size: .7em;
+
+            // padding: .2em .8em;
+            // border-radius: 0.1em;
+            // border-width: 1px;
+            // border-style: solid;
+
         }
     }
+
+    // .itemNameValue{
+    //     font-size: 1em;
+    //     flex-grow: 1;
+    //     max-width: 100%;
+    //     input{
+    //         font-size: 0.9em;
+    //         background-color: #343434;
+    //         color: red;
+    //         border: 1px solid #583a3a;
+    //         outline: none;
+    //         padding: 0.1em 0.2em;
+    //         width: 90%;
+    //     }
+    // }
 
     .whatTake{
         font-size: 1em;
         flex-grow: 1;
         max-width: 100%;
+        // width: 10em;
 
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
         align-content: center;
+
+        .itemNameValue{
+            font-size: 1em;
+            flex-grow: 1;
+            // max-width: calc( 100% - 1em );
+            max-width: 18em;
+            
+            margin: 0 0.5em;
+            input{
+                font-size: .7em;
+                background-color: #ffffff;
+                color: #636363;
+                border: 1px solid #e7e7e7;
+                outline: none;
+                padding: .3em .8em;
+                width: calc( 100% - 2em );
+
+            }
+        }
 
         span{
             font-size: 0.65em;
@@ -69,6 +123,8 @@
             user-select: none;
             
             color: #53adf7;
+            white-space: preserve nowrap;
+
         }
         span.isActive{
             color: #1b6fb3;

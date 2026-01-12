@@ -12,6 +12,7 @@ export const get_used_events = ( scheduleEventsLlist, filterList, exportType = '
             quotationMarks,
             upperCase,
             staples,
+            itemNameValue,
         } = filterList[ i ];
         if( isUsed ){
             obj[ eventId ] = {
@@ -19,6 +20,7 @@ export const get_used_events = ( scheduleEventsLlist, filterList, exportType = '
                 quotationMarks,
                 upperCase,
                 staples,
+                itemNameValue,
             };
         };
     };

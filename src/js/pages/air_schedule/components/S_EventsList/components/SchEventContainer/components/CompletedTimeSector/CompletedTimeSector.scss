@@ -8,7 +8,9 @@
     align-items: flex-start;
     align-content: center;
 
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
+    flex-wrap: nowrap;
+
 
     .SEC_time_push{
         font-size: 1em;

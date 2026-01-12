@@ -34,6 +34,8 @@ const CutSegmentButtonComponent = ( props ) => {
         setSutEventData,
         setScheduleEventsList,
 
+        setDragIsActive = () => {},
+
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
@@ -59,6 +61,12 @@ const CutSegmentButtonComponent = ( props ) => {
         };
 
     }, [ scheduleEventsListByGridEventId, gridEventId ] );
+
+    useEffect( () => {
+        if( isOpen === false ){
+            setDragIsActive( true );
+        };
+    }, [ isOpen ] );
  
     const getShowStatus = ( first_segment_id ) => {
         let result = false;
@@ -101,6 +109,7 @@ const CutSegmentButtonComponent = ( props ) => {
     const click = ( status ) => {
         if( status ){
             setIsOpen( true );
+            setDragIsActive( false );
 
             let eventParts = get_event_parts();
 

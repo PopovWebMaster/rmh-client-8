@@ -28,6 +28,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
         gridEventId,
         scheduleEventsList,
         scheduleEventsListByGridEventId,
+        setDragIsActive = () => {},
 
 
 
@@ -46,6 +47,10 @@ const DurationTimeEditButtonComponent = ( props ) => {
         // }else{
 
         // }
+
+        if( isOpen === false ){
+            setDragIsActive( true );
+        }
         
 
     }, [ gridEventId, isOpen ] );
@@ -85,6 +90,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
     const clickAdd = () => {
         if( isEditable ){
             setIsOpen( true );
+            setDragIsActive( false );
         };
     };
 
