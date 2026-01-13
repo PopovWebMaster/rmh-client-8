@@ -17,6 +17,11 @@ import { PageBodyCounters } from './../../../../components/PageBodyCounters/Page
 
 import { save_grid_events_changes_on_server } from './vendors/save_grid_events_changes_on_server.js';
 
+import { LayoutTopPanelContainer } from './components/LayoutTopPanelContainer/LayoutTopPanelContainer.js';
+import { LayoutBodyLeftArea } from './components/LayoutBodyLeftArea/LayoutBodyLeftArea.js';
+import { LayoutBodyCenterArea } from './components/LayoutBodyCenterArea/LayoutBodyCenterArea.js';
+import { LayoutBodyRightArea } from './components/LayoutBodyRightArea/LayoutBodyRightArea.js';
+
 const LayoutGridComponent = ( props ) => {
 
     let {
@@ -30,18 +35,31 @@ const LayoutGridComponent = ( props ) => {
     }, [] );
     
     return (
-        <PageBodyContainer 
-            className =             'layoutGrid'
+        // <PageBodyContainer 
+        //     className =             'layoutGrid'
 
-            controlPanelContainer = { <>
-                <GridDayMenu />
-                <SaveGridEventsList />
-            </> }
+        //     controlPanelContainer = { <>
+        //         <GridDayMenu />
+        //         <SaveGridEventsList />
+        //     </> }
 
-            leftContainer =  { <PageBodyCounters /> }
+        //     leftContainer =  { <PageBodyCounters /> }
 
-            bodyContainer = { <GridDayEditor /> }
-        />
+        //     bodyContainer = { <GridDayEditor /> }
+        // />
+        <div className = 'layoutGrid'>
+
+            <LayoutTopPanelContainer />
+
+            <div className = 'LG_Body'>
+                <LayoutBodyLeftArea />
+                <LayoutBodyCenterArea />
+                <LayoutBodyRightArea />
+
+            </div>
+
+            
+        </div>
     )
 
 };

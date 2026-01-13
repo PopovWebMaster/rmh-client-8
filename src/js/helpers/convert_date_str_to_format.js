@@ -12,4 +12,12 @@ export const convert_date_str_to_format = {
         return result;
     },
 
+    YY_MM_DD_to_seconds( YYYY_MM_DD ){
+
+        let dateObj = new Date( YYYY_MM_DD );
+        let seconds = dateObj.getTime() / 1000;
+        return seconds;
+
+    },
+
 }

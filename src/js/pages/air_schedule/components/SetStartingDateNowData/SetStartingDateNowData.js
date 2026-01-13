@@ -20,6 +20,7 @@ import {
 } from './../../../../redux/scheduleResultSlise.js';
 
 import { get_full_day_info_from_day_seconds } from './../../../../helpers/get_full_day_info_from_day_seconds.js';
+import { get_day_data_for_start } from './../../vendors/get_day_data_for_start.js';
 
 
 const SetStartingDateNowDataComponent = ( props ) => {
@@ -41,16 +42,10 @@ const SetStartingDateNowDataComponent = ( props ) => {
 
     useEffect( () => {
 
-        let dateObj = new Date();
-        let now_seconds = dateObj.getTime() / 1000;
-        let {
-            date,
-            dayNum,
-            // mounth,
-            month,
-            year,
-
-        } = get_full_day_info_from_day_seconds( now_seconds );
+        // let dateObj = new Date();
+        // let now_seconds = dateObj.getTime() / 1000;
+        // let { date, dayNum, month, year } = get_full_day_info_from_day_seconds( now_seconds );
+        let { date, dayNum, month, year } = get_day_data_for_start();
 
         setCalendarYear( year );
         setCalendarMonth( month );

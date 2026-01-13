@@ -1,0 +1,60 @@
+.LBRA_EventsDragActiveList{
+    font-size: 1em;
+
+    overflow: hidden;
+
+
+    .LBRA_EventsBtnWrap{
+        font-size: 1em;
+        padding: 0.2em 0.4em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        .LBRA_EventsDuration{
+            font-size: .55em;
+            flex-grow: 0;
+            color: #0d2b06;
+            // margin: 0 1em 0 0em;
+            // background-color: #959595;
+            padding: 0.3em 0em;
+            border-radius: 0.1em;
+
+            width: 5.4em;
+            text-align: center;
+        }
+
+        .LBRA_EventsBtn{
+            font-size: 0.6em;
+            padding: 0.3em 0.8em;
+            border-radius: 0.1em;
+            margin: 0.2em 0.4em;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid #ffffff00;
+
+            max-width: calc(100% - 6em);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .LBRA_EventsBtn.isActive{
+            box-shadow: 0 0 3px 2px #7a86e9;
+            border: 1px solid #ffffff;
+        }
+
+        .LBRA_EventsBtn:hover{
+            box-shadow: 0 0 3px 2px #7a86e9;
+            border: 1px solid #ffffff;
+        }
+
+        .LBRA_EventsBtn:hover{
+            box-shadow: 0 0 3px 2px #7a86e9;
+            border: 1px solid #ffffff;
+        }
+    }
+
+}

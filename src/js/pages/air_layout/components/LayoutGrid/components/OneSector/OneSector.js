@@ -91,7 +91,10 @@ const OneSectorComponent = ( props ) => {
                 durationTime =  { sector_list[ 0 ].durationTime }
             />
         ): ( */}
-            <div className = 'GDE_OneSector'>
+            <div 
+                className = { `GDE_OneSector` }
+                id = { `sector_${sector_start_time}` }
+            >
                 <div className = 'GDE_OS_header'>
                     <div className = 'GDE_OS_header_time'>
                         <span>{ convert_sec_to_time( sector_start_time ) }</span>

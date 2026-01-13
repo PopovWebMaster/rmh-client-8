@@ -163,7 +163,6 @@ const CountersDayListComponent = ( props ) => {
 
                 { create( counterList ) }
 
-
             </ScrollContainer>
 
         </div>

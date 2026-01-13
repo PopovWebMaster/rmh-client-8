@@ -1,0 +1,85 @@
+.LBCA_ScrollButtons{
+    font-size: 1em;
+    
+    top: 0;
+    left: 0;
+    width: 5.2em;
+    // height: 100%;
+    height: calc( 100vh - 7.4em );
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .LBCA_btn_arrow{
+        font-size: 1em;
+        width: 100%;
+        margin-bottom: 0.3em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        opacity: 0.4;
+
+        .LBCA_btn_icon{
+            font-size: 1.6em;
+            padding: 0.1em 0.1em;
+            border-radius: 0.1em;
+            background-color: #7c994a;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .LBCA_btn_icon:hover{
+            background-color: #647c3b;
+        }
+    }
+
+    .LBCA_btn_wrap{
+        font-size: 1em;
+        // background-color: red;
+        width: 100%;
+        overflow: hidden;
+
+        height: calc( 100vh - 12.1em );
+
+        .LBCA_btn_key{
+            font-size: 1em;
+            width: 100%;
+            margin-bottom: 0.2em;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            .LBCA_btn_time{
+                font-size: 0.65em;
+                padding: .2em .5em .1em;
+                border-radius: .1em;
+                background-color: #ab3928;
+                color: #fff;
+                cursor: pointer;
+                user-select: none;
+            }
+            .LBCA_btn_time:hover{
+                background-color: #ef6a56;
+            }
+
+        }
+    }
+
+    
+}
+
+.LBCA_ScrollButtons:hover{
+    // background-color: #ffffffb9;
+    background-color: #dfdfdf;
+    .LBCA_btn_key{
+        display: flex;
+    }
+    .LBCA_btn_arrow{
+        opacity: 1;
+    }
+}

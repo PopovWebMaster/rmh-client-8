@@ -68,9 +68,11 @@ export const layoutSlice = createSlice({
         gridEmptySegmentMaxHeightEm: 0,
         gridEmptySegmentMinHeightEm: 1.6, // взято из минимальной высоты элемента по стилям
 
-
-
         dragebleGridEventId: null,
+
+
+
+        eventsDragFilterCategoryId: null,
 
 
 
@@ -205,6 +207,17 @@ export const layoutSlice = createSlice({
         },
 
 
+
+
+
+        setEventsDragFilterCategoryId: ( state, action ) => {
+            state.eventsDragFilterCategoryId =  action.payload;
+        },
+
+
+
+        
+
         
 
         
@@ -219,9 +232,6 @@ export const layoutSlice = createSlice({
 export const {  
     setWeekKeyPointList,
     setKeyPointsCurrentEventId,
-
-
-    
     setPointListIsChanged,
     setWeekKeyPointListAsChanged,
     setCategoryesIsChanged,
@@ -231,19 +241,17 @@ export const {
     setEventList,
     setEventListAsChanged,
     setEventsCurrentFilterCategoryId,
-
     setGridCurrentDay,
-
     setGridDayEventsIsChanges,
     setGridDayEventsList,
     setGridDayEventsListAsChanged,
-
     setGridOneDayList,
-
     setGridEmptySegmentMaxHeightEm,
     setGridEmptySegmentMinHeightEm,
-
     setDragebleGridEventId,
+
+
+    setEventsDragFilterCategoryId
    
 
 } = layoutSlice.actions;
@@ -252,49 +260,30 @@ export const selectorData = ( state ) => {
     return {
         weekKeyPointList:   state.layout.weekKeyPointList,
         keyPointsCurrentEventId:   state.layout.keyPointsCurrentEventId,
-
-
-
-
-
-
-
-
-
-
         pointListIsChanged: state.layout.pointListIsChanged,
-
         categoryList: state.layout.categoryList,
         categoryListById: state.layout.categoryListById,
         categoryesIsChanged: state.layout.categoryesIsChanged,
-
         eventList: state.layout.eventList,
         eventListById: state.layout.eventListById,
         eventsIsChanged: state.layout.eventsIsChanged,
         eventsCurrentFilterCategoryId: state.layout.eventsCurrentFilterCategoryId,
-
-
-        
-
-
-
         allUsedColors: state.layout.allUsedColors,
         allUsedNames: state.layout.allUsedNames,
         allUsedPrefixes: state.layout.allUsedPrefixes,
-
-
         gridCurrentDay: state.layout.gridCurrentDay,
         gridCurrentDayName: state.layout.gridCurrentDayName,
         gridDayEventsList: state.layout.gridDayEventsList,
         gridDayEventsListById: state.layout.gridDayEventsListById,
         gridDayEventsIsChanges: state.layout.gridDayEventsIsChanges,
         gridOneDayList: state.layout.gridOneDayList,
-
         gridEmptySegmentMaxHeightEm: state.layout.gridEmptySegmentMaxHeightEm,
         gridEmptySegmentMinHeightEm: state.layout.gridEmptySegmentMinHeightEm,
-
-
         dragebleGridEventId: state.layout.dragebleGridEventId,
+
+
+
+        eventsDragFilterCategoryId: state.layout.eventsDragFilterCategoryId,
 
 
         

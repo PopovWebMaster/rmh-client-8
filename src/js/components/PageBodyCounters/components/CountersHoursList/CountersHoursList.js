@@ -94,7 +94,6 @@ const CountersHoursListComponent = ( props ) => {
 
                 { create( counterListHours ) }
 
-
             </ScrollContainer>
 
         </div>

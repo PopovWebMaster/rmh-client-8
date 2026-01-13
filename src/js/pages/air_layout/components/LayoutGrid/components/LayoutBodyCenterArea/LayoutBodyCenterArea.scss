@@ -1,0 +1,19 @@
+.layoutBodyCenterArea{
+    font-size: 1em;
+    height: calc( 100vh - 7.4em );
+    // background-color: #d1be13d0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    flex-grow: 1;
+    max-width: 100%;
+
+    position: relative;
+
+    // >div{
+    //     font-size: 1em;
+    //     height: calc( 100vh - 6.6em );
+    // }
+}

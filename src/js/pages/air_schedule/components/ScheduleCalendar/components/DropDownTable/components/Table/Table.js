@@ -18,6 +18,7 @@ import {
 } from './../../../../../../../../redux/scheduleResultSlise.js';
 
 import { get_YYYY_MM_DD } from './../../../../../../../../helpers/get_YYYY_MM_DD.js';
+import { set_last_day_second_to_localStorage } from './../../../../../../vendors/set_last_day_second_to_localStorage.js';
 
 const TableComponent = ( props ) => {
 
@@ -47,6 +48,10 @@ const TableComponent = ( props ) => {
         setCurrentYear( calendarYear );
         setIsOpen( false );
         setCurrentDayNum( day - 1 );
+
+        let YYYY_MM_DD = get_YYYY_MM_DD( calendarYear, calendarMonth, date );
+        set_last_day_second_to_localStorage( YYYY_MM_DD );
+
     }
 
 
@@ -76,16 +81,7 @@ const TableComponent = ( props ) => {
                         className = `${className} isSet`
                     };
 
-
-
                 };
-
-
-
-
-
-
-
 
                 return ( 
                     <td
