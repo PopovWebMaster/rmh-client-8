@@ -116,7 +116,15 @@ const EARL_ActiveListComponent = ( props ) => {
 
     const create = ( arr ) => {
 
-        let div = arr.map( ( item, index ) => {
+        let arr_sort = arr.sort( ( a, b ) => {
+            if( a.name > b.name ){
+                return 1;
+            }else{
+                return -1;
+            };
+        } );
+
+        let div = arr_sort.map( ( item, index ) => {
             let {
                 category_id,
                 durationTime,

@@ -34,8 +34,9 @@ const GridTimePushButtonsComponent = ( props ) => {
                         if( startTime !== nextStartTime ){
                             set_grid_event_changes_to_store( id, { startTime: nextStartTime } );
                         };
+                    }else{
+                        set_grid_event_changes_to_store( id, { startTime: 0 } );
                     };
-
                     break;
                 };
             };
@@ -53,6 +54,9 @@ const GridTimePushButtonsComponent = ( props ) => {
                         if( startTime !== nextStartTime ){
                             set_grid_event_changes_to_store( id, { startTime: nextStartTime } );
                         };
+                    }else{
+                        let nextStartTime = 24*60*60 - durationTime - 1;
+                        set_grid_event_changes_to_store( id, { startTime: nextStartTime } );
                     };
                     break;
                 };

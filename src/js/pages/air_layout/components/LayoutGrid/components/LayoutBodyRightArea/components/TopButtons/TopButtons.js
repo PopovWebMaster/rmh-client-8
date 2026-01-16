@@ -26,12 +26,12 @@ const TopButtonsComponent = ( props ) => {
                 <span>События</span>
             </div>
 
-            <div
+            {/* <div
                 className = { `LBAR_btn ${ activeTab === 'free_release'? 'isActive': '' }` }
                 onClick = { () => { setActiveTab( 'free_release' ) } }
             >
                 <span>Меж.прогр.</span>
-            </div>
+            </div> */}
 
        </div>
     )

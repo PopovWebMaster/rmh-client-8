@@ -22,7 +22,7 @@
 
     .SA_remove_btn{
         font-size: 0.86em;
-        width: 1.4em;
+        // width: 1.4em;
         height: 1.4em;
         background-color: #ffffff1a;
         border-radius: 0.1em;
@@ -35,6 +35,12 @@
             font-size: 1em;
             line-height: 1.4em;
             color: #9f9e9e;
+        }
+
+        span.SA_remove_btn_text{
+            font-size: 0.68em;
+            color: #e36e6e;
+            padding: 0.1em 0.5em;
         }
     
     }

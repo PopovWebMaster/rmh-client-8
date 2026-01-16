@@ -18,6 +18,7 @@ import { AppearanceOfEvent } from './components/AppearanceOfEvent/AppearanceOfEv
 import { CreateButton } from './components/CreateButton/CreateButton.js';
 
 import { add_new_grid_event_to_current_day_to_store } from './../../vendors/add_new_grid_event_to_current_day_to_store.js';
+import { create_new_grid_event_on_server } from './../../vendors/create_new_grid_event_on_server.js';
 
 // import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../config/layout.js';
 
@@ -84,38 +85,53 @@ const AddNewGridEventComponentComponent = ( props ) => {
 
     const create = () => {
 
-        if( eventId !== null ){
-            setSpinnerIsActive( true );
-            
-            send_request_to_server({
-                route: `add-new-grid-event`,
-                data: { 
-                    dayNum: gridCurrentDay,
-                    isAKeyPoint: isAKeyOneEvent,
-                    startTime,
-                    eventId,
-                    durationTime,
-                },
-
-                successCallback: ( response ) => {
-                    console.dir( 'response' );
-                    console.dir( response );
-
-                    // newGridEvent
-
-                    if( response.ok ){
-                        setSpinnerIsActive( false );
-                        // setGridDayEventsList( response.list );
-
-                        add_new_grid_event_to_current_day_to_store( response.newGridEvent );
-
-                        setGridDayEventsIsChanges( false );
-                        setIsOpen( false );
-                    };
-
+            create_new_grid_event_on_server({
+                dayNum: gridCurrentDay,
+                isAKeyPoint: isAKeyOneEvent,
+                startTime,
+                eventId,
+                durationTime,
+                callback: () => {
+                    setIsOpen( false );
                 },
             });
-        };
+
+        // if( eventId !== null ){
+
+
+
+
+            // setSpinnerIsActive( true );
+            
+            // send_request_to_server({
+            //     route: `add-new-grid-event`,
+            //     data: { 
+            //         dayNum: gridCurrentDay,
+            //         isAKeyPoint: isAKeyOneEvent,
+            //         startTime,
+            //         eventId,
+            //         durationTime,
+            //     },
+
+            //     successCallback: ( response ) => {
+            //         console.dir( 'response' );
+            //         console.dir( response );
+
+            //         // newGridEvent
+
+            //         if( response.ok ){
+            //             setSpinnerIsActive( false );
+            //             // setGridDayEventsList( response.list );
+
+            //             add_new_grid_event_to_current_day_to_store( response.newGridEvent );
+
+            //             setGridDayEventsIsChanges( false );
+            //             setIsOpen( false );
+            //         };
+
+            //     },
+            // });
+        // };
 
     };
 

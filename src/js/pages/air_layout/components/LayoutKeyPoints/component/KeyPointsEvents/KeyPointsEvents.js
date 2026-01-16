@@ -28,7 +28,31 @@ const KeyPointsEventsComponent = ( props ) => {
 
     const create = ( arr ) => {
 
-        let div = arr.map( ( item, index ) => {
+        let arr_1 = [];
+        for( let i = 0; i < arr.length; i++ ){
+            arr_1.push( structuredClone( arr[ i ] ) );
+        };
+
+        let sort_arr = arr_1.sort( ( a, b ) => {
+            if( a.category_id > b.category_id ){
+                return 1;
+            }else{
+                if( a.category_id === b.category_id ){
+                    if( a.name > b.name ){
+                        return 1;
+                    }else{
+                        return -1;
+                    };
+
+                }else{
+                    return -1;
+                };
+            };
+
+        } );
+
+
+        let div = sort_arr.map( ( item, index ) => {
             
             let {
                 category_id,

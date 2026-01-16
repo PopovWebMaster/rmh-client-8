@@ -40,10 +40,19 @@ const CutSegmentButtonComponent = ( props ) => {
         setGridDayEventsList,
         setGridDayEventsIsChanges,
 
+        setDragIsActive = () => {},
+
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
     let [ showStatus, setShowStatus ] = useState( true );
+
+    useEffect( () => {
+        if( isOpen === false ){
+            setDragIsActive( true );
+        };
+        
+    }, [ isOpen ] );
 
     useEffect( () => {
         if( gridDayEventsListById[ id ] ){
@@ -66,6 +75,7 @@ const CutSegmentButtonComponent = ( props ) => {
     const click = ( status ) => {
         if( status ){
             setIsOpen( true );
+            setDragIsActive( false );
 
             let eventParts = get_grid_event_parts_arr( gridOneDayList, id );
             let { eventId } = eventParts[ 0 ];

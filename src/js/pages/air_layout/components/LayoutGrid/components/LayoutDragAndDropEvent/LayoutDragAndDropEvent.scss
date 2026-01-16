@@ -1,0 +1,28 @@
+.layoutDragAndDropEvent{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    // width: 100%;
+    position: relative;
+
+    // padding: 0.1em 0em;
+    background-color: #ffffff14;
+
+    border-radius: 0.1em;
+    margin: 0.14em 0em;
+
+}
+
+.layoutDragAndDropEvent.isCompletd{
+    background-color: #f5f5f585;
+}
+
+
+.layoutDragAndDropEvent.isLighter, .layoutDragAndDropEvent.isCompletd.isLighter{
+    background-color: #89fff765;
+}
+
+.layoutDragAndDropEvent.isCompletd:has( .RIB_btn:hover ){
+    background-color: #ff4d4d6b;
+}
+

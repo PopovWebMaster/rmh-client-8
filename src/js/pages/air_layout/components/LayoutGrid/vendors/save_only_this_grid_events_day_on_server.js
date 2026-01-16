@@ -10,6 +10,8 @@ export const save_only_this_grid_events_day_on_server = ( callback ) => {
 
     let { gridDayEventsList, gridCurrentDay } = layout;
 
+    // isKeyPoint
+
     send_request_to_server({
         // route: `save-grid-event-list`,
         route: `save-grid-event-list-for-one-day`,

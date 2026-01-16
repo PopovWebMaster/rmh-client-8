@@ -19,6 +19,9 @@ import playReportAnalyticsSlise     from './playReportAnalyticsSlise.js';
 import dailySchaduleEditorSlice     from './dailySchaduleEditorSlice.js';
 import scheduleResultDragEventSlise     from './scheduleResultDragEventSlise.js';
 
+import layoutDragEventSlise     from './layoutDragEventSlise.js';
+
+
 
 
 
@@ -51,6 +54,9 @@ export default configureStore({
 
         dailySchaduleEditor: dailySchaduleEditorSlice,
         scheduleResultDragEvent: scheduleResultDragEventSlise,
+
+        layoutDragEvent: layoutDragEventSlise,
+
 
 
 

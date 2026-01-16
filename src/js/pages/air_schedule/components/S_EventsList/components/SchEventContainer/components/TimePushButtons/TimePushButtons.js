@@ -19,7 +19,6 @@ const TimePushButtonsComponent = ( props ) => {
     } = props;
 
     const clickUp = () => {
-
         if( gridEventId !== null ){
             for( let i = 0; i < scheduleEventsList.length; i++ ){
                 if( scheduleEventsList[ i ].gridEventId === gridEventId ){
@@ -35,6 +34,7 @@ const TimePushButtonsComponent = ( props ) => {
                     }else{
                         set_schedule_list_changes_to_store( gridEventId, { startTime: 0 });
                     };
+                    break;
                 };
             };
 
@@ -61,6 +61,7 @@ const TimePushButtonsComponent = ( props ) => {
                         let nextStartTime = 24*60*60 - durationTime - 1;
                         set_schedule_list_changes_to_store( gridEventId, { startTime: nextStartTime });
                     };
+                    break;
                 };
             };
         }

@@ -48,7 +48,7 @@ const LBCA_ScrollButtonsComponent = ( props ) => {
     }
 
     const click_down = () => {
-        let schEventContainer = document.querySelectorAll( '.grigItem.isCompletd_' );
+        let schEventContainer = document.querySelectorAll( '.layoutDragAndDropEvent.isCompletd ' );
         if( schEventContainer[ schEventContainer.length - 1 ] ){
             schEventContainer[ schEventContainer.length - 1 ].scrollIntoView({ behavior: "smooth" });
         };

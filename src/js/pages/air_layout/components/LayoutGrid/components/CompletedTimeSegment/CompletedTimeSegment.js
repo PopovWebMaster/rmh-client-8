@@ -37,6 +37,10 @@ const CompletedTimeSegmentComponent = ( props ) => {
     } = props;
 
     let [ duration, setDuration ] = useState( 0 );
+    let [ dragIsActive, setDragIsActive ] = useState( true );
+
+
+    
 
     useEffect( () => {
 
@@ -62,6 +66,8 @@ const CompletedTimeSegmentComponent = ( props ) => {
             isCompletd =    { true }
             isKeyPoint =    { isKeyPoint }
             id =            { id }
+            dragIsActive =      { dragIsActive }
+            setDragIsActive =   { setDragIsActive }
         >
             <div className = 'completedTimeSegment'>
 
@@ -87,6 +93,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
                     <CutItem 
                         id = { id }
+                        setDragIsActive =   { setDragIsActive }
                     />
 
                     <RemoveItem 

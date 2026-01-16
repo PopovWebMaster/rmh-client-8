@@ -28,9 +28,9 @@ const LayoutBodyRightAreaComponent = ( props ) => {
 
                 break;
 
-            case 'free_release':
-                result = <FreeReleaseDrag />
-                break;
+            // case 'free_release':
+            //     result = <FreeReleaseDrag />
+            //     break;
         };
 
         return result;

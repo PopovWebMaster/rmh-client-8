@@ -23,6 +23,7 @@ const StartTimeWithEditComponent = ( props ) => {
 
         gridDayEventsList,
         gridCurrentDay,
+        setDragIsActive = () => {},
 
     } = props;
 
@@ -33,6 +34,16 @@ const StartTimeWithEditComponent = ( props ) => {
     let [ timeSpaceTo, setTimeSpaceTo ] = useState( 0 );
     let [ timeSpaceFrom, setTimeSpaceFrom ] = useState( 0 );
     let [ eventId, setEventId ] = useState( null );
+    let [ isAKeyOneEvent, setIsAKeyOneEvent ] = useState( isKeyPoint );
+
+
+    useEffect( () => {
+        if( isOpen ){
+            setIsAKeyOneEvent( isKeyPoint );
+        }else{
+            setDragIsActive( true );
+        };
+    }, [ isKeyPoint, isOpen ] );
 
 
     useEffect( () => {
@@ -44,6 +55,7 @@ const StartTimeWithEditComponent = ( props ) => {
     const clickAdd = () => {
         if( access_right( 'layout_grid_edit' ) ){
             setIsOpen( true );
+            setDragIsActive( false );
         };
     };
 
@@ -76,7 +88,7 @@ const StartTimeWithEditComponent = ( props ) => {
 
     const clickSaveHandler = () => {
         if( access_right( 'layout_grid_edit' ) ){
-            set_grid_event_changes_to_store( id, { startTime } );
+            set_grid_event_changes_to_store( id, { startTime, isKeyPoint: isAKeyOneEvent } );
             setIsOpen( false );
         };
 
@@ -93,6 +105,12 @@ const StartTimeWithEditComponent = ( props ) => {
             eventId =           { eventId }
             setStartTime =      { setStartTime }
             clickSaveHandler =  { clickSaveHandler }
+
+            isAKeyOneEvent =  { isAKeyOneEvent }
+            setIsAKeyOneEvent =  { setIsAKeyOneEvent }
+
+
+
         />
 
         <span 

@@ -35,3 +35,9 @@ export const PUSH_IT = {
     UP: 'up',
     BOTTOM: 'bottom'
 };
+
+export const DRAG_START = {
+    GRID_EVENT: 'grid_event',
+    NEW_EVENT: 'new_event',
+
+}

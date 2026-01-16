@@ -17,6 +17,7 @@ const CutItemComponent = ( props ) => {
     let {
         id,
         // firstSegmentId,
+        setDragIsActive = () => {},
     } = props;
 
     let [ isAllowed, setIsAllowedResult ] = useState( false );
@@ -32,6 +33,7 @@ const CutItemComponent = ( props ) => {
 
                 <CutSegmentButton 
                     id = { id }
+                    setDragIsActive = { setDragIsActive }
                 />
             </div> 
         </IsAllowedContainer>

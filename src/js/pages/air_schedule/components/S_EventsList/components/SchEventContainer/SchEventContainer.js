@@ -78,7 +78,7 @@ const SchEventContainerComponent = ( props ) => {
             isCompletd =    { isCompletd }
             dragOverHandler = { dragOverHandler }
             dragLeaveHandler = { dragLeaveHandler }
-            nextStartTime = { nextStartTime }
+            nextStartTime = { nextStartTime } // не нужна здесь
             dragIsActive = { dragIsActive }
         >
             <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }>

@@ -13,6 +13,7 @@ import { target_event_is_aparticipant } from './../../vendors/target_event_is_ap
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 
+
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
@@ -110,11 +111,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
     const drag_over = ( e ) => {
         e.preventDefault();
-
-        
-
-        let targetState= getTargetState();
-
+        let targetState = getTargetState();
         setDropZoneIsActive( targetState );
         setIsLighter( targetState );
 

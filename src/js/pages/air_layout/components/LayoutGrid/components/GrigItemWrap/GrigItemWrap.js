@@ -17,6 +17,8 @@ import { set_grid_event_changes_to_store } from './../../vendors/set_grid_event_
 import { access_right } from './../../../../../../helpers/access_right.js';
 
 import { GridTimePushButtons } from './components/GridTimePushButtons/GridTimePushButtons.js';
+import { LayoutDragAndDropEvent } from './../LayoutDragAndDropEvent/LayoutDragAndDropEvent.js';
+
 
 const GrigItemWrapComponent = ( props ) => {
 
@@ -24,6 +26,7 @@ const GrigItemWrapComponent = ( props ) => {
         startTime,
         durationTime,
         isCompletd = false,
+        isEmpty = false,
         isKeyPoint = false,
         id = null,
 
@@ -32,14 +35,18 @@ const GrigItemWrapComponent = ( props ) => {
 
         children,
 
-        dragebleGridEventId,
+        // dragebleGridEventId,
 
-        setDragebleGridEventId,
+        // setDragebleGridEventId,
+
+        dragIsActive,
+        setDragIsActive,
+
     } = props;
 
     let [ isError, setIsError ] = useState( false );
 
-    let [ isLighter, setIsLighter ] = useState( false );
+    // let [ isLighter, setIsLighter ] = useState( false );
 
     let [ gridEventType, setGridEventType ] = useState( '' );
     let [ linkedFile, setLinkedFile ] = useState( null );
@@ -90,109 +97,93 @@ const GrigItemWrapComponent = ( props ) => {
 
 
 
+    // const getTargetState = () => {
+    //     let result = false;
+    //     if( isCompletd ){
+    //     }else{
+    //         let dragebleGE = gridDayEventsListById[ dragebleGridEventId ];
+
+    //         if( dragebleGE.startTime > startTime ){ // верхний
+    //             if( startTime + durationTime !== dragebleGE.startTime ){
+    //                 if( durationTime >= dragebleGE.durationTime ){
+    //                     result = true;
+    //                 };
+    //             };
+    //         }else{ // нижний
+    //             if( dragebleGE.startTime + dragebleGE.durationTime + 1 !== startTime ){
+    //                 if( durationTime >= dragebleGE.durationTime ){
+    //                     result = true;
+    //                 };
+    //             };
+    //         };
+    //     };
+    //     return result;
+
+    // }
 
 
+    // const drag_start = ( e, gridEventId ) => {
+    //     if( access_right( 'layout_grid_edit' ) ){
+    //         if( isCompletd ){
+    //             setDragebleGridEventId( gridEventId );
+    //         };     
+    //     };
 
+    // }
 
-
-
-
-
-
-
-
-
-
-
-
-    const getTargetState = () => {
-        let result = false;
-        if( isCompletd ){
-        }else{
-            let dragebleGE = gridDayEventsListById[ dragebleGridEventId ];
-
-            if( dragebleGE.startTime > startTime ){ // верхний
-                if( startTime + durationTime !== dragebleGE.startTime ){
-                    if( durationTime >= dragebleGE.durationTime ){
-                        result = true;
-                    };
-                };
-            }else{ // нижний
-                if( dragebleGE.startTime + dragebleGE.durationTime + 1 !== startTime ){
-                    if( durationTime >= dragebleGE.durationTime ){
-                        result = true;
-                    };
-                };
-            };
-        };
-        return result;
-
-    }
-
-
-    const drag_start = ( e, gridEventId ) => {
-        if( access_right( 'layout_grid_edit' ) ){
-            if( isCompletd ){
-                setDragebleGridEventId( gridEventId );
-            };     
-        };
-
-    }
-
-    const drag_end = () => {
-        if( access_right( 'layout_grid_edit' ) ){
-            setDragebleGridEventId( null )
-        };
+    // const drag_end = () => {
+    //     if( access_right( 'layout_grid_edit' ) ){
+    //         setDragebleGridEventId( null )
+    //     };
         
-    }
+    // }
 
-    const drag_over = ( e ) => {
-        if( access_right( 'layout_grid_edit' ) ){
-            e.preventDefault();
-            let isTargetEvent = getTargetState();
-            if( isTargetEvent ){
-                setIsLighter( true );
-            }else{
-                setIsLighter( false );
-            };
-        };
+    // const drag_over = ( e ) => {
+    //     if( access_right( 'layout_grid_edit' ) ){
+    //         e.preventDefault();
+    //         let isTargetEvent = getTargetState();
+    //         if( isTargetEvent ){
+    //             setIsLighter( true );
+    //         }else{
+    //             setIsLighter( false );
+    //         };
+    //     };
 
-    }
+    // }
     
-    const drag_leave = ( e ) => {
-        if( access_right( 'layout_grid_edit' ) ){
-            setIsLighter( false );
-        };
+    // const drag_leave = ( e ) => {
+    //     if( access_right( 'layout_grid_edit' ) ){
+    //         setIsLighter( false );
+    //     };
         
-    }
+    // }
     
-    const drop = () => {
+    // const drop = () => {
 
-        if( access_right( 'layout_grid_edit' ) ){
+    //     if( access_right( 'layout_grid_edit' ) ){
 
-            setIsLighter( false );
+    //         setIsLighter( false );
 
-            let isTargetEvent = getTargetState();
-            if( isTargetEvent ){ 
-                set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
-            };
+    //         let isTargetEvent = getTargetState();
+    //         if( isTargetEvent ){ 
+    //             set_grid_event_changes_to_store( dragebleGridEventId, { startTime } );
+    //         };
 
-        };
+    //     };
 
-    }
+    // }
 
     return (
-        <div
-            className = { `grigItem ${ isLighter? 'isLighter': '' } ${isCompletd? 'isCompletd_': ''}` }
-            draggable = { true }
-            onDragStart = { ( e ) => { drag_start( e, id ) } }
-            onDragEnd =     { drag_end }
-
-            onDragOver =    { drag_over }
-            onDragLeave =   { drag_leave }
-            onDrop =        { drop }
+        <LayoutDragAndDropEvent
+            isEmpty =           { isEmpty }
+            isCompletd =        { isCompletd }
+            gridEventId =       { id }
+            startTime =         { startTime }
+            durationTime =      { durationTime }
+            dragIsActive =      { dragIsActive }
+            setDragIsActive =   { setDragIsActive }
         >
-            <div className = { `grigItemWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
+            <div className = { `grigItemWrap ${ isError? 'errorTime': '' }` }>
                 { isCompletd? (
                     <div className = 'grigItemTime'>
 
@@ -204,6 +195,7 @@ const GrigItemWrapComponent = ( props ) => {
                             startTimeValue =    { startTime }
                             isKeyPoint =        { isKeyPoint }
                             id =                { id }
+                            setDragIsActive = { setDragIsActive }
                         />
 
                         { gridEventType === EVENT_TYPE.BLOCK? ( 
@@ -211,6 +203,7 @@ const GrigItemWrapComponent = ( props ) => {
                                 durationTime = { durationTime }
                                 id = { id }
                                 linkedFile = { linkedFile }
+                                setDragIsActive = { setDragIsActive }
                             />
                         ): (
                             <span className = 'ETS_duration'>{ convert_sec_to_time( durationTime ) }</span>
@@ -234,7 +227,9 @@ const GrigItemWrapComponent = ( props ) => {
                     { children }
                 </div>
             </div>
-        </div>
+
+        </LayoutDragAndDropEvent>
+
     )
 
 };
@@ -251,9 +246,9 @@ export function GrigItemWrap( props ){
             eventListById = { layout.eventListById }
 
 
-            dragebleGridEventId = { layout.dragebleGridEventId }
+            // dragebleGridEventId = { layout.dragebleGridEventId }
 
-            setDragebleGridEventId = { ( callback ) => { dispatch( setDragebleGridEventId( callback ) ) } }
+            // setDragebleGridEventId = { ( callback ) => { dispatch( setDragebleGridEventId( callback ) ) } }
 
         />
     );

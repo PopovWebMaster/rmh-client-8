@@ -32,13 +32,13 @@ const EventsDragListComponent = ( props ) => {
     return (
        <div className = 'LBAR_EventsDragList'>
 
-            {/* <EventsDragFilter
+            <EventsDragFilter
                 setFilterHeight = { setFilterHeight }
             />
 
             <EventsDragActiveList
                 filterHeight = { filterHeight }
-            /> */}
+            />
 
        </div>
     )

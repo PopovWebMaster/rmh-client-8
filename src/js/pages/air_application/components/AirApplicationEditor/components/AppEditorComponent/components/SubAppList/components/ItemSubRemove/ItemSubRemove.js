@@ -80,7 +80,9 @@ const ItemSubRemoveComponent = ( props ) => {
                 className = 'SA_remove_btn'
                 onClick = { () => { setIsOpen( true ) } }
             >
-                <span className = 'icon-cancel-2'></span>
+                {/* <span className = 'icon-cancel-2'></span> */}
+                <span className = 'SA_remove_btn_text'>Удалить</span>
+
             </div>
 
         </div>

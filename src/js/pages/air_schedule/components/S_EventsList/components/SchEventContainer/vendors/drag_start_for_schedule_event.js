@@ -29,7 +29,7 @@ export const drag_start_for_schedule_event = ( gridEventId ) => {
                 if( scheduleEventsList[ i ].firstSegmentId === gridEventId ){
                     if( scheduleEventsList[ i + 1 ] ){
                         for( let z = i + 1; z <scheduleEventsList.length; z++ ){
-                            if( scheduleEventsList[ z ].firstSegmentId === firstSegmentId ){
+                            if( scheduleEventsList[ z ].firstSegmentId === firstSegmentId || scheduleEventsList[ z ].isKeyPoint === true ){
                                 maxStartTime = scheduleEventsList[ z ].startTime;
                                 break;
                             };
@@ -38,7 +38,7 @@ export const drag_start_for_schedule_event = ( gridEventId ) => {
                 }else{
                     if( scheduleEventsList[ i - 1 ] ){
                         for( let y = i - 1; y >=0; y-- ){
-                            if( scheduleEventsList[ y ].firstSegmentId === firstSegmentId ){
+                            if( scheduleEventsList[ y ].firstSegmentId === firstSegmentId || scheduleEventsList[ y ].isKeyPoint === true ){
                                 minStartTime = scheduleEventsList[ y ].startTime;
                                 break;
                             };
@@ -46,7 +46,7 @@ export const drag_start_for_schedule_event = ( gridEventId ) => {
                     };
                     if( scheduleEventsList[ i + 1 ] ){
                         for( let z = i + 1; z < scheduleEventsList.length; z++ ){
-                            if( scheduleEventsList[ z ].firstSegmentId === firstSegmentId ){
+                            if( scheduleEventsList[ z ].firstSegmentId === firstSegmentId || scheduleEventsList[ z ].isKeyPoint === true ){
                                 maxStartTime = scheduleEventsList[ z ].startTime;
                                 break;
                             };

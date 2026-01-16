@@ -19,13 +19,21 @@ const DurationTimeEditComponent = ( props ) => {
         durationTime,
         id = null,
         linkedFile,
+        setDragIsActive,
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+    useEffect( () => {
+        if( isOpen === false ){
+            setDragIsActive( true );
+        };
+
+    }, [ isOpen ] );
 
     const clickAdd = () => {
         if( access_right( 'layout_grid_edit' ) ){
             setIsOpen( true );
+            setDragIsActive( false );
         };
 
     };

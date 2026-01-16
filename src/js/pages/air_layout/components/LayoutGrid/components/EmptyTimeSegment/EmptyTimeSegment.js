@@ -34,6 +34,7 @@ const EmptyTimeSegmentComponent = ( props ) => {
     let [ isConfirm, setIsConfirm ] = useState( false );
 
     let [ isAllowed, setIsAllowedResult ] = useState( false );
+    let [ dragIsActive, setDragIsActive ] = useState( true );
 
     const clickAdd = () => {
 
@@ -62,9 +63,15 @@ const EmptyTimeSegmentComponent = ( props ) => {
     }
 
     return (
+
         <GrigItemWrap
-            startTime =     { startTime }
-            durationTime =  { durationTime }
+            startTime =         { startTime }
+            durationTime =      { durationTime }
+            isEmpty =           { true }
+
+            dragIsActive =      { dragIsActive }
+            setDragIsActive =   { setDragIsActive }
+
         >
 
             <AlertWindowContainer

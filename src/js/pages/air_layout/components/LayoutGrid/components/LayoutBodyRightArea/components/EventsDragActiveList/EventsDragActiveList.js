@@ -19,6 +19,8 @@ import { access_right } from './../../../../../../../../helpers/access_right.js'
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
+ 
+import { drag_start_for_new_event } from './../../../LayoutDragAndDropEvent/vendors/drag_start_for_new_event.js';
 
 
 const EventsDragActiveListComponent = ( props ) => {
@@ -59,37 +61,38 @@ const EventsDragActiveListComponent = ( props ) => {
     }
 
 
-    const drag_start = ( e, eventId, duration ) => {
-        // access_right( 'schedule_edit', () => {
+    const drag_start = ( e, eventId ) => {
+        access_right( 'layout_grid_edit', () => {
+            drag_start_for_new_event( eventId );
             
-        //     // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+            var img = document.createElement("img");
+            e.dataTransfer.setDragImage(img, 0, 0);
 
-        //     // ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_AS_EVENT );
-        //     // ScheduleReleaseDragEvent.DragStart.SetDuration( duration );
-        //     // ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
-        //     // ScheduleReleaseDragEvent.DragStart.SetToStore();
-        //     // var img = document.createElement("img");
-        //     // e.dataTransfer.setDragImage(img, 0, 0);
-
-        // } );
+        } );
     }
 
-    const drag_end = () => {
-
-    }
+    const drag_end = () => {}
 
     const create = ( arr ) => {
 
-        let div = arr.map( ( item, index ) => {
+        let arr_sort = arr.sort( ( a, b ) => {
+            if( a.name > b.name ){
+                return 1;
+            }else{
+                return -1;
+            };
+        } );
+
+        let div = arr_sort.map( ( item, index ) => {
             let {
-                category_id,
+                // category_id,
                 durationTime,
                 id,
-                linked_file,
+                // linked_file,
                 name,
-                notes,
+                // notes,
                 style,
-                type
+                // type
             } = item;
 
             let duration_sec = 0;
@@ -105,9 +108,9 @@ const EventsDragActiveListComponent = ( props ) => {
                 <div
                     className = 'LBRA_EventsBtnWrap'
                     key = { index }
-                    // draggable =     { true }
-                    // onDragStart =   { ( e ) => { drag_start(  e, id, duration_sec  ) } }
-                    // onDragEnd =     { drag_end }
+                    draggable =     { true }
+                    onDragStart =   { ( e ) => { drag_start(  e, id ) } }
+                    onDragEnd =     { drag_end }
                 >
                     <span
                         className = 'LBRA_EventsDuration'

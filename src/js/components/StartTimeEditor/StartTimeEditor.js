@@ -25,7 +25,7 @@ const StartTimeEditorComponent = ( props ) => {
         setStartTime,
         clickSaveHandler,
         isAKeyOneEvent,
-            setIsAKeyOneEvent,
+        setIsAKeyOneEvent,
         
     } = props;
 
