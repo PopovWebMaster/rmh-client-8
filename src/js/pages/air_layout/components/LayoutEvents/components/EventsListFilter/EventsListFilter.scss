@@ -7,32 +7,62 @@
     align-items: center;
     align-content: center;
 
+    margin: 0 1em;
+    padding: 0.2em 1em;
+    border-radius: 0.1em;
+    background-color: #69b1eb38;
+
     .EL_btn{
+        // font-size: 0.95em;
+        // margin: 0.3em 0.5em;
+        // padding: 0.3em 1em;
+        // border-radius: 0.1em;
+        // cursor: pointer;
+        // user-select: none;
+        // opacity: 0.2;
+
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // align-content: center;
+
+        // span{
+        //     font-size: 0.8em;
+        // }
+
         font-size: 0.95em;
         margin: 0.3em 0.5em;
         padding: 0.3em 1em;
         border-radius: 0.1em;
         cursor: pointer;
         user-select: none;
-        opacity: 0.2;
+        opacity: 0.5;
 
         display: flex;
         justify-content: center;
         align-items: center;
         align-content: center;
+        border: 1px solid #34343447;
 
         span{
             font-size: 0.8em;
         }
-        // background-color: red;
-        // color: red;
+
     }
 
     .EL_btn:hover{
+        // opacity: 1;
         opacity: 1;
+        -webkit-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        -moz-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
     }
 
     .EL_btn.isActive{
+        // opacity: 1;
         opacity: 1;
+        -webkit-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        -moz-box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
+        box-shadow: 0px 0px 3px 2px rgba(182, 223, 255, 0.5);
     }
 }

@@ -25,14 +25,20 @@ const AWEventSelectComponent = ( props ) => {
 
     let [ eventIsOpen, setEventIsOpen ] = useState( false );
     let [ eventNameValue, setEventNameValue ] = useState( EVENT_NAME_NOT_SELECTED );
+    let [ eventStyle, setEventStyle ] = useState( {} );
+
 
     useEffect( () => {
 
         if( value === null ){
             setEventNameValue( EVENT_NAME_NOT_SELECTED );
+            setEventStyle({});
         }else{
             if( eventListById[ value ] ){
-                let { name } = eventListById[ value ];
+                let { name, style } = eventListById[ value ];
+
+                setEventStyle( style );
+
                 setEventNameValue( name );
             }else{
                 changeHandler( null );
@@ -163,7 +169,17 @@ const AWEventSelectComponent = ( props ) => {
             >
                 <h4
                     onClick = { () => { changeIsOpen( !eventIsOpen ) } }
-                >{ eventNameValue }</h4>
+                >
+                    <span 
+                        className = 'AW_item_event_appir'
+                        style = { eventStyle }
+                    >
+                        { eventNameValue }
+                    </span>
+                    
+                </h4>
+
+
                 <div 
                     className = 'AW_CDD_btn'
                     onClick = { () => { changeIsOpen( !eventIsOpen ) }}
