@@ -35,6 +35,10 @@ export class FreeReleasesListClass {
         this.GetList = this.GetList.bind(this);
         this.SetToStoreLastCurrentData = this.SetToStoreLastCurrentData.bind(this);
         this.RemoveFile = this.RemoveFile.bind(this);
+        this.GetUniqList = this.GetUniqList.bind(this);
+
+        this.FilterOnlyUniq = this.FilterOnlyUniq.bind(this);
+
 
 
 
@@ -157,6 +161,50 @@ export class FreeReleasesListClass {
             result.push( { ...this.list[ i ] } );
         };
         return result;
+    }
+
+    GetUniqList(){
+        let result = [];
+
+        let { scheduleResult } = store.getState();
+        let { freeReleasesList } = scheduleResult;
+
+        let obj = {};
+        let old_list = [];
+        for( let i = 0; i < freeReleasesList.length; i++ ){
+            let { fileName, eventId } = freeReleasesList[ i ];
+            if( obj[ fileName ] ){}else{
+                obj[ fileName ] = {};
+            };
+
+            if( obj[ fileName ][ eventId ] ){}else{
+                obj[ fileName ][ eventId ] = true;
+            };
+
+            old_list.push( { ...freeReleasesList[ i ] } );
+        };
+
+        let new_list = [];
+        for( let i = 0; i < this.list.length; i++ ){
+            let { fileName, eventId } = this.list[ i ];
+            if( obj[ fileName ] ){
+                if( obj[ fileName ][ eventId ] ){
+
+                }else{
+                    new_list.push( { ...this.list[ i ] } );
+                };
+            }else{
+                new_list.push( { ...this.list[ i ] } );
+            };
+        };
+
+        result = [ ...old_list, ...new_list ];
+        return result;
+    }
+
+    FilterOnlyUniq(){
+        let list = this.GetUniqList();
+        this.list = list;
     }
 
     SetToStore( setAsChanged = false ){

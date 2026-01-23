@@ -1,0 +1,45 @@
+.FRL_add_from_folder{
+    // font-size: 1em;
+    // flex-grow: 0;
+    // width: 15em;
+
+    // font-size: 1em;
+
+    >span.FRL_btn{
+        font-size: 0.68em;
+        color: #5b5b5b;
+        padding: 0.16em 1em;
+        border-radius: 0.1em;
+        border: 1px solid #d1d1d1;
+        background-color: #ededed;
+        cursor: pointer;
+        user-select: none;
+            margin: 0.5em 1em;
+    }
+
+    >span.FRL_count{
+        font-size: 0.6em;
+        color: #1d5772;
+        padding: 0.16em 0.1em;
+        border-radius: 0.1em;
+        border: 1px solid #d1d1d100;
+        background-color: #ededed00;
+        
+        margin: 0.5em 0em;
+    }
+
+    >span.FRL_btn:hover{
+        color: #5b5b5b;
+        border: 1px solid #bfbfbf;
+        background-color: #dfdfdf3b;
+    }
+    >span.FRL_btn:active{
+        color: #1b1a1a;
+        // border: 1px solid #bfbfbf;
+        // background-color: #dfdfdf3b;
+    }
+
+    >.hiddenInput{
+        display: none;
+    }
+}

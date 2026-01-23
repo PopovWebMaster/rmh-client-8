@@ -1,0 +1,196 @@
+.eventByCategorySelect{
+    font-size: 1em;
+    padding: .3em 0.4em;
+    margin: .5em 0;
+
+    h3{
+        font-size: .75em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+    }
+
+    .ECBS_wrap{
+        font-size: 1em;
+        width: 100%;
+        height: 1.6em;
+        position: relative;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+        // background-color: #ffffff;
+        background-color: #f2f2f2;
+        // border: 1px solid #343434;
+
+        border: 1px solid #d2d2d2;
+        border-radius: 0.1em;
+
+
+        h4{
+            font-size: 0.7em;
+            padding: 0.3em 0;
+            // text-indent: 1em;
+            // text-align: left;
+            color: #676767;
+            flex-grow: 1;
+            max-width: 100%;
+
+            .ECBS_wrap_appir{
+                font-size: 0.9em;
+                padding: 0.2em 0.8em;
+                margin: 0.3em 0 0 1em;
+                border-radius: 0.1em;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #ffffff00;
+                display: inline-block;
+                text-overflow: ellipsis; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                // max-width: 19em;
+                width: fit-content;
+                max-width: calc( 100% - 4em );
+            }
+
+        }
+
+        .ECBS_btn{
+            font-size: 1em;
+            width: 1.6em;
+            height: 1.6em;
+            background-color: rgba(255, 255, 255, 0);
+            flex-grow: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            cursor: pointer;
+            user-select: none;
+
+            .ECBS_btn_icon{
+                font-size: 0.8em;
+                color: #2f2f2f;
+            }
+
+        }
+
+        .ECBS_btn:hover{
+            background-color: #f1eeee;
+        }
+
+        .ECBS_btn:active{
+            .LEAEC_CDD_btn_icon{
+                color: #a78383;
+            }
+        }
+
+        .ECBS_tree_list{
+            font-size: 1em;
+            width: 100%;
+            // height: 30vh;
+
+            
+            position: absolute;
+            top: 100%;
+            left: -1px;
+            background-color: #ffffff;
+            border: 1px solid #d2d2d2;
+            border-radius: 0.1em;
+            list-style-type: none;
+            overflow: auto;
+            z-index: 1000;
+
+            // li{
+            //     font-size: .7em;
+            //     color: #181818;
+            //     padding: 0.4em 0.9em;
+            //     margin: .2em 0.2em 0 0.2em;
+            //     // background-color: #dfdfdf44;
+            //     background-color: #f1f1f100;
+            //     border-radius: 0.1em;
+            //     border: 1px solid #ebebeb;
+
+
+            //     cursor: pointer;
+            //     user-select: none;
+
+            //     display: flex;
+            //     flex-direction: row;
+            //     justify-content: flex-start;
+            //     align-items: center;
+            //     align-content: center;
+
+
+            //     .AW_CDD_list_event{
+            //         font-size: 1em;
+
+            //         flex-grow: 1;
+            //         max-width: 100%;
+            //     }
+
+
+
+            //     .AW_CDD_list_category{
+            //         font-size: .9em;
+            //         margin: 0em 0.8em;
+            //         padding: 0.2em 0.8em;
+            //         border-radius: 0.1em;
+            //         flex-grow: 0;
+
+            //     }
+            // }
+            // li:hover{
+            //     // color: #181818;
+            //     background-color: #f7f4f4fc;
+            // }
+
+        }
+
+
+
+        .ECBS_tree_list::-webkit-scrollbar {
+            width: 0.5em;
+        }
+            
+        .ECBS_tree_list::-webkit-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .ECBS_tree_list::-webkit-scrollbar-thumb {
+            border: 1px solid #ededed;
+            border-radius: 0.1em;
+            background-color: #dddada;
+        }
+        
+        
+        
+        .ECBS_tree_list::-moz-scrollbar {
+            width: 0.5em;
+        }
+            
+        .ECBS_tree_list::-moz-scrollbar-track {
+            background-color: #65656500;
+        }
+            
+        .ECBS_tree_list::-moz-scrollbar-thumb {
+            border: 1px solid #ededed;
+            border-radius: 0.1em;
+            background-color: #dddada;
+        }
+        
+        
+        .ECBS_tree_list::-moz-scrollbar {
+            width: thin;
+        }
+
+
+    }
+
+
+}
+
+// .eventByCategorySelect.alwaysIsOpen{
+//     margin-bottom: 32vh;
+
+// }

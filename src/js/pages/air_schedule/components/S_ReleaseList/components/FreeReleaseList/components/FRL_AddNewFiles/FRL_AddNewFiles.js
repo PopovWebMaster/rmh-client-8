@@ -8,8 +8,6 @@ import './FRL_AddNewFiles.scss';
 import { selectorData as scheduleResultSlise, setFreeReleasesIsChanges } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
-
-import { AWEventSelect } from './../../../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
 import { AWButtonAdd } from './../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
 import { get_metadata_from_video_file } from './../../../../../../../../helpers/get_metadata_from_video_file.js';
@@ -20,6 +18,10 @@ import { FreeReleasesListClass } from './../../../../../../../../classes/FreeRel
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
+
+import { EventByCategorySelect } from './../../../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
+import { FRL_ButtonAddFromFolder } from './components/FRL_ButtonAddFromFolder/FRL_ButtonAddFromFolder.js';
+import { FRL_ButtonUploadTXT } from './components/FRL_ButtonUploadTXT/FRL_ButtonUploadTXT.js';
 
 
 const FRL_AddNewFilesComponent = ( props ) => {
@@ -48,6 +50,7 @@ const FRL_AddNewFilesComponent = ( props ) => {
     }, [ isOpen ] );
 
     useEffect( () => {
+
         if( eventId === null){
             setIsReady( false );
         }else{
@@ -60,44 +63,44 @@ const FRL_AddNewFilesComponent = ( props ) => {
     }, [ newFilesList, eventId ] );
 
 
-    const inputRef = useRef();
+    // const inputRef = useRef();
 
-    const click = () => {
+    // const click = () => {
 
-        let accept = [ '.mp4' ];
-        let input = inputRef.current;
-        input.setAttribute('accept', accept.join(',') );
-        input.click();
+    //     let accept = [ '.mp4' ];
+    //     let input = inputRef.current;
+    //     input.setAttribute('accept', accept.join(',') );
+    //     input.click();
 
-    };
+    // };
 
-    const inputHandler = (e) => {
+    // const inputHandler = (e) => {
 
-        if( !e.target.files.length ){
-            return;
-        };
-        let files = e.target.files;
-        let arr = [];
-        const finish = () => {
-            setNewFilesList( arr );
-        };
-        const recursive_get = ( files, index ) => {
-            if( files[ index ] ){
-                get_metadata_from_video_file( files[ index ], ( fileName, fileDuration ) => {
-                    if( fileDuration !== null ){
-                        arr.push( {
-                            file_name: fileName,
-                            file_duration: fileDuration,
-                        } );
-                    };
-                    recursive_get( files, index + 1 )
-                } );
-            }else{
-                finish();
-            };
-        };
-        recursive_get( files, 0 );
-    }
+    //     if( !e.target.files.length ){
+    //         return;
+    //     };
+    //     let files = e.target.files;
+    //     let arr = [];
+    //     const finish = () => {
+    //         setNewFilesList( arr );
+    //     };
+    //     const recursive_get = ( files, index ) => {
+    //         if( files[ index ] ){
+    //             get_metadata_from_video_file( files[ index ], ( fileName, fileDuration ) => {
+    //                 if( fileDuration !== null ){
+    //                     arr.push( {
+    //                         file_name: fileName,
+    //                         file_duration: fileDuration,
+    //                     } );
+    //                 };
+    //                 recursive_get( files, index + 1 )
+    //             } );
+    //         }else{
+    //             finish();
+    //         };
+    //     };
+    //     recursive_get( files, 0 );
+    // }
 
 
     const add_new_free_releases = () => {
@@ -105,12 +108,16 @@ const FRL_AddNewFilesComponent = ( props ) => {
             let FreeReleasesList = new FreeReleasesListClass();
             FreeReleasesList.SetListFromStore();
             FreeReleasesList.AddNewFiles( newFilesList, eventId );
+
+            FreeReleasesList.FilterOnlyUniq();
             FreeReleasesList.SetToStore( true );
             FreeReleasesList.SetToStoreLastCurrentData();
-
             setNewFilesList( [] );
-            setEventId( null );
-            setIsReady( false );
+
+
+
+            // setEventId( null );
+            // setIsReady( false );
         };
     }
 
@@ -179,9 +186,11 @@ const FRL_AddNewFilesComponent = ( props ) => {
 
         <div className = 'FRL_AddNewFiles'>
 
-            <AWEventSelect
-                value = { eventId }
+            <EventByCategorySelect
+                isOpen =        { isOpen }
+                value =         { eventId }
                 changeHandler = { setEventId }
+                maxHeight = { 45 }
             />
 
             <div className = 'FRL_files'>
@@ -191,7 +200,6 @@ const FRL_AddNewFilesComponent = ( props ) => {
                     <ScrollContainer
                         height = { '6em' }
                     >
-
                         { create( newFilesList, eventId ) }
                     </ScrollContainer>
 
@@ -199,26 +207,39 @@ const FRL_AddNewFilesComponent = ( props ) => {
 
                 </div>
 
-                <div className = 'FRL_add_from_folder'>
+                <div className = 'FRL_add_right_buttons'>
+                    {/* <div className = 'FRL_add_from_folder'>
+                        <span
+                            onClick = { click }
+                            className = 'FRL_btn'
+                        >Взять из папки</span>
 
-                    <span
-                        onClick = { click }
-                        className = 'FRL_btn'
-                    >Взять из папки</span>
+                        { newFilesList.length > 0? (
+                            <span className = 'FRL_count'>Всего: { newFilesList.length } шт.</span>
+                        ): '' }
 
-                    { newFilesList.length > 0? (
-                        <span className = 'FRL_count'>Всего: { newFilesList.length } шт.</span>
-                    ): '' }
+                        <input 
+                            type =          'file' 
+                            ref =           { inputRef }
+                            className =     'hiddenInput'
+                            onChange =      { inputHandler }
+                            multiple = { true }
+                        />
+                    </div> */}
 
-                    <input 
-                        type =          'file' 
-                        ref =           { inputRef }
-                        className =     'hiddenInput'
-                        onChange =      { inputHandler }
-                        multiple = { true }
+                    <FRL_ButtonAddFromFolder
+                        newFilesList = { newFilesList }
+                        setNewFilesList = { setNewFilesList }
+                    />
+
+                    <FRL_ButtonUploadTXT
+                        newFilesList = { newFilesList }
+                        setNewFilesList = { setNewFilesList }
                     />
 
                 </div>
+
+                
 
 
             </div>
