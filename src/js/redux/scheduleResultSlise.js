@@ -55,13 +55,13 @@ export const scheduleResultSlise = createSlice({
         freeReleasesFilterCategoryId: null,
         freeReleasesFilterEventId: null,
 
+        freeReleasesFilterSortBy: 'num_asc', //  'num_asc' 'num_desc' 'alph_asc' 'alph_desc'
+
+
+
+
         eventsAsReleaseFilterCategoryId: null,
         eventsAsReleaseFiltered: null,
-
-
-
-
-
 
 
 
@@ -223,6 +223,14 @@ export const scheduleResultSlise = createSlice({
             state.freeReleasesFilterEventId =  action.payload;
         },
 
+        setFreeReleasesFilterSortBy: ( state, action ) => {
+            state.freeReleasesFilterSortBy =  action.payload;
+        },
+
+
+
+        
+
         setScheduleEventBySectors: ( state, action ) => {
             state.scheduleEventBySectors =  action.payload;
         },
@@ -278,6 +286,7 @@ export const {
             
     setFreeReleasesFilterCategoryId,
     setFreeReleasesFilterEventId,
+    setFreeReleasesFilterSortBy,
     setEventsAsReleaseFilterCategoryId,
     setEventsAsReleaseFiltered,
 
@@ -324,12 +333,24 @@ export const selectorData = ( state ) => {
 
         freeReleasesFilterCategoryId: state.scheduleResult.freeReleasesFilterCategoryId,
         freeReleasesFilterEventId: state.scheduleResult.freeReleasesFilterEventId,
+        freeReleasesFilterSortBy: state.scheduleResult.freeReleasesFilterSortBy,
+
+
+
+
+
+
         scheduleEventBySectors: state.scheduleResult.scheduleEventBySectors,
         usedFreeReleaseById: state.scheduleResult.usedFreeReleaseById,
+
+        
 
 
         eventsAsReleaseFilterCategoryId: state.scheduleResult.eventsAsReleaseFilterCategoryId,
         eventsAsReleaseFiltered: state.scheduleResult.eventsAsReleaseFiltered,
+
+
+
 
 
 

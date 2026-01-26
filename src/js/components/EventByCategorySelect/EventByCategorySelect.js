@@ -23,6 +23,7 @@ const EventByCategorySelectComponent = ( props ) => {
         eventListById,
         alwaysIsOpen = false,
         maxHeight = 32, // num vh
+        maxHeightUnit = 'vh',
         maxDuration = null, // num second
         
 
@@ -132,7 +133,7 @@ const EventByCategorySelectComponent = ( props ) => {
     };
 
     return (
-        <div className = 'eventByCategorySelect' style = { alwaysIsOpen? { marginBottom: `${maxHeight}vh` }: {} }>
+        <div className = 'eventByCategorySelect' style = { alwaysIsOpen? { marginBottom: `${maxHeight}${maxHeightUnit}` }: {} }>
             <h3>Событие:</h3>
 
             <div className = 'ECBS_wrap'>
@@ -150,7 +151,7 @@ const EventByCategorySelectComponent = ( props ) => {
                 </div>
 
                 { menuIsOpen? (
-                    <div className = 'ECBS_tree_list' style = { { height: `${maxHeight - 2}vh`} }>
+                    <div className = 'ECBS_tree_list' style = { { height: `${maxHeight - 2}${maxHeightUnit}`} }>
                         { create( listTree ) }
                     </div>
                 ): ''}

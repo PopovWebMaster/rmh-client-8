@@ -1,5 +1,5 @@
 import store from './../redux/store.js';
-import { setCounterList, setCounterListHours } from './../redux/countersSlise.js';
+import { setCounterList, setCounterListHours, setCounterListFiles } from './../redux/countersSlise.js';
 import { get_category_by_event_id } from './../helpers/get_category_by_event_id.js';
 import { HoursClass } from './vendors/EventsDayCountersClass/HoursClass.js';
 
@@ -8,10 +8,14 @@ export class EventsDayCountersClass{
 
         this.counter_list = [];
         this.counter_list_hours = [];
+        this.counter_list_files = [];
+
 
 
         this.CreateTypeDay = this.CreateTypeDay.bind(this);
         this.CreateTypeHour = this.CreateTypeHour.bind(this);
+        this.CreateTypeFiles = this.CreateTypeFiles.bind(this);
+
         this.SetToStore = this.SetToStore.bind(this);
 
 
@@ -68,10 +72,83 @@ export class EventsDayCountersClass{
 
     }
 
+    CreateTypeFiles( dayList ){
+
+        // console.dir( 'dayList' );
+        // console.dir( dayList );
+
+        let counter_list_files = [];
+
+        let obj = {};
+        for( let i = 0; i < dayList.length; i++ ){
+            let { 
+                eventId,
+                // durationTime,
+                // is_premiere,
+                // category_id,
+                releases,
+            } = dayList[ i ];
+
+            let category = get_category_by_event_id( eventId );
+            let category_id = category.id;
+
+            
+            if( obj[ category_id ] ){
+                obj[ category_id ].count = obj[ category_id ].count + 1;
+            }else{
+                obj[ category_id ] = {
+                    count: 1,
+                    events: {},
+                    category,
+                };
+            };
+
+            if( obj[ category_id ].events[ eventId ] ){
+                obj[ category_id ].events[ eventId ].count = obj[ category_id ].events[ eventId ].count + 1;
+            }else{
+                obj[ category_id ].events[ eventId ] = {
+                    count: 1,
+                    files: {},
+                };
+            };
+
+            for( let y = 0; y < releases.length; y++ ){
+                let { file_list, releaseName, releaseDuration } = releases[ y ];
+                let fileName = releaseName;
+                if( file_list.length > 0 ){
+                    fileName = file_list[ file_list.length - 1 ];
+                };
+
+                if( obj[ category_id ].events[ eventId ].files[ fileName ] ){
+
+                    obj[ category_id ].events[ eventId ].files[ fileName ].count =      obj[ category_id ].events[ eventId ].files[ fileName ].count + 1;
+                    obj[ category_id ].events[ eventId ].files[ fileName ].duration =   obj[ category_id ].events[ eventId ].files[ fileName ].duration + releaseDuration;
+
+                }else{
+                    obj[ category_id ].events[ eventId ].files[ fileName ] = {
+                        count: 1,
+                        duration: releaseDuration,
+                    };
+                };
+
+            };
+
+        };
+
+        // console.dir( 'obj' );
+        // console.dir( obj );
+        this.counter_list_files = obj;
+
+
+    }
+
     SetToStore(){
 
         store.dispatch( setCounterList( this.counter_list ) );
         store.dispatch( setCounterListHours( this.counter_list_hours ) );
+        store.dispatch( setCounterListFiles( this.counter_list_files ) );
+
+
 
     }
 

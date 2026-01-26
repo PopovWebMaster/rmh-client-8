@@ -11,25 +11,34 @@
     .FRL_ActiveList_item_name{
         font-size: .65em;
         color: #476edb;
-        flex-grow: 1;
+        flex-grow: 2;
         max-width: 100%;
 
         text-overflow: ellipsis;
-        white-space: nowrap;
+        // white-space: nowrap;
         overflow: hidden;
     }
 
     .FRL_ActiveList_item_duration{
-        font-size: .65em;
-        flex-grow: 0;
-        color: #ffffff;
-        margin: 0 1em 0 0em;
-        background-color: #959595;
-        padding: 0.3em 0em;
-        border-radius: 0.1em;
+        // font-size: .65em;
+        // flex-grow: 0;
+        // color: #ffffff;
+        // margin: 0 1em 0 0em;
+        // background-color: #959595;
+        // padding: 0.3em 0.5em;
+        // border-radius: 0.1em;
+        // text-align: center;
 
-        width: 5.4em;
+        font-size: .72em;
+        flex-grow: 0;
+        color: #3d3d3d;
+        margin: 0 1em 0 0em;
+        background-color: #ebe6e6;
+        padding: 0.2em 0.5em;
+        border-radius: 0.1em;
         text-align: center;
+
+        border: 1px solid #e3e0e0;
     }
 
     .FRL_ActiveList_item_count{
@@ -42,6 +51,8 @@
         border-radius: 0.1em;
 
         width: 3em;
+        min-width: 3em;
+
         text-align: center;
     }
 

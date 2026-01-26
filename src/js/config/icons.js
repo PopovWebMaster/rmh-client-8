@@ -37,6 +37,9 @@
 
 // fa-file-o
 
+// icon-sort-alphabet
+// icon-sort-numeric
+
 
 {/* <span className = 'icon-up-1' ></span>
                 <span className = 'icon-down-1' ></span> */}

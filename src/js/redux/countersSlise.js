@@ -12,6 +12,8 @@ export const countersSlise = createSlice({
         currentCounterCategoryId: null,
         counterList: [],
         counterListHours: [],
+        counterListFiles: {},
+
 
        
 
@@ -37,6 +39,14 @@ export const countersSlise = createSlice({
         setCounterListHours: ( state, action ) => {
             state.counterListHours =  action.payload;
         }, 
+
+        setCounterListFiles: ( state, action ) => {
+            state.counterListFiles =  action.payload;
+        }, 
+
+
+
+        
         
     },
 
@@ -47,6 +57,7 @@ export const {
     setCurrentCounterCategoryId,
     setCounterList,
     setCounterListHours,
+    setCounterListFiles,
    
    
 
@@ -58,6 +69,10 @@ export const selectorData = ( state ) => {
         currentCounterCategoryId:   state.counters.currentCounterCategoryId,
         counterList:                state.counters.counterList,
         counterListHours:           state.counters.counterListHours,
+        counterListFiles:           state.counters.counterListFiles,
+
+
+        
 
 
 

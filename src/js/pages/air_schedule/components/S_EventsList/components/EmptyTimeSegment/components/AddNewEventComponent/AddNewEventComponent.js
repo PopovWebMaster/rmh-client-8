@@ -13,14 +13,14 @@ import { convert_time_str_to_sec } from './../../../../../../../../helpers/conve
 
 
 import { GridEventType } from './../GridEventType/GridEventType.js';
-import { SelectedEvent } from './../SelectedEvent/SelectedEvent.js';
+// import { SelectedEvent } from './../SelectedEvent/SelectedEvent.js';
 import { AppearanceOfEvent } from './../AppearanceOfEvent/AppearanceOfEvent.js';
 import { TimeSelected } from './../TimeSelected/TimeSelected.js';
 
 import { CreateButton } from './../CreateButton/CreateButton.js';
 
 import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
-
+import { EventByCategorySelect } from './../../../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
 
 import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
@@ -114,11 +114,19 @@ const AddNewEventComponentComponent = ( props ) => {
                 setIsAKeyOneEvent = { setIsAKeyOneEvent }
             />
 
-            <SelectedEvent 
+            {/* <SelectedEvent 
                 eventId =       { eventId }
                 setEventId =    { setEventId }
                 durationLimit = { timeSpaceTo - timeSpaceFrom }
-                // alwaysOpen =    { true }
+            /> */}
+
+            <EventByCategorySelect 
+                isOpen = { isOpen }
+                value = { eventId }
+                changeHandler = { setEventId }
+
+                maxHeight = { 35 }
+                maxDuration = { timeSpaceTo - timeSpaceFrom }
             />
 
             <AppearanceOfEvent 

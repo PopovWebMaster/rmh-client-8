@@ -10,6 +10,7 @@ import { selectorData as scheduleResultSlise } from './../../../../../../../../r
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
 
 import { get_filtered_list } from './../../vendors/get_filtered_list.js';
+import { sort_filtered_list_by } from './../../vendors/sort_filtered_list_by.js';
 
 import { FRL_OneActiveListItem } from './../FRL_OneActiveListItem/FRL_OneActiveListItem.js';
 import { FRL_DragAndDropEventStart } from './../FRL_DragAndDropEventStart/FRL_DragAndDropEventStart.js';
@@ -25,6 +26,7 @@ const FRL_ActiveListComponent = ( props ) => {
         freeReleasesFilterEventId,
         freeReleasesFiltered,
         usedFreeReleaseById,
+        freeReleasesFilterSortBy,
        
     } = props;
 
@@ -33,7 +35,13 @@ const FRL_ActiveListComponent = ( props ) => {
     useEffect( () => {
 
         if( isOpen ){
+            // let arr = get_filtered_list();
+
+            // let sort_arr = sort_filtered_list_by( arr, freeReleasesFilterSortBy );
+            // setList( sort_arr );
+
             setList( get_filtered_list() );
+
         }else{
             setList( [] );
         };
@@ -43,6 +51,7 @@ const FRL_ActiveListComponent = ( props ) => {
         freeReleasesFilterCategoryId,
         freeReleasesFilterEventId,
         freeReleasesFiltered,
+        freeReleasesFilterSortBy,
     ] );
 
     const create = ( arr ) => {
@@ -120,6 +129,9 @@ export function FRL_ActiveList( props ){
             freeReleasesFilterCategoryId = { scheduleResult.freeReleasesFilterCategoryId }
             freeReleasesFilterEventId = { scheduleResult.freeReleasesFilterEventId }
             freeReleasesFiltered = { scheduleResult.freeReleasesFiltered }
+
+            freeReleasesFilterSortBy = { scheduleResult.freeReleasesFilterSortBy }
+
 
 
             usedFreeReleaseById = { scheduleResult.usedFreeReleaseById }

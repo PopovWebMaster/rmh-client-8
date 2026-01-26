@@ -33,6 +33,13 @@ const CounterTypeSelectComponent = ( props ) => {
                 <span>Час</span>
             </div>
 
+            <div 
+                className = { `PBC_type_btn ${ currentCounterType === 'files'? 'isActive': '' }` }
+                onClick = { () => { setCurrentCounterType( 'files' ) } }
+            >
+                <span>Файлы</span>
+            </div>
+
         </div>
 
     )

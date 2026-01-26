@@ -1,6 +1,8 @@
 
 import store from './../../../../../../../redux/store.js';
 
+import { sort_filtered_list_by } from './sort_filtered_list_by.js';
+
 export const get_filtered_list = () => {
 
     let { scheduleResult } = store.getState();
@@ -46,6 +48,8 @@ export const get_filtered_list = () => {
         };
     };
 
-    return result;
+    let sort_res = sort_filtered_list_by( result );
+
+    return sort_res;
 
 };

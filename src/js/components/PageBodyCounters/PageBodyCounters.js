@@ -9,13 +9,39 @@ import { selectorData as countersSlise } from './../../redux/countersSlise.js';
 
 import { CounterTypeSelect } from './components/CounterTypeSelect/CounterTypeSelect.js';
 import { CountersDayList } from './components/CountersDayList/CountersDayList.js';
-import { CountersHoursList } from './components/CountersHoursList/CountersHoursList.js'
+import { CountersHoursList } from './components/CountersHoursList/CountersHoursList.js';
+import { CountersFiles } from './components/CountersFiles/CountersFiles.js';
 
 const PageBodyCountersComponent = ( props ) => {
 
     let {
         currentCounterType,
     } = props;
+
+    // files
+
+    const get_counter = ( value ) => {
+        let result = '';
+
+        switch( value ){
+            case 'day':
+                result = <CountersDayList />;
+                break;
+
+            case 'hour':
+                result = <CountersHoursList />;
+                break;
+
+            case 'files':
+                result = <CountersFiles />
+                break;
+
+        };
+
+
+        return result;
+
+    }
 
 
     
@@ -24,9 +50,11 @@ const PageBodyCountersComponent = ( props ) => {
             <h2 className = 'PBC_counter_title' >Счётчик</h2>
             <CounterTypeSelect />
 
-            { currentCounterType === 'day'? (
+            { get_counter( currentCounterType ) }
+
+            {/* { currentCounterType === 'day'? (
                 <CountersDayList />
-            ): <CountersHoursList /> }
+            ): <CountersHoursList /> } */}
 
             
 

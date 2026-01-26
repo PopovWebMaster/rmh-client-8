@@ -5,7 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import './FRL_CategoryButtons.scss';
 
-import { selectorData as scheduleResultSlise, setFreeReleasesFilterCategoryId } from './../../../../../../../../../redux/scheduleResultSlise.js';
+import { 
+    selectorData as scheduleResultSlise,
+    setFreeReleasesFilterCategoryId,
+    setFreeReleasesFilterEventId,
+} from './../../../../../../../../../redux/scheduleResultSlise.js';
 import { selectorData as layoutSlice } from './../../../../../../../../../redux/layoutSlice.js';
 
 
@@ -17,7 +21,11 @@ const FRL_CategoryButtonsComponent = ( props ) => {
 
         freeReleasesFiltered,
         freeReleasesFilterCategoryId,
+        freeReleasesFilterEventId,
         setFreeReleasesFilterCategoryId,
+        setFreeReleasesFilterEventId,
+
+        // scheduleResult,
         categoryListById,
 
 
@@ -65,8 +73,17 @@ const FRL_CategoryButtonsComponent = ( props ) => {
 
     
     const click = ( categoryId ) => {
-
         setFreeReleasesFilterCategoryId( categoryId );
+
+        let event_id = null;
+
+        if( freeReleasesFiltered[ categoryId ] ){
+            if( freeReleasesFiltered[ categoryId ][ freeReleasesFilterEventId ] ){
+                event_id = freeReleasesFilterEventId;
+            };
+        };
+
+        setFreeReleasesFilterEventId( event_id );
 
     }
 
@@ -123,12 +140,21 @@ export function FRL_CategoryButtons( props ){
 
             freeReleasesFiltered = { scheduleResult.freeReleasesFiltered }
             freeReleasesFilterCategoryId = { scheduleResult.freeReleasesFilterCategoryId }
+            freeReleasesFilterEventId = { scheduleResult.freeReleasesFilterEventId }
+
+            // scheduleResult = { scheduleResult }
+
+
 
             categoryListById = { layout.categoryListById }
 
 
 
             setFreeReleasesFilterCategoryId = { ( val ) => { dispatch( setFreeReleasesFilterCategoryId( val ) ) } }
+            setFreeReleasesFilterEventId = { ( val ) => { dispatch( setFreeReleasesFilterEventId( val ) ) } }
+
+
+            
 
         />
     );

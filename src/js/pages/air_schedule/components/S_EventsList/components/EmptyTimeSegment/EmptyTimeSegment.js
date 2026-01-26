@@ -17,6 +17,8 @@ import { AddNewEventComponent } from './components/AddNewEventComponent/AddNewEv
 // import { ConfirmationOfSaving } from './../ConfirmationOfSaving/ConfirmationOfSaving.js';
 // import { save_grid_events_changes_on_server } from './../../vendors/save_grid_events_changes_on_server.js';
 
+
+
 const EmptyTimeSegmentComponent = ( props ) => {
 
     let {

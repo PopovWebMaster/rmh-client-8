@@ -22,6 +22,7 @@ import { access_right } from './../../../../../../../../helpers/access_right.js'
 import { EventByCategorySelect } from './../../../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
 import { FRL_ButtonAddFromFolder } from './components/FRL_ButtonAddFromFolder/FRL_ButtonAddFromFolder.js';
 import { FRL_ButtonUploadTXT } from './components/FRL_ButtonUploadTXT/FRL_ButtonUploadTXT.js';
+import { FRL_ButtonSaveAsTXTFile } from './components/FRL_ButtonSaveAsTXTFile/FRL_ButtonSaveAsTXTFile.js';
 
 
 const FRL_AddNewFilesComponent = ( props ) => {
@@ -61,46 +62,6 @@ const FRL_AddNewFilesComponent = ( props ) => {
             };
         };
     }, [ newFilesList, eventId ] );
-
-
-    // const inputRef = useRef();
-
-    // const click = () => {
-
-    //     let accept = [ '.mp4' ];
-    //     let input = inputRef.current;
-    //     input.setAttribute('accept', accept.join(',') );
-    //     input.click();
-
-    // };
-
-    // const inputHandler = (e) => {
-
-    //     if( !e.target.files.length ){
-    //         return;
-    //     };
-    //     let files = e.target.files;
-    //     let arr = [];
-    //     const finish = () => {
-    //         setNewFilesList( arr );
-    //     };
-    //     const recursive_get = ( files, index ) => {
-    //         if( files[ index ] ){
-    //             get_metadata_from_video_file( files[ index ], ( fileName, fileDuration ) => {
-    //                 if( fileDuration !== null ){
-    //                     arr.push( {
-    //                         file_name: fileName,
-    //                         file_duration: fileDuration,
-    //                     } );
-    //                 };
-    //                 recursive_get( files, index + 1 )
-    //             } );
-    //         }else{
-    //             finish();
-    //         };
-    //     };
-    //     recursive_get( files, 0 );
-    // }
 
 
     const add_new_free_releases = () => {
@@ -208,24 +169,6 @@ const FRL_AddNewFilesComponent = ( props ) => {
                 </div>
 
                 <div className = 'FRL_add_right_buttons'>
-                    {/* <div className = 'FRL_add_from_folder'>
-                        <span
-                            onClick = { click }
-                            className = 'FRL_btn'
-                        >Взять из папки</span>
-
-                        { newFilesList.length > 0? (
-                            <span className = 'FRL_count'>Всего: { newFilesList.length } шт.</span>
-                        ): '' }
-
-                        <input 
-                            type =          'file' 
-                            ref =           { inputRef }
-                            className =     'hiddenInput'
-                            onChange =      { inputHandler }
-                            multiple = { true }
-                        />
-                    </div> */}
 
                     <FRL_ButtonAddFromFolder
                         newFilesList = { newFilesList }
@@ -236,6 +179,8 @@ const FRL_AddNewFilesComponent = ( props ) => {
                         newFilesList = { newFilesList }
                         setNewFilesList = { setNewFilesList }
                     />
+
+                    <FRL_ButtonSaveAsTXTFile />
 
                 </div>
 

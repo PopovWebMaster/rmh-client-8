@@ -94,7 +94,7 @@ const FRL_ButtonAddFromFolderComponent = ( props ) => {
             <span
                 onClick = { click }
                 className = 'FRL_btn'
-            >Взять из папки</span>
+            >Взять видео из папки</span>
 
             { newFilesList.length > 0? (
                 <span className = 'FRL_count'>Всего: { newFilesList.length } шт.</span>

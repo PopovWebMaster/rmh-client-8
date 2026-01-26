@@ -16,6 +16,16 @@
         align-content: center;
 
         position: relative;
+
+        .FRL_buttons_left{
+            font-size: 1em;
+            flex-grow: 1;
+            max-width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+        }
         
     }
 }

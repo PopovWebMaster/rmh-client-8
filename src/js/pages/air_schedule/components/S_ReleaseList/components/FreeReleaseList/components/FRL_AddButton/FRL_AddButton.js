@@ -42,7 +42,7 @@ const FRL_AddButtonComponent = ( props ) => {
                 isOpen = { isOpen }
                 setIsOpen = { setIsOpen }
                 title = 'Межпрограммные ролики'
-                width = '60vw'
+                width = '70vw'
                 height = '94vh'
 
                 showCurrentDayName = { true }

@@ -19,6 +19,8 @@ import { FRL_AddButton } from './components/FRL_AddButton/FRL_AddButton.js';
 import { FRL_FilterButtons } from './components/FRL_FilterButtons/FRL_FilterButtons.js';
 import { FRL_ActiveList } from './components/FRL_ActiveList/FRL_ActiveList.js';
 
+import { FRL_SortButton } from './components/FRL_SortButton/FRL_SortButton.js';
+
 import { SetFreeReleaseListFromServer } from './../SetFreeReleaseListFromServer/SetFreeReleaseListFromServer.js';
 
 
@@ -38,6 +40,15 @@ const FreeReleaseListComponent = ( props ) => {
        <div className = 'freeReleaseList'>
             <SetFreeReleaseListFromServer>
                 <div className = 'freeReleaseList_buttons'>
+
+                    <div className = 'FRL_buttons_left'>
+                        <FRL_SortButton 
+                        
+                        />
+
+                    </div>
+
+                    
                     <FRL_AddButton
                         setListIsActive = { setListIsActive }
                     />

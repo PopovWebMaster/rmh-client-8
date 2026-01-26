@@ -231,6 +231,10 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         let EventsDayCounters = new EventsDayCountersClass();
         EventsDayCounters.CreateTypeDay( list );
         EventsDayCounters.CreateTypeHour( list );
+        EventsDayCounters.CreateTypeFiles( list );
+
+
+        
         EventsDayCounters.SetToStore();
     }
 
