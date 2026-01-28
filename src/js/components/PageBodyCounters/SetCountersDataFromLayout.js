@@ -33,6 +33,7 @@ const SetCountersDataFromLayoutComponent = ( props ) => {
         let EventsDayCounters = new EventsDayCountersClass();
         EventsDayCounters.CreateTypeDay( list );
         EventsDayCounters.CreateTypeHour( list );
+        EventsDayCounters.CreateTypeFiles( list );
         EventsDayCounters.SetToStore();
 
         // let list = gridDayEventsList[ gridCurrentDay ];

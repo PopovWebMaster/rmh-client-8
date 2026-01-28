@@ -18,6 +18,10 @@
                 border-radius: 0.1em;
             }
 
+            .PBC_CHF_item_cat_name{
+                padding: 0.2em 0.5em;
+            }
+
             .PBC_CHF_item_cat_count{
                 // background-color: red;
                 // padding: 0.1em 0.2em;
@@ -25,56 +29,130 @@
                 color: #ffffff;
             }
 
-            .PBC_CHF_item_cat_name{
-                padding: 0.2em 0.5em;
-            }
+            
         }
 
         h4.PBC_CHF_item_event{
-            padding-left: 1em;
+            padding-left: 0em;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: center;
 
             span{
                 font-size: 0.6em;
-                padding: 0.2em 0.5em;
+                padding: 0em 0.5em;
                 border-radius: 0.1em;
-            }
-
-            .PBC_CHF_item_ev_count{
-                // background-color: red;
-                // padding: 0.1em 0.2em;
-                margin-right: 0.5em;
-                color: #ffffff;
             }
 
             .PBC_CHF_item_ev_name{
                 padding: 0.2em 0.5em;
                 border-width: 1px;
                 border-style: solid;
+
+                flex-grow: 0;
+                max-width: calc( 100% - 4em );
+
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
+
+            .PBC_CHF_item_ev_count{
+                // background-color: red;
+                // padding: 0.1em 0.2em;
+                // margin-right: 0.5em;
+                // color: #ffffff;
+
+                font-size: 0.65em;
+                
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+                align-content: center;
+
+                flex-grow: 1;
+                max-width: 100%;
+                // padding: 0.1em 0em;
+
+                .PBC_CHF_item_ev_count_val{
+                    font-size: 1em;
+                    width: 3em;
+                    background-color: #f5f4f4;
+                    color: #767780;
+                    text-align: center;
+                    // border: 1px solid #343434;
+
+                    border-radius: 0.1em;
+                    padding: 0.2em 0.1em;
+                }
+            }
+
+            
 
         }
 
         h4.PBC_CHF_item_fileName{
-            padding-left: 2em;
+            padding-left: 0.8em;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: center;
             
 
             span{
                 font-size: 0.6em;
-                padding: 0.35em 0.5em;
+                padding: 0em 0.5em;
                 border-radius: 0.1em;
             }
 
-            .PBC_CHF_item_file_count{
-                margin-right: 0.5em;
-                color: #ffffff;
-                // background-color: #525252;
+            .PBC_CHF_item_file_name{
+
+                // padding: 0.35em 0.9em;
+                background-color: #fafbfb;
+                color: #343434;
+                font-weight: bold;
+
+                padding: 0.3em 0.8em;
+                border-radius: 0.1em;
+                border: 1px solid #2d633691;
+
+                flex-grow: 0;
+                max-width: calc( 100% - 5em );
+
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
 
-            .PBC_CHF_item_file_name{
-                padding: 0.35em 0.9em;
-                background-color: #ffffff;
-                color: #252323;
+            .PBC_CHF_item_file_count{
+                font-size: 0.65em;
+                
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-start;
+                align-content: center;
+
+                flex-grow: 1;
+                max-width: 100%;
+                // padding: 0.1em 0em;
+
+                .PBC_CHF_item_file_count_val{
+                    font-size: 1em;
+                    width: 3em;
+                    background-color: #b7b7b7;
+                    color: #2d2d2d;
+                    text-align: center;
+                    // border: 1px solid #343434;
+
+                    border-radius: 0.1em;
+                    padding: 0.2em 0.1em;
+                }
             }
+
+            
 
         }
 

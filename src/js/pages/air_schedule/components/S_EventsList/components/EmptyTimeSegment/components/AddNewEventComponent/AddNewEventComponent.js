@@ -125,7 +125,7 @@ const AddNewEventComponentComponent = ( props ) => {
                 value = { eventId }
                 changeHandler = { setEventId }
 
-                maxHeight = { 35 }
+                maxHeight = { 55 }
                 maxDuration = { timeSpaceTo - timeSpaceFrom }
             />
 

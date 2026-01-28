@@ -112,26 +112,32 @@ export class EventsDayCountersClass{
                 };
             };
 
-            for( let y = 0; y < releases.length; y++ ){
-                let { file_list, releaseName, releaseDuration } = releases[ y ];
-                let fileName = releaseName;
-                if( file_list.length > 0 ){
-                    fileName = file_list[ file_list.length - 1 ];
-                };
 
-                if( obj[ category_id ].events[ eventId ].files[ fileName ] ){
-
-                    obj[ category_id ].events[ eventId ].files[ fileName ].count =      obj[ category_id ].events[ eventId ].files[ fileName ].count + 1;
-                    obj[ category_id ].events[ eventId ].files[ fileName ].duration =   obj[ category_id ].events[ eventId ].files[ fileName ].duration + releaseDuration;
-
-                }else{
-                    obj[ category_id ].events[ eventId ].files[ fileName ] = {
-                        count: 1,
-                        duration: releaseDuration,
+            if( releases ){
+                for( let y = 0; y < releases.length; y++ ){
+                    let { file_list, releaseName, releaseDuration } = releases[ y ];
+                    let fileName = releaseName;
+                    if( file_list.length > 0 ){
+                        fileName = file_list[ file_list.length - 1 ];
                     };
-                };
 
+                    if( obj[ category_id ].events[ eventId ].files[ fileName ] ){
+
+                        obj[ category_id ].events[ eventId ].files[ fileName ].count =      obj[ category_id ].events[ eventId ].files[ fileName ].count + 1;
+                        obj[ category_id ].events[ eventId ].files[ fileName ].duration =   obj[ category_id ].events[ eventId ].files[ fileName ].duration + releaseDuration;
+
+                    }else{
+                        obj[ category_id ].events[ eventId ].files[ fileName ] = {
+                            count: 1,
+                            duration: releaseDuration,
+                        };
+                    };
+
+                };
             };
+
+
+
 
         };
 

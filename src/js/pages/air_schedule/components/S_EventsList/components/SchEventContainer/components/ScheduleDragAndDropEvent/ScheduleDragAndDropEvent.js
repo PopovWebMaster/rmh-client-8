@@ -93,6 +93,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             setSelectedEventWindow_isOpen( false );
         };  
 
+        setSelectedEventId( null );
+
     }
 
     const drag_start = ( e ) => {

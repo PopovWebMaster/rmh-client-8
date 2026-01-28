@@ -13,6 +13,7 @@ import './FRL_ButtonUploadTXT.scss';
 // import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 import { convert_time_str_to_sec } from './../../../../../../../../../../helpers/convert_time_str_to_sec.js';
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/layout.js';
 
 const FRL_ButtonUploadTXTComponent = ( props ) => {
 
@@ -78,10 +79,12 @@ const FRL_ButtonUploadTXTComponent = ( props ) => {
                                 let sec = convert_time_str_to_sec( dutation );
 
                                 if( sec ){
-                                    arr_list.push({
-                                        file_name: fileNameTrim,
-                                        file_duration: sec,
-                                    });
+                                    if( sec >= MIN_EVENT_DURATION_SEC ){
+                                        arr_list.push({
+                                            file_name: fileNameTrim,
+                                            file_duration: sec,
+                                        });
+                                    };
                                 };
 
                                 

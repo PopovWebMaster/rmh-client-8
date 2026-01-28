@@ -44,10 +44,17 @@ const CountersFilesComponent = ( props ) => {
                     key = { index }
                     className = 'PBC_CHF_item_fileName'
                 >
-                    <span className = 'PBC_CHF_item_file_count'>{ count }</span>
                     <span
+                        title = { fileName }
                         className = 'PBC_CHF_item_file_name'
                     >{ fileName }</span>
+
+                    <span className = 'PBC_CHF_item_file_count'>
+                        <span className = 'PBC_CHF_item_file_count_val'>
+                            { count }
+                        </span>
+                    </span>
+                    
                 </h4>
             );
         } );
@@ -77,11 +84,17 @@ const CountersFilesComponent = ( props ) => {
                         
                         className = 'PBC_CHF_item_event'
                     >
-                        <span className = 'PBC_CHF_item_ev_count'>{ count }</span>
                         <span
                             className = 'PBC_CHF_item_ev_name'
                             style = { style }
+                            title = { name }
                         >{ name }</span>
+
+                        <span className = 'PBC_CHF_item_ev_count'>
+                            <span className = 'PBC_CHF_item_ev_count_val'>{ count }</span>
+
+                            
+                        </span>
                     </h4>
 
                     { createFiles( files ) }
@@ -115,7 +128,7 @@ const CountersFilesComponent = ( props ) => {
                     className = 'PBC_CHF_item'
                     key = { index }
                 >
-                    <h4>
+                    {/* <h4>
                         <span className = 'PBC_CHF_item_cat_count'>{ count }</span>
                         <span
                             className = 'PBC_CHF_item_cat_name'
@@ -124,7 +137,7 @@ const CountersFilesComponent = ( props ) => {
                                 color: colorText,
                             }}
                         >{ name }</span>
-                    </h4>
+                    </h4> */}
 
                     { createEvents( events ) }
                 </div>

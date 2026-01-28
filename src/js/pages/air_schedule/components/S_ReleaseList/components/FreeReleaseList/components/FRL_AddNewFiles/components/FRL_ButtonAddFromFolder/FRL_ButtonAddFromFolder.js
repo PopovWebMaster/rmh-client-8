@@ -11,6 +11,7 @@ import './FRL_ButtonAddFromFolder.scss';
 // import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/layout.js';
 
 const FRL_ButtonAddFromFolderComponent = ( props ) => {
 
@@ -71,10 +72,12 @@ const FRL_ButtonAddFromFolderComponent = ( props ) => {
             if( files[ index ] ){
                 get_metadata_from_video_file( files[ index ], ( fileName, fileDuration ) => {
                     if( fileDuration !== null ){
-                        arr.push( {
-                            file_name: fileName,
-                            file_duration: fileDuration,
-                        } );
+                        if( fileDuration >= MIN_EVENT_DURATION_SEC ){
+                            arr.push( {
+                                file_name: fileName,
+                                file_duration: fileDuration,
+                            } );
+                        };
                     };
                     recursive_get( files, index + 1 )
                 } );

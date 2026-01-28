@@ -24,19 +24,31 @@
         user-select: none;
 
         span{
-            font-size: 0.7em;
+            font-size: 0.6em;
             color: #b9b9b9;
+        
+        }
+
+        span.TSB_btn_first{
+            color: #d5d5d5;
+            margin-right: 0.3em;
         }
     }
     .TSB_btn:hover{
         span{
             color: #ffffff;
         }
+        span.TSB_btn_first{
+            color: #d5d5d5;
+        }
     }
     .TSB_btn.isActive{
         background-color: #3f89c55c;
         span{
             color: #ffffff;
+        }
+        span.TSB_btn_first{
+            color: #d5d5d5;
         }
     }
     

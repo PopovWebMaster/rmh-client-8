@@ -11,8 +11,8 @@ import './CountersHoursList.scss';
 import { selectorData as countersSlise } from './../../../../redux/countersSlise.js';
 import { ScrollContainer } from './../../../ScrollContainer/ScrollContainer.js';
 
-import { convert_sec_to_time } from './../../../../helpers/convert_sec_to_time.js';
-import { round_to_number } from './../../../../helpers/round_to_number.js';
+// import { convert_sec_to_time } from './../../../../helpers/convert_sec_to_time.js';
+// import { round_to_number } from './../../../../helpers/round_to_number.js';
 
 
 const CountersHoursListComponent = ( props ) => {

@@ -30,7 +30,11 @@ const FRL_FilterButtonsComponent = ( props ) => {
     useEffect( () => {
 
         if( isOpen ){
-            set_buttons_height();
+            let timerId = setTimeout( () => {
+                set_buttons_height();
+                clearTimeout( timerId );
+            }, 300 );
+            
         }else{
             setButtonsHeight( 0 );
         };

@@ -2,6 +2,7 @@
     font-size: 1em;
     padding: 0.2em 0.5em;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     align-content: center;
@@ -27,6 +28,12 @@
         cursor: pointer;
         user-select: none;
         border: 1px solid #ffffff00;
+
+         max-width: 15em;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .FRL_CategoryBtn.isActive, .FRL_CategoryBtnAll.isActive{

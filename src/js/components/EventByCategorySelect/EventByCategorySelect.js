@@ -20,28 +20,39 @@ const EventByCategorySelectComponent = ( props ) => {
         value,
         changeHandler,
 
+        clickHandler = () => {},
+
         eventListById,
         alwaysIsOpen = false,
         maxHeight = 32, // num vh
         maxHeightUnit = 'vh',
         maxDuration = null, // num second
+
+        startingIsOpen = false,
         
 
     } = props;
 
     let [ selectedEventId, setSelectedEventId ] = useState( null );
 
-    let [ menuIsOpen, setMenuIsOpen ] = useState( false );
+    let [ menuIsOpen, setMenuIsOpen ] = useState( startingIsOpen );
     let [ eventNameValue, setEventNameValue ] = useState( EVENT_NAME_NOT_SELECTED );
     let [ eventStyle, setEventStyle ] = useState( {} );
 
     let [ listTree, setListTree ] = useState( [] );
 
+    
+
     useEffect( () => {
         if( isOpen ){
 
             setSelectedEventId( value );
-            setMenuIsOpen( alwaysIsOpen );
+            if( startingIsOpen ){
+                setMenuIsOpen( startingIsOpen );
+            }else{
+                setMenuIsOpen( alwaysIsOpen );
+            };
+            
             setListTree( get_events_tree_list( maxDuration ) );
 
             if( value === null ){
@@ -58,7 +69,7 @@ const EventByCategorySelectComponent = ( props ) => {
             };
         }else{
             setSelectedEventId( null );
-            setMenuIsOpen( false );
+            setMenuIsOpen( startingIsOpen );
             setEventStyle({});
             setEventNameValue( EVENT_NAME_NOT_SELECTED );
 
@@ -89,6 +100,7 @@ const EventByCategorySelectComponent = ( props ) => {
     const eventClick = ( id ) => {
         changeHandler( id );
         setSelectedEventId( id );
+        clickHandler( id );
         if( alwaysIsOpen === false ){
             setMenuIsOpen( false );
         };

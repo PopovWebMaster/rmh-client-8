@@ -37,6 +37,10 @@ const BufferListComponent = ( props ) => {
     }, [ releaseList ] );
 
     const drag_start = ( e, item ) => {
+
+        // console.dir( 'item<<<<<<' );
+        // console.dir( item );
+
         access_right( 'schedule_edit', () => {
 
             let {
@@ -48,7 +52,7 @@ const BufferListComponent = ( props ) => {
             } = item;
 
             let work_event_id = event_id;
-            if( category_id === null && event_id === null ){
+            if( event_id === null && force_event_id !== null ){
                 work_event_id = force_event_id;
             };
 

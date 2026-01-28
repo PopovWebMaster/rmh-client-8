@@ -103,6 +103,7 @@ const FRL_CategoryButtonsComponent = ( props ) => {
                     onClick =       { () => { click( categoryId ) } }
                     style =         { categoryStyle }
                     key =           { index }
+                    title = { categoryName }
                 >{ categoryName }</span>
             );
         } );

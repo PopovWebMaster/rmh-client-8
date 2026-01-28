@@ -20,6 +20,8 @@ import { CreateButton } from './components/CreateButton/CreateButton.js';
 import { add_new_grid_event_to_current_day_to_store } from './../../vendors/add_new_grid_event_to_current_day_to_store.js';
 import { create_new_grid_event_on_server } from './../../vendors/create_new_grid_event_on_server.js';
 
+import { EventByCategorySelect } from './../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
+
 // import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../config/layout.js';
 
 const AddNewGridEventComponentComponent = ( props ) => {
@@ -146,11 +148,25 @@ const AddNewGridEventComponentComponent = ( props ) => {
                 setIsAKeyOneEvent = { setIsAKeyOneEvent }
             />
 
-            <SelectedEvent 
+            {/* <SelectedEvent 
                 eventId =       { eventId }
                 setEventId =    { setEventId }
                 durationLimit = { timeSpaceTo - timeSpaceFrom }
                 startingIsOpen = { true }
+            /> */}
+
+            <EventByCategorySelect
+                isOpen = { isOpen }
+                value = { eventId }
+                changeHandler = { setEventId }
+
+                // clickHandler = () => {},
+
+                // alwaysIsOpen = false,
+                maxHeight = { 50 } // num vh
+                // maxHeightUnit = 'vh',
+                startingIsOpen = { true }
+                maxDuration = { timeSpaceTo - timeSpaceFrom }
             />
 
             <AppearanceOfEvent 

@@ -10,6 +10,7 @@ import './SelectedEventWindow.scss';
 import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
 import { SelectedEvent } from './../../../EmptyTimeSegment/components/SelectedEvent/SelectedEvent.js';
+import { EventByCategorySelect } from './../../../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
 
 
 
@@ -43,12 +44,26 @@ const SelectedEventWindowComponent = ( props ) => {
             title = 'Пожалуйста, выберете событие'
         >
 
-            <SelectedEvent
+            {/* <SelectedEvent
                 eventId =       { selectedEventId }
                 setEventId =    { setSelectedEventId }
                 durationLimit = { durationLimit }
                 alwaysOpen =    { alwaysOpen }
                 eventClickHandler = { eventClickHandler }
+            /> */}
+
+            <EventByCategorySelect
+            
+                isOpen = { selectedEventWindow_isOpen }
+                value = { selectedEventId }
+                changeHandler = { setSelectedEventId }
+
+                clickHandler = { eventClickHandler }
+
+                alwaysIsOpen = { true }
+                maxHeight = { 50 }
+                // maxHeightUnit = 'vh',
+                maxDuration = { durationLimit }
             />
 
 

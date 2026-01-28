@@ -17,6 +17,10 @@ export const get_day_data_for_start = () => {
 
     let last_day_seconds = localStorage.getItem( 'last_day_seconds' );
 
+    // console.dir( 'last_day_seconds' );
+    // console.dir( last_day_seconds );
+
+
     if( last_day_seconds ){
         let last_seconds = Number( last_day_seconds );
         if( last_seconds > now_seconds ){
@@ -38,6 +42,9 @@ export const get_day_data_for_start = () => {
     result.dayNum = dayNum;
     result.month =  month;
     result.year =   year;
+
+    // console.dir( 'result' );
+    // console.dir( result );
 
     return result;
     

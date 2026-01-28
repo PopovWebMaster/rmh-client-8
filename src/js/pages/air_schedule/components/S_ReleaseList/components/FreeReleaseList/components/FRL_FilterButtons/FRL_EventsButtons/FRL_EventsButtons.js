@@ -113,6 +113,7 @@ const FRL_EventsButtonsComponent = ( props ) => {
                     onClick =       { () => { click( eventId ) } }
                     style =         { eventStyle }
                     key =           { index }
+                    title = { eventName }
                 >{ eventName }</span>
             );
         } );

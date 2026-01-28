@@ -16,11 +16,15 @@ import { ItemName } from './components/ItemName/ItemName.js';
 import { ItemNum } from './components/ItemNum/ItemNum.js';
 import { ItemCategory } from './components/ItemCategory/ItemCategory.js';
 import { ItemManagerNotes } from './components/ItemManagerNotes/ItemManagerNotes.js';
+import { ItemBlindChar } from './components/ItemBlindChar/ItemBlindChar.js';
 
 import { ItemEvents } from './components/ItemEvents/ItemEvents.js';
 import { ItemForceEventId } from './components/ItemForceEventId/ItemForceEventId.js';
 
-import { AlertWindowContainerButtonAdd } from './../../../../../../components/AlertWindowContainerButtonAdd/AlertWindowContainerButtonAdd.js'
+import { AlertWindowContainerButtonAdd } from './../../../../../../components/AlertWindowContainerButtonAdd/AlertWindowContainerButtonAdd.js';
+import { EventByCategorySelect } from './../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
+
+import { get_event_by_id } from './../../../../../../helpers/get_event_by_id.js';
 
 
 const NewAppComponentComponent = ( props ) => {
@@ -47,7 +51,7 @@ const NewAppComponentComponent = ( props ) => {
     let [ eventId,          setEventId ] = useState( null );
     let [ forceEventId,     setForceEventId ] = useState( null );
 
-
+    let [ isBlindChar, setIsBlindChar ] = useState( false );
 
 
     useEffect( () => {
@@ -60,6 +64,7 @@ const NewAppComponentComponent = ( props ) => {
             setManagerNotes( '' );
             setEventId( null );
             setForceEventId( null );
+            setIsBlindChar( false );
         };
 
     }, [ isOpen ]);
@@ -68,26 +73,75 @@ const NewAppComponentComponent = ( props ) => {
         if( appNameIsError || appNumIsError || appName === '' ){
             setIsReady( false );
         }else{
-            setIsReady( true );
+            if( forceEventId === null ){
+                setIsReady( false );
+            }else{
+                setIsReady( true );
+            };
         };
 
-    }, [ appNameIsError, appNumIsError, appName ] );
+    }, [ appNameIsError, appNumIsError, appName, forceEventId ] );
+
+    useEffect( () => {
+        if( forceEventId === null ){
+            setIsBlindChar( false );
+        };
+    }, [ forceEventId ] );
 
 
     const clickAdd = () => {
+
+
+
+
+        // console.dir( {
+        //     applicationName: appName,
+        //     applicationNum: appNum,
+        //     applicationCategoryId: categoryId,
+        //     applicationEventId: eventId,
+        //     applicationForceEventId: categoryId === null && eventId === null? forceEventId: null,
+        //     applicationManagerNotes: managerNotes,
+        // } );
+
+
         if( isReady ){
+
+            let event = get_event_by_id( forceEventId );
+            let { category_id } = get_event_by_id( forceEventId );
+            let event_id = forceEventId;
+
+            if( isBlindChar ){
+                event_id = null;
+            }
+
+            // console.dir( 'event' );
+            // console.dir( event );
+
+
+            let data = {
+                applicationName:            appName,
+                applicationNum:             appNum,
+                applicationCategoryId:      category_id,
+                applicationEventId:         event_id,
+                applicationForceEventId:    forceEventId,
+                applicationManagerNotes:    managerNotes,
+            };
+
+            console.dir( 'data' );
+            console.dir( data );
 
             setSpinnerIsActive( true );
             send_request_to_server({
                 route: `add-new-application`,
-                data: {
-                    applicationName: appName,
-                    applicationNum: appNum,
-                    applicationCategoryId: categoryId,
-                    applicationEventId: eventId,
-                    applicationForceEventId: categoryId === null && eventId === null? forceEventId: null,
-                    applicationManagerNotes: managerNotes,
-                },
+                // data: {
+                //     applicationName: appName,
+                //     applicationNum: appNum,
+                //     applicationCategoryId: categoryId,
+                //     applicationEventId: eventId,
+                //     applicationForceEventId: categoryId === null && eventId === null? forceEventId: null,
+                //     applicationManagerNotes: managerNotes,
+                // },
+                data,
 
                 successCallback: ( response ) => {
                     console.dir( 'response' );
@@ -102,6 +156,8 @@ const NewAppComponentComponent = ( props ) => {
                 },
             });
         };
+
+
     };
 
     
@@ -123,7 +179,13 @@ const NewAppComponentComponent = ( props ) => {
                 setAppNumIsError =  { setAppNumIsError }
             />
 
-            <ItemCategory 
+            <EventByCategorySelect
+                isOpen =        { isOpen }
+                value =         { forceEventId }
+                changeHandler = { setForceEventId }
+                maxHeight =     { 40 } 
+            />
+            {/* <ItemCategory 
                 categoryId =        { categoryId }
                 setCategoryId =     { setCategoryId }
             />
@@ -140,7 +202,16 @@ const NewAppComponentComponent = ( props ) => {
                 eventId =           { eventId }
                 setForceEventId =   { setForceEventId }
             
-            />
+            /> */}
+
+            { forceEventId === null? '': (
+               <ItemBlindChar
+                    isBlindChar =       { isBlindChar }
+                    setIsBlindChar =    { setIsBlindChar }
+                /> 
+            ) }
+
+            
 
             <ItemManagerNotes 
                 managerNotes =      { managerNotes }
