@@ -13,6 +13,8 @@ import { AlertWindowContainer } from './../../../../../../components/AlertWindow
 import { AWEventSelect }        from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
 import { AWButtonAdd }          from './../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
+import { EventByCategorySelect } from './../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
+
 import { set_air_files_to_store } from './../../../../vendors/set_air_files_to_store.js';
 
 const AssignEventForCheckedComponent = ( props ) => {
@@ -74,15 +76,25 @@ const AssignEventForCheckedComponent = ( props ) => {
                     isOpen =    { isOpen }
                     setIsOpen = { setIsOpen }
                     title =     'Назначить событие'
-                    width =     '30em'
-                    height =    '65vh'
+                    width =     '40em'
+                    height =    '70vh'
                 >
                     <div className = 'FPAEFC_wrap'>
 
-                        <AWEventSelect
+                        {/* <AWEventSelect
                             value = { eventId }
                             changeHandler = { changheEvent }
                             alwaysIsOpen = { true }
+                        /> */}
+
+                        <EventByCategorySelect
+                            isOpen = { isOpen }
+                            value = { eventId }
+                            changeHandler = { changheEvent }
+
+                            alwaysIsOpen = { true }
+                            maxHeight = { 45 }
+                            maxDuration = { null }
                         />
 
                         <AWButtonAdd

@@ -81,6 +81,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
                     eventId =   { eventId }
                     id =   { id }
                     notes =   { notes }
+                    setDragIsActive =   { setDragIsActive }
                 />
 
                 <div className = 'CTS_right_buttons_wrap'>

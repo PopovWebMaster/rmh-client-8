@@ -19,8 +19,15 @@ const AWTextareaComponent = ( props ) => {
         max = 255,
         min = 0,
         placeholder = '',
+        enterHandler = () => {}
 
     } = props;
+
+    let enter = ( e ) => {
+        if( e.which === 13 ){
+            enterHandler();
+        };
+    }
 
 
     return (
@@ -34,6 +41,7 @@ const AWTextareaComponent = ( props ) => {
                 minLength = { min }
                 value =     { value }
                 onChange =  { onChange }
+                onKeyDown = { enter }
                 placeholder = { placeholder }
             />
         </div>

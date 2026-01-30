@@ -11,6 +11,10 @@ import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 
+import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+import { AWTextarea } from './../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
+import { AWButtonAdd } from './../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
+
 
 const EventNotesItemComponent = ( props ) => {
 
@@ -20,9 +24,12 @@ const EventNotesItemComponent = ( props ) => {
         notes,
 
         eventListById,
+        setDragIsActive,
     } = props;
 
-    let inputRef = useRef();
+    // let inputRef = useRef();
+
+    let [ isOpen, setIsOpen ] = useState( false );
 
     let [ eventNotes, setEventNotes ] = useState('');
     let [ notesValue, setNotesValue ] = useState( notes );
@@ -44,10 +51,17 @@ const EventNotesItemComponent = ( props ) => {
             setInputValue( notesValue );
         }else{
             setInputValue( `${eventNotes} ${notesValue}` );
-            
         };
         
     }, [ eventNotes, notesValue ]);
+
+    useEffect( () => {
+        if( isOpen ){
+            setDragIsActive( false );
+        }else{
+            setDragIsActive( true );
+        };
+    }, [ isOpen ] );
 
     const set_changes_to_store = () => {
         if( access_right( 'layout_grid_edit' ) ){
@@ -57,46 +71,70 @@ const EventNotesItemComponent = ( props ) => {
         };
     };
 
-    const change = ( e ) => {
+    const clickOpen = () => {
+        setIsOpen( true );
+    }
+
+    const changeGridEvent = ( e ) => {
         if( access_right( 'layout_grid_edit' ) ){
             let val = e.target.value;
-            if( eventNotes === '' ){
-                setNotesValue( val );
-            }else{
-                if( val.indexOf( `${eventNotes} ` ) !== -1 ){
-                    let val_2 = val.replace( `${eventNotes} `, '' );
-                    setNotesValue( val_2 );
-                };
-            };
+            setNotesValue( val );
         };
-    };
+    }
 
-    const enter = ( e ) => {
-        if( e.which === 13 ){
-            set_changes_to_store();
-            inputRef.current.blur();
-        };
-    };
-
-    const blur = ( e ) => {
+    const save = () => {
         set_changes_to_store();
+        setIsOpen( false );
     };
     
 
 
     return (
         <div className = 'CTS_EventNotesItem'>
-            <input 
-                type =      'text'
-                // value =     { `${eventNotes} ${notesValue}` }
-                value =     { inputValue }
 
-                maxLength = { 255 }
-                onChange =  { change }
-                onKeyDown = { enter }
-                onBlur =    { blur }
-                ref =       { inputRef }
-            />
+            <AlertWindowContainer
+                isOpen =        { isOpen }
+                setIsOpen =     { setIsOpen }
+                title =         'Заметки'
+                width =         { '30em' }
+                height =        { '20em' }
+
+            >
+
+                {/* <AWTextarea 
+                    title =         { 'Заметки событий' }
+                    value =         { eventNotes }
+                    onChange =      { () => {} }
+                    placeholder =   'Редактируются в событиях'
+                /> */}
+
+                <div
+                    className = 'CTS_EventNotesItem_all_val'
+                >
+                    <p>{ inputValue }</p>
+                </div>
+
+                <AWTextarea 
+                    title =         { '' }
+                    max = { 250 }
+                    value =         { notesValue }
+                    onChange =      { changeGridEvent }
+                    placeholder =   'Это прочтёт эфирщик'
+                />
+
+                <AWButtonAdd 
+                    title =         'Сохранить'
+                    icon =          'icon-floppy'
+                    isReady =       { true }
+                    clickHandler =  { save }
+                />
+
+            </AlertWindowContainer>
+
+            <span 
+                className = 'SEC_EventNotesItem_text'
+                onClick = { clickOpen }
+            >{ inputValue }</span>
         </div>
     )
 

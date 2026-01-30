@@ -36,6 +36,7 @@ export const get_cell_D = ( release, notes, isLastBlockRow, hilightFiles ) => {
                 alignment: {
                     horizontal: 'left',
                     vertical: 'center',
+                    wrapText: true,
                 },
                 border,
                 fill: {
@@ -72,7 +73,14 @@ export const get_cell_D = ( release, notes, isLastBlockRow, hilightFiles ) => {
 
         let comment = `${notes} ${air_notes}`.trim();
 
-        value = `${ value } ${comment === ''? '': '   // ' + comment}`;
+        if( comment === '' ){
+
+        }else{
+            value = `// ${ comment }\n${value}`;
+        };
+
+            // value = `${ value } ${comment === ''? '': '   // ' + comment}`;
+        
 
 
 
@@ -90,6 +98,7 @@ export const get_cell_D = ( release, notes, isLastBlockRow, hilightFiles ) => {
                 alignment: {
                     horizontal: 'left',
                     vertical: 'center',
+                    wrapText: true,
                 },
                 border,
                 fill: {

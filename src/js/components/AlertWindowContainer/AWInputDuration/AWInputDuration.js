@@ -17,6 +17,7 @@ const AWInputDurationComponent = ( props ) => {
 
     let {
         value, // num_seconds or stryng format '00:00:00'
+        title = 'Длительность:',
 
         changeHandler,
 
@@ -66,8 +67,9 @@ const AWInputDurationComponent = ( props ) => {
 
     return (
         <div className = 'AW_item AWInputDuration'>
-            <h3>Длительность:</h3>
-
+            
+            { title? <h3>{ title }</h3>: '' }
+            
             <InputDuration 
                 HH = { hh }
                 MM = { mm }

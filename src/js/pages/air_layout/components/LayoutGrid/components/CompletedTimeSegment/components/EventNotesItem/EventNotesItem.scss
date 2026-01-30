@@ -1,25 +1,118 @@
 .CTS_EventNotesItem{
-    font-size: 0.8em;
+    font-size: 1em;
     margin-right: 1em;
-    max-width: 20em;
+    width: 14em;
     flex-grow: 1;
 
-    input{
-        font-size: 0.85em;
-        padding: 0.3em 0.8em;
-        // width: 20vw;
-        width: calc( 100% - 2em );
 
-        text-align: left;
-        line-height: 1em;
-        border: 1px solid #34343400;
-        outline: none;
-        color: #ffffff;
-        background-color: #ffffff17;
+    position: relative;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .CTS_EventNotesItem_all_val{
+        
+        font-size: 0.7em;
+        margin: 0.5em;
+        padding: 0.2em 1em;
+        line-height: 1.4em;
+        border-radius: 0.1em;
+        // border: 1px solid #95636330;
+        // outline: none;
+        background-color: #ffffff;
+        // width: calc(100% - 2em);
+        color: #575757;
+        min-height: 2em;
+        overflow: hidden;
     }
 
-    input:focus{
+    // input{
+    //     font-size: 0.85em;
+    //     padding: 0.3em 0.8em;
+    //     // width: 20vw;
+    //     width: calc( 100% - 2em );
+
+    //     text-align: left;
+    //     line-height: 1em;
+    //     border: 1px solid #34343400;
+    //     outline: none;
+    //     color: #ffffff;
+    //     background-color: #ffffff17;
+    // }
+
+    // input:focus{
+    //     background-color: #ffffffec;
+    //     color: #4e4e4e;
+    // }
+
+    .SEC_EventNotesItem_text{
+        font-size: 0.65em;
+        // width: 3em;
+        overflow: hidden;
+        // color: #7d7c7c;
+        white-space: preserve nowrap;
+
+        padding: 0.3em 0.8em;
+        width: calc( 100% - 2em );
+        line-height: 1em;
+        text-align: left;
+        border: 1px solid #34343400;
+        min-height: 1em;
+        border-radius: 0.1em;
+        color: #ffffff;
+        background-color: #ffffff17;
+
+        text-overflow: ellipsis;
+        cursor: pointer;
+        // user-select: all;
+    }
+
+    .SEC_EventNotesItem_text:hover{
         background-color: #ffffffec;
         color: #4e4e4e;
     }
+    .SEC_EventNotesItem_text:active{
+        background-color: #ffffffd8;
+        color: #a08282;
+        border: 1px solid #956f6f67;
+    }
+
+    // .SEC_EventNotesItem_btn{
+    //     font-size: 1em;
+    //     height: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     align-content: center;
+        
+    //     border-radius: 0.1em;
+    //     margin-right: 0.2em;
+
+    //     cursor: pointer;
+    //     user-select: none;
+
+    //     .SEC_EventNotesItem_icon{
+    //         font-size: 1em;
+    //         color: #818181;
+    //         padding: .26em .03em .21em .22em;
+    //         border-radius: 0.15em;
+    //         cursor: pointer;
+    //         -webkit-user-select: none;
+    //         -moz-user-select: none;
+    //         -ms-user-select: none;
+    //         user-select: none;
+    //     }
+
+
+
+    // }
+    // .SEC_EventNotesItem_btn:hover{
+    //     .SEC_EventNotesItem_icon{
+    //         background-color: #ffffff;
+    //         color: #575757;
+    //     }
+
+    // }
 }

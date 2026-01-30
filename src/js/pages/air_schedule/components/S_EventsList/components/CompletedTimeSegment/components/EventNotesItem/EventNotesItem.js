@@ -87,14 +87,17 @@ const EventNotesItemComponent = ( props ) => {
 
             </AlertWindowContainer>
 
-            <div
+            {/* <div
                 className = 'SEC_EventNotesItem_btn'
                 onClick = { clickOpen }
             >
                 <span className = 'SEC_EventNotesItem_icon icon-edit'></span>
-            </div>
+            </div> */}
 
-            <span className = 'SEC_EventNotesItem_text'>{ inputValue }</span>
+            <span 
+                className = 'SEC_EventNotesItem_text'
+                onClick = { clickOpen }
+            >{ inputValue }</span>
 
         </div>
     )

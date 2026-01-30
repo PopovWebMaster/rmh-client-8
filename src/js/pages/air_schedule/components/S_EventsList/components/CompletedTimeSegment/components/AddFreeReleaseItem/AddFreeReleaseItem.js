@@ -10,16 +10,16 @@ import './AddFreeReleaseItem.scss';
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 
 // import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
-import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
-import { AWTextarea } from './../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
-import { AWButtonAdd } from './../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
+// import { AlertWindowContainer } from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+// import { AWTextarea } from './../../../../../../../../components/AlertWindowContainer/AWTextarea/AWTextarea.js';
+// import { AWButtonAdd } from './../../../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 
-import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js'
+// import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js'
 
 
 import { access_right } from './../../../../../../../../helpers/access_right.js';
 import { get_metadata_from_video_file } from './../../../../../../../../helpers/get_metadata_from_video_file.js';
-import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
+// import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 import { get_event_by_id } from './../../../../../../../../helpers/get_event_by_id.js';
 import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
 

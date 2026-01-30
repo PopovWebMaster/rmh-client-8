@@ -1,0 +1,65 @@
+.SEC_AddFreeReleaseAsTextItem{
+    font-size: 1em;
+    margin-right: 0.4em;
+    flex-grow: 0;
+    // width: 6em;
+    // max-width: 10em;
+    // flex-grow: 1;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    .SEC_AddFreeReleaseAsTextItem_res_wrap{
+        font-size: 1em;
+        padding: 0.5em;
+
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: flex-start;
+        // align-items: center;
+        // align-content: center;
+
+        h4{
+            font-size: 0.75em;
+            color: #476edb;
+            padding: 0.2em 0.6em;
+            text-indent: 1em;
+        }
+        >div.SEC_AddFree_dur_wrap{
+            font-size: 0.9em;
+            padding-left: 1em;
+            width: 8em;
+        }
+
+
+    }
+
+    .SEC_AddFreeReleaseAsTextItem_text{
+        font-size: 0.6em;
+        // width: 4em;
+        color: #1c8151;
+        // background-color: #13ab63;
+        text-align: center;
+        padding: 0.15em 0.6em;
+        border-radius: 0.1em;
+        border: 1px solid #13ab63;
+        cursor: pointer;
+        user-select: none;
+    }
+    .SEC_AddFreeReleaseAsTextItem_text:hover{
+        color: #e6e6e6;
+        background-color: #7dbb9e;
+    }
+
+    .SEC_AddFreeReleaseAsTextItem_text:active{
+        color: #ff9b9b;
+    }
+
+    >.hiddenInput{
+        display: none;
+    }
+
+}

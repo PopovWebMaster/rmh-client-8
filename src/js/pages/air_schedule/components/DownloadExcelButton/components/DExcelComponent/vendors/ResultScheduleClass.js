@@ -24,8 +24,12 @@ import { get_TV_P_startTime } from './get_TV_P_startTime.js';
 import { get_TV_P_eventName } from './get_TV_P_eventName.js';
 import { get_TV_P_releaseNamesList } from './get_TV_P_releaseNamesList.js';
 
+// import store from './../../../../../../../redux/store.js';
+import { get_event_by_id } from './../../../../../../../helpers/get_event_by_id.js';
+
 
 import { MOUNTH_NAME } from './../.././../../../../../config/mounth.js';
+import { EVENT_TYPE } from './../../../../../../../config/layout.js'
 
 
 export class ResultScheduleClass {
@@ -152,9 +156,28 @@ export class ResultScheduleClass {
                 finalNotes = `ПРЕМЬЕРА! ${finalNotes}`
             };
 
+            
+
+
             let cell_A = get_cell_A( startTime, isKeyPoint, isLastBlockRow );
             let cell_B = get_cell_B( durationTime, isLastBlockRow );
             let cell_C = get_cell_C( eventId, isLastBlockRow );
+            // let cell_D = {};
+            // let eventData = get_event_by_id( eventId );
+
+            // let release_index = 1; 
+            // if( eventData !== null ){
+            //     if( eventData.type === EVENT_TYPE.BLOCK ){
+            //         release_index = 0;
+            //         cell_D = get_cell_D( false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
+            //     }else{
+            //         cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
+            //     };
+            // }else{
+            //     cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
+            // };
+
+
             let cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
 
             this.rows.push( [ cell_A, cell_B, cell_C, cell_D ] );
@@ -164,16 +187,20 @@ export class ResultScheduleClass {
                 let cell_B_ = {};
                 let cell_C_ = {};
                 let cell_D_ = {};
+
+                // console.dir( 'releases[ rel_index ]' );
+                // console.dir( releases[ rel_index ].air_notes );
+
                 if( releases[ rel_index + 1 ] ){
                     cell_A_ = get_cell_A( false, false, false );
                     cell_B_ = get_cell_B( null, false );
                     cell_C_ = get_cell_C( null, false );
-                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes, false, this.hilightFiles );
+                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes, /*releases[ rel_index ].air_notes*/ false, this.hilightFiles );
                 }else{
                     cell_A_ = get_cell_A( false, false, true );
                     cell_B_ = get_cell_B( null, true );
                     cell_C_ = get_cell_C( null, true );
-                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes, true, this.hilightFiles );
+                    cell_D_ = get_cell_D( releases[ rel_index ], finalNotes,/*releases[ rel_index ].air_notes*/ true, this.hilightFiles );
                 };
                 this.rows.push( [ cell_A_, cell_B_, cell_C_, cell_D_ ] );
             };

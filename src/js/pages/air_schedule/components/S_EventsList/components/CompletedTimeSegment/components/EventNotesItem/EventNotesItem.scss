@@ -2,8 +2,8 @@
     font-size: 1em;
     margin-right: 1em;
     flex-grow: 0;
-    max-width: 12em;
-    min-width: 4em;
+    width: 7em;
+    // min-width: 4em;
     // max-width: 10em;
     flex-grow: 1;
     position: relative;
@@ -13,49 +13,84 @@
     align-items: center;
     align-content: center;
 
+    // .SEC_EventNotesItem_text{
+    //     font-size: 0.6em;
+    //     // width: 3em;
+    //     overflow: hidden;
+    //     color: #7d7c7c;
+    //     white-space: preserve nowrap;
+    // }
+
     .SEC_EventNotesItem_text{
-        font-size: 0.6em;
+        font-size: 0.65em;
         // width: 3em;
         overflow: hidden;
-        color: #7d7c7c;
+        // color: #7d7c7c;
         white-space: preserve nowrap;
-    }
 
-    .SEC_EventNotesItem_btn{
-        font-size: 1em;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        
+        padding: 0.3em 0.8em;
+        width: calc( 100% - 2em );
+        line-height: 1em;
+        text-align: left;
+        border: 1px solid #34343400;
         border-radius: 0.1em;
-        margin-right: 0.2em;
+        min-height: 1em;
 
+        color: #ffffff;
+        background-color: #ffffff17;
+
+        text-overflow: ellipsis;
         cursor: pointer;
-        user-select: none;
-
-        .SEC_EventNotesItem_icon{
-            font-size: .8em;
-            color: #818181;
-            padding: .26em .03em .21em .22em;
-            border-radius: 0.15em;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-
-
+        // user-select: all;
     }
-    .SEC_EventNotesItem_btn:hover{
-        .SEC_EventNotesItem_icon{
-            background-color: #ffffff;
-            color: #575757;
-        }
 
+    .SEC_EventNotesItem_text:hover{
+        background-color: #ffffffec;
+        color: #4e4e4e;
     }
+    .SEC_EventNotesItem_text:active{
+        background-color: #ffffffd8;
+        color: #a08282;
+        border: 1px solid #956f6f67;
+    }
+
+
+
+    // .SEC_EventNotesItem_btn{
+    //     font-size: 1em;
+    //     height: 100%;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     align-content: center;
+        
+    //     border-radius: 0.1em;
+    //     margin-right: 0.2em;
+
+    //     cursor: pointer;
+    //     user-select: none;
+
+    //     .SEC_EventNotesItem_icon{
+    //         font-size: .8em;
+    //         color: #818181;
+    //         padding: .26em .03em .21em .22em;
+    //         border-radius: 0.15em;
+    //         cursor: pointer;
+    //         -webkit-user-select: none;
+    //         -moz-user-select: none;
+    //         -ms-user-select: none;
+    //         user-select: none;
+    //     }
+
+
+
+    // }
+    // .SEC_EventNotesItem_btn:hover{
+    //     .SEC_EventNotesItem_icon{
+    //         background-color: #ffffff;
+    //         color: #575757;
+    //     }
+
+    // }
 
 }

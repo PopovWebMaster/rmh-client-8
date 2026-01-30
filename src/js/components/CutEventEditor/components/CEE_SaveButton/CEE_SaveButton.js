@@ -84,8 +84,8 @@ const CEE_SaveButtonComponent = ( props ) => {
                 className = 'btn_wrap'
                 onClick = { click }
             >
-                <span className = 'icon icon-plus'></span>
-                <span className = 'text'>Добавть</span>
+                <span className = 'icon icon-floppy'></span>
+                <span className = 'text'>Сохранить</span>
             </div>
         </div>
     )
