@@ -1,0 +1,30 @@
+.AWGFFE_FileNameTextarea{
+    font-size: 1em;
+    >h4{
+        font-size: 0.75em;
+        color: #3f3f3f;
+        padding: 0.2em 0.4em;
+        text-indent: 1em;
+        margin: 0.2em 0;
+    }
+
+    .AWGFFE_textarea{
+        font-size: 0.75em;
+        padding: 0.2em 1em;
+        line-height: 1.4em;
+        border-radius: 0.1em;
+        border: 1px solid #95636330;
+        outline: none;
+        background-color: #ffffff;
+        width: calc(100% - 2em);
+        color: #575757;
+        min-height: 7em;
+        user-select: all;
+        resize: none;
+    }
+
+    .AWGFFE_textarea::placeholder {
+        // font-size: 0.75em;
+        color: rgb(175, 175, 175);
+    }
+}

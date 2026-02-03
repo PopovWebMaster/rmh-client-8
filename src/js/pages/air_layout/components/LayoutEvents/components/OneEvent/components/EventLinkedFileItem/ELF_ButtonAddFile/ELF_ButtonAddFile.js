@@ -21,6 +21,8 @@ import { set_event_changes_to_store } from './../../../../../vendors/set_event_c
 // import { get_gridDayEventsList_with_new_duration_time } from './vendors/get_gridDayEventsList_with_new_duration_time.js';
 import { get_gridDayEventsList_with_new_duration_time } from './../../EventDurationItem/vendors/get_gridDayEventsList_with_new_duration_time.js';
 
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../config/layout.js'
+
 
 
 const ELF_ButtonAddFileComponent = ( props ) => {
@@ -46,14 +48,19 @@ const ELF_ButtonAddFileComponent = ( props ) => {
 
 
     useEffect( () => {
+
+        // console.dir( 'newFileName' );
+        // console.dir( newFileName );
+
         if( newFileName === '' ){
             setIsReady( false );
         }else{
-            if( newFileDuration === 0 ){
-                setIsReady( false );
-            }else{
-                setIsReady( true );
-            };
+            setIsReady( true );
+            // if( newFileDuration === null ){
+            //     setIsReady( false );
+            // }else{
+            //     setIsReady( true );
+            // };
         };
     }, [
         newFileName,
@@ -84,7 +91,7 @@ const ELF_ButtonAddFileComponent = ( props ) => {
 
             let item = {
                 name:       newFileName,
-                duration:   newFileDuration,
+                duration:   newFileDuration === null? MIN_EVENT_DURATION_SEC: newFileDuration, 
             };
             if( type === EVENT_TYPE.FILE ){
                 arr.push( item );
@@ -116,7 +123,7 @@ const ELF_ButtonAddFileComponent = ( props ) => {
             }else{
                 set_event_changes_to_store( event_id, { linked_file: arr } );
                 setNewFileName( '' );
-                setNewFileDuration( 0 );
+                setNewFileDuration( null );
                 setSavingIsNeeded( true );
 
             };

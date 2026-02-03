@@ -7,15 +7,21 @@ import './ItemSubFiles.scss';
 
 import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
 
-import { ItemEditComponent } from './../ItemEditComponent/ItemEditComponent.js';
-import { AlertWindowContainerSaveAdd } from './../../../../../../../../../../components/AlertWindowContainerSaveAdd/AlertWindowContainerSaveAdd.js';
+// import { ItemEditComponent } from './../ItemEditComponent/ItemEditComponent.js';
+// import { AlertWindowContainerSaveAdd } from './../../../../../../../../../../components/AlertWindowContainerSaveAdd/AlertWindowContainerSaveAdd.js';
 import { save_sub_app_changes_on_server } from './../../../../../../vendors/save_sub_app_changes_on_server.js';
 
-import { new_file_name_is_unic } from './vendors/new_file_name_is_unic.js';
+// import { new_file_name_is_unic } from './vendors/new_file_name_is_unic.js';
 
 import { YesOrNoTitle } from './../YesOrNoTitle/YesOrNoTitle.js';
 
-import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
+// import { get_metadata_from_video_file } from './../../../../../../../../../../helpers/get_metadata_from_video_file.js';
+
+import { AWGetFileForEvent } from './../../../../../../../../../../components/AlertWindowContainer/AWGetFileForEvent/AWGetFileForEvent.js';
+
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/layout.js';
+
+import { AlertWindowContainer } from './../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
 const ItemSubFilesComponent = ( props ) => {
 
@@ -23,53 +29,60 @@ const ItemSubFilesComponent = ( props ) => {
         id,
         application_id,
         file_names,
+
         
     } = props;
 
     let [ isReady, setIsReady ] = useState( false );
+
+    let [ isOpen, setIsOpen ] = useState( false );
     
     let [ nameValue,    setNameValue ] = useState( '' );
     let [ isError,      setIsError ] =  useState( false );
     let [ errorText,    setErrorText ] = useState( '' );
 
-    let [ fileDuration, setFileDuration ] = useState( null );
+    let [ fileDuration, setFileDuration ] = useState( MIN_EVENT_DURATION_SEC );
+    let [ fileDuration_, setFileDuration_ ] = useState( MIN_EVENT_DURATION_SEC );
+
+
+
 
 
     let inputRef = useRef();
 
-        const inputRef_hidden = useRef();
+    // const inputRef_hidden = useRef();
     
-    const click = () => {
+    // const click = () => {
 
-        let accept = [ '.mp4', '.mxf' ];
-        let input = inputRef_hidden.current;
-        input.setAttribute('accept', accept.join(',') );
-        input.click();
+    //     let accept = [ '.mp4', '.mxf' ];
+    //     let input = inputRef_hidden.current;
+    //     input.setAttribute('accept', accept.join(',') );
+    //     input.click();
 
-    };
+    // };
 
-    const inputHandler = (e) => {
+    // const inputHandler = (e) => {
 
-        if( !e.target.files.length ){
-            return;
-        };
+    //     if( !e.target.files.length ){
+    //         return;
+    //     };
 
-        get_metadata_from_video_file( e.target.files[0], ( fileName, fileDuration ) => {
+    //     get_metadata_from_video_file( e.target.files[0], ( fileName, fileDuration ) => {
 
-            setNameValue( fileName );
-            setIsError( false );
-            setErrorText( '' );
+    //         setNameValue( fileName );
+    //         setIsError( false );
+    //         setErrorText( '' );
 
-            if( fileDuration !== null ){
-                setFileDuration( fileDuration )
-            };
+    //         if( fileDuration !== null ){
+    //             setFileDuration( fileDuration )
+    //         };
 
-        } );
+    //     } );
 
-    };
+    // };
 
     useEffect( () => {
-        if( nameValue === '' ){
+        if( nameValue.trim() === '' ){
             setIsReady( false );
         }else{
             
@@ -78,17 +91,32 @@ const ItemSubFilesComponent = ( props ) => {
             }else{
                 setIsReady( true );
             };
+
+            // setFileDuration( MIN_EVENT_DURATION_SEC );
         };
 
     }, [ nameValue, isError ] );
 
+    // useEffect( () => {
 
-    const change_name = ( e ) => {
-        let val = e.target.value;
-        setNameValue( val );
-        setIsError( false );
-        setErrorText( '' );
-    };
+    //     console.dir( 'fileDuration <<<<<<<<<' );
+    //     console.dir( fileDuration );
+
+    //     if( fileDuration === null  ){
+    //         setFileDuration( MIN_EVENT_DURATION_SEC );
+    //     }else{
+            
+           
+    //     };
+
+    // }, [ fileDuration ] );
+
+    // const change_name = ( e ) => {
+    //     let val = e.target.value;
+    //     setNameValue( val );
+    //     setIsError( false );
+    //     setErrorText( '' );
+    // };
 
     const acceptName = () => {
         let nameTrim = nameValue.trim();
@@ -197,66 +225,186 @@ const ItemSubFilesComponent = ( props ) => {
 
 
     return (
-        <div className = 'SA_ItemSubFiles'>
 
-           <YesOrNoTitle
-                title = { 'Имя файла' }
-                booleanValue = { file_names.length > 0 }
-           />
+        // <div className = 'SA_ItemEditComponent'>
+            
 
-            <ItemEditComponent>
+            <div className = 'SA_ItemSubFiles'>
 
-                <div className = 'SA_ItemSubFiles_edit'>
-                    <h3>Новое названия для файла:</h3>
+                <YesOrNoTitle
+                        title = { 'Имя файла' }
+                        booleanValue = { file_names.length > 0 }
+                />
 
-                    <input 
-                        type =          'text'
-                        ref =           { inputRef }
-                        value =         { nameValue }
-                        onChange =      { change_name }
-                        maxLength =     { 255 }
-                        onKeyDown =     { enter }
-                        onBlur =        { blur }
-                        placeholder =   { "имя новой версии файла" }
-                    />
+                <AlertWindowContainer
+                    isOpen =    { isOpen }
+                    setIsOpen = { setIsOpen }
+                    title =     'Привязать файл'
+                    width =     '45vw'
+                    height =    '60vh'
+                >
 
-                    { isError? (
-                        <p className = 'error'>{ errorText }</p>
-                    ): '' }
+                    {/* <div className = 'SA_ItemEditComponent'>
+                                <span 
+                                    className = 'icon-edit'
+                                    onClick = { () => { setIsOpen( true ) } }
+                                ></span>
+                    
+                                <AlertWindowContainer
+                                    isOpen =    { isOpen }
+                                    setIsOpen = { setIsOpen }
+                                    width =     { '40em' }
+                                    height =    { '60em' }
+                                >
+                                    <>{ children }</>
+                    
+                                </AlertWindowContainer>
+                            </div> */}
 
-                    <div className = 'SA_ItemSubFiles_edit_version_take_from_folder'>
-                            <span
-                                onClick = { click }
-                                className = 'SA_take_from_folder_btn'
-                            >Взять из папки</span>
-                            <input 
-                                type =          'file' 
-                                ref =           { inputRef_hidden }
-                                className =     'SA_take_from_folder_inp_file'
-                                onChange =      { inputHandler }
-                            />
+                    <div className = 'SA_ItemSubFiles_edit'>
+                        { isError? (
+                            <p className = 'error'>{ errorText }</p>
+                        ): '' }
+
+                        <div className = 'SA_ItemSubFiles_edit_version'>
+                            <h3>Существующие версии:</h3>
+                            
+
+                            { createList( file_names ) }
+
                         </div>
-                    <div className = 'SA_ItemSubFiles_edit_version'>
-                        <h3>Существующие версии:</h3>
-                        
 
-                        { createList( file_names ) }
+                        <AWGetFileForEvent
+                            fileName =          { nameValue }
+                            setFileName =       { setNameValue }
+                            fileDuration =      { fileDuration_ }
+                            setFileDuration =   { setFileDuration_ }
+                        
+                        />
 
                     </div>
 
-                </div>
+                
+                </AlertWindowContainer>
 
-                <AlertWindowContainerSaveAdd 
-                    isActive =      { isReady }
-                    clickHandler =  { save_click }
-                />
-            </ItemEditComponent>
+                
 
-           
-        </div>
+            
+            </div>
+
+            // <span 
+            //     className = 'icon-edit'
+            //     onClick = { () => { setIsOpen( true ) } }
+            // ></span>
+        // </div>
     )
 
 };
+
+
+
+
+
+
+
+
+
+// <ItemEditComponent>
+
+//                 <div className = 'SA_ItemSubFiles_edit'>
+//                     <h3>Новое названия для файла:</h3>
+
+//                     <input 
+//                         type =          'text'
+//                         ref =           { inputRef }
+//                         value =         { nameValue }
+//                         onChange =      { change_name }
+//                         maxLength =     { 255 }
+//                         onKeyDown =     { enter }
+//                         onBlur =        { blur }
+//                         placeholder =   { "имя новой версии файла" }
+//                     />
+
+//                     { isError? (
+//                         <p className = 'error'>{ errorText }</p>
+//                     ): '' }
+
+//                     <div className = 'SA_ItemSubFiles_edit_version_take_from_folder'>
+//                         <span
+//                             onClick = { click }
+//                             className = 'SA_take_from_folder_btn'
+//                         >Взять из папки</span>
+//                         <input 
+//                             type =          'file' 
+//                             ref =           { inputRef_hidden }
+//                             className =     'SA_take_from_folder_inp_file'
+//                             onChange =      { inputHandler }
+//                         />
+//                     </div>
+
+
+
+
+
+
+
+
+
+
+//                     <div className = 'SA_ItemSubFiles_edit_version'>
+//                         <h3>Существующие версии:</h3>
+                        
+
+//                         { createList( file_names ) }
+
+//                     </div>
+
+//                     <AWGetFileForEvent
+//                         fileName =          { nameValue }
+//                         setFileName =       { setNameValue }
+//                         fileDuration =      { fileDuration_ }
+//                         setFileDuration =   { setFileDuration_ }
+                    
+//                     />
+
+
+//                 </div>
+
+//                 <AlertWindowContainerSaveAdd 
+//                     isActive =      { isReady }
+//                     clickHandler =  { save_click }
+//                 />
+//             </ItemEditComponent>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function ItemSubFiles( props ){
 

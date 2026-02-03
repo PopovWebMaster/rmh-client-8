@@ -16,7 +16,8 @@ import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
 
 import { ReleasesItem } from './components/ReleasesItem/ReleasesItem.js';
 import { AddFreeReleaseItem } from './components/AddFreeReleaseItem/AddFreeReleaseItem.js';
-import { AddFreeReleaseAsTextItem } from './components/AddFreeReleaseAsTextItem/AddFreeReleaseAsTextItem.js'
+import { AddFreeReleaseAsTextItem } from './components/AddFreeReleaseAsTextItem/AddFreeReleaseAsTextItem.js';
+import { AddFileToEventItem } from './components/AddFileToEventItem/AddFileToEventItem.js';
 
 import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
 import { EVENT_TYPE } from './../../../../../../config/layout.js';
@@ -96,7 +97,15 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
                 <div className = 'SEC_right_buttons_wrap'>
 
-                    <AddFreeReleaseItem
+                    <AddFileToEventItem
+                        gridEventId =       { gridEventId }
+                        releases =          { releases }
+                        eventId =           { eventId }
+                        firstSegmentId =    { firstSegmentId }
+                        setDragIsActive =   { setDragIsActive }
+                    />
+
+                    {/* <AddFreeReleaseItem
                         gridEventId =       { gridEventId }
                         releases =          { releases }
                         eventId =           { eventId }
@@ -110,7 +119,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
                         eventId =           { eventId }
                         firstSegmentId =    { firstSegmentId }
                         setDragIsActive =   { setDragIsActive }
-                    />
+                    /> */}
 
                     <CutItem 
                         gridEventId = { gridEventId }

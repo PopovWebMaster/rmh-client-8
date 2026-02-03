@@ -16,6 +16,8 @@ import { ItemSubShedule }           from './../ItemSubShedule/ItemSubShedule.js'
 import { ItemSubReportInDetail }    from './../ItemSubReportInDetail/ItemSubReportInDetail.js';
 import { ItemSubRemove }            from './../ItemSubRemove/ItemSubRemove.js';
 
+import { ItemFileNameEdit } from './../ItemFileNameEdit/ItemFileNameEdit.js';
+
 import { ItemAirNotes } from './../ItemAirNotes/ItemAirNotes.js';
 
 ;
@@ -56,7 +58,13 @@ const OneSubApplicationComponent = ( props ) => {
                 period_to =         { period_to }
 
             />
-            <ItemSubFiles 
+            {/* <ItemSubFiles 
+                id =                { id }
+                application_id =    { application_id }
+                file_names =        { file_names }
+            /> */}
+
+            <ItemFileNameEdit
                 id =                { id }
                 application_id =    { application_id }
                 file_names =        { file_names }

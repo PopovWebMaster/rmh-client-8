@@ -41,6 +41,17 @@ const FRL_EventsButtonsComponent = ( props ) => {
                 let idList = Object.keys( freeReleasesFiltered[ freeReleasesFilterCategoryId ] );
                 let arr = [];
 
+                let firstEventId = null;
+                if( idList[ 0 ] ){
+                    firstEventId = idList[ 0 ];
+                };
+                if( freeReleasesFilterEventId === null ){
+                    if( firstEventId !== null ){
+                        setFreeReleasesFilterEventId( Number( firstEventId ) );
+                    };
+                };
+
+
                 for( let i = 0; i < idList.length; i++ ){
                     let eventId = Number( idList[ i ] );
                     let event = get_event_by_id( eventId );
@@ -76,9 +87,14 @@ const FRL_EventsButtonsComponent = ( props ) => {
 
                 };
 
+
+
+
+
                 setList( arr );
             }else{
                 setList( [] );
+                setFreeReleasesFilterEventId( null );
             };
 
         }else{
@@ -125,10 +141,10 @@ const FRL_EventsButtonsComponent = ( props ) => {
 
     return (
         <div className = 'FRL_EventsButtons'>
-            <span
+            {/* <span
                 className = { `FRL_EventsBtnAll ${ freeReleasesFilterEventId === null? 'isActive': '' }` }
                 onClick = { () => { click( null ) } }
-            >Все</span>
+            >Все</span> */}
 
             { create( list ) }
 

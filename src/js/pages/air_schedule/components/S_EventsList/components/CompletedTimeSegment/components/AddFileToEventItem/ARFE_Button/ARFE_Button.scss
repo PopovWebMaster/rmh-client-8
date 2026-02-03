@@ -1,0 +1,25 @@
+.SEC_AddFileToEventItem{
+
+    .SEC_ARFE_Button{
+        font-size: 0.58em;
+        // width: 4em;
+        color: #1c8151;
+        // background-color: #13ab63;
+        text-align: center;
+        padding: 0.15em 0.6em;
+        border-radius: 0.1em;
+        border: 1px solid #13ab63;
+        cursor: pointer;
+        user-select: none;
+    }
+    .SEC_ARFE_Button:hover{
+        color: #e6e6e6;
+        background-color: #7dbb9e;
+    }
+
+    .SEC_ARFE_Button:active{
+        color: #ff9b9b;
+    }
+
+
+}

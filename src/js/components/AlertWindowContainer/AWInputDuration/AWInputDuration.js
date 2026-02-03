@@ -25,7 +25,10 @@ const AWInputDurationComponent = ( props ) => {
 
     let [ hh, set_hh ] = useState( '00' );
     let [ mm, set_mm ] = useState( '00' );
-    let [ ss, set_ss ] = useState( '05' );
+    // let [ ss, set_ss ] = useState( '02' );
+    let [ ss, set_ss ] = useState( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
+
+
 
     useEffect( () => {
 

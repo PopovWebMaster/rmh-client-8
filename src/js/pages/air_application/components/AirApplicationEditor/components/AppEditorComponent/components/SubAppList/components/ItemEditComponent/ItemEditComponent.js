@@ -15,10 +15,9 @@ const ItemEditComponentComponent = ( props ) => {
         children
         
     } = props;
+
     let [ isOpen, setIsOpen ] = useState( false );
 
-
-    
     return (
         <div className = 'SA_ItemEditComponent'>
             <span 
@@ -30,9 +29,10 @@ const ItemEditComponentComponent = ( props ) => {
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
                 width =     { '40em' }
-                height =    { '20em' }
+                height =    { '60em' }
             >
                 <>{ children }</>
+
             </AlertWindowContainer>
         </div>
     )

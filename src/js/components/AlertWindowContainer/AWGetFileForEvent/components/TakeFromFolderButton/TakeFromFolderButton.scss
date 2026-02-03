@@ -1,0 +1,40 @@
+.AWGFFE_TakeFromFolderButton{
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+    .AWGFFE_TakeFromFolderButton{
+        font-size: .68em;
+        color: #5b5b5b;
+        padding: .16em 1em;
+        border-radius: .1em;
+        border: 1px solid #d1d1d1;
+        background-color: #ededed;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin: .5em 1em;
+
+    }
+
+    .AWGFFE_TakeFromFolderButton:hover{
+        color: #5b5b5b;
+        border: 1px solid #bfbfbf;
+        background-color: #dfdfdf3b;
+    }
+    .AWGFFE_TakeFromFolderButton:active{
+        color: #1b1a1a;
+    }
+
+
+    
+    >.hiddenInput{
+        display: none;
+    }
+}

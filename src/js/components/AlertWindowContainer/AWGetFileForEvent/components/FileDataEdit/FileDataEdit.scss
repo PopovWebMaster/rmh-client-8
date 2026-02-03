@@ -1,0 +1,131 @@
+.AWGFFE_FileDataEdit{
+    font-size: 1em;
+
+    .AWGFFE_container{
+        font-size: 1em;
+        // background-color: #e28686;
+        width: 100%;
+        height: 2.8em;
+
+        overflow: hidden;
+        position: relative;
+
+        .AWGFFE_amin_curtain{
+            font-size: 0.9em;
+
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+
+            background-color: #e9f2f4;
+            border-radius: 0.1em;
+
+            transition: top 0.1s ease-in-out, opacity 0.2s ease-in-out;
+            // transition: top 0.1s ease-in-out;
+
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-items: center;
+
+
+            .AWGFFE_input_text{
+                font-size: 0.75em;
+                padding: 0.3em 1em;
+                line-height: 1.4em;
+                border-radius: 0.1em;
+                border: 1px solid #95636330;
+                // border: 1px solid #57a991;
+
+                outline: none;
+                background-color: #ffffff;
+                max-width: 100%;
+                color: #575757;
+                flex-grow: 1;
+                margin-right: 0.5em;
+            }
+
+            // .InputDuration{
+
+            //     animation-duration: 1s;
+            //     animation-delay: 0.2s;
+            //     animation-name: slidein;
+
+            // }
+
+            // @keyframes slidein {
+            //     0% {
+                    
+            //     }
+            //     25% {
+            //         background-color: #ff9b9b;
+            //     }
+            //     50% {
+            //         background-color: #ffffff;
+            //     }
+            //     75% {
+            //         background-color: #ff9b9b;
+            //     }
+            //     100% {
+            //         background-color: #ffffff;
+            //     }
+            // }
+
+
+
+
+            // #ff9b9b
+
+
+
+
+        }
+
+        .AWGFFE_amin_curtain.isDown{
+            top: 0;
+            opacity: 1;
+        }
+        .AWGFFE_amin_curtain.timeBlink{
+            .AW_item.AWInputDuration{
+                .InputDuration{
+                    animation-duration: 0.5s;
+                    // animation-duration: 5s;
+
+                    animation-delay: 0.2s;
+                    // animation-delay: 10s;
+
+                    animation-name: slidein;
+
+                    // background-color: #fdb2b2;
+                }
+
+                @keyframes slidein {
+                    0% {
+                        background-color: #f7f7f7;
+                    }
+                    25% {
+                        background-color: #fdb2b2;
+                    }
+                    50% {
+                        background-color: #f7f7f7;
+                    }
+                    75% {
+                        background-color: #fdb2b2;
+                    }
+                    100% {
+                        background-color: #f7f7f7;
+                        // background-color: #fdb2b2;
+                    }
+                }
+            }
+            
+        }
+
+    }
+
+
+}

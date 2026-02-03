@@ -29,7 +29,7 @@ export const GRID_SEGMENT_TYPE = {
     COMPLETED: 'completed',
 };
 
-export const MIN_EVENT_DURATION_SEC = 5;
+export const MIN_EVENT_DURATION_SEC = 2;
 
 export const PUSH_IT = {
     UP: 'up',

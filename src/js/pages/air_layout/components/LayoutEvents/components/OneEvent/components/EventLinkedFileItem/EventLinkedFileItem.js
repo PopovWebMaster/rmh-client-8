@@ -30,6 +30,10 @@ import { get_gridDayEventsList_with_new_duration_time } from './../EventDuration
 import { seve_on_server_new_grid_event_list } from './../../../../vendors/seve_on_server_new_grid_event_list.js';
 import { seve_one_event_changes_on_setver } from './../../../../vendors/seve_one_event_changes_on_setver.js';
 
+
+import { AWGetFileForEvent } from './../../../../../../../../components/AlertWindowContainer/AWGetFileForEvent/AWGetFileForEvent.js';
+import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/layout.js';
+
 const EventLinkedFileItemComponent = ( props ) => {
 
     let {
@@ -51,7 +55,7 @@ const EventLinkedFileItemComponent = ( props ) => {
     let [ savingIsNeeded, setSavingIsNeeded ] = useState( false );
 
     let [ newFileName, setNewFileName ] = useState( '' );
-    let [ newFileDuration, setNewFileDuration ] = useState( 0 );
+    let [ newFileDuration, setNewFileDuration ] = useState( MIN_EVENT_DURATION_SEC );
     let [ eventDuration, setEventDuration ] = useState( 0 );
 
 
@@ -75,6 +79,7 @@ const EventLinkedFileItemComponent = ( props ) => {
 
         }else if( isOpen === false ){
             setNewFileName( '' );
+            setNewFileDuration( MIN_EVENT_DURATION_SEC );
 
             if( savingIsNeeded ){
                 let durSec = convert_time_str_to_sec( durationTime );
@@ -131,7 +136,7 @@ const EventLinkedFileItemComponent = ( props ) => {
                 setIsOpen = { setIsOpen }
                 title =     'Привязать файл'
                 width =     '45vw'
-                height =    '45vh'
+                height =    '60vh'
             >
 
                 <div className = 'LE_EventLinkedFileItem_container'>
@@ -153,9 +158,9 @@ const EventLinkedFileItemComponent = ( props ) => {
 
 
 
-                    <h3>Названия файла:</h3>
+                    {/* <h3>Названия файла:</h3> */}
 
-                    <ELF_NewFileInput
+                    {/* <ELF_NewFileInput
                         newFileName = { newFileName }
                         setNewFileName = { setNewFileName }
                     />
@@ -164,7 +169,19 @@ const EventLinkedFileItemComponent = ( props ) => {
                         newFileDuration =       { newFileDuration }
                         setNewFileName =        { setNewFileName }
                         setNewFileDuration =    { setNewFileDuration }
+                    /> */}
+
+                    <AWGetFileForEvent
+                        fileName = { newFileName }
+                        setFileName = { setNewFileName }
+                        fileDuration = { newFileDuration }
+                        setFileDuration = { setNewFileDuration }
                     />
+
+
+
+
+
 
                     <ELF_ButtonAddFile
                         event_id =          { id }

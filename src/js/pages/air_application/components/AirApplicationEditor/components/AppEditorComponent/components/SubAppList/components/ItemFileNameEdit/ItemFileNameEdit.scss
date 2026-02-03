@@ -1,0 +1,202 @@
+
+.SA_ItemFileNameEdit{
+    font-size: 1em;
+    height: 100%;
+    margin-right: 0.2em;
+    padding: 0.2em 0.4em;
+
+    flex-grow: 0;
+
+    position: relative;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    border-right: 1px solid #f7feff;
+
+    width: 8.5em;
+
+    >h3{
+        font-size: .6em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        line-height: 2.2em;
+        // margin-right: 1em;
+
+        // width: 10.4em;
+
+    }
+
+    >span{
+        font-size: 0.8em;
+        // background-color: #cdc8c8;
+        color: #818181;
+        padding: 0.25em 0.1em 0.26em 0.24em;
+        border-radius: 0.15em;
+        cursor: pointer;
+        user-select: none;
+    }
+    >span:hover{
+        background-color: #6f9599;
+        color: #ffffff;
+    }
+
+    >span:active{
+        color: #e9bbbb;
+    }
+
+
+
+    // .SA_ItemSubFiles_edit{
+    //     font-size: 0.9em;
+    //     padding: 1em;
+    //     margin: 0 .5em;
+
+
+    //     h3{
+    //         font-size: .8em;
+    //         padding: 0.2em 0.4em;
+    //         color: #636363;
+    //         margin-right: 1em;
+    //         // width: 12em;
+
+    //         span{
+    //             font-size: 0.8em;
+    //             color: #ff4d4d94;
+    //         }
+    //     }
+
+    //     input{
+    //         font-size: .7em;
+    //         padding: 0.4em 0.4em;
+    //         width: calc( 100% - 2em );
+    //         // max-width: 100%;
+    //         margin: 0 1em 0 0.2em;
+    //         text-align: left;
+    //         text-indent: 1em;
+
+    //         border: 1px solid #7474742e;
+    //         border-radius: 0.1em;
+    //         outline: none;
+    //         // flex-grow: 1;
+
+    //         color: rgb(54, 54, 54);
+    //     }
+
+    //     input[type="text"]::placeholder { 
+    //         color: #d3d3d3; 
+    //     }  
+
+        .error{
+            font-size: .75em;
+            color: #9d2c2c;
+            line-height: 1.4em;
+            padding: .5em 1em;
+            text-indent: 1em;
+
+        }
+
+        // .SA_ItemSubFiles_edit_version_take_from_folder{
+        //     font-size: 1em;
+        //     display: flex;
+        //     justify-content: flex-end;
+        //     align-items: center;
+        //     align-content: center;
+        //     margin: 0.3em 0.6em;
+
+        //     .SA_take_from_folder_btn{
+        //         font-size: 0.68em;
+        //         color: #5b5b5b;
+        //         padding: 0.16em 1em 0.2em;
+        //         border-radius: 0.1em;
+        //         border: 1px solid #dfdfdf;
+        //         background-color: #dfdfdf73;
+        //         cursor: pointer;
+        //         user-select: none;
+        //     }
+        //     .SA_take_from_folder_btn:hover{
+        //         color: #5b5b5b;
+        //         border: 1px solid #bfbfbf;
+        //         background-color: #dfdfdf3b;
+        //     }
+        //     .SA_take_from_folder_btn:active{
+        //         color: #1b1a1a;
+        //     }
+
+        //     .SA_take_from_folder_inp_file{
+        //         display: none;
+        //     }
+
+        // }
+
+
+        .SA_ItemSubFiles_edit_version{
+            margin: 0 0 0.5em 0;
+            padding: 0.5em;
+
+                >h3{
+                    font-size: .7em;
+                    padding: 0.2em 0.4em;
+                    color: #636363;
+                    line-height: 2.2em;
+                    // margin-right: 1em;
+
+                    // width: 10.4em;
+
+                }
+
+            >div{
+                font-size: 1em;
+
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                align-content: center;
+
+                border-radius: 0.1em;
+                padding: 0.2em 0.6em;
+
+                h4{
+                    font-size: .65em;
+                    // padding: 0.2em 0.4em;
+                    color: #476edb;
+                    // text-indent: 2em;
+
+                    flex-grow: 1;
+                    max-width: 100%;
+
+                    
+                }
+
+                .SA_ItemSubFiles_remove{
+                    font-size: 0.7em;
+                    width: 1em;
+                    height: 1em;
+                    border-radius: 0.1em;
+                    padding: 0.1em 0.2em;
+                    color: rgb(253, 133, 133);
+                    flex-grow: 0;
+
+                    cursor: pointer;
+                    user-select: none;
+
+
+                }
+                .SA_ItemSubFiles_remove:hover{
+                    color: red;
+                }
+            }
+
+            >div:hover{
+                background-color: #e3e3e338;
+            }
+
+
+
+        }
+    // }
+
+
+}

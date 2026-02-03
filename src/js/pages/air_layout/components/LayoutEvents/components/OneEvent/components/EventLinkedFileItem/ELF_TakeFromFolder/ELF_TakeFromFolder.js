@@ -23,7 +23,7 @@ const ELF_TakeFromFolderComponent = ( props ) => {
     
     const click = () => {
 
-        let accept = [ '.mp4' ];
+        let accept = [ '.mp4', '.mov' ];
         let input = inputRef_hidden.current;
         input.setAttribute('accept', accept.join(',') );
         input.click();
