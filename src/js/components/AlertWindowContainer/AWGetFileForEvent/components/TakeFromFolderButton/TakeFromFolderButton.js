@@ -23,6 +23,7 @@ const TakeFromFolderButtonComponent = ( props ) => {
     const click = () => {
 
         // clearData();
+        // clearData();
 
         let accept = [ '.mp4', '.mov', '.MOV', '.mxf' ];
         let input = inputRef.current;
@@ -36,7 +37,7 @@ const TakeFromFolderButtonComponent = ( props ) => {
         if( !e.target.files.length ){
             return;
         };
-        clearData();
+        
 
         let files = e.target.files;
 

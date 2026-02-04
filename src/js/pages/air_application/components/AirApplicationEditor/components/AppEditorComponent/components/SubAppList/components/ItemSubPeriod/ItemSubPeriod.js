@@ -124,7 +124,7 @@ const ItemSubPeriodComponent = ( props ) => {
             <span className = 'SA_ItemSubPeriod_data_tire'>-</span>
             <span className = 'SA_ItemSubPeriod_data second' > { convert_date_str_to_format.YY_MM_DD_points( period_to ) }</span>
 
-            <ItemEditComponent>
+            <ItemEditComponent buttonType = 'by_body' >
             
                 <div className = 'SA_ItemSubPeriod_edit'>
                     <h3>Период:</h3>

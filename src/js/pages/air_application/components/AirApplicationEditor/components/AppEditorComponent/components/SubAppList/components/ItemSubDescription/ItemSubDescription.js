@@ -28,6 +28,8 @@ const ItemSubDescriptionComponent = ( props ) => {
     let [ descriptionValue, setSetDescriptionValue ] = useState( description );
 
     useEffect( () => {
+
+
         if( descriptionValue.trim() === description ){
             setIsReady( false );
         }else{
@@ -70,7 +72,7 @@ const ItemSubDescriptionComponent = ( props ) => {
                 title = { 'Описание' }
                 booleanValue = { description }
             />
-            <ItemEditComponent>
+            <ItemEditComponent buttonType = 'by_body'>
                         
                 <div className = 'SA_ItemSubDescription_edit'>
                     <h3>Описание содержимого файла:</h3>
@@ -83,7 +85,7 @@ const ItemSubDescriptionComponent = ( props ) => {
                 </div>
 
                 <AlertWindowContainerSaveAdd 
-                    isActive =      { isReady }
+                    isActive =      { true }
                     clickHandler =  { save_click }
                 />
             </ItemEditComponent>

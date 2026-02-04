@@ -113,11 +113,7 @@ const ItemSubNameComponent = ( props ) => {
 
     return (
         <div className = 'SA_ItemSubName'>
-            <input 
-                type = 'text'
-                value = { name }
-                onChange = { () => {} }
-            />
+            
 
             <ItemEditComponent>
 
@@ -146,6 +142,12 @@ const ItemSubNameComponent = ( props ) => {
                     clickHandler =  { save_click }
                 />
             </ItemEditComponent>
+
+            <input 
+                type = 'text'
+                value = { name }
+                onChange = { () => {} }
+            />
 
         </div>
     )

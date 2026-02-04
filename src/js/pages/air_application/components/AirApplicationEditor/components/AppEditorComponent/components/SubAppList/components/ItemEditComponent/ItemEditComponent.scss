@@ -20,5 +20,26 @@
         color: #e9bbbb;
     }
 
+}
+.SA_ItemEditComponent.SA_byBody{
+    cursor: pointer;
+    user-select: none;
 
+    position: absolute;
+    top: 0;
+    left: -0.2em;
+    width: 100%;
+    height: 100%;
+
+}
+
+.SA_ItemEditComponent.SA_byBody:hover{
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #6baad1;
+    border-radius: 0.1em;
+}
+
+.SA_ItemEditComponent.SA_byBody:active{
+    border: 1px solid #d16b6b;
 }

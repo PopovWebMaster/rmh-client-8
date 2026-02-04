@@ -28,23 +28,23 @@ const FileDataEditComponent = ( props ) => {
 
     let [ timeBlink, setTimeBlink ] = useState( false );
 
-
-
     useEffect( () => {
         if( fileName === '' ){
             setIsDown( false );
             setTimeBlink( false );
+
             setDuration( MIN_EVENT_DURATION_SEC );
         }else{
-            if( fileDuration === null ){
+
+            if( fileDuration === null || fileDuration === MIN_EVENT_DURATION_SEC ){
                 setDuration( MIN_EVENT_DURATION_SEC );
                 setTimeBlink( true );
+                
             }else{
                 setDuration( fileDuration );
                 setTimeBlink( false );
             };
 
-            ;
             setIsDown( true );
         };
 
@@ -57,6 +57,21 @@ const FileDataEditComponent = ( props ) => {
         setFileName( val );
 
     }
+
+    useEffect( () => {
+
+        if( timeBlink ){
+
+            let timerId = setTimeout( () => {
+
+                setTimeBlink( false );
+                clearTimeout( timerId );
+            }, 1000 );
+
+        };
+
+
+    }, [ timeBlink ] );
 
 
     return (

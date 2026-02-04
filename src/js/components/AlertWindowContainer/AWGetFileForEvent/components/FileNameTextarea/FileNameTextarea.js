@@ -58,7 +58,7 @@ const FileNameTextareaComponent = ( props ) => {
    
     return (
         <div className = 'AWGFFE_FileNameTextarea'>
-            <h4>Введите имя файла + время + ↵Enter</h4>
+            <h4>Введите имя файла + хронометраж + ↵Enter</h4>
 
             <textarea 
                 className = 'AWGFFE_textarea'

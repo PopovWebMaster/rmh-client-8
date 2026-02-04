@@ -67,6 +67,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     let [ nextStartTime, setNextStartTime ] = useState( null );
     let [ dropZoneIsActive, setDropZoneIsActive ] = useState( false );
 
+    let [ dropBlockMode, setDropBlockMode ] = useState( false );
+
 
     const getTargetState = () => {
         let result = target_event_is_aparticipant({
@@ -205,10 +207,39 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         setNextStartTime( null );
     }
 
+
+    const mouse_down = ( e ) => { 
+        // console.dir( e );
+
+        if( isEmpty ){
+
+        }else{
+            if( e.altKey ){
+                setDropBlockMode( true );
+            }else{
+                setDropBlockMode( false );
+            };
+        };
+    }
+
+    const mouse_up = ( e ) => { 
+        // console.dir( e.altKey );
+        if( e.altKey === false ){
+            setDropBlockMode( false );
+        }
+        // 
+    }
+
+    const key_up = ( e ) => {
+        console.dir( e );
+
+    }
+
+
     return (
 
        <div 
-            className = 'ScheduleDragAndDropEvent'
+            className = { `ScheduleDragAndDropEvent ${dropBlockMode? 'dropBlockMode': ''}` }
             draggable =     { isEmpty? false: dragIsActive? true: false }
 
             onDragStart =   { drag_start }
@@ -218,6 +249,10 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
             onDragOver =    { drag_over }
             onDragLeave =   { drag_leave }
             onDrop =        { drop }
+
+            onMouseDown =   { mouse_down }
+            onMouseUp =     { mouse_up }
+            onKeyUp = { key_up }
         >
             <SelectedEventWindow
                 selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }

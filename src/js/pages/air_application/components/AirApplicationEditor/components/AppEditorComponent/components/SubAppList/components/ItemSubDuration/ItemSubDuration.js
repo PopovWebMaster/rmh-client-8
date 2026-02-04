@@ -97,7 +97,7 @@ const ItemSubDurationComponent = ( props ) => {
 
             <h3>Хрон: <span className = 'SA_ItemSubDuration_dur'>{ convert_sec_to_time( duration_sec ) }</span></h3>
 
-            <ItemEditComponent>
+            <ItemEditComponent buttonType = 'by_body'>
             
                 <div className = 'SA_ItemSubDuration_edit'>
                     <h3>Длительность файла:</h3>

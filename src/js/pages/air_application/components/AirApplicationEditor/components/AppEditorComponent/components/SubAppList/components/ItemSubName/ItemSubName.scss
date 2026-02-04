@@ -25,10 +25,11 @@
         // width: 14em;
 
         flex-grow: 1;
-        max-width: calc( 100% - 2em );
+        max-width: calc( 100% - 3em );
 
         background-color: #ffffff00;
         outline: none;
+        margin-left: 0.5em;
     }
 
     input:focus{

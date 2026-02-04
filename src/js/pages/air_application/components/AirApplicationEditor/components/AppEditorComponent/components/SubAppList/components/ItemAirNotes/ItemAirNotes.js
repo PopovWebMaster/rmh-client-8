@@ -89,7 +89,7 @@ const ItemAirNotesComponent = ( props ) => {
                 booleanValue = { notesValue === ''? false: true }
            />
 
-            <ItemEditComponent>
+            <ItemEditComponent buttonType = 'by_body'>
 
                 <div className = 'SA_ItemAirNotes_edit'>
                     <h3>Заметки для эфирщика:</h3>
@@ -104,7 +104,7 @@ const ItemAirNotesComponent = ( props ) => {
                 </div>
 
                 <AlertWindowContainerSaveAdd 
-                    isActive =      { isReady }
+                    isActive =      { true }
                     clickHandler =  { save_click }
                 />
             </ItemEditComponent>

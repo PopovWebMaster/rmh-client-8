@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+// import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
 import './CompletedTimeSegment.scss';
 
-import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
+// import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 import { SchEventContainer } from './../SchEventContainer/SchEventContainer.js';
 
 import { EventNameItem } from './components/EventNameItem/EventNameItem.js';
@@ -15,12 +15,8 @@ import { CutItem } from './components/CutItem/CutItem.js';
 import { PremieraToggle } from './components/PremieraToggle/PremieraToggle.js';
 
 import { ReleasesItem } from './components/ReleasesItem/ReleasesItem.js';
-import { AddFreeReleaseItem } from './components/AddFreeReleaseItem/AddFreeReleaseItem.js';
-import { AddFreeReleaseAsTextItem } from './components/AddFreeReleaseAsTextItem/AddFreeReleaseAsTextItem.js';
 import { AddFileToEventItem } from './components/AddFileToEventItem/AddFileToEventItem.js';
 
-import { convert_time_str_to_sec } from './../../../../../../helpers/convert_time_str_to_sec.js';
-import { EVENT_TYPE } from './../../../../../../config/layout.js';
 
 const CompletedTimeSegmentComponent = ( props ) => {
 
@@ -28,7 +24,7 @@ const CompletedTimeSegmentComponent = ( props ) => {
         gridEventId,
         firstSegmentId,
         eventId,
-        notes,
+        // notes,
         isKeyPoint,
         startTime,
         durationTime,
@@ -37,32 +33,10 @@ const CompletedTimeSegmentComponent = ( props ) => {
         finalNotes,
         releases,
 
-        eventListById,
 
     } = props;
 
     let [ dragIsActive, setDragIsActive ] = useState( true );
-
-
-    // let [ duration, setDuration ] = useState( 0 );
-
-
-    // useEffect( () => {
-
-    //     if( firstSegmentId === null ){
-    //         let event = eventListById[ eventId ];
-    //         if( event.type === EVENT_TYPE.BLOCK ){
-    //             setDuration( durationTime );
-    //         }else if( event.type === EVENT_TYPE.FILE ){
-    //             setDuration( convert_time_str_to_sec( event.durationTime ) );
-    //         };
-
-    //     }else{
-    //         setDuration( durationTime );
-    //     };
-
-
-    // }, [ eventListById, durationTime ]);
 
 
     return (
@@ -105,22 +79,6 @@ const CompletedTimeSegmentComponent = ( props ) => {
                         setDragIsActive =   { setDragIsActive }
                     />
 
-                    {/* <AddFreeReleaseItem
-                        gridEventId =       { gridEventId }
-                        releases =          { releases }
-                        eventId =           { eventId }
-                        firstSegmentId =    { firstSegmentId }
-                        setDragIsActive = { setDragIsActive }
-                    />
-
-                    <AddFreeReleaseAsTextItem
-                        gridEventId =       { gridEventId }
-                        releases =          { releases }
-                        eventId =           { eventId }
-                        firstSegmentId =    { firstSegmentId }
-                        setDragIsActive =   { setDragIsActive }
-                    /> */}
-
                     <CutItem 
                         gridEventId = { gridEventId }
                         setDragIsActive = { setDragIsActive }
@@ -148,13 +106,13 @@ const CompletedTimeSegmentComponent = ( props ) => {
 
 export function CompletedTimeSegment( props ){
 
-    const layout = useSelector( layoutSlice );
+    // const layout = useSelector( layoutSlice );
     // const dispatch = useDispatch();
 
     return (
         <CompletedTimeSegmentComponent
             { ...props }
-            eventListById = { layout.eventListById }
+            // eventListById = { layout.eventListById }
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 
         />

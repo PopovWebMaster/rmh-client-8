@@ -25,6 +25,8 @@ import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../../../config/l
 
 import { AlertWindowContainer } from './../../../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 
+import { ItemEditComponent } from './../ItemEditComponent/ItemEditComponent.js';
+
 const ItemFileNameEditComponent = ( props ) => {
 
     let {
@@ -144,6 +146,14 @@ const ItemFileNameEditComponent = ( props ) => {
 
     }
 
+    const clickOpen = ( e ) => {
+        if( e.target.className = 'SA_ItemFileNameEdit'){
+            alert( 'opacha' );
+
+        }
+
+    }
+
 
     return (
 
@@ -170,10 +180,10 @@ const ItemFileNameEditComponent = ( props ) => {
                 </div>
 
                 <AWGetFileForEvent
-                    fileName = { nameValue }
-                    setFileName = { setNameValue }
-                    fileDuration = { fileDuration }
-                    setFileDuration = { setFileDuration }
+                    fileName =          { nameValue }
+                    setFileName =       { setNameValue }
+                    fileDuration =      { fileDuration }
+                    setFileDuration =   { setFileDuration }
                 />
 
                 
@@ -190,10 +200,17 @@ const ItemFileNameEditComponent = ( props ) => {
                 title = { 'Имя файла' }
                 booleanValue = { file_names.length > 0 }
             />
-            <span 
+            {/* <span 
                 className = 'icon-edit'
                 onClick = { () => { setIsOpen( true ) } }
-            ></span>
+            ></span> */}
+
+            <div
+                className = 'SA_ItemFileNameEdit_btn'
+                onClick = { () => { setIsOpen( true ) } }
+            ></div>
+
+
         </div>
     )
 

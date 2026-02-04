@@ -89,21 +89,21 @@
             top: 0;
             opacity: 1;
         }
-        .AWGFFE_amin_curtain.timeBlink{
-            .AW_item.AWInputDuration{
-                .InputDuration{
+        >.AWGFFE_amin_curtain.timeBlink{
+            >.AW_item.AWInputDuration{
+                >.InputDuration{
                     animation-duration: 0.5s;
                     // animation-duration: 5s;
 
                     animation-delay: 0.2s;
                     // animation-delay: 10s;
 
-                    animation-name: slidein;
+                    animation-name: slideinDur;
 
                     // background-color: #fdb2b2;
                 }
 
-                @keyframes slidein {
+                @keyframes slideinDur {
                     0% {
                         background-color: #f7f7f7;
                     }

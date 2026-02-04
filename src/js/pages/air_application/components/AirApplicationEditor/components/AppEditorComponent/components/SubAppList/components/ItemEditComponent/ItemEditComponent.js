@@ -12,24 +12,47 @@ import { AlertWindowContainer } from './../../../../../../../../../../components
 const ItemEditComponentComponent = ( props ) => {
 
     let {
-        children
+        children,
+
+        buttonType = 'by_edit_button', // or 'by_body'
+
+        width = '40em',
+        height = '40vh',
+
         
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
 
+    const clickBody = ( e ) => {
+        if( e.target.className === 'SA_ItemEditComponent SA_byBody' ){
+            setIsOpen( true )
+        };
+    }
+
+    const clickBtn = () => {
+        setIsOpen( true )
+    }
+
     return (
-        <div className = 'SA_ItemEditComponent'>
-            <span 
-                className = 'icon-edit'
-                onClick = { () => { setIsOpen( true ) } }
-            ></span>
+        <div 
+            className = { `SA_ItemEditComponent ${buttonType === 'by_body'? 'SA_byBody': ''}`  }
+            onClick = { clickBody }
+        >
+
+            { buttonType === 'by_edit_button'? (
+                <span 
+                    className = 'icon-edit'
+                    onClick = { clickBtn }
+                ></span>
+            ): '' }
+            
 
             <AlertWindowContainer
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
-                width =     { '40em' }
-                height =    { '60em' }
+                width =     { width }
+                height =    { height }
             >
                 <>{ children }</>
 

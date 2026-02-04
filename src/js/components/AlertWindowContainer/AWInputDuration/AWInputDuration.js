@@ -28,9 +28,11 @@ const AWInputDurationComponent = ( props ) => {
     // let [ ss, set_ss ] = useState( '02' );
     let [ ss, set_ss ] = useState( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
 
-
+// console.log( 'value', value );
 
     useEffect( () => {
+
+        
 
         if( typeof value === 'number' ){
             setValueNumber( value );
