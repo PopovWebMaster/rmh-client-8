@@ -25,14 +25,12 @@ const AWInputDurationComponent = ( props ) => {
 
     let [ hh, set_hh ] = useState( '00' );
     let [ mm, set_mm ] = useState( '00' );
-    // let [ ss, set_ss ] = useState( '02' );
     let [ ss, set_ss ] = useState( `${MIN_EVENT_DURATION_SEC}`.padStart( 2, "0" ) );
-
-// console.log( 'value', value );
 
     useEffect( () => {
 
-        
+        // console.dir( 'value' );
+        // console.dir( value );
 
         if( typeof value === 'number' ){
             setValueNumber( value );
@@ -66,7 +64,10 @@ const AWInputDurationComponent = ( props ) => {
     const enter = () => {
         let time = `${hh}:${mm}:${ss}`;
         let sec = convert_time_str_to_sec( time );
-        changeHandler( sec, time );
+        if( sec !== MIN_EVENT_DURATION_SEC ){
+            changeHandler( sec, time );
+        }
+        
     }
 
 

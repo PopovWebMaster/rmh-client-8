@@ -54,11 +54,15 @@ export class NewGridEventGroupClass {
         ScheduleEvent.SetData( gridEventData );
         this.scheduleEventsGroup.push( ScheduleEvent );
 
+        let newGroupIndex = this.scheduleEventsGroup.length - 1;
+
         if( this.scheduleEventsGroup.length === 1 ){
             this.SetEventData();
-            let { firstSegmentId } = this.scheduleEventsGroup[ 0 ];
+            let { firstSegmentId } = this.scheduleEventsGroup[ newGroupIndex ];
             this.firstSegmentId = firstSegmentId;
         };
+
+        return newGroupIndex;
 
     }
 
@@ -99,7 +103,7 @@ export class NewGridEventGroupClass {
 
     }
 
-    AddLinkedFilesFromEvent(){
+    AddLinkedFilesFromEvent( groupIndex = 0 ){
         if( this.firstSegmentId === null ){  // событие не является порезаным на части
             if( this.event_type === EVENT_TYPE.BLOCK ){
                 if( this.linked_file !== null ){
@@ -114,15 +118,15 @@ export class NewGridEventGroupClass {
                         } = this.linked_file[ i ];
 
                         
-                        let { startTime } = this.scheduleEventsGroup[ 0 ];
-                        this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                        let { startTime } = this.scheduleEventsGroup[ groupIndex ];
+                        this.scheduleEventsGroup[ groupIndex ].AddLinkedFileToRelease({
                             category_id: this.category_id,
                             eventId: this.eventId,
                             name,
                             duration,
                             startTime
                         });
-                        this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                        this.scheduleEventsGroup[ groupIndex ].UpdateEventData();
                     };
                 }
                 
@@ -167,7 +171,7 @@ export class NewGridEventGroupClass {
         
     }
 
-    AddReleaseAsLinkedFile( params ){
+    AddReleaseAsLinkedFile( params, groupIndex = 0 ){
         let {
             name,
             duration,
@@ -175,26 +179,26 @@ export class NewGridEventGroupClass {
         } = params;
         if( this.firstSegmentId === null ){
             if( this.event_type === EVENT_TYPE.BLOCK ){
-                this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                this.scheduleEventsGroup[ groupIndex ].AddLinkedFileToRelease({
                     category_id:    this.category_id,
                     eventId:        this.eventId,
                     name,
                     duration,
                     startTime
                 });
-                this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                this.scheduleEventsGroup[ groupIndex ].UpdateEventData();
             }else{
 
 
                 if( releases.length === 0 ){
-                    this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                    this.scheduleEventsGroup[ groupIndex ].AddLinkedFileToRelease({
                         category_id:    this.category_id,
                         eventId:        this.eventId,
                         name,
                         duration,
                         startTime
                     });
-                    this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                    this.scheduleEventsGroup[ groupIndex ].UpdateEventData();
                 };
             };
         }else{
@@ -217,38 +221,41 @@ export class NewGridEventGroupClass {
 
     }
 
-    AddFreeRelease( params ){
+    AddFreeRelease( params, groupIndex = 0 ){
         let {
             name,
             duration,
             startTime,
+            air_notes = '',
         } = params;
 
         if( this.firstSegmentId === null ){
             if( this.event_type === EVENT_TYPE.BLOCK ){
 
                 
-                this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                this.scheduleEventsGroup[ groupIndex ].AddLinkedFileToRelease({
                     category_id:    this.category_id,
                     eventId:        this.eventId,
                     name,
                     duration,
-                    startTime
+                    startTime,
+                    air_notes,
                 });
-                this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                this.scheduleEventsGroup[ groupIndex ].UpdateEventData();
             }else{
                 // console.dir( this);
 
 
-                if( this.scheduleEventsGroup[ 0 ].releases.length === 0 ){
-                    this.scheduleEventsGroup[ 0 ].AddLinkedFileToRelease({
+                if( this.scheduleEventsGroup[ groupIndex ].releases.length === 0 ){
+                    this.scheduleEventsGroup[ groupIndex ].AddLinkedFileToRelease({
                         category_id:    this.category_id,
                         eventId:        this.eventId,
                         name,
                         duration,
-                        startTime
+                        startTime,
+                        air_notes,
                     });
-                    this.scheduleEventsGroup[ 0 ].UpdateEventData();
+                    this.scheduleEventsGroup[ groupIndex ].UpdateEventData();
                 };
             };
         }else{

@@ -41,9 +41,9 @@ const CompletedTimeSectorComponent = ( props ) => {
 
             { firstSegmentId === null? (
                 <DurationTimeEditButton
-                    durationTime =  { durationTime }
-                    gridEventId =   { gridEventId }
-                    setDragIsActive = { setDragIsActive }
+                    durationTime =      { durationTime }
+                    gridEventId =       { gridEventId }
+                    setDragIsActive =   { setDragIsActive }
                 />
             ): <span className = 'SEC_duration'>{ convert_sec_to_time( durationTime ) }</span> }
 

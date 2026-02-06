@@ -42,16 +42,17 @@ const DurationTimeEditButtonComponent = ( props ) => {
     let [ isReady, setIsReady ] = useState( false );
 
     useEffect( () => {
-        // if( isOpen ){
+        setValue( durationTime );
+    }, [ durationTime ] );
+
+    useEffect( () => {
+        if( isOpen ){
+           
+        }else{
             setValue( durationTime );
-        // }else{
-
-        // }
-
-        if( isOpen === false ){
             setDragIsActive( true );
-        }
-        
+        };
+ 
 
     }, [ gridEventId, isOpen ] );
 
@@ -81,6 +82,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
 
     const clickSave = () => {
+
         if( isReady ){
             set_schedule_list_changes_to_store( gridEventId, { durationTime: value } );
             setIsOpen( false );
@@ -109,7 +111,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
                 <div className = 'SEC_duration_controller_wrap'>
                     <AWInputDuration
-                        value = { value }
+                        value =         { value }
                         changeHandler = { change }
                     />
                 </div>

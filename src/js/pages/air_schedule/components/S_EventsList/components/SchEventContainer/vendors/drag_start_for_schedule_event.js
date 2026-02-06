@@ -66,7 +66,6 @@ export const drag_start_for_schedule_event = ( gridEventId ) => {
     ScheduleReleaseDragEvent.DragStart.SetDuration( durationTime );
     ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );
     ScheduleReleaseDragEvent.DragStart.SetGridEventId( gridEventId );
-
     ScheduleReleaseDragEvent.DragStart.SetMinStartTime( minStartTime );
     ScheduleReleaseDragEvent.DragStart.SetMaxStartTime( maxStartTime );
 

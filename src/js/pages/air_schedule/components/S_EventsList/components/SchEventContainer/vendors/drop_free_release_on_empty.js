@@ -38,6 +38,8 @@ export const drop_free_release_on_empty = ( startTime ) => {
     });
 
 
+
+
     StoreScheduleResultEvents.AddNewGridEvent();
 
     

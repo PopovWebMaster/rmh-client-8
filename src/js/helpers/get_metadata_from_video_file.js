@@ -13,6 +13,10 @@ export const get_metadata_from_video_file = ( file, callback ) => {
     if( type === 'video/mp4' ){
         nanoMetadata.video.duration(file).then((duration) => {
             fileDuration = Math.floor( Number( duration ) );
+
+            console.dir( 'fileDuration' )
+            console.dir( fileDuration )
+
             callback( fileName, fileDuration );
         });
     }else{

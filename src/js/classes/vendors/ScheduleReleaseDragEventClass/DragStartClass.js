@@ -135,11 +135,7 @@ export class DragStartClass {
     SetToStore(){
 
         store.dispatch( setDragStartFrom( this.startFrom ) );
-        // if( this.duration + this.linked_files_duration === 0 ){
-        //     store.dispatch( setDragStartDuration( this.event_duration ) );
-        // }else{
-            store.dispatch( setDragStartDuration( this.duration  ) );
-        // };
+        store.dispatch( setDragStartDuration( this.duration  ) );
         
 
         store.dispatch( setDragStartEventId( this.eventId ) );
@@ -161,6 +157,14 @@ export class DragStartClass {
             store.dispatch( setDragStartReleaseId( this.releaseId ) );
 
         }else if( this.startFrom === START_FROM.SCHEDULE_EVENT ){
+
+
+
+
+
+
+
+
             store.dispatch( setDragStartStartTime( this.startTime ) );
             store.dispatch( setDragStartGridEventId( this.gridEventId ) );
         }else if( this.startFrom === START_FROM.RELEASE_LIST ){

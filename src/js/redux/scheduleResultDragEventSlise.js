@@ -22,6 +22,9 @@ export const scheduleResultDragEventSlise = createSlice({
         dragStartMaxStartTime: 24*60*60,
 
 
+        altKayList: {},
+
+
     },
 
     reducers: {
@@ -73,9 +76,13 @@ export const scheduleResultDragEventSlise = createSlice({
 
 
 
+        setAltKayList: ( state, action ) => {
+            state.altKayList =  action.payload;
+        },
 
 
-        
+
+
 
 
         
@@ -93,9 +100,10 @@ export const {
     setDragStartCategoryId,
     setDragStartReleaseId,
     setDragStartLinkedFileDuration,
-
     setDragStartMinStartTime,
     setDragStartMaxStartTime,
+
+    setAltKayList,
 
 
 } = scheduleResultDragEventSlise.actions;
@@ -104,21 +112,23 @@ export const selectorData = ( state ) => {
     return {
 
         dragStartFrom: state.scheduleResultDragEvent.dragStartFrom,
-
         dragStartFileName: state.scheduleResultDragEvent.dragStartFileName,
         dragStartDuration: state.scheduleResultDragEvent.dragStartDuration,
         dragStartEventId: state.scheduleResultDragEvent.dragStartEventId,
         dragStartCategoryId: state.scheduleResultDragEvent.dragStartCategoryId,
-
-
         dragStartStartTime: state.scheduleResultDragEvent.dragStartStartTime,
         dragStartGridEventId: state.scheduleResultDragEvent.dragStartGridEventId,
         dragStartReleaseId: state.scheduleResultDragEvent.dragStartReleaseId,
         dragStartLinkedFileDuration: state.scheduleResultDragEvent.dragStartLinkedFileDuration,
-
         dragStartMinStartTime: state.scheduleResultDragEvent.dragStartMinStartTime,
-
         dragStartMaxStartTime: state.scheduleResultDragEvent.dragStartMaxStartTime,
+
+        altKayList: state.scheduleResultDragEvent.altKayList,
+
+
+
+
+        
 
 
 

@@ -22,7 +22,7 @@ const TopSwitchButtonsComponent = ( props ) => {
                 className = { `TSB_btn ${ activeTab === 'buffer'? 'isActive': '' }` }
                 onClick = { () => { setActiveTab( 'buffer' ) } }
             >
-                <span className = 'TSB_btn_first'>Заявки</span>
+                {/* <span className = 'TSB_btn_first'>Заявки</span> */}
                 <span>Буфер</span>
             </div>
 

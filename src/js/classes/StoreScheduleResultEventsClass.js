@@ -65,7 +65,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         
 
-
+// AddReleasesFromNewGridEvent
         
 
 
@@ -129,28 +129,40 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             startTime,
             eventId,
             durationTime = MIN_EVENT_DURATION_SEC,
+
+            finalNotes = '',
+            is_premiere = false,
+            notes = '',
+
+
         } = params;
 
         this.NewGridEventGroup = new NewGridEventGroupClass();
-        this.NewGridEventGroup.AddNewEvent({
+        let newGroupIndex = this.NewGridEventGroup.AddNewEvent({
             durationTime,
             id: this.GetIdForNewGridEvent(),
             eventId,
             startTime,
+
+            finalNotes,
+            is_premiere,
+            notes,
         });
+
+        return newGroupIndex;
     }
 
-    AddReleasesFromNewGridEvent( gridEventId ){
+    AddReleasesFromNewGridEvent( gridEventId, groupIndex = 0 ){
         for( let i = 0; i < this.list.length; i++ ){
             if( this.list[ i ].id === gridEventId ){
 
                 if( this.list[ i ].firstSegmentId === null ){
-                    let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
+                    let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ groupIndex ].GetData();
                     for( let y = 0; y < newEventData.releases.length; y++ ){
                         this.AddAnyReleaseByData( gridEventId, newEventData.releases[ y ] );
                     };
                 }else{
-                    let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ 0 ].GetData();
+                    let newEventData = this.NewGridEventGroup.scheduleEventsGroup[ groupIndex ].GetData();
                     for( let y = 0; y < newEventData.releases.length; y++ ){
                         this.AddAnyReleaseByData( gridEventId, newEventData.releases[y] );
                     };

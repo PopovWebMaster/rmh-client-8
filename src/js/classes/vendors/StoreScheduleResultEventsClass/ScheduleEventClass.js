@@ -54,7 +54,7 @@ export class ScheduleEventClass{
         this.SetFirstSegmentIdAsNull = this.SetFirstSegmentIdAsNull.bind(this);
 
 
-
+// AddLinkedFileToRelease
 
 
     }
@@ -285,14 +285,15 @@ export class ScheduleEventClass{
             eventId,
             name,
             duration,
-            startTime
+            startTime,
+            air_notes = '',
         } = params;
 
         let YYYY_MM_DD = get_date_now_YYYY_MM_DD();
 
         let relData = {
             YYYY_MM_DD,
-            air_notes: '',
+            air_notes,
             applicationName: 'no name',
             application_id: null,
             category_id,
@@ -380,57 +381,42 @@ export class ScheduleEventClass{
     UpdateDurationTime(){
         let { type } = get_event_by_id( this.eventId );  
 
-        // if( type ){
-            // let durationTime = 0;
-            let allReleaseDuration = null;
+        let allReleaseDuration = null;
 
-            if( this.releaseList.length > 0 ){
-                if( type === EVENT_TYPE.BLOCK ){
-                    for( let i = 0; i < this.releaseList.length; i++ ){
-                        allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
-                    };
-                }else{
-
-                    if( this.firstSegmentId === null ){
-                        allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
-                    }else{
-                        /*
-                            никогда не выполнится, так как нельзя резать события с релизами больше одного
-                        */
-                        allReleaseDuration = this.durationTime;
-                        // allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
-
-                    };
-                }
-
-            }else{
-                if( type === EVENT_TYPE.BLOCK ){
-                    // durationTime = MIN_EVENT_DURATION_SEC;
-                    allReleaseDuration = MIN_EVENT_DURATION_SEC;
-
-                }else{
-                    allReleaseDuration = this.durationTime;
-                    // if( this.gridEventId !== null ){
-                    //     let event = get_grid_event_by_id( this.gridEventId );
-
-                    //     if( event === null ){
-                    //         durationTime = this.durationTime;
-                    //     }else{
-                    //         durationTime = event.durationTime;
-                    //     };
-
-                    // }else{
-                    //     durationTime = this.durationTime;
-                    // }
+        if( this.releaseList.length > 0 ){
+            if( type === EVENT_TYPE.BLOCK ){
+                for( let i = 0; i < this.releaseList.length; i++ ){
+                    allReleaseDuration = allReleaseDuration + this.releaseList[ i ].GetDurationTime();
                 };
-            };
-            // this.durationTime = durationTime;
-            if( allReleaseDuration !== null ){
-                this.durationTime = allReleaseDuration;
-            };
-            
+            }else{
 
-        // }
+                if( this.firstSegmentId === null ){
+                    allReleaseDuration = this.releaseList[ 0 ].GetDurationTime();
+                }else{
+                    /*
+                        никогда не выполнится, так как нельзя резать события с релизами больше одного
+                    */
+                    allReleaseDuration = this.durationTime;
+                };
+            }
+
+        }else{
+            if( type === EVENT_TYPE.BLOCK ){
+                // allReleaseDuration = MIN_EVENT_DURATION_SEC;
+                /*
+                    если здесь поставить MIN_EVENT_DURATION_SEC то нельзя будет редактировать хрон блоков пустых
+                */
+            }else{
+                allReleaseDuration = this.durationTime;
+            };
+        };
+
+        
+
+        if( allReleaseDuration !== null ){
+            this.durationTime = allReleaseDuration;
+        };
+            
 
     }
 

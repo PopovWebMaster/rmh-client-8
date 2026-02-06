@@ -105,22 +105,25 @@ const BufferListComponent = ( props ) => {
                         draggable = { true }
                         onDragStart = { ( e ) => { drag_start( e, item ) } }
                         onDragEnd = { drag_end }
+
+                        title = { releaseName }
                         
                     >
-                        <span className = 'GE_id'>{ charYes? grid_event_id: '' }</span>
-                        <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
-                        <span className = 'name'>{ releaseName }</span>
-                        {
-                            eventName === ''? <>
-                                <span className = 'char_name'>График</span>
-                                <span className = { charYes? 'char_yes': 'char_not' }>{ charYes? 'Да': 'Нет' }</span>
-                            </>: <span className = 'eventName'>{ eventName }</span>
-                        }
-                        
-                        
-                        <span className = 'duration_name'>Хрон.</span>
-                        <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
 
+                        <div className = 'RB_BufferList_item_left'>
+                            <span className = 'GE_id'>{ charYes? grid_event_id: ' ' }</span>
+                            <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
+                            <span className = 'name'>
+                                <span>{ releaseName }</span>
+                            </span>
+                        </div>
+
+                        <div className = 'RB_BufferList_item_right'>
+                            { charYes? '': <span className = 'char_not'>{ 'Слепой' }</span> }
+                            <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
+
+                        </div>
+                        
                     </div>
                 )
             };

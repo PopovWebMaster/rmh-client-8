@@ -56,6 +56,11 @@ const AddFileToEventItemComponent = ( props ) => {
     }, [ fileName ] );
 
     const save = () => {
+
+        console.dir( {
+            fileDuration,
+            fileName,
+        } );
         if( fileName !== '' ){
 
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();

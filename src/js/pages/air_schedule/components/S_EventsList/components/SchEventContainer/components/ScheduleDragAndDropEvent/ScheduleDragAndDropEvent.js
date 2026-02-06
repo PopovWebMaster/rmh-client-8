@@ -30,7 +30,7 @@ import { drop_release_list_on_empty } from './../../vendors/drop_release_list_on
 import { drop_release_list_on_complete } from './../../vendors/drop_release_list_on_complete.js';
 
 
-
+import { set_altKey_list } from './../../vendors/set_altKey_list.js';
 
 
 import { SelectedEventWindow } from './../../components/SelectedEventWindow/SelectedEventWindow.js';
@@ -54,6 +54,8 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         dragOverHandler = () => {},
         dragLeaveHandler = () => {},
 
+        altKayList,
+
 
         children,
         dragStartFrom,
@@ -68,6 +70,19 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     let [ dropZoneIsActive, setDropZoneIsActive ] = useState( false );
 
     let [ dropBlockMode, setDropBlockMode ] = useState( false );
+
+
+    useEffect( () => {
+        if( altKayList[ gridEventId ] === true ){
+            setDropBlockMode( true );
+        }else{
+            setDropBlockMode( false );
+        };
+
+    }, [ altKayList ] );
+
+
+
 
 
     const getTargetState = () => {
@@ -118,7 +133,6 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         let targetState = getTargetState();
         setDropZoneIsActive( targetState );
         setIsLighter( targetState );
-
     }
 
     const drag_leave = ( e ) => {
@@ -209,30 +223,13 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
 
     const mouse_down = ( e ) => { 
-        // console.dir( e );
-
-        if( isEmpty ){
-
-        }else{
-            if( e.altKey ){
-                setDropBlockMode( true );
-            }else{
-                setDropBlockMode( false );
-            };
+        if( isCompletd ){
+            set_altKey_list( e, gridEventId );
         };
     }
 
     const mouse_up = ( e ) => { 
-        // console.dir( e.altKey );
-        if( e.altKey === false ){
-            setDropBlockMode( false );
-        }
-        // 
-    }
-
-    const key_up = ( e ) => {
-        console.dir( e );
-
+        // cleare_altKey_list();
     }
 
 
@@ -244,15 +241,12 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
             onDragStart =   { drag_start }
             onDragEnd =     { drag_end }
-
-
             onDragOver =    { drag_over }
             onDragLeave =   { drag_leave }
             onDrop =        { drop }
 
             onMouseDown =   { mouse_down }
             onMouseUp =     { mouse_up }
-            onKeyUp = { key_up }
         >
             <SelectedEventWindow
                 selectedEventWindow_isOpen =        { selectedEventWindow_isOpen }
@@ -305,6 +299,8 @@ export function ScheduleDragAndDropEvent( props ){
             dragStartFrom =         { scheduleResultDragEvent.dragStartFrom }
             dragStartEventId =      { scheduleResultDragEvent.dragStartEventId }
             dragStartDuration =     { scheduleResultDragEvent.dragStartDuration }
+
+            altKayList = { scheduleResultDragEvent.altKayList }
 
             // setDragebleReleaseId = { ( val ) => { dispatch( setDragebleReleaseId( val ) ) } }
 
