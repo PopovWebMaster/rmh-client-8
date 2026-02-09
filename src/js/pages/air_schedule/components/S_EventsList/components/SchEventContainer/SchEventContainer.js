@@ -96,6 +96,8 @@ const SchEventContainerComponent = ( props ) => {
                             durationTime =  { durationTime }
                             firstSegmentId =  { firstSegmentId }
                             setDragIsActive = { setDragIsActive }
+                            // setDragIsActive = { () => {} }
+
 
                         />
                     ): (<>

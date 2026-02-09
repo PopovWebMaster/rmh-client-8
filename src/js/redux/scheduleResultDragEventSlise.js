@@ -23,6 +23,9 @@ export const scheduleResultDragEventSlise = createSlice({
 
 
         altKayList: {},
+        altGridEventsList: [],
+        altGridEventsListById: {},
+        dragStartAltGridEventId: null,
 
 
     },
@@ -74,11 +77,27 @@ export const scheduleResultDragEventSlise = createSlice({
             state.dragStartMaxStartTime =  action.payload;
         },
 
-
-
         setAltKayList: ( state, action ) => {
             state.altKayList =  action.payload;
         },
+
+
+
+        setAltGridEventsList: ( state, action ) => {
+            state.altGridEventsList =  action.payload;
+        },
+
+        setAltGridEventsListById: ( state, action ) => {
+            state.altGridEventsListById =  action.payload;
+        },
+
+        setDragStartAltGridEventId: ( state, action ) => {
+            state.dragStartAltGridEventId =  action.payload;
+        },
+
+
+
+
 
 
 
@@ -104,6 +123,9 @@ export const {
     setDragStartMaxStartTime,
 
     setAltKayList,
+    setAltGridEventsList,
+    setAltGridEventsListById,
+    setDragStartAltGridEventId,
 
 
 } = scheduleResultDragEventSlise.actions;
@@ -124,6 +146,12 @@ export const selectorData = ( state ) => {
         dragStartMaxStartTime: state.scheduleResultDragEvent.dragStartMaxStartTime,
 
         altKayList: state.scheduleResultDragEvent.altKayList,
+        altGridEventsList: state.scheduleResultDragEvent.altGridEventsList,
+        altGridEventsListById: state.scheduleResultDragEvent.altGridEventsListById,
+        dragStartAltGridEventId: state.scheduleResultDragEvent.dragStartAltGridEventId,
+
+
+
 
 
 

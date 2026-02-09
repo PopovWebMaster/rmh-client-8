@@ -28,6 +28,7 @@ import { drag_start_for_schedule_event } from './../../vendors/drag_start_for_sc
 import { drop_release_as_event_on_empty } from './../../vendors/drop_release_as_event_on_empty.js';
 import { drop_release_list_on_empty } from './../../vendors/drop_release_list_on_empty.js';
 import { drop_release_list_on_complete } from './../../vendors/drop_release_list_on_complete.js';
+import { drop_alt_event_on_empty } from './../../vendors/drop_alt_event_on_empty.js';
 
 
 import { set_altKey_list } from './../../vendors/set_altKey_list.js';
@@ -115,8 +116,11 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
     }
 
     const drag_start = ( e ) => {
+
         access_right( 'schedule_edit', () => {
             if( isCompletd ){
+
+                
                 drag_start_for_schedule_event( gridEventId );
                 var img = document.createElement("img");
                 e.dataTransfer.setDragImage(img, 0, 0);
@@ -213,6 +217,19 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
                     setStartTimePlus( 0 );
                     let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
                     ScheduleReleaseDragEvent.ClearData();
+                };
+            }else if( dragStartFrom === START_FROM.ALT_GRID_EVENT ){
+                if( isEmpty ){
+                    drop_alt_event_on_empty( startTime + startTimePlus );
+                    setStartTimePlus( 0 );
+                    let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    ScheduleReleaseDragEvent.ClearData();
+
+                }else{
+                    // drop_release_list_on_complete( gridEventId );
+                    // setStartTimePlus( 0 );
+                    // let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                    // ScheduleReleaseDragEvent.ClearData();
                 };
             };
         };

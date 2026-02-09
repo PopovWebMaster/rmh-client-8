@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import './S_ReleaseList.scss';
 
 import { selectorData as scheduleResultSlise } from './../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultDragEventSlise } from './../../../../redux/scheduleResultDragEventSlise.js';
+
 
 import { TopSwitchButtons } from './components/TopSwitchButtons/TopSwitchButtons.js';
 import { ReleaseBuffer } from './components/ReleaseBuffer/ReleaseBuffer.js';
@@ -19,10 +21,19 @@ import { EventsAsReleaseList } from './components/EventsAsReleaseList/EventsAsRe
 const S_ReleaseListComponent = ( props ) => {
 
     let {
-
+        altKayList
     } = props;
 
+
     let [ activeTab, setActiveTab ] = useState( 'buffer' ); // 'buffer' 'list' 'free_release' 'events_as_release'
+
+        useEffect( () => {
+        let arr = Object.keys( altKayList );
+        if( arr.length > 0  ){
+            setActiveTab( 'buffer' );
+        };
+
+    }, [altKayList] );
 
     const create = ( val ) => {
         let result = '';
@@ -67,11 +78,16 @@ const S_ReleaseListComponent = ( props ) => {
 export function S_ReleaseList( props ){
 
     const scheduleResult = useSelector( scheduleResultSlise );
+    const scheduleResultDragEvent = useSelector( scheduleResultDragEventSlise );
+
+
     // const dispatch = useDispatch();
 
     return (
         <S_ReleaseListComponent
             { ...props }
+
+            altKayList = { scheduleResultDragEvent.altKayList }
 
             // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
 

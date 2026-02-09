@@ -39,7 +39,7 @@ const AddFileToEventItemComponent = ( props ) => {
             setDragIsActive( false );
 
         }else{
-            setDragIsActive( false );
+            setDragIsActive( true );
             setFileName( '' );
             setFileDuration( null );
         };
@@ -83,6 +83,8 @@ const AddFileToEventItemComponent = ( props ) => {
             setIsOpen( false );
 
         };
+
+        // setDragIsActive( true );
     }
 
 

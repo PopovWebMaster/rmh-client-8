@@ -40,7 +40,7 @@ const FRL_DragAndDropEventStartComponent = ( props ) => {
             ScheduleReleaseDragEvent.SetStartFrom( START_FROM.RELEASE_FREE );
             ScheduleReleaseDragEvent.DragStart.SetFileName( fileName );
             ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
-            ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
+            // ScheduleReleaseDragEvent.DragStart.SetDuration( duration + linked_file_dutation );
             ScheduleReleaseDragEvent.DragStart.SetLinkedFilesDuration( linked_file_dutation );
 
             ScheduleReleaseDragEvent.DragStart.SetEventId( eventId );

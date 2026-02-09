@@ -15,6 +15,7 @@ import {
 
     setDragStartMinStartTime,
     setDragStartMaxStartTime,
+    setDragStartAltGridEventId,
 
 } from './../../../redux/scheduleResultDragEventSlise.js';
 
@@ -43,6 +44,8 @@ export class DragStartClass {
         this.minStartTime = 0;
         this.maxStartTime = 24*60*60;
 
+        this.altEventId = null;
+
 
         this.SetFileName = this.SetFileName.bind(this);
         this.SetDuration = this.SetDuration.bind(this);
@@ -56,9 +59,9 @@ export class DragStartClass {
 
         this.SetMinStartTime = this.SetMinStartTime.bind(this);
         this.SetMaxStartTime = this.SetMaxStartTime.bind(this);
+        this.SetAltEventId = this.SetAltEventId.bind(this);
 
 
-        
 
 
     }
@@ -131,23 +134,24 @@ export class DragStartClass {
 
     }
 
+    SetAltEventId( altEventId ){
+        this.altEventId = altEventId;
+
+    }
+
 
     SetToStore(){
 
         store.dispatch( setDragStartFrom( this.startFrom ) );
         store.dispatch( setDragStartDuration( this.duration  ) );
         
-
         store.dispatch( setDragStartEventId( this.eventId ) );
         store.dispatch( setDragStartCategoryId( this.categoryId ) );
 
-
         store.dispatch( setDragStartLinkedFileDuration( this.linked_files_duration ) );
-
 
         store.dispatch( setDragStartMinStartTime( this.minStartTime ) );
         store.dispatch( setDragStartMaxStartTime( this.maxStartTime ) );
-
 
 
         if( this.startFrom === START_FROM.RELEASE_FREE ){
@@ -157,18 +161,13 @@ export class DragStartClass {
             store.dispatch( setDragStartReleaseId( this.releaseId ) );
 
         }else if( this.startFrom === START_FROM.SCHEDULE_EVENT ){
-
-
-
-
-
-
-
-
             store.dispatch( setDragStartStartTime( this.startTime ) );
             store.dispatch( setDragStartGridEventId( this.gridEventId ) );
         }else if( this.startFrom === START_FROM.RELEASE_LIST ){
             store.dispatch( setDragStartFileName( this.fileName ) );
+        }else if( this.startFrom === START_FROM.ALT_GRID_EVENT ){
+            store.dispatch( setDragStartAltGridEventId( this.altEventId ) );
+
 
         };
 

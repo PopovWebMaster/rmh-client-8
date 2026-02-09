@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import './BufferList.scss';
 
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultDragEventSlise } from './../../../../../../../../redux/scheduleResultDragEventSlise.js';
+
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
@@ -17,6 +19,12 @@ import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
 import { get_linked_file_dutation_by_event_id } from './../../../../../../../../helpers/get_linked_file_dutation_by_event_id.js';
 
+import { get_drag_target_state } from './vendors/get_drag_target_state.js';
+import { drop_schedule_event_on_bufer } from './vendors/drop_schedule_event_on_bufer.js';
+import { remove_alt_event_on_store } from './vendors/remove_alt_event_on_store.js';
+import { drag_start_fot_alt_event } from './vendors/drag_start_fot_alt_event.js';
+
+
 const BufferListComponent = ( props ) => {
 
     let {
@@ -26,11 +34,15 @@ const BufferListComponent = ( props ) => {
         gridDayEventsListById,
         usedReleasesById,
 
+        dragStartFrom,
+        altGridEventsList,
+
     //     setDragebleReleaseId,
 
     } = props;
 
     let [ freeList, serFreeList ] = useState( [] );
+    let [ isLighter, setIsLighter ] = useState( false );
 
     useEffect( () => {
         serFreeList( get_free_list() );
@@ -132,14 +144,127 @@ const BufferListComponent = ( props ) => {
         return div;
     }
 
+
+    const alt_drag_start = ( e, item ) => {
+        let { id } = item;
+        drag_start_fot_alt_event( id );
+        var img = document.createElement("img");
+        e.dataTransfer.setDragImage(img, 0, 0);
+    }
+
+    const alt_drag_end = () => {}
+
+    const createAltList = ( arr ) => {
+        let div = arr.map(( item, index ) => {
+            let {
+                style,
+                name,
+                duration,
+                id,
+                gridEventsGroup,
+            } = item;
+
+            return (
+                <div
+                    key =       { index }
+                    className = 'RB_BufferList_alt_item'
+                    draggable = { true }
+                    onDragStart = { ( e ) => { alt_drag_start( e, item ) } }
+                    onDragEnd = { alt_drag_end }
+                    
+                >
+                    <div className = 'RB_BufferList_alt_item_left'>
+                        {/* <span className = 'durat'>{ convert_sec_to_time( duration ) }</span> */}
+                        <span className = 'alt_id'>{ id }</span>
+                        <span
+                            className = 'name'
+                            style = { style }
+                        >
+                            <span>{ name }</span>
+                        </span>
+                    </div>
+
+                    <div className = 'RB_BufferList_alt_item_right'>
+                        <span className = 'duration_time'>{ convert_sec_to_time( duration ) }</span>
+                        <span 
+                            className = 'remove icon-cancel-2'
+                            onClick = { () => { remove_alt_event_on_store( id ) } }
+                        ></span>
+                    </div>
+                    
+                </div>
+            )
+
+        });
+        return div;
+    };
+
+
+
+
+    const drag_over = ( e ) => {
+        e.preventDefault();
+        let targetState = get_drag_target_state();
+        setIsLighter( targetState );
+    }
+
+    const drag_leave = ( e ) => {
+        setIsLighter( false );
+    }
+
+    const drop = ( e ) => {
+        setIsLighter( false );
+        let targetState = get_drag_target_state();
+
+        if( targetState ){
+            if( dragStartFrom === START_FROM.SCHEDULE_EVENT ){
+
+                drop_schedule_event_on_bufer();
+
+                let ScheduleReleaseDragEvent = new ScheduleReleaseDragEventClass();
+                ScheduleReleaseDragEvent.ClearData();
+
+            };
+        };
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
        <div 
-            className = 'RB_BufferList'
+            className = { `RB_BufferList ${isLighter? 'isLighter': ''}` }
             style = {{
                 height: `${height}px`,
             }}
+            onDragOver =    { drag_over }
+            onDragLeave =   { drag_leave }
+            onDrop =        { drop }
         >
             <ScrollContainer>
+
+
+                { createAltList( altGridEventsList ) }
                 { create( freeList ) }
 
             </ScrollContainer>
@@ -152,6 +277,9 @@ const BufferListComponent = ( props ) => {
 export function BufferList( props ){
 
     const scheduleResult = useSelector( scheduleResultSlise );
+    const scheduleResultDragEvent = useSelector( scheduleResultDragEventSlise );
+
+
     const layout = useSelector( layoutSlice );
     
     // const dispatch = useDispatch();
@@ -164,6 +292,9 @@ export function BufferList( props ){
             usedReleasesById =      { scheduleResult.usedReleasesById }
             eventListById =         { layout.eventListById }
             gridDayEventsListById = { layout.gridDayEventsListById }
+
+            dragStartFrom = { scheduleResultDragEvent.dragStartFrom }
+            altGridEventsList = { scheduleResultDragEvent.altGridEventsList }
 
             // setDragebleReleaseId = { ( val ) => { dispatch( setDragebleReleaseId( val ) ) } }
 

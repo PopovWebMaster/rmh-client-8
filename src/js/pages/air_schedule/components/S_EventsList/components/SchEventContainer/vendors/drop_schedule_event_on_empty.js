@@ -77,25 +77,6 @@ export const drop_schedule_event_on_empty = ( startTimeNext ) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         cleare_altKey_list();
 
 
