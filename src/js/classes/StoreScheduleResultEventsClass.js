@@ -254,11 +254,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         let scheduleEventsList = this.GetScheduleEventsList();
 
 
-
         let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
 
-        // console.dir( 'newList' );
-        // console.dir( structuredClone( newList ) );
+        console.dir( 'newList' );
+        console.dir( structuredClone( newList ) );
+
+        console.dir( 'isError' );
+        console.dir( isError );
 
 
         let arr = divide_day_into_sectors( newList );

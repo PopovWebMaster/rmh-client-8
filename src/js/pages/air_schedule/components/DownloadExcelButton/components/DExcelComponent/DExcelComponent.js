@@ -16,9 +16,12 @@ import { ExportTypeButtons } from './../ExportTypeButtons/ExportTypeButtons.js';
 import { HighlightFiles } from './../HighlightFiles/HighlightFiles.js';
 import { ExportFilterList } from './../ExportFilterList/ExportFilterList.js';
 import { ExportRunButton } from './../ExportRunButton/ExportRunButton.js';
+import { ExportExcelViewType } from './../ExportExcelViewType/ExportExcelViewType.js';
 
 import { download_excel_as_schedule } from './vendors/download_excel_as_schedule.js';
 import { download_excel_as_TV_program } from './vendors/download_excel_as_TV_program.js';
+
+import { download_excel_as_schedule_oplot } from './../../vendors/download_excel_as_schedule_oplot/download_excel_as_schedule_oplot.js';
 
 
 const DExcelComponentComponent = ( props ) => {
@@ -31,6 +34,9 @@ const DExcelComponentComponent = ( props ) => {
 
     let [ filterList, setFilterList ] = useState( [] );
     let [ exportType, setExportType ] = useState( 'schedule' ); // 'schedule' TV_program
+    let [ excelVewType, setExcelVewType ] = useState( 'classic' ); // 'classic' 'oplot'
+
+
 
     let [ allUsedFiles, setAllUsedFiles ] = useState( [] );
     let [ allFiles, setAllFiles ] = useState( {} );
@@ -40,13 +46,9 @@ const DExcelComponentComponent = ( props ) => {
         if( isOpen ){
             let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
             StoreScheduleResultEvents.CreateList();
-
             let eventsList = StoreScheduleResultEvents.GetAllUsedEvents();
-
             setAllFiles( StoreScheduleResultEvents.GetAllUsedFiles( eventsList ) );
-
             setFilterList( get_filter_list_from_events_list( eventsList ) );
-
 
         }else{
             setFilterList( [] );
@@ -56,10 +58,18 @@ const DExcelComponentComponent = ( props ) => {
 
     const click = () => {
         if( exportType === 'schedule' ){
-            download_excel_as_schedule({
-                filterList,
-                allUsedFiles,
-            });
+            if( excelVewType === 'classic' ){
+                download_excel_as_schedule({
+                    filterList,
+                    allUsedFiles,
+                });
+            }else if( excelVewType === 'oplot' ){
+                download_excel_as_schedule_oplot({
+                    filterList,
+                    highlightFiles: allUsedFiles,
+                });
+            };
+            
         }else if( exportType === 'TV_program' ){
             download_excel_as_TV_program( filterList );
         };
@@ -69,9 +79,20 @@ const DExcelComponentComponent = ( props ) => {
         <div className = 'S_DExcelComponent'>
 
             <ExportTypeButtons
-                exportType = { exportType }
+                exportType =    { exportType }
                 setExportType = { setExportType }
             />
+
+            { exportType === 'schedule'? (
+                <ExportExcelViewType 
+                    excelVewType =      { excelVewType }
+                    setExcelVewType =   { setExcelVewType }
+                    isOpen =            { isOpen }
+                    filterList =        { filterList }
+                    setFilterList =     { setFilterList }
+                />
+            ): '' }
+            
 
             <ExportFilterList
                 isOpen =        { isOpen }
