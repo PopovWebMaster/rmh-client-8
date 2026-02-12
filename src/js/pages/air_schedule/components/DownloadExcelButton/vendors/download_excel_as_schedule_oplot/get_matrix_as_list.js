@@ -26,7 +26,15 @@ export const get_matrix_as_list = ( params ) => {
         MatrixOplot.AddScheduleEvent( actual_schedule_events[ i ] );
     };
 
+    let matrix = MatrixOplot.GetMatrix();
+
     console.dir( MatrixOplot );
+
+    console.dir( 'matrix' );
+    console.dir( matrix );
+
+
+
 
 
 

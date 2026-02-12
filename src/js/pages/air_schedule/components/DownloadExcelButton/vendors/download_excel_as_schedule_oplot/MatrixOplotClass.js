@@ -1,8 +1,12 @@
 
+import { MatrixRowClass } from './MatrixRowClass.js';
+import { MatrixMethodsClass } from './MatrixMethodsClass.js';
 
-export class MatrixOplotClass {
+export class MatrixOplotClass extends MatrixMethodsClass {
 
     constructor(){
+        super();
+
         this.last_startTime = 0;
         this.matrix = [];
 
@@ -12,13 +16,28 @@ export class MatrixOplotClass {
         this.AddScheduleEvent =     this.AddScheduleEvent.bind(this);
         this.SetHighlightFiles =    this.SetHighlightFiles.bind(this);
         this.SetUsedEvents =        this.SetUsedEvents.bind(this);
+        this.GetMatrix =        this.GetMatrix.bind(this);
+
+
+
+        
 
 
     }
 
     AddScheduleEvent( scheduleEvent ){
 
-        console.dir( scheduleEvent );
+        let rowsList = this.GetRowsDataFromScheduleEvent( scheduleEvent );
+
+        this.AddPreviewEmptyRowIfIsset( rowsList );
+
+        for( let i = 0; i < rowsList.length; i++ ){
+            this.matrix.push( rowsList[ i ] );
+        };
+
+        this.SetLastStartTime( rowsList );
+
+        
 
     }
 
@@ -28,6 +47,12 @@ export class MatrixOplotClass {
 
     SetUsedEvents( used_events_by_id ){
         this.used_events = used_events_by_id;
+    }
+
+    GetMatrix(){
+
+        this.MakeTimeCorrects();
+
     }
 
 

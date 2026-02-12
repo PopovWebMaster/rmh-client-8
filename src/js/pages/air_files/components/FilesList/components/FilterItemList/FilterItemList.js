@@ -19,11 +19,14 @@ const FilterItemListComponent = ( props ) => {
     const create = ( arr ) => {
 
         let div = arr.map( ( item, index ) => {
-            let { name } = item
+            let { name, fileDuration } = item;
+
             return (
                 <OneFileItem
                     key = { index }
                     fileName = { name }
+                    fileDuration = { fileDuration }
+
                 />
             );
 

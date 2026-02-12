@@ -10,6 +10,7 @@ import { selectorData as airFilesSlice, setCurrentFilterEventId } from './../../
 import { get_premier_from_sec } from './../../../../vendors/get_premier_from_sec.js';
 
 import { set_isChaked_into_filteredList } from './../../../../vendors/set_isChaked_into_filteredList.js';
+import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_time.js';
 
 
 const OneFileItemComponent = ( props ) => {
@@ -17,11 +18,13 @@ const OneFileItemComponent = ( props ) => {
     let {
 
         fileName,
+        fileDuration,
         filterItemsByEventId,
         filteredList,
         filteredListByName,
 
     } = props;
+
 
 
     let [ countValue, setCountValue ] = useState( '' );
@@ -81,7 +84,9 @@ const OneFileItemComponent = ( props ) => {
                 <span className = 'FL_OneFileItem_event' style = { eventStyle }>{ eventName }</span>
             ) }
             
-
+            <span className = 'FL_OneFileItem_dur'>
+                <span className = 'FL_OneFileItem_dur_val'>{ convert_sec_to_time( fileDuration ) }</span>
+            </span>
 
             <span className = 'FL_OneFileItem_count'>
                 <span className = 'FL_OneFileItem_count_title'>Повторов:</span>

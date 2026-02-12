@@ -33,6 +33,28 @@
         border-style: solid;
     }
 
+    .FL_OneFileItem_dur{
+        font-size: 0.65em;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+
+        margin: 0 0.5em;
+
+        .FL_OneFileItem_dur_val{
+            font-size: 0.9em;
+            padding: 0.16em 0.6em;
+            border-radius: 0.1em;
+            color: #040404;
+            background-color: #49cefc;
+            
+
+        }
+
+    }
+
     .FL_OneFileItem_count{
         font-size: 0.65em;
         color: #040404;
