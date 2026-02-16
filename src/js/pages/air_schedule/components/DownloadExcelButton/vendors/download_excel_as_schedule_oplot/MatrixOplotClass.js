@@ -1,5 +1,4 @@
 
-import { MatrixRowClass } from './MatrixRowClass.js';
 import { MatrixMethodsClass } from './MatrixMethodsClass.js';
 
 export class MatrixOplotClass extends MatrixMethodsClass {
@@ -7,7 +6,7 @@ export class MatrixOplotClass extends MatrixMethodsClass {
     constructor(){
         super();
 
-        this.last_startTime = 0;
+        this.last_startTime = null;
         this.matrix = [];
 
         this.highlight_files = {};
@@ -52,6 +51,14 @@ export class MatrixOplotClass extends MatrixMethodsClass {
     GetMatrix(){
 
         this.MakeTimeCorrects();
+
+        let matrix = [];
+        for( let i = 0; i < this.matrix.length; i++ ){
+            let item = structuredClone( this.matrix[ i ] );
+            matrix.push( item );
+        };
+
+        return matrix;
 
     }
 

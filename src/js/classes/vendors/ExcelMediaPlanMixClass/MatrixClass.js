@@ -1,5 +1,4 @@
 
-import { MatrixRowClass } from './MatrixRowClass.js';
 import { MatrixFirstRowDaysClass } from './MatrixFirstRowDaysClass.js';
 
 import { get_full_day_info_from_day_seconds } from './../../../helpers/get_full_day_info_from_day_seconds.js';

@@ -14,8 +14,14 @@ export class MatrixMethodsClass {
         this.MakePushToKeyPointsBefor =        this.MakePushToKeyPointsBefor.bind(this);
         this.MakePushToKeyPointsAfter =        this.MakePushToKeyPointsAfter.bind(this);
 
+        this.SortMatrix =        this.SortMatrix.bind(this);
+        this.MakePushToNoKeyPoint =        this.MakePushToNoKeyPoint.bind(this);
+        this.FillEmptyDuration =        this.FillEmptyDuration.bind(this);
 
-        
+
+
+
+
 
 
 
@@ -74,7 +80,7 @@ export class MatrixMethodsClass {
             MatrixRow.SetDuration( durationTime );
             MatrixRow.SetReleaseInfoFromEvent( eventId );
             MatrixRow.SetNotesFromScheduleEvent( scheduleEvent );
-
+            
             result.push( MatrixRow.GetData() );
 
         };
@@ -86,11 +92,13 @@ export class MatrixMethodsClass {
     AddPreviewEmptyRowIfIsset( rowsList ){
 
         let { startTime } = rowsList[ 0 ];
+
         if( startTime > this.last_startTime ){
             let MatrixRow = new MatrixRowClass();
             MatrixRow.SetStartTime( this.last_startTime );
             this.matrix.push( MatrixRow.GetDataForEmpty() );
-        };
+        };  
+
     }
 
     SetLastStartTime( rowsList ){
@@ -100,9 +108,9 @@ export class MatrixMethodsClass {
 
     MakeTimeCorrects(){
 
-        for( let i = 0; i < this.matrix.length; i++ ){
-            // this.matrix[ i ].startTime = 100;
-        }
+        this.MakePushToKeyPoints();
+        this.MakePushToNoKeyPoint();
+        this.FillEmptyDuration();
 
     }
 
@@ -113,10 +121,8 @@ export class MatrixMethodsClass {
             if( isKeyPoint ){
                 this.MakePushToKeyPointsBefor( i );
                 this.MakePushToKeyPointsAfter( i );
-
-
             };
-        }
+        };
 
     }
 
@@ -162,6 +168,151 @@ export class MatrixMethodsClass {
     }
 
     MakePushToKeyPointsAfter( i ){
+
+        let last_duration = this.matrix[ i ].duration;
+        let last_startTime = this.matrix[ i ].startTime;
+        let offset = 1;
+
+        while( true ){
+            if( this.matrix[ i + offset ] ){
+                let { isEmpty, duration, startTime, isKeyPoint } = this.matrix[ i + offset ];
+                if( isEmpty ){
+                    if( offset === 1 ){
+                        this.matrix[ i + offset ].startTime = last_startTime + last_duration;
+                    }else{
+                        this.matrix[ i + offset ].startTime = last_startTime;
+                    };
+                    
+                    break;
+                }else{
+                    
+                    if( isKeyPoint ){
+                        if( startTime > last_startTime ){
+                            let MatrixRow = new MatrixRowClass();
+                            MatrixRow.SetStartTime( last_startTime );
+                            this.matrix.push( MatrixRow.GetDataForEmpty() );
+                            this.SortMatrix();
+                        };
+                        break;
+                    }else{
+                        if( offset === 1 ){
+                            last_startTime = last_startTime + last_duration;
+                        };
+
+                        this.matrix[ i + offset ].startTime = last_startTime;
+
+                        last_startTime = last_startTime + duration;
+
+                    };
+                };
+
+                offset++;
+
+            }else{
+                break;
+            };
+
+        };
+    }
+
+    MakePushToNoKeyPoint(){
+        let preview_isEmpty = false;
+        for( let i = 0; i < this.matrix.length; i++ ){
+            let { isKeyPoint, isEmpty } = this.matrix[ i ];
+            if( preview_isEmpty ){
+                if( isEmpty === false ){
+                    if( isKeyPoint === false ){
+
+                        let is_between = false;
+
+                        let offset = 1;
+                        while( true ){
+                            if( this.matrix[ i + offset ] ){
+                                if( this.matrix[ i + offset ].isEmpty ){
+                                    is_between = true;
+                                    break;
+                                }else{
+                                    if( this.matrix[ i + offset ].isKeyPoint ){
+                                        break;
+                                    };
+                                };
+                                offset++;
+                            }else{
+                                is_between = true;
+                                break;
+                            };
+
+
+                        };
+
+                        if( is_between ){
+
+                            let last_duration = this.matrix[ i ].duration;
+                            let last_startTime = this.matrix[ i ].startTime;
+   
+                            let offset_ = 1;
+
+                            while( true ){
+                                if( offset_ > offset ){
+                                    break;
+                                };
+                                if( offset_ === 1 ){
+                                    this.matrix[ i + offset_ ].startTime = last_startTime + last_duration;
+                                    last_startTime = last_startTime + this.matrix[ i + offset_ ].duration + last_duration;
+                                }else{
+                                    this.matrix[ i + offset_ ].startTime = last_startTime;
+                                    last_startTime = last_startTime + this.matrix[ i + offset_ ].duration;
+                                }
+                                
+                                // this.matrix[ i + offset_ ].startTime = last_startTime;
+                                // last_startTime = last_startTime + this.matrix[ i + offset_ ].duration;
+
+                                offset_++;
+
+                            };
+
+                        };
+
+
+                    };
+                };
+            };
+
+            preview_isEmpty = isEmpty;
+
+        };
+    }
+
+    FillEmptyDuration(){
+        let matrix = [];
+        for( let i = 0; i < this.matrix.length; i++ ){
+            let item = structuredClone( this.matrix[ i ] );
+            if( item.isEmpty === true ){
+                if( this.matrix[ i + 1 ] ){
+                    item.duration = this.matrix[ i + 1 ].startTime - item.startTime;
+                };
+            };
+            matrix.push( item );
+        };
+
+        this.matrix = matrix;
+
+    }
+
+    SortMatrix(){
+        let arr = structuredClone( this.matrix );
+
+        let matrix = arr.sort( ( a, b ) => {
+            if( a.startTime > b.startTime ){
+                return 1;
+
+            }else{
+                return -1;
+            };
+
+        } );
+
+        this.matrix = matrix;
 
     }
 }
