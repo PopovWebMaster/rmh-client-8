@@ -1,0 +1,60 @@
+.S_ColorCellButtons{
+    font-size: 1em;
+    flex-grow: 1;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+
+
+    .SCCB_current{
+        font-size: 1em;
+        height: 1em;
+        width: 1.6em;
+        margin: 0 0.5em 0 0.2em;
+        border-radius: 0.1em;
+        border: 1px solid #c4c4c4;
+        // background-color: red;
+        cursor: pointer;
+    }
+    .SCCB_current:hover{
+            border: 1px solid #d2d2d2;
+        }
+
+    .S_ColorCellButtons_wrap{
+        font-size: 1em;
+        width: 8em;
+        height: 1.2em;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid #d2d2d2;
+        border-radius: 0.1em;
+        
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+
+
+
+        .SCCB_item{
+            font-size: 0.9em;
+            height: 0.7em;
+            width: 1.1em;
+            margin-right: 0.2em;
+            border: 1px solid #d2d2d200;
+            border-radius: 0.1em;
+            cursor: pointer;
+            // background-color: red;
+        }
+        .SCCB_item:hover{
+            border: 1px solid #d2d2d2;
+        }
+
+
+    }
+
+
+}

@@ -55,6 +55,12 @@ const DExcelComponentComponent = ( props ) => {
         };
     }, [ isOpen ] );
 
+    useEffect( () => {
+        if( excelVewType === 'oplot' ){
+            set_oplot_settings();
+        };
+    }, [ excelVewType ]);
+
 
     const click = () => {
         if( exportType === 'schedule' ){
@@ -74,6 +80,22 @@ const DExcelComponentComponent = ( props ) => {
             download_excel_as_TV_program( filterList );
         };
     }
+
+
+    const set_oplot_settings = () => {
+        let arr = [];
+        for( let i = 0; i < filterList.length; i++ ){
+            let item = structuredClone( filterList[ i ] );
+
+            // console.dir( 'item' );
+            // console.dir( item );
+
+            item.withOnlyApplications = false;
+            item.isUsed = true;
+            arr.push( item );
+        };
+        setFilterList( arr );
+    };
 
     return (
         <div className = 'S_DExcelComponent'>
@@ -97,6 +119,7 @@ const DExcelComponentComponent = ( props ) => {
             <ExportFilterList
                 isOpen =        { isOpen }
                 filterList =    { filterList }
+                excelVewType = { excelVewType }
                 setFilterList = { setFilterList }
                 exportType =    { exportType }
             

@@ -1,5 +1,6 @@
 
 import { get_event_by_id } from './../../../../../helpers/get_event_by_id.js';
+import { get_cell_color_from_localStorage } from './get_cell_color_from_localStorage.js';
 
 export const get_filter_list_from_events_list = ( eventsList ) => {
     let result = [];
@@ -26,6 +27,7 @@ export const get_filter_list_from_events_list = ( eventsList ) => {
             upperCase: true,
             staples: false,
             itemNameValue: name,
+            cellColor: get_cell_color_from_localStorage( eventId ),
         });
     };
 

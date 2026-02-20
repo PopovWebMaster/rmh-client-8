@@ -43,7 +43,13 @@ export class MatrixMethodsClass {
             is_premiere,
             startTime,
             releases,
+            cellBackground,
+            textColor
         } = scheduleEvent;
+
+        // console.dir( 'scheduleEvent' );
+        // console.dir( scheduleEvent );
+
 
         let result = [];
 
@@ -62,11 +68,18 @@ export class MatrixMethodsClass {
                     MatrixRow.SetNotesFromScheduleEvent( scheduleEvent );
                 };
 
+                
+
+                MatrixRow.SetHighlightFiles( this.highlight_files );
+                MatrixRow.SetCellBackground( cellBackground );
+                MatrixRow.SetTextColor( textColor );
+
                 MatrixRow.SetStartTime( last_startTime );
                 MatrixRow.SetDuration( releaseDuration );
-                MatrixRow.SetReleaseInfoFromRelease( releases[ i ] );
+                MatrixRow.SetReleaseInfoFromRelease( releases[ i ], eventId );
                 MatrixRow.SetNotesFromRelease( releases[ i ] );
 
+                
                 last_startTime = last_startTime + releaseDuration;
 
                 result.push( MatrixRow.GetData() );
@@ -80,6 +93,8 @@ export class MatrixMethodsClass {
             MatrixRow.SetDuration( durationTime );
             MatrixRow.SetReleaseInfoFromEvent( eventId );
             MatrixRow.SetNotesFromScheduleEvent( scheduleEvent );
+            MatrixRow.SetCellBackground( cellBackground );
+            MatrixRow.SetTextColor( textColor );
             
             result.push( MatrixRow.GetData() );
 
@@ -90,20 +105,35 @@ export class MatrixMethodsClass {
     }
 
     AddPreviewEmptyRowIfIsset( rowsList ){
+        if( rowsList[ 0 ] ){
 
-        let { startTime } = rowsList[ 0 ];
+            // console.dir( 'AddPreviewEmptyRowIfIsset' );
+            // console.dir( rowsList[ 0 ] );
 
-        if( startTime > this.last_startTime ){
-            let MatrixRow = new MatrixRowClass();
-            MatrixRow.SetStartTime( this.last_startTime );
-            this.matrix.push( MatrixRow.GetDataForEmpty() );
-        };  
+            
+            let { startTime } = rowsList[ 0 ];
+
+            
+
+            if( startTime > this.last_startTime ){
+                let MatrixRow = new MatrixRowClass();
+                MatrixRow.SetStartTime( this.last_startTime );
+                this.matrix.push( MatrixRow.GetDataForEmpty() );
+            };  
+
+            // console.dir( '>>>>>>>>>> END >>>>>>>>>> AddPreviewEmptyRowIfIsset ' );
+        };
 
     }
 
     SetLastStartTime( rowsList ){
+        // console.dir( 'SetLastStartTime' );
+        //     console.dir( rowsList );
+
         let { startTime, duration } = rowsList[ rowsList.length - 1 ];
         this.last_startTime = startTime + duration + 1;
+
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> SetLastStartTime ' );
     }
 
     MakeTimeCorrects(){
@@ -147,6 +177,9 @@ export class MatrixMethodsClass {
         };
 
         if( shifting_is_allowed ){
+            // console.dir( 'MakePushToKeyPointsBefor' );
+            // console.dir( this.matrix[ i ] );
+
             let last_startTime = this.matrix[ i ].startTime;
             let offset = 1;
             while( true ){
@@ -165,9 +198,14 @@ export class MatrixMethodsClass {
             };
         };
 
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToKeyPointsBefor ' );
+
     }
 
     MakePushToKeyPointsAfter( i ){
+
+        // console.dir( 'MakePushToKeyPointsAfter' );
+        //     console.dir( this.matrix[ i ] );
 
         let last_duration = this.matrix[ i ].duration;
         let last_startTime = this.matrix[ i ].startTime;
@@ -213,6 +251,8 @@ export class MatrixMethodsClass {
             };
 
         };
+
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToKeyPointsAfter ' );
     }
 
     MakePushToNoKeyPoint(){
@@ -247,6 +287,9 @@ export class MatrixMethodsClass {
 
                         if( is_between ){
 
+                            // console.dir( 'MakePushToNoKeyPoint' );
+                            // console.dir( this.matrix[ i ] );
+
                             let last_duration = this.matrix[ i ].duration;
                             let last_startTime = this.matrix[ i ].startTime;
    
@@ -257,8 +300,16 @@ export class MatrixMethodsClass {
                                     break;
                                 };
                                 if( offset_ === 1 ){
-                                    this.matrix[ i + offset_ ].startTime = last_startTime + last_duration;
-                                    last_startTime = last_startTime + this.matrix[ i + offset_ ].duration + last_duration;
+
+                                    // console.dir( 'this.matrix[ i + offset_ ]' );
+                                    // console.dir( this.matrix[ i + offset_ ] );
+                                    if( this.matrix[ i + offset_ ] ){
+                                        this.matrix[ i + offset_ ].startTime = last_startTime + last_duration;
+                                        last_startTime = last_startTime + this.matrix[ i + offset_ ].duration + last_duration;
+                                    }else{
+                                        break;
+                                    };
+
                                 }else{
                                     this.matrix[ i + offset_ ].startTime = last_startTime;
                                     last_startTime = last_startTime + this.matrix[ i + offset_ ].duration;
@@ -281,6 +332,8 @@ export class MatrixMethodsClass {
             preview_isEmpty = isEmpty;
 
         };
+
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToNoKeyPoint ' );
     }
 
     FillEmptyDuration(){
@@ -289,11 +342,15 @@ export class MatrixMethodsClass {
             let item = structuredClone( this.matrix[ i ] );
             if( item.isEmpty === true ){
                 if( this.matrix[ i + 1 ] ){
+                    // console.dir( 'FillEmptyDuration' );
+                    // console.dir( this.matrix[ i + 1 ] );
                     item.duration = this.matrix[ i + 1 ].startTime - item.startTime;
                 };
             };
             matrix.push( item );
         };
+
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> FillEmptyDuration ' );
 
         this.matrix = matrix;
 
@@ -301,6 +358,10 @@ export class MatrixMethodsClass {
 
     SortMatrix(){
         let arr = structuredClone( this.matrix );
+
+        // console.dir( 'SortMatrix <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<' );
+        // console.dir( arr );
+
 
         let matrix = arr.sort( ( a, b ) => {
             if( a.startTime > b.startTime ){
@@ -311,7 +372,7 @@ export class MatrixMethodsClass {
             };
 
         } );
-
+        // console.dir( '>>>>>>>>>> END >>>>>>>>>> SortMatrix ' );
         this.matrix = matrix;
 
     }

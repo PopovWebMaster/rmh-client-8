@@ -8,6 +8,7 @@ import './FilterItem.scss';
 import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 
 import { get_event_style } from './../../../../../../helpers/get_event_style.js';
+import { ColorCellButtons } from './ColorCellButtons/ColorCellButtons.js';
 
 
 const FilterItemComponent = ( props ) => {
@@ -30,6 +31,9 @@ const FilterItemComponent = ( props ) => {
         exportType,
         itemNameValue,
         change_itemNameValue,
+        cellColor,
+        excelVewType,
+        change_cell_color,
 
     } = props;
 
@@ -58,9 +62,8 @@ const FilterItemComponent = ( props ) => {
 
     const change_input = ( e ) => {
         let val = e.target.value;
-        
-
-        change_itemNameValue( val, eventId )
+    
+        change_itemNameValue( val, eventId );
 
     }
 
@@ -79,26 +82,18 @@ const FilterItemComponent = ( props ) => {
                 className = 'eventName'
                 style = { style }
             >
-                {/* <span style = { style }>{ eventName }</span> */}
                 <span>{ eventName }</span>
 
             </div>
-{/* 
-            <div className = 'itemNameValue'>
-                <input
-                    type = 'text'
-                    value = { itemNameValue }
-                    onChange = { ( ) => {} }
+
+
+            { isUsed && exportType === 'schedule'? excelVewType === 'oplot'? (
+                <ColorCellButtons
+                    eventId = { eventId }
+                    cellColor = { cellColor }
+                    change_cell_color = { change_cell_color }
                 />
-                
-            </div> */}
-
-
-
-
-
-
-            { isUsed && exportType === 'schedule'? (
+            ): (
                 <div className = 'whatTake'>
                     <span
                         className = { `${withOnlyApplications? 'isActive': '' }` }

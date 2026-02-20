@@ -13,6 +13,7 @@ import { get_event_style } from './../../../../../../helpers/get_event_style.js'
 const FilterControlPanelComponent = ( props ) => {
 
     let {
+        excelVewType,
         filterList,
         setFilterList,
         isOpen,
@@ -93,7 +94,7 @@ const FilterControlPanelComponent = ( props ) => {
 
             {/* 'schedule' TV_program */}
 
-            { exportType === 'schedule'? (
+            { exportType === 'schedule'? excelVewType !== 'oplot'? (
                 <div className = 'whatTake'>
                     <span
                         onClick = { click_what_take_all }
@@ -102,7 +103,7 @@ const FilterControlPanelComponent = ( props ) => {
                         onClick = { click_what_take_only_applications }
                     >всё</span>
                 </div>
-            ): '' }
+            ): '': '' }
 
 
 

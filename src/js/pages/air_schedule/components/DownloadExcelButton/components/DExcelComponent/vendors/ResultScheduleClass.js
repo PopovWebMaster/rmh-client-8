@@ -46,6 +46,7 @@ export class ResultScheduleClass {
         this.collsWidthList =   [ { width: 5 }, { width: 7.4 }, { width: 18 }, { width: 64 }, ];
 
         this.rowsHeightList =   [ { hpx: 30 }, ];
+        
         this.mergesList =       [ 'A1:E1', ];
 
         this.rows = [];

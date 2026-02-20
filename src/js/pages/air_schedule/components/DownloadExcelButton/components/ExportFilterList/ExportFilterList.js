@@ -22,6 +22,7 @@ const ExportFilterListComponent = ( props ) => {
     let {
         isOpen,
         filterList,
+        excelVewType,
         setFilterList,
         exportType,
         
@@ -71,6 +72,11 @@ const ExportFilterListComponent = ( props ) => {
 
     }
 
+    const change_cell_color = ( val, eventId ) => {
+        let changed_list = get_changet_filter_list( filterList, eventId, { cellColor: val } );
+        setFilterList( changed_list );
+    }
+
 
 
     const createList = ( arr ) => {
@@ -87,6 +93,7 @@ const ExportFilterListComponent = ( props ) => {
                 upperCase,
                 staples,
                 itemNameValue,
+                cellColor,
             } = item;
 
             let with_category = true;
@@ -123,6 +130,9 @@ const ExportFilterListComponent = ( props ) => {
                         item_change_staples = { item_change_staples }
                         itemNameValue = { itemNameValue }
                         change_itemNameValue = { change_itemNameValue }
+                        cellColor = { cellColor }
+                        excelVewType = { excelVewType }
+                        change_cell_color = { change_cell_color }
 
                     />
                 </React.Fragment>
@@ -144,6 +154,7 @@ const ExportFilterListComponent = ( props ) => {
             <h4 className = 'S_DExcelComponent_header'>Что включить в экспорт?</h4>
 
             <FilterControlPanel
+                excelVewType = { excelVewType }
                 filterList =    { filterList }
                 setFilterList = { setFilterList }
                 isOpen =        { isOpen }
