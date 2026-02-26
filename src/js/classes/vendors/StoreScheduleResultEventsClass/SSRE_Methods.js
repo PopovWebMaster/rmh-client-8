@@ -366,11 +366,11 @@ export class SSRE_Methods{
                     
                 }else{
 
-                                            console.dir( {
-                            remaining_duration,
-                            rest_duration,
-                            item
-                        } );
+                        //                     console.dir( {
+                        //     remaining_duration,
+                        //     rest_duration,
+                        //     item
+                        // } );
                     if( remaining_duration === 0 ){
 
 

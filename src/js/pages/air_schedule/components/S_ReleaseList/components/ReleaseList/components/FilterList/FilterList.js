@@ -17,6 +17,8 @@ import { get_linked_file_dutation_by_event_id } from './../../../../../../../../
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
 
+import { scroll_to_grid_event } from './../../../ReleaseBuffer/components/BufferList/vendors/scroll_to_grid_event.js'
+
 const FilterListComponent = ( props ) => {
 
     let {
@@ -91,7 +93,9 @@ const FilterListComponent = ( props ) => {
     }
 
 
-
+    const clickScroleByTime = ( startTime ) => {
+        scroll_to_grid_event( startTime );
+    }
 
     const create = ( arr ) => {
 
@@ -124,14 +128,33 @@ const FilterListComponent = ( props ) => {
                     draggable =     { true }
                     onDragStart =   { ( e ) => { drag_start( e, item ) } }
                     onDragEnd =     { drag_end }
+
+                    title = { releaseName }
                     
                 >
-                    <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
+
+                    <div className = 'RL_FL_item_left'>
+                        <span className = 'RL_FL_id'>{ charYes? grid_event_id: ' ' }</span>
+                        <span 
+                            className = 'RL_FL_time'
+                            onClick = { () => { clickScroleByTime( startTime ) } }
+                        >{ convert_sec_to_time( startTime ) }</span>
+
+                        <span className = 'RL_FL_name'>
+                            <span>{ releaseName }</span>
+                        </span>
+                    </div>
+                    <div className = 'RL_FL_item_right'>
+                        { charYes? '': <span className = 'char_not'>{ 'Слепой' }</span> }
+                        <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
+                    </div>
+
+                    {/* <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
                     <span className = 'name'>{ releaseName }</span>
                     <span className = 'duration_name'>Хрон.</span>
                     <span className = 'duration_time'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span className = 'char_name'>График</span>
-                    <span className = { charYes? 'char_yes': 'char_not' }>{ charYes? 'Да': 'Нет' }</span>
+                    <span className = { charYes? 'char_yes': 'char_not' }>{ charYes? 'Да': 'Нет' }</span> */}
 
 
 

@@ -24,6 +24,8 @@ import { drop_schedule_event_on_bufer } from './vendors/drop_schedule_event_on_b
 import { remove_alt_event_on_store } from './vendors/remove_alt_event_on_store.js';
 import { drag_start_fot_alt_event } from './vendors/drag_start_fot_alt_event.js';
 
+import { scroll_to_grid_event } from './vendors/scroll_to_grid_event.js';
+
 
 const BufferListComponent = ( props ) => {
 
@@ -90,6 +92,34 @@ const BufferListComponent = ( props ) => {
         // ScheduleReleaseDragEvent.ClearData();
     }
 
+
+
+
+
+    const clickScroleByTime = ( startTime ) => {
+        scroll_to_grid_event( startTime );
+    }
+
+    const releaseMouseOver = ( grid_event_id ) => {
+        if( grid_event_id !== null ){
+
+            let elem = document.querySelector( `.schEventContainer[data-grid-event-id="${grid_event_id}"]` );
+            elem.classList.add( 'isLighter_2' );
+
+        }
+        
+
+    }
+
+    const releaseMouseLeave = ( grid_event_id) => {
+        if( grid_event_id !== null ){
+
+            let elem = document.querySelector( `.schEventContainer[data-grid-event-id="${grid_event_id}"]` );
+            elem.classList.remove( 'isLighter_2' );
+
+        }
+    }
+
     const create = ( arr ) => {
 
         let div = arr.map(( item, index ) => {
@@ -119,12 +149,20 @@ const BufferListComponent = ( props ) => {
                         onDragEnd = { drag_end }
 
                         title = { releaseName }
+
+                        onMouseOver = { () => { releaseMouseOver( grid_event_id ) } }
+                        onMouseLeave = { () => { releaseMouseLeave( grid_event_id ) } }
+
                         
                     >
 
                         <div className = 'RB_BufferList_item_left'>
                             <span className = 'GE_id'>{ charYes? grid_event_id: ' ' }</span>
-                            <span className = 'time'>{ convert_sec_to_time( startTime ) }</span>
+                            <span 
+                                className = 'time'
+                                onClick = { () => { clickScroleByTime( startTime ) } }
+                            >{ convert_sec_to_time( startTime ) }</span>
+
                             <span className = 'name'>
                                 <span>{ releaseName }</span>
                             </span>
@@ -174,7 +212,6 @@ const BufferListComponent = ( props ) => {
                     
                 >
                     <div className = 'RB_BufferList_alt_item_left'>
-                        {/* <span className = 'durat'>{ convert_sec_to_time( duration ) }</span> */}
                         <span className = 'alt_id'>{ id }</span>
                         <span
                             className = 'name'

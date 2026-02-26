@@ -32,37 +32,72 @@ const RemoveItemComponent = ( props ) => {
     let [ isOpen, setIsOpen] = useState( false );
     let [ isAllowed, setIsAllowedResult ] = useState( false );
 
+    const remove = () => {
+        setSpinnerIsActive( true );
+
+        let gridEventId = id;
+
+        send_request_to_server({
+            route: `remove-grid-event`,
+            data: { 
+                gridEventId: gridEventId,
+            },
+
+            successCallback: ( response ) => {
+                console.dir( 'response' );
+                console.dir( response );
+
+                if( response.ok ){
+                    setSpinnerIsActive( false );
+
+                    remove_grid_event_from_curren_day_in_store( gridEventId );
+
+                };
+
+            },
+        });
+    };
+
     const remove_event = () => {
 
         if( isAllowed ){
             setIsOpen( false );
-            setSpinnerIsActive( true );
+            remove();
+            // setSpinnerIsActive( true );
 
-            let gridEventId = id;
+            // let gridEventId = id;
 
-            send_request_to_server({
-                route: `remove-grid-event`,
-                data: { 
-                    gridEventId: gridEventId,
-                },
+            // send_request_to_server({
+            //     route: `remove-grid-event`,
+            //     data: { 
+            //         gridEventId: gridEventId,
+            //     },
 
-                successCallback: ( response ) => {
-                    console.dir( 'response' );
-                    console.dir( response );
+            //     successCallback: ( response ) => {
+            //         console.dir( 'response' );
+            //         console.dir( response );
 
-                    if( response.ok ){
-                        setSpinnerIsActive( false );
+            //         if( response.ok ){
+            //             setSpinnerIsActive( false );
 
-                        remove_grid_event_from_curren_day_in_store( gridEventId );
+            //             remove_grid_event_from_curren_day_in_store( gridEventId );
 
+            //         };
 
-
-                        // setGridDayEventsList( response.list );
-                    };
-
-                },
-            });
+            //     },
+            // });
         };
+
+    }
+
+    const click = ( e ) => {
+        if( e.altKey === true ){
+            remove();
+        }else{
+            setIsOpen( true );
+        };
+
+        // setIsOpen( true )
 
     }
 
@@ -78,10 +113,11 @@ const RemoveItemComponent = ( props ) => {
                     isOpen = { isOpen }
                     setIsOpen = { setIsOpen }
                     width = '25em'
-                    height = '10em'
+                    height = '15em'
                 >
                     <div className = 'CTS_Event_remove'>
                         <p>Пожалуйста, подтвердите удаление события</p>
+                        
                         <p>
                             <span 
                                 className = 'CTS_Event_remove_btn'
@@ -92,13 +128,24 @@ const RemoveItemComponent = ( props ) => {
                                 onClick = { () => { setIsOpen( false ) } }
                             >Отмена</span>
                         </p>
+
+                        <br />
+
+                        <p>Для быстрого удаления используйте комбинацию</p>
+                        <h4 className = 'CTS_Event_remove_combo' >
+                            <span>
+                                Alt + <span className = 'icon-cancel-2'></span>
+                            </span>
+                            
+                        </h4>
+
                     </div>
         
                 </AlertWindowContainer>
 
                 <RemoveSegmentButton 
                     id = { id }
-                    clickHandler = { () => { setIsOpen( true ) } }
+                    clickHandler = { click }
                 />
                 
             </div>

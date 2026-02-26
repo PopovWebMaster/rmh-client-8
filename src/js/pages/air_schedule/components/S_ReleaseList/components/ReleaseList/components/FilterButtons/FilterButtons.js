@@ -71,18 +71,24 @@ const FilterButtonsComponent = ( props ) => {
                 name,
             } = item;
 
-            return (
-                <span
-                    key = { index }
-                    className = { `btn_all ${activeCategoryId === id? 'isActive': ''}`}
-                    onClick = { () => { 
-                        setActiveCategoryId( id );
-                        setActiveEventId( null );
-                        setActiveSubAppId( null );
-                        setActiveReleaseName( null );
-                    } }
-                >{ name }</span>
-            );
+            // if( id === null ){
+            //     return '';
+            // }else{
+                return (
+                    <span
+                        key = { index }
+                        className = { `btn_all ${activeCategoryId === id? 'isActive': ''}`}
+                        onClick = { () => { 
+                            setActiveCategoryId( id );
+                            setActiveEventId( null );
+                            setActiveSubAppId( null );
+                            setActiveReleaseName( null );
+                        } }
+                    >{ name }</span>
+                );
+            // };
+
+
 
         } );
         setElemHeight();
@@ -113,18 +119,24 @@ const FilterButtonsComponent = ( props ) => {
                 name,
             } = item;
 
-            return (
-                <span
-                    key = { index }
-                    className = { `btn_all ${activeEventId === id? 'isActive': ''}`}
+            if( id === null ){
+                return '';
+            }else{
+                return (
+                    <span
+                        key = { index }
+                        className = { `btn_all ${activeEventId === id? 'isActive': ''}`}
 
-                    onClick = { () => { 
-                        setActiveEventId( id )
-                        setActiveSubAppId( null )
-                        setActiveReleaseName( null );
-                    } }
-                >{ name }</span>
-            );
+                        onClick = { () => { 
+                            setActiveEventId( id )
+                            setActiveSubAppId( null )
+                            setActiveReleaseName( null );
+                        } }
+                    >{ name }</span>
+                );
+            }
+
+            
         } );
 
         setElemHeight();

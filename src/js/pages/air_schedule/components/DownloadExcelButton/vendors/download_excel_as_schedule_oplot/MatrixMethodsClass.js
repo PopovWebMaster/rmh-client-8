@@ -128,7 +128,7 @@ export class MatrixMethodsClass {
 
     SetLastStartTime( rowsList ){
         // console.dir( 'SetLastStartTime' );
-        //     console.dir( rowsList );
+        // console.dir( rowsList );
 
         let { startTime, duration } = rowsList[ rowsList.length - 1 ];
         this.last_startTime = startTime + duration + 1;
@@ -196,9 +196,11 @@ export class MatrixMethodsClass {
                     break;
                 };
             };
+
+            // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToKeyPointsBefor ' );
         };
 
-        // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToKeyPointsBefor ' );
+        
 
     }
 
@@ -311,8 +313,13 @@ export class MatrixMethodsClass {
                                     };
 
                                 }else{
-                                    this.matrix[ i + offset_ ].startTime = last_startTime;
-                                    last_startTime = last_startTime + this.matrix[ i + offset_ ].duration;
+                                    if( this.matrix[ i + offset_ ] ){
+                                        this.matrix[ i + offset_ ].startTime = last_startTime;
+                                        last_startTime = last_startTime + this.matrix[ i + offset_ ].duration;
+                                    }else{
+                                        break;
+                                    };
+                                    
                                 }
                                 
                                 // this.matrix[ i + offset_ ].startTime = last_startTime;
@@ -321,6 +328,8 @@ export class MatrixMethodsClass {
                                 offset_++;
 
                             };
+
+                            // console.dir( '>>>>>>>>>> END >>>>>>>>>> MakePushToNoKeyPoint ' );
 
                         };
 

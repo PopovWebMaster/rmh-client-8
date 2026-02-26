@@ -1,0 +1,81 @@
+.PBC_CHL_item{
+    font-size: 1em;
+    margin: 0.3em 0;
+    background-color: #ffffff25;
+    border-radius: 0.1em;
+    padding: 0.1em 0.4em;
+
+    h4{
+        font-size: 1em;
+        padding: 0.1em 0;
+
+        cursor: pointer;
+        user-select: none;
+
+        .PBC_CHL_icon{
+            font-size: 0.8em;
+            color: #2f2f2f;
+        }
+        
+        span{
+            font-size: 0.7em;
+            padding: 0.2em 0.5em;
+            border-radius: 0.1em;
+        }
+    }
+
+    h4:hover{
+        background-color: #f1eeee85;
+    }
+
+    h4:active{
+        .PBC_CHL_icon{
+            color: #a78383;
+        }
+    }
+
+
+
+
+
+    >div{
+        font-size: 1em;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+        margin: 0.1em 0.1em;
+
+        span{
+            font-size: 0.65em;
+            padding: 0.2em 0.3em;
+            text-align: center;
+            background-color: #f5f4f4;
+            width: 6em;
+            margin: 0 0.05em;
+            border-radius: 0.1em;
+
+        }
+
+        .PBS_startTime{
+            color: #767780;
+        }
+
+        .PBS_duration_time{
+            color: #237f2b;
+        }
+        .PBS_duration_procent{
+            color: #2f3ec7;
+        }
+        .PBS_duration_sec{
+            color: #343434;
+            >span{
+                margin: 0 0 0 0;
+                font-size: 0.9em;
+            }
+        }
+
+    }
+
+
+}

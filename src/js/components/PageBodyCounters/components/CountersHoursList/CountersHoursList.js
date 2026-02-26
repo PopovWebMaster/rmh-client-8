@@ -11,6 +11,8 @@ import './CountersHoursList.scss';
 import { selectorData as countersSlise } from './../../../../redux/countersSlise.js';
 import { ScrollContainer } from './../../../ScrollContainer/ScrollContainer.js';
 
+import { OneHourItem } from './OneHourItem/OneHourItem.js';
+
 // import { convert_sec_to_time } from './../../../../helpers/convert_sec_to_time.js';
 // import { round_to_number } from './../../../../helpers/round_to_number.js';
 
@@ -22,29 +24,29 @@ const CountersHoursListComponent = ( props ) => {
         
     } = props;
 
-    const createHours = ( hours ) => {
-        let div = hours.map( ( item, index ) => {
-            let {
-                duration_proc,
-                duration_sec,
-                duration_time,
-                hour,
-                time,
-            } = item;
+    // const createHours = ( hours ) => {
+    //     let div = hours.map( ( item, index ) => {
+    //         let {
+    //             duration_proc,
+    //             duration_sec,
+    //             duration_time,
+    //             hour,
+    //             time,
+    //         } = item;
 
-            return (
-                <div key = { index }>
-                    <span className = 'PBS_startTime' >{ time }</span>
-                    <span className = 'PBS_duration_time' >{ duration_time }</span>
-                    <span className = 'PBS_duration_procent' >{ duration_proc }%</span>
-                    <span className = 'PBS_duration_sec' >{ duration_sec } <span>сек</span></span>
-                </div>
-            );
+    //         return (
+    //             <div key = { index }>
+    //                 <span className = 'PBS_startTime' >{ time }</span>
+    //                 <span className = 'PBS_duration_time' >{ duration_time }</span>
+    //                 <span className = 'PBS_duration_procent' >{ duration_proc }%</span>
+    //                 <span className = 'PBS_duration_sec' >{ duration_sec } <span>сек</span></span>
+    //             </div>
+    //         );
 
-        } );
-        return div
+    //     } );
+    //     return div
 
-    }
+    // }
 
     const create = ( arr ) => {
 
@@ -58,22 +60,30 @@ const CountersHoursListComponent = ( props ) => {
             } = category;
 
             return (
-                <div
-                    key = { index }
-                    className = 'PBC_CHL_item'
-                >
-                    <h4>
-                        <span
-                            style = {{
-                                backgroundColor: colorBG,
-                                color: colorText,
-                            }}
-                        >{ name }</span>
-                    </h4>
 
-                    { createHours( hours ) }
+                <OneHourItem
+                    key =               { index }
+                    categoryName =      { name }
+                    categoryColorBG =   { colorBG }
+                    categoryColorText = { colorText }
+                    hours =             { hours }
+                />
+                // <div
+                //     key = { index }
+                //     className = 'PBC_CHL_item'
+                // >
+                //     <h4>
+                //         <span
+                //             style = {{
+                //                 backgroundColor: colorBG,
+                //                 color: colorText,
+                //             }}
+                //         >{ name }</span>
+                //     </h4>
 
-                </div>
+                //     { createHours( hours ) }
+
+                // </div>
             );
 
         } );

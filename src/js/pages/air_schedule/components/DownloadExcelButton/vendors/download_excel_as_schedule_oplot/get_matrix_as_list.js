@@ -18,8 +18,8 @@ export const get_matrix_as_list = ( params ) => {
 
     let actual_schedule_events = get_all_actual_schedule_events( used_events_by_id, highlight_files_by_name );
 
-    console.dir( 'actual_schedule_events' );
-    console.dir( actual_schedule_events );
+    // console.dir( 'actual_schedule_events' );
+    // console.dir( actual_schedule_events );
 
     let MatrixOplot = new MatrixOplotClass();
     MatrixOplot.SetUsedEvents( used_events_by_id );

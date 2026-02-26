@@ -81,7 +81,7 @@ const SchEventContainerComponent = ( props ) => {
             nextStartTime = { nextStartTime } // не нужна здесь
             dragIsActive = { dragIsActive }
         >
-            <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` }>
+            <div className = { `schEventContainer ${ isLighter? 'isLighter': '' }` } data-start-time = { startTime } data-grid-event-id = { gridEventId }>
 
                 <div className = { `schEventContainerWrap ${ isCompletd? 'isCompletd': '' } ${ isError? 'errorTime': '' }` }>
 

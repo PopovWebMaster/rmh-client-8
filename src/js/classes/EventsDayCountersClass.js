@@ -77,7 +77,6 @@ export class EventsDayCountersClass{
         // console.dir( 'dayList' );
         // console.dir( dayList );
 
-        let counter_list_files = [];
 
         let obj = {};
         for( let i = 0; i < dayList.length; i++ ){
@@ -86,13 +85,24 @@ export class EventsDayCountersClass{
                 // durationTime,
                 // is_premiere,
                 // category_id,
+                firstSegmentId,
+                gridEventId,
                 releases,
             } = dayList[ i ];
 
             let category = get_category_by_event_id( eventId );
             let category_id = category.id;
 
-            
+
+            let isCounted = false;
+            if( firstSegmentId === null ){
+                isCounted = true;
+            }else{
+                if( firstSegmentId === gridEventId ){
+                    isCounted = true;
+                };
+            };
+
             if( obj[ category_id ] ){
                 obj[ category_id ].count = obj[ category_id ].count + 1;
             }else{
@@ -104,7 +114,11 @@ export class EventsDayCountersClass{
             };
 
             if( obj[ category_id ].events[ eventId ] ){
-                obj[ category_id ].events[ eventId ].count = obj[ category_id ].events[ eventId ].count + 1;
+
+                if( isCounted ){
+                    obj[ category_id ].events[ eventId ].count = obj[ category_id ].events[ eventId ].count + 1;
+                };
+
             }else{
                 obj[ category_id ].events[ eventId ] = {
                     count: 1,
@@ -123,8 +137,10 @@ export class EventsDayCountersClass{
 
                     if( obj[ category_id ].events[ eventId ].files[ fileName ] ){
 
-                        obj[ category_id ].events[ eventId ].files[ fileName ].count =      obj[ category_id ].events[ eventId ].files[ fileName ].count + 1;
-                        obj[ category_id ].events[ eventId ].files[ fileName ].duration =   obj[ category_id ].events[ eventId ].files[ fileName ].duration + releaseDuration;
+                        if( isCounted ){
+                            obj[ category_id ].events[ eventId ].files[ fileName ].count =      obj[ category_id ].events[ eventId ].files[ fileName ].count + 1;
+                            obj[ category_id ].events[ eventId ].files[ fileName ].duration =   obj[ category_id ].events[ eventId ].files[ fileName ].duration + releaseDuration;
+                        };
 
                     }else{
                         obj[ category_id ].events[ eventId ].files[ fileName ] = {
@@ -141,8 +157,6 @@ export class EventsDayCountersClass{
 
         };
 
-        // console.dir( 'obj' );
-        // console.dir( obj );
         this.counter_list_files = obj;
 
 

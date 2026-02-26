@@ -8,7 +8,9 @@ import './AddAllBtn.scss';
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { BuffferButtonContainer } from './../BuffferButtonContainer/BuffferButtonContainer.js';
 
-import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+// import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+
+import { add_all_releases } from './vendors/add_all_releases.js';
 
 const AddAllBtnComponent = ( props ) => {
 
@@ -23,17 +25,21 @@ const AddAllBtnComponent = ( props ) => {
     let [ isActive, setIsActive ] = useState( true );
 
     const click = () => {
+        // console.time( 'speed' )
 
-        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateList({
-            withReleses: true
-        });
+        // console.dir( {
+        //     releaseList, usedReleasesById
+        // } );
 
+        // let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+        // StoreScheduleResultEvents.CreateList({
+        //     withReleses: true
+        // });
+        // StoreScheduleResultEvents.AddAllRemainingReleases( releaseList, usedReleasesById );
+        // StoreScheduleResultEvents.SetListToStore( true );
 
-        // StoreScheduleResultEvents.AddAllReleases( releaseList );
-        StoreScheduleResultEvents.AddAllRemainingReleases( releaseList, usedReleasesById );
+        add_all_releases();
 
-        StoreScheduleResultEvents.SetListToStore( true );
 
     }
 

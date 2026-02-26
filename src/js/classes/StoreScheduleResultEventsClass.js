@@ -256,11 +256,11 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         let { isError, newList } = adjust_startTime_in_list_v2( scheduleEventsList );
 
-        console.dir( 'newList' );
-        console.dir( structuredClone( newList ) );
+        // console.dir( 'newList' );
+        // console.dir( structuredClone( newList ) );
 
-        console.dir( 'isError' );
-        console.dir( isError );
+        // console.dir( 'isError' );
+        // console.dir( isError );
 
 
         let arr = divide_day_into_sectors( newList );
@@ -283,7 +283,7 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
 
         if( isError ){
-            store.dispatch( setInfoMessageText( 'Не может быть добавлено. Не достаточно места') );
+            // store.dispatch( setInfoMessageText( 'Не может быть добавлено. Не достаточно места') );
 
         }else{
             let arr = divide_day_into_sectors( newList );

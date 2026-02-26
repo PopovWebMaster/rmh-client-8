@@ -40,7 +40,9 @@ export const get_filter_data = ( releaseList ) => {
             category_obj[ category_id ] = category; 
         };
 
-        if( events_obj[ event_id ] ){}else{ 
+        if( events_obj[ event_id ] ){
+            
+        }else{ 
             events_obj[ event_id ] = event; 
             events_obj[ event_id ].colorBG = category.colorBG;
             events_obj[ event_id ].colorText = category.colorText;

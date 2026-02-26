@@ -43,7 +43,18 @@
                 text-align: center;
                 margin-right: 0.4em;
                 border-radius: 0.1em;
+                cursor: pointer;
+                user-select: none;
             }
+            >.time:hover{
+                background-color: #b96356;
+                color: #ffffff;
+            }
+
+
+
+
+
             >.name{
                 font-size: 0.6em;
                 padding: 0.1em 0.3em;
@@ -102,6 +113,17 @@
 
     .RB_BufferList_item:hover{
         background-color: #ffffff85;
+
+        .RB_BufferList_item_left{
+
+            >.GE_id{
+                color: #ffffff;
+            }
+
+
+        }
+
+
     }
     .RB_BufferList_item:active{
         background-color: #ffffff85;
@@ -114,6 +136,45 @@
         }
         
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
