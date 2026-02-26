@@ -11,6 +11,74 @@
 
     margin: 0.2em 0;
 
+
+    .FL_One_FileData_btn{
+            font-size: 0.8em;
+            // font-size: 1em;
+            margin: 0 0.2em;
+            padding: 0em 0.1em;
+            // background-color: #343434;
+
+            flex-grow: 0;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+            // border-radius: 0.1em;
+
+            span:first-child{
+                border-radius: 0.1em 0 0 0.1em;
+            }
+            span:last-child{
+                border-radius: 0 0.1em 0.1em 0 ;
+            }
+
+            span{
+                font-size: 0.7em;
+                padding: 0.25em 0.6em;
+                margin: 0;
+                color: #747474;
+                font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+                background-color: #dadada;
+                cursor: pointer;
+                user-select: none;
+            }
+            span.FL_One_FileData_btn_isActive{
+                color: #ffffff;
+                background-color: #545454;
+
+            }
+            span:hover{
+                color: #5e5e5e;
+                background-color: #c9c8c8;
+            }
+            span.FL_One_FileData_btn_isActive:hover{
+                color: #ffffff;
+                background-color: #545454;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .FL_OneFileItem_fileName{
         font-size: 0.6em;
         padding: 0.2em 0.4em;

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 
@@ -32,11 +32,20 @@ import { SaveScheduleButton } from './../SaveScheduleButton/SaveScheduleButton.j
 
 import { ScheduleInfoAlertMessage } from './../ScheduleInfoAlertMessage/ScheduleInfoAlertMessage.js';
 
+
+window.onbeforeunload = ( ev ) => {
+            ev.preventDefault();
+            return ev.returnValue = 'Are you sure you want to close?';
+        }
+
 const AirScheduleComponent = ( props ) => {
 
     let {
 
     } = props;
+
+
+
 
     return (
         <PageContainer className = 'airSchedule'>

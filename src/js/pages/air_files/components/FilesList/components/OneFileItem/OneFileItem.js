@@ -18,6 +18,7 @@ const OneFileItemComponent = ( props ) => {
     let {
 
         fileName,
+        filePuth,
         fileDuration,
         filterItemsByEventId,
         filteredList,
@@ -33,6 +34,17 @@ const OneFileItemComponent = ( props ) => {
     let [ eventName, setEventName ] = useState( null );
 
     let [ chackValue, setChackValue ] = useState( false );
+
+
+    let [ showIsFile, setShowIsFile ] = useState( true );
+    let [ fileValue, setFileValue ] = useState( '' );
+
+
+    useEffect( () => {
+        setFileValue( fileName );
+        setShowIsFile( true );
+    }, [ fileName ] );
+
     
 
     useEffect( () => {
@@ -63,6 +75,18 @@ const OneFileItemComponent = ( props ) => {
         set_isChaked_into_filteredList( [ fileName ], !chackValue );
     };
 
+
+    const clickFile = () => {
+        setShowIsFile( true );
+        setFileValue( fileName );
+    }
+
+    const clickPuth = () => {
+        setShowIsFile( false );
+        setFileValue( filePuth );
+
+    }
+
     return (
         <div className = 'FL_OneFileItem'>
 
@@ -73,10 +97,26 @@ const OneFileItemComponent = ( props ) => {
                 onChange =  { chack }
             />
 
+
+
+            <div className = 'FL_One_FileData_btn'>
+                <span 
+                    className = { showIsFile? 'FL_One_FileData_btn_isActive': '' }
+                    onClick = { clickFile }
+                >file</span>
+
+                <span 
+                    className = { showIsFile? '': 'FL_One_FileData_btn_isActive' }
+                    onClick = { clickPuth }
+                >puth</span>
+
+            </div>
+
+
             <input
                 type =      'text'
                 className = 'FL_OneFileItem_fileName'
-                value =     { fileName }
+                value =     { fileValue }
                 onChange =  { () => {} }
             />
 

@@ -23,6 +23,18 @@ const SaveCategoryChangesComponent = ( props ) => {
 
     } = props;
 
+    useEffect(() => {
+        if( categoryesIsChanged ){
+            window.onbeforeunload = ( ev ) => {
+                ev.preventDefault();
+                ev.returnValue = 'Are you sure you want to close?';
+                // return 
+            };
+        }else{
+            window.onbeforeunload = null
+        };
+    }, [ categoryesIsChanged ]);
+
 
     const click = () => {
         

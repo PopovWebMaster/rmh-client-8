@@ -20,6 +20,18 @@ const SaveScheduleButtonComponent = ( props ) => {
         scheduleEventsListIsChanged
     } = props;
 
+    useEffect(() => {
+        if( scheduleEventsListIsChanged ){
+            window.onbeforeunload = ( ev ) => {
+                ev.preventDefault();
+                ev.returnValue = 'Are you sure you want to close?';
+                // return 
+            };
+        }else{
+            window.onbeforeunload = null
+        };
+    }, [ scheduleEventsListIsChanged ]);
+
     let [ isAllowed, setIsAllowedResult ] = useState( false );
 
 

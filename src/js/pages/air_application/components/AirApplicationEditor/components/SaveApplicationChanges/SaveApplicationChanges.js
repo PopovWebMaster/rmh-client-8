@@ -30,6 +30,18 @@ const SaveApplicationChangesComponent = ( props ) => {
 
     } = props;
 
+    useEffect(() => {
+        if( currentAppIsChanged ){
+            window.onbeforeunload = ( ev ) => {
+                ev.preventDefault();
+                ev.returnValue = 'Are you sure you want to close?';
+                // return 
+            };
+        }else{
+            window.onbeforeunload = null
+        };
+    }, [ currentAppIsChanged ]);
+
 
     const click = () => {
         if( currentAppIsChanged ){

@@ -27,6 +27,19 @@ const SaveEventsChangesComponent = ( props ) => {
 
     } = props;
 
+    useEffect(() => {
+        if( eventsIsChanged ){
+            window.onbeforeunload = ( ev ) => {
+                ev.preventDefault();
+                ev.returnValue = 'Are you sure you want to close?';
+                // return 
+            };
+        }else{
+            window.onbeforeunload = null
+        };
+    }, [ eventsIsChanged ]);
+
+
     const click = () => {
         if( eventsIsChanged ){
 

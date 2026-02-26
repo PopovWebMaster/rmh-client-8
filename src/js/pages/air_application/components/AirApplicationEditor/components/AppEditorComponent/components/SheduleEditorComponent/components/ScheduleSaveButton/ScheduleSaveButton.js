@@ -1,6 +1,6 @@
 
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -27,6 +27,18 @@ const ScheduleSaveButtonComponent = ( props ) => {
         setIsChanged,
 
     } = props;
+
+    useEffect(() => {
+        if( isChanged ){
+            window.onbeforeunload = ( ev ) => {
+                ev.preventDefault();
+                ev.returnValue = 'Are you sure you want to close?';
+                // return 
+            };
+        }else{
+            window.onbeforeunload = null
+        };
+    }, [ isChanged ]);
 
     const save_release_list = () => {
 
