@@ -9,6 +9,7 @@ import './AdvancedSearchContainer.scss';
 
 import { AWInputText } from './../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
 import { AWEventSelect } from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
+import { EventByCategorySelect } from './../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
 
 
 import { SearchPeriodEdit } from './components/SearchPeriodEdit/SearchPeriodEdit.js';
@@ -156,13 +157,28 @@ const AdvancedSearchContainerComponent = ( props ) => {
                     selectedEvents =    { selectedEvents }
                     removeSelectedEvent = { removeSelectedEvent }
                 />
+
+
+                
+
+
             
-                <AWEventSelect
+                {/* <AWEventSelect
                     value =         { null }
                     changeHandler = { addSelectedEvent }
                     alwaysIsOpen =  { true }
                 
+                /> */}
+
+                <EventByCategorySelect
+                    isOpen =        { isOpen }
+                    value =         { null }
+                    changeHandler = { addSelectedEvent }
+                    maxHeight =     { 38 }
+                    maxDuration =   { null }
                 />
+
+
 
                 <SearchByEventsButton
                     selectedEvents =    { selectedEvents }

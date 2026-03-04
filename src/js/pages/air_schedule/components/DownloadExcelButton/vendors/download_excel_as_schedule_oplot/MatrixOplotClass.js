@@ -15,7 +15,7 @@ export class MatrixOplotClass extends MatrixMethodsClass {
         this.AddScheduleEvent =     this.AddScheduleEvent.bind(this);
         this.SetHighlightFiles =    this.SetHighlightFiles.bind(this);
         this.SetUsedEvents =        this.SetUsedEvents.bind(this);
-        this.GetMatrix =        this.GetMatrix.bind(this);
+        this.GetMatrix =            this.GetMatrix.bind(this);
 
 
 

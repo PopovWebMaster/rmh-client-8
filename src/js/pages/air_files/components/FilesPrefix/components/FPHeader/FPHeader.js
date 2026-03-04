@@ -11,9 +11,13 @@ import { setSpinnerIsActive } from './../../../../../../redux/spinnerSlice.js';
 
 import { AlertWindowContainer } from './../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
 import { AWInputText } from './../../../../../../components/AlertWindowContainer/AWInputText/AWInputText.js';
-import { AWEventSelect } from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
+// import { AWEventSelect } from './../../../../../../components/AlertWindowContainer/AWEventSelect/AWEventSelect.js';
 import { AWButtonAdd } from './../../../../../../components/AlertWindowContainer/AWButtonAdd/AWButtonAdd.js';
 import { AWShowErrors } from './../../../../../../components/AlertWindowContainer/AWShowErrors/AWShowErrors.js';
+
+import { EventByCategorySelect } from './../../../../../../components/EventByCategorySelect/EventByCategorySelect.js';
+
+
 
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
@@ -126,8 +130,8 @@ const FPHeaderComponent = ( props ) => {
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
                 title =     'Новый префикс'
-                width =     '30em'
-                height =    '65vh'
+                width =     '40em'
+                height =    '75vh'
             >
 
                 <div className = 'FPHeader_wrap'>
@@ -143,10 +147,20 @@ const FPHeaderComponent = ( props ) => {
                         placeholder =   'prefix'
                     />
 
-                    <AWEventSelect
+                    {/* <AWEventSelect
                         value = { eventId }
                         changeHandler = { changheEvent }
                         alwaysIsOpen = { true }
+                    /> */}
+
+                    <EventByCategorySelect
+                        isOpen = { isOpen }
+                        value = { eventId }
+                        changeHandler = { changheEvent }
+                        alwaysIsOpen = { true }
+                        maxHeight =     { 42 }
+                        maxDuration = { null }
+
                     />
 
                     <AWButtonAdd

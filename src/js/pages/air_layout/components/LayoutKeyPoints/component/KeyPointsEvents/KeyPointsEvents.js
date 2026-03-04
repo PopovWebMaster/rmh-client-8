@@ -10,6 +10,10 @@ import { ScrollContainer } from './../../../../../../components/ScrollContainer/
 
 import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../config/layout.js';
 
+import { get_key_points_by_category } from './vendors/get_key_points_by_category.js';
+
+import { OneKetEventGroup } from './OneKetEventGroup/OneKetEventGroup.js';
+
 
 const KeyPointsEventsComponent = ( props ) => {
 
@@ -28,6 +32,30 @@ const KeyPointsEventsComponent = ( props ) => {
 
     const create = ( arr ) => {
 
+        // console.dir( 'arr' );
+        // console.dir( arr );
+
+        let obj = get_key_points_by_category( arr );
+
+        let category_list = Object.keys( obj );
+
+
+        let div = category_list.map( ( category_id, index ) => {
+
+            return (
+                <OneKetEventGroup 
+                    key =           { index }
+                    category_id =   { category_id }
+                    list =          { obj[ category_id ] }
+                />
+            )
+
+        } );
+
+        return div;
+
+
+/*
         let arr_1 = [];
         for( let i = 0; i < arr.length; i++ ){
             arr_1.push( structuredClone( arr[ i ] ) );
@@ -98,6 +126,8 @@ const KeyPointsEventsComponent = ( props ) => {
         } );
 
         return div;
+
+        */
           
     };
 
@@ -107,7 +137,7 @@ const KeyPointsEventsComponent = ( props ) => {
     
     return (
         <div className = 'keyPointsEvents'>
-            <h2 className = 'keyPointsEvents_title' >События</h2>
+            {/* <h2 className = 'keyPointsEvents_title' >События</h2> */}
 
             <div className = 'keyPointsEvents_list'>
                 <ScrollContainer >

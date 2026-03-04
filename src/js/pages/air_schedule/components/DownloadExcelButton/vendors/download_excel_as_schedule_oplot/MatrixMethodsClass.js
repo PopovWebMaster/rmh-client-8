@@ -20,7 +20,7 @@ export class MatrixMethodsClass {
 
 
 
-
+// GetRowsDataFromScheduleEvent
 
 
 
@@ -75,7 +75,14 @@ export class MatrixMethodsClass {
                 MatrixRow.SetTextColor( textColor );
 
                 MatrixRow.SetStartTime( last_startTime );
-                MatrixRow.SetDuration( releaseDuration );
+
+                if( firstSegmentId === null ){
+                    MatrixRow.SetDuration( releaseDuration );
+                }else{
+                    MatrixRow.SetDuration( durationTime );
+                };
+
+
                 MatrixRow.SetReleaseInfoFromRelease( releases[ i ], eventId );
                 MatrixRow.SetNotesFromRelease( releases[ i ] );
 

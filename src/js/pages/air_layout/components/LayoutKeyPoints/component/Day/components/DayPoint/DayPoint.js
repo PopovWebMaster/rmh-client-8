@@ -71,6 +71,7 @@ const DayPointComponent = ( props ) => {
         <div 
             className = 'LP_Day_point'
             style = {{ top }}
+            title = { `${name}` }
         >
             <span className = 'LP_Day_time'>{ time }</span>
 
@@ -80,6 +81,7 @@ const DayPointComponent = ( props ) => {
                     backgroundColor: colorBG,
                 }}
                 className = 'LP_Day_description'
+                
             >{ name }</span>
 
             {/* <input 
