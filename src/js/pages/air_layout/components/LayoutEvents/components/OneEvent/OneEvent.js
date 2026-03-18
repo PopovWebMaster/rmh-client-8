@@ -44,6 +44,7 @@ const OneEventComponent = ( props ) => {
 
                 <EventDurationItem 
                     id = { id }
+                    type = { type }
                     durationTime = { durationTime }
                 />
 

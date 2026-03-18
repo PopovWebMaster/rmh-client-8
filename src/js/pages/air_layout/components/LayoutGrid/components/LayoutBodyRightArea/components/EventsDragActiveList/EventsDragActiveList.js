@@ -19,6 +19,8 @@ import { access_right } from './../../../../../../../../helpers/access_right.js'
 import { ScheduleReleaseDragEventClass } from './../../../../../../../../classes/ScheduleReleaseDragEventClass.js';
 
 import { START_FROM } from './../../../../../../../../config/scheduleResult.js';
+import { EVENT_TYPE } from './../../../../../../../../config/layout.js';
+
  
 import { drag_start_for_new_event } from './../../../LayoutDragAndDropEvent/vendors/drag_start_for_new_event.js';
 
@@ -92,17 +94,34 @@ const EventsDragActiveListComponent = ( props ) => {
                 name,
                 // notes,
                 style,
-                // type
+                type,
+                linked_file,
             } = item;
 
-            let duration_sec = 0;
+            // console.dir( 'item' );
+            // console.dir( item );
 
-            let linked_file_dutation = get_linked_file_dutation_by_event_id( id );
-            if( linked_file_dutation === 0 ){
-                duration_sec = convert_time_str_to_sec( durationTime );
+            let duration_sec = convert_time_str_to_sec( durationTime );
+
+            if( linked_file === null ){
+                // duration_sec = convert_time_str_to_sec( durationTime );
             }else{
-                duration_sec = linked_file_dutation;
+                let linked_file_dutation = get_linked_file_dutation_by_event_id( id );
+                if( type === EVENT_TYPE.BLOCK ){
+                    if( linked_file_dutation > duration_sec ){
+                        duration_sec = linked_file_dutation;
+                    };
+                }else{
+                    duration_sec = linked_file_dutation;
+                };
             };
+
+            // let linked_file_dutation = get_linked_file_dutation_by_event_id( id );
+            // if( linked_file_dutation === 0 ){
+            //     duration_sec = convert_time_str_to_sec( durationTime );
+            // }else{
+            //     duration_sec = linked_file_dutation;
+            // };
 
             return (
                 <div

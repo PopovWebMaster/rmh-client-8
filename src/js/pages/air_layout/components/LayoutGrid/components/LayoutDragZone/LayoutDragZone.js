@@ -107,6 +107,7 @@ const LayoutDragZoneComponent = ( props ) => {
             }else{
                 // setEventIsShow( false );
                 setStartTimePlus( 0 );
+                setEventTop( 0 );
             }
 
 

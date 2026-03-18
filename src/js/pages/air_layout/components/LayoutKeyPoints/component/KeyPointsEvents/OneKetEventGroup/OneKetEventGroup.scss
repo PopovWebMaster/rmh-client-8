@@ -64,6 +64,36 @@
 
             background-color: #ffffff10;
 
+            position: relative;
+
+            >.gridAllCount{
+                font-size: 1em;
+                position: absolute;
+                top: 0;
+                left: 1em;
+                width: 2em;
+                height: 100%;
+                // background-color: red;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                // padding-right: 0.5em;
+
+                >span{
+                    font-size: 0.55em;
+                    color: #112440;
+                    padding: 0.2em 0.6em 0.1em 0.6em;
+                    border-radius: 0.1em;
+                    background-color: #dfdfdf;;
+                    border: 1px solid #4d7dc1;
+                }
+            }
+
+
+
+
             >span{
                 font-size: 0.6em;
                 padding: 0.2em 0.8em;

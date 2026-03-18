@@ -103,11 +103,28 @@ export class LayoutDragEventClass {
 
         this.eventId =          eventId;
         this.categoryId = category_id;
-        this.eventDurationTime = convert_time_str_to_sec( durationTime );
+
+
+        let eventDurationTime = convert_time_str_to_sec( durationTime );
         this.eventLinkedFile = linked_file;
+        let all_linked_file_duration = 0;
+        if( linked_file !== null ){
+            for( let i = 0; i < linked_file.length; i++ ){
+                let { duration } = linked_file[ i ];
+                all_linked_file_duration = all_linked_file_duration + duration;
+            };
+        };
+        if( all_linked_file_duration > eventDurationTime ){
+            eventDurationTime = all_linked_file_duration;
+        };
+
+        this.eventDurationTime = eventDurationTime;
+
+
         this.eventName = name;
         this.eventStyle = style;
         this.eventType = type;
+
 
     }
 
@@ -141,6 +158,9 @@ export class LayoutDragEventClass {
             store.dispatch( setDragStartGridEventId( this.gridEventId ) );
 
         }else if( this.startFrom === DRAG_START.NEW_EVENT ){
+
+
+
             store.dispatch( setDragStartDuration( this.eventDurationTime ) );
 
         };

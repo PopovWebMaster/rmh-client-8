@@ -162,11 +162,11 @@ export class ScheduleEventClass{
         this.notes = eventData.notes;
         this.finalNotes = `${ eventData.notes } ${notes}`;
 
-        if( eventData.type ){
-            if( eventData.type === EVENT_TYPE.BLOCK ){
-                this.durationTime  = MIN_EVENT_DURATION_SEC
-            };
-        };
+        // if( eventData.type ){
+        //     if( eventData.type === EVENT_TYPE.BLOCK ){
+        //         this.durationTime  = MIN_EVENT_DURATION_SEC
+        //     };
+        // };
 
 
         if( eventData.linked_file ){

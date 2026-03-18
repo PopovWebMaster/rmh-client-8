@@ -74,11 +74,17 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
     CreateFromGridEvents(){
         let gridEventsList = this.GetGridEventsList();
 
+        // console.dir( 'gridEventsList' );
+        // console.dir( gridEventsList );
+        
+
         for( let i = 0; i < gridEventsList.length; i++ ){
             let ScheduleEvent = new ScheduleEventClass();
             ScheduleEvent.SetDataFromGridEvent( gridEventsList[ i ] );
             this.list.push( ScheduleEvent );
             this.SetLastGridEventId( ScheduleEvent );
+
+            
         };
 
         let list = this.GetScheduleEventsList( false );

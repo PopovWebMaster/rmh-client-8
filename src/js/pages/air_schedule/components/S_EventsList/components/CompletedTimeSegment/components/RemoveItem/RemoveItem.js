@@ -19,6 +19,9 @@ import { RemoveSegmentButton } from './../RemoveSegmentButton/RemoveSegmentButto
 import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
 
+import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
+
+
 
 const RemoveItemComponent = ( props ) => {
 
@@ -32,13 +35,28 @@ const RemoveItemComponent = ( props ) => {
 
     const remove_event = () => {
 
-        let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
-        StoreScheduleResultEvents.CreateList();
-        StoreScheduleResultEvents.RemoveEvent( gridEventId );
-        StoreScheduleResultEvents.SetListToStore( true );
-        // setIsOpen( false );
+        set_schedule_list_changes_to_store( gridEventId, { isKeyPoint: false } ); // костыль, чтоб всё не съезжало
+
+        let timerId = setTimeout( () => {
+            /*
+                это здесь потому, что setTimeout используется в set_schedule_list_changes_to_store
+                а там важна очерёдность
+            */
+
+            let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+            StoreScheduleResultEvents.CreateList();
+            StoreScheduleResultEvents.RemoveEvent( gridEventId );
+            StoreScheduleResultEvents.SetListToStore( true );
+
+
+            clearTimeout( timerId );
+        }, 50 );
+
 
     }
+
+
+
 
 
     return (

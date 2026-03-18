@@ -17,6 +17,8 @@ import { set_max_height_em_for_empty_time_segment } from './vendors/set_max_heig
 import { EventsScrollButtons } from './components/EventsScrollButtons/EventsScrollButtons.js';
 
 
+// let scrollTop = 0;
+
 const S_EventsListComponent = ( props ) => {
 
     let {
@@ -33,9 +35,28 @@ const S_EventsListComponent = ( props ) => {
     useEffect( () => {
         set_max_height_em_for_empty_time_segment( refEd.current.parentElement );
         setIsReady( true );
+
+        // let elem = refEd.current;
+        // let scrollElem = elem.querySelector( '.scrollContainer' );
+        // if( scrollElem ){
+        //     scrollElem.scrollTop = scrollTop;
+        // };
+
+        // scrollTop = 0;
+
+
     }, [] );
 
     const create = ( arr, arr_2 ) => {
+
+        // let elem = refEd.current;
+        // let scrollElem = elem.querySelector( '.scrollContainer' );
+        // let scrollTop = 0;
+        // if( scrollElem ){
+        //     scrollTop = scrollElem.scrollTop
+        // };
+
+
         if( arr.length > 0 ){
             
             let sectors = arr.map( ( item, index ) => {

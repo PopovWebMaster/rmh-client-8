@@ -10,6 +10,13 @@ import './ECBS_CategoryItem.scss';
 import { set_category_isOpen } from './../../vendors/set_category_isOpen.js';
 import { ECSB_EventItem } from './../ECSB_EventItem/ECSB_EventItem.js';
 
+import { get_linked_file_dutation_by_event_id } from './../../../../helpers/get_linked_file_dutation_by_event_id.js';
+import { convert_time_str_to_sec } from './../../../../helpers/convert_time_str_to_sec.js';
+import { convert_sec_to_time } from './../../../../helpers/convert_sec_to_time.js';
+import { EVENT_TYPE } from './../../../../config/layout.js';
+
+
+
 const ECBS_CategoryItemComponent = ( props ) => {
 
     let {
@@ -65,13 +72,34 @@ const ECBS_CategoryItemComponent = ( props ) => {
                 id,
                 name,
                 style,
+                linked_file,
+                type,
             } = item;
+
+            // console.dir( item);
+
+            let duration_sec = convert_time_str_to_sec( durationTime );
+
+            if( linked_file !== null ){
+                let linked_file_dutation = get_linked_file_dutation_by_event_id( id );
+
+                if( type === EVENT_TYPE.BLOCK ){
+                    if( linked_file_dutation > duration_sec ){
+                        duration_sec = linked_file_dutation;
+                    };
+                }else{
+                    duration_sec = linked_file_dutation;
+                };
+
+            };
+
+
 
             return (
                 <ECSB_EventItem
                     key = { index }
 
-                    durationTime =  { durationTime }
+                    durationTime =  { convert_sec_to_time( duration_sec ) }
                     isActive =      { isActive }
                     eventId =       { id }
                     name =          { name }

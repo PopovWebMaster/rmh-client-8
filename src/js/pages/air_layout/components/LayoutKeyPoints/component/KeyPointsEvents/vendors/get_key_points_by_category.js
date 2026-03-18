@@ -1,6 +1,8 @@
 
 import { get_event_by_id } from './../../../../../../../helpers/get_event_by_id.js';
 
+import { add_counts_into_key_points } from './add_counts_into_key_points.js';
+
 export const get_key_points_by_category = ( eventList ) => { // eventList можно взять из store, но не хочу, и так сойдёт
 
     let obj = {};
@@ -14,7 +16,7 @@ export const get_key_points_by_category = ( eventList ) => { // eventList мож
             obj[ category_id ] = [];
         };
         let item = get_event_by_id( id );
-        item.isUsed = false;
+        // item.isUsed = false;
         obj[ category_id ].push( structuredClone( item ) );
     };
 
@@ -30,7 +32,10 @@ export const get_key_points_by_category = ( eventList ) => { // eventList мож
         result[ category_id ] = [ ...list ];
     };
 
-    return result;
+    let res = add_counts_into_key_points( result );
+
+
+    return res;
 
 
 };

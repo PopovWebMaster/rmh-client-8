@@ -41,26 +41,34 @@ const LinkedFilesItemsComponent = ( props ) => {
 
     const createFreeTime = ( allDuration ) => {
         if( eventType === EVENT_TYPE.BLOCK ){
-            return (
-                <div
-                    className = 'CTS_LinkedFilesItems_item'
-                >
+
+            let rest_of_time = durationTime - allDuration;
+            if( rest_of_time > 0 ){
+                return (
                     <div
-                        className = 'CTS_LFI_time'
+                        className = 'CTS_LinkedFilesItems_item'
                     >
-                        <span className = 'CTS_LFI_time_fact' >{ convert_sec_to_time( startTime + allDuration ) }</span>
-                        <span className = 'CTS_LFI_duration'>{ convert_sec_to_time( durationTime - allDuration ) }</span>
+                        <div
+                            className = 'CTS_LFI_time'
+                        >
+                            <span className = 'CTS_LFI_time_fact' >{ convert_sec_to_time( startTime + allDuration ) }</span>
+                            <span className = 'CTS_LFI_duration'>{ convert_sec_to_time( rest_of_time ) }</span>
+                        </div>
+
+                        <input
+                            type = 'text'
+                            className = 'CTS_LFI_file_name_inp_free'
+                            value = { 'остаток времени' }
+                            onChange = { () => {} }
+                        />
+
                     </div>
+                )
+            }else{
+                return '';
+            };
 
-                    <input
-                        type = 'text'
-                        className = 'CTS_LFI_file_name_inp_free'
-                        value = { 'остаток времени' }
-                        onChange = { () => {} }
-                    />
-
-                </div>
-            )
+            
 
         }else{
             return '';
@@ -77,6 +85,10 @@ const LinkedFilesItemsComponent = ( props ) => {
                 name,
                 duration,
             } = item;
+
+            // console.dir( 'item' );
+            // console.dir( item );
+
 
             let startTime_sec = startTime + allDuration;
             allDuration = allDuration + duration;

@@ -8,7 +8,8 @@ import './EventDurationItem.scss';
 import { selectorData as layoutSlice, setEventListAsChanged, setGridDayEventsList, setGridDayEventsIsChanges } from './../../../../../../../../redux/layoutSlice.js';
 import { setSpinnerIsActive } from './../../../../../../../../redux/spinnerSlice.js';
 
-import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/events.js';
+// import { MIN_EVENT_DURATION_SEC } from './../../../../../../../../config/events.js';
+import { MIN_EVENT_DURATION_SEC, EVENT_TYPE } from './../../../../../../../../config/layout.js';
 
 import { InputDuration } from './../../../../../../../../components/InputDuration/InputDuration.js';
 
@@ -24,12 +25,16 @@ import { access_right } from './../../../../../../../../helpers/access_right.js'
 
 import { seve_on_server_new_grid_event_list } from './../../../../vendors/seve_on_server_new_grid_event_list.js';
 
+import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
+import { get_hh_mm_ss_from_seconds } from './vendors/get_hh_mm_ss_from_seconds.js';
+
 
 
 const EventDurationItemComponent = ( props ) => {
 
     let {
         id,
+        type,
         durationTime,
 
         // eventList,
@@ -69,33 +74,38 @@ const EventDurationItemComponent = ( props ) => {
         access_right( 'layout_event_edit', () => {
             
             let duration_sec = getTimeInSeconds( HH, MM, SS );
-
             let new_durationTime = `${HH}:${MM}:${SS}`;
 
             if( duration_sec >= MIN_EVENT_DURATION_SEC ){
 
             }else{
-                setHH( '00' );
-                setMM( '00' );
-                setSS( '05' );
-                new_durationTime = `00:00:05`;
+                let { hh, mm, ss } = get_hh_mm_ss_from_seconds( duration_sec );
+                setHH( hh );
+                setMM( mm );
+                setSS( ss );
+                new_durationTime = convert_sec_to_time( MIN_EVENT_DURATION_SEC );
+                duration_sec = MIN_EVENT_DURATION_SEC;
             };
 
-            let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
-            if( addReport.isErrors ){
-                let arr = durationTime.split( ':' );
-                setHH( arr[ 0 ] );
-                setMM( arr[ 1 ] );
-                setSS( arr[ 2 ] );
-
-                alert( addReport.message );
-
+            if( type === EVENT_TYPE.BLOCK ){
+                setNewDuration();
             }else{
+                let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+                if( addReport.isErrors ){
+                    let arr = durationTime.split( ':' );
+                    setHH( arr[ 0 ] );
+                    setMM( arr[ 1 ] );
+                    setSS( arr[ 2 ] );
 
-                if( new_durationTime !== durationTime ){
-                    setIsOpen( true );
+                    alert( addReport.message );
+
+                }else{
+
+                    if( new_durationTime !== durationTime ){
+                        setIsOpen( true );
+                    };
+
                 };
-
             };
 
         } );
@@ -105,6 +115,7 @@ const EventDurationItemComponent = ( props ) => {
     };
 
     const setNewDuration = () => {
+
         setIsOpen( false );
 
         let duration_sec = getTimeInSeconds( HH, MM, SS );
@@ -113,15 +124,18 @@ const EventDurationItemComponent = ( props ) => {
         if( duration_sec >= MIN_EVENT_DURATION_SEC ){
 
         }else{
-            setHH( '00' );
-            setMM( '00' );
-            setSS( '05' );
-            new_durationTime = `00:00:05`;
+            let { hh, mm, ss } = get_hh_mm_ss_from_seconds( MIN_EVENT_DURATION_SEC );
+            setHH( hh );
+            setMM( mm );
+            setSS( ss );
+
+            // setHH( '00' );
+            // setMM( '00' );
+            // setSS( '05' );
+            new_durationTime = convert_sec_to_time( MIN_EVENT_DURATION_SEC );
         };
 
-        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
-
-        seve_on_server_new_grid_event_list( addReport.gridDayEventsList, () => {
+        if( type === EVENT_TYPE.BLOCK ){
             seve_one_event_changes_on_setver({
                 eventId: id,
                 eventData: { 
@@ -130,41 +144,23 @@ const EventDurationItemComponent = ( props ) => {
                 },
                 callback: () => {},
             });
-        } );
-/*
-        setSpinnerIsActive( true );
+        }else{
+            let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
 
-        let addReport = get_gridDayEventsList_with_new_duration_time( id, duration_sec );
+            seve_on_server_new_grid_event_list( addReport.gridDayEventsList, () => {
+                seve_one_event_changes_on_setver({
+                    eventId: id,
+                    eventData: { 
+                        durationTime: new_durationTime,
+                        durationSec: duration_sec,
+                    },
+                    callback: () => {},
+                });
+            } );
+        };
 
-        send_request_to_server({
-            route: `save-grid-event-list`,
-            data: { 
-                list: addReport.gridDayEventsList,
-            },
-            successCallback: ( response ) => {
-                console.dir( 'response' );
-                console.dir( response );
-                if( response.ok ){
-                    setSpinnerIsActive( false );
-                    setGridDayEventsList( response.list );
-                    setGridDayEventsIsChanges( false );
 
-                    
 
-                    seve_one_event_changes_on_setver({
-                        eventId: id,
-                        eventData: { 
-                            durationTime: new_durationTime,
-                            durationSec: duration_sec,
-                        },
-                        callback: () => {},
-                    });
-                    
-                };
-
-            },
-        });
-        */
 
     }
 

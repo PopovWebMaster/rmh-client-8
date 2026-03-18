@@ -8,7 +8,7 @@ import './KeyPointsEvents.scss';
 import { selectorData as layoutSlice, setKeyPointsCurrentEventId } from './../../../../../../redux/layoutSlice.js';
 import { ScrollContainer } from './../../../../../../components/ScrollContainer/ScrollContainer.js';
 
-import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../config/layout.js';
+// import { DEFAULT_CATEGORY, EVENT_TYPE } from './../../../../../../config/layout.js';
 
 import { get_key_points_by_category } from './vendors/get_key_points_by_category.js';
 

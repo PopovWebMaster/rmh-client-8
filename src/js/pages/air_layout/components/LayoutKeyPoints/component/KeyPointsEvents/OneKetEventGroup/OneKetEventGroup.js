@@ -53,15 +53,26 @@ const OneKetEventGroupComponent = ( props ) => {
 
     }
 
+    let getAllCountFromItem = ( item ) => {
+        let { gridEvents } = item;
+        let res = 0;
+        for( let dayNum = 0; dayNum < 7; dayNum++ ){
+            res = res + gridEvents[ dayNum ].length;
+        };
+        return res;
+    }
+
 
     const create = ( arr ) => {
 
         let div = arr.map( ( item, index ) => {
 
-            let { id, isUsed, style, name } = item;
+            let { id, style, name } = item;
 
             // console.dir( 'item' );
             // console.dir( item );
+
+            let allCpunt = getAllCountFromItem( item );
 
 
             return (
@@ -71,6 +82,13 @@ const OneKetEventGroupComponent = ( props ) => {
                     onClick = { () => { clickEvent( id ) } }
                     title = { name }
                 >
+
+                    { allCpunt === 0? '': (
+                        <div className = 'gridAllCount'>
+                            <span>{allCpunt}</span>
+                        </div>
+                    ) }
+
                     <span style = { style }>
                         { name }
                     </span>

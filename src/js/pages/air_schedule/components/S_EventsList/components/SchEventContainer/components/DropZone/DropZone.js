@@ -131,6 +131,7 @@ const DropZoneComponent = ( props ) => {
 
             }else{
                 // setEventIsShow( false );
+                setEventTop(0);
                 setStartTimePlus( 0 );
             }
 
