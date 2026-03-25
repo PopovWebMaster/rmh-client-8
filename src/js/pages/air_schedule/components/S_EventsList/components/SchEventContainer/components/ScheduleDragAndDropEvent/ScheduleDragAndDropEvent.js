@@ -120,10 +120,11 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
         access_right( 'schedule_edit', () => {
             if( isCompletd ){
 
-                
                 drag_start_for_schedule_event( gridEventId );
                 var img = document.createElement("img");
                 e.dataTransfer.setDragImage(img, 0, 0);
+
+
             };
         } );
     }
@@ -240,6 +241,7 @@ const ScheduleDragAndDropEventComponent = ( props ) => {
 
 
     const mouse_down = ( e ) => { 
+
         if( isCompletd ){
             set_altKey_list( e, gridEventId );
         };

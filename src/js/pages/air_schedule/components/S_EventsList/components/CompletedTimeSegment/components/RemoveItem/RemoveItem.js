@@ -21,7 +21,7 @@ import { StoreScheduleResultEventsClass } from './../../../../../../../../classe
 
 import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
 
-
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
 
 const RemoveItemComponent = ( props ) => {
 
@@ -33,7 +33,12 @@ const RemoveItemComponent = ( props ) => {
 
     // let [ isOpen, setIsOpen] = useState( false );
 
-    const remove_event = () => {
+    const remove_event = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
 
         set_schedule_list_changes_to_store( gridEventId, { isKeyPoint: false } ); // костыль, чтоб всё не съезжало
 

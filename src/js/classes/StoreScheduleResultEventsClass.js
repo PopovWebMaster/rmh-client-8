@@ -61,6 +61,15 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
 
         this.AddAnyReleaseByData = this.AddAnyReleaseByData.bind(this);
         this.GetAllUsedFiles = this.GetAllUsedFiles.bind(this);
+        this.GetAllUsedFiles = this.GetAllUsedFiles.bind(this);
+
+        this.SetDurationForEmptyGridEvent = this.SetDurationForEmptyGridEvent.bind(this);
+
+
+
+
+
+        // SetDurationForGridEvent
 
 
         
@@ -301,7 +310,13 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
             };
             this.SetCounterDataToStore( newList );
         };
+
+        return {
+            isError, newList
+        }
     }
+
+    
 
 
     AddAnyReleaseByData( gridEventId, releaseData ){
@@ -595,13 +610,24 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         this.list = newList;
     }
 
-    GetAllUsedEvents(){
+    GetAllUsedEvents( ){ 
 
         let obj = {};
 
         for( let i = 0; i < this.list.length; i++ ){
-            let { eventId } = this.list[ i ];
-            obj[ eventId ] = true;
+            // if( gridEventsOnly === null ){
+                let { eventId } = this.list[ i ];
+                obj[ eventId ] = true;
+            // }else{
+            //     let { gridEventId } = this.list[ i ];
+            //     if( gridEventsOnly[ gridEventId ] === true ){
+            //         let { eventId } = this.list[ i ];
+            //         obj[ eventId ] = true;
+            //     }
+                
+            // };
+            // let { eventId } = this.list[ i ];
+            // obj[ eventId ] = true;
         };
 
         let result = [];
@@ -649,5 +675,18 @@ export class StoreScheduleResultEventsClass extends SSRE_Methods{
         return obj;
 
     }
+
+    SetDurationForEmptyGridEvent( gridEventId, duration ){
+        let newList = [];
+        for( let i = 0; i < this.list.length; i++ ){
+            if( this.list[ i ].gridEventId === gridEventId ){
+                this.list[ i ].SetDurationTime( duration );
+            };
+            newList.push( this.list[ i ] );
+        };
+        this.list = newList;
+    }
+
+    
     
 }

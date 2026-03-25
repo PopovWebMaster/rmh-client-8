@@ -13,6 +13,7 @@ import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_
 
 import { StartTimeEditor } from './../../../../../../components/StartTimeEditor/StartTimeEditor.js';
 import { set_schedule_list_changes_to_store } from './../../../../vendors/set_schedule_list_changes_to_store.js';
+import { drag_event_button_click_is_allowed } from './../../vendors/drag_event_button_click_is_allowed.js';
 
 const StartTimeEditButtonComponent = ( props ) => {
 
@@ -64,7 +65,12 @@ const StartTimeEditButtonComponent = ( props ) => {
 
     useEffect( () => { setStartTimeNext( startTime ) }, [startTime ] );
 
-    const clickAdd = () => {
+    const clickAdd = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
         
         setIsOpen( true );
         setDragIsActive( false );

@@ -15,6 +15,7 @@ import { AWGetFileForEvent } from './../../../../../../../../components/AlertWin
 
 import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
+
 import { ARFE_Button } from './ARFE_Button/ARFE_Button.js';
 
 const AddFileToEventItemComponent = ( props ) => {
@@ -83,6 +84,7 @@ const AddFileToEventItemComponent = ( props ) => {
 
         // setDragIsActive( true );
     }
+
 
 
     return (

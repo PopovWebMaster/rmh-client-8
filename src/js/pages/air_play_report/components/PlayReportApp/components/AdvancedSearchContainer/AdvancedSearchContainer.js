@@ -1,7 +1,12 @@
 
 import React, { useRef, useState, useEffect }   from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { selectorData as playReportSlice } from './../../../../../../redux/playReportSlice.js';
+import { 
+    selectorData as playReportSlice,
+    setAdvancedSearchisRequestList,
+    setAdvancedSearchisSelectedEvents,
+    setAdvancedSearchisActiveType,
+} from './../../../../../../redux/playReportSlice.js';
 import { selectorData as layoutSlice } from './../../../../../../redux/layoutSlice.js';
 
 
@@ -36,6 +41,13 @@ const AdvancedSearchContainerComponent = ( props ) => {
         setIsOpen,
 
         eventListById,
+        advancedSearchisRequestList,
+        advancedSearchisSelectedEvents,
+        advancedSearchisActiveType,
+        setAdvancedSearchisRequestList,
+        setAdvancedSearchisSelectedEvents,
+
+        setAdvancedSearchisActiveType,
     } = props;
 
     let [ requestList, setRequestList ] = useState( [] );
@@ -49,11 +61,13 @@ const AdvancedSearchContainerComponent = ( props ) => {
     let [ activeType, setActiveType ] = useState( 'by_name' ); // 'by_name' 'by_event'
     let [ selectedEvents, setSelectedEvents ] = useState( [] )
 
-    useEffect( () => {
-        let nowDate = get_date_now_YYYY_MM_DD();
-        setDataFromValue( nowDate );
-        setDataToValue( nowDate );
-    }, [] );
+    // useEffect( () => {
+
+    //     let nowDate = get_date_now_YYYY_MM_DD();
+    //     setDataFromValue( nowDate );
+    //     setDataToValue( nowDate );
+        
+    // }, [] );
 
 
     const changeNewRequest = ( e ) => {
@@ -64,9 +78,9 @@ const AdvancedSearchContainerComponent = ( props ) => {
     const addRequest = () => {
         let val = newRequest.trim()
         if( val !== '' ){
-            if( requestList.indexOf( val ) === -1 ){
-                let arr = [ ...requestList, val ];
-                setRequestList( arr );
+            if( advancedSearchisRequestList.indexOf( val ) === -1 ){
+                let arr = [ ...advancedSearchisRequestList, val ];
+                setAdvancedSearchisRequestList( arr );
                 setNewRequest( '' );
             };
         };
@@ -81,9 +95,9 @@ const AdvancedSearchContainerComponent = ( props ) => {
     const addSelectedEvent = ( id ) => {
         if( id !== null ){
             let SelectedEvents = new SelectedEventsClass();
-            SelectedEvents.SetList( selectedEvents );
+            SelectedEvents.SetList( advancedSearchisSelectedEvents );
             SelectedEvents.AddAsToggle( id );
-            setSelectedEvents( SelectedEvents.GetList() );
+            setAdvancedSearchisSelectedEvents( SelectedEvents.GetList() );
         }
 
     };
@@ -91,9 +105,9 @@ const AdvancedSearchContainerComponent = ( props ) => {
     const removeSelectedEvent = ( id ) => {
         if( id !== null ){
             let SelectedEvents = new SelectedEventsClass();
-            SelectedEvents.SetList( selectedEvents );
+            SelectedEvents.SetList( advancedSearchisSelectedEvents );
             SelectedEvents.Remove( id );
-            setSelectedEvents( SelectedEvents.GetList() );
+            setAdvancedSearchisSelectedEvents( SelectedEvents.GetList() );
         }
 
     };
@@ -108,26 +122,26 @@ const AdvancedSearchContainerComponent = ( props ) => {
         <div className = 'PR_advancedSearchComponent'>
 
             <SearchPeriodEdit
-                dataFromValue =     { dataFromValue }
-                dataToValue =       { dataToValue }
-                setDataFromValue =  { setDataFromValue }
-                setDataToValue =    { setDataToValue }
+                // dataFromValue =     { dataFromValue }
+                // dataToValue =       { dataToValue }
+                // setDataFromValue =  { setDataFromValue }
+                // setDataToValue =    { setDataToValue }
             />
 
             <OnlyPremiersEdit
-                isOnlyPremiers =    { isOnlyPremiers }
-                setIsOnlyPremiers = { setIsOnlyPremiers }
+                // isOnlyPremiers =    { isOnlyPremiers }
+                // setIsOnlyPremiers = { setIsOnlyPremiers }
             />
 
             <ActiveTypeSelect
-                activeType =    { activeType }
-                setActiveType = { setActiveType }
+                activeType =    { advancedSearchisActiveType }
+                setActiveType = { setAdvancedSearchisActiveType }
             />
 
-            { activeType === 'by_name'? (<>
+            { advancedSearchisActiveType === 'by_name'? (<>
                 <DownloadFromFile
-                    requestList =       { requestList }
-                    setRequestList =    { setRequestList }
+                    requestList =       { advancedSearchisRequestList }
+                    setRequestList =    { setAdvancedSearchisRequestList }
                 />
 
                 <AWInputText
@@ -139,22 +153,22 @@ const AdvancedSearchContainerComponent = ( props ) => {
                 />
 
                 <RequestListEdit 
-                    requestList =       { requestList }
-                    setRequestList =    { setRequestList }
+                    requestList =       { advancedSearchisRequestList }
+                    setRequestList =    { setAdvancedSearchisRequestList }
                 />
 
                 <SearchButton
-                    requestList =       { requestList }
-                    isOnlyPremiers =    { isOnlyPremiers }
-                    dataFrom =          { dataFromValue }
-                    dataTo =            { dataToValue }
+                    requestList =       { advancedSearchisRequestList }
+                    // isOnlyPremiers =    { isOnlyPremiers }
+                    // dataFrom =          { dataFromValue }
+                    // dataTo =            { dataToValue }
                     callback =          { callback }
 
                 />
             </>): (<>
 
                 <SelectEventsList
-                    selectedEvents =    { selectedEvents }
+                    selectedEvents =    { advancedSearchisSelectedEvents }
                     removeSelectedEvent = { removeSelectedEvent }
                 />
 
@@ -181,10 +195,10 @@ const AdvancedSearchContainerComponent = ( props ) => {
 
 
                 <SearchByEventsButton
-                    selectedEvents =    { selectedEvents }
-                    isOnlyPremiers =    { isOnlyPremiers }
-                    dataFrom =          { dataFromValue }
-                    dataTo =            { dataToValue }
+                    selectedEvents =    { advancedSearchisSelectedEvents }
+                    // isOnlyPremiers =    { isOnlyPremiers }
+                    // dataFrom =          { dataFromValue }
+                    // dataTo =            { dataToValue }
                     callback =          { callback }
                 />
             
@@ -221,7 +235,21 @@ export function AdvancedSearchContainer( props ){
 
             eventListById = { layout.eventListById }
 
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            advancedSearchisRequestList = { playReport.advancedSearchisRequestList }
+            advancedSearchisSelectedEvents = { playReport.advancedSearchisSelectedEvents }
+            advancedSearchisActiveType = { playReport.advancedSearchisActiveType }
+
+
+
+            setAdvancedSearchisRequestList = { ( arr ) => { dispatch( setAdvancedSearchisRequestList( arr ) ) } }
+            setAdvancedSearchisSelectedEvents = { ( arr ) => { dispatch( setAdvancedSearchisSelectedEvents( arr ) ) } }
+            setAdvancedSearchisActiveType = { ( arr ) => { dispatch( setAdvancedSearchisActiveType( arr ) ) } }
+
+
+            
+
+
+            
 
         />
     );

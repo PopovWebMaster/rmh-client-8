@@ -9,6 +9,8 @@ import { selectorData as scheduleResultSlise } from './../../../../../../../../r
 
 import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
 
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
+
 
 const TimePushButtonsComponent = ( props ) => {
 
@@ -18,7 +20,13 @@ const TimePushButtonsComponent = ( props ) => {
 
     } = props;
 
-    const clickUp = () => {
+    const clickUp = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
         if( gridEventId !== null ){
             for( let i = 0; i < scheduleEventsList.length; i++ ){
                 if( scheduleEventsList[ i ].gridEventId === gridEventId ){
@@ -42,7 +50,12 @@ const TimePushButtonsComponent = ( props ) => {
 
     }
 
-    const clickDown = () => {
+    const clickDown = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
 
         if( gridEventId !== null ){
             for( let i = 0; i < scheduleEventsList.length; i++ ){

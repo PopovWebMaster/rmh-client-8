@@ -3,7 +3,12 @@ import * as XLSX from 'xlsx-js-style';
 
 import { RowClass } from './vendors/ExcelPlayReportClass/RowClass.js';
 import { get_header_row } from './vendors/ExcelPlayReportClass/get_header_row.js';
-import store from './../redux/store.js'
+import store from './../redux/store.js';
+
+import { convert_time_str_to_sec } from './../helpers/convert_time_str_to_sec.js';
+import { convert_sec_to_time_for_Excel } from './../helpers/convert_sec_to_time_for_Excel.js';
+import { convert_YYYY_MM_DD_to_Excel_date } from './../helpers/convert_YYYY_MM_DD_to_Excel_date.js';
+
 
 export class ExcelPlayReportClass{
     constructor(){
@@ -51,8 +56,12 @@ export class ExcelPlayReportClass{
 
     GetOneRow( item ){
         const trim_ms = ( str ) => {
+            // let arr = str.split( '.' );
+            // return arr[0];
             let arr = str.split( '.' );
-            return arr[0];
+            let sec = convert_time_str_to_sec( arr[0] );
+            let time = convert_sec_to_time_for_Excel( sec );
+            return time;
         }
 
         let date = item.date.YYYY_MM_DD;

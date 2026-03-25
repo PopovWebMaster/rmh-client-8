@@ -58,13 +58,9 @@ export class RowClass {
             },
             {
                 v: fileDuration, 
-                t: "s", 
-                // z: "$00:00:00",
-                // "z": "h/m/s",
-                // "z": "hh:mm:ss",
-                // "z": "h:m:s",
-
-
+                // t: "s", 
+                // t: "t", 
+                // z: "hh:mm:ss",
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -74,8 +70,12 @@ export class RowClass {
                     },
                     alignment: {
                         horizontal: 'left',
+                        // horizontal: 'right',
+
                     },
-                    // numFmt: 'h:m:ss',
+                    // numFmt: 'hh:mm:ss',
+                    // numFmt: "HH:mm:ss"
+                    numFmt: "H:mm:ss"
                 },
                 // 
             },

@@ -52,6 +52,7 @@ export class ScheduleEventClass{
         this.GetDutationTime = this.GetDutationTime.bind(this);
         this.SetData = this.SetData.bind(this);
         this.SetFirstSegmentIdAsNull = this.SetFirstSegmentIdAsNull.bind(this);
+        this.SetDurationTime = this.SetDurationTime.bind(this);
 
 
 // AddLinkedFileToRelease
@@ -117,6 +118,13 @@ export class ScheduleEventClass{
             this.AddReleaseByData( data );
         };
 
+
+    }
+
+    SetDurationTime( durationTime ){
+        if( this.releases.length === 0 ){
+            this.durationTime = durationTime;
+        };
 
     }
 

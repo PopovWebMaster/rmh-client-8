@@ -17,7 +17,7 @@ import { get_event_style }  from './../../../../../../../../helpers/get_event_st
 
 import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
-
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
 
 const CutSegmentButtonComponent = ( props ) => {
 
@@ -150,6 +150,15 @@ const CutSegmentButtonComponent = ( props ) => {
 
     }
 
+     const clikOpen = ( e ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
+        click( showStatus )
+     }
+
 
 
     return (
@@ -164,7 +173,7 @@ const CutSegmentButtonComponent = ( props ) => {
 
             <div 
                 className = { `CSB_btn ${showStatus? 'isActive': ''}` }
-                onClick = { () => { click( showStatus ) } }
+                onClick = { clikOpen }
             >
                 <span className = 'icon-scissors'></span>
             </div> 

@@ -1,4 +1,10 @@
 
+import { convert_time_str_to_sec } from './../../../../../helpers/convert_time_str_to_sec.js';
+import { convert_sec_to_time_for_Excel } from './../../../../../helpers/convert_sec_to_time_for_Excel.js';
+import { convert_YYYY_MM_DD_to_Excel_date } from './../../../../../helpers/convert_YYYY_MM_DD_to_Excel_date.js';
+
+
+
 
 export const get_content_as_table_from_list = ( params ) => {
     let {
@@ -38,7 +44,7 @@ export const get_content_as_table_from_list = ( params ) => {
 
         if( type === 'movie' ){
             let row = get_row_str({
-                Date: date.YYYY_MM_DD,
+                Date: convert_YYYY_MM_DD_to_Excel_date( date.YYYY_MM_DD ),
                 Time: trim_ms( startTime.time ),
                 FileName: file.name,
                 FileDuration: trim_ms( fileDuration.time ),
@@ -53,7 +59,7 @@ export const get_content_as_table_from_list = ( params ) => {
         }else if( type === 'empty' ){
 
             let row = get_row_str({
-                Date: date.YYYY_MM_DD,
+                Date: convert_YYYY_MM_DD_to_Excel_date( date.YYYY_MM_DD ),
                 Time: trim_ms( startTime.time ),
                 FileName: 'Ошибка! Прерывание эфира по неизвестной причине',
                 FileDuration: trim_ms( list[ i ].duration.time ),
@@ -91,5 +97,16 @@ function get_row_str( params ){
 
 function trim_ms( str ){
     let arr = str.split( '.' );
-    return arr[0];
+
+    let sec = convert_time_str_to_sec( arr[0] );
+    let time = convert_sec_to_time_for_Excel( sec );
+
+
+//     import { convert_time_str_to_sec } from './../../../../../helpers/convert_time_str_to_sec.js';
+// import { convert_sec_to_time_for_Excel } from './../../../../../helpers/convert_sec_to_time_for_Excel.js';
+
+
+    // return arr[0];
+    return time;
+
 }

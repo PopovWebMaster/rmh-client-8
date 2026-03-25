@@ -15,6 +15,8 @@ import { AWButtonAdd } from './../../../../../../../../components/AlertWindowCon
 import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js'
 
 
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
+
 
 
 const EventNotesItemComponent = ( props ) => {
@@ -45,7 +47,12 @@ const EventNotesItemComponent = ( props ) => {
 
 
 
-    const clickOpen = () => {
+    const clickOpen = ( e ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
         setIsOpen( true );
         setDragIsActive( false );
     }

@@ -120,10 +120,6 @@ const FRL_ButtonUploadTXTComponent = ( props ) => {
                 className = 'FRL_btn_txt'
             >Загрузить из файла .txt</span>
 
-            {/* { newFilesList.length > 0? (
-                <span className = 'FRL_count'>Всего: { newFilesList.length } шт.</span>
-            ): '' } */}
-
             <input 
                 type =          'file' 
                 ref =           { inputRef }

@@ -1,20 +1,30 @@
 
 import React from "react";
 
-// import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-// import { selectorData as playReportSlice } from './../../../../../../redux/playReportSlice.js';
+import { 
+    selectorData as playReportSlice, 
+    setAdvancedSearchPeriodFrom,
+    setAdvancedSearchPeriodTo, 
+} from './../../../../../../../../redux/playReportSlice.js';
 
 import './SearchPeriodEdit.scss';
 
 const SearchPeriodEditComponent = ( props ) => {
 
     let {
-        dataFromValue,
-        dataToValue,
-        setDataFromValue,
-        setDataToValue,
+        // dataFromValue,
+        // dataToValue,
+        // setDataFromValue,
+        // setDataToValue,
+
+
+        advancedSearchPeriodFrom,
+        advancedSearchPeriodTo,
+        setAdvancedSearchPeriodFrom,
+        setAdvancedSearchPeriodTo,
 
 
     } = props;
@@ -26,16 +36,16 @@ const SearchPeriodEditComponent = ( props ) => {
         let date = new Date( val );
         let from_ms = date.getTime();
 
-        let date_2 = new Date( dataToValue );
+        let date_2 = new Date( advancedSearchPeriodTo );
         let to_ms = date_2.getTime();
         if( from_ms <= to_ms ){
             if( to_ms - from_ms < max_ms_diference ){
-                setDataFromValue( val );
+                setAdvancedSearchPeriodFrom( val );
             };
         }else{
             if( to_ms - from_ms < max_ms_diference ){
-                setDataFromValue( val );
-                setDataToValue( val );
+                setAdvancedSearchPeriodFrom( val );
+                setAdvancedSearchPeriodTo( val );
             };
         };
     };
@@ -45,11 +55,11 @@ const SearchPeriodEditComponent = ( props ) => {
         let date = new Date( val );
         let to_ms = date.getTime();
 
-        let date_2 = new Date( dataFromValue );
+        let date_2 = new Date( advancedSearchPeriodFrom );
         let from_ms = date_2.getTime();
         if( to_ms >= from_ms ){
             if( to_ms - from_ms < max_ms_diference ){
-                setDataToValue( val );
+                setAdvancedSearchPeriodTo( val );
             }
         };
     };
@@ -64,16 +74,16 @@ const SearchPeriodEditComponent = ( props ) => {
 
             <input 
                 type = 'date'
-                value =     { dataFromValue }
-                max =       { dataToValue }
+                value =     { advancedSearchPeriodFrom }
+                max =       { advancedSearchPeriodTo }
                 onChange =  { change_date_from }
             />
 
             <span>до</span>
             <input 
                 type = 'date'
-                value =     { dataToValue }
-                min =       { dataFromValue }
+                value =     { advancedSearchPeriodTo }
+                min =       { advancedSearchPeriodFrom }
                 onChange =  { change_date_to }
             />
         </div>
@@ -84,14 +94,20 @@ const SearchPeriodEditComponent = ( props ) => {
 
 export function SearchPeriodEdit( props ){
 
-    // const playReport = useSelector( playReportSlice );
-    // const dispatch = useDispatch();
+    const playReport = useSelector( playReportSlice );
+    const dispatch = useDispatch();
 
     return (
         <SearchPeriodEditComponent
             { ...props }
-            // searchFocus = { playReport.searchFocus }
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            advancedSearchPeriodFrom = { playReport.advancedSearchPeriodFrom }
+            advancedSearchPeriodTo = { playReport.advancedSearchPeriodTo }
+
+            setAdvancedSearchPeriodFrom = { ( val ) => { dispatch( setAdvancedSearchPeriodFrom( val ) ) } }
+            setAdvancedSearchPeriodTo = { ( val ) => { dispatch( setAdvancedSearchPeriodTo( val ) ) } }
+
+
+
 
         />
     );

@@ -1,6 +1,8 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+import { get_date_now_YYYY_MM_DD } from './../helpers/get_date_now_YYYY_MM_DD.js';
+
 export const playReportSlice = createSlice({
 
     name: 'playReport',
@@ -34,6 +36,20 @@ export const playReportSlice = createSlice({
         detailDataIsActive: false,
 
         resultPointsSec: [],
+
+
+        advancedSearchPeriodFrom: get_date_now_YYYY_MM_DD(),
+        advancedSearchPeriodTo: get_date_now_YYYY_MM_DD(),
+
+        advancedSearchisOnlyPremiers: false,
+        advancedSearchisRequestList: [],
+        advancedSearchisSelectedEvents: [],
+        advancedSearchisActiveType: 'by_name', // 'by_name' 'by_event'
+
+
+
+
+
 
 
 
@@ -142,6 +158,36 @@ export const playReportSlice = createSlice({
 
 
 
+
+        setAdvancedSearchPeriodFrom: ( state, action ) => {
+            state.advancedSearchPeriodFrom =  action.payload;
+        },
+
+        setAdvancedSearchPeriodTo: ( state, action ) => {
+            state.advancedSearchPeriodTo =  action.payload;
+        },
+
+        setAdvancedSearchisOnlyPremiers: ( state, action ) => {
+            state.advancedSearchisOnlyPremiers =  action.payload;
+        },
+
+        setAdvancedSearchisRequestList: ( state, action ) => {
+            state.advancedSearchisRequestList =  action.payload;
+        },
+
+        setAdvancedSearchisSelectedEvents: ( state, action ) => {
+            state.advancedSearchisSelectedEvents =  action.payload;
+        },
+
+        setAdvancedSearchisActiveType: ( state, action ) => {
+            state.advancedSearchisActiveType =  action.payload;
+        },
+
+
+
+
+
+
         
         
         
@@ -178,6 +224,17 @@ export const {
 
     setDetailDataIsActive,
 
+
+
+    setAdvancedSearchPeriodFrom,
+    setAdvancedSearchPeriodTo,
+
+    setAdvancedSearchisOnlyPremiers,
+
+    setAdvancedSearchisRequestList,
+    setAdvancedSearchisSelectedEvents,
+    setAdvancedSearchisActiveType,
+
 } = playReportSlice.actions;
 
 export const selectorData = ( state ) => {
@@ -212,6 +269,21 @@ export const selectorData = ( state ) => {
 
 
         detailDataIsActive: state.playReport.detailDataIsActive,
+
+
+
+
+
+        advancedSearchPeriodFrom:   state.playReport.advancedSearchPeriodFrom,
+        advancedSearchPeriodTo:     state.playReport.advancedSearchPeriodTo,
+        advancedSearchisOnlyPremiers:     state.playReport.advancedSearchisOnlyPremiers,
+        advancedSearchisRequestList:     state.playReport.advancedSearchisRequestList,
+        advancedSearchisSelectedEvents:     state.playReport.advancedSearchisSelectedEvents,
+        advancedSearchisActiveType:     state.playReport.advancedSearchisActiveType,
+
+
+
+
 
 
 

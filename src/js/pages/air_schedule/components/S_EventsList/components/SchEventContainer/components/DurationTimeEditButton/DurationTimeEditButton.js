@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import './DurationTimeEditButton.scss';
 
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
-import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
+import { selectorData as scheduleResultSlise, setInfoMessageText } from './../../../../../../../../redux/scheduleResultSlise.js';
+
 
 // import { convert_sec_to_time } from './../../../../../../helpers/convert_sec_to_time.js';
 
@@ -17,8 +18,17 @@ import { set_schedule_list_changes_to_store } from './../../../../../../vendors/
 import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
 import { AlertWindowContainer }         from './../../../../../../../../components/AlertWindowContainer/AlertWindowContainer.js';
+
+import { AWShowErrors }         from './../../../../../../../../components/AlertWindowContainer/AWShowErrors/AWShowErrors.js';
+
+
 import { AWInputDuration }              from './../../../../../../../../components/AlertWindowContainer/AWInputDuration/AWInputDuration.js';
 import { AlertWindowContainerSaveAdd }  from './../../../../../../../../components/AlertWindowContainerSaveAdd/AlertWindowContainerSaveAdd.js';
+
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
+
+
+import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
 
 const DurationTimeEditButtonComponent = ( props ) => {
 
@@ -29,6 +39,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
         scheduleEventsList,
         scheduleEventsListByGridEventId,
         setDragIsActive = () => {},
+        setInfoMessageText,
 
 
 
@@ -36,6 +47,11 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
     let [ isOpen, setIsOpen ] = useState( false );
     let [ isEditable, setIsEditable] = useState( false );
+    let [ errorMessage, setErrorMessage] = useState( '' );
+
+
+
+
 
 
     let [ value, setValue ] = useState( durationTime );
@@ -78,18 +94,38 @@ const DurationTimeEditButtonComponent = ( props ) => {
 
     const change = ( sec, time ) => {
         setValue( sec );
+        if( errorMessage !== ''){
+            setErrorMessage( '' );
+        };
     };
 
 
     const clickSave = () => {
 
         if( isReady ){
-            set_schedule_list_changes_to_store( gridEventId, { durationTime: value } );
-            setIsOpen( false );
+
+            let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
+            StoreScheduleResultEvents.CreateList();
+            StoreScheduleResultEvents.SetDurationForEmptyGridEvent( gridEventId, value );
+            let { isError } = StoreScheduleResultEvents.SetListToStoreOnlySaccess( true );
+
+            if( isError ){
+                let durStr = convert_sec_to_time( value );
+                setErrorMessage( `Хронометраж ${durStr} не может быть добавлен. Не достаточно места в блоке` );
+                setIsReady( false );
+            }else{
+                setIsOpen( false );
+            };
+
         };
     };
 
-    const clickAdd = () => {
+    const clickAdd = ( e ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
         if( isEditable ){
             setIsOpen( true );
             setDragIsActive( false );
@@ -103,7 +139,7 @@ const DurationTimeEditButtonComponent = ( props ) => {
             isOpen =    { isOpen }
             setIsOpen = { setIsOpen }
             width =     '30em'
-            height =    '18em'
+            height =    '20em'
             title = 'Хронометраж события'
         >
 
@@ -114,7 +150,11 @@ const DurationTimeEditButtonComponent = ( props ) => {
                         value =         { value }
                         changeHandler = { change }
                     />
+
                 </div>
+                <AWShowErrors
+                    errors = { errorMessage }
+                />
 
                 <AlertWindowContainerSaveAdd 
                     isActive = { isReady }
@@ -140,7 +180,7 @@ export function DurationTimeEditButton( props ){
 
 
     
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <DurationTimeEditButtonComponent
@@ -151,7 +191,7 @@ export function DurationTimeEditButton( props ){
             
             gridDayEventsListById = { layout.gridDayEventsListById }
 
-            // aaaa = { ( callback ) => { dispatch( aaa( callback ) ) } }
+            setInfoMessageText = { ( val ) => { dispatch( setInfoMessageText( val ) ) } }
 
         />
     );

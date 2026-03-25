@@ -11,6 +11,8 @@ import { access_right } from './../../../../../../../../../helpers/access_right.
 import { get_event_by_id } from './../../../../../../../../../helpers/get_event_by_id.js';
 import { EVENT_TYPE } from './../../../../../../../../../config/layout.js';
 
+import { drag_event_button_click_is_allowed } from './../../../../../vendors/drag_event_button_click_is_allowed.js';
+
 
 
 const ARFE_ButtonComponent = ( props ) => {
@@ -46,7 +48,14 @@ const ARFE_ButtonComponent = ( props ) => {
         return result;
     }
 
-    const click = () => {
+    const click = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
+
         if( access_right( 'schedule_edit' ) ){
             let isActive = get_is_active( eventId, releases );
             if( isActive ){

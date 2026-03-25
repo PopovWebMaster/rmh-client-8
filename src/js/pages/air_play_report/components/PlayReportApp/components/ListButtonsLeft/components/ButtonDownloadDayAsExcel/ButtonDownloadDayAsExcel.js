@@ -14,6 +14,8 @@ import { ButtonLeft } from './../ButtonLeft/ButtonLeft.js';
 import { ExcelPlayReportClass } from './../../../../../../../../classes/ExcelPlayReportClass.js';
 
 
+
+
 const ButtonDownloadDayAsExcelComponent = ( props ) => {
 
     let {

@@ -14,13 +14,17 @@ const SearchByEventsButtonComponent = ( props ) => {
 
     let {
         selectedEvents,
-        isOnlyPremiers,
-        dataFrom,
-        dataTo,
+        // isOnlyPremiers,
+        // dataFrom,
+        // dataTo,
         callback,
 
         setSpinnerIsActive,
         setEntireList,
+
+        advancedSearchPeriodFrom,
+        advancedSearchPeriodTo,
+        advancedSearchisOnlyPremiers
 
     } = props;
 
@@ -48,13 +52,16 @@ const SearchByEventsButtonComponent = ( props ) => {
             route: 'get-entier-list-for-advanced-search-by-events',
             data: {
                 eventList,
-                isOnlyPremiers,
-                dataFrom,
-                dataTo,
+                isOnlyPremiers: advancedSearchisOnlyPremiers,
+                dataFrom: advancedSearchPeriodFrom,
+                dataTo: advancedSearchPeriodTo,
             },
             successCallback: ( response ) => {
 
                 // console.dir( 'response' );
+                // console.dir( response );
+
+                // console.dir( 'response>>>>>>>>>>>>>>>>>>' );
                 // console.dir( response );
 
                 if( response.ok ){
@@ -114,6 +121,9 @@ export function SearchByEventsButton( props ){
             // searchFocus = { playReport.searchFocus }
             // searchValue = { playReport.searchValue }
             // calendarIsOpen = { playReport.calendarIsOpen }
+            advancedSearchPeriodFrom = { playReport.advancedSearchPeriodFrom }
+            advancedSearchPeriodTo = { playReport.advancedSearchPeriodTo }
+            advancedSearchisOnlyPremiers = { playReport.advancedSearchisOnlyPremiers }
 
             setSpinnerIsActive = { ( val ) => { dispatch( setSpinnerIsActive( val ) ) } }
             setEntireList = { ( val ) => { dispatch( setEntireList( val ) ) } }

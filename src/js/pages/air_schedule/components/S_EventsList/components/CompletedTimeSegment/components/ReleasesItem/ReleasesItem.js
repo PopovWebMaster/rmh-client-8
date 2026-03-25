@@ -8,7 +8,9 @@ import './ReleasesItem.scss';
 import { selectorData as scheduleResultSlise } from './../../../../../../../../redux/scheduleResultSlise.js';
 import { convert_sec_to_time } from './../../../../../../../../helpers/convert_sec_to_time.js';
 
-import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js'
+import { StoreScheduleResultEventsClass } from './../../../../../../../../classes/StoreScheduleResultEventsClass.js';
+
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
 
 
 const ReleasesItemComponent = ( props ) => {
@@ -23,14 +25,23 @@ const ReleasesItemComponent = ( props ) => {
 
     } = props;
 
-    const remove = ( release_id ) => {
+    const remove = ( e, release_id ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+        
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.RemoveRelease( gridEventId, release_id  );
         StoreScheduleResultEvents.SetListToStore( true );
     }
 
-    const releaseMoveUp = ( id ) => {
+    const releaseMoveUp = ( e, id ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.ReleaseMoveUp( gridEventId, id  );
@@ -38,7 +49,11 @@ const ReleasesItemComponent = ( props ) => {
 
     }
 
-    const releaseMoveDown = ( id ) => {
+    const releaseMoveDown = ( e, id ) => {
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
         let StoreScheduleResultEvents = new StoreScheduleResultEventsClass();
         StoreScheduleResultEvents.CreateList();
         StoreScheduleResultEvents.ReleaseMoveDown( gridEventId, id  );
@@ -109,11 +124,11 @@ const ReleasesItemComponent = ( props ) => {
                     </div>
                     <span
                         className = 'icon-angle-up arrow'
-                        onClick = { () => { releaseMoveUp( id ) } }
+                        onClick = { ( e ) => { releaseMoveUp( e, id ) } }
                     ></span>
                     <span
                         className = 'icon-angle-down arrow'
-                        onClick = { () => { releaseMoveDown( id ) } }
+                        onClick = { ( e ) => { releaseMoveDown( e, id ) } }
                     ></span>
 
                     <span className = 'name'>{ name }</span>
@@ -123,7 +138,7 @@ const ReleasesItemComponent = ( props ) => {
                 
                     <span className = 'duration'>{ convert_sec_to_time( releaseDuration ) }</span>
                     <span
-                        onClick = { () => { removeActive? remove( id ): () => {} } }
+                        onClick = { ( e ) => { removeActive? remove( e,id ): () => {} } }
                         className = { `remove ${removeActive? '': 'removeHidden'}` }>Снять</span>
                 </div>
             );

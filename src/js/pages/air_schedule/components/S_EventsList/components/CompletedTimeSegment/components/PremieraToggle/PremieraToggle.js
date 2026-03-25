@@ -10,7 +10,7 @@ import { selectorData as scheduleResultSlise } from './../../../../../../../../r
 // import { set_grid_event_changes_to_store } from './../../../../vendors/set_grid_event_changes_to_store.js';
 import { set_schedule_list_changes_to_store } from './../../../../../../vendors/set_schedule_list_changes_to_store.js';
 
-
+import { drag_event_button_click_is_allowed } from './../../../../vendors/drag_event_button_click_is_allowed.js';
 
 const PremieraToggleComponent = ( props ) => {
 
@@ -34,7 +34,14 @@ const PremieraToggleComponent = ( props ) => {
         };
     }, [ gridEventId ] );
 
-    const click = () => {
+    const click = ( e ) => {
+
+        let is_allowed = drag_event_button_click_is_allowed( e );
+        if( is_allowed === false ){
+            return ;
+        };
+
+
         let { firstSegmentId } = scheduleEventsListByGridEventId[ gridEventId ];
 
         if( firstSegmentId === null ){
