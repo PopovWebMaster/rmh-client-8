@@ -46,6 +46,7 @@ const ItemMovie2Component = ( props ) => {
                     fileDuration =          { item.fileDuration }
                     segmentRealDuration =   { item.segmentRealDuration }
                     markIn =                { item.markIn }
+                    item = { item }
                 />
 
                 <div className = 'PRL_Duration_graphics_btn'>

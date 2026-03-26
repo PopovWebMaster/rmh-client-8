@@ -18,6 +18,7 @@ const Duration_v2Component = ( props ) => {
         fileDuration,
         segmentRealDuration,
         markIn,
+        item,
     } = props;
 
     let max_time_ms = comvert_min_to_ms( 90 );
@@ -70,10 +71,22 @@ const Duration_v2Component = ( props ) => {
 
 
     const trim_ms = ( str ) => {
-        let arr = str.split('.');
-        return arr[0];
-    }
 
+        let res = '00:00:00';
+
+        if( str !==  null ){
+            
+            let arr = str.split('.');
+            res = arr[0];
+        }else{
+            // console.dir( str );
+            // console.dir( item );
+        };
+
+        return res;
+
+    }
+    
 
     return (
         <div 

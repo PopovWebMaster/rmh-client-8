@@ -39,6 +39,7 @@ const PlayReportListComponent = ( props ) => {
         let div = arr.map( ( item, index ) => {
 
             let result = '';
+
             switch( item.type ){
 
                 case 'movie':
