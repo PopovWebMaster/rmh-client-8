@@ -18,6 +18,8 @@ import { send_request_to_server }   from './../../../../../../helpers/send_reque
 
 import { set_air_files_to_store } from './../../../../vendors/set_air_files_to_store.js';
 
+
+
 const FPBCalendarBtnComponent = ( props ) => {
 
     let {
@@ -110,6 +112,11 @@ const FPBCalendarBtnComponent = ( props ) => {
 
     }
 
+
+    const testClick = () => {
+        alert(100);
+    };
+
     
     return (<>
             <AlertWindowContainer
@@ -151,6 +158,11 @@ const FPBCalendarBtnComponent = ( props ) => {
             <div
                 className = 'FPBCalendarBtn'
                 onClick = { () => { setIsOpen( true ) } }
+                // onClick = { testClick }
+
+
+
+                
             >
                 <span 
                     className = 'fa-calendar'

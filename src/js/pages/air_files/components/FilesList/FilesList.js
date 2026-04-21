@@ -18,6 +18,7 @@ import { SetFilteredList } from './../SetFilteredList/SetFilteredList.js';
 import { FilterButtonCheckAll } from './components/FilterButtonCheckAll/FilterButtonCheckAll.js';
 import { AssignEventForChecked } from './components/AssignEventForChecked/AssignEventForChecked.js';
 import { SortAllCheckedByPrefix } from './components/SortAllCheckedByPrefix/SortAllCheckedByPrefix.js';
+import { DownloadNamesTXT } from './components/DownloadNamesTXT/DownloadNamesTXT.js';
 
 
 
@@ -42,6 +43,8 @@ const FilesListComponent = ( props ) => {
 
                     <AssignEventForChecked />
                     <SortAllCheckedByPrefix />
+
+                    <DownloadNamesTXT />
 
                 {/* </div> */}
             </div>

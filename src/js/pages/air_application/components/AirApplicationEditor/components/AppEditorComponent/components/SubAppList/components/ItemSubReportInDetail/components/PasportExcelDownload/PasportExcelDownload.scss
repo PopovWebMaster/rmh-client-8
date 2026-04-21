@@ -1,0 +1,53 @@
+.SA_PasportExcelDownload{
+    font-size: 1em;
+    margin: 0.5em 2em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    width: 7em;
+
+
+    .SA_PasExcel_btn{
+        font-size: 1em;
+        padding: 0.2em 0.8em 0.26em;
+        border-radius: 0.1em;
+        background-color: #70b367;
+        color: #ffffff;
+
+        cursor: pointer;
+        user-select: none;
+        // margin: 0 0.5em 0 0;
+
+        .SA_PasExcel_icon{
+            font-size: 0.65em;
+            color: #ffffff;
+            padding: 0.2em 0em;
+        }
+
+        .SA_PasExcel_text{
+            font-size: 0.68em;
+            color: #fafafa;
+            padding: 0.2em 0.4em;
+        }
+
+    }
+
+    .SA_PasExcel_btn:hover{
+        // background-color: #639584;
+        background-color: #69a261;
+
+    }
+
+    .SA_PasExcel_btn:active{
+        // color: #f89898;
+        background-color: #7cc572;
+        .SA_PasExcel_text{
+            // color: #b9b9b9;
+            
+            // text-decoration: underline;
+        }
+    }
+}

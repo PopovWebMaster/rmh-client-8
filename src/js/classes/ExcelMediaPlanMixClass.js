@@ -22,7 +22,12 @@ import { TableFooterClass } from './vendors/ExcelMediaPlanMixClass/TableFooterCl
 import { SubAppListClass } from './vendors/ExcelMediaPlanMixClass/SubAppListClass.js';
 import { MatrixClass } from './vendors/ExcelMediaPlanMixClass/MatrixClass.js';
 import { PeriodClass } from './vendors/ExcelMediaPlanMixClass/PeriodClass.js';
-import { get_array_of_colum_width } from './vendors/ExcelMediaPlanMixClass/get_array_of_colum_width.js'
+import { get_array_of_colum_width } from './vendors/ExcelMediaPlanMixClass/get_array_of_colum_width.js';
+
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
+
+
 
 export class ExcelMediaPlanMixClass {
     constructor(){
@@ -237,7 +242,41 @@ export class ExcelMediaPlanMixClass {
 */
         XLSX.utils.book_append_sheet(wb, ws, "1");
 
+
+
         XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
+
+
+
+        // const zip = new JSZip();
+        // zip.file("Hello.txt", "Hello World\n");
+        // const img = zip.folder("images");
+        // // img.file("smile.gif", imgData, {base64: true});
+        // img.file('idlist.txt', 'текст мекст')
+        // zip.generateAsync({type:"blob"}).then(function(content) {
+        //     // see FileSaver.js
+        //     // saveAs(content, "example.zip");
+        //     FileSaver.saveAs(content, 'download.zip');
+        // });
+
+
+
+
+
+        
+
+
+
+
+/*
+        const zip = new JSZip();
+        const workbookBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const fileData = new Blob([workbookBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+        zip.file('example.xlsx', fileData);
+
+        // Генерируем ZIP-архив и сохраняем его как файл
+        zip.generateAsync({ type: 'blob' }).then(blob => saveAs(blob, 'archive.zip'));
+        */
     }
 
 }

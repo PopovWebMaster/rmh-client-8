@@ -102,10 +102,21 @@ const OneSubApplicationComponent = ( props ) => {
             />
 
 
-            {/* <ItemSubReportInDetail 
-                id =                { id }
-                application_id =    { application_id }
-            /> */}
+            <ItemSubReportInDetail 
+                id =                    { id }
+                air_notes =             { air_notes }
+                application_id =        { application_id }
+                duration_sec =          { duration_sec }
+                name =                  { name }
+                period_from =           { period_from }
+                period_to =             { period_to }
+                serial_num =            { serial_num }
+                type =                  { type }
+                file_names =            { file_names }
+                description =           { description }
+                release_list =          { release_list }
+                release_list_count =    { release_list_count }
+            />
             
             <ItemSubRemove
                 id =                { id }

@@ -12,6 +12,8 @@
         color: #575757;
         min-height: 4em;
         user-select: all;
+
+        resize: vertical; 
     }
 
     .AW_textarea::placeholder {

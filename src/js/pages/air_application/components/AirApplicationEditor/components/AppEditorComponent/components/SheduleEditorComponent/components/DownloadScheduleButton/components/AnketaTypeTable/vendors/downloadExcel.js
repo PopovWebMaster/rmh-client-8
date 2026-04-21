@@ -4,7 +4,9 @@ import { get_matrix_array } from './get_matrix_array.js';
 import { ExcelMediaPlanMixClass } from './../../../../../../../../../../../../../classes/ExcelMediaPlanMixClass.js';
 
 import store from './../../../../../../../../../../../../../redux/store.js';
-import { CHAR_TYPE } from './../../../../../../../../../../../../../config/application.js'
+import { CHAR_TYPE } from './../../../../../../../../../../../../../config/application.js';
+
+
 
 export const downloadExcel = ( params ) => {
     let {

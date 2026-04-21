@@ -29,6 +29,8 @@ import { send_request_to_server } from './../../../../../../../../../../helpers/
 // import { set_application_data_to_store } from './../../vendors/set_application_data_to_store.js'
 import { set_application_data_to_store } from './../../../../../../vendors/set_application_data_to_store.js';
 
+import { get_application_list_for_period_from_server } from './../../../../../../vendors/get_application_list_for_period_from_server.js';
+
 const ItemSubSheduleComponent = ( props ) => {
 
     let {
@@ -62,7 +64,7 @@ const ItemSubSheduleComponent = ( props ) => {
 
     const click = () => {
 
-        setSpinnerIsActive( true );
+        // setSpinnerIsActive( true );
 
         setCurrentSubAppId( id );
         setReleaseDuration( duration_sec );
@@ -73,6 +75,29 @@ const ItemSubSheduleComponent = ( props ) => {
         setModeShort( false );
 
         setIsChanged( false );
+
+        get_application_list_for_period_from_server({
+            period_from,
+            period_to,
+            eventId: currentAppEventId,
+            applicationId: application_id,
+            callback: ( list ) => {
+                setApplicationList( list );
+
+                for( let i = 0; i < list.length; i++ ){
+                    if( list[ i ].id === application_id ){
+                        set_application_data_to_store( list[ i ] );
+                        break;
+                    };
+                };
+
+                setIsOpen( true );
+            }
+        });
+
+
+
+        /*
 
         send_request_to_server({
             route: 'get_application_list_for_period',
@@ -98,35 +123,18 @@ const ItemSubSheduleComponent = ( props ) => {
                         };
                     };
 
-                    // set_application_data_to_store
-
-                    // let timerId = setTimeout( () => {
-                        // setCurrentSubAppId( id );
-                        // setReleaseDuration( duration_sec );
-                        // setReleaseName( name );
-                        // setPeriodFrom( period_from );
-                        // setPeriodTo( period_to );
-                        setIsOpen( true );
-                        setSpinnerIsActive( false );
-                        // setCurrentAppIsChanged( false );
-                        // setModeMix( false );
-
-                        // clearTimeout( timerId );
-                    // }, 500 );
-
+                    setIsOpen( true );
+                    setSpinnerIsActive( false );
 
                 };
 
                 
-
-
             },
         });
 
-
-/*
-
         */
+
+
     };
 
 

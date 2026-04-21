@@ -1,0 +1,43 @@
+.SA_PasportTotalDuration{
+    font-size: 0.9em;
+    padding: 0.3em 1em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    h4{
+        font-size: 0.8em;
+        padding: 0.2em 0.4em;
+        color: #636363;
+        width: 5em;
+    }
+
+    .SAPTD_span{
+        font-size: 0.7em;
+        padding: 0.2em 0.4em;
+        color: #494949;
+    }
+
+    .SAPTD_input_text{
+        font-size: 0.75em;
+        padding: 0.2em 1em;
+        line-height: 1.4em;
+        border-radius: 0.1em;
+        border: 1px solid #9563631f;
+        outline: none;
+        background-color: #ffffff;
+        width: 5em;
+        color: #575757;
+        flex-grow: 0;
+    }
+
+    .SAPTD_input_text::placeholder {
+        color: rgba(0, 0, 0, 0.233);
+    }
+
+    
+
+}
