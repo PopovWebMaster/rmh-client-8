@@ -1,0 +1,56 @@
+.SA_SelecteTabType{
+    font-size: 1em;
+}
+
+.SA_SelecteTabType{
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-bottom: 1px solid #e4e4e4;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+
+    .SA_SelecteTabType_item{
+        font-size: 1em;
+        margin: 0.3em 1em;
+        padding: 0.2em 0.6em 0.16em 0.6em;
+        border: 1px solid #70b367;
+        border-radius: 0.1em;
+        
+
+        cursor: pointer;
+        user-select: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        span{
+            font-size: 0.7em;
+            color: #70b367;
+        }
+
+    }
+    .SA_SelecteTabType_item:hover{
+        background-color: #cfffc96b;
+    }
+
+    .SA_SelecteTabType_item.isActive{
+        background-color: #70b367;
+        span{
+            color: #ffffff;
+        }
+    }
+
+    .SA_SelecteTabType_item.isActive:hover{
+        background-color: #70b367;
+        span{
+            color: #ffffff;
+        }
+    }
+
+}

@@ -68,6 +68,8 @@ export class ExcelMediaPlanMixClass {
 
         this.AddRow =           this.AddRow.bind(this);
         this.GetRangeArray =    this.GetRangeArray.bind(this);
+        this.GetSheet =    this.GetSheet.bind(this);
+
 
 
 
@@ -202,28 +204,43 @@ export class ExcelMediaPlanMixClass {
     }
 
 
+    GetSheet(){
+
+        this.CreateExcelRows();
+
+        const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+
+        ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
+        ws['!rows'] = this.excelRowHeights;
+        ws["!merges"] = this.GetRangeArray();
+
+        return ws;
+
+    }
+
+
 
 
     Download(){
 
-        this.CreateExcelRows();
+        // this.CreateExcelRows();
 
 
         const wb = XLSX.utils.book_new();
 
-        const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+        // const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
 /*
         const ws = XLSX.utils.aoa_to_sheet([
             // this.TableHeader.GetRow(),
         ]);
     */
 
-        ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
-        ws['!rows'] = this.excelRowHeights;
-        /*
-        ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
-        */
-        ws["!merges"] = this.GetRangeArray();
+        // ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
+        // ws['!rows'] = this.excelRowHeights;
+        // /*
+        // ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
+        // */
+        // ws["!merges"] = this.GetRangeArray();
 /*
         ws["!merges"] = [
             XLSX.utils.decode_range("A1:AO1"),
@@ -240,6 +257,9 @@ export class ExcelMediaPlanMixClass {
             XLSX.utils.decode_range("AM14:AM15"),XLSX.utils.decode_range("AN14:AN15"),
         ];
 */
+
+        let ws = this.GetSheet();
+
         XLSX.utils.book_append_sheet(wb, ws, "1");
 
 

@@ -52,6 +52,11 @@ export class ExcelMediaPlanTypeVisitkaClass {
 
         this.AddRow =           this.AddRow.bind(this);
         this.GetRangeArray =    this.GetRangeArray.bind(this);
+        this.GetSheet =    this.GetSheet.bind(this);
+
+
+
+        
 
 
 
@@ -176,16 +181,31 @@ export class ExcelMediaPlanTypeVisitkaClass {
 
     }
 
-    Download(){
+    GetSheet(){
+
         this.CreateExcelRows();
-        const wb = XLSX.utils.book_new();
-        
+
         const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
         ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
         ws['!rows'] = this.excelRowHeights;
 
         ws["!merges"] = this.GetRangeArray();
+
+        return ws;
+
+    }
+
+    Download(){
+        // this.CreateExcelRows();
+        const wb = XLSX.utils.book_new();
         
+        // const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+        // ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
+        // ws['!rows'] = this.excelRowHeights;
+
+        // ws["!merges"] = this.GetRangeArray();
+        
+        let ws = this.GetSheet();
 
         XLSX.utils.book_append_sheet(wb, ws, "1");
 

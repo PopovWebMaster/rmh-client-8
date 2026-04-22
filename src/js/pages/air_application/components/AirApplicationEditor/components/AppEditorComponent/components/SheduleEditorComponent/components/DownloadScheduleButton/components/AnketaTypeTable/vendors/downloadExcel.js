@@ -17,7 +17,7 @@ export const downloadExcel = ( params ) => {
         pricePrime,
         mediaName,
         materialName,
-        Schedule,
+        // Schedule,
     } = params;
 
     let { currentSubApplication } = store.getState();

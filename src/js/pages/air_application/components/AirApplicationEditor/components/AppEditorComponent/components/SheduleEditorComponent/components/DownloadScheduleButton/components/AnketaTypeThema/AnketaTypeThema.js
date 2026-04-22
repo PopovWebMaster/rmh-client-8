@@ -50,16 +50,20 @@ const AnketaTypeThemaComponent = ( props ) => {
 
     const download_table = () => {
 
-        console.dir( 'props' );
-        console.dir( props );
-        console.dir( Schedule );
+        // console.dir( 'props' );
+        // console.dir( props );
+        // console.dir( Schedule );
+
+        let { file_names, name } = Schedule.SubApplication;
 
 
         download_excel_plot({
             customer,
             executor,
             mediaName,
-            Schedule,
+            // Schedule,
+            file_names,
+            name,
         });
 
 

@@ -48,7 +48,7 @@ const AnketaComponentComponent = ( props ) => {
 
     } = props;
 
-    let [ anketaType, setAnketaType ] = useState( 'table_vizitka' ); // 'table' 'thema' table_vizitka
+    let [ anketaType, setAnketaType ] = useState( 'table' ); // 'table' 'thema' table_vizitka
 
     let [ tableHeader, setTableHeader ] = useState( '' )
     let [ executor, setExecutor ] = useState( '' );

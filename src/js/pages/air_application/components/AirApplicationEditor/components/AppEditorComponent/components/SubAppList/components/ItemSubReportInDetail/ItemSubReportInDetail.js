@@ -5,7 +5,22 @@ import { useDispatch } from 'react-redux';
 
 import './ItemSubReportInDetail.scss';
 
-import { selectorData as applicationSlice } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as applicationSlice, setApplicationList } from './../../../../../../../../../../redux/applicationSlice.js';
+import { selectorData as companySlice } from './../../../../../../../../../../redux/companySlice.js';
+
+// import { selectorData as applicationSlice, setApplicationList } from './../../../../../../../../../../redux/applicationSlice.js';
+
+import { 
+    selectorData as currentSubApplicationSlise,
+    setCurrentSubAppId,
+    // setReleaseDuration,
+    // setReleaseName,
+    setPeriodFrom,
+    setPeriodTo,
+    // setModeMix,
+    // setModeShort
+} from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+
 
 
 import JSZip from 'jszip';
@@ -23,9 +38,18 @@ import { PasportTotalCount } from './components/PasportTotalCount/PasportTotalCo
 import { PasportTotalDuration } from './components/PasportTotalDuration/PasportTotalDuration.js';
 import { PasportExcelDownload } from './components/PasportExcelDownload/PasportExcelDownload.js';
 import { PasportAppName } from './components/PasportAppName/PasportAppName.js';
+import { PasportColontitul } from './components/PasportColontitul/PasportColontitul.js';
+import { PasportExecutor } from './components/PasportExecutor/PasportExecutor.js';
+import { PasportPrice } from './components/PasportPrice/PasportPrice.js';
+import { PasportPricePrime } from './components/PasportPricePrime/PasportPricePrime.js';
 
+ 
+import { TabTitle } from './components/TabTitle/TabTitle.js';
 
-import { get_application_list_for_period_from_server } from './../../../../../../vendors/get_application_list_for_period_from_server.js';
+import { SelectAnketaType } from './../../../SheduleEditorComponent/components/DownloadScheduleButton/components/SelectAnketaType/SelectAnketaType.js';
+
+import { get_application_list_for_period_from_server }  from './../../../../../../vendors/get_application_list_for_period_from_server.js';
+import { set_application_data_to_store }                from './../../../../../../vendors/set_application_data_to_store.js';
 
 import { get_release_list_from_app_list } from './vendors/get_release_list_from_app_list.js';
  
@@ -51,13 +75,28 @@ const ItemSubReportInDetailComponent = ( props ) => {
 
 
         currentAppEventId,
+        companyLegalName,
         
+        setApplicationList,
+        setCurrentSubAppId,
+        setPeriodFrom,
+            setPeriodTo,
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
-    let [ pasportName, setPasportName ] = useState( '' );
-    let [ pasportAppName, setPasportAppName ] = useState( '' );
 
+    let [ anketaType, setAnketaType ] = useState( 'table' ); // 'table' 'thema' table_vizitka
+
+
+    let [ pasportName, setPasportName ] = useState( '' );
+    let [ pasportColontitul, setPasportColontitul ] = useState( 'Приложение 1 к Договору №_01-61/02 от 14.01.2025  на оказание услуг (выполнения работ) в сфере телевещания' );
+    let [ pasportExecutor, setPasportExecutor ] = useState( 'ГУП ДНР  "РМХ"' );
+    let [ pasportPrice, setPasportPrice ] = useState( 28 );
+    let [ pasportPricePrime, setPasportPricePrime ] = useState( 36 );
+    let [ pasportMediaName, setPasportMediaName ] = useState( companyLegalName );
+
+
+    let [ pasportAppName, setPasportAppName ] = useState( '' );
     let [ pasportFileName, setPasportFileName ] = useState( '' );
     let [ pasportNotes, setPasportNotes ] = useState( '' );
     let [ pasportDescription, setPasportDescription ] = useState( '' );
@@ -82,6 +121,16 @@ const ItemSubReportInDetailComponent = ( props ) => {
                     setPasportTotalCount( release_list_count );
                     setPasportAppName( currentAppName );
 
+                    setPasportColontitul( 'Приложение 1 к Договору №_01-61/02 от 14.01.2025  на оказание услуг (выполнения работ) в сфере телевещания' );
+                    setPasportExecutor( 'ГУП ДНР  "РМХ"' );
+                    setPasportPrice( 28 );
+                    setPasportPricePrime( 36 );
+
+                    setCurrentSubAppId( id );
+                    setPeriodFrom( period_from );
+                    setPeriodTo( period_to );
+
+
                     let new_rel_list = get_release_list_from_app_list({
                         application_list: list,
                         application_id: application_id,
@@ -89,6 +138,17 @@ const ItemSubReportInDetailComponent = ( props ) => {
                     });
 
                     setPasportReleaseList( new_rel_list );
+
+                    // setApplicationList( list );
+
+                    for( let i = 0; i < list.length; i++ ){
+                        if( list[ i ].id === application_id ){
+                            set_application_data_to_store( list[ i ] );
+                            break;
+                        };
+                    };
+
+                    // set_application_data_to_store( new_rel_list );
 
                 }
             });
@@ -137,11 +197,40 @@ const ItemSubReportInDetailComponent = ( props ) => {
                 isOpen =    { isOpen }
                 setIsOpen = { setIsOpen }
                 title =     'Проект'
-                width =     '60vw'
-                height =    '80vh'
+                width =     '65vw'
+                height =    '90vh'
             >
-                <ScrollContainer height = 'calc( 80vh - 1.6em )'>
+                <ScrollContainer height = 'calc( 90vh - 1.6em )'>
+
+
                     <div className = 'SA_Item_PasportWrap'>
+
+                        <div className = 'SA_Item_PasportButtons_wrap'>
+
+                            <PasportExcelDownload 
+                                anketaType =            { anketaType }
+                                pasportColontitul =     { pasportColontitul }
+                                pasportExecutor =       { pasportExecutor }
+                                pasportPrice =          { pasportPrice }
+                                pasportPricePrime =     { pasportPricePrime }
+                                pasportMediaName =      { pasportMediaName }
+                                pasportAppName =        { pasportAppName }
+                                pasportName =           { pasportName }
+                                pasportFileName =       { pasportFileName }
+                                pasportNotes =          { pasportNotes }
+                                pasportDescription =    { pasportDescription }
+                                period_from =           { period_from }
+                                period_to =             { period_to }
+                                duration_sec =          { duration_sec }
+                                pasportReleaseList =    { pasportReleaseList }
+                            />
+
+                        </div>
+
+                        <PasportExecutor
+                            pasportExecutor =       { pasportExecutor }
+                            setPasportExecutor =    { setPasportExecutor }
+                        />
 
                         <PasportAppName
                             pasportAppName =       { pasportAppName }
@@ -157,6 +246,7 @@ const ItemSubReportInDetailComponent = ( props ) => {
                             pasportFileName = { pasportFileName }
                             setPasportFileName = { setPasportFileName }
                         />
+
                         <PasportPeriod
                             period_from =   { period_from }
                             period_to =     { period_to }
@@ -182,22 +272,42 @@ const ItemSubReportInDetailComponent = ( props ) => {
                             setPasportDescription = { setPasportDescription }
                         />
 
-                        <div className = 'SA_Item_PasportButtons_wrap'>
+                        <PasportColontitul
+                            pasportColontitul = { pasportColontitul }
+                            setPasportColontitul = { setPasportColontitul }
+                        />
 
-                            <PasportExcelDownload 
-                                pasportAppName =        { pasportAppName }
-                                pasportName =           { pasportName }
-                                pasportFileName =       { pasportFileName }
-                                pasportNotes =          { pasportNotes }
-                                pasportDescription =    { pasportDescription }
-                                period_from =           { period_from }
-                                period_to =             { period_to }
-                                duration_sec =          { duration_sec }
-                                pasportReleaseList =    { pasportReleaseList }
+                        <SelectAnketaType 
+                            anketaType =    { anketaType }
+                            setAnketaType = { setAnketaType }
+                            itemList = { [
+                                {
+                                    type: 'table',
+                                    name: 'Таблица',
+                                },
+                                {
+                                    type: 'thema',
+                                    name: 'Сюжет',
+                                },
+                                {
+                                    type: 'table_vizitka',
+                                    name: 'Визитка',
+                                },
+                            ] }
+                        />
+
+                        { anketaType === 'table'? (<>
+                            <PasportPrice
+                                pasportPrice = { pasportPrice }
+                                setPasportPrice = { setPasportPrice }
                             />
 
-                        </div>
-                    
+                            <PasportPricePrime
+                                pasportPricePrime = { pasportPricePrime }
+                                setPasportPricePrime = { setPasportPricePrime }
+                            />
+                        </>): '' }
+
 
                     </div> 
                 </ScrollContainer>
@@ -217,8 +327,12 @@ const ItemSubReportInDetailComponent = ( props ) => {
 export function ItemSubReportInDetail( props ){
 
     const application = useSelector( applicationSlice );
+    const company = useSelector( companySlice );
+
+
+    
     // const navigation = useSelector( navigationSlice );
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <ItemSubReportInDetailComponent
@@ -226,9 +340,18 @@ export function ItemSubReportInDetail( props ){
             // application = { application }
             currentAppEventId = { application.currentAppEventId }
             currentAppName = { application.currentAppName }
+            companyLegalName = { company.companyLegalName }
 
 
-            // setCategoryesIsChanged = { ( val ) => { dispatch( setCategoryesIsChanged( val ) ) } }
+
+
+
+            setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
+            setCurrentSubAppId = { ( val ) => { dispatch( setCurrentSubAppId( val ) ) } }
+            setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
+            setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
+
+
 
 
         />

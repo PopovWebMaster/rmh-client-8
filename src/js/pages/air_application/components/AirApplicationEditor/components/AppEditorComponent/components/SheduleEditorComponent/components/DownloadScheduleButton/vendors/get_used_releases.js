@@ -16,6 +16,13 @@ export const get_used_releases = () => {
     let { currentSubAppListById } = application;
     let { currentSubAppId, modeMix } = currentSubApplication;
 
+    // console.dir({
+    //     gridEventTable,
+    //     currentSubAppListById,
+    //     currentSubAppId,
+    //     modeMix
+    // });
+
 
 
     for( let YYYY_MM_DD in gridEventTable ){

@@ -61,6 +61,8 @@ export class ExcelMediaPlanTypePlotClass {
         this.Download =    this.Download.bind(this);
         this.AddRow =    this.AddRow.bind(this);
         this.GetRangeArray =    this.GetRangeArray.bind(this);
+        this.GetSheet =    this.GetSheet.bind(this);
+
 
 
 
@@ -97,7 +99,19 @@ export class ExcelMediaPlanTypePlotClass {
         return result;
     }
 
-    Download(){
+
+    
+    GetSheet(){
+
+        // this.CreateExcelRows();
+
+        // const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+
+        // ws['!cols'] = get_array_of_colum_width( this.modeMixStatus );
+        // ws['!rows'] = this.excelRowHeights;
+        // ws["!merges"] = this.GetRangeArray();
+
+        // return ws;
 
         this.AddRow( new RowCustomerClass( this.nextRowNumber, this.customer ) );
         this.AddRow( new RowExecutorClass( this.nextRowNumber, this.executor ) );
@@ -131,6 +145,55 @@ export class ExcelMediaPlanTypePlotClass {
         this.AddRow( new RowTextClass( this.nextRowNumber, 'заказчика в указанное время (форс-мажорные обстоятельства), предоставить клиенту ' ) );
         this.AddRow( new RowTextClass( this.nextRowNumber, 'эквивалентные по объему и срокам позиции.' ) );
 
+        const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+
+        ws['!cols'] = [ { width: 15.14 }, { width: 14.3 }, { width: 8 }, { width: 34 }, { width: 10 } ];
+        ws['!rows'] = this.excelRowHeights;
+
+        ws["!merges"] = this.GetRangeArray();
+
+        return ws;
+
+    }
+    
+
+
+
+
+    Download(){
+
+        // this.AddRow( new RowCustomerClass( this.nextRowNumber, this.customer ) );
+        // this.AddRow( new RowExecutorClass( this.nextRowNumber, this.executor ) );
+        // this.AddRow( new RowMediaClass( this.nextRowNumber, this.mediaName ) );
+        // this.AddRow( new RowThemaClass( this.nextRowNumber, this.fileThema ) );
+        // this.AddRow( new RowFileClass( this.nextRowNumber, this.fileName ) );
+        // this.AddRow( new RowPeriodClass( this.nextRowNumber, this.period ) );
+        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+        // this.AddRow( new RowMediaPlanHeaderClass( this.nextRowNumber ) );
+        
+        // this.AddRow( new RowMatrixHeaderClass( this.nextRowNumber ) );
+
+        // for( let i = 0; i < this.martix.length; i++ ){
+        //     this.AddRow( new RowMatrixClass( this.nextRowNumber, this.martix[ i ] ) );
+        // };
+
+        // this.AddRow( new RowMatrixFooterClass( this.nextRowNumber ) );
+
+        // this.AddRow( new RowSecondMatrixHeaderClass( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_1_Class( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_2_Class( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_3_Class( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_4_Class( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_5_Class( this.nextRowNumber ) );
+        // this.AddRow( new RowSecondMatrix_6_Class( this.nextRowNumber ) );
+
+        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+
+        // this.AddRow( new RowTextClass( this.nextRowNumber, 'Время выхода в эфир может меняться в пределах 5-10 минут' ) );
+        // this.AddRow( new RowTextClass( this.nextRowNumber, 'ГУП ДНР «РМХ» оставляет за собой право, в случае невозможности размещения продукции' ) );
+        // this.AddRow( new RowTextClass( this.nextRowNumber, 'заказчика в указанное время (форс-мажорные обстоятельства), предоставить клиенту ' ) );
+        // this.AddRow( new RowTextClass( this.nextRowNumber, 'эквивалентные по объему и срокам позиции.' ) );
+
 
 
 
@@ -143,12 +206,14 @@ export class ExcelMediaPlanTypePlotClass {
 
         const wb = XLSX.utils.book_new();
         
-        const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
+        // const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
 
-        ws['!cols'] = [ { width: 15.14 }, { width: 14.3 }, { width: 8 }, { width: 34 }, { width: 10 } ];
-        ws['!rows'] = this.excelRowHeights;
+        // ws['!cols'] = [ { width: 15.14 }, { width: 14.3 }, { width: 8 }, { width: 34 }, { width: 10 } ];
+        // ws['!rows'] = this.excelRowHeights;
 
-        ws["!merges"] = this.GetRangeArray();
+        // ws["!merges"] = this.GetRangeArray();
+
+        let ws = this.GetSheet();
 
         XLSX.utils.book_append_sheet(wb, ws, "1");
 

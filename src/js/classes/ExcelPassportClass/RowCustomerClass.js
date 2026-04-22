@@ -18,13 +18,12 @@ export class RowCustomerClass extends RowClass {
     Create(){
         let row = [
             {},
-            {},
-            { v: "Заказчик:", t: "s", 
+            { v: "Заказ:", t: "s", 
                 s: { 
                     font: { 
                         name: "Verdana", 
-                        sz: 12,
-                        italic: true,
+                        sz: 11,
+                        italic: false,
                         bold: true,
                     },
                     alignment: {
@@ -48,7 +47,9 @@ export class RowCustomerClass extends RowClass {
         ];
 
         this.AddRow( row );
-        this.AddRange( `D${this.rowNumber}:AO${this.rowNumber}` );
+        // this.AddRange( `D${this.rowNumber}:AO${this.rowNumber}` );
+        this.AddRange( `C${this.rowNumber}:E${this.rowNumber}` );
+
 
 
     }

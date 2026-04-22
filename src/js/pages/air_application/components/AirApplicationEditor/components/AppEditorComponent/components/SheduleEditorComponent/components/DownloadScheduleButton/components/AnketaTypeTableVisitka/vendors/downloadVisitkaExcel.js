@@ -12,7 +12,7 @@ export const downloadVisitkaExcel = ( params ) => {
         Schedule,
     } = params;
 
-    console.dir( params );
+    // console.dir( params );
 
     let {
         matrix,

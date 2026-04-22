@@ -15,7 +15,9 @@ export const download_excel_plot = ( params ) => {
         customer,
         executor,
         mediaName,
-        Schedule,
+        // Schedule,
+        file_names,
+        name,
     } = params;
 
     let martix = get_matrix_plot();
@@ -24,7 +26,7 @@ export const download_excel_plot = ( params ) => {
 
     let fileName = '';
     let fileThema = '';
-    let { file_names, name } = Schedule.SubApplication;
+    // let { file_names, name } = Schedule.SubApplication;
 
     fileThema = name;
     if( file_names.length > 0 ){

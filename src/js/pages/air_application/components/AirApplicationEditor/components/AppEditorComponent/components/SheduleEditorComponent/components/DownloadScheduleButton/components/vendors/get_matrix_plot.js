@@ -13,6 +13,10 @@ export const get_matrix_plot = () => {
 
     let { releases } = get_used_releases();
 
+    // console.dir( 'get_used_releases' );
+    // console.dir( releases );
+
+
     for( let YYYY_MM_DD in releases ){
         for( let i = 0; i < releases[ YYYY_MM_DD ].length; i++ ){
             let { startTime } = releases[ YYYY_MM_DD ][ i ];

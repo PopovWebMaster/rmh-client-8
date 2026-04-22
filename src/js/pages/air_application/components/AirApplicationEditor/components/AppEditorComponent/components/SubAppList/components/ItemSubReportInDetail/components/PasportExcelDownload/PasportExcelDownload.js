@@ -13,8 +13,15 @@ import { ExcelPassportClass } from './../../../../../../../../../../../../classe
 
 
 const PasportExcelDownloadComponent = ( props ) => {
-
+    
     let {
+        anketaType, // 'table' 'thema' table_vizitka
+        pasportColontitul,
+        pasportExecutor,
+        pasportPrice,
+        pasportPricePrime,
+        pasportMediaName,
+
         pasportAppName,
         pasportName,
         pasportFileName,
@@ -40,6 +47,16 @@ const PasportExcelDownloadComponent = ( props ) => {
         ExcelPassport.SetPeriodTo( period_to );
         ExcelPassport.SetDurationSec( duration_sec );
         ExcelPassport.SetReleaseList( pasportReleaseList );
+
+
+        ExcelPassport.SetAnketaType( anketaType );
+        ExcelPassport.SetColontitul( pasportColontitul );
+        ExcelPassport.SetExecutor( pasportExecutor );
+        ExcelPassport.SetPrice( pasportPrice );
+        ExcelPassport.SetPricePrime( pasportPricePrime );
+        ExcelPassport.SetMediaName( pasportMediaName );
+
+
         ExcelPassport.Download();
 
 
@@ -59,7 +76,7 @@ const PasportExcelDownloadComponent = ( props ) => {
                 onClick = { click }
             >
                 <span className = 'SA_PasExcel_icon icon-download-alt'></span>
-                <span className = 'SA_PasExcel_text'>Passport</span>
+                <span className = 'SA_PasExcel_text'>Скачать</span>
 
 
             </div>

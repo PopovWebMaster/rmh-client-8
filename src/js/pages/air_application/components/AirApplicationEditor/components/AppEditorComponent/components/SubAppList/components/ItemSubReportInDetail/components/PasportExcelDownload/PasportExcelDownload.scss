@@ -1,6 +1,6 @@
 .SA_PasportExcelDownload{
     font-size: 1em;
-    margin: 0.5em 2em;
+    margin: 0.5em 2em 0 0;
 
     display: flex;
     justify-content: center;
@@ -8,14 +8,18 @@
     align-content: center;
 
     width: 7em;
+    flex-grow: 0;
 
 
     .SA_PasExcel_btn{
-        font-size: 1em;
-        padding: 0.2em 0.8em 0.26em;
+        font-size: 0.9em;
+        padding: 0.1em 0.8em 0.3em;
         border-radius: 0.1em;
         background-color: #70b367;
         color: #ffffff;
+        // margin: 0.3em 2em;
+
+        // width: 7em;
 
         cursor: pointer;
         user-select: none;
