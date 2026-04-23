@@ -76,7 +76,7 @@ const PasportExcelDownloadComponent = ( props ) => {
                 onClick = { click }
             >
                 <span className = 'SA_PasExcel_icon icon-download-alt'></span>
-                <span className = 'SA_PasExcel_text'>Скачать</span>
+                <span className = 'SA_PasExcel_text'>Passport</span>
 
 
             </div>

@@ -14,6 +14,7 @@ export const get_first_martix_row_cells = ( params, withNames = false ) => {
         price,
         pricePrime,
         rowNum,
+        cellDurationLink,
     } = params;
 
     let priceValue = price;
@@ -24,6 +25,35 @@ export const get_first_martix_row_cells = ( params, withNames = false ) => {
 
     if( sec >= START_TIME_PRIME_FROM && sec <= START_TIME_PRIME_TO){
         priceValue = pricePrime;
+    };
+
+    let cellDuration = {
+        v: releaseDuration, 
+        t: "s", 
+        s: { 
+            font: { 
+                name: "Arial", 
+                sz: 12,
+                italic: false,
+                bold: false,
+                // color: { rgb: "0964CC" }
+            },
+            
+            alignment: {
+                horizontal: 'center',
+                vertical: 'center',
+            },
+            border: {
+                right:  { style: BORDER_STYLE, color: BORDER_COLOR_STYLE },
+                bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
+            },
+        }
+    };
+    if( cellDurationLink !== null ){
+        // cellDuration.v = ''; 
+        cellDuration.t = 'n'; 
+        cellDuration.f = cellDurationLink; 
+
     };
 
     let result = [
@@ -90,25 +120,27 @@ export const get_first_martix_row_cells = ( params, withNames = false ) => {
             } 
         },
         {
-            v: releaseDuration, t: "s", 
-            s: { 
-                font: { 
-                    name: "Arial", 
-                    sz: 12,
-                    italic: false,
-                    bold: false,
-                    // color: { rgb: "0964CC" }
-                },
+            ...cellDuration
+            // v: releaseDuration, 
+            // t: "s", 
+            // s: { 
+            //     font: { 
+            //         name: "Arial", 
+            //         sz: 12,
+            //         italic: false,
+            //         bold: false,
+            //         // color: { rgb: "0964CC" }
+            //     },
                 
-                alignment: {
-                    horizontal: 'center',
-                    vertical: 'center',
-                },
-                border: {
-                    right:  { style: BORDER_STYLE, color: BORDER_COLOR_STYLE },
-                    bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
-                },
-            } 
+            //     alignment: {
+            //         horizontal: 'center',
+            //         vertical: 'center',
+            //     },
+            //     border: {
+            //         right:  { style: BORDER_STYLE, color: BORDER_COLOR_STYLE },
+            //         bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
+            //     },
+            // } 
         },
         {
             v: '', 

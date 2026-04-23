@@ -42,43 +42,6 @@ const DownloadScheduleButtonComponent = ( props ) => {
 
     const click = () => {
 
-        // console.dir( Schedule.GetDataForDownloadExcelFormatTable() );
-
-
-/*
-        const wb = XLSX.utils.book_new();
-
-        const ws = XLSX.utils.aoa_to_sheet([
-            get_row_1(),
-            [],
-            [],
-            [],
-            [],
-            get_row_6(),
-            get_row_7(),
-            get_row_8(),
-        ]);
-
-        ws['!cols'] = get_array_of_colum_width();
-  
-        ws["!merges"] = [
-            XLSX.utils.decode_range("A1:AO1"),
-            XLSX.utils.decode_range("A2:AO2"),
-            XLSX.utils.decode_range("A3:AO3"),
-            XLSX.utils.decode_range("A4:AO4"),
-            XLSX.utils.decode_range("D6:AO6"),
-            XLSX.utils.decode_range("D7:AO7"),
-            XLSX.utils.decode_range("D8:AO8"),
-            XLSX.utils.decode_range("D9:AO9"),
-        ];
-
-
-        XLSX.utils.book_append_sheet(wb, ws, "readme demo");
-
-        XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
-*/
-
-
 
 
 

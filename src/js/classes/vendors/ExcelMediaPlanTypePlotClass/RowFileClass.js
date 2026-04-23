@@ -35,7 +35,7 @@ export class RowFileClass extends RowClass {
                         name: "Calibri", 
                         sz: 11,
                         italic: false,
-                        bold: false,
+                        bold: true,
                     },
                     alignment: {
                         horizontal: 'left',
@@ -45,6 +45,7 @@ export class RowFileClass extends RowClass {
         ];
 
         this.AddRow( row );
+        this.AddRange( `B${this.rowNumber}:E${this.rowNumber}` )
 
     }
 }

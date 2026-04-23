@@ -33,15 +33,24 @@ export const downloadExcel = ( params ) => {
 
     let ExcelMediaPlanMix = new ExcelMediaPlanMixClass();
 
-    ExcelMediaPlanMix.SetModeMixStatus( modeMix );
-    ExcelMediaPlanMix.SetTableHeader( tableHeader );
+    ExcelMediaPlanMix.SetParams({
+        modeMix: modeMix,
+        executor,
+        price,
+        pricePrime,
+        customer,
+        mediaName,
+    });
 
-    ExcelMediaPlanMix.SetExecutor( executor );
-    ExcelMediaPlanMix.SetCustomer( customer );
-    ExcelMediaPlanMix.SetPrice( price );
-    ExcelMediaPlanMix.SetPricePrime( pricePrime );
 
-    ExcelMediaPlanMix.SetMediaName( mediaName );
+    // ExcelMediaPlanMix.SetModeMixStatus( modeMix );
+    // ExcelMediaPlanMix.SetTableHeader( tableHeader );
+    // ExcelMediaPlanMix.SetExecutor( executor );
+    // ExcelMediaPlanMix.SetCustomer( customer );
+    // ExcelMediaPlanMix.SetPrice( price );
+    // ExcelMediaPlanMix.SetPricePrime( pricePrime );
+
+    // ExcelMediaPlanMix.SetMediaName( mediaName );
     ExcelMediaPlanMix.SetSubAppList( used_sub_app_id );
     ExcelMediaPlanMix.SetMatrix( matrix );
 

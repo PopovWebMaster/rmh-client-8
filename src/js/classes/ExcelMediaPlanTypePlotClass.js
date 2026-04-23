@@ -5,10 +5,19 @@ import { RowCustomerClass } from './vendors/ExcelMediaPlanTypePlotClass/RowCusto
 import { RowExecutorClass } from './vendors/ExcelMediaPlanTypePlotClass/RowExecutorClass.js';
 import { RowMediaClass } from './vendors/ExcelMediaPlanTypePlotClass/RowMediaClass.js';
 import { RowThemaClass } from './vendors/ExcelMediaPlanTypePlotClass/RowThemaClass.js';
+import { RowReleaseNameClass } from './vendors/ExcelMediaPlanTypePlotClass/RowReleaseNameClass.js';
+
 import { RowFileClass } from './vendors/ExcelMediaPlanTypePlotClass/RowFileClass.js';
 import { RowPeriodClass } from './vendors/ExcelMediaPlanTypePlotClass/RowPeriodClass.js';
 import { RowMediaPlanHeaderClass } from './vendors/ExcelMediaPlanTypePlotClass/RowMediaPlanHeaderClass.js';
 import { RowMatrixHeaderClass } from './vendors/ExcelMediaPlanTypePlotClass/RowMatrixHeaderClass.js';
+import { RowNotesClass } from './vendors/ExcelMediaPlanTypePlotClass/RowNotesClass.js';
+import { RowDescriptionClass } from './vendors/ExcelMediaPlanTypePlotClass/RowDescriptionClass.js';
+
+
+
+
+
 import { EmptyRowClass } from './vendors/ExcelMediaPlanTypePlotClass/EmptyRowClass.js';
 
 import { RowMatrixClass } from './vendors/ExcelMediaPlanTypePlotClass/RowMatrixClass.js';
@@ -23,19 +32,7 @@ import { RowSecondMatrix_5_Class } from './vendors/ExcelMediaPlanTypePlotClass/R
 import { RowSecondMatrix_6_Class } from './vendors/ExcelMediaPlanTypePlotClass/RowSecondMatrix_6_Class.js';
 import { RowTextClass } from './vendors/ExcelMediaPlanTypePlotClass/RowTextClass.js';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+import store from './../redux/store.js';
 
 
 
@@ -113,12 +110,37 @@ export class ExcelMediaPlanTypePlotClass {
 
         // return ws;
 
+        // let srrr = store.getState();
+        let {
+            currentSubApplication,
+            application,
+        } = store.getState();
+        let { currentSubAppId } = currentSubApplication;
+        let { currentSubAppListById } = application;
+        let { air_notes, description } = currentSubAppListById[ currentSubAppId ];
+
+
+        // console.dir( 'srrr' );
+        // console.dir( srrr );
+
+        
+
+
         this.AddRow( new RowCustomerClass( this.nextRowNumber, this.customer ) );
         this.AddRow( new RowExecutorClass( this.nextRowNumber, this.executor ) );
         this.AddRow( new RowMediaClass( this.nextRowNumber, this.mediaName ) );
-        this.AddRow( new RowThemaClass( this.nextRowNumber, this.fileThema ) );
+        // this.AddRow( new RowThemaClass( this.nextRowNumber, this.fileThema ) );
+        this.AddRow( new RowReleaseNameClass( this.nextRowNumber, this.fileThema ) );
+
         this.AddRow( new RowFileClass( this.nextRowNumber, this.fileName ) );
         this.AddRow( new RowPeriodClass( this.nextRowNumber, this.period ) );
+        if( air_notes !== '' && air_notes !== null ){
+            this.AddRow( new RowNotesClass( this.nextRowNumber, air_notes ) );
+        };
+        if( description !== '' && description !== null ){
+            this.AddRow( new RowDescriptionClass( this.nextRowNumber, description ) );
+        };
+
         this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
         this.AddRow( new RowMediaPlanHeaderClass( this.nextRowNumber ) );
         
@@ -162,47 +184,8 @@ export class ExcelMediaPlanTypePlotClass {
 
     Download(){
 
-        // this.AddRow( new RowCustomerClass( this.nextRowNumber, this.customer ) );
-        // this.AddRow( new RowExecutorClass( this.nextRowNumber, this.executor ) );
-        // this.AddRow( new RowMediaClass( this.nextRowNumber, this.mediaName ) );
-        // this.AddRow( new RowThemaClass( this.nextRowNumber, this.fileThema ) );
-        // this.AddRow( new RowFileClass( this.nextRowNumber, this.fileName ) );
-        // this.AddRow( new RowPeriodClass( this.nextRowNumber, this.period ) );
-        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
-        // this.AddRow( new RowMediaPlanHeaderClass( this.nextRowNumber ) );
-        
-        // this.AddRow( new RowMatrixHeaderClass( this.nextRowNumber ) );
-
-        // for( let i = 0; i < this.martix.length; i++ ){
-        //     this.AddRow( new RowMatrixClass( this.nextRowNumber, this.martix[ i ] ) );
-        // };
-
-        // this.AddRow( new RowMatrixFooterClass( this.nextRowNumber ) );
-
-        // this.AddRow( new RowSecondMatrixHeaderClass( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_1_Class( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_2_Class( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_3_Class( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_4_Class( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_5_Class( this.nextRowNumber ) );
-        // this.AddRow( new RowSecondMatrix_6_Class( this.nextRowNumber ) );
-
-        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
-
-        // this.AddRow( new RowTextClass( this.nextRowNumber, 'Время выхода в эфир может меняться в пределах 5-10 минут' ) );
-        // this.AddRow( new RowTextClass( this.nextRowNumber, 'ГУП ДНР «РМХ» оставляет за собой право, в случае невозможности размещения продукции' ) );
-        // this.AddRow( new RowTextClass( this.nextRowNumber, 'заказчика в указанное время (форс-мажорные обстоятельства), предоставить клиенту ' ) );
-        // this.AddRow( new RowTextClass( this.nextRowNumber, 'эквивалентные по объему и срокам позиции.' ) );
-
-
-
-
-
-
-
-
-
-
+        let { currentSubApplication } = store.getState();
+        let { releaseName } = currentSubApplication;
 
         const wb = XLSX.utils.book_new();
         
@@ -217,7 +200,9 @@ export class ExcelMediaPlanTypePlotClass {
 
         XLSX.utils.book_append_sheet(wb, ws, "1");
 
-        XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.period}.xlsx`);
+        // XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.period}.xlsx`);
+        XLSX.writeFile(wb, `Медиа план ${releaseName}.xlsx`);
+
 
     }
 

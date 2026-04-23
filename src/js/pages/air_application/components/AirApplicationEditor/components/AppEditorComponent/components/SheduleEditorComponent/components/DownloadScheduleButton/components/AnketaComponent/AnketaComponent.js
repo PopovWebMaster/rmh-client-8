@@ -184,62 +184,6 @@ const AnketaComponentComponent = ( props ) => {
 
 
     }
-/*
-    const download_table = () => {
-
-        const wb = XLSX.utils.book_new();
-
-        const ws = XLSX.utils.aoa_to_sheet([
-            get_row_1( tableHeader ),
-            [],
-            [],
-            [],
-            [],
-            get_row_6( executor ),
-            get_row_7( customer ),
-            get_row_8( mediaName ),
-            get_row_9( getPeriod( periodFrom, periodTo ) ),
-            get_row_10( materialName ),
-            get_row_11(),
-            get_row_12( releaseDuration ),
-            get_row_13( releaseDuration, mediaName ),
-            get_row_14( martix ),
-            get_row_15( martix ),
-            ...get_table_martix_rows( martix, price, releaseDuration ),
-        ]);
-
-        ws['!cols'] = get_array_of_colum_width();
-        ws['!rows'] = [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, { hpx: 38.25 }, {}, { hpx: 77.25 } ];
-
-        ws["!merges"] = [
-            XLSX.utils.decode_range("A1:AO1"),
-            XLSX.utils.decode_range("A2:AO2"),
-            XLSX.utils.decode_range("A3:AO3"),
-            XLSX.utils.decode_range("A4:AO4"),
-            XLSX.utils.decode_range("D6:AO6"),
-            XLSX.utils.decode_range("D7:AO7"),
-            XLSX.utils.decode_range("D8:AO8"),
-            XLSX.utils.decode_range("D9:AO9"),
-            XLSX.utils.decode_range("D10:R10"),XLSX.utils.decode_range("S10:AO10"),
-            XLSX.utils.decode_range("F13:AO13"),
-            XLSX.utils.decode_range("A14:A15"),XLSX.utils.decode_range("B14:B15"),XLSX.utils.decode_range("C14:C15"),XLSX.utils.decode_range("D14:D15"),XLSX.utils.decode_range("E14:E15"),
-            XLSX.utils.decode_range("AM14:AM15"),XLSX.utils.decode_range("AN14:AN15"),
-
-
-        ];
-
-        XLSX.utils.book_append_sheet(wb, ws, "readme demo");
-
-        // XLSX.writeFile(wb, "xlsx-js-style-demo.xlsx");
-        XLSX.writeFile(wb, `Медиа план ${customer}_${materialName} ${getPeriod( periodFrom, periodTo )}.xlsx`);
-
-    }
-*/
-
-    const download_table = () => {
-
-    }
-
 
 
     const create = ( type ) => {

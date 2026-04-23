@@ -18,6 +18,7 @@ export class RowMartixClass extends RowClass {
             price,
             pricePrime,
             withName = false,
+            cellDurationLink = null,
 
         } = data;
 
@@ -28,6 +29,8 @@ export class RowMartixClass extends RowClass {
         this.duration = duration;
         this.price =    price;
         this.pricePrime = pricePrime;
+        this.cellDurationLink = cellDurationLink;
+
 
         this.withName = withName;
 
@@ -46,10 +49,13 @@ export class RowMartixClass extends RowClass {
             price:              this.price,
             pricePrime:         this.pricePrime,
             rowNum:             this.rowNumber,
+            cellDurationLink:   this.cellDurationLink,
+
         }, this.withName );
 
         let valuesCells = get_martix_values_cells({
             values: this.values,
+            cellDurationLink:   this.cellDurationLink,
         });
 
         let lastCells = get_matrix_row_last_cells( this.rowNumber );

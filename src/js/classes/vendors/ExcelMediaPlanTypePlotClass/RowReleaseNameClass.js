@@ -1,23 +1,22 @@
 
 import { RowClass } from './RowClass.js';
 
-export class RowCustomerClass extends RowClass {
-
-    constructor( rowNumber, customer ){
+export class RowReleaseNameClass extends RowClass {
+     constructor( rowNumber, thema ){
         super( rowNumber );
 
-        this.customer = customer;
+        this.thema = thema;
+        
 
         this.Create = this.Create.bind(this);
 
         this.Create();
 
-
     }
 
     Create(){
-        let row = [
-            { v: "ЗАЗАКАЗЧИК:", t: "s", 
+         let row = [
+            { v: "Выпуск:", t: "s", 
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -30,7 +29,7 @@ export class RowCustomerClass extends RowClass {
                     } 
                 } 
             },
-                { v: this.customer, t: "s", 
+                { v: this.thema, t: "s", 
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -46,8 +45,7 @@ export class RowCustomerClass extends RowClass {
         ];
 
         this.AddRow( row );
-        this.AddRange( `B${this.rowNumber}:E${this.rowNumber}` );
-
+        this.AddRange( `B${this.rowNumber}:E${this.rowNumber}` )
 
     }
 }

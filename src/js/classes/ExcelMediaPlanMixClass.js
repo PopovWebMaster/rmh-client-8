@@ -8,6 +8,8 @@ import { RowCustomerClass } from './vendors/ExcelMediaPlanMixClass/RowCustomerCl
 import { RowMediaNameClass } from './vendors/ExcelMediaPlanMixClass/RowMediaNameClass.js';
 import { RowPeriodClass } from './vendors/ExcelMediaPlanMixClass/RowPeriodClass.js';
 import { RowAdvertisingTypeClass } from './vendors/ExcelMediaPlanMixClass/RowAdvertisingTypeClass.js';
+import { RowFileNameClass } from './vendors/ExcelMediaPlanMixClass/RowFileNameClass.js';
+import { RowFileDurationClass } from './vendors/ExcelMediaPlanMixClass/RowFileDurationClass.js';
 import { RowMovieNameClass } from './vendors/ExcelMediaPlanMixClass/RowMovieNameClass.js';
 import { RowMediaNameAsHeaderClass } from './vendors/ExcelMediaPlanMixClass/RowMediaNameAsHeaderClass.js';
 import { RowMartixHeaderDayNamesClass } from './vendors/ExcelMediaPlanMixClass/RowMartixHeaderDayNamesClass.js';
@@ -27,6 +29,8 @@ import { get_array_of_colum_width } from './vendors/ExcelMediaPlanMixClass/get_a
 import JSZip from 'jszip';
 import FileSaver from 'file-saver';
 
+import store from './../redux/store.js';
+
 
 
 export class ExcelMediaPlanMixClass {
@@ -38,75 +42,108 @@ export class ExcelMediaPlanMixClass {
         this.price = '';
         this.pricePrime = '';
         this.mediaName = '';
+        this.footerText = '';
+        this.releaseName = '';
+        this.releaseDuration = 0;
 
         this.excelRows = [];
         this.excelRangeValues = [];
         this.excelRowHeights = [];
         this.nextRowNumber = 1;
-
+        this.cellDurationLink = '';
 
         this.SubAppList = new SubAppListClass();
         this.Matrix = new MatrixClass();
         this.Period = new PeriodClass();
 
-        this.SetModeMixStatus =   this.SetModeMixStatus.bind(this);
+        // this.SetModeMixStatus = this.SetModeMixStatus.bind(this);
         this.SetTableHeader =   this.SetTableHeader.bind(this);
-
-
-        
 
         this.SetExecutor =      this.SetExecutor.bind(this);
         this.SetCustomer =      this.SetCustomer.bind(this);
         this.SetPrice =         this.SetPrice.bind(this);
-        this.SetPricePrime =         this.SetPricePrime.bind(this);
+        this.SetPricePrime =    this.SetPricePrime.bind(this);
 
         this.SetMediaName =     this.SetMediaName.bind(this);
         this.SetSubAppList =    this.SetSubAppList.bind(this);
         this.SetMatrix =        this.SetMatrix.bind(this);
         this.Download =         this.Download.bind(this);
-        this.CreateExcelRows =         this.CreateExcelRows.bind(this);
+        this.CreateExcelRows =  this.CreateExcelRows.bind(this);
 
         this.AddRow =           this.AddRow.bind(this);
         this.GetRangeArray =    this.GetRangeArray.bind(this);
-        this.GetSheet =    this.GetSheet.bind(this);
+        this.GetSheet =         this.GetSheet.bind(this);
+
+        this.SetParams =         this.SetParams.bind(this);
+
+        this.Create =         this.Create.bind(this);
 
 
-
-
-
-
+        this.Create();
         
+    }
+
+    Create(){
+        let { currentSubApplication, company, application } = store.getState();
+        let { releaseName, releaseDuration } = currentSubApplication;
+
+        // console.dir( 'currentSubApplication' );
+        // console.dir( currentSubApplication );
+
+        let {
+            colontitul,
+            executor,
+            price,
+            pricePrime,
+            companyLegalName,
+            footerText,
+        } = company;
+        let { currentAppName } = application;
+
+        this.tableHeader = colontitul;
+        this.executor = executor;
+        this.customer = currentAppName;
+        this.price = price;
+        this.pricePrime = pricePrime;
+        this.mediaName = companyLegalName;
+        this.footerText = footerText;
+        this.releaseName = releaseName;
+        this.releaseDuration = releaseDuration;
 
 
     }
-    SetModeMixStatus( value ){
-        this.modeMixStatus = value;
+
+    SetParams( params ){
+        let {
+            modeMix =       false,
+            tableHeader =   null,
+            executor =      null,
+            customer =      null,
+            price =         null,
+            pricePrime =    null,
+            mediaName =     null,
+        } = params;
+
+        // this.modeMixStatus = modeMix;
+        this.modeMixStatus = false;
+
+        this.SetTableHeader( tableHeader );
+        this.SetExecutor( executor );
+        this.SetCustomer( customer );
+        this.SetPrice( price );
+        this.SetPricePrime( pricePrime );
+        this.SetMediaName( mediaName );
+
+
+
     }
 
-    SetTableHeader( value ){
-        this.tableHeader = value;
-        // this.TableHeader = new TableHeaderClass( value );
-    }
-
-    SetExecutor( value ){
-        this.executor = value;
-    }
-
-    SetCustomer( value ){
-        this.customer = value;
-    }
-
-    SetPrice( value ){
-        this.price = Number( value );
-    }
-
-    SetPricePrime( value ){
-        this.pricePrime = Number( value );
-    }
-
-    SetMediaName( value ){
-        this.mediaName = value;
-    }
+    SetTableHeader( value ){ if( value !== null ){      this.tableHeader = value; };}
+    SetExecutor( value ){ if( value !== null ){         this.executor = value;}}
+    SetCustomer( value ){if( value !== null ){          this.customer = value;};}
+    SetPrice( value ){ if( value !== null ){            this.price = Number( value ); }; }
+    SetPricePrime( value ){ if( value !== null ){       this.pricePrime = Number( value );};}
+    SetMediaName( value ){ if( value !== null ){        this.mediaName = value; }; }
 
     SetSubAppList( used_sub_app_id ){
         this.SubAppList.CreateList( used_sub_app_id );
@@ -123,8 +160,8 @@ export class ExcelMediaPlanMixClass {
     CreateExcelRows(){
 
         this.AddRow( new TableHeaderClass( this.nextRowNumber, this.tableHeader ) );
-        this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
-        this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
+        // this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
         this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
         this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
         this.AddRow( new RowExecutorClass( this.nextRowNumber, this.executor ) );
@@ -135,10 +172,21 @@ export class ExcelMediaPlanMixClass {
 
         let subAppList = this.SubAppList.GetListArray();
 
-        for( let i = 0; i < subAppList.length; i++ ){
-            let { name, duration_sec } = subAppList[ i ];
-            this.AddRow( new RowMovieNameClass( this.nextRowNumber, name, duration_sec ) );
+        let fileName = '';
+        if( subAppList[0] ){
+            let { file_names } = subAppList[0];
+            if( file_names[ 0 ] ){
+                fileName = file_names[ file_names.length - 1 ]
+            };
+
         };
+
+
+        this.AddRow( new RowFileNameClass( this.nextRowNumber, fileName ) );
+        this.cellDurationLink = `=D${this.nextRowNumber}`;
+        this.AddRow( new RowFileDurationClass( this.nextRowNumber, this.releaseDuration ) );
+        this.AddRow( new RowMovieNameClass( this.nextRowNumber, this.releaseName ) );
+
 
         this.AddRow( new RowMediaNameAsHeaderClass( this.nextRowNumber, this.mediaName ) );
 
@@ -168,6 +216,7 @@ export class ExcelMediaPlanMixClass {
                 withName: this.modeMixStatus,
                 price: this.price,
                 pricePrime: this.pricePrime,
+                cellDurationLink: this.cellDurationLink,
             };
 
             this.AddRow( new RowMartixClass( this.nextRowNumber, data ) );
@@ -179,7 +228,8 @@ export class ExcelMediaPlanMixClass {
         this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
         this.AddRow( new EmptyRowClass( this.nextRowNumber ) );
 
-        let text = '* ГУП ДНР "РМХ" оставляет за собой право, в случае невозможности размещения рекламной продукции заказчика в указаннное время (форс-мажорные обстоятельства), предоставить клиенту эквивалентные по обьему и срокам позиции.'
+        // let text = '* ГУП ДНР "РМХ" оставляет за собой право, в случае невозможности размещения рекламной продукции заказчика в указаннное время (форс-мажорные обстоятельства), предоставить клиенту эквивалентные по обьему и срокам позиции.'
+        let text = this.footerText;
         this.AddRow( new TableFooterClass( this.nextRowNumber, text ) );
 
 
@@ -225,6 +275,10 @@ export class ExcelMediaPlanMixClass {
 
         // this.CreateExcelRows();
 
+        let { currentSubApplication, company } = store.getState();
+        let { releaseName } = currentSubApplication;
+        let { companyLegalName } = company;
+
 
         const wb = XLSX.utils.book_new();
 
@@ -260,11 +314,18 @@ export class ExcelMediaPlanMixClass {
 
         let ws = this.GetSheet();
 
-        XLSX.utils.book_append_sheet(wb, ws, "1");
+        XLSX.utils.book_append_sheet(wb, ws, '1');
 
 
 
-        XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
+        XLSX.writeFile(wb, `Медиа план ${releaseName}.xlsx`);
+
+
+        
+
+
+
+
 
 
 
@@ -288,15 +349,15 @@ export class ExcelMediaPlanMixClass {
 
 
 
-/*
-        const zip = new JSZip();
-        const workbookBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const fileData = new Blob([workbookBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-        zip.file('example.xlsx', fileData);
 
-        // Генерируем ZIP-архив и сохраняем его как файл
-        zip.generateAsync({ type: 'blob' }).then(blob => saveAs(blob, 'archive.zip'));
-        */
+        // const zip = new JSZip();
+        // const workbookBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        // const fileData = new Blob([workbookBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+        // zip.file('example.xlsx', fileData);
+
+        // // Генерируем ZIP-архив и сохраняем его как файл
+        // zip.generateAsync({ type: 'blob' }).then(blob => saveAs(blob, 'archive.zip'));
+        
     }
 
 }

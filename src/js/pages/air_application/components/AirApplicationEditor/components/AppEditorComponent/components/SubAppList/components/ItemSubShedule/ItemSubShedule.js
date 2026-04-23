@@ -31,6 +31,13 @@ import { set_application_data_to_store } from './../../../../../../vendors/set_a
 
 import { get_application_list_for_period_from_server } from './../../../../../../vendors/get_application_list_for_period_from_server.js';
 
+
+
+import { set_current_application_data_from_server } from './../../../../../../vendors/set_current_application_data_from_server.js';
+
+
+
+
 const ItemSubSheduleComponent = ( props ) => {
 
     let {
@@ -60,11 +67,27 @@ const ItemSubSheduleComponent = ( props ) => {
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+
+    let [ isFinishUpdate, setIsFinishUpdate ] = useState( false );
+
+    useEffect( () => {
+        if( isOpen === false && isFinishUpdate === true ){
+            set_current_application_data_from_server( () => {} );
+            setIsFinishUpdate( false );
+        };
+
+    }, [ isOpen, isFinishUpdate ] );
+
+
+
+
     
 
     const click = () => {
 
         // setSpinnerIsActive( true );
+
+        
 
         setCurrentSubAppId( id );
         setReleaseDuration( duration_sec );
@@ -92,6 +115,7 @@ const ItemSubSheduleComponent = ( props ) => {
                 };
 
                 setIsOpen( true );
+                setIsFinishUpdate( true );
             }
         });
 

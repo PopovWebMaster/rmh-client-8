@@ -22,6 +22,8 @@ import { RowMatrixFooterClass } from './vendors/RowMatrixFooterClass.js';
 import { TableFooterClass } from './vendors/TableFooterClass.js';
 
 import { get_array_of_colum_width } from './vendors/get_array_of_colum_width.js';
+
+import store from './../../redux/store.js';
  
 
 export class ExcelMediaPlanTypeVisitkaClass {
@@ -197,6 +199,10 @@ export class ExcelMediaPlanTypeVisitkaClass {
 
     Download(){
         // this.CreateExcelRows();
+
+        let { currentSubApplication } = store.getState();
+        let { releaseName } = currentSubApplication;
+
         const wb = XLSX.utils.book_new();
         
         // const ws = XLSX.utils.aoa_to_sheet( this.excelRows );
@@ -212,7 +218,9 @@ export class ExcelMediaPlanTypeVisitkaClass {
        
 
         
-        XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
+        // XLSX.writeFile(wb, `Медиа план ${this.customer} ${this.Period.from.dateFull} - ${this.Period.to.dateFull}.xlsx`);
+        XLSX.writeFile(wb, `Медиа план ${releaseName}.xlsx`);
+        
     }
 
 

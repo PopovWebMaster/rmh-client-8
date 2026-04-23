@@ -1,23 +1,22 @@
 
 import { RowClass } from './RowClass.js';
 
-export class RowCustomerClass extends RowClass {
-
-    constructor( rowNumber, customer ){
+export class RowDescriptionClass extends RowClass {
+     constructor( rowNumber, val ){
         super( rowNumber );
 
-        this.customer = customer;
+        this.val = val;
+        
 
         this.Create = this.Create.bind(this);
 
         this.Create();
 
-
     }
 
     Create(){
-        let row = [
-            { v: "ЗАЗАКАЗЧИК:", t: "s", 
+         let row = [
+            { v: "Описание:", t: "s", 
                 s: { 
                     font: { 
                         name: "Calibri", 
@@ -27,19 +26,22 @@ export class RowCustomerClass extends RowClass {
                     },
                     alignment: {
                         horizontal: 'right',
-                    } 
+                    },
+                    
                 } 
             },
-                { v: this.customer, t: "s", 
+                { v: this.val, t: "s", 
                 s: { 
                     font: { 
                         name: "Calibri", 
-                        sz: 11,
+                        sz: 10,
                         italic: false,
                         bold: false,
+                        // color: { rgb: "FF0000" }
                     },
                     alignment: {
                         horizontal: 'left',
+                        wrapText: true,
                     } 
                 } 
             },
@@ -47,6 +49,11 @@ export class RowCustomerClass extends RowClass {
 
         this.AddRow( row );
         this.AddRange( `B${this.rowNumber}:E${this.rowNumber}` );
+        if( this.val !== '' ){
+            this.AddRowHeight( 20 );
+        };
+        
+
 
 
     }

@@ -9,7 +9,8 @@ import { setSpinnerIsActive }               from './../../../../../../redux/spin
 
 import { send_request_to_server } from './../../../../../../helpers/send_request_to_server.js';
 
-import { set_application_data_to_store } from './../../vendors/set_application_data_to_store.js'
+// import { set_application_data_to_store } from './../../vendors/set_application_data_to_store.js';
+import { set_current_application_data_from_server } from './../../vendors/set_current_application_data_from_server.js';
 
 const GetCurrentApplicationDataFromServerComponent = ( props ) => {
 
@@ -28,27 +29,31 @@ const GetCurrentApplicationDataFromServerComponent = ( props ) => {
     useEffect( () => {
 
         setIsReady( false );
-        setSpinnerIsActive( true );
 
-        send_request_to_server({
-            route: `get-application-data`,
-            data: { 
-                applicationId: currentApplicationId,
-            },
+        set_current_application_data_from_server( () => {
+            setIsReady( true );
+        } );
+        // setSpinnerIsActive( true );
 
-            successCallback: ( response ) => {
-                console.dir( 'response' );
-                console.dir( response );
+        // send_request_to_server({
+        //     route: `get-application-data`,
+        //     data: { 
+        //         applicationId: currentApplicationId,
+        //     },
 
-                if( response.ok ){
-                    set_application_data_to_store( response.application );
-                    setSpinnerIsActive( false );
-                    setIsReady( true );
-                    // setCurrentAppIsChanged( false );
-                };
+        //     successCallback: ( response ) => {
+        //         console.dir( 'response' );
+        //         console.dir( response );
 
-            },
-        });
+        //         if( response.ok ){
+        //             set_application_data_to_store( response.application );
+        //             setSpinnerIsActive( false );
+        //             setIsReady( true );
+        //             // setCurrentAppIsChanged( false );
+        //         };
+
+        //     },
+        // });
 
        
     }, [ currentApplicationId ] );

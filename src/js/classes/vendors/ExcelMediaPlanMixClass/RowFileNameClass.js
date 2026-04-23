@@ -1,9 +1,11 @@
 
 import { RowClass } from './RowClass.js';
 
-export class RowAdvertisingTypeClass extends RowClass {
-    constructor( rowNumber ){
+export class RowFileNameClass extends RowClass {
+    constructor( rowNumber, fileName = '' ){
         super( rowNumber );
+
+        this.fileName = fileName;
 
         this.Create = this.Create.bind(this);
 
@@ -16,7 +18,7 @@ export class RowAdvertisingTypeClass extends RowClass {
         let row = [
             {},
             {},
-            { v: "вид рекламы", t: "s", 
+            { v: "имя файла:", t: "s", 
                 s: { 
                     font: { 
                         name: "Arial", 
@@ -30,13 +32,13 @@ export class RowAdvertisingTypeClass extends RowClass {
                 } 
             },
             { 
-                v: 'видеоролик', t: "s", 
+                v: this.fileName, t: "s", 
                 s: { 
                     font: { 
                         name: "Arial", 
                         sz: 12,
                         italic: false,
-                        bold: false,
+                        bold: true,
                     },
                     alignment: {
                         horizontal: 'left',
@@ -45,7 +47,7 @@ export class RowAdvertisingTypeClass extends RowClass {
             },
             {},{},{},{},{},{},{},{},{},{},{},{},{},{},
             { 
-                // v: '', t: "s", 
+                // v: 'МЕДИАПЛАН    ВЫХОДОВ', t: "s", 
                 // s: { 
                 //     font: { 
                 //         name: "Arial", 
@@ -62,8 +64,9 @@ export class RowAdvertisingTypeClass extends RowClass {
 
         this.AddRow( row );
         
-        this.AddRange( `D${this.rowNumber}:R${this.rowNumber}` );
-        this.AddRange( `S${this.rowNumber}:AO${this.rowNumber}` );
+        // this.AddRange( `D${this.rowNumber}:R${this.rowNumber}` );
+        // this.AddRange( `S${this.rowNumber}:AO${this.rowNumber}` );
+        this.AddRange( `D${this.rowNumber}:AO${this.rowNumber}` );
 
 
         // XLSX.utils.decode_range("D10:R10"),XLSX.utils.decode_range("S10:AO10"),

@@ -13,13 +13,16 @@ import { selectorData as companySlice } from './../../../../../../../../../../re
 import { 
     selectorData as currentSubApplicationSlise,
     setCurrentSubAppId,
-    // setReleaseDuration,
-    // setReleaseName,
+    setReleaseDuration,
+    setReleaseName,
     setPeriodFrom,
     setPeriodTo,
     // setModeMix,
     // setModeShort
 } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+
+
+import { set_current_application_data_from_server } from './../../../../../../vendors/set_current_application_data_from_server.js';
 
 
 
@@ -42,6 +45,7 @@ import { PasportColontitul } from './components/PasportColontitul/PasportColonti
 import { PasportExecutor } from './components/PasportExecutor/PasportExecutor.js';
 import { PasportPrice } from './components/PasportPrice/PasportPrice.js';
 import { PasportPricePrime } from './components/PasportPricePrime/PasportPricePrime.js';
+import { PasportZipDownload } from './components/PasportZipDownload/PasportZipDownload.js';
 
  
 import { TabTitle } from './components/TabTitle/TabTitle.js';
@@ -79,11 +83,22 @@ const ItemSubReportInDetailComponent = ( props ) => {
         
         setApplicationList,
         setCurrentSubAppId,
+        setReleaseDuration,
+        setReleaseName,
         setPeriodFrom,
             setPeriodTo,
     } = props;
 
     let [ isOpen, setIsOpen ] = useState( false );
+    let [ isFinishUpdate, setIsFinishUpdate ] = useState( false );
+
+    useEffect( () => {
+        if( isOpen === false && isFinishUpdate === true ){
+            set_current_application_data_from_server( () => {} );
+            setIsFinishUpdate( false );
+        };
+
+    }, [ isOpen, isFinishUpdate ] );
 
     let [ anketaType, setAnketaType ] = useState( 'table' ); // 'table' 'thema' table_vizitka
 
@@ -127,8 +142,12 @@ const ItemSubReportInDetailComponent = ( props ) => {
                     setPasportPricePrime( 36 );
 
                     setCurrentSubAppId( id );
+                    setReleaseDuration( duration_sec );
+                    setReleaseName( name );
                     setPeriodFrom( period_from );
                     setPeriodTo( period_to );
+
+                    setIsFinishUpdate( true );
 
 
                     let new_rel_list = get_release_list_from_app_list({
@@ -139,7 +158,7 @@ const ItemSubReportInDetailComponent = ( props ) => {
 
                     setPasportReleaseList( new_rel_list );
 
-                    // setApplicationList( list );
+                    setApplicationList( list );
 
                     for( let i = 0; i < list.length; i++ ){
                         if( list[ i ].id === application_id ){
@@ -225,6 +244,28 @@ const ItemSubReportInDetailComponent = ( props ) => {
                                 pasportReleaseList =    { pasportReleaseList }
                             />
 
+                            <PasportZipDownload 
+                                anketaType =            { anketaType }
+                                pasportColontitul =     { pasportColontitul }
+                                pasportExecutor =       { pasportExecutor }
+                                pasportPrice =          { pasportPrice }
+                                pasportPricePrime =     { pasportPricePrime }
+                                pasportMediaName =      { pasportMediaName }
+                                pasportAppName =        { pasportAppName }
+                                pasportName =           { pasportName }
+                                pasportFileName =       { pasportFileName }
+                                pasportNotes =          { pasportNotes }
+                                pasportDescription =    { pasportDescription }
+                                period_from =           { period_from }
+                                period_to =             { period_to }
+                                duration_sec =          { duration_sec }
+                                pasportReleaseList =    { pasportReleaseList }
+                            />
+
+
+
+                            
+
                         </div>
 
                         <PasportExecutor
@@ -272,10 +313,10 @@ const ItemSubReportInDetailComponent = ( props ) => {
                             setPasportDescription = { setPasportDescription }
                         />
 
-                        <PasportColontitul
+                        {/* <PasportColontitul
                             pasportColontitul = { pasportColontitul }
                             setPasportColontitul = { setPasportColontitul }
-                        />
+                        /> */}
 
                         <SelectAnketaType 
                             anketaType =    { anketaType }
@@ -348,6 +389,8 @@ export function ItemSubReportInDetail( props ){
 
             setApplicationList = { ( val ) => { dispatch( setApplicationList( val ) ) } }
             setCurrentSubAppId = { ( val ) => { dispatch( setCurrentSubAppId( val ) ) } }
+            setReleaseDuration = { ( val ) => { dispatch( setReleaseDuration( val ) ) } }
+            setReleaseName = { ( val ) => { dispatch( setReleaseName( val ) ) } }
             setPeriodFrom = { ( val ) => { dispatch( setPeriodFrom( val ) ) } }
             setPeriodTo = { ( val ) => { dispatch( setPeriodTo( val ) ) } }
 

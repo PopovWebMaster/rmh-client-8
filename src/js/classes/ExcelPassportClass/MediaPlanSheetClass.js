@@ -93,15 +93,14 @@ export class MediaPlanSheetClass extends PassportSheetClass {
 
             let ExcelMediaPlanMix = new ExcelMediaPlanMixClass();
 
-            ExcelMediaPlanMix.SetModeMixStatus( false );
-            ExcelMediaPlanMix.SetTableHeader( this.colontitul );
+            ExcelMediaPlanMix.SetParams({
+                executor:   this.executor,
+                customer:   this.orderName,
+                price:      this.price,
+                pricePrime: this.pricePrime,
+                mediaName:  this.mediaName,
+            });
 
-            ExcelMediaPlanMix.SetExecutor( this.executor );
-            ExcelMediaPlanMix.SetCustomer( this.orderName );
-            ExcelMediaPlanMix.SetPrice( this.price );
-            ExcelMediaPlanMix.SetPricePrime( this.pricePrime );
-
-            ExcelMediaPlanMix.SetMediaName( this.mediaName );
             ExcelMediaPlanMix.SetSubAppList( used_sub_app_id );
             ExcelMediaPlanMix.SetMatrix( matrix );
 

@@ -114,94 +114,9 @@ export class ExcelPassportClass {
         this.mediaName = mediaName;
     }
 
+    GetSheets(){
 
-    // AddRow( Row ){
-    //     this.excelRangeValues = [ ...this.excelRangeValues, ...Row.GetRange() ];
-    //     this.excelRows = [ ...this.excelRows, ...Row.GetRows() ];
-    //     this.nextRowNumber = Row.GetNextRowNumber();
-    //     this.excelRowHeights.push( Row.GetRowHeight() );
-    // }
-
-    // GetRangeArray(){
-    //     let result = [];
-    //     for( let i = 0; i < this.excelRangeValues.length; i++ ){
-    //         result.push( XLSX.utils.decode_range( this.excelRangeValues[ i ] ) );
-    //     }
-    //     return result;
-    // }
-
-    // CreateTitelRows(){
-
-    //     // this.nextRowNumber = 2
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         isEmpty: true
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Заказ' },
-    //         cell_C: { value: this.orderName },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Название выпуска' },
-    //         cell_C: { value: this.releaseName },
-    //     } ) );
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Имя файла' },
-    //         cell_C: { value: this.fileName },
-    //     } ) );
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Период' },
-    //         cell_C: { value: get_period_value( this.period_from, this.period_to ) },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Хрон.' },
-    //         cell_C: { value: convert_sec_to_time_for_Excel( this.duration_sec ) },
-    //     } ) );
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Хрон. (сек)' },
-    //         cell_C: { value: this.duration_sec },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Всего выпусков' },
-    //         cell_C: { value: this.release_list.length },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Хрон. общий' },
-    //         cell_C: { value: convert_sec_to_time_for_Excel( this.duration_sec * this.release_list.length ) },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Хрон. общий (сек)' },
-    //         cell_C: { value: this.duration_sec * this.release_list.length },
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Доп. инфо.' },
-    //         cell_C: { value: this.notes },
-    //         // rowHeight: 60,
-    //     } ) );
-
-    //     this.AddRow( new RowTitleClass( this.nextRowNumber, {
-    //         cell_B: { value: 'Описание' },
-    //         cell_C: { value: this.description },
-    //         // rowHeight: 60,
-    //     } ) );
-
-
-        
-
-    // }
-
-    Download(){
-
-        console.dir( this );
-
-        const wb = XLSX.utils.book_new();
+        let result = [];
 
         let TitleSheet = new TitleSheetClass();
         TitleSheet.SetParams({
@@ -215,7 +130,11 @@ export class ExcelPassportClass {
             notes:          this.notes,
             description:    this.description,
         });
-        let WS_title = TitleSheet.GetSheet();
+        // let WS_title = TitleSheet.GetSheet();
+        result.push({
+            name: 'Пасспорт ролика',
+            WS: TitleSheet.GetSheet(),
+        });
 
         let MediaPlanSheet = new MediaPlanSheetClass();
         MediaPlanSheet.SetParams({
@@ -232,8 +151,11 @@ export class ExcelPassportClass {
             period_to: this.period_to,
             duration_sec: this.duration_sec,
         })
-
-        let WS_mediaPlan = MediaPlanSheet.GetSheet();
+        // let WS_mediaPlan = MediaPlanSheet.GetSheet();
+        result.push({
+            name: 'Медиа план',
+            WS: MediaPlanSheet.GetSheet(),
+        });
 
         let ReportTableSheet = new ReportTableSheetClass();
         ReportTableSheet.SetParams({
@@ -241,13 +163,80 @@ export class ExcelPassportClass {
             duration_sec: this.duration_sec,
         });
 
-       let WS_repotrTable = ReportTableSheet.GetSheet();
+    //    let WS_repotrTable = ReportTableSheet.GetSheet();
+       result.push({
+            name: 'Отчёт. Таблица',
+            WS: ReportTableSheet.GetSheet(),
+        });
 
-        XLSX.utils.book_append_sheet(wb, WS_title, "Пасспорт ролика");
-        XLSX.utils.book_append_sheet(wb, WS_mediaPlan, "Медиа план");
-        XLSX.utils.book_append_sheet(wb, WS_repotrTable, "Таблица");
 
-        XLSX.writeFile( wb, `Passport test.xlsx`);
+       
+        // XLSX.utils.book_append_sheet(wb, WS_title, "Пасспорт ролика");
+        // XLSX.utils.book_append_sheet(wb, WS_mediaPlan, "Медиа план");
+        // XLSX.utils.book_append_sheet(wb, WS_repotrTable, "Таблица");
+
+       return result;
+
+    }
+
+
+
+    Download(){
+
+        // console.dir( this );
+
+        const wb = XLSX.utils.book_new();
+
+    //     let TitleSheet = new TitleSheetClass();
+    //     TitleSheet.SetParams({
+    //         orderName:      this.orderName,
+    //         releaseName:    this.releaseName,
+    //         fileName:       this.fileName,
+    //         period_from:    this.period_from,
+    //         period_to:      this.period_to,
+    //         duration_sec:   this.duration_sec,
+    //         release_list:   this.release_list,
+    //         notes:          this.notes,
+    //         description:    this.description,
+    //     });
+    //     let WS_title = TitleSheet.GetSheet();
+
+    //     let MediaPlanSheet = new MediaPlanSheetClass();
+    //     MediaPlanSheet.SetParams({
+    //         anketaType: this.anketaType,
+    //         colontitul: this.colontitul,
+    //         executor: this.executor,
+    //         price: this.price,
+    //         pricePrime: this.pricePrime,
+    //         mediaName: this.mediaName,
+    //         orderName: this.orderName,
+    //         releaseName: this.releaseName,
+    //         fileName: this.fileName,
+    //         period_from: this.period_from,
+    //         period_to: this.period_to,
+    //         duration_sec: this.duration_sec,
+    //     })
+
+    //     let WS_mediaPlan = MediaPlanSheet.GetSheet();
+
+    //     let ReportTableSheet = new ReportTableSheetClass();
+    //     ReportTableSheet.SetParams({
+    //         fileName: this.fileName,
+    //         duration_sec: this.duration_sec,
+    //     });
+
+    //    let WS_repotrTable = ReportTableSheet.GetSheet();
+
+        let sheets = this.GetSheets();
+        for( let i = 0; i < sheets.length; i++ ){
+            XLSX.utils.book_append_sheet(wb, sheets[ i ].WS, sheets[ i ].name );
+        };
+
+        // XLSX.utils.book_append_sheet(wb, WS_title, "Пасспорт ролика");
+        // XLSX.utils.book_append_sheet(wb, WS_mediaPlan, "Медиа план");
+        // XLSX.utils.book_append_sheet(wb, WS_repotrTable, "Таблица");
+
+        XLSX.writeFile( wb, `Passport ${this.releaseName}.xlsx`);
 
 
     }

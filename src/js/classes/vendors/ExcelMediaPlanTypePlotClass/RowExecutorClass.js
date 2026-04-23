@@ -45,6 +45,7 @@ export class RowExecutorClass extends RowClass {
         ];
 
         this.AddRow( row );
+        this.AddRange( `B${this.rowNumber}:E${this.rowNumber}` );
 
     }
 }

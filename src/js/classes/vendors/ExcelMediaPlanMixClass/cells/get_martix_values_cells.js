@@ -5,6 +5,7 @@ import { BORDER_COLOR_STYLE } from './../excel_config.js';
 export const get_martix_values_cells = ( params ) => {
     let {
         values,
+        cellDurationLink,
     } = params;
 
     let result = [];
@@ -43,55 +44,33 @@ export const get_martix_values_cells = ( params ) => {
             // });
             result.push({});
         }else{
-            result.push({
+            let cell = {
                 v: value, 
                 // t: "s", 
                 t: "n", 
-
                 s: { 
                     font: { 
                         name: "Arial Cyr", 
                         sz: 12,
                         italic: false,
                         bold: true,
-                        
                     },
                     alignment: {
                         horizontal: 'center',
                         vertical: 'bottom',
                     },
-                    // border: {
-                    //     right: { style: 'thin', color: BORDER_COLOR_STYLE },
-                    //     bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
-                    // },
                     numFmt: 0,
                 },
                 z: '0' 
-            });
+            };
+            if( cellDurationLink !== null ){
+                // cellDuration.v = ''; 
+                // cellDuration.t = 'n'; 
+                cell.f = cellDurationLink; 
+            }
+            result.push( cell );
         };
 
-        // result.push({
-        //     v: value, 
-        //     t: "s", 
-        //     s: { 
-        //         font: { 
-        //             name: "Arial Cyr", 
-        //             sz: 12,
-        //             italic: false,
-        //             bold: true,
-                    
-        //         },
-        //         alignment: {
-        //             horizontal: 'center',
-        //             vertical: 'bottom',
-        //         },
-        //         border: {
-        //             right: { style: 'thin', color: BORDER_COLOR_STYLE },
-        //             bottom: { style: 'thin', color: BORDER_COLOR_STYLE },
-        //         },
-        //         numFmt: '0',
-        //     }   
-        // });
 
     };
 

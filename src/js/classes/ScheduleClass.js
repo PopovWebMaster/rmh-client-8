@@ -102,7 +102,7 @@ export class ScheduleClass extends ScheduleMethodsClass {
 
         this.SetDayListToStore();
 
-        console.dir( this );
+        // console.dir( this );
         
 
     }
@@ -157,7 +157,13 @@ export class ScheduleClass extends ScheduleMethodsClass {
     GetDataForDownloadExcelFormatTable(){
 
         let { company } = store.getState();
-        let { companyLegalName } = company;
+        let { 
+            companyLegalName,
+            colontitul,
+            executor,
+            price,
+            pricePrime,
+        } = company;
 
         let result = {
             
@@ -165,11 +171,11 @@ export class ScheduleClass extends ScheduleMethodsClass {
             releaseDuration:    this.SubApplication.duration_sec,
             releaseDescription: this.SubApplication.description,
             releaseList:        this.Days.GetReleaseListForServer(),
-            colintitul: 'Приложение 1 к Договору №_01-61/02 от 14.01.2025  на оказание услуг (выполнения работ) в сфере телевещания',
-            executor:   'ГУП ДНР  "РМХ"',
+            colintitul: colontitul,
+            executor,
             customer:   this.Application.name,
-            price: 28,
-            pricePrime: 36,
+            price,
+            pricePrime,
             // mediaName: 'ПЕРВЫЙ РЕСПУБЛИКАНСКИЙ КАНАЛ ДОНЕЦКОЙ НАРОДНОЙ РЕСПУБЛИКИ',
             mediaName: companyLegalName,
             

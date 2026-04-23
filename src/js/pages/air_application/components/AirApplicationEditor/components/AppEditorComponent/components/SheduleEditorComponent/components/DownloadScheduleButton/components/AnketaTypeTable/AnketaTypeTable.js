@@ -96,11 +96,11 @@ const AnketaTypeTableComponent = ( props ) => {
     return (
         <div  className = 'SEC_AnketaTypeTable'>
 
-            <AWTextarea 
+            {/* <AWTextarea 
                 title =     'Колонтитул'
                 value =     { tableHeader }
                 onChange =  { change_tableHeader }
-            />
+            /> */}
 
             <AWInputText 
                 title =     'Исполнитель'

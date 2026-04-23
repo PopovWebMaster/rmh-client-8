@@ -7,6 +7,8 @@ import './MatrixCell.scss';
 
 import { selectorData as scheduleSlise } from './../../../../../../../../../../../redux/scheduleSlise.js';
 import { selectorData as currentSubApplicationSlise } from './../../../../../../../../../../../redux/currentSubApplicationSlise.js';
+import { selectorData as layoutSlice } from './../../../../../../../../../../../redux/layoutSlice.js';
+
 
 import { selectorData as applicationSlice, setEnvIsOpen } from './../../../../../../../../../../../redux/applicationSlice.js';
 // import { ScrollContainer } from './../../../../../../../../../../components/ScrollContainer/ScrollContainer.js';
@@ -44,6 +46,8 @@ const MatrixCellComponent = ( props ) => {
         setEnvIsOpen,
         modeShort,
         gridEventTable,
+
+        gridDayEventsListById,
         
     } = props;
 
@@ -168,10 +172,26 @@ const MatrixCellComponent = ( props ) => {
         };
     }
 
+    const getIsBlindClassName = ( gridEventid ) => {
+        let result = ''
+        if( typeof gridEventid !== 'number' ){
+            result = 'SB_TTD_isBlind';
+        }else{
+            if( gridDayEventsListById[ gridEventid ] ){
+
+            }else{
+                result = 'SB_TTD_isBlind';
+            };
+        };
+
+        return result
+
+    }
+
 
     return (
         <div 
-            className = { `SB_TTD_MatrixCell ${modeShort? 'SB_TTD_modeShort': ''} ${col_class_name} ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' }` }
+            className = { `SB_TTD_MatrixCell ${modeShort? 'SB_TTD_modeShort': ''} ${col_class_name} ${ isFilled? 'filled': ''} ${ isReserved? 'reserved': '' } ${getIsBlindClassName(grid_event_id)}` }
             onClick = { click }
             onMouseOver = { mouse_over }
             onMouseLeave = { mouse_leave }
@@ -217,6 +237,11 @@ export function MatrixCell( props ){
 
     const schedule = useSelector( scheduleSlise );
     const currentSubApplication = useSelector( currentSubApplicationSlise );
+    const layout = useSelector( layoutSlice );
+
+
+
+    
 
 
     
@@ -231,6 +256,9 @@ export function MatrixCell( props ){
             gridEventTable =    { schedule.gridEventTable }
 
             modeShort = { currentSubApplication.modeShort }
+
+            gridDayEventsListById = { layout.gridDayEventsListById }
+
 
 
             setEnvIsOpen = { ( val ) => { dispatch( setEnvIsOpen( val ) ) } }

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import './TableTypeDetaile.scss';
 
 import { selectorData as currentSubApplicationSlise } from './../../../../../../../../../../redux/currentSubApplicationSlise.js';
+import { selectorData as layoutSlice } from './../../../../../../../../../../redux/layoutSlice.js';
 
 import { selectorData as scheduleSlise } from './../../../../../../../../../../redux/scheduleSlise.js';
 
@@ -30,11 +31,15 @@ const TableTypeDetaileComponent = ( props ) => {
         dayList,
         modeShort,
 
+        gridDayEventsListById,
+
     } = props;
 
     const createCells = ( row, day_list, mode_short ) => {
 
         let div = row.map( ( cell, index ) => {
+
+            // console.dir( cell );
 
 
             if( day_list[ index ] ){
@@ -66,27 +71,45 @@ const TableTypeDetaileComponent = ( props ) => {
                         reserved_name = null,
                     } = cell[ secStr ];
 
-                    // console.dir( cell[ secStr ] );
+                    // console.dir( grid_event_id );
 
-                    return (
-                        <MatrixCell
-                            key =           { index_2 }
+                    let isRemovedGridEvent = false;
 
-                            fill_count =    { fill_count }
-                            grid_event_id = { grid_event_id }
-                            sec =           { sec }
-                            time =          { time }
-                            title =         { title }
-                            is_reserved =   { is_reserved }
-                            reserved_name = { reserved_name }
+                    if( typeof grid_event_id === 'number' ){
+                        if( gridDayEventsListById[ grid_event_id ] ){
+
+                        }else{
+                            if( fill_count === 0 ){
+                                isRemovedGridEvent = true
+                            };
+                        };
+                    };
+
+                    if( isRemovedGridEvent ){
+                        return '';
+                    }else{
+                        return (
+                            <MatrixCell
+                                key =           { index_2 }
+
+                                fill_count =    { fill_count }
+                                grid_event_id = { grid_event_id }
+                                sec =           { sec }
+                                time =          { time }
+                                title =         { title }
+                                is_reserved =   { is_reserved }
+                                reserved_name = { reserved_name }
 
 
-                            YYYY_MM_DD =    { YYYY_MM_DD }
-                            Schedule =      { Schedule }
-                            col_class_name = { col_class_name }
+                                YYYY_MM_DD =    { YYYY_MM_DD }
+                                Schedule =      { Schedule }
+                                col_class_name = { col_class_name }
 
-                        />
-                    );
+                            />
+                        );  
+                    }
+
+                    
 
                 } );
                 return div_cell;
@@ -117,8 +140,8 @@ const TableTypeDetaileComponent = ( props ) => {
             if( pointsGroup[ index ] ){
 
             }else{
-                console.dir( 'pointsGroup[ index ] <<<<<<<<<<<<<<<<<<<<<<<' );
-                console.dir( day_list[ index ] );
+                // console.dir( 'pointsGroup[ index ] <<<<<<<<<<<<<<<<<<<<<<<' );
+                // console.dir( day_list[ index ] );
                 return '';
             };
 
@@ -181,7 +204,7 @@ export function TableTypeDetaile( props ){
     const schedule = useSelector( scheduleSlise );
     const currentSubApplication = useSelector( currentSubApplicationSlise );
 
-
+    const layout = useSelector( layoutSlice );
     
     // const dispatch = useDispatch();
 
@@ -194,6 +217,7 @@ export function TableTypeDetaile( props ){
             dayList = { schedule.dayList }
 
             modeShort = { currentSubApplication.modeShort }
+            gridDayEventsListById = { layout.gridDayEventsListById }
 
 
 

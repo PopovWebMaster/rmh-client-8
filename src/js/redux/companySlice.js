@@ -16,7 +16,11 @@ export const companySlice = createSlice({
         companyProgramSystem: null,
         companyLegalName: '',
 
-
+        colontitul: 'Приложение 1 к Договору №_01-61/02 от 14.01.2025  на оказание услуг (выполнения работ) в сфере телевещания',
+        executor:   'ГУП ДНР  "РМХ"',
+        price: 28,
+        pricePrime: 36,
+        footerText: '* ГУП ДНР "РМХ" оставляет за собой право, в случае невозможности размещения рекламной продукции заказчика в указаннное время (форс-мажорные обстоятельства), предоставить клиенту эквивалентные по обьему и срокам позиции.',
 
         companyList: [],
 
@@ -77,13 +81,15 @@ export const selectorData = ( state ) => {
 
         currentCompanyType:         state.company.currentCompanyType,
         companyProgramSystem:       state.company.companyProgramSystem,
-        companyLegalName:       state.company.companyLegalName,
+        companyLegalName:           state.company.companyLegalName,
+
+        colontitul:                 state.company.colontitul,
+        executor:                   state.company.executor,
+        price:                      state.company.price,
+        pricePrime:                 state.company.pricePrime,
+        footerText:                 state.company.footerText,
 
 
-
-        
-
-        
         
         
 

@@ -10,6 +10,8 @@ import { get_duration_value } from './get_duration_value.js';
 
 import { convert_sec_to_time_for_Excel } from './../../helpers/convert_sec_to_time_for_Excel.js';
 
+import store from './../../redux/store.js';
+
 export class TitleSheetClass extends PassportSheetClass {
     constructor(){
         super();
@@ -29,13 +31,6 @@ export class TitleSheetClass extends PassportSheetClass {
         this.CreateTitelRows = this.CreateTitelRows.bind(this);
 
         
-
-
-
-        
-
-
-
     }
 
     SetParams( params ){
@@ -65,10 +60,17 @@ export class TitleSheetClass extends PassportSheetClass {
 
     CreateTitelRows(){
     
-        // this.nextRowNumber = 2
+        let { company } = store.getState();
+        let { companyLegalName } = company;
 
         this.AddRow( new RowTitleClass( this.nextRowNumber, {
             isEmpty: true
+        } ) );
+
+
+        this.AddRow( new RowTitleClass( this.nextRowNumber, {
+            cell_B: { value: ' ' },
+            cell_C: { value: companyLegalName, fontBold: true },
         } ) );
 
         this.AddRow( new RowTitleClass( this.nextRowNumber, {
@@ -78,7 +80,7 @@ export class TitleSheetClass extends PassportSheetClass {
 
         this.AddRow( new RowTitleClass( this.nextRowNumber, {
             cell_B: { value: 'Название выпуска' },
-            cell_C: { value: this.releaseName },
+            cell_C: { value: this.releaseName, fontBold: true  },
         } ) );
         this.AddRow( new RowTitleClass( this.nextRowNumber, {
             cell_B: { value: 'Имя файла' },
