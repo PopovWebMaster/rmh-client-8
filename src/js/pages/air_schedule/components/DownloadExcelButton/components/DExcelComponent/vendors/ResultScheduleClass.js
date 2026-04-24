@@ -4,6 +4,8 @@ import * as XLSX from 'xlsx-js-style';
 
 import { get_first_excel_row } from './get_first_excel_row.js';
 
+import { FILL_BG_COLOR_GRAY } from './excel_config.js';
+
 import store from './../../../../../../../redux/store.js';
 import { convert_sec_to_time } from './../../../../../../../helpers/convert_sec_to_time.js';
 
@@ -157,29 +159,24 @@ export class ResultScheduleClass {
                 finalNotes = `ПРЕМЬЕРА! ${finalNotes}`
             };
 
-            
+            let BGColor = localStorage.getItem( `cell_color_event_id_${eventId}` );
+            let fgColor = '';
+            if( `${BGColor}` === 'null' ){
+                fgColor = FILL_BG_COLOR_GRAY;
+            }else{
+                fgColor = BGColor;
+            };
 
 
             let cell_A = get_cell_A( startTime, isKeyPoint, isLastBlockRow );
             let cell_B = get_cell_B( durationTime, isLastBlockRow );
             let cell_C = get_cell_C( eventId, isLastBlockRow );
-            // let cell_D = {};
-            // let eventData = get_event_by_id( eventId );
-
-            // let release_index = 1; 
-            // if( eventData !== null ){
-            //     if( eventData.type === EVENT_TYPE.BLOCK ){
-            //         release_index = 0;
-            //         cell_D = get_cell_D( false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
-            //     }else{
-            //         cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
-            //     };
-            // }else{
-            //     cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
-            // };
-
-
             let cell_D = get_cell_D( releases[ 0 ]? releases[ 0 ]: false, finalNotes, releases[ 1 ]? false: true, this.hilightFiles );
+
+            cell_A.s.fill.fgColor.rgb = fgColor;
+            cell_B.s.fill.fgColor.rgb = fgColor;
+            cell_C.s.fill.fgColor.rgb = fgColor;
+            cell_D.s.fill.fgColor.rgb = fgColor;
 
             this.rows.push( [ cell_A, cell_B, cell_C, cell_D ] );
 
@@ -203,6 +200,16 @@ export class ResultScheduleClass {
                     cell_C_ = get_cell_C( null, true );
                     cell_D_ = get_cell_D( releases[ rel_index ], finalNotes,/*releases[ rel_index ].air_notes*/ true, this.hilightFiles );
                 };
+
+                // console.dir( 'cell_A_' );
+                // console.dir( cell_A_ );
+
+                cell_A_.s.fill.fgColor.rgb = fgColor;
+                cell_B_.s.fill.fgColor.rgb = fgColor;
+                cell_C_.s.fill.fgColor.rgb = fgColor;
+                cell_D_.s.fill.fgColor.rgb = fgColor;
+
+
                 this.rows.push( [ cell_A_, cell_B_, cell_C_, cell_D_ ] );
             };
 

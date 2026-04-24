@@ -54,18 +54,44 @@ const SetCurrentEventDataComponent = ( props ) => {
 
         for( let i = 0; i < list.length; i++ ){
             if( list[ i ].id === currentEventIdOfListFilter ){
-                result = currentEventIdOfListFilter;
                 isset = true;
                 break;
             };
         };
 
         if( isset ){
-
+            result = currentEventIdOfListFilter;
         }else{
-            if( list.length > 0 ){
-                result = list[ 0 ].id;
+            let lastEventId = localStorage.getItem( 'last_app_filter_event_id' );
+
+            // console.log( 'lastEventId', lastEventId );
+
+            if( `${lastEventId}` === 'null' ){
+                if( list[ 0 ] ){
+                    result = list[ 0 ].id;
+                };
+            }else{
+                let isset_last = false;
+                for( let i = 0; i < list.length; i++ ){
+                    if( `${list[ i ].id}` === `${lastEventId}` ){
+                        isset_last = true;
+                        break;
+                    };
+                };
+
+                if( isset_last ){
+                    result = Number( lastEventId );
+                }else{
+                    if( list[ 0 ] ){
+                        result = list[ 0 ].id;
+                        localStorage.setItem('last_app_filter_event_id', result );
+                    }else{
+                        // localStorage.setItem('last_app_filter_event_id', null );
+                    };
+                };
+
             };
+
         };
 
         return result;

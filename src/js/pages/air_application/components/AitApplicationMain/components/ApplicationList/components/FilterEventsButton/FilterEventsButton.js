@@ -9,6 +9,8 @@ import './FilterEventsButton.scss';
 import { selectorData as applicationSlice, setCurrentEventIdOfListFilter } from './../../../../../../../../redux/applicationSlice.js';
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
+import { set_current_event_id } from './../../../../../../vendors/set_current_event_id.js';
+
 
 const FilterEventsButtonComponent = ( props ) => {
 
@@ -16,7 +18,7 @@ const FilterEventsButtonComponent = ( props ) => {
         filterEventList,
         currentEventIdOfListFilter,
 
-        setCurrentEventIdOfListFilter,
+        // setCurrentEventIdOfListFilter,
 
 
     } = props;
@@ -35,7 +37,7 @@ const FilterEventsButtonComponent = ( props ) => {
                     style = { style }
                     key = { index }
 
-                    onClick = { () => { setCurrentEventIdOfListFilter( id ) } }
+                    onClick = { () => { set_current_event_id( id ) } }
                 >
                     <span>{ name }</span>
                 </div>

@@ -68,7 +68,7 @@ const FilterItemComponent = ( props ) => {
     }
 
 
-
+// { isUsed && exportType === 'schedule'? excelVewType === 'oplot'? ( 
     return (
         <div className = { `S_DExcelComponent_FilterItem ${ isUsed? 'isUsed': '' }` }>
             <div
@@ -87,13 +87,20 @@ const FilterItemComponent = ( props ) => {
             </div>
 
 
-            { isUsed && exportType === 'schedule'? excelVewType === 'oplot'? (
+            { isUsed && exportType === 'schedule'? excelVewType === 'oplot'? ( 
                 <ColorCellButtons
                     eventId = { eventId }
                     cellColor = { cellColor }
                     change_cell_color = { change_cell_color }
                 />
-            ): (
+            ): (<>
+            
+                <ColorCellButtons
+                    eventId = { eventId }
+                    cellColor = { cellColor }
+                    change_cell_color = { change_cell_color }
+                />
+
                 <div className = 'whatTake'>
                     <span
                         className = { `${withOnlyApplications? 'isActive': '' }` }
@@ -106,8 +113,7 @@ const FilterItemComponent = ( props ) => {
                     >всё</span>
 
                 </div>
-
-            ): isUsed && exportType === 'TV_program'? (
+            </>): isUsed && exportType === 'TV_program'? (
                 <div className = 'whatTake'>
 
                     

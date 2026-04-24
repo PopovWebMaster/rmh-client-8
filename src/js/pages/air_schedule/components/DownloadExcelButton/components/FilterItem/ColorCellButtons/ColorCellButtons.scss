@@ -1,5 +1,5 @@
 .S_ColorCellButtons{
-    font-size: 1em;
+    font-size: 0.9em;
     flex-grow: 1;
     max-width: 100%;
     display: flex;
@@ -9,9 +9,9 @@
 
 
     .SCCB_current{
-        font-size: 1em;
-        height: 1em;
-        width: 1.6em;
+        font-size: 0.9em;
+        height: 0.9em;
+        width: 1.4em;
         margin: 0 0.5em 0 0.2em;
         border-radius: 0.1em;
         border: 1px solid #c4c4c4;
@@ -23,18 +23,19 @@
         }
 
     .S_ColorCellButtons_wrap{
-        font-size: 1em;
-        width: 8em;
+        font-size: 0.9em;
+        width: 8.2em;
         height: 1.2em;
         background-color: rgb(255, 255, 255);
         border: 1px solid #d2d2d2;
         border-radius: 0.1em;
+        padding: 0 0.1em;
         
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
 
 
 
@@ -43,7 +44,9 @@
             font-size: 0.9em;
             height: 0.7em;
             width: 1.1em;
-            margin-right: 0.2em;
+            // margin-right: 0.2em;
+            margin: 0 0.1em;
+
             border: 1px solid #d2d2d200;
             border-radius: 0.1em;
             cursor: pointer;

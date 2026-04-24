@@ -4,6 +4,12 @@ import { BORDER_COLOR_STYLE, FONT_SIZE, FILL_BG_COLOR_GRAY } from './excel_confi
 
 export const get_cell_A = ( startTime = false, isKeyPoint = false, isLastBlockRow = false ) => {
 
+    // let {
+    //     startTime = false,
+    //     isKeyPoint = false,
+    //     isLastBlockRow = false,
+    // } = params;
+
     let value = '';
 
     let border = {

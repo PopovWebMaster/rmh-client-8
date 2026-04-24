@@ -105,10 +105,6 @@ const FilterControlPanelComponent = ( props ) => {
                 </div>
             ): '': '' }
 
-
-
-
-            
         </div>
         
     )

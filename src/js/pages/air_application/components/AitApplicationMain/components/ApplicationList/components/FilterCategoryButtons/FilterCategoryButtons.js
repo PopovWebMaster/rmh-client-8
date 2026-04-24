@@ -11,6 +11,8 @@ import { selectorData as layoutSlice } from './../../../../../../../../redux/lay
 
 import { get_list_of_all_used_categories } from './vendors/get_list_of_all_used_categories.js';
 
+import { set_current_category_id } from './../../../../../../vendors/set_current_category_id.js';
+
 
 const FilterCategoryButtonsComponent = ( props ) => {
 
@@ -20,42 +22,9 @@ const FilterCategoryButtonsComponent = ( props ) => {
         currentCategoryIdOfListFilter,
         filterCategoryList,
 
-        setCurrentCategoryIdOfListFilter,
+        // setCurrentCategoryIdOfListFilter, 
 
     } = props;
-
-    // let [ list, setList ] = useState( [] );
-
-    useEffect( () => {
-        // let list = get_list_of_all_used_categories( applicationList, categoryListById );
-
-        // setList( list );
-
-        // let id = get_actual_category_id( list );
-        // setCurrentCategoryIdOfListFilter( id );
-
-    }, [ applicationList ] );
-
-    // const get_actual_category_id = ( list ) => {
-    //     let result = null;
-    //     if( currentCategoryIdOfListFilter === null ){
-    //         if( list[ 0 ] ){
-    //             result = list[ 0 ].id;
-    //         };
-    //     }else{
-    //         for( let i = 0; i < list.length; i++ ){
-    //             if( list[ i ].id === currentCategoryIdOfListFilter ){
-    //                 result = currentCategoryIdOfListFilter;
-    //                 break;
-    //             };
-    //         };
-    //         if( list.length > 0 && result === null ){
-    //             result = list[ 0 ].id;
-    //         };
-    //     };
-    //     return result;
-
-    // };
 
     const create = ( arr ) => {
 
@@ -78,7 +47,7 @@ const FilterCategoryButtonsComponent = ( props ) => {
                     }}
                     key = { index }
 
-                    onClick = { () => { setCurrentCategoryIdOfListFilter( id ) } }
+                    onClick = { () => { set_current_category_id( id ) } }
                 >
                     <span>{ name }</span>
                 </div>

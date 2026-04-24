@@ -40,9 +40,32 @@ const SetCurrentCategoryDataComponent = ( props ) => {
 
     const get_actual_category_id = ( list ) => {
         let result = null;
+
+        let lastCategoryId = localStorage.getItem( 'last_app_filter_category_id' );
+
         if( currentCategoryIdOfListFilter === null ){
-            if( list[ 0 ] ){
-                result = list[ 0 ].id;
+            if( `${lastCategoryId}` === 'null' ){
+                if( list[ 0 ] ){
+                    result = list[ 0 ].id;
+                };
+            }else{
+                let isset = false;
+                for( let i = 0; i < list.length; i++ ){
+                    if( `${list[ i ].id}` === `${lastCategoryId}` ){
+                        isset = true;
+                        break;
+                    };
+                };
+                if( isset ){
+                    result = Number( lastCategoryId );
+                }else{
+                    if( list[ 0 ] ){
+                        result = list[ 0 ].id;
+                        localStorage.setItem('last_app_filter_category_id', result );
+                    }else{
+                        // localStorage.setItem('last_app_filter_category_id', null );
+                    };
+                };
             };
         }else{
             for( let i = 0; i < list.length; i++ ){
@@ -52,7 +75,18 @@ const SetCurrentCategoryDataComponent = ( props ) => {
                 };
             };
             if( list.length > 0 && result === null ){
-                result = list[ 0 ].id;
+                let isset = false;
+                for( let i = 0; i < list.length; i++ ){
+                    if( `${list[ i ].id}` === `${lastCategoryId}` ){
+                        isset = true;
+                        break;
+                    };
+                };
+                if( isset ){
+                    result = Number( lastCategoryId );
+                }else{
+                    result = list[ 0 ].id;
+                }; 
             };
         };
         return result;
