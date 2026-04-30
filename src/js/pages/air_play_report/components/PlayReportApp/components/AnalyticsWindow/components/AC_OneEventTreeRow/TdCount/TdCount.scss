@@ -12,7 +12,9 @@
                     border: 1px solid #e5e0e0;
                     width: 4.6em;
                     opacity: 0;
-                    vertical-align: middle;
+                    // vertical-align: middle;
+                    vertical-align: top;
+
 
                     >div{
                         font-size: 1em;
@@ -20,6 +22,7 @@
                         justify-content: flex-start;
                         align-items: center;
                         align-content: center;
+                        margin-top: 0.2em;
 
                         >div{
                             font-size: 1em;

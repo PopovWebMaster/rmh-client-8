@@ -10,7 +10,7 @@
 
                     width: 4.2em;
                     position: relative;
-                    vertical-align: middle;
+                    vertical-align: top;
 
                     >input{
                         font-size: .6em;
@@ -23,6 +23,7 @@
                         outline: none;
                         text-align: center;
                         width: calc( 100% - 2px );
+                        margin-top: 0.6em;
                     }
 
                     >span.procZnak{
@@ -31,7 +32,7 @@
                         position: absolute;
                         width: 1em;
                         // height: 100%;
-                        top: 0.9em;
+                        top: 1.12em;
                         right: 0.5em;
                         font-family: Open Sans Semibold;
 

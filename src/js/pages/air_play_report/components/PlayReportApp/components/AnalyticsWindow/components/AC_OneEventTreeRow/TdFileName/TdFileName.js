@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import { selectorData as layoutSlice } from './../../../../../../../../../redux/
 import './TdFileName.scss';
 
 import { set_evenstTree_changes_to_store } from './../../../vendors/set_evenstTree_changes_to_store.js';
+import { convert_sec_to_time } from './../../../../../../../../../helpers/convert_sec_to_time.js';
 
 const TdFileNameComponent = ( props ) => {
 
@@ -21,11 +22,19 @@ const TdFileNameComponent = ( props ) => {
         event_id,
         fileName,
         count,
+        list,
 
         isUsed,
 
 
     } = props;
+
+    let [ listIsOpen, setListIsOpen ] = useState( false );
+    useEffect(() => {
+        if( isUsed === false ){
+            setListIsOpen( false );
+        }
+    }, [ isUsed ]);
 
     const chack = ( e ) => {
         set_evenstTree_changes_to_store({
@@ -37,6 +46,37 @@ const TdFileNameComponent = ( props ) => {
             }
         });
     };
+
+    const createFileList = ( arr ) => {
+
+        let div = arr.map( ( item, index ) => {
+            let {
+                startTime,
+            } = item;
+
+            return (
+                <div
+                    className = 'fileList_item'
+                    key = { index }
+                >
+                    <span className = 'FLI_time'>{ convert_sec_to_time( startTime ) }</span>
+                    <span className = 'FLI_fileName'>{ fileName }</span>
+
+                    
+                    
+                </div>
+            );
+
+        } );
+
+        return div;
+
+
+
+
+        
+
+    }
 
 
 
@@ -59,6 +99,18 @@ const TdFileNameComponent = ( props ) => {
 
                 />
             </div>
+            { isUsed? (<div className = 'fileList'>
+
+                <div
+                    className = 'allListBtn'
+                    onClick = { () => { setListIsOpen( !listIsOpen ) } }
+                >
+                    <span className = { listIsOpen? 'icon-angle-up': 'icon-angle-down' }></span>
+                </div>
+
+                { listIsOpen? createFileList( list ): '' }
+
+            </div>): '' }
 
         </td>
     )

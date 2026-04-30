@@ -55,6 +55,7 @@ const AC_EventsTreeComponent = ( props ) => {
                             isUsed,
                             startTime,
                             releaseCount,
+                            list,
                         } = tree[ category_id ][ event_id ][ fileName ];
 
                         if( eventsCount[event_id] ){
@@ -76,6 +77,7 @@ const AC_EventsTreeComponent = ( props ) => {
                             startTime,
                             eventCount: 0,
                             releaseCount,
+                            list,
                         });
                     };
                 };
@@ -95,6 +97,8 @@ const AC_EventsTreeComponent = ( props ) => {
                     <AC_OneEventTreeRow 
                         key = { index }
                         list = { list }
+                        eventsList = { list }
+
                     />
                 )
 

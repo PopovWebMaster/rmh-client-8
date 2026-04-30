@@ -20,6 +20,7 @@ const SetApplicationsForThisDayComponent = ( props ) => {
 
     let {
         isOpen,
+        // analitycsIsActive,
         evenstTree,
 
         dateListSelected,

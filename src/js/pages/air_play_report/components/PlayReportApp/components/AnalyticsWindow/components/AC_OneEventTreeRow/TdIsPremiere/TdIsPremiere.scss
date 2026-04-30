@@ -8,7 +8,9 @@
                     user-select: none;
                     width: 4em;
                     padding: 0;
-                    vertical-align: middle;
+                    // vertical-align: middle;
+                    vertical-align: top;
+
                     >div{
                         font-size: 1em;
                         text-align: center;
@@ -17,6 +19,7 @@
                         align-items: flex-start;
                         align-content: flex-start;
                         // height: 1.4em;
+                        margin-top: 0.5em;
 
                         >span{
                             font-size: .6em;

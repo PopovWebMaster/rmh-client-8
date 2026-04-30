@@ -50,16 +50,6 @@ const TdCountComponent = ( props ) => {
 
     
     return (
-        // <td className = { `TdCount ${count === 0 || isUsed? 'isUsed': ''}` }>
-        //     <div>
-        //         <input
-        //             type =      'number'
-        //             value =     { count }
-        //             onChange =  { change }
-        //         />
-        //         <>{ releaseCount === 0? '': <span className = { count === releaseCount? '': count === 0? '': 'attention' } >{ releaseCount }</span> }</>
-        //     </div>
-        // </td>
 
         <td className = { `TdCount ${isUsed? 'isUsed': ''}` }>
             <div>

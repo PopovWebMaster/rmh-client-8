@@ -1,5 +1,3 @@
-// AC_OneEventTreeRow
-
 
 import React, { useRef, useState, useEffect }   from "react";
 
@@ -10,7 +8,7 @@ import { selectorData as playReportAnalyticsSlise } from './../../../../../../..
 import { selectorData as layoutSlice } from './../../../../../../../../redux/layoutSlice.js';
 
 
-import './AC_OneEventTreeRow.scss';
+import './AC_OneOpenedEventTree.scss';
 
 
 // import { ScrollContainer } from './../../../../../../../../components/ScrollContainer/ScrollContainer.js';
@@ -35,12 +33,11 @@ import { AC_EmptyRow } from './../AC_EmptyRow/AC_EmptyRow.js';
 
 
 
-const AC_OneEventTreeRowComponent = ( props ) => {
+const AC_OneOpenedEventTreeComponent = ( props ) => {
 
     let {
 
         list,
-        eventsList,
 
         eventListById,
         categoryListById,
@@ -64,7 +61,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
         let all_premier_duration = 0;
 
 
-        for( let i = 0; i < eventsList.length; i++ ){
+        for( let i = 0; i < list.length; i++ ){
             let {
                 category_id,
                 event_id,
@@ -75,7 +72,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                 isUsed,
                 startTime,
                 eventCount,
-            } = eventsList[ i ];
+            } = list[ i ];
 
             if( isUsed ){
                 all_counts = all_counts + count;
@@ -98,7 +95,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
 
        
 
-    }, [ eventsList ] );
+    }, [ list ] );
 
 
 
@@ -122,14 +119,7 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                 startTime,
                 eventCount,
                 releaseCount,
-                list,
             } = item;
-
-            
-            // if( fileName.indexOf( '(Порезка' ) !== -1 ){
-            //     console.dir(item);
-            // };
-
 
             let isFirstEvent = true;
             if( usedEvents[ event_id ] ){
@@ -162,7 +152,6 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                         fileName =      { fileName }
                         isUsed =        { isUsed }
                         count =         { count }
-                        list = { list } 
                     />
                     <TdIsPremiere
                         category_id =   { category_id }
@@ -181,9 +170,6 @@ const AC_OneEventTreeRowComponent = ( props ) => {
                     />
 
                     <TdDurationSec
-                    category_id =   { category_id }
-                        event_id =      { event_id }
-                        fileName =      { fileName }
                         duration = { duration }
                         isUsed =    { isUsed }
                     />
@@ -222,22 +208,22 @@ const AC_OneEventTreeRowComponent = ( props ) => {
 
     return (
         <>
-            { create( eventsList ) }
-            <RowCounter
-                allCount =              { allCount }
-                allDuration =           { allDuration }
-                allPremiersCount =      { allPremiersCount }
-                allPremiersDuration =   { allPremiersDuration }
+            { create( list ) }
+            {/* <RowCounter
+                allCount = { allCount }
+                allDuration = { allDuration }
+                allPremiersCount = { allPremiersCount }
+                allPremiersDuration = { allPremiersDuration }
             />
 
-            <AC_EmptyRow />
+            <AC_EmptyRow /> */}
         </>
 
     )
 
 };
 
-export function AC_OneEventTreeRow( props ){
+export function AC_OneOpenedEventTree( props ){
 
     const playReportAnalytics = useSelector( playReportAnalyticsSlise );
     const layout = useSelector( layoutSlice );
@@ -247,7 +233,7 @@ export function AC_OneEventTreeRow( props ){
     const dispatch = useDispatch();
 
     return (
-        <AC_OneEventTreeRowComponent
+        <AC_OneOpenedEventTreeComponent
             { ...props }
             analitycsIsActive = { playReportAnalytics.analitycsIsActive }
             evenstTree = { playReportAnalytics.evenstTree }

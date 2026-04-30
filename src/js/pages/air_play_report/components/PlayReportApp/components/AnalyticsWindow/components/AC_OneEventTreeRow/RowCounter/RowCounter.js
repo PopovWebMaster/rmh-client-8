@@ -37,44 +37,49 @@ const RowCounterComponent = ( props ) => {
     }
 
     return (<>
-        <tr className = 'AC_RowCounter_all'>
-            <td></td>
-            <td></td>
-            <TdItemName title = 'Всего:' isActive = { allCount > 0? true: false }/>
-            <td></td>
-            <IdItemValue value = { allCount } />
-            <td></td>
-            <td></td>
-            <IdItemValue value = { allDuration } />
-            <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration ) } />
-            <IdItemValue value = { get_procent( allDuration ) } subZnak = '%'/>
-        </tr>
+        { allCount === 0? '': (<>
+            <tr className = 'AC_RowCounter_all'>
+                <td></td>
+                <td></td>
+                <TdItemName title = 'Всего:' isActive = { allCount > 0? true: false }/>
+                <td></td>
+                <IdItemValue value = { allCount } />
+                <td></td>
+                <td></td>
+                <IdItemValue value = { allDuration } />
+                <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration ) } />
+                <IdItemValue value = { get_procent( allDuration ) } subZnak = '%'/>
+            </tr>
 
-        <tr className = 'AC_RowCounter_all_premiers'>
-            <td></td>
-            <td></td>
-            <TdItemName title = 'Премьеры:' isActive = { allCount > 0? true: false }/>
-            <td></td>
-            <IdItemValue value = { allPremiersCount } />
-            <td></td>
-            <td></td>
-            <IdItemValue value = { allPremiersDuration } />
-            <IdItemValue value = { allPremiersDuration === 0? 0: convert_sec_to_time( allPremiersDuration ) } />
-            <IdItemValue value = { get_procent( allPremiersDuration ) } subZnak = '%'/>
-        </tr>
+            <tr className = 'AC_RowCounter_all_premiers'>
+                <td></td>
+                <td></td>
+                <TdItemName title = 'Премьеры:' isActive = { allCount > 0? true: false }/>
+                <td></td>
+                <IdItemValue value = { allPremiersCount } />
+                <td></td>
+                <td></td>
+                <IdItemValue value = { allPremiersDuration } />
+                <IdItemValue value = { allPremiersDuration === 0? 0: convert_sec_to_time( allPremiersDuration ) } />
+                <IdItemValue value = { get_procent( allPremiersDuration ) } subZnak = '%'/>
+            </tr>
 
-        <tr className = 'AC_RowCounter_all_repeats'>
-            <td></td>
-            <td></td>
-            <TdItemName title = 'Повторы:' isActive = { allCount > 0? true: false }/>
-            <td></td>
-            <IdItemValue value = { allCount - allPremiersCount } />
-            <td></td>
-            <td></td>
-            <IdItemValue value = { allDuration - allPremiersDuration } />
-            <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration - allPremiersDuration ) } />
-            <IdItemValue value = { get_procent( allDuration - allPremiersDuration ) } subZnak = '%'/>
-        </tr>
+            <tr className = 'AC_RowCounter_all_repeats'>
+                <td></td>
+                <td></td>
+                <TdItemName title = 'Повторы:' isActive = { allCount > 0? true: false }/>
+                <td></td>
+                <IdItemValue value = { allCount - allPremiersCount } />
+                <td></td>
+                <td></td>
+                <IdItemValue value = { allDuration - allPremiersDuration } />
+                <IdItemValue value = { allDuration === 0? 0: convert_sec_to_time( allDuration - allPremiersDuration ) } />
+                <IdItemValue value = { get_procent( allDuration - allPremiersDuration ) } subZnak = '%'/>
+            </tr>
+
+
+        </>) }
+        
     
     </>)
 

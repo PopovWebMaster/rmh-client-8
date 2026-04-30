@@ -12,6 +12,9 @@ export class TreeFileNameDataClass {
         this.GetData = this.GetData.bind(this);
 
 
+        
+
+
     };
 
     AddData( filteredListItem ){
@@ -31,6 +34,7 @@ export class TreeFileNameDataClass {
 
             this.list.push({
                 startTime:          startTime.ms/1000,
+                // startTimeList: [ startTime.ms/1000 ],
                 duration:    segmentRealDuration.ms/1000,
                 isPremiere:         premiere.isPremiere,
                 // count:          1,
@@ -41,6 +45,8 @@ export class TreeFileNameDataClass {
             });
 
         };
+
+        
 
     }
 
@@ -81,11 +87,21 @@ export class TreeFileNameDataClass {
 
         if( wholeItem !== null ){
             result[ this.fileName ] = { ...wholeItem };
+            result[ this.fileName ].list = structuredClone( this.list );
         };
 
         for( let i = 0 ; i < cutList.length; i++ ){
+
+
             result[ `${this.fileName} (Порезка ${i + 1})` ] = { ...cutList[ i ] };
+            result[ `${this.fileName} (Порезка ${i + 1})` ].list = [ { ...cutList[ i ] } ];
         };
+
+        // console.dir( this );
+
+        // console.dir( 'result' );
+        // console.dir( result );
+
 
           
         return result
